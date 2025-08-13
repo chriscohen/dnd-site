@@ -1,0 +1,7 @@
+﻿services:
+  web:
+    build: web/
+    ports:
+
+  database:
+    image: mariadb:12.0.2
