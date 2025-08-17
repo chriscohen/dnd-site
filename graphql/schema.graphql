@@ -1,0 +1,61 @@
+type Query {
+    attackTypes: [AttackType!]! @all
+
+    distances: [Distance!]! @all
+
+    magicSchools: [MagicSchool!]! @all
+
+    spellComponentType(id: String! @eq): SpellComponentType @find
+    spellComponentTypes: [SpellComponentType!]! @all
+}
+
+type AttackType {
+    id: String!
+    name: String!
+}
+
+type Damage {
+    damage_type: DamageType!
+}
+
+type DamageType {
+    id: String!
+    name: String!
+}
+
+type Distance {
+    id: String!
+    short_name: String!
+    plural: String
+    per_meter: Float!
+}
+
+type MagicSchool {
+    id: String!
+    name: String!
+}
+
+type SpellMaterialComponent {
+    id: String!
+    name: String!
+}
+
+type SpellComponentType {
+    id: String!
+    name: String!
+}
+
+type Spell {
+    id: Uuid!
+    index: String!
+    name: String!
+    description: [String]
+    higher_level: [String]
+    range: String
+    range_number: Int
+    range_unit: Distance @belongsTo
+    components: [SpellComponentType]
+    materials: [SpellMaterialComponent]
+}
+
+scalar Uuid

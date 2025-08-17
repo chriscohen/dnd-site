@@ -1,0 +1,18 @@
+[
+    {
+        "id": "melee-spell",
+        "name": "Melee Spell"
+    },
+    {
+        "id": "melee-weapon",
+        "name": "Melee Weapon"
+    },
+    {
+        "id": "ranged-spell",
+        "name": "Ranged Spell"
+    },
+    {
+        "id": "ranged-weapon",
+        "name": "Ranged Weapon"
+    }
+]

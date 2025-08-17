@@ -1,0 +1,41 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+Thumbs.db
+Homestead.json
+Homestead.yaml
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Secrets
+.db-password
+
+# Laravel
+/.phpunit.cache
+/auth.json
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/logs
+/storage/pail
+/vendor

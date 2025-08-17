@@ -1,0 +1,32 @@
+[
+    {
+        "id": "inch",
+        "plural": "inches",
+        "short_name": "in",
+        "per_meter": 39.3700799999
+    },
+    {
+        "id": "foot",
+        "plural": "feet",
+        "short_name": "ft",
+        "per_meter": 3.28084
+    },
+    {
+        "id": "yard",
+        "plural": "yards",
+        "short_name": "yd",
+        "per_meter": 1.0936133333
+    },
+    {
+        "id": "meter",
+        "plural": "meters",
+        "short_name": "m",
+        "per_meter": 1.0
+    },
+    {
+        "id": "mile",
+        "plural": "miles",
+        "short_name": "mi",
+        "per_meter": 0.0006213712
+    }
+]

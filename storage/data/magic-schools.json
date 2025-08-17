@@ -1,0 +1,34 @@
+[
+    {
+        "id": "abjuration",
+        "name": "Abjuration"
+    },
+    {
+        "id": "conjuration",
+        "name": "Conjuration"
+    },
+    {
+        "id": "divination",
+        "name": "Divination"
+    },
+    {
+        "id": "enchantment",
+        "name": "Enchantment"
+    },
+    {
+        "id": "evocation",
+        "name": "Evocation"
+    },
+    {
+        "id": "illusion",
+        "name": "Illusion"
+    },
+    {
+        "id": "necromancy",
+        "name": "Necromancy"
+    },
+    {
+        "id": "transmutation",
+        "name": "Transmutation"
+    }
+]

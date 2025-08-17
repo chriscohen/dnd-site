@@ -1,7 +1,73 @@
-﻿services:
-  web:
-    build: web/
-    ports:
-
-  database:
-    image: mariadb:12.0.2
+services:
+    laravel:
+        build:
+            context: .
+            dockerfile: '.docker/develop/laravel/Dockerfile'
+            args:
+                WWWGROUP: '${WWWGROUP}'
+                MYSQL_CLIENT: mysql-client
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${APP_PORT:-80}:80'
+            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            IGNITION_LOCAL_SITES_PATH: '${PWD}'
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - dnd
+        depends_on:
+            - mysql
+            - redis
+    mysql:
+        image: 'mysql:8'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: 'fuckyou'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: 'dnd'
+            MYSQL_USER: 'laravel'
+            MYSQL_PASSWORD: 'fuckyou'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+        volumes:
+            - 'mysql:/var/lib/mysql'
+            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+        networks:
+            - dnd
+        healthcheck:
+            test:
+                - CMD
+                - healthcheck.sh
+                - '--connect'
+                - '--innodb_initialized'
+            retries: 3
+            timeout: 5s
+    redis:
+        image: 'redis:alpine'
+        ports:
+            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        volumes:
+            - 'redis:/data'
+        networks:
+            - dnd
+        healthcheck:
+            test:
+                - CMD
+                - redis-cli
+                - ping
+            retries: 3
+            timeout: 5s
+networks:
+    dnd:
+        driver: bridge
+volumes:
+    mysql:
+        driver: local
+    redis:
+        driver: local
