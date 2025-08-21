@@ -4,6 +4,7 @@ type Query {
     distances: [Distance!]! @all
 
     item(slug: String! @eq): Item @find
+    items: [Item!]! @all @orderBy(column: "name", direction: ASC)
 
     magicSchools: [MagicSchool!]! @all
 
