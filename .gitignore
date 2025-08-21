@@ -39,3 +39,6 @@ Homestead.yaml
 /storage/logs
 /storage/pail
 /vendor
+
+# PHPUnit
+.phpunit.result.cache
