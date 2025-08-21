@@ -16,7 +16,7 @@ class InternalLinkGenerator implements MentionGeneratorInterface
         $identifier = str_replace('@', '', $identifier);
         $pieces = explode(':', $identifier);
 
-        $mention->setUrl('/' . $pieces[0] . '/' . $pieces[1]);
+        $mention->setUrl('/' . $pieces[0] . 's/' . $pieces[1]);
         $mention->setLabel($pieces[2]);
         return $mention;
     }
