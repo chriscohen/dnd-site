@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Database\Seeders;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
-use BadMethodCallException;
 
 abstract class AbstractYmlSeeder extends Seeder
 {
@@ -29,22 +31,78 @@ abstract class AbstractYmlSeeder extends Seeder
     protected array $schema = [];
 
     /**
+     * Properties in this list will not be imported to the model from the JSON.
+     *
+     * @var string[] $excludedProperties
+     */
+    protected array $excludedProperties = [];
+
+    /**
      * @return void
      * @throws FileNotFoundException
      */
     public function run(): void
     {
-        // Make sure the file exists.
+        $data = $this->getDataFromFile();
+
+        // For each item in the JSON file...
+        foreach ($data as $datum) {
+            // Remove excluded properties from JSON.
+            $output = $this->removeExcludedProperties($datum);
+
+            // Equivalent to ModelClass::create([...$datum]);
+            $model = forward_static_call([$this->model, 'create'], $output);
+
+            $this->doExtras($model, $datum);
+        }
+    }
+
+    public function getDataFromFile(): array
+    {
         if (Storage::disk('data')->missing($this->path)) {
             throw new FileNotFoundException('storage/data/' . $this->path . ' not found');
         }
 
-        $data = json_decode(Storage::disk('data')->get($this->path), true);
+        return json_decode(Storage::disk('data')->get($this->path), true);
+    }
 
-        // For each item in the JSON file...
-        foreach ($data as $datum) {
-            // Equivalent to ModelClass::create([...$datum]);
-            forward_static_call([$this->model, 'create'], $datum);
+    public function doExtras(Model $model, array $datum): Model
+    {
+        return $model;
+    }
+
+    /**
+     * @param  array<string, mixed>  $input
+     * @return array<string, mixed>
+     */
+    public function removeExcludedProperties(array $input): array
+    {
+        $output = [];
+
+        foreach ($input as $key => $value) {
+            if (!in_array($key, $this->excludedProperties, true)) {
+                $output[$key] = $value;
+            }
         }
+
+        return $output;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getExcludedProperties(): array
+    {
+        return $this->excludedProperties;
+    }
+
+    /**
+     * @param  string[]  $excludedProperties
+     * @return $this
+     */
+    public function setExcludedProperties(array $excludedProperties): self
+    {
+        $this->excludedProperties = $excludedProperties;
+        return $this;
     }
 }

@@ -14,9 +14,14 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AttackTypeSeeder::class,
+            CompanySeeder::class,
             DistanceSeeder::class,
             MagicSchoolSeeder::class,
+            SourceSeeder::class,
             SpellComponentSeeder::class,
+
+            ItemSeeder::class,
+            SpellSeeder::class,
         ]);
     }
 }

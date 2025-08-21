@@ -1,0 +1,101 @@
+[
+    {
+        "id": "2cb9aad8-9447-40f1-a861-cc49261d2cf9",
+        "name": "Aurora's Whole Realms Catalogue",
+        "slug": "auroras-whole-realms-catalogue",
+        "description": "At last! Complete in one catalog, all the finest merchandise Faerûn has to offer is presented by the enterprising entrepreneur, Aurora the Eclectic.\nUseful for players in any AD&D fantasy campaign (and other role-playing games, too!), this is a handy listing of items and goods of all kinds, from farming tools to scribes' pens, from imported Shou Lung silks to Maztican cotton, from wines and ales to breads and cheeses. Prices are given in the gold piece standard, for simple conversion. Players' \"shopping trips\" will never be the same!\n\nIt is our hope that players and DMs will find this Catalogue both useful and enjoyable. Aurora is not above editorializing about her wares, but we think her opinions will be informative as well as entertaining.",
+        "source_type": "sourcebook",
+        "game_edition": "2e",
+        "publication_type": "official",
+        "cover_image": "auroras-whole-realms-catalogue.webp",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "editions": [
+            {
+                "id": "73a8172c-70b6-4ce1-a52d-85a54ab603e7",
+                "name": "original",
+                "binding": "paperback",
+                "pages": 160,
+                "isbn10": "1560763272",
+                "isbn13": "9781560763277",
+                "release_date": "1992-06-01",
+                "release_date_month_only": true
+            }
+        ]
+    },
+    {
+        "id": "38158381-4523-4a0b-a699-8b252c15f9b9",
+        "name": "Monster Manual",
+        "slug": "monster-manual-5th-edition",
+        "description": "The A to Z Fantasy Bestiary\n\nThe Monster Manual presents a horde of classic Dungeons & Dragons creatures, including dragons, giants, mind flayers, and beholders—a monstrous feast for Dungeon Masters ready to challenge their players and populate their adventures.\n\nThe monsters contained herein are culled from the D&D game's illustrious history, with easy-to-use game statistics and thrilling stories to feed your imagination.",
+        "source_type": "sourcebook",
+        "game_edition": "5.2014",
+        "publication_type": "official",
+        "cover_image": "monster-manual-5th-edition.webp",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "editions": [
+            {
+                "id": "eae1620a-303e-4825-b16f-c2cae8949e29",
+                "name": "original",
+                "binding": "hardcover",
+                "pages": 352,
+                "isbn10": "0786965614",
+                "isbn13": "9780786965614",
+                "release_date": "2014-09-30"
+            }
+        ]
+    },
+    {
+        "id": "397cd5d7-8e67-4c35-ac11-94c2413a341f",
+        "name": "Spell Compendium",
+        "description": "The essential spellcaster's companion, Spell Compendium gather over 1,000 of the best spell from previously published Dungeons & Dragons game supplements and campaign settings, Dragon magazine articles, and articles posted on the Wizards of the Coast website.\n\nThe spells contained herein complement those presented in the Player's Handbook and have been updated to include official errata. In addition, this book contains descriptive read-aloud text telling you what a spell looks like, sounds like, or feels like.",
+        "product_code": "885987200",
+        "source_type": "sourcebook",
+        "game_edition": "3e",
+        "publication_type": "official",
+        "cover_image": "spell-compendium.webp",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "editions": [
+            {
+                "id": "a482661a-f6ae-4efb-a006-5bf972e3c8cf",
+                "name": "original",
+                "binding": "hardcover",
+                "pages": 288,
+                "isbn10": "0786937025",
+                "isbn13": "9780786937028",
+                "release_date": "2005-12-01",
+                "release_date_month_only": true
+            },
+            {
+                "id": "db6c7e1f-86a3-4502-89e6-4b08d752c6e1",
+                "name": "premium",
+                "binding": "hardcover",
+                "pages": 288,
+                "isbn10": "0786964480",
+                "isbn13": "9780786964482",
+                "release_date": "2013-04-16"
+            }
+        ]
+    },
+    {
+        "id": "f17ba616-db54-41eb-8616-5779c9e60f78",
+        "name": "Unearthed Arcana",
+        "description": "A new guide to variant rules for the Dungeons & Dragons roleplaying game, this sourcebook provides players and DMs with a wide choice of alternate rules for roleplaying in a D&D campaign. Designed to expand the options available for customizing gameplay, these variant rules are modular and can be imported into any campaign in any amount desired. Examples of variant rules include playing core classes as prestige classes and alternate damage systems. Brand-new rules also include a new system of metamagic feats and a new spell system.",
+        "product_code": "881560000",
+        "source_type": "sourcebook",
+        "game_edition": "3e",
+        "publication_type": "official",
+        "cover_image": "unearthed-arcana.webp",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "editions": [
+            {
+                "id": "5518baa8-9175-4b5a-b689-72d58f3a2eeb",
+                "name": "original",
+                "binding": "hardcover",
+                "pages": 224,
+                "isbn10": "0768031310",
+                "release_date": "2004-02-01",
+                "release_date_month_only": true
+            }
+        ]
+    }
+]

@@ -1,6 +1,14 @@
-schema: ./graphql/schema.graphql
+schema:
+  - ./graphql/schema.graphql
+  - ./graphql/schema-directives.graphql
+  - ./graphql/enums.graphql
+  - ./graphql/programmatic-types.graphql
+  - ./graphql/scalars.graphql
 documents: ./graphql/**/*.graphql
 extensions:
+  endpoints:
+    default:
+      url: http://localhost:8080/graphql
   codegen:
     generates:
       ./generated-backend.ts:

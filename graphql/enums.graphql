@@ -1,0 +1,21 @@
+enum Binding {
+    HARDCOVER @enum(value: 1)
+    PAPERBACK @enum(value: 2)
+}
+
+enum GameEdition {
+    FIRST @enum(value: 1)
+    SECOND @enum(value: 2)
+    TPF @enum(value: 3)
+    THIRD @enum(value: 9)
+    FOURTH @enum(value: 4)
+    FIFTH @enum(value: 5)
+    FIFTH_REVISED @enum(value:8)
+}
+
+enum SourceType {
+    SOURCEBOOK @enum(value: 1)
+    NOVEL @enum(value: 2)
+    WEBSITE @enum(value: 3)
+    MAGAZINE @enum(value: 4)
+}

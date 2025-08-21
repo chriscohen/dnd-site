@@ -3,7 +3,12 @@ type Query {
 
     distances: [Distance!]! @all
 
+    item(slug: String! @eq): Item @find
+
     magicSchools: [MagicSchool!]! @all
+
+    source(slug: String! @eq): Source @find
+    sources: [Source!]! @all @orderBy(column: "game_edition", direction: DESC)
 
     spellComponentType(id: String! @eq): SpellComponentType @find
     spellComponentTypes: [SpellComponentType!]! @all
@@ -12,6 +17,14 @@ type Query {
 type AttackType {
     id: String!
     name: String!
+}
+
+type Company {
+    id: String!
+    slug: String!
+    name: String!
+    short_name: String
+    website: String
 }
 
 type Damage {
@@ -30,9 +43,53 @@ type Distance {
     per_meter: Float!
 }
 
+type Item {
+    id: Uuid!
+    slug: String!
+    name: String!
+    editions: [ItemEdition]
+}
+
+type ItemEdition {
+    id: Uuid!
+    item_id: Uuid!
+    game_edition: GameEdition!
+    description: String
+    price: String
+    quantity: Int!
+    weight: Float
+    source: Source!
+}
+
 type MagicSchool {
     id: String!
     name: String!
+}
+
+type Source {
+    id: Uuid!
+    slug: String!
+    name: String!
+    description: String
+    product_code: String
+    source_type: String!
+    game_edition: String
+    publication_type: String!
+    cover_image: String
+    publisher: Company
+    editions: [SourceEdition]
+}
+
+type SourceEdition {
+    id: Uuid!
+    source_id: Uuid!
+    name: String!
+    binding: String
+    pages: Int
+    isbn10: String
+    isbn13: String
+    release_date: String
+    release_date_month_only: Boolean!
 }
 
 type SpellMaterialComponent {
@@ -59,3 +116,4 @@ type Spell {
 }
 
 scalar Uuid
+
