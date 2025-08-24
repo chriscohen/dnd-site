@@ -11,16 +11,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->index();
-            $table->foreignIdFor(Category::class, 'category_id')->index();
+            $table->string('entity_type')->index();
+            $table->foreignIdFor(Category::class, 'parent_id')->nullable()->index();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('categories');
     }
 };

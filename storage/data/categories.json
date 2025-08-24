@@ -1,0 +1,23 @@
+[
+    {
+        "id": "350515c4-09d1-49fd-bf62-71d9870d53d0",
+        "slug": "consumable",
+        "name": "Consumable",
+        "entity_type": "item"
+    },
+    {
+        "id": "89d0088a-7909-4345-9147-1cf175d1ce13",
+        "slug": "food",
+        "name": "Food",
+        "entity_type": "item",
+        "parent": "consumable"
+    },
+    {
+        "id": "aa4ea0d8-1736-45ea-8280-b67b366d4b2f",
+        "slug": "cheese",
+        "name": "Cheese",
+        "entity_type": "item",
+        "parent": "food",
+        "image": "cheese.jpg"
+    }
+]

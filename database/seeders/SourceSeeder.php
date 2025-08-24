@@ -8,9 +8,11 @@ use App\Enums\Binding;
 use App\Enums\GameEdition;
 use App\Enums\PublicationType;
 use App\Enums\SourceType;
+use App\Models\CampaignSetting;
 use App\Models\Source;
 use App\Models\SourceEdition;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class SourceSeeder extends AbstractYmlSeeder
 {
@@ -18,6 +20,10 @@ class SourceSeeder extends AbstractYmlSeeder
     protected string $model = Source::class;
     protected array $excludedProperties = [
         'cover_image'
+    ];
+
+    protected array $dependsOn = [
+        CampaignSettingSeeder::class,
     ];
 
     public function run(): void
@@ -28,7 +34,7 @@ class SourceSeeder extends AbstractYmlSeeder
             $source = new Source();
             $source->id = $datum['id'];
             // If no slug, assume we can just urlencode the name.
-            $source->slug = $datum['slug'] ?? urlencode(mb_strtolower($datum['name']));
+            $source->slug = $datum['slug'] ?? self::makeSlug($datum['name']);
             $source->name = $datum['name'];
             $source->description = $datum['description'] ?? null;
             $source->product_code = $datum['product_code'] ?? null;
@@ -37,6 +43,12 @@ class SourceSeeder extends AbstractYmlSeeder
             $source->publication_type = PublicationType::tryFromString($datum['publication_type']);
             $source->cover_image = $datum['cover_image'] ?? null;
             $source->publisher_id = $datum['publisher_id'] ?? null;
+
+            if (!empty($datum['campaign_setting'])) {
+                $setting = CampaignSetting::query()->where('slug', $datum['campaign_setting'])->firstOrFail();
+                $source->campaignSetting()->associate($setting);
+            }
+
             $source->save();
 
             foreach ($datum['editions'] as $editionData) {

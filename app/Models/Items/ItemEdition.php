@@ -18,6 +18,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  *
  * @property string $description
  * @property GameEdition $game_edition
+ * @property bool $is_primary
  * @property Item $item
  * @property Uuid $item_id
  * @property int $price
@@ -31,6 +32,10 @@ class ItemEdition extends AbstractModel
     use HasUuids;
 
     public $timestamps = false;
+
+    public $casts = [
+        'is_primary' => 'boolean',
+    ];
 
     public function description(): Attribute
     {

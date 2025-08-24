@@ -37,6 +37,8 @@ abstract class AbstractYmlSeeder extends Seeder
      */
     protected array $excludedProperties = [];
 
+    protected array $dependsOn = [];
+
     /**
      * @return void
      * @throws FileNotFoundException
@@ -104,5 +106,10 @@ abstract class AbstractYmlSeeder extends Seeder
     {
         $this->excludedProperties = $excludedProperties;
         return $this;
+    }
+
+    public static function makeSlug(string $input): string
+    {
+        return str_replace('+', '-', urlencode(mb_strtolower($input)));
     }
 }

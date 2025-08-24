@@ -20,6 +20,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property Uuid $id
  * @property string $slug
  *
+ * @property ?CampaignSetting $campaign_setting
+ * @property ?Uuid $campaign_setting_id
  * @property string $cover_image
  * @property ?string $description
  * @property Collection<SourceEdition> $editions
@@ -43,9 +45,9 @@ class Source extends AbstractModel implements HasMedia
         'source_type' => SourceType::class,
     ];
 
-    public function publisher(): BelongsTo
+    public function campaignSetting(): BelongsTo
     {
-        return $this->belongsTo(Company::class, 'publisher_id');
+        return $this->belongsTo(CampaignSetting::class, 'campaign_setting_id');
     }
 
     protected function description(): Attribute
@@ -72,6 +74,11 @@ class Source extends AbstractModel implements HasMedia
         return Attribute::make(
             get: fn (int $value) => PublicationType::tryFrom($value)?->toString(),
         );
+    }
+
+    public function publisher(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'publisher_id');
     }
 
     protected function sourceType(): Attribute

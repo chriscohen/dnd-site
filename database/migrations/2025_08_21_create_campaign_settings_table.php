@@ -5,22 +5,25 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\Category;
+use App\Models\Company;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('campaign_settings', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->index();
-            $table->foreignIdFor(Category::class, 'category_id')->index();
+            $table->string('short_name', 16)->unique();
+            $table->foreignIdFor(Company::class, 'publisher_id')->index();
+            $table->smallInteger('publication_type')->index();
+            $table->string('logo')->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('campaign_settings');
     }
 };

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignIdFor(Item::class, 'item_id');
             $table->smallInteger('game_edition');
+            $table->boolean('is_primary')->default(false);
 
             //$table->morphs('itemable');
 

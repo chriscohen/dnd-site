@@ -1,6 +1,12 @@
 type Query {
     attackTypes: [AttackType!]! @all
 
+    category(slug: String! @eq): Category @find
+    categories: [Category!]! @all
+
+    campaignSetting(slug: String! @eq): CampaignSetting @find
+    campaignSettings: [CampaignSetting!]! @all @orderBy(column: "name", direction: ASC)
+
     distances: [Distance!]! @all
 
     item(slug: String! @eq): Item @find
@@ -18,6 +24,25 @@ type Query {
 type AttackType {
     id: String!
     name: String!
+}
+
+type CampaignSetting {
+    id: Uuid!
+    slug: String!
+    name: String!
+    short_name: String!
+    publisher: Company! @hasOne
+    publication_type: String!
+    logo: String
+}
+
+type Category {
+    id: Uuid!
+    slug: String!
+    name: String!
+    entity_type: String!
+    parent: Category
+    image: Media @hasOne
 }
 
 type Company {
@@ -67,6 +92,12 @@ type MagicSchool {
     name: String!
 }
 
+type Media {
+    uuid: Uuid
+    model_id: Uuid
+    path: String! @method(name: "getFullUrl")
+}
+
 type Source {
     id: Uuid!
     slug: String!
@@ -78,6 +109,7 @@ type Source {
     publication_type: String!
     cover_image: String
     publisher: Company
+    campaign_setting: CampaignSetting
     editions: [SourceEdition]
 }
 
