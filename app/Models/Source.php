@@ -20,7 +20,8 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  *
  * @property ?CampaignSetting $campaign_setting
  * @property ?Uuid $campaign_setting_id
- * @property string $cover_image
+ * @property ?Uuid $cover_image_id
+ * @property ?Media $coverImage
  * @property ?string $description
  * @property Collection<SourceEdition> $editions
  * @property ?GameEdition $game_edition
@@ -42,9 +43,24 @@ class Source extends AbstractModel
         'source_type' => SourceType::class,
     ];
 
+    public function campaign_setting(): BelongsTo
+    {
+        return $this->campaignSetting();
+    }
+
     public function campaignSetting(): BelongsTo
     {
         return $this->belongsTo(CampaignSetting::class, 'campaign_setting_id');
+    }
+
+    public function cover_image(): BelongsTo
+    {
+        return $this->coverImage();
+    }
+
+    public function coverImage(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'cover_image_id');
     }
 
     protected function description(): Attribute

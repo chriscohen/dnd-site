@@ -54,7 +54,7 @@ type Company {
 }
 
 type Damage {
-    damage_type: DamageType!
+    damage_type: DamageType! @belongsTo
 }
 
 type DamageType {
@@ -113,10 +113,10 @@ type Source {
     source_type: String!
     game_edition: String
     publication_type: String!
-    cover_image: String
-    publisher: Company
-    campaign_setting: CampaignSetting
-    editions: [SourceEdition]
+    cover_image: Media @belongsTo
+    publisher: Company @belongsTo
+    campaign_setting: CampaignSetting @belongsTo
+    editions: [SourceEdition] @hasMany
 }
 
 type SourceEdition {

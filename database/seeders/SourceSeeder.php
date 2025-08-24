@@ -9,6 +9,7 @@ use App\Enums\GameEdition;
 use App\Enums\PublicationType;
 use App\Enums\SourceType;
 use App\Models\CampaignSetting;
+use App\Models\Media;
 use App\Models\Source;
 use App\Models\SourceEdition;
 use Carbon\Carbon;
@@ -41,7 +42,16 @@ class SourceSeeder extends AbstractYmlSeeder
             $source->source_type = SourceType::tryFromString($datum['source_type']);
             $source->game_edition = GameEdition::tryFromString($datum['game_edition']);
             $source->publication_type = PublicationType::tryFromString($datum['publication_type']);
-            $source->cover_image = $datum['cover_image'] ?? null;
+
+            if (!empty($datum['cover_image'])) {
+                $media = Media::createFromExisting([
+                    'filename' => '/books/' . $datum['cover_image'],
+                    'disk' => 's3',
+                    'collection_name' => 'cover-images',
+                ]);
+                $source->coverImage()->associate($media);
+            }
+
             $source->publisher_id = $datum['publisher_id'] ?? null;
 
             if (!empty($datum['campaign_setting'])) {

@@ -7,6 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Company;
 use App\Models\CampaignSetting;
+use App\Models\Media;
 
 return new class extends Migration
 {
@@ -21,9 +22,11 @@ return new class extends Migration
             $table->smallInteger('source_type')->index();
             $table->smallInteger('game_edition')->nullable()->index();
             $table->smallInteger('publication_type')->index();
-            $table->string('cover_image')->nullable();
             $table->foreignIdFor(Company::class, 'publisher_id')->nullable()->index();
             $table->foreignIdFor(CampaignSetting::class, 'campaign_setting_id')->nullable()->index();
+
+            // Images.
+            $table->foreignIdFor(Media::class, 'cover_image_id')->nullable();
         });
     }
 
