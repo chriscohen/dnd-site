@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Media;
 use Illuminate\Database\Eloquent\Model;
 
 class CategorySeeder extends AbstractYmlSeeder
@@ -31,16 +32,19 @@ class CategorySeeder extends AbstractYmlSeeder
             $parent = Category::query()->where('slug', $datum['parent'])->firstOrFail();
             /** @var Category $model */
             $model->parent()->associate($parent);
-            $model->save();
         }
 
         if (!empty($datum['image'])) {
-            /** @var Category $model */
-            $model->addMediaFromDisk('/categories/' . $datum['image'], 's3')
-                ->preservingOriginal()
-                ->toMediaCollection('image');
+            $media = Media::createFromExisting([
+                'filename' => '/categories/' . $datum['image'],
+                'disk' => 's3',
+                'collection_name' => 'images',
+            ]);
+
+            $model->image()->associate($media);
         }
 
+        $model->save();
         return $model;
     }
 }

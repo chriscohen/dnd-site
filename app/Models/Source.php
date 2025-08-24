@@ -13,8 +13,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 use Spatie\LaravelMarkdown\MarkdownRenderer;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @property Uuid $id
@@ -32,9 +30,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property string $publisher_id
  * @property SourceType $source_type
  */
-class Source extends AbstractModel implements HasMedia
+class Source extends AbstractModel
 {
-    use InteractsWithMedia;
     use HasUuids;
 
     public $timestamps = false;

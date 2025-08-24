@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use App\Models\Category;
+use App\Models\Media;
 
 return new class extends Migration
 {
@@ -17,6 +18,9 @@ return new class extends Migration
             $table->string('name')->index();
             $table->string('entity_type')->index();
             $table->foreignIdFor(Category::class, 'parent_id')->nullable()->index();
+
+            // Images.
+            $table->foreignIdFor(Media::class, 'image_id')->nullable();
         });
     }
 

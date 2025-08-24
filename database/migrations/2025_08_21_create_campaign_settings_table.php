@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use App\Models\Company;
+use App\Models\Media;
 
 return new class extends Migration
 {
@@ -18,7 +19,9 @@ return new class extends Migration
             $table->string('short_name', 16)->unique();
             $table->foreignIdFor(Company::class, 'publisher_id')->index();
             $table->smallInteger('publication_type')->index();
-            $table->string('logo')->nullable();
+
+            // Images.
+            $table->foreignidFor(Media::class, 'logo_id')->nullable();
         });
     }
 

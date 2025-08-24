@@ -7,7 +7,6 @@ namespace App\Models;
 use App\Enums\PublicationType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
 
@@ -15,7 +14,8 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  * @property string $slug
  *
- * @property ?string $logo
+ * @property Media $logo
+ * @property Uuid $logo_id
  * @property string $name
  * @property Company $publisher
  * @property Uuid $publisher_id
@@ -27,10 +27,16 @@ class CampaignSetting extends AbstractModel
     use HasUuids;
 
     public $timestamps = false;
+    protected $primaryKey = 'id';
 
     public $casts = [
         'publication_type' => PublicationType::class,
     ];
+
+    public function logo(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'logo_id');
+    }
 
     public function publicationType(): Attribute
     {
@@ -42,5 +48,10 @@ class CampaignSetting extends AbstractModel
     public function publisher(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'publisher_id');
+    }
+
+    public function temp(): string
+    {
+        return $this->getFirstMedia('logo')?->getFullUrl() ?? '';
     }
 }

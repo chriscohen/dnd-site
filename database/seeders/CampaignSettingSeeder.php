@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Enums\PublicationType;
 use App\Models\CampaignSetting;
 use App\Models\Company;
+use App\Models\Media;
 
 class CampaignSettingSeeder extends AbstractYmlSeeder
 {
@@ -33,7 +34,17 @@ class CampaignSettingSeeder extends AbstractYmlSeeder
             $item->publisher()->associate($publisher);
 
             $item->publication_type = PublicationType::tryFromString($datum['publication_type']);
-            $item->logo = $datum['logo'] ?? null;
+
+            if (!empty($datum['logo'])) {
+                $media = Media::createFromExisting([
+                    'filename' => '/campaign-settings/' . $datum['logo'],
+                    'disk' => 's3',
+                    'collection_name' => 'logos',
+                ]);
+                $item->logo()->associate($media);
+            }
+
+            $item->save();
             $item->save();
         }
     }

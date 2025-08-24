@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Enums\Binding;
 use App\Enums\GameEdition;
 use App\Enums\SourceType;
-use App\Models\Category;
 use App\Models\Items\Item;
 use GraphQL\Type\Definition\PhpEnumType;
 use Illuminate\Database\Eloquent\Relations\Relation;

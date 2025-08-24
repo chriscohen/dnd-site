@@ -33,7 +33,7 @@ type CampaignSetting {
     short_name: String!
     publisher: Company! @hasOne
     publication_type: String!
-    logo: String
+    logo: Media @belongsTo
 }
 
 type Category {
@@ -93,9 +93,15 @@ type MagicSchool {
 }
 
 type Media {
-    uuid: Uuid
-    model_id: Uuid
-    path: String! @method(name: "getFullUrl")
+    id: Uuid!
+    name: String
+    filename: String!
+    collection_name: String
+    mime_type: String
+    size: Int
+    created_at: String
+    updated_at: String
+    url: String! @method(name: "getUrl")
 }
 
 type Source {
