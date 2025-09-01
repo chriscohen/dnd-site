@@ -52,10 +52,12 @@ abstract class AbstractYmlSeeder extends Seeder
             // Remove excluded properties from JSON.
             $output = $this->removeExcludedProperties($datum);
 
+            $this->preSave($datum);
+
             // Equivalent to ModelClass::create([...$datum]);
             $model = forward_static_call([$this->model, 'create'], $output);
 
-            $this->doExtras($model, $datum);
+            $this->postSave($model, $datum);
         }
     }
 
@@ -68,7 +70,12 @@ abstract class AbstractYmlSeeder extends Seeder
         return json_decode(Storage::disk('data')->get($this->path), true);
     }
 
-    public function doExtras(Model $model, array $datum): Model
+    public function preSave(array &$datum): void
+    {
+        return;
+    }
+
+    public function postSave(Model $model, array $datum): Model
     {
         return $model;
     }

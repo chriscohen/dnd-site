@@ -73,7 +73,8 @@ type Item {
     id: Uuid!
     slug: String!
     name: String!
-    editions: [ItemEdition]
+    category: Category @belongsTo
+    editions: [ItemEdition] @hasMany
 }
 
 type ItemEdition {
@@ -84,7 +85,7 @@ type ItemEdition {
     price: String
     quantity: Int!
     weight: Float
-    source: Source!
+    source: Source! @belongsTo
 }
 
 type MagicSchool {

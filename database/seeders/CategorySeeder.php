@@ -26,7 +26,7 @@ class CategorySeeder extends AbstractYmlSeeder
         'image',
     ];
 
-    public function doExtras(Model $model, array $datum): Model
+    public function postSave(Model $model, array $datum): Model
     {
         if (!empty($datum['parent'])) {
             $parent = Category::query()->where('slug', $datum['parent'])->firstOrFail();

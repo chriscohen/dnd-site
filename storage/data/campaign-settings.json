@@ -60,7 +60,8 @@
         "name": "Eberron",
         "short_name": "Ebr",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publication_type": "official",
+        "logo": "eberron-logo.webp"
     },
     {
         "id": "26a1861f-c5f5-4e83-b672-48dda7192d4c",
@@ -166,7 +167,8 @@
         "name": "Ravenloft",
         "short_name": "RL",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publication_type": "official",
+        "logo": "ravenloft.webp"
     },
     {
         "id": "92343471-d0bb-4da6-84d9-6fd6539df24e",

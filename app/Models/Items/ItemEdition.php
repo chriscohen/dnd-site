@@ -17,7 +17,8 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Uuid $id
  *
  * @property string $description
- * @property GameEdition $game_edition
+ * @property GameEdition $gameEdition
+ * @property Uuid $game_edition_id
  * @property bool $is_primary
  * @property Item $item
  * @property Uuid $item_id
@@ -52,6 +53,11 @@ class ItemEdition extends AbstractModel
                 ])
                 ->toHtml($value),
         );
+    }
+
+    public function gameEdition(): BelongsTo
+    {
+        return $this->belongsTo(GameEdition::class);
     }
 
     public function item(): BelongsTo

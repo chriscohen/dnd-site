@@ -1,0 +1,110 @@
+[
+    {
+        "id": "ff6bce28-a213-46da-ae28-912b99a6ed57",
+        "slug": "athletics",
+        "name": "Athletics",
+        "related_attribute": "STR"
+    },
+    {
+        "id": "4d8ceaf2-330f-4657-a27e-7c33f5c0c049",
+        "slug": "acrobatics",
+        "name": "Acrobatics",
+        "related_attribute": "DEX"
+    },
+    {
+        "id": "c2630c65-91f0-4487-9f56-417f449dffe1",
+        "slug": "sleight-of-hand",
+        "name": "Sleight of Hand",
+        "related_attribute": "DEX"
+    },
+    {
+        "id": "91fe69ec-76fd-4316-8ad1-8e440561ad28",
+        "slug": "stealth",
+        "name": "Stealth",
+        "related_attribute": "DEX"
+    },
+    {
+        "id": "2dbfbb18-db20-4f76-8584-5100a2fa644a",
+        "slug": "arcana",
+        "name": "Arcana",
+        "related_attribute": "INT"
+    },
+    {
+        "id": "4432f7f1-6179-4539-9a2d-878c677031e7",
+        "slug": "history",
+        "name": "History",
+        "related_attribute": "INT"
+    },
+    {
+        "id": "bb3d2e71-ea75-4bf2-b5cd-0f4d291081de",
+        "slug": "investigation",
+        "name": "Investigation",
+        "related_attribute": "INT"
+    },
+    {
+        "id": "eaf34917-bc01-41b6-bca7-82342f075167",
+        "slug": "nature",
+        "name": "Nature",
+        "related_attribute": "INT"
+    },
+    {
+        "id": "227a4f39-7036-4ee6-b84b-6fecd63814cf",
+        "slug": "religion",
+        "name": "Religion",
+        "related_attribute": "INT"
+    },
+    {
+        "id": "bdf01679-001a-4f6c-86a4-e25f84feb861",
+        "slug": "animal-handling",
+        "name": "Animal Handling",
+        "related_attribute": "WIS"
+    },
+    {
+        "id": "588244fa-41aa-49f1-aaab-49f301054867",
+        "slug": "insight",
+        "name": "Insight",
+        "related_attribute": "WIS"
+    },
+    {
+        "id": "9d296ce5-0c96-4f24-b73d-54c9f42acbee",
+        "slug": "medicine",
+        "name": "Medicine",
+        "related_attribute": "WIS"
+    },
+    {
+        "id": "01f33ad0-6613-4a49-ba0f-6443fed00765",
+        "slug": "perception",
+        "name": "Perception",
+        "related_attribute": "WIS"
+    },
+    {
+        "id": "04b740de-e1df-4d82-84cf-a054c5a93bd6",
+        "slug": "survival",
+        "name": "Survival",
+        "related_attribute": "WIS"
+    },
+    {
+        "id": "494df4de-dac7-44be-a509-418288104b20",
+        "slug": "deception",
+        "name": "Deception",
+        "related_attribute": "CHA"
+    },
+    {
+        "id": "dbfb6ad7-5925-42b0-8357-9ac04e990681",
+        "slug": "intimidation",
+        "name": "Intimidation",
+        "related_attribute": "CHA"
+    },
+    {
+        "id": "dad286cb-e0f5-41b8-a432-1aa78c350db3",
+        "slug": "performance",
+        "name": "Performance",
+        "related_attribute": "CHA"
+    },
+    {
+        "id": "92d03c8c-7eb0-49d1-9cd1-0050ccb00de0",
+        "slug": "persuasion",
+        "name": "Persuasion",
+        "related_attribute": "CHA"
+    }
+]
