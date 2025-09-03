@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @property Uuid $uuid
+ * @property Uuid $id
  * @property string $slug
  *
  * @property Media $logo
