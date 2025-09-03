@@ -7,12 +7,15 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
  *
  * @property ?Binding $binding
+ * @property Collection $formats
  * @property ?string $isbn10
  * @property ?string $isbn13
  * @property string $name
@@ -38,6 +41,11 @@ class SourceEdition extends AbstractModel
         return Attribute::make(
             get: fn (int $value) => Binding::tryFrom($value)->toString(),
         );
+    }
+
+    public function formats(): HasMany
+    {
+        return $this->hasMany(SourceEditionFormat::class, 'source_edition_id');
     }
 
     public function source(): BelongsTo

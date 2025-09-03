@@ -14,6 +14,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->index();
+            $table->string('product_url')->nullable();
             $table->string('short_name')->nullable()->index();
             $table->string('website');
         });

@@ -49,6 +49,7 @@ type Company {
     id: String!
     slug: String!
     name: String!
+    product_url: String
     short_name: String
     website: String
 }
@@ -105,31 +106,45 @@ type Media {
     url: String! @method(name: "getUrl")
 }
 
+type ProductId {
+    id: Uuid!
+    origin: Company!
+    product_id: String!
+    url: String @method(name: "url")
+}
+
 type Source {
     id: Uuid!
     slug: String!
     name: String!
-    description: String
-    product_code: String
-    source_type: String!
-    game_edition: String
-    publication_type: String!
-    cover_image: Media @belongsTo(relation: "coverImage")
-    publisher: Company @belongsTo
     campaign_setting: CampaignSetting @belongsTo(relation: "campaignSetting")
+    cover_image: Media @belongsTo(relation: "coverImage")
+    description: String
     editions: [SourceEdition] @hasMany
+    game_edition: String
+    product_code: String
+    product_ids: [ProductId] @hasMany(relation: "productIds")
+    publication_type: String!
+    publisher: Company @belongsTo
+    source_type: String!
 }
 
 type SourceEdition {
     id: Uuid!
-    source_id: Uuid!
     name: String!
     binding: String
-    pages: Int
+    formats: [SourceFormat]!
     isbn10: String
     isbn13: String
+    pages: Int
     release_date: String
     release_date_month_only: Boolean!
+    source_id: Uuid!
+}
+
+type SourceFormat {
+    id: Uuid!
+    format: String
 }
 
 type SpellMaterialComponent {

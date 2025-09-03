@@ -10,6 +10,7 @@
         "id": "0f063d69-07ea-49ac-8bae-b26dd3a2bdf9",
         "slug": "dungeon-masters-guild",
         "name": "Dungeon Masters Guild",
+        "product_url": "product/{{id}}",
         "short_name": "DMs Guild",
         "website": "https://www.dmsguild.com"
     },
@@ -17,6 +18,7 @@
         "id": "31f5297b-9b97-4613-a2e4-097eea74557e",
         "slug": "drivethru-rpg",
         "name": "DriveThru RPG",
+        "product_url": "product/{{id}}",
         "website": "https://www.drivethrurpg.com"
     }
 ]

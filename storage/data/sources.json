@@ -3,25 +3,31 @@
         "id": "2cb9aad8-9447-40f1-a861-cc49261d2cf9",
         "name": "Aurora's Whole Realms Catalogue",
         "slug": "auroras-whole-realms-catalogue",
-        "description": "At last! Complete in one catalog, all the finest merchandise Faerûn has to offer is presented by the enterprising entrepreneur, Aurora the Eclectic.\nUseful for players in any AD&D fantasy campaign (and other role-playing games, too!), this is a handy listing of items and goods of all kinds, from farming tools to scribes' pens, from imported Shou Lung silks to Maztican cotton, from wines and ales to breads and cheeses. Prices are given in the gold piece standard, for simple conversion. Players' \"shopping trips\" will never be the same!\n\nIt is our hope that players and DMs will find this Catalogue both useful and enjoyable. Aurora is not above editorializing about her wares, but we think her opinions will be informative as well as entertaining.",
-        "source_type": "sourcebook",
-        "game_edition": "2e",
-        "publication_type": "official",
-        "cover_image": "auroras-whole-realms-catalogue.webp",
-        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
         "campaign_setting": "forgotten-realms",
+        "cover_image": "auroras-whole-realms-catalogue.webp",
+        "description": "At last! Complete in one catalog, all the finest merchandise Faerûn has to offer is presented by the enterprising entrepreneur, Aurora the Eclectic.\nUseful for players in any AD&D fantasy campaign (and other role-playing games, too!), this is a handy listing of items and goods of all kinds, from farming tools to scribes' pens, from imported Shou Lung silks to Maztican cotton, from wines and ales to breads and cheeses. Prices are given in the gold piece standard, for simple conversion. Players' \"shopping trips\" will never be the same!\n\nIt is our hope that players and DMs will find this Catalogue both useful and enjoyable. Aurora is not above editorializing about her wares, but we think her opinions will be informative as well as entertaining.",
         "editions": [
             {
                 "id": "73a8172c-70b6-4ce1-a52d-85a54ab603e7",
                 "name": "original",
                 "binding": "paperback",
-                "pages": 160,
+                "formats": ["print", "pdf"],
                 "isbn10": "1560763272",
                 "isbn13": "9781560763277",
+                "pages": 160,
                 "release_date": "1992-06-01",
                 "release_date_month_only": true
             }
-        ]
+        ],
+        "game_edition": "2e",
+        "product_code": "TSR9358",
+        "product_ids": {
+            "drivethru-rpg": "16384",
+            "dungeon-masters-guild": "16834"
+        },
+        "publication_type": "official",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "source_type": "sourcebook"
     },
     {
         "id": "b1ab839d-a975-415e-bb81-f4cf7910a546",

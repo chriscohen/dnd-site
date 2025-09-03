@@ -27,6 +27,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property ?GameEdition $game_edition
  * @property string $name
  * @property ?string $product_code
+ * @property Collection $productIds
  * @property PublicationType $publication_type
  * @property string $publisher_id
  * @property SourceType $source_type
@@ -70,6 +71,11 @@ class Source extends AbstractModel
         return Attribute::make(
             get: fn (int $value) => GameEdition::tryFrom($value)?->toString(true),
         );
+    }
+
+    public function productIds(): HasMany
+    {
+        return $this->hasMany(ProductId::class);
     }
 
     protected function publicationType(): Attribute
