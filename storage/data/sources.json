@@ -31,68 +31,77 @@
     },
     {
         "id": "b1ab839d-a975-415e-bb81-f4cf7910a546",
-        "name": "Eberron Campaign Setting (3.5 Edition)",
         "slug": "eberron-campaign-setting-35",
-        "description": "Find Action Around Every Corner of the World\n\nGrab your pack and leap into the action-packed, intrigue-laced world of cinematic adventure. Within the Eberron Campaign Setting, you'll discover a vast, richly detailed world infused with magic, and waiting to be filled with daring escapades and dangerous exploits. Throw open the cover—and be ready for anything.\n\nInside this book, you'll find all the details you'll need to embark on Dungeons & Dragons adventures in the exciting world of Eberron:\n\n* 4 new races: changeling, kalashtar, shifter, and warforged\n* Over 70 new feats, 8 new prestige classes, and a new character class: the artificer\n* New equipment, weapons, spells, and magic items\n* New monsters and monster templates\nHighly detailed regions, new organizations, and a short adventure to launch your campaign",
-        "source_type": "sourcebook",
-        "game_edition": "3.5",
-        "publication_type": "official",
-        "cover_image": "eberron-campaign-setting-35-cover.webp",
-        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "name": "Eberron Campaign Setting (3.5 Edition)",
         "campaign_setting": "eberron",
+        "cover_image": "eberron-campaign-setting-35-cover.webp",
+        "description": "Find Action Around Every Corner of the World\n\nGrab your pack and leap into the action-packed, intrigue-laced world of cinematic adventure. Within the Eberron Campaign Setting, you'll discover a vast, richly detailed world infused with magic, and waiting to be filled with daring escapades and dangerous exploits. Throw open the cover—and be ready for anything.\n\nInside this book, you'll find all the details you'll need to embark on Dungeons & Dragons adventures in the exciting world of Eberron:\n\n* 4 new races: changeling, kalashtar, shifter, and warforged\n* Over 70 new feats, 8 new prestige classes, and a new character class: the artificer\n* New equipment, weapons, spells, and magic items\n* New monsters and monster templates\nHighly detailed regions, new organizations, and a short adventure to launch your campaign",
         "editions": [
             {
                 "id": "2ba7d79b-fa84-44dc-a759-0c73d3cf6a91",
                 "name": "original",
                 "binding": "hardcover",
-                "pages": 324,
+                "formats": ["print", "pdf"],
                 "isbn10": "0786932740",
                 "isbn13": "9780786932740",
+                "pages": 324,
                 "release_date": "2004-06-01",
                 "release_date_month_only": true
             }
-        ]
+        ],
+        "game_edition": "3.5",
+        "product_ids": {
+            "drivethru-rpg": "28474",
+            "dungeon-masters-guild": "28474"
+        },
+        "publication_type": "official",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "source_type": "sourcebook"
     },
     {
         "id": "38158381-4523-4a0b-a699-8b252c15f9b9",
         "name": "Monster Manual",
         "slug": "monster-manual-5th-edition",
-        "description": "The A to Z Fantasy Bestiary\n\nThe Monster Manual presents a horde of classic Dungeons & Dragons creatures, including dragons, giants, mind flayers, and beholders—a monstrous feast for Dungeon Masters ready to challenge their players and populate their adventures.\n\nThe monsters contained herein are culled from the D&D game's illustrious history, with easy-to-use game statistics and thrilling stories to feed your imagination.",
-        "source_type": "sourcebook",
-        "game_edition": "5.2014",
-        "publication_type": "official",
         "cover_image": "monster-manual-5th-edition.webp",
-        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "description": "The A to Z Fantasy Bestiary\n\nThe Monster Manual presents a horde of classic Dungeons & Dragons creatures, including dragons, giants, mind flayers, and beholders—a monstrous feast for Dungeon Masters ready to challenge their players and populate their adventures.\n\nThe monsters contained herein are culled from the D&D game's illustrious history, with easy-to-use game statistics and thrilling stories to feed your imagination.",
         "editions": [
             {
                 "id": "eae1620a-303e-4825-b16f-c2cae8949e29",
                 "name": "original",
                 "binding": "hardcover",
-                "pages": 352,
+                "formats": ["print", "roll_20"],
                 "isbn10": "0786965614",
                 "isbn13": "9780786965614",
+                "pages": 352,
                 "release_date": "2014-09-30"
             }
-        ]
+        ],
+        "game_edition": "5.2014",
+        "product_ids": {
+            "drivethru-rpg": "442459",
+            "dungeon-masters-guild": "442459"
+        },
+        "publication_type": "official",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "source_type": "sourcebook"
     },
     {
         "id": "397cd5d7-8e67-4c35-ac11-94c2413a341f",
         "name": "Spell Compendium",
-        "description": "The essential spellcaster's companion, Spell Compendium gather over 1,000 of the best spell from previously published Dungeons & Dragons game supplements and campaign settings, Dragon magazine articles, and articles posted on the Wizards of the Coast website.\n\nThe spells contained herein complement those presented in the Player's Handbook and have been updated to include official errata. In addition, this book contains descriptive read-aloud text telling you what a spell looks like, sounds like, or feels like.",
-        "product_code": "885987200",
-        "source_type": "sourcebook",
-        "game_edition": "3e",
-        "publication_type": "official",
         "cover_image": "spell-compendium.webp",
-        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "description": "The essential spellcaster's companion, Spell Compendium gather over 1,000 of the best spell from previously published Dungeons & Dragons game supplements and campaign settings, Dragon magazine articles, and articles posted on the Wizards of the Coast website.\n\nThe spells contained herein complement those presented in the Player's Handbook and have been updated to include official errata. In addition, this book contains descriptive read-aloud text telling you what a spell looks like, sounds like, or feels like.",
         "editions": [
             {
                 "id": "a482661a-f6ae-4efb-a006-5bf972e3c8cf",
                 "name": "original",
                 "binding": "hardcover",
-                "pages": 288,
+                "formats": [
+                    "print",
+                    "pdf"
+                ],
                 "isbn10": "0786937025",
                 "isbn13": "9780786937028",
+                "pages": 288,
                 "release_date": "2005-12-01",
                 "release_date_month_only": true
             },
@@ -100,33 +109,54 @@
                 "id": "db6c7e1f-86a3-4502-89e6-4b08d752c6e1",
                 "name": "premium",
                 "binding": "hardcover",
-                "pages": 288,
+                "formats": [
+                    "print",
+                    "pdf"
+                ],
                 "isbn10": "0786964480",
                 "isbn13": "9780786964482",
+                "pages": 288,
                 "release_date": "2013-04-16"
             }
-        ]
+        ],
+        "game_edition": "3e",
+        "product_code": "885987200",
+        "product_ids": {
+            "drivethru-rpg": "28314",
+            "dungeon-masters-guild": "28314"
+        },
+        "publication_type": "official",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "source_type": "sourcebook"
     },
     {
         "id": "f17ba616-db54-41eb-8616-5779c9e60f78",
         "name": "Unearthed Arcana",
-        "description": "A new guide to variant rules for the Dungeons & Dragons roleplaying game, this sourcebook provides players and DMs with a wide choice of alternate rules for roleplaying in a D&D campaign. Designed to expand the options available for customizing gameplay, these variant rules are modular and can be imported into any campaign in any amount desired. Examples of variant rules include playing core classes as prestige classes and alternate damage systems. Brand-new rules also include a new system of metamagic feats and a new spell system.",
-        "product_code": "881560000",
-        "source_type": "sourcebook",
-        "game_edition": "3e",
-        "publication_type": "official",
         "cover_image": "unearthed-arcana.webp",
-        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "description": "A new guide to variant rules for the Dungeons & Dragons roleplaying game, this sourcebook provides players and DMs with a wide choice of alternate rules for roleplaying in a D&D campaign. Designed to expand the options available for customizing gameplay, these variant rules are modular and can be imported into any campaign in any amount desired. Examples of variant rules include playing core classes as prestige classes and alternate damage systems. Brand-new rules also include a new system of metamagic feats and a new spell system.",
         "editions": [
             {
                 "id": "5518baa8-9175-4b5a-b689-72d58f3a2eeb",
                 "name": "original",
                 "binding": "hardcover",
-                "pages": 224,
+                "formats": [
+                    "print",
+                    "pdf"
+                ],
                 "isbn10": "0768031310",
+                "pages": 224,
                 "release_date": "2004-02-01",
                 "release_date_month_only": true
             }
-        ]
+        ],
+        "game_edition": "3e",
+        "product_code": "881560000",
+        "product_ids": {
+            "drivethru-rpg": "3734",
+            "dungeon-masters-guild": "3734"
+        },
+        "publication_type": "official",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "source_type": "sourcebook"
     }
 ]
