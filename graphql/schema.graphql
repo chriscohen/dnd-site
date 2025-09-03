@@ -133,7 +133,7 @@ type SourceEdition {
     id: Uuid!
     name: String!
     binding: String
-    formats: [SourceFormat]!
+    formats: [String]! @method(name: "getFormatsAsArray")
     isbn10: String
     isbn13: String
     pages: Int

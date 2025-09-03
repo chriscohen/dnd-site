@@ -15,7 +15,7 @@ enum SourceFormat: int
 
     public function toString(): string
     {
-        return mb_ucfirst(mb_strtolower($this->name));
+        return mb_strtolower(str_replace('_', ' ', $this->name));
     }
 
     public static function tryFromString(string $value): ?SourceFormat

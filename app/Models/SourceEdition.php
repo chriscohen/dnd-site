@@ -48,6 +48,20 @@ class SourceEdition extends AbstractModel
         return $this->hasMany(SourceEditionFormat::class, 'source_edition_id');
     }
 
+    /**
+     * @return string[]
+     */
+    public function getFormatsAsArray(): array
+    {
+        $output = [];
+
+        foreach ($this->formats as $format) {
+            $output[] = $format->format;
+        }
+
+        return $output;
+    }
+
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class);

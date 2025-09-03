@@ -30,7 +30,7 @@ class SourceEditionFormat extends AbstractModel
     protected function format(): Attribute
     {
         return Attribute::make(
-            get: fn (SourceFormat $value) => $value->toString(),
+            get: fn (int $value) => SourceFormat::tryFrom($value)->toString(),
         );
     }
 
