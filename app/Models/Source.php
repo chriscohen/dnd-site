@@ -43,19 +43,9 @@ class Source extends AbstractModel
         'source_type' => SourceType::class,
     ];
 
-    public function campaign_setting(): BelongsTo
-    {
-        return $this->campaignSetting();
-    }
-
     public function campaignSetting(): BelongsTo
     {
         return $this->belongsTo(CampaignSetting::class, 'campaign_setting_id');
-    }
-
-    public function cover_image(): BelongsTo
-    {
-        return $this->coverImage();
     }
 
     public function coverImage(): BelongsTo

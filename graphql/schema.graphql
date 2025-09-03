@@ -114,9 +114,9 @@ type Source {
     source_type: String!
     game_edition: String
     publication_type: String!
-    cover_image: Media @belongsTo
+    cover_image: Media @belongsTo(relation: "coverImage")
     publisher: Company @belongsTo
-    campaign_setting: CampaignSetting @belongsTo
+    campaign_setting: CampaignSetting @belongsTo(relation: "campaignSetting")
     editions: [SourceEdition] @hasMany
 }
 
