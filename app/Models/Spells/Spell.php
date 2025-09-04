@@ -6,29 +6,16 @@ namespace App\Models\Spells;
 
 use App\Enums\GameEdition;
 use App\Models\AbstractModel;
-use App\Models\Distance;
-use App\Models\MagicSchool;
-use App\Models\Source;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
  *
- * @property Collection<CharacterClass> $classes
- * @property GameEdition $game_edition
+ * @property Collection<SpellEdition> $editions
  * @property string $name
- * @property string $description
- * @property string $higher_level
- * @property bool $range_is_self
- * @property bool $range_is_touch
- * @property int $range_number
- * @property Distance $range_unit
- * @property MagicSchool $school
  * @property string $slug
  */
 class Spell extends AbstractModel
@@ -43,23 +30,8 @@ class Spell extends AbstractModel
         'range_is_self' => 'boolean',
     ];
 
-    public function components(): BelongsToMany
+    public function editions(): HasMany
     {
-        return $this->belongsToMany(SpellComponentType::class);
-    }
-
-    public function rangeUnit(): BelongsTo
-    {
-        return $this->belongsTo(Distance::class, 'id', 'range_unit');
-    }
-
-    public function school(): BelongsTo
-    {
-        return $this->belongsTo(MagicSchool::class, 'id');
-    }
-
-    public function sources(): MorphToMany
-    {
-        return $this->morphToMany(Source::class, 'source');
+        return $this->hasMany(SpellEdition::class);
     }
 }

@@ -6,6 +6,8 @@ use App\Enums\Binding;
 use App\Enums\GameEdition;
 use App\Enums\SourceType;
 use App\Models\Items\Item;
+use App\Models\Spells\Spell;
+use App\Models\Spells\SpellEdition;
 use GraphQL\Type\Definition\PhpEnumType;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
@@ -26,14 +28,15 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->register(OrderByServiceProvider::class);
 
-        foreach ([
-            Binding::class,
-            GameEdition::class,
-            SourceType::class,
-        ] as $enum) {
+        foreach (
+            [
+                Binding::class,
+                GameEdition::class,
+                SourceType::class,
+            ] as $enum
+        ) {
             $typeRegistry->register(new PhpEnumType($enum));
         }
-
     }
 
     /**
@@ -41,8 +44,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Relation::morphMap([
+        Relation::enforceMorphMap([
             'item' => Item::class,
+            'spell' => Spell::class,
+            'spell_edition' => SpellEdition::class,
         ]);
     }
 }

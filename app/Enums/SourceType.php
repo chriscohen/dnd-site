@@ -18,7 +18,7 @@ enum SourceType: int
 
     public static function tryFromString(string $value): ?SourceType
     {
-        return match(mb_strtoupper($value)) {
+        return match (mb_strtoupper($value)) {
             'SOURCEBOOK' => self::SOURCEBOOK,
             'NOVEL' => self::NOVEL,
             'WEBSITE' => self::WEBSITE,

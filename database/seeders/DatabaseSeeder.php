@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             CompanySeeder::class,
             SkillSeeder::class,
+            CharacterClassSeeder::class,
+            MagicSchoolSeeder::class,
 
             AttackTypeSeeder::class,
             CampaignSettingSeeder::class,
-            DistanceSeeder::class,
-            MagicSchoolSeeder::class,
             SourceSeeder::class,
             SpellComponentSeeder::class,
 

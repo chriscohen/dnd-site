@@ -10,16 +10,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('distances', function (Blueprint $table) {
+        Schema::create('character_classes', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('plural')->nullable()->index();
-            $table->string('short_name')->unique();
-            $table->double('per_meter');
+            $table->string('name')->unique();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('distances');
+        Schema::dropIfExists('character_classes');
     }
 };

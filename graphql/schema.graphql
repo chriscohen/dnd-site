@@ -10,8 +10,6 @@ type Query {
     company(slug: String! @eq): Company @find
     companies: [Company!]! @all
 
-    distances: [Distance!]! @all
-
     item(slug: String! @eq): Item @find
     items: [Item!]! @all @orderBy(column: "name", direction: ASC)
 
@@ -19,6 +17,8 @@ type Query {
 
     source(slug: String! @eq): Source @find
     sources: [Source!]! @all @orderBy(column: "game_edition", direction: DESC)
+
+    spells: [Spell!]! @all
 
     spellComponentType(id: String! @eq): SpellComponentType @find
     spellComponentTypes: [SpellComponentType!]! @all
@@ -65,13 +65,6 @@ type Damage {
 type DamageType {
     id: String!
     name: String!
-}
-
-type Distance {
-    id: String!
-    short_name: String!
-    plural: String
-    per_meter: Float!
 }
 
 type Item {
@@ -163,16 +156,21 @@ type SpellComponentType {
 
 type Spell {
     id: Uuid!
-    index: String!
+    slug: String!
     name: String!
-    description: [String]
-    higher_level: [String]
+    editions: [SpellEdition!]! @hasMany
+}
+
+type SpellEdition {
+    id: Uuid!
+    components: String @method(name: "componentsAsString")
+    description: String
+    game_edition: String!
+    higher_level: String
     range: String
     range_number: Int
-    range_unit: Distance @belongsTo
-    components: [SpellComponentType]
-    materials: [SpellMaterialComponent]
+    range_unit: String
+    school: String @method(name: "schoolAsString")
 }
 
 scalar Uuid
-

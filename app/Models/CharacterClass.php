@@ -8,4 +8,5 @@ namespace App\Models;
  */
 class CharacterClass extends AbstractModel
 {
+    public $timestamps = false;
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\GameEdition;
 use App\Enums\PublicationType;
 use App\Enums\SourceType;
+use App\Models\Spells\Spell;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

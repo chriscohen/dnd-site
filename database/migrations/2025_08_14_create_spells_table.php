@@ -14,16 +14,6 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('slug')->index();
             $table->string('name')->index();
-            $table->smallInteger('game_edition')->index();
-            $table->string('school')->index();
-            $table->text('description')->nullable();
-            $table->text('higher_level')->nullable();
-            $table->smallInteger('range_number')->nullable();
-            $table->string('range_unit')->nullable();
-            $table->boolean('range_is_touch')->default(false);
-            $table->boolean('range_is_self')->default(false);
-
-            $table->unique(['slug', 'game_edition']);
         });
     }
 

@@ -5,7 +5,14 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Enums\GameEdition;
+use App\Models\CharacterClass;
+use App\Models\MagicSchool;
+use App\Models\Reference;
+use App\Models\Source;
+use App\Models\SourceEdition;
 use App\Models\Spells\Spell;
+use App\Models\Spells\SpellEditionCharacterClassLevel;
+use App\Models\Spells\SpellEdition;
 
 class SpellSeeder extends AbstractYmlSeeder
 {
@@ -21,14 +28,59 @@ class SpellSeeder extends AbstractYmlSeeder
             $spell->id = $datum['id'];
             $spell->slug = $datum['slug'];
             $spell->name = $datum['name'];
-            $spell->game_edition = GameEdition::tryFrom($datum['game_edition']);
-            $spell->school = $datum['school'];
-            $spell->description = $datum['description'] ?? null;
-            $spell->higher_level = $datum['higher_level'] ?? null;
-            $spell->range_number = $datum['range_number'] ?? null;
-            $spell->range_unit = $datum['range_unit'] ?? null;
-            $spell->range_is_self = $datum['range_is_self'] ?? false;
-            $spell->range_is_touch = $datum['range_is_touch'] ?? false;
+
+            $spell->save();
+
+            foreach ($datum['editions'] as $editionData) {
+                $edition = new SpellEdition();
+                $edition->spell()->associate($spell);
+
+                $edition->description = $editionData['description'] ?? null;
+                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
+                $edition->higher_level = $editionData['higher_level'] ?? null;
+                $edition->range_number = $editionData['range_number'] ?? null;
+                $edition->range_unit = $editionData['range_unit'] ?? null;
+                $edition->range_is_self = $editionData['range_is_self'] ?? false;
+                $edition->range_is_touch = $editionData['range_is_touch'] ?? false;
+
+                $school = MagicSchool::query()->where('id', $editionData['school'])->firstOrFail();
+                $edition->school()->associate($school);
+
+                $edition->save();
+
+                foreach ($editionData['classes'] as $classData) {
+                    $class = CharacterClass::query()->where('id', $classData['class'])->firstOrFail();
+
+                    $sccl = new SpellEditionCharacterClassLevel();
+                    $sccl->characterClass()->associate($class);
+                    $sccl->spellEdition()->associate($edition);
+                    $sccl->level = $classData['level'];
+
+                    $sccl->save();
+                }
+
+                foreach ($editionData['references'] as $referenceData) {
+                    $reference = new Reference();
+
+                    // If there's a specific sourcebook edition ID, use that. If not, use the first edition of the
+                    // sourcebook.
+                    if (!empty($referenceData['edition_id'])) {
+                        $sourceEdition = SourceEdition::query()
+                            ->where('id', $referenceData['edition_id'])
+                            ->firstOrFail();
+                    } else {
+                        $source = Source::query()->where('slug', $referenceData['source'])->firstOrFail();
+                        $sourceEdition = $source->editions()->first();
+                    }
+
+                    $reference->edition()->associate($sourceEdition);
+                    $reference->page_from = $referenceData['page_from'];
+                    $reference->page_to = $referenceData['page_to'] ?? null;
+                    $reference->entity()->associate($edition);
+
+                    $reference->save();
+                }
+            }
         }
     }
 }

@@ -46,7 +46,7 @@ enum GameEdition: int
 
     public static function tryFromString(string $value): ?GameEdition
     {
-        return match(mb_strtolower($value)) {
+        return match (mb_strtolower($value)) {
             '1st', '1e', 'first' => self::FIRST,
             '2nd', '2e', 'second' => self::SECOND,
             '3rd', '3e', 'third' => self::THIRD,
