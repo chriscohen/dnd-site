@@ -18,6 +18,7 @@ type Query {
     source(slug: String! @eq): Source @find
     sources: [Source!]! @all @orderBy(column: "game_edition", direction: DESC)
 
+    spell(slug: String! @eq): Spell @find
     spells: [Spell!]! @all
 
     spellComponentType(id: String! @eq): SpellComponentType @find
