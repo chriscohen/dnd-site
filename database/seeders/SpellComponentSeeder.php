@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\SpellComponentType;
+use App\Models\Spells\SpellComponentType;
 
 class SpellComponentSeeder extends AbstractYmlSeeder
 {

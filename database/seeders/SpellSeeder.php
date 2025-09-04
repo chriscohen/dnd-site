@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Enums\GameEdition;
-use App\Models\Spell;
+use App\Models\Spells\Spell;
 
 class SpellSeeder extends AbstractYmlSeeder
 {

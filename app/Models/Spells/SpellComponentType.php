@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Spells;
+
+use App\Models\AbstractModel;
 
 class SpellComponentType extends AbstractModel
 {
