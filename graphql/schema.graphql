@@ -1,11 +1,14 @@
 type Query {
     attackTypes: [AttackType!]! @all
 
+    campaignSetting(slug: String! @eq): CampaignSetting @find
+    campaignSettings: [CampaignSetting!]! @all @orderBy(column: "name", direction: ASC)
+
     category(slug: String! @eq): Category @find
     categories: [Category!]! @all
 
-    campaignSetting(slug: String! @eq): CampaignSetting @find
-    campaignSettings: [CampaignSetting!]! @all @orderBy(column: "name", direction: ASC)
+    company(slug: String! @eq): Company @find
+    companies: [Company!]! @all
 
     distances: [Distance!]! @all
 
