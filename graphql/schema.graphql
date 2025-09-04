@@ -168,6 +168,7 @@ type SpellEdition {
     description: String
     game_edition: String!
     higher_level: String
+    is_default: Boolean
     range: String
     range_number: Int
     range_unit: String

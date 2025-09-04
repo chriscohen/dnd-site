@@ -21,6 +21,7 @@ use Ramsey\Uuid\Uuid;
  * @property string $description
  * @property GameEdition $game_edition
  * @property string $higher_level
+ * @property bool $is_default
  * @property MagicSchool $school
  * @property bool $range_is_self
  * @property bool $range_is_touch
@@ -38,6 +39,7 @@ class SpellEdition extends AbstractModel
 
     public $casts = [
         'game_edition' => GameEdition::class,
+        'is_default' => 'bool',
         'range_unit' => Distance::class,
     ];
 

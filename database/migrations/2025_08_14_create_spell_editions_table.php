@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('magic_school_id')->index();
             $table->text('description')->nullable();
             $table->text('higher_level')->nullable();
+            $table->boolean('is_default')->default(false);
 
             $table->unsignedSmallInteger('range_number')->nullable();
             $table->unsignedSmallInteger('range_unit')->nullable();

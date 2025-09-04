@@ -38,6 +38,7 @@ class SpellSeeder extends AbstractYmlSeeder
                 $edition->description = $editionData['description'] ?? null;
                 $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
                 $edition->higher_level = $editionData['higher_level'] ?? null;
+                $edition->is_default = $editionData['is_default'] ?? false;
                 $edition->range_number = $editionData['range_number'] ?? null;
                 $edition->range_unit = $editionData['range_unit'] ?? null;
                 $edition->range_is_self = $editionData['range_is_self'] ?? false;
