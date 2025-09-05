@@ -16,7 +16,9 @@ type Query {
     magicSchools: [MagicSchool!]! @all
 
     source(slug: String! @eq): Source @find
-    sources: [Source!]! @all @orderBy(column: "game_edition", direction: DESC)
+    sources(
+        game_edition: [String]
+    ): [Source!]! @all @orderBy(column: "game_edition", direction: DESC)
 
     spell(slug: String! @eq): Spell @find
     spells: [Spell!]! @all
