@@ -51,6 +51,11 @@ type Category {
     image: Media @hasOne
 }
 
+type CharacterClass {
+    id: String!
+    name: String!
+}
+
 type Company {
     id: String!
     slug: String!
@@ -166,6 +171,7 @@ type Spell {
 
 type SpellEdition {
     id: Uuid!
+    class_levels: [SpellEditionCharacterClassLevel] @hasMany(relation: "classLevels")
     components: String @method(name: "componentsAsString")
     description: String
     game_edition: String!
@@ -175,6 +181,14 @@ type SpellEdition {
     range_number: Int
     range_unit: String
     school: String @method(name: "schoolAsString")
+}
+
+type SpellEditionCharacterClassLevel {
+    id: Uuid!
+    spell_edition: SpellEdition!
+    character_class: String! @method(name: "getCharacterClassName")
+    character_class_raw: CharacterClass! @belongsTo(relation: "characterClass")
+    level: Int!
 }
 
 scalar Uuid

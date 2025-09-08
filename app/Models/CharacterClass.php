@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 /**
@@ -9,4 +11,5 @@ namespace App\Models;
 class CharacterClass extends AbstractModel
 {
     public $timestamps = false;
+    public $incrementing = false;
 }

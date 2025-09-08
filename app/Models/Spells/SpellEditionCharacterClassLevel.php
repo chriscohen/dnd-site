@@ -31,6 +31,11 @@ class SpellEditionCharacterClassLevel extends AbstractModel
         return $this->belongsTo(CharacterClass::class, 'character_class_id');
     }
 
+    public function getCharacterClassName(): string
+    {
+        return $this->characterClass->name;
+    }
+
     public function spellEdition(): BelongsTo
     {
         return $this->belongsTo(Spell::class, 'spell_edition_id');

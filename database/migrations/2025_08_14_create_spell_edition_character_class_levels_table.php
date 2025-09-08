@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
 
             $table->foreignIdFor(SpellEdition::class, 'spell_edition_id');
-            $table->foreignIdFor(CharacterClass::class, 'character_class_id');
+            $table->string('character_class_id');
             $table->unsignedSmallInteger('level')->index();
 
             $table->unique(['spell_edition_id', 'character_class_id'], 'spell_edition_cc_index');

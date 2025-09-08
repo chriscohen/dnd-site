@@ -16,11 +16,11 @@ return new class extends Migration
 
             $table->foreignIdFor(Spell::class, 'spell_id');
 
-            $table->unsignedSmallInteger('game_edition')->index();
-            $table->string('magic_school_id')->index();
             $table->text('description')->nullable();
+            $table->unsignedSmallInteger('game_edition')->index();
             $table->text('higher_level')->nullable();
             $table->boolean('is_default')->default(false);
+            $table->string('magic_school_id')->index();
 
             $table->unsignedSmallInteger('range_number')->nullable();
             $table->unsignedSmallInteger('range_unit')->nullable();

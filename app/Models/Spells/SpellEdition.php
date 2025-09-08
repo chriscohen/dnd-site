@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
@@ -18,6 +19,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
+ * @property Collection<SpellEditionCharacterClassLevel> $classLevels
  * @property string $description
  * @property GameEdition $game_edition
  * @property string $higher_level
@@ -43,6 +45,11 @@ class SpellEdition extends AbstractModel
         'range_unit' => Distance::class,
     ];
 
+    public function classLevels(): HasMany
+    {
+        return $this->hasMany(SpellEditionCharacterClassLevel::class, 'spell_edition_id');
+    }
+
     public function componentsAsString(): string
     {
         $output = '';
@@ -57,7 +64,7 @@ class SpellEdition extends AbstractModel
     protected function gameEdition(): Attribute
     {
         return Attribute::make(
-            get: fn (int $value) => GameEdition::tryFrom($value)->toString(),
+            get: fn (int $value) => GameEdition::tryFrom($value)->toStringShort(),
         );
     }
 
