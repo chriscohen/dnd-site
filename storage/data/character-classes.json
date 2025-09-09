@@ -8,6 +8,10 @@
         "name": "Cleric"
     },
     {
+        "id": "druid",
+        "name": "Druid"
+    },
+    {
         "id": "sorcerer",
         "name": "Sorcerer"
     },

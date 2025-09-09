@@ -77,5 +77,31 @@
             }
         ]
     },
-
+    {
+        "id": "d89d5b6f-f4b2-428a-82bf-db9773707574",
+        "slug": "air-breathing",
+        "name": "Air Breathing",
+        "editions": [
+            {
+                "classes": [
+                    { "class":  "cleric", "level":  3 },
+                    { "class":  "druid", "level":  3 },
+                    { "class":  "sorcerer", "level":  3 },
+                    { "class":  "wizard", "level":  3 }
+                ],
+                "components": "SM",
+                "description": "The transmuted creatures can breathe air freely. Divide the duration evenly among all the creatures you touch.\n\nThe spell does not make creatures unable to breathe water. Air breathing dispels and counters water breathing.",
+                "game_edition": "3.5",
+                "is_default": true,
+                "range_is_touch": true,
+                "references": [
+                    {
+                        "source": "champions-of-ruin",
+                        "page_from": 28
+                    }
+                ],
+                "school": "transmutation"
+            }
+        ]
+    }
 ]
