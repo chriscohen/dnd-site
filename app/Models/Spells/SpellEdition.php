@@ -68,6 +68,19 @@ class SpellEdition extends AbstractModel
         );
     }
 
+    public function getLowestLevel(): int
+    {
+        $lowest = 99;
+
+        foreach ($this->classLevels as $classLevel) {
+            if ($classLevel->level < $lowest) {
+                $lowest = $classLevel->level;
+            }
+        }
+
+        return $lowest;
+    }
+
     public function spellComponents(): BelongsToMany
     {
         return $this->belongsToMany(SpellComponentType::class, 'spell_edition_spell_component_types');

@@ -2,5 +2,17 @@
     {
         "id": "assassin",
         "name": "Assassin"
+    },
+    {
+        "id": "cleric",
+        "name": "Cleric"
+    },
+    {
+        "id": "sorcerer",
+        "name": "Sorcerer"
+    },
+    {
+        "id": "wizard",
+        "name": "Wizard"
     }
 ]

@@ -21,7 +21,7 @@ type Query {
     ): [Source!]! @all @orderBy(column: "game_edition", direction: DESC)
 
     spell(slug: String! @eq): Spell @find
-    spells: [Spell!]! @all
+    spells: [Spell!]! @all @orderBy(column: "name", direction: ASC)
 
     spellComponentType(id: String! @eq): SpellComponentType @find
     spellComponentTypes: [SpellComponentType!]! @all
@@ -177,6 +177,7 @@ type SpellEdition {
     game_edition: String!
     higher_level: String
     is_default: Boolean
+    lowest_level: Int! @method(name: "getLowestLevel")
     range: String
     range_number: Int
     range_unit: String
