@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @property Uuid $uuid
+ * @property Uuid $id
  */
 class AttackType extends AbstractModel
 {

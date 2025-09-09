@@ -17,8 +17,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Uuid $id
  *
  * @property string $description
- * @property GameEdition $gameEdition
- * @property Uuid $game_edition_id
+ * @property GameEdition $game_edition
  * @property bool $is_primary
  * @property Item $item
  * @property Uuid $item_id
@@ -35,6 +34,7 @@ class ItemEdition extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
+        'game_edition' => GameEdition::class,
         'is_primary' => 'boolean',
     ];
 
@@ -55,11 +55,6 @@ class ItemEdition extends AbstractModel
         );
     }
 
-    public function gameEdition(): BelongsTo
-    {
-        return $this->belongsTo(GameEdition::class);
-    }
-
     public function item(): BelongsTo
     {
         return $this->belongsTo(Item::class, 'item_id');
@@ -68,5 +63,19 @@ class ItemEdition extends AbstractModel
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class, 'source_id');
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'description' => $this->description,
+            'game_edition' => $this->game_edition?->toStringShort() ?? null,
+            'is_primary' => $this->is_primary,
+            'price' => $this->price,
+            'quantity' => $this->quantity,
+            'source' => $this->source->slug,
+            'weight' => $this->weight,
+        ];
     }
 }

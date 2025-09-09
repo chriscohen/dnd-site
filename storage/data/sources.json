@@ -30,6 +30,36 @@
         "source_type": "sourcebook"
     },
     {
+        "id": "0f9e2836-dbcf-49f4-9f98-10d36b422c8b",
+        "slug": "champions-of-ruin",
+        "name": "Champions of Ruin",
+        "campaign_setting": "forgotten-realms",
+        "cover_image": "champions-of-ruin.webp",
+        "description": "WELCOME TO THE SWORD COAST\n\nA region of the Forgotten Realms®, the Sword Coast comprises shining paragons of civilization, perilous locales fraught with evil, and, encompassing them all, a wilderness that offers an explorer both vast opportunity and great danger.\n\nThe Sword Coast Adventurer's Guide™ is a valuable resource for Dungeon Masters and players alike. In addition to describing the peoples and places of the Sword Coast, the book contains a plethora of new character options to intrigue and inspire every adventuring party.\n\nFor use with the fifth edition Player's Handbook®, Monster Manual®, and Dungeon Master's Guide®, this book provides the setting, story, and character options needed to participate in a D&D game anywhere along the Sword Coast of Faerûn.",
+        "editions": [
+            {
+                "id": "7b064d3c-36ed-47ff-b35b-0a824de399f3",
+                "name": "original",
+                "binding": "hardcover",
+                "formats": ["print", "pdf"],
+                "isbn10": "0786936924",
+                "isbn13": "9780786936922",
+                "pages": 160,
+                "release_date": "2005-05",
+                "release_date_month_only": true
+            }
+        ],
+        "game_edition": "3.5",
+        "product_code": "178720000",
+        "product_ids": {
+            "drivethru-rpg": "3730",
+            "dungeon-masters-guild": "3730"
+        },
+        "publication_type": "official",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "source_type": "sourcebook"
+    },
+    {
         "id": "b1ab839d-a975-415e-bb81-f4cf7910a546",
         "slug": "eberron-campaign-setting-35",
         "name": "Eberron Campaign Setting (3.5 Edition)",

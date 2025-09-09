@@ -54,4 +54,16 @@ class Media extends AbstractModel
     {
         return Storage::disk($this->disk)->url($this->filename);
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'collection_name' => $this->collection_name,
+            'filename' => $this->filename,
+            'mime_type' => $this->mime_type,
+            'name' => $this->name,
+            'size' => $this->size,
+        ];
+    }
 }

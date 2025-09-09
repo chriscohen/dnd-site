@@ -7,7 +7,6 @@ namespace App\Models;
 use App\Traits\IdentifiesModel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -37,5 +36,17 @@ class Category extends AbstractModel
     public function parent(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'name' => $this->name,
+
+            'image' => $this->image?->toArray() ?? null,
+            'parent' => $this->parent?->toArray() ?? null,
+        ];
     }
 }

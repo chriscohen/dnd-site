@@ -14,4 +14,12 @@ class MagicSchool extends AbstractModel
 {
     public $timestamps = false;
     public $incrementing = false;
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
 }

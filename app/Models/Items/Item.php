@@ -6,6 +6,7 @@ namespace App\Models\Items;
 
 use App\Models\AbstractModel;
 use App\Models\Category;
+use App\Models\ModelCollection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -41,5 +42,17 @@ class Item extends AbstractModel
     public function editions(): HasMany
     {
         return $this->hasMany(ItemEdition::class);
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'name' => $this->name,
+
+            'category' => $this->category->toArray(),
+            'editions' => ModelCollection::make($this->editions)->toArray(),
+        ];
     }
 }
