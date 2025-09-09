@@ -6,7 +6,6 @@ namespace Database\Seeders;
 
 use App\Enums\Binding;
 use App\Enums\GameEdition;
-use App\Enums\ProductIdType;
 use App\Enums\PublicationType;
 use App\Enums\SourceFormat;
 use App\Enums\SourceType;

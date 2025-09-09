@@ -102,6 +102,7 @@ type MagicDomain {
 type MagicSchool {
     id: String!
     name: String!
+    image: Media!
 }
 
 type Media {

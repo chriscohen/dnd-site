@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
+use Spatie\LaravelMarkdown\MarkdownRenderer;
 
 /**
  * @property Uuid $id
@@ -62,6 +63,13 @@ class SpellEdition extends AbstractModel
         }
 
         return $output;
+    }
+
+    protected function description(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => app(MarkdownRenderer::class)->toHtml($value),
+        );
     }
 
     public function domains(): BelongsToMany
