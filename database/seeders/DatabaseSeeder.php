@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             SkillSeeder::class,
             CharacterClassSeeder::class,
             MagicSchoolSeeder::class,
+            MagicDomainSeeder::class,
 
             AttackTypeSeeder::class,
             CampaignSettingSeeder::class,

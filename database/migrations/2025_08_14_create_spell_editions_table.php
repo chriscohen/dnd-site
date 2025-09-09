@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('magic_school_id')->index();
 
             $table->unsignedSmallInteger('range_number')->nullable();
+            $table->unsignedSmallInteger('range_per_level')->nullable();
             $table->unsignedSmallInteger('range_unit')->nullable();
             $table->boolean('range_is_touch')->default(false);
             $table->boolean('range_is_self')->default(false);

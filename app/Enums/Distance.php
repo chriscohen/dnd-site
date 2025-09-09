@@ -42,4 +42,27 @@ enum Distance: int
             self::MILE => 'mi',
         };
     }
+
+    public function toString(): string
+    {
+        return match ($this) {
+            self::INCH => 'in',
+            self::FOOT => 'ft',
+            self::YARD => 'yd',
+            self::METER => 'm',
+            self::MILE => 'mi',
+        };
+    }
+
+    public static function tryFromString(string $value): ?self
+    {
+        return match ($value) {
+            'in', 'inch', 'inches' => self::INCH,
+            'ft', 'foot', 'feet' => self::FOOT,
+            'yd', 'yds', 'yard', 'yards' => self::YARD,
+            'm', 'meter', 'metre', 'meters', 'metres' => self::METER,
+            'mi', 'mis', 'mile', 'miles' => self::MILE,
+            default => null,
+        };
+    }
 }

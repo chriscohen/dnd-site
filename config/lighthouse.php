@@ -189,6 +189,7 @@ return [
             'App',
             'App\\Models',
             'App\\Models\\Items',
+            'App\\Models\\Magic',
             'App\\Models\\Spells',
         ],
         'queries' => 'App\\GraphQL\\Queries',

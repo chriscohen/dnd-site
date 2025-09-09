@@ -5,7 +5,8 @@ namespace App\Models\Spells;
 use App\Enums\Distance;
 use App\Enums\GameEdition;
 use App\Models\AbstractModel;
-use App\Models\MagicSchool;
+use App\Models\Magic\MagicDomain;
+use App\Models\Magic\MagicSchool;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -21,6 +22,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property Collection<SpellEditionCharacterClassLevel> $classLevels
  * @property string $description
+ * @property Collection<MagicDomain> $domains
  * @property GameEdition $game_edition
  * @property string $higher_level
  * @property bool $is_default
@@ -28,6 +30,7 @@ use Ramsey\Uuid\Uuid;
  * @property bool $range_is_self
  * @property bool $range_is_touch
  * @property int $range_number
+ * @property int $range_per_level
  * @property Distance $range_unit
  * @property Spell $spell
  * @property Uuid $spell_id
@@ -61,11 +64,30 @@ class SpellEdition extends AbstractModel
         return $output;
     }
 
+    public function domains(): BelongsToMany
+    {
+        return $this->belongsToMany(MagicDomain::class, 'spell_editions_magic_domains');
+    }
+
     protected function gameEdition(): Attribute
     {
         return Attribute::make(
             get: fn (int $value) => GameEdition::tryFrom($value)->toStringShort(),
         );
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDomainsAsStringArray(): array
+    {
+        $output = [];
+
+        foreach ($this->domains as $domain) {
+            $output[] = $domain->name;
+        }
+
+        return $output;
     }
 
     public function getLowestLevel(): int
@@ -79,6 +101,13 @@ class SpellEdition extends AbstractModel
         }
 
         return $lowest;
+    }
+
+    protected function rangeUnit(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?int $value) => $value === null ? '' : Distance::tryFrom($value)->toString(),
+        );
     }
 
     public function spellComponents(): BelongsToMany

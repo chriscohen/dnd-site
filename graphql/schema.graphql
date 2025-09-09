@@ -94,6 +94,11 @@ type ItemEdition {
     source: Source! @belongsTo
 }
 
+type MagicDomain {
+    id: String!
+    name: String!
+}
+
 type MagicSchool {
     id: String!
     name: String!
@@ -174,12 +179,14 @@ type SpellEdition {
     class_levels: [SpellEditionCharacterClassLevel] @hasMany(relation: "classLevels")
     components: String @method(name: "componentsAsString")
     description: String
+    domains: [String] @method(name: "getDomainsAsStringArray")
     game_edition: String!
     higher_level: String
     is_default: Boolean
     lowest_level: Int! @method(name: "getLowestLevel")
     range: String
     range_number: Int
+    range_per_level: Int
     range_unit: String
     school: String @method(name: "schoolAsString")
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Magic;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Models\AbstractModel;
 
 /**
  * @property string $id

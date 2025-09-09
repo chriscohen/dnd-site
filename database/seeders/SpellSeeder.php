@@ -6,13 +6,14 @@ namespace Database\Seeders;
 
 use App\Enums\GameEdition;
 use App\Models\CharacterClass;
-use App\Models\MagicSchool;
+use App\Enums\Distance;
+use App\Models\Magic\MagicSchool;
 use App\Models\Reference;
 use App\Models\Source;
 use App\Models\SourceEdition;
 use App\Models\Spells\Spell;
-use App\Models\Spells\SpellEditionCharacterClassLevel;
 use App\Models\Spells\SpellEdition;
+use App\Models\Spells\SpellEditionCharacterClassLevel;
 
 class SpellSeeder extends AbstractYmlSeeder
 {
@@ -40,7 +41,9 @@ class SpellSeeder extends AbstractYmlSeeder
                 $edition->higher_level = $editionData['higher_level'] ?? null;
                 $edition->is_default = $editionData['is_default'] ?? false;
                 $edition->range_number = $editionData['range_number'] ?? null;
-                $edition->range_unit = $editionData['range_unit'] ?? null;
+                $edition->range_unit = !empty($editionData['range_unit']) ?
+                    Distance::tryFromString($editionData['range_unit']) :
+                    null;
                 $edition->range_is_self = $editionData['range_is_self'] ?? false;
                 $edition->range_is_touch = $editionData['range_is_touch'] ?? false;
 
