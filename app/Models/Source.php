@@ -74,6 +74,13 @@ class Source extends AbstractModel
         );
     }
 
+    public function primaryEdition(): ?SourceEdition
+    {
+        /** @var SourceEdition|null $edition */
+        $edition = $this->editions->where('is_primary', true)->firstOrFail();
+        return $edition;
+    }
+
     public function productIds(): HasMany
     {
         return $this->hasMany(ProductId::class);

@@ -17,7 +17,6 @@ use App\Models\Source;
 use App\Models\SourceEdition;
 use App\Models\SourceEditionFormat;
 use Carbon\Carbon;
-use Illuminate\Database\Seeder;
 
 class SourceSeeder extends AbstractYmlSeeder
 {
@@ -78,6 +77,10 @@ class SourceSeeder extends AbstractYmlSeeder
                 $edition->id = $editionData['id'];
                 $edition->source_id = $datum['id'];
                 $edition->name = $editionData['name'];
+
+                $edition->is_primary = (count($datum['editions']) == 1) ?
+                    true :
+                    ($editionData['is_primary'] ?? false);
 
                 $edition->binding = Binding::tryFromString($editionData['binding']);
                 $edition->isbn10 = $editionData['isbn10'] ?? null;

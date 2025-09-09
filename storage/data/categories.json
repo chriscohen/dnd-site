@@ -1,5 +1,14 @@
 [
     {
+        "id": "aa4ea0d8-1736-45ea-8280-b67b366d4b2f",
+        "slug": "cheese",
+        "name": "Cheese",
+        "entity_type": "item",
+        "parent": "food",
+        "parent_id": "89d0088a-7909-4345-9147-1cf175d1ce13",
+        "image": "cheese.jpg"
+    },
+    {
         "id": "350515c4-09d1-49fd-bf62-71d9870d53d0",
         "slug": "consumable",
         "name": "Consumable",
@@ -10,14 +19,23 @@
         "slug": "food",
         "name": "Food",
         "entity_type": "item",
-        "parent": "consumable"
+        "parent": "consumable",
+        "parent_id": "350515c4-09d1-49fd-bf62-71d9870d53d0"
     },
     {
-        "id": "aa4ea0d8-1736-45ea-8280-b67b366d4b2f",
-        "slug": "cheese",
-        "name": "Cheese",
+        "id": "dda993d3-66a5-4eeb-8872-88a22bcc95ff",
+        "slug": "flora",
+        "name": "Flora",
         "entity_type": "item",
-        "parent": "food",
-        "image": "cheese.jpg"
+        "parent": "consumable",
+        "parent_id": "350515c4-09d1-49fd-bf62-71d9870d53d0"
+    },
+    {
+        "id": "833777b6-a8c6-4d8d-8880-65de5be3a768",
+        "slug": "grass",
+        "name": "Grass",
+        "entity_type": "item",
+        "parent": "flora",
+        "parent_id": "dda993d3-66a5-4eeb-8872-88a22bcc95ff"
     }
 ]

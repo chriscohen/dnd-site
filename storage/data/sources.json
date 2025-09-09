@@ -129,6 +129,7 @@
                     "print",
                     "pdf"
                 ],
+                "is_primary": true,
                 "isbn10": "0786937025",
                 "isbn13": "9780786937028",
                 "pages": 288,

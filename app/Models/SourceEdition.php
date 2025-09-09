@@ -16,6 +16,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property ?Binding $binding
  * @property Collection $formats
+ * @property bool $is_primary
  * @property ?string $isbn10
  * @property ?string $isbn13
  * @property string $name
@@ -32,6 +33,7 @@ class SourceEdition extends AbstractModel
 
     public $casts = [
         'binding' => Binding::class,
+        'is_primary' => 'boolean',
         'release_date' => 'date',
         'release_date_month_only' => 'boolean',
     ];

@@ -24,7 +24,6 @@ return new class extends Migration
             $table->smallInteger('price')->nullable();
             $table->smallInteger('quantity')->default(1);
             $table->float('weight')->nullable();
-            $table->foreignIdFor(Source::class, 'source_id')->index();
         });
     }
 

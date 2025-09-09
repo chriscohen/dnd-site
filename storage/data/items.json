@@ -7,9 +7,37 @@
             {
                 "id": "6126021d-e3d2-4c03-a032-fb69f537de9b",
                 "game_edition": "2e",
-                "is_primary": true,
                 "description": "Arabellan Cheddar is a cheese crafted in Arabel. It was also sold through @source:auroras-whole-realms-catalogue:Aurora's Whole Realms Catalogue.",
-                "source": "auroras-whole-realms-catalogue"
+                "references": [
+                    {
+                        "source": "auroras-whole-realms-catalogue",
+                        "page_from": 122
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "d92b3b3c-6d5d-419f-a51f-0eb82f92bc75",
+        "name": "Reed",
+        "category": "grass",
+        "editions": [
+            {
+                "id": "dfa983ce-577e-4667-af4f-3c4a8cf196a9",
+                "game_edition": "3.5",
+                "description": "A tall, slender-leaved plant of the grass family, which grows in water or on marshy ground."
+            }
+        ]
+    },
+    {
+        "id": "de4f7950-ac01-4661-ae66-f433982868cf",
+        "name": "Straw",
+        "category": "grass",
+        "editions": [
+            {
+                "id": "e2e2f2b9-580d-4296-ae97-59b948a536b8",
+                "game_edition": "3.5",
+                "description": "A dried grain stalk, used especially as fodder or as material for thatching, packing, or weaving."
             }
         ]
     }

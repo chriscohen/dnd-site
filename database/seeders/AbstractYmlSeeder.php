@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\Reference;
+use App\Models\Source;
+use App\Models\SourceEdition;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
@@ -112,6 +115,42 @@ abstract class AbstractYmlSeeder extends Seeder
     public function setExcludedProperties(array $excludedProperties): self
     {
         $this->excludedProperties = $excludedProperties;
+        return $this;
+    }
+
+    /**
+     * @param  array{
+     *     edition_id: ?string,
+     *     page_from: int,
+     *     page_to: ?int,
+     *     source: ?string
+     * } $data
+     * @return self
+     */
+    public function setReferences(array $data): self
+    {
+        foreach ($data as $datum) {
+            $reference = new Reference();
+
+            // If there's a specific sourcebook edition ID, use that. If not, use the first edition of the
+            // sourcebook.
+            if (!empty($datum['edition_id'])) {
+                $sourceEdition = SourceEdition::query()
+                    ->where('id', $datum['edition_id'])
+                    ->firstOrFail();
+            } else {
+                $source = Source::query()->where('slug', $datum['source'])->firstOrFail();
+                $sourceEdition = $source->primaryEdition();
+            }
+
+            $reference->edition()->associate($sourceEdition);
+            $reference->page_from = $datum['page_from'];
+            $reference->page_to = $datum['page_to'] ?? null;
+            $reference->entity()->associate($sourceEdition);
+
+            $reference->save();
+        }
+
         return $this;
     }
 

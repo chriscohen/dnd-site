@@ -6,6 +6,8 @@ use App\Enums\Binding;
 use App\Enums\GameEdition;
 use App\Enums\SourceType;
 use App\Models\Items\Item;
+use App\Models\Source;
+use App\Models\SourceEdition;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
 use GraphQL\Type\Definition\PhpEnumType;
@@ -46,6 +48,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Relation::enforceMorphMap([
             'item' => Item::class,
+            'source' => Source::class,
+            'source_edition' => SourceEdition::class,
             'spell' => Spell::class,
             'spell_edition' => SpellEdition::class,
         ]);

@@ -4,7 +4,9 @@ namespace App\Models\Spells;
 
 use App\Enums\Distance;
 use App\Enums\GameEdition;
+use App\Enums\MaterialComponentMode;
 use App\Models\AbstractModel;
+use App\Models\Items\ItemEdition;
 use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
 use App\Models\Reference;
@@ -27,7 +29,10 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property GameEdition $game_edition
  * @property string $higher_level
  * @property bool $is_default
+ * @property Collection<ItemEdition> $itemEditions
+ * @property Collection<SpellMaterialComponent> $materialComponents
  * @property MagicSchool $school
+ * @property MaterialComponentMode $material_component_mode
  * @property bool $range_is_self
  * @property bool $range_is_touch
  * @property int $range_number
@@ -46,6 +51,7 @@ class SpellEdition extends AbstractModel
     public $casts = [
         'game_edition' => GameEdition::class,
         'is_default' => 'bool',
+        'material_component_mode' => MaterialComponentMode::class,
         'range_unit' => Distance::class,
     ];
 
@@ -109,6 +115,23 @@ class SpellEdition extends AbstractModel
         }
 
         return $lowest;
+    }
+
+    public function itemEditions(): BelongsToMany
+    {
+        return $this->belongsToMany(ItemEdition::class, 'spell_material_components');
+    }
+
+    protected function materialComponentMode(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?int $value) => $value === null ? null : MaterialComponentMode::tryFrom($value)->toString(),
+        );
+    }
+
+    public function materialComponents(): HasMany
+    {
+        return $this->hasMany(SpellMaterialComponent::class);
     }
 
     protected function rangeUnit(): Attribute

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('higher_level')->nullable();
             $table->boolean('is_default')->default(false);
             $table->string('magic_school_id')->index();
+            $table->unsignedSmallInteger('material_component_mode')->nullable();
 
             $table->unsignedSmallInteger('range_number')->nullable();
             $table->unsignedSmallInteger('range_per_level')->nullable();

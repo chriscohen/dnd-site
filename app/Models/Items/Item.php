@@ -10,7 +10,6 @@ use App\Models\ModelCollection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 
@@ -34,9 +33,9 @@ class Item extends AbstractModel
         return $this->belongsTo(Category::class);
     }
 
-    public function itemable(): MorphTo
+    public function primaryEdition(): ItemEdition
     {
-        return $this->morphTo();
+        return $this->editions->where('is_primary', true)->firstOrFail();
     }
 
     public function editions(): HasMany

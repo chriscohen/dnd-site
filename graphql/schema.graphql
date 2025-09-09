@@ -13,6 +13,7 @@ type Query {
     item(slug: String! @eq): Item @find
     items: [Item!]! @all @orderBy(column: "name", direction: ASC)
 
+    magicSchool(id: String! @eq): MagicSchool @find
     magicSchools: [MagicSchool!]! @all
 
     source(slug: String! @eq): Source @find
@@ -83,8 +84,15 @@ type Item {
     editions: [ItemEdition] @hasMany
 }
 
+type ItemData {
+    id: Uuid!
+    slug: String!
+    name: String!
+}
+
 type ItemEdition {
     id: Uuid!
+    item: Item! @belongsTo
     item_id: Uuid!
     game_edition: GameEdition!
     description: String
@@ -145,6 +153,7 @@ type SourceEdition {
     name: String!
     binding: String
     formats: [String]! @method(name: "getFormatsAsArray")
+    is_primary: Boolean
     isbn10: String
     isbn13: String
     pages: Int
@@ -158,21 +167,16 @@ type SourceFormat {
     format: String
 }
 
-type SpellMaterialComponent {
-    id: String!
-    name: String!
-}
-
-type SpellComponentType {
-    id: String!
-    name: String!
-}
-
 type Spell {
     id: Uuid!
     slug: String!
     name: String!
     editions: [SpellEdition!]! @hasMany
+}
+
+type SpellComponentType {
+    id: String!
+    name: String!
 }
 
 type SpellEdition {
@@ -185,6 +189,8 @@ type SpellEdition {
     higher_level: String
     is_default: Boolean
     lowest_level: Int! @method(name: "getLowestLevel")
+    material_component_mode: String
+    material_components: [SpellMaterialComponent] @belongsToMany(relation: "materialComponents")
     range: String
     range_number: Int
     range_per_level: Int
@@ -198,6 +204,13 @@ type SpellEditionCharacterClassLevel {
     character_class: String! @method(name: "getCharacterClassName")
     character_class_raw: CharacterClass! @belongsTo(relation: "characterClass")
     level: Int!
+}
+
+type SpellMaterialComponent {
+    id: String!
+    is_consumed: Boolean!
+    item_edition: ItemEdition! @belongsTo(relation: "itemEdition")
+    quantity: Int!
 }
 
 scalar Uuid

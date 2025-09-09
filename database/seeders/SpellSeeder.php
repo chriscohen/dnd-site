@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Enums\GameEdition;
+use App\Enums\MaterialComponentMode;
 use App\Models\CharacterClass;
 use App\Enums\Distance;
+use App\Models\Items\Item;
 use App\Models\Magic\MagicSchool;
-use App\Models\Reference;
-use App\Models\Source;
-use App\Models\SourceEdition;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
 use App\Models\Spells\SpellEditionCharacterClassLevel;
+use App\Models\Spells\SpellMaterialComponent;
 
 class SpellSeeder extends AbstractYmlSeeder
 {
@@ -40,6 +40,8 @@ class SpellSeeder extends AbstractYmlSeeder
                 $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
                 $edition->higher_level = $editionData['higher_level'] ?? null;
                 $edition->is_default = $editionData['is_default'] ?? false;
+                $edition->material_component_mode = !empty($editionData['material_component_mode']) ?
+                    MaterialComponentMode::tryFrom($editionData['material_component_mode']) : null;
                 $edition->range_number = $editionData['range_number'] ?? null;
                 $edition->range_unit = !empty($editionData['range_unit']) ?
                     Distance::tryFromString($editionData['range_unit']) :
@@ -63,26 +65,22 @@ class SpellSeeder extends AbstractYmlSeeder
                     $sccl->save();
                 }
 
-                foreach ($editionData['references'] as $referenceData) {
-                    $reference = new Reference();
+                foreach ($editionData['material_components'] ?? [] as $materialData) {
+                    $material = new SpellMaterialComponent();
+                    $material->spellEdition()->associate($edition);
 
-                    // If there's a specific sourcebook edition ID, use that. If not, use the first edition of the
-                    // sourcebook.
-                    if (!empty($referenceData['edition_id'])) {
-                        $sourceEdition = SourceEdition::query()
-                            ->where('id', $referenceData['edition_id'])
-                            ->firstOrFail();
-                    } else {
-                        $source = Source::query()->where('slug', $referenceData['source'])->firstOrFail();
-                        $sourceEdition = $source->editions()->first();
-                    }
+                    $item = Item::query()->where('slug', $materialData['item'])->firstOrFail();
+                    $itemEdition = $item->primaryEdition();
+                    $material->itemEdition()->associate($itemEdition);
 
-                    $reference->edition()->associate($sourceEdition);
-                    $reference->page_from = $referenceData['page_from'];
-                    $reference->page_to = $referenceData['page_to'] ?? null;
-                    $reference->entity()->associate($edition);
+                    $material->quantity = $materialData['quantity'] ?? 1;
+                    $material->is_consumed = $materialData['is_consumed'] ?? false;
 
-                    $reference->save();
+                    $material->save();
+                }
+
+                if (!empty($editionData['references'])) {
+                    $this->setReferences($editionData['references']);
                 }
             }
         }

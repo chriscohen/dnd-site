@@ -93,6 +93,19 @@
                 "description": "The transmuted creatures can breathe air freely. Divide the duration evenly among all the creatures you touch.\n\nThe spell does not make creatures unable to breathe water. Air breathing dispels and counters water breathing.",
                 "game_edition": "3.5",
                 "is_default": true,
+                "material_components": [
+                    {
+                        "item": "reed",
+                        "quantity": 1,
+                        "is_consumed": true
+                    },
+                    {
+                        "item": "straw",
+                        "quantity": 1,
+                        "is_consumed": true
+                    }
+                ],
+                "material_component_mode": 2,
                 "range_is_touch": true,
                 "references": [
                     {

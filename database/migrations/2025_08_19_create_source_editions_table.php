@@ -17,9 +17,10 @@ return new class extends Migration
                 ->on('sources');
             $table->string('name');
             $table->smallInteger('binding')->nullable();
-            $table->smallInteger('pages')->nullable();
+            $table->boolean('is_primary')->default(false)->index();
             $table->string('isbn10', 10)->unique()->nullable();
             $table->string('isbn13', 13)->unique()->nullable();
+            $table->smallInteger('pages')->nullable();
             $table->date('release_date')->nullable();
             $table->boolean('release_date_month_only')->default(false);
         });
