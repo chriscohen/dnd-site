@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Spells\Spell;
+use App\Models\Range;
 
 return new class extends Migration
 {
@@ -17,17 +18,15 @@ return new class extends Migration
             $table->foreignIdFor(Spell::class, 'spell_id');
 
             $table->text('description')->nullable();
+            $table->text('focus')->nullable();
             $table->unsignedSmallInteger('game_edition')->index();
             $table->text('higher_level')->nullable();
             $table->boolean('is_default')->default(false);
             $table->string('magic_school_id')->index();
             $table->unsignedSmallInteger('material_component_mode')->nullable();
 
-            $table->unsignedSmallInteger('range_number')->nullable();
-            $table->unsignedSmallInteger('range_per_level')->nullable();
-            $table->unsignedSmallInteger('range_unit')->nullable();
-            $table->boolean('range_is_touch')->default(false);
-            $table->boolean('range_is_self')->default(false);
+            $table->foreignIdFor(Range::class, 'range_id');
+            $table->string('spell_components', 10);
 
             $table->unique(['spell_id', 'game_edition']);
         });

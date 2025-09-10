@@ -5,16 +5,19 @@ namespace App\Models\Spells;
 use App\Enums\Distance;
 use App\Enums\GameEdition;
 use App\Enums\MaterialComponentMode;
+use App\Enums\SpellComponentType;
 use App\Models\AbstractModel;
 use App\Models\Items\ItemEdition;
 use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
+use App\Models\Range;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
@@ -26,6 +29,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Collection<SpellEditionCharacterClassLevel> $classLevels
  * @property string $description
  * @property Collection<MagicDomain> $domains
+ * @property ?string $focus
  * @property GameEdition $game_edition
  * @property string $higher_level
  * @property bool $is_default
@@ -33,14 +37,11 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Collection<SpellMaterialComponent> $materialComponents
  * @property MagicSchool $school
  * @property MaterialComponentMode $material_component_mode
- * @property bool $range_is_self
- * @property bool $range_is_touch
- * @property int $range_number
- * @property int $range_per_level
- * @property Distance $range_unit
+ * @property Range $range
+ * @property Uuid $range_id
  * @property Spell $spell
+ * @property string $spell_components
  * @property Uuid $spell_id
- * @property Collection<SpellComponentType> $spellComponents
  */
 class SpellEdition extends AbstractModel
 {
@@ -58,17 +59,6 @@ class SpellEdition extends AbstractModel
     public function classLevels(): HasMany
     {
         return $this->hasMany(SpellEditionCharacterClassLevel::class, 'spell_edition_id');
-    }
-
-    public function componentsAsString(): string
-    {
-        $output = '';
-
-        foreach ($this->spellComponents as $component) {
-            $output .= $component->id;
-        }
-
-        return $output;
     }
 
     protected function description(): Attribute
@@ -117,6 +107,11 @@ class SpellEdition extends AbstractModel
         return $lowest;
     }
 
+    public function hasComponent(SpellComponentType $componentType): bool
+    {
+        return str_contains($this->spell_components, $componentType->value);
+    }
+
     public function itemEditions(): BelongsToMany
     {
         return $this->belongsToMany(ItemEdition::class, 'spell_material_components');
@@ -134,16 +129,21 @@ class SpellEdition extends AbstractModel
         return $this->hasMany(SpellMaterialComponent::class);
     }
 
+    public function range(): BelongsTo
+    {
+        return $this->belongsTo(Range::class);
+    }
+
+    public function rangeAsString(): string
+    {
+        return $this->range->toString();
+    }
+
     protected function rangeUnit(): Attribute
     {
         return Attribute::make(
             get: fn (?int $value) => $value === null ? '' : Distance::tryFrom($value)->toString(),
         );
-    }
-
-    public function spellComponents(): BelongsToMany
-    {
-        return $this->belongsToMany(SpellComponentType::class, 'spell_edition_spell_component_types');
     }
 
     public function school(): BelongsTo

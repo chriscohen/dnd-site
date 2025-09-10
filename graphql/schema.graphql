@@ -132,6 +132,15 @@ type ProductId {
     url: String @method(name: "url")
 }
 
+type Range {
+    id: Uuid!
+    is_self: Boolean
+    is_touch: Boolean
+    number: Int
+    per_level: Int
+    unit: String
+}
+
 type Source {
     id: Uuid!
     slug: String!
@@ -182,19 +191,17 @@ type SpellComponentType {
 type SpellEdition {
     id: Uuid!
     class_levels: [SpellEditionCharacterClassLevel] @hasMany(relation: "classLevels")
-    components: String @method(name: "componentsAsString")
+    components: String
     description: String
     domains: [String] @method(name: "getDomainsAsStringArray")
+    focus: String
     game_edition: String!
     higher_level: String
     is_default: Boolean
     lowest_level: Int! @method(name: "getLowestLevel")
     material_component_mode: String
     material_components: [SpellMaterialComponent] @belongsToMany(relation: "materialComponents")
-    range: String
-    range_number: Int
-    range_per_level: Int
-    range_unit: String
+    range: String @method(name: "rangeAsString")
     school: String @method(name: "schoolAsString")
 }
 

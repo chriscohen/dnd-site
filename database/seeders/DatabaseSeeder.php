@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
             AttackTypeSeeder::class,
             CampaignSettingSeeder::class,
             SourceSeeder::class,
-            SpellComponentSeeder::class,
 
             ItemSeeder::class,
             SpellSeeder::class,

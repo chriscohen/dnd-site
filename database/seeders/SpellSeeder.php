@@ -6,10 +6,12 @@ namespace Database\Seeders;
 
 use App\Enums\GameEdition;
 use App\Enums\MaterialComponentMode;
+use App\Enums\SpellComponentType;
 use App\Models\CharacterClass;
 use App\Enums\Distance;
 use App\Models\Items\Item;
 use App\Models\Magic\MagicSchool;
+use App\Models\Range;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
 use App\Models\Spells\SpellEditionCharacterClassLevel;
@@ -37,17 +39,25 @@ class SpellSeeder extends AbstractYmlSeeder
                 $edition->spell()->associate($spell);
 
                 $edition->description = $editionData['description'] ?? null;
+                $edition->focus = $editionData['focus'] ?? null;
                 $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
                 $edition->higher_level = $editionData['higher_level'] ?? null;
                 $edition->is_default = $editionData['is_default'] ?? false;
                 $edition->material_component_mode = !empty($editionData['material_component_mode']) ?
                     MaterialComponentMode::tryFrom($editionData['material_component_mode']) : null;
-                $edition->range_number = $editionData['range_number'] ?? null;
-                $edition->range_unit = !empty($editionData['range_unit']) ?
-                    Distance::tryFromString($editionData['range_unit']) :
+
+                // Range
+                $range = new Range();
+                $range->number = $editionData['range']['number'] ?? null;
+                $range->per_level = $editionData['range']['per_level'] ?? null;
+                $range->unit = !empty($editionData['range']['unit']) ?
+                    Distance::tryFromString($editionData['range']['unit']) :
                     null;
-                $edition->range_is_self = $editionData['range_is_self'] ?? false;
-                $edition->range_is_touch = $editionData['range_is_touch'] ?? false;
+                $range->is_self = $editionData['range']['is_self'] ?? false;
+                $range->is_touch = $editionData['range']['is_touch'] ?? false;
+                $range->save();
+                $edition->range()->associate($range);
+                $edition->spell_components = $editionData['spell_components'];
 
                 $school = MagicSchool::query()->where('id', $editionData['school'])->firstOrFail();
                 $edition->school()->associate($school);
