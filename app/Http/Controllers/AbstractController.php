@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Psy\Util\Json;
 
 abstract class AbstractController implements ControllerInterface
 {
@@ -14,7 +16,14 @@ abstract class AbstractController implements ControllerInterface
 
     public function get(Request $request, string $slug)
     {
-        return response()->json($this->getQuery()->where('slug', $slug)->first());
+        $model = $this->getQuery()->where('slug', $slug)->first();
+
+        return response()->json($model->toArray($this->getMode($request)));
+    }
+
+    public function getMode(Request $request): JsonRenderMode
+    {
+        return JsonRenderMode::tryFromString($request->query('mode', 'short'));
     }
 
     public function getQuery(): Builder
@@ -25,13 +34,13 @@ abstract class AbstractController implements ControllerInterface
             ->limit($limit);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $items = $this->getQuery()->get();
         $output = [];
 
         foreach ($items as $item) {
-            $output[] = $item->toArray();
+            $output[] = $item->toArray($this->getMode($request));
         }
 
         return response()->json($output);

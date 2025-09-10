@@ -4,6 +4,7 @@ namespace App\Models\Items;
 
 use App\CommonMark\InternalLinkGenerator;
 use App\Enums\GameEdition;
+use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\Reference;
 use App\Models\Spells\SpellEdition;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Collection;
 use League\CommonMark\Extension\Mention\MentionExtension;
 use Ramsey\Uuid\Uuid;
@@ -28,7 +30,6 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property int $price
  * @property int $quantity
  * @property Collection<Reference> $references
- * @property Uuid $source_id
  * @property Collection<SpellEdition> $spells
  * @property float $weight
  */
@@ -75,7 +76,7 @@ class ItemEdition extends AbstractModel
         return $this->belongsToMany(SpellEdition::class, 'spell_material_components');
     }
 
-    public function toArray(): array
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
     {
         return [
             'id' => $this->id,
@@ -84,7 +85,7 @@ class ItemEdition extends AbstractModel
             'is_primary' => $this->is_primary,
             'price' => $this->price,
             'quantity' => $this->quantity,
-            'source' => $this->source->slug,
+            'source' => $this->source?->slug ?? null,
             'weight' => $this->weight,
         ];
     }

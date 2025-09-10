@@ -49,7 +49,7 @@ class ItemSeeder extends AbstractYmlSeeder
                 $edition->weight = $editionData['weight'] ?? null;
 
                 if (!empty($editionData['references'])) {
-                    $this->setReferences($editionData['references']);
+                    $this->setReferences($editionData['references'], $edition);
                 }
 
                 $edition->save();

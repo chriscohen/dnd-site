@@ -6,6 +6,7 @@ use App\Enums\Binding;
 use App\Enums\GameEdition;
 use App\Enums\SourceType;
 use App\Models\Items\Item;
+use App\Models\Items\ItemEdition;
 use App\Models\Source;
 use App\Models\SourceEdition;
 use App\Models\Spells\Spell;
@@ -48,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Relation::enforceMorphMap([
             'item' => Item::class,
+            'item_edition' => ItemEdition::class,
             'source' => Source::class,
             'source_edition' => SourceEdition::class,
             'spell' => Spell::class,

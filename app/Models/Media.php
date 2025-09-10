@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\JsonRenderMode;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Support\Facades\Storage;
@@ -55,15 +56,23 @@ class Media extends AbstractModel
         return Storage::disk($this->disk)->url($this->filename);
     }
 
-    public function toArray(): array
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
     {
-        return [
+        $short = [
             'id' => $this->id,
-            'collection_name' => $this->collection_name,
             'filename' => $this->filename,
+            'url' => $this->getUrl(),
+        ];
+
+        if ($mode == JsonRenderMode::SHORT) {
+            return $short;
+        }
+
+        return array_merge_recursive($short, [
+            'collection_name' => $this->collection_name,
             'mime_type' => $this->mime_type,
             'name' => $this->name,
             'size' => $this->size,
-        ];
+        ]);
     }
 }

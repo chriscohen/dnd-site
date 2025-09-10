@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\ModelInterface;
 use App\Models\Reference;
 use App\Models\Source;
 use App\Models\SourceEdition;
@@ -127,7 +128,7 @@ abstract class AbstractYmlSeeder extends Seeder
      * } $data
      * @return self
      */
-    public function setReferences(array $data): self
+    public function setReferences(array $data, ModelInterface $me): self
     {
         foreach ($data as $datum) {
             $reference = new Reference();
@@ -146,7 +147,7 @@ abstract class AbstractYmlSeeder extends Seeder
             $reference->edition()->associate($sourceEdition);
             $reference->page_from = $datum['page_from'];
             $reference->page_to = $datum['page_to'] ?? null;
-            $reference->entity()->associate($sourceEdition);
+            $reference->entity()->associate($me);
 
             $reference->save();
         }

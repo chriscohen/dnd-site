@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Binding;
+use App\Enums\JsonRenderMode;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -23,6 +24,7 @@ use Ramsey\Uuid\Uuid;
  * @property ?int $pages
  * @property ?Carbon $release_date
  * @property bool $release_date_month_only
+ * @property Source $source
  * @property string $source_id
  */
 class SourceEdition extends AbstractModel
@@ -67,5 +69,29 @@ class SourceEdition extends AbstractModel
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class);
+    }
+
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
+    {
+        $format = $this->release_date_month_only ? 'Y-m' : 'Y-m-d';
+
+        $short = [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+
+        if ($mode == JsonRenderMode::SHORT) {
+            return $short;
+        }
+
+        return array_merge_recursive($short, [
+            'binding' => $this->binding,
+            'formats' => $this->getFormatsAsArray(),
+            'pages' => $this->pages,
+            'isbn10' => $this->isbn10 ?? null,
+            'isbn13' => $this->isbn13 ?? null,
+            'release_date' => $this->release_date->format($format),
+            'source' => $this->source->toArray($mode),
+        ]);
     }
 }

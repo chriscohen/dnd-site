@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Magic;
 
+use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\Media;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,12 +25,19 @@ class MagicSchool extends AbstractModel
         return $this->belongsTo(Media::class, 'image_id');
     }
 
-    public function toArray(): array
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
     {
-        return [
+        $short = [
             'id' => $this->id,
             'name' => $this->name,
-            'image' => $this->image->toArray(),
         ];
+
+        if ($mode === JsonRenderMode::SHORT) {
+            return $short;
+        }
+
+        return array_merge_recursive($short, [
+            'image' => $this->image->toArray(),
+        ]);
     }
 }

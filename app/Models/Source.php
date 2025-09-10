@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\GameEdition;
+use App\Enums\JsonRenderMode;
 use App\Enums\PublicationType;
 use App\Enums\SourceType;
 use App\Models\Spells\Spell;
@@ -108,5 +109,30 @@ class Source extends AbstractModel
     public function spells(): MorphToMany
     {
         return $this->morphedByMany(Spell::class, 'entity');
+    }
+
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
+    {
+        $short = [
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+        ];
+
+        if ($mode === JsonRenderMode::SHORT) {
+            return $short;
+        }
+
+        return array_merge_recursive($short, [
+            'campaign_setting' => $this->campaign_setting?->toArray($mode) ?? null,
+            'cover_image' => $this->coverImage->toArray($mode),
+            'description' => $this->description,
+            'editions' => null, // TBC
+            'game_edition' => $this->gameEdition(),
+            'product_code' => $this->product_code,
+            'product_ids' => null, // TBC
+            'publication_type' => $this->publicationType(),
+            'source_type' => $this->sourceType(),
+        ]);
     }
 }

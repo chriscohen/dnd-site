@@ -27,16 +27,16 @@ class SpellSeeder extends AbstractYmlSeeder
         $data = $this->getDataFromFile();
 
         foreach ($data as $datum) {
-            $spell = new Spell();
-            $spell->id = $datum['id'];
-            $spell->slug = $datum['slug'];
-            $spell->name = $datum['name'];
+            $item = new Spell();
+            $item->id = $datum['id'];
+            $item->slug = $datum['slug'];
+            $item->name = $datum['name'];
 
-            $spell->save();
+            $item->save();
 
             foreach ($datum['editions'] as $editionData) {
                 $edition = new SpellEdition();
-                $edition->spell()->associate($spell);
+                $edition->spell()->associate($item);
 
                 $edition->description = $editionData['description'] ?? null;
                 $edition->focus = $editionData['focus'] ?? null;
@@ -79,8 +79,8 @@ class SpellSeeder extends AbstractYmlSeeder
                     $material = new SpellMaterialComponent();
                     $material->spellEdition()->associate($edition);
 
-                    $item = Item::query()->where('slug', $materialData['item'])->firstOrFail();
-                    $itemEdition = $item->primaryEdition();
+                    $materialItem = Item::query()->where('slug', $materialData['item'])->firstOrFail();
+                    $itemEdition = $materialItem->primaryEdition();
                     $material->itemEdition()->associate($itemEdition);
 
                     $material->quantity = $materialData['quantity'] ?? 1;
@@ -90,7 +90,7 @@ class SpellSeeder extends AbstractYmlSeeder
                 }
 
                 if (!empty($editionData['references'])) {
-                    $this->setReferences($editionData['references']);
+                    $this->setReferences($editionData['references'], $edition);
                 }
             }
         }

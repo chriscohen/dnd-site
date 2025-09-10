@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\JsonRenderMode;
 use App\Traits\IdentifiesModel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -38,15 +39,21 @@ class Category extends AbstractModel
         return $this->belongsTo(Category::class);
     }
 
-    public function toArray(): array
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
     {
-        return [
+        $short = [
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
+        ];
 
+        if ($mode == JsonRenderMode::SHORT) {
+            return $short;
+        }
+
+        return array_merge_recursive($short, [
             'image' => $this->image?->toArray() ?? null,
             'parent' => $this->parent?->toArray() ?? null,
-        ];
+        ]);
     }
 }

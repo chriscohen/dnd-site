@@ -99,7 +99,7 @@ type ItemEdition {
     price: String
     quantity: Int!
     weight: Float
-    source: Source! @belongsTo
+    references: [Reference] @hasMany
 }
 
 type MagicDomain {
@@ -139,6 +139,14 @@ type Range {
     number: Int
     per_level: Int
     unit: String
+}
+
+type Reference {
+    id: Uuid!
+    name: String! @method(name: "getName")
+    page_from: Int
+    page_to: Int
+    slug: String! @method(name: "getSlug")
 }
 
 type Source {

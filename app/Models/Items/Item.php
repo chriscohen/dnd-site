@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Items;
 
+use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\Category;
 use App\Models\ModelCollection;
@@ -43,15 +44,21 @@ class Item extends AbstractModel
         return $this->hasMany(ItemEdition::class);
     }
 
-    public function toArray(): array
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
     {
-        return [
+        $short = [
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
+        ];
 
+        if ($mode === JsonRenderMode::SHORT) {
+            return $short;
+        }
+
+        return array_merge_recursive($short, [
             'category' => $this->category->toArray(),
             'editions' => ModelCollection::make($this->editions)->toArray(),
-        ];
+        ]);
     }
 }
