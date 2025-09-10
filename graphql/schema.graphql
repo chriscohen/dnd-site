@@ -199,7 +199,6 @@ type SpellComponentType {
 type SpellEdition {
     id: Uuid!
     class_levels: [SpellEditionCharacterClassLevel] @hasMany(relation: "classLevels")
-    components: String
     description: String
     domains: [String] @method(name: "getDomainsAsStringArray")
     focus: String
@@ -211,6 +210,7 @@ type SpellEdition {
     material_components: [SpellMaterialComponent] @belongsToMany(relation: "materialComponents")
     range: String @method(name: "rangeAsString")
     school: String @method(name: "schoolAsString")
+    spell_components: String
 }
 
 type SpellEditionCharacterClassLevel {
