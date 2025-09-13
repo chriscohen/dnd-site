@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Spells;
 
+use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\CharacterClass;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -39,5 +40,24 @@ class SpellEditionCharacterClassLevel extends AbstractModel
     public function spellEdition(): BelongsTo
     {
         return $this->belongsTo(Spell::class, 'spell_edition_id');
+    }
+
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
+    {
+        $short = [
+            'id' => $this->id,
+            'spell_edition' => $this->spellEdition->id,
+            'character_class' => $this->getCharacterClassName(),
+            'level' => $this->level,
+        ];
+
+        if ($mode === JsonRenderMode::SHORT) {
+            return $short;
+        }
+
+        return array_merge_recursive($short, [
+            'spell_edition' => $this->spellEdition->toArray($mode),
+            'character_class' => $this->characterClass->toArray($mode),
+        ]);
     }
 }

@@ -29,6 +29,18 @@ class Category extends AbstractModel
 
     public $timestamps = false;
 
+    protected array $schema = [
+        JsonRenderMode::SHORT->value => [
+            'id' => 'uuid',
+            'slug' => 'string',
+            'name' => 'string',
+        ],
+        JsonRenderMode::FULL->value => [
+            '?image' => Media::class,
+            '?parent' => Category::class,
+        ],
+    ];
+
     public function image(): BelongsTo
     {
         return $this->belongsTo(Media::class, 'image_id');
@@ -37,23 +49,5 @@ class Category extends AbstractModel
     public function parent(): BelongsTo
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
-    {
-        $short = [
-            'id' => $this->id,
-            'slug' => $this->slug,
-            'name' => $this->name,
-        ];
-
-        if ($mode == JsonRenderMode::SHORT) {
-            return $short;
-        }
-
-        return array_merge_recursive($short, [
-            'image' => $this->image?->toArray() ?? null,
-            'parent' => $this->parent?->toArray() ?? null,
-        ]);
     }
 }

@@ -85,7 +85,7 @@ class ItemEdition extends AbstractModel
             'is_primary' => $this->is_primary,
             'price' => $this->price,
             'quantity' => $this->quantity,
-            'source' => $this->source?->slug ?? null,
+            'references' => $this->references->collect()->toArray(),
             'weight' => $this->weight,
         ];
     }

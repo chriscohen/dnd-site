@@ -4,6 +4,7 @@ namespace App\Models\Spells;
 
 use App\Enums\Distance;
 use App\Enums\GameEdition;
+use App\Enums\JsonRenderMode;
 use App\Enums\MaterialComponentMode;
 use App\Enums\SpellComponentType;
 use App\Models\AbstractModel;
@@ -163,5 +164,21 @@ class SpellEdition extends AbstractModel
     public function spell(): BelongsTo
     {
         return $this->belongsTo(Spell::class);
+    }
+
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
+    {
+        $short = [
+            'id' => $this->id,
+        ];
+
+        if ($mode == JsonRenderMode::SHORT) {
+            return $short;
+        }
+
+        return array_merge_recursive($short, [
+            'class_levels' => $this->classLevels->collect()->toArray()
+            'source_edition' => $this->edition->toArray($mode),
+        ]);
     }
 }

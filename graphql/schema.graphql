@@ -209,7 +209,7 @@ type SpellEdition {
     material_component_mode: String
     material_components: [SpellMaterialComponent] @belongsToMany(relation: "materialComponents")
     range: String @method(name: "rangeAsString")
-    school: String @method(name: "schoolAsString")
+    school: MagicSchool @belongsTo
     spell_components: String
 }
 

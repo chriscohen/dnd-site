@@ -1,0 +1,132 @@
+[
+    {
+        "id": "a81bd807-ac37-437c-b86d-23ed208b049a",
+        "slug": "air",
+        "name": "air",
+        "description": "Certain elementals and outsiders, as well as cloud giants, will-o'-wisps, and green and silver dragons.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "710d8f5d-02a0-49d6-bd00-f3f684e116d1",
+        "slug": "aquatic",
+        "name": "aquatic",
+        "description": "Creatures that live in watery environments, such as aboleths, crocodiles, lizardfolk, merfolk, octopi, and whales.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "b97c26f4-2c1d-4b8e-8c80-9d83468e35de",
+        "slug": "chaotic",
+        "name": "chaotic",
+        "description": "Chaotic outsiders, such as chaos beasts, demons, djinni, and slaadi.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "29264837-9d22-46e5-9752-51eb4ded7562",
+        "slug": "cold",
+        "name": "cold",
+        "description": "Cold creatures, such as frost giants, ice mephits, and white dragons. Cold creatures are also immune to cold attacks but vulnerable to fire.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "0e87fe36-4b0a-4713-a031-da7038c0aa66",
+        "slug": "earth",
+        "name": "earth",
+        "description": "Certain elementals and outsiders, as well as gargoyles, stone giants, and blue and copper dragons.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "fb6e9571-1c14-42f1-883f-cfc7a0820ce8",
+        "slug": "electricity",
+        "name": "electricity",
+        "description": "Creatures such as behirs and storm giants.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "642264b9-4993-4e49-baa1-e76c1c634dc0",
+        "slug": "evil",
+        "name": "evil",
+        "description": "Evil outsiders, such as demons, devils, night hags, and rakshasa.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "b651a5df-b915-41cf-9bfc-105d6fcba8fb",
+        "slug": "fire",
+        "name": "fire",
+        "description": "Fire creatures, such as fire elementals, fire giants, fire mephits, and red dragons. Fire creatures are also immune to fire attacks but vulnerable to cold.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "ac7f5d50-65be-48d8-b3f1-35f282ffc777",
+        "slug": "good",
+        "name": "good",
+        "description": "Good outsiders, such as celestials, couatl, and titans.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "ef8ab3cb-5ad9-4542-aa2b-c4e67436208b",
+        "slug": "incorporeal",
+        "name": "incorporeal",
+        "description": "Undead creatures with no physical form, able to pass through solid objects, and only able to be harmed by magic or other incorporeal creatures. Examples include shadows and spectres.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "90a9bb6c-82c3-454f-add4-425a1fe1e9cb",
+        "slug": "lawful",
+        "name": "lawful",
+        "description": "Lawful outsiders, such as archons, devils, formians, and rakshasa.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "ffc85b68-660e-4be0-8cc7-3199de495d85",
+        "slug": "reptilian",
+        "name": "reptilian",
+        "description": "Creatures such as basilisks, kobolds, lizardfolk, and trogolodytes.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    },
+    {
+        "id": "4c1f3ead-7cf8-43db-9326-c415b621b24e",
+        "slug": "water",
+        "name": "water",
+        "description": "Certain elementals and outsiders, as well as black and bronze dragons.",
+        "editions": [
+            "3e",
+            "3.5"
+        ]
+    }
+]

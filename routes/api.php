@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Items\ItemController;
 use App\Http\Controllers\Magic\MagicDomainController;
@@ -9,6 +10,9 @@ use App\Http\Controllers\Magic\MagicSchoolController;
 use App\Http\Controllers\ReferenceController;
 
 Route::prefix('api')->group(function () {
+    Route::get('/category/{slug}', [CategoryController::class, 'get']);
+    Route::get('/categories', [CategoryController::class, 'index']);
+
     Route::get('/domains', [MagicDomainController::class, 'index']);
 
     Route::get('/item/{slug}', [ItemController::class, 'get']);

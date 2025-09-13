@@ -24,6 +24,16 @@ class Media extends AbstractModel
 {
     use HasUuids;
 
+    public array $schema = [
+        JsonRenderMode::SHORT->value => [
+            'id' => 'uuid',
+            'url' => 'getUrl()'
+        ],
+        JsonRenderMode::FULL->value => [
+
+        ]
+    ];
+
     /**
      * @param  array{
      *     filename: string,
@@ -54,25 +64,5 @@ class Media extends AbstractModel
     public function getUrl(): string
     {
         return Storage::disk($this->disk)->url($this->filename);
-    }
-
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
-    {
-        $short = [
-            'id' => $this->id,
-            'filename' => $this->filename,
-            'url' => $this->getUrl(),
-        ];
-
-        if ($mode == JsonRenderMode::SHORT) {
-            return $short;
-        }
-
-        return array_merge_recursive($short, [
-            'collection_name' => $this->collection_name,
-            'mime_type' => $this->mime_type,
-            'name' => $this->name,
-            'size' => $this->size,
-        ]);
     }
 }

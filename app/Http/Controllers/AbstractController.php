@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Psy\Util\Json;
 
 abstract class AbstractController implements ControllerInterface
 {
@@ -14,7 +14,7 @@ abstract class AbstractController implements ControllerInterface
     protected $order = 'ASC';
     protected $orderKey = '';
 
-    public function get(Request $request, string $slug)
+    public function get(Request $request, string $slug): JsonResponse
     {
         $model = $this->getQuery()->where('slug', $slug)->first();
 
@@ -34,7 +34,7 @@ abstract class AbstractController implements ControllerInterface
             ->limit($limit);
     }
 
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         $items = $this->getQuery()->get();
         $output = [];
