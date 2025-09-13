@@ -29,6 +29,18 @@ class Item extends AbstractModel
 
     public $timestamps = false;
 
+    public array $schema = [
+        JsonRenderMode::SHORT->value => [
+            'id' => 'uuid',
+            'slug' => 'string',
+            'name' => 'string',
+        ],
+        JsonRenderMode::FULL->value => [
+            'category' => Category::class,
+            'editions[]' => ItemEdition::class,
+        ],
+    ];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -42,23 +54,5 @@ class Item extends AbstractModel
     public function editions(): HasMany
     {
         return $this->hasMany(ItemEdition::class);
-    }
-
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
-    {
-        $short = [
-            'id' => $this->id,
-            'slug' => $this->slug,
-            'name' => $this->name,
-        ];
-
-        if ($mode === JsonRenderMode::SHORT) {
-            return $short;
-        }
-
-        return array_merge_recursive($short, [
-            'category' => $this->category->toArray(),
-            'editions' => ModelCollection::make($this->editions)->toArray(),
-        ]);
     }
 }

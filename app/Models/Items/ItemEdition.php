@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Collection;
 use League\CommonMark\Extension\Mention\MentionExtension;
 use Ramsey\Uuid\Uuid;
@@ -42,6 +41,21 @@ class ItemEdition extends AbstractModel
     public $casts = [
         'game_edition' => GameEdition::class,
         'is_primary' => 'boolean',
+    ];
+
+    public array $schema = [
+        JsonRenderMode::SHORT->value => [
+            'id' => 'uuid',
+        ],
+        JsonRenderMode::FULL->value => [
+            'description' => 'string',
+            'game_edition' => 'game_edition->toStringShort()',
+            'is_primary' => 'bool',
+            '?price' => 'int',
+            '?quantity' => 'int',
+            'references[]' => Reference::class,
+            '?weight' => 'int',
+        ],
     ];
 
     public function description(): Attribute
@@ -74,19 +88,5 @@ class ItemEdition extends AbstractModel
     public function spells(): BelongsToMany
     {
         return $this->belongsToMany(SpellEdition::class, 'spell_material_components');
-    }
-
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
-    {
-        return [
-            'id' => $this->id,
-            'description' => $this->description,
-            'game_edition' => $this->game_edition?->toStringShort() ?? null,
-            'is_primary' => $this->is_primary,
-            'price' => $this->price,
-            'quantity' => $this->quantity,
-            'references' => $this->references->collect()->toArray(),
-            'weight' => $this->weight,
-        ];
     }
 }

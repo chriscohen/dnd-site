@@ -5,16 +5,11 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\JsonRenderMode;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 interface ModelInterface
 {
-    public function cleanKey(string $key): string;
-
-    public function keyIsArray(string $key): bool;
-
-    public function keyIsOptional(string $key): bool;
-
-    public function render(string $key, string $type): string|int|array|null;
+    public function render(JsonKeyPair $keyPair, JsonRenderMode $mode): string|bool|int|array|Attribute|null;
 
     /**
      * @param  JsonRenderMode  $mode The render mode to use, whether to only return basic fields, or all of them.
@@ -27,8 +22,4 @@ interface ModelInterface
         JsonRenderMode $mode = JsonRenderMode::SHORT,
         array $exclude = []
     ): array;
-
-    public function typeIsClass(string $type): bool;
-
-    public function typeIsMethod(string $type): bool;
 }

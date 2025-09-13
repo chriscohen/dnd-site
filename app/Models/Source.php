@@ -46,6 +46,25 @@ class Source extends AbstractModel
         'source_type' => SourceType::class,
     ];
 
+    public array $schema = [
+        JsonRenderMode::SHORT->value => [
+            'id' => 'uuid',
+            'name' => 'string',
+            'slug' => 'string',
+        ],
+        JsonRenderMode::FULL->value => [
+            '?campaign_setting' => CampaignSetting::class,
+            'cover_image' => Media::class,
+            'description' => 'string',
+            //'editions' =>
+            '?game_edition' => 'gameEdition()',
+            '?product_code' => 'string',
+            //'product_ids' =>
+            'publication_type' => 'publicationType()',
+            'source_type' => 'sourceType()',
+        ],
+    ];
+
     public function campaignSetting(): BelongsTo
     {
         return $this->belongsTo(CampaignSetting::class, 'campaign_setting_id');
@@ -109,30 +128,5 @@ class Source extends AbstractModel
     public function spells(): MorphToMany
     {
         return $this->morphedByMany(Spell::class, 'entity');
-    }
-
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
-    {
-        $short = [
-            'id' => $this->id,
-            'name' => $this->name,
-            'slug' => $this->slug,
-        ];
-
-        if ($mode === JsonRenderMode::SHORT) {
-            return $short;
-        }
-
-        return array_merge_recursive($short, [
-            'campaign_setting' => $this->campaign_setting?->toArray($mode) ?? null,
-            'cover_image' => $this->coverImage->toArray($mode),
-            'description' => $this->description,
-            'editions' => null, // TBC
-            'game_edition' => $this->gameEdition(),
-            'product_code' => $this->product_code,
-            'product_ids' => null, // TBC
-            'publication_type' => $this->publicationType(),
-            'source_type' => $this->sourceType(),
-        ]);
     }
 }

@@ -20,24 +20,16 @@ class MagicSchool extends AbstractModel
     public $timestamps = false;
     public $incrementing = false;
 
+    public array $schema = [
+        JsonRenderMode::SHORT->value => [
+            'id' => 'string',
+            'name' => 'string',
+        ],
+        JsonRenderMode::FULL->value => []
+    ];
+
     public function image(): BelongsTo
     {
         return $this->belongsTo(Media::class, 'image_id');
-    }
-
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
-    {
-        $short = [
-            'id' => $this->id,
-            'name' => $this->name,
-        ];
-
-        if ($mode === JsonRenderMode::SHORT) {
-            return $short;
-        }
-
-        return array_merge_recursive($short, [
-            'image' => $this->image->toArray(),
-        ]);
     }
 }

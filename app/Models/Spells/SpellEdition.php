@@ -56,6 +56,15 @@ class SpellEdition extends AbstractModel
         'range_unit' => Distance::class,
     ];
 
+    public array $schema = [
+        JsonRenderMode::SHORT->value => [
+
+        ],
+        JsonRenderMode::FULL->value => [
+
+        ]
+    ];
+
     public function classLevels(): HasMany
     {
         return $this->hasMany(SpellEditionCharacterClassLevel::class, 'spell_edition_id');
@@ -164,21 +173,5 @@ class SpellEdition extends AbstractModel
     public function spell(): BelongsTo
     {
         return $this->belongsTo(Spell::class);
-    }
-
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
-    {
-        $short = [
-            'id' => $this->id,
-        ];
-
-        if ($mode == JsonRenderMode::SHORT) {
-            return $short;
-        }
-
-        return array_merge_recursive($short, [
-            'class_levels' => $this->classLevels->collect()->toArray()
-            'source_edition' => $this->edition->toArray($mode),
-        ]);
     }
 }

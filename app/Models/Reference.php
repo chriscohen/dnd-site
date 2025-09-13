@@ -23,6 +23,19 @@ class Reference extends AbstractModel
 
     public $timestamps = false;
 
+    public array $schema = [
+        JsonRenderMode::SHORT->value => [
+            'id' => 'string',
+            '?page_from' => 'int',
+            '?page_to' => 'int',
+            'source' => 'edition->source->name',
+        ],
+        JsonRenderMode::FULL->value => [
+            'entity' => ModelInterface::class,
+            'edition' => SourceEdition::class,
+        ],
+    ];
+
     public function edition(): BelongsTo
     {
         return $this->belongsTo(SourceEdition::class, 'source_edition_id');
@@ -41,26 +54,5 @@ class Reference extends AbstractModel
     public function getSlug(): string
     {
         return $this->edition->source?->slug;
-    }
-
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
-    {
-        $short = [
-            'id' => $this->id,
-            'page_from' => $this->page_from ?? null,
-            'page_to' => $this->page_to ?? null,
-            'source' => $this->edition->source->name,
-        ];
-
-        if ($mode == JsonRenderMode::SHORT) {
-            return $short;
-        }
-
-        unset($short['source']);
-
-        return array_merge_recursive($short, [
-            'entity' => $this->entity->toArray(),
-            'source_edition' => $this->edition->toArray($mode),
-        ]);
     }
 }
