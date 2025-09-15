@@ -10,6 +10,6 @@ use Illuminate\Http\Request;
 
 class CategoryController extends AbstractController
 {
-    protected $entityType = Category::class;
-    protected $orderKey = 'id';
+    protected string $entityType = Category::class;
+    protected string $orderKey = 'id';
 }

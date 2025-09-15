@@ -9,6 +9,6 @@ use App\Models\Magic\MagicDomain;
 
 class MagicDomainController extends AbstractController
 {
-    protected $entityType = MagicDomain::class;
-    protected $orderKey = 'id';
+    protected string $entityType = MagicDomain::class;
+    protected string $orderKey = 'id';
 }

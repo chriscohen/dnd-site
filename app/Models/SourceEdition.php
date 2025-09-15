@@ -91,4 +91,28 @@ class SourceEdition extends AbstractModel
     {
         return $this->belongsTo(Source::class);
     }
+
+    public function toArrayLong(): array
+    {
+        return [
+            'binding' => $this->binding,
+            //'formats' => ModelCollection::make($this->formats)->toString(),
+            'is_primary' => $this->is_primary,
+            'isbn10' => $this->isbn10,
+            'isbn13' => $this->isbn13,
+            'pages' => $this->pages,
+            'release_date' => $this->formatReleaseDate(),
+            'source' => $this->isExcluded(Source::class) ?
+                $this->source_id :
+                $this->source->toArray($this->renderMode, $this->excluded),
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
 }

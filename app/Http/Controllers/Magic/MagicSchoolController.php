@@ -9,6 +9,6 @@ use App\Models\Magic\MagicSchool;
 
 class MagicSchoolController extends AbstractController
 {
-    protected $entityType = MagicSchool::class;
-    protected $orderKey = 'id';
+    protected string $entityType = MagicSchool::class;
+    protected string $orderKey = 'id';
 }

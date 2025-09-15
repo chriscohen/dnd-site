@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
@@ -31,6 +30,22 @@ class ProductId extends AbstractModel
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class, 'source_id');
+    }
+
+    public function toArrayLong(): array
+    {
+        print_r($this->excluded);
+        return [
+            'edition' => $this->edition->toArray($this->renderMode, $this->excluded),
+            'origin' => $this->origin->toArray($this->renderMode, $this->excluded),
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+        ];
     }
 
     public function url(): ?string

@@ -9,6 +9,6 @@ use App\Models\Items\Item;
 
 class ItemController extends AbstractController
 {
-    protected $entityType = Item::class;
-    protected $orderKey = 'id';
+    protected string $entityType = Item::class;
+    protected string $orderKey = 'id';
 }

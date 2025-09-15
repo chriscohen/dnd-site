@@ -8,6 +8,6 @@ use App\Models\Reference;
 
 class ReferenceController extends AbstractController
 {
-    protected $entityType = Reference::class;
-    protected $orderKey = 'id';
+    protected string $entityType = Reference::class;
+    protected string $orderKey = 'id';
 }

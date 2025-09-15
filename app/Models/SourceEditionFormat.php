@@ -38,4 +38,24 @@ class SourceEditionFormat extends AbstractModel
     {
         return $this->belongsTo(SourceEdition::class, 'source_edition_id');
     }
+
+    public function toArrayLong(): array
+    {
+        return [
+            'edition' => $this->edition->toArray($this->renderMode, $this->excluded),
+            'format' => $this->format,
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+        ];
+    }
+
+    public function toString(): Attribute
+    {
+        return $this->format();
+    }
 }

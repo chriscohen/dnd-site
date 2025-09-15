@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 
 abstract class AbstractController implements ControllerInterface
 {
-    protected $entityType = AbstractModel::class;
-    protected $order = 'ASC';
-    protected $orderKey = '';
+    protected string $entityType = AbstractModel::class;
+    protected string $order = 'ASC';
+    protected string $orderKey = '';
 
     public function get(Request $request, string $slug): JsonResponse
     {

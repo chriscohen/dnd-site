@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Contracts\Support\Arrayable;
+use App\Enums\JsonRenderMode;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
 
-class ModelCollection implements Arrayable
+class ModelCollection
 {
     protected ?string $itemClass = null;
     protected Collection $items;
@@ -55,12 +55,23 @@ class ModelCollection implements Arrayable
         return $collection;
     }
 
-    public function toArray(): array
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT, array $excluded = []): array
     {
         $output = [];
 
         foreach ($this->items as $item) {
-            $output[] = $item->toArray();
+            $output[] = $item->toArray($mode, $excluded);
+        }
+
+        return $output;
+    }
+
+    public function toString(): array
+    {
+        $output = [];
+
+        foreach ($this->items as $item) {
+            $output[] = $item->toString();
         }
 
         return $output;

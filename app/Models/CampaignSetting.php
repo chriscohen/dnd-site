@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\JsonRenderMode;
 use App\Enums\PublicationType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -50,8 +51,21 @@ class CampaignSetting extends AbstractModel
         return $this->belongsTo(Company::class, 'publisher_id');
     }
 
-    public function temp(): string
+    public function toArrayLong(): array
     {
-        return $this->getFirstMedia('logo')?->getFullUrl() ?? '';
+        return [
+            'logo' => $this->logo?->toArray($this->renderMode, $this->excluded),
+            'publication_type' => $this->publication_type,
+            'publisher' => $this->publisher->toArray($this->renderMode, $this->excluded),
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'name' => $this->name,
+        ];
     }
 }

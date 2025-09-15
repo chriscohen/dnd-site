@@ -31,6 +31,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property ?string $product_code
  * @property Collection $productIds
  * @property PublicationType $publication_type
+ * @property Company $publisher
  * @property string $publisher_id
  * @property SourceType $source_type
  */
@@ -128,5 +129,30 @@ class Source extends AbstractModel
     public function spells(): MorphToMany
     {
         return $this->morphedByMany(Spell::class, 'entity');
+    }
+
+    public function toArrayLong(): array
+    {
+        return [
+            'campaign_setting' => $this->campaign_setting?->toArray($this->renderMode, $this->excluded) ?? null,
+            'cover_image' => $this->coverImage->toArray($this->renderMode, $this->excluded),
+            'description' => $this->description,
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
+            'game_edition' => $this->game_edition,
+            'product_code' => $this->product_code,
+            'product_ids' => $this->productIds->collect()->toArray(),
+            'publication_type' => $this->publication_type,
+            'publisher' => $this->publisher->toArray($this->renderMode, $this->excluded),
+            'source_type' => $this->source_type,
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'name' => $this->name,
+        ];
     }
 }
