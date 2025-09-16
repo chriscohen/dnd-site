@@ -9,10 +9,24 @@ use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
+ * @property string $name
  */
 class AttackType extends AbstractModel
 {
     use HasUuids;
 
     public $timestamps = false;
+
+    public function toArrayLong(): array
+    {
+        return [];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
 }

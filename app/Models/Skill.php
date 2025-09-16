@@ -24,4 +24,19 @@ class Skill extends AbstractModel
     public $casts = [
         'related_attribute' => Attribute::class,
     ];
+
+    public function toArrayLong(): array
+    {
+        return [];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'name' => $this->name,
+            'related_attribute' => $this->related_attribute
+        ];
+    }
 }

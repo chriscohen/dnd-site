@@ -59,4 +59,25 @@ class SpellMaterialComponent extends AbstractModel
     {
         return $this->belongsTo(SpellEdition::class);
     }
+
+    public function toArrayLong(): array
+    {
+        return [
+            'is_consumed' => $this->is_consumed,
+            'item' => $this->item->toArray($this->renderMode, $this->excluded),
+            'item_edition' => $this->itemEdition->toArray($this->renderMode, $this->excluded),
+            'quantity' => $this->quantity,
+            'spell' => $this->spell->toArray($this->renderMode, $this->excluded),
+            'spell_edition' => $this->spellEdition->toArray($this->renderMode, $this->excluded),
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'item_edition_id' => $this->itemEdition->id,
+            'spell_edition_id' => $this->spellEdition->id,
+        ];
+    }
 }

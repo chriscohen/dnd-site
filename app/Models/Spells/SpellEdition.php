@@ -11,6 +11,7 @@ use App\Models\AbstractModel;
 use App\Models\Items\ItemEdition;
 use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
+use App\Models\ModelCollection;
 use App\Models\Range;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -34,11 +35,11 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property string $higher_level
  * @property bool $is_default
  * @property Collection<ItemEdition> $itemEditions
- * @property Collection<SpellMaterialComponent> $materialComponents
- * @property MagicSchool $school
  * @property MaterialComponentMode $material_component_mode
+ * @property Collection<SpellMaterialComponent> $materialComponents
  * @property Range $range
  * @property Uuid $range_id
+ * @property MagicSchool $school
  * @property Spell $spell
  * @property string $spell_components
  * @property Uuid $spell_id
@@ -48,6 +49,36 @@ class SpellEdition extends AbstractModel
     use HasUuids;
 
     public $timestamps = false;
+
+    public function toArrayLong(): array
+    {
+        return [
+            'description' => $this->description,
+            'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode, $this->excluded),
+            'focus' => $this->focus,
+            'game_edition' => $this->game_edition,
+            'higher_level' => $this->higher_level,
+            'is_default' => $this->is_default,
+            'item_editions' => ModelCollection::make($this->itemEditions)->toArray($this->renderMode, $this->excluded),
+            'material_component_mode' => $this->material_component_mode,
+            'material_components' => ModelCollection::make($this->materialComponents)->toArray(
+                $this->renderMode,
+                $this->excluded
+            ),
+            'range' => $this->range->toArray($this->renderMode, $this->excluded),
+            'school' => $this->school?->toArray($this->renderMode, $this->excluded) ?? null,
+            'spell' => $this->spell->toArray($this->renderMode, $this->excluded),
+            'spell_components' => $this->spell_components,
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'spell_id' => $this->spell_id,
+        ];
+    }
 
     public $casts = [
         'game_edition' => GameEdition::class,

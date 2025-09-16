@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\JsonRenderMode;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
@@ -34,10 +35,8 @@ class ProductId extends AbstractModel
 
     public function toArrayLong(): array
     {
-        print_r($this->excluded);
         return [
             'edition' => $this->edition->toArray($this->renderMode, $this->excluded),
-            'origin' => $this->origin->toArray($this->renderMode, $this->excluded),
         ];
     }
 
@@ -45,6 +44,9 @@ class ProductId extends AbstractModel
     {
         return [
             'id' => $this->id,
+            'origin' => $this->origin->toArray(JsonRenderMode::FULL),
+            'product_id' => $this->product_id,
+            'url' => $this->url(),
         ];
     }
 

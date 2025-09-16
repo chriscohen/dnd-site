@@ -59,11 +59,8 @@ class Media extends AbstractModel
     public function toArrayLong(): array
     {
         return [
-            'collection_name' => $this->collection_name,
-            'disk' => $this->disk,
             'filename' => $this->filename,
             'mime_type' => $this->mime_type,
-            'name' => $this->name,
             'size' => $this->size,
         ];
     }

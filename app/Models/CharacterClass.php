@@ -12,4 +12,17 @@ class CharacterClass extends AbstractModel
 {
     public $timestamps = false;
     public $incrementing = false;
+
+    public function toArrayLong(): array
+    {
+        return [];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
 }

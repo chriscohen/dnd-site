@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models\Magic;
 
-use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\Media;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,16 +19,23 @@ class MagicSchool extends AbstractModel
     public $timestamps = false;
     public $incrementing = false;
 
-    public array $schema = [
-        JsonRenderMode::SHORT->value => [
-            'id' => 'string',
-            'name' => 'string',
-        ],
-        JsonRenderMode::FULL->value => []
-    ];
-
     public function image(): BelongsTo
     {
         return $this->belongsTo(Media::class, 'image_id');
+    }
+
+    public function toArrayLong(): array
+    {
+        return [
+            'image' => $this->image->toArray($this->renderMode, $this->excluded),
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
     }
 }

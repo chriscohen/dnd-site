@@ -6,6 +6,7 @@ use App\CommonMark\InternalLinkGenerator;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
+use App\Models\ModelCollection;
 use App\Models\Reference;
 use App\Models\Spells\SpellEdition;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -43,21 +44,6 @@ class ItemEdition extends AbstractModel
         'is_primary' => 'boolean',
     ];
 
-    public array $schema = [
-        JsonRenderMode::SHORT->value => [
-            'id' => 'uuid',
-        ],
-        JsonRenderMode::FULL->value => [
-            'description' => 'string',
-            'game_edition' => 'game_edition->toStringShort()',
-            'is_primary' => 'bool',
-            '?price' => 'int',
-            '?quantity' => 'int',
-            'references[]' => Reference::class,
-            '?weight' => 'int',
-        ],
-    ];
-
     public function description(): Attribute
     {
         return Attribute::make(
@@ -88,5 +74,24 @@ class ItemEdition extends AbstractModel
     public function spells(): BelongsToMany
     {
         return $this->belongsToMany(SpellEdition::class, 'spell_material_components');
+    }
+
+    public function toArrayLong(): array
+    {
+        return [
+            'game_edition' => $this->game_edition,
+            'price' => $this->price,
+            'quantity' => $this->quantity,
+            'references' => ModelCollection::make($this->references)->toArray($this->renderMode, $this->excluded),
+            'weight' => $this->weight,
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'is_primary' => $this->is_primary,
+        ];
     }
 }

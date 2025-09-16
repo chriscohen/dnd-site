@@ -15,7 +15,14 @@ enum SourceFormat: int
 
     public function toString(): string
     {
-        return mb_strtolower(str_replace('_', ' ', $this->name));
+        return match ($this) {
+            self::PRINT => 'Print',
+            self::PDF => 'PDF',
+            self::ROLL_20 => 'Roll20 VTT',
+            self::FOUNDRY => 'Foundry VTT',
+            self::FANTASY_GROUNDS => 'Fantasy Grounds',
+            self::DND_BEYOND => 'D&D Beyond',
+        };
     }
 
     public static function tryFromString(string $value): ?SourceFormat

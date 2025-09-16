@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models\Items;
 
-use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\Category;
 use App\Models\ModelCollection;
@@ -29,18 +28,6 @@ class Item extends AbstractModel
 
     public $timestamps = false;
 
-    public array $schema = [
-        JsonRenderMode::SHORT->value => [
-            'id' => 'uuid',
-            'slug' => 'string',
-            'name' => 'string',
-        ],
-        JsonRenderMode::FULL->value => [
-            'category' => Category::class,
-            'editions[]' => ItemEdition::class,
-        ],
-    ];
-
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -54,5 +41,22 @@ class Item extends AbstractModel
     public function editions(): HasMany
     {
         return $this->hasMany(ItemEdition::class);
+    }
+
+    public function toArrayLong(): array
+    {
+        return [
+            'category' => $this->category->toArray($this->renderMode, $this->excluded),
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'name' => $this->name,
+        ];
     }
 }

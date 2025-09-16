@@ -6,6 +6,7 @@ namespace App\Models\Spells;
 
 use App\Enums\GameEdition;
 use App\Models\AbstractModel;
+use App\Models\ModelCollection;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -33,5 +34,21 @@ class Spell extends AbstractModel
     public function editions(): HasMany
     {
         return $this->hasMany(SpellEdition::class);
+    }
+
+    public function toArrayLong(): array
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'name' => $this->name,
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
+        ];
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Models\Magic;
 
-use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 
 /**
@@ -14,7 +13,12 @@ class MagicDomain extends AbstractModel
     public $timestamps = false;
     public $incrementing = false;
 
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
+    public function toArrayLong(): array
+    {
+        return [];
+    }
+
+    public function toArrayShort(): array
     {
         return [
             'id' => $this->id,

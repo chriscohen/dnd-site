@@ -10,6 +10,7 @@ use App\Http\Controllers\Magic\MagicDomainController;
 use App\Http\Controllers\Magic\MagicSchoolController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\Sources\SourceController;
+use App\Http\Controllers\Spells\SpellController;
 
 Route::prefix('api')->group(function () {
     Route::get('/campaign-setting/{slug}', [CampaignSettingController::class, 'get']);
@@ -29,4 +30,7 @@ Route::prefix('api')->group(function () {
 
     Route::get('/source/{slug}', [SourceController::class, 'get']);
     Route::get('/sources', [SourceController::class, 'index']);
+
+    Route::geT('/spell/{slug}', [SpellController::class, 'get']);
+    Route::get('/spells', [SpellController::class, 'index']);
 });

@@ -59,7 +59,7 @@ class SpellSeeder extends AbstractYmlSeeder
                 $edition->range()->associate($range);
                 $edition->spell_components = $editionData['spell_components'];
 
-                $school = MagicSchool::query()->where('id', $editionData['school'])->firstOrFail();
+                $school = MagicSchool::query()->where('name', ucfirst($editionData['school']))->firstOrFail();
                 $edition->school()->associate($school);
 
                 $edition->save();

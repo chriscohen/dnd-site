@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Creatures;
 
 use App\Models\AbstractModel;
+use App\Models\ModelCollection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
@@ -27,5 +28,22 @@ class CreatureMajorType extends AbstractModel
     public function editions(): HasMany
     {
         return $this->hasMany(CreatureMajorTypeEdition::class, 'creature_major_type_id');
+    }
+
+    public function toArrayLong(): array
+    {
+        return [
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'name' => $this->name,
+            'plural '=> $this->plural,
+        ];
     }
 }

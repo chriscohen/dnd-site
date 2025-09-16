@@ -47,24 +47,23 @@ class Range extends AbstractModel
         return $this->number !== null && $this->number < 0;
     }
 
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
+    public function toArrayLong(): array
     {
-        $short = [
-            'id' => $this->id,
-            'string' => $this->toString(),
-        ];
-
-        if ($mode == JsonRenderMode::SHORT) {
-            return $short;
-        }
-
-        return array_merge_recursive($short, [
+        return [
             'is_self' => $this->is_self,
             'is_touch' => $this->is_touch,
             'number' => $this?->number ?? null,
             'per_level' => $this?->per_level ?? null,
             'unit' => $this?->unit?->toString() ?? null,
-        ]);
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'string' => $this->toString(),
+        ];
     }
 
     public function toString(): string

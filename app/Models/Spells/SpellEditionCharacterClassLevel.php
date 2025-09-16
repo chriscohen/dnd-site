@@ -42,22 +42,21 @@ class SpellEditionCharacterClassLevel extends AbstractModel
         return $this->belongsTo(Spell::class, 'spell_edition_id');
     }
 
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
+    public function toArrayLong(): array
     {
-        $short = [
+        return [
+            'spell_edition' => $this->spellEdition->toArray($this->renderMode, $this->excluded),
+            'character_class' => $this->characterClass->toArray($this->renderMode, $this->excluded),
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
             'id' => $this->id,
             'spell_edition' => $this->spellEdition->id,
             'character_class' => $this->getCharacterClassName(),
             'level' => $this->level,
         ];
-
-        if ($mode === JsonRenderMode::SHORT) {
-            return $short;
-        }
-
-        return array_merge_recursive($short, [
-            'spell_edition' => $this->spellEdition->toArray($mode),
-            'character_class' => $this->characterClass->toArray($mode),
-        ]);
     }
 }

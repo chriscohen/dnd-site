@@ -25,7 +25,7 @@ class Company extends AbstractModel
 
     public $timestamps = false;
 
-    public function getProductUrl(string $id): ?string
+    public function getProductUrl(string|Uuid $id): ?string
     {
         return empty($this->product_url) ?
             null :

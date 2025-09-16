@@ -41,4 +41,21 @@ class CreatureMajorTypeEdition extends AbstractModel
             get: fn (int $value) => GameEdition::tryFrom($value)->toStringShort()
         );
     }
+
+    public function toArrayLong(): array
+    {
+        return [
+            'creature_major_type' => $this->creatureMajorType->toArray($this->renderMode, $this->excluded),
+            'description' => $this->description,
+            'game_edition' => $this->game_edition,
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'creature_major_type_id' => $this->creature_major_type_id,
+        ];
+    }
 }
