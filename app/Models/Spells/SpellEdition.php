@@ -53,6 +53,8 @@ class SpellEdition extends AbstractModel
     public function toArrayLong(): array
     {
         return [
+            'class_levels' => ModelCollection::make($this->classLevels)
+                ->toArray(JsonRenderMode::SHORT, $this->excluded),
             'description' => $this->description,
             'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode, $this->excluded),
             'focus' => $this->focus,
@@ -60,6 +62,7 @@ class SpellEdition extends AbstractModel
             'higher_level' => $this->higher_level,
             'is_default' => $this->is_default,
             'item_editions' => ModelCollection::make($this->itemEditions)->toArray($this->renderMode, $this->excluded),
+            'lowest_level' => $this->getLowestLevel(),
             'material_component_mode' => $this->material_component_mode,
             'material_components' => ModelCollection::make($this->materialComponents)->toArray(
                 $this->renderMode,

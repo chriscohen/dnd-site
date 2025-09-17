@@ -1,11 +1,25 @@
 [
     {
         "id": "abjuration",
-        "name": "Abjuration"
+        "name": "Abjuration",
+        "description": "Encompasses protective spells, though some have aggressive uses. Can create magical barriers, negate magical or physical abilities, harm trespassers, or even banish to another plane."
+    },
+    {
+        "id": "calling",
+        "name": "Calling",
+        "parent": "conjuration",
+        "description": "Takes creatures from their natural planes and brings them to the caster."
     },
     {
         "id": "conjuration",
-        "name": "Conjuration"
+        "name": "Conjuration",
+        "description": "Calls materials, creatures, or energy to the caster or could be reversed to cause the opposite effect, possibly over long distances, or from another plane of existence."
+    },
+    {
+        "id": "creation",
+        "name": "Creation",
+        "parent": "conjuration",
+        "description": "Manipulates matter itself to create an object or creature, often requiring further magic to hold the creation together afterwards."
     },
     {
         "id": "divination",
@@ -20,12 +34,30 @@
         "name": "Evocation"
     },
     {
+        "id": "healing",
+        "name": "Healing",
+        "parent": "conjuration",
+        "description": "Channels positive energy to heal the wounds of creatures or damage of the undead. Powerful healing magic can call dead creatures back from the Fugue Plane."
+    },
+    {
         "id": "illusion",
         "name": "Illusion"
     },
     {
         "id": "necromancy",
         "name": "Necromancy"
+    },
+    {
+        "id": "summoning",
+        "name": "Summoning",
+        "parent": "conjuration",
+        "description": "Brings an object or creature from one location to the caster. Usually results in the object or creature being returned to its original location once the spell ends."
+    },
+    {
+        "id": "teleportation",
+        "name": "Teleportation",
+        "parent": "conjuration",
+        "description": "Transports the subject(s) over (usually a great) distance, normally via the Astral Plane. Although usually both the origin and destination are on the Material Plane, powerful spells can teleport between planes."
     },
     {
         "id": "transmutation",

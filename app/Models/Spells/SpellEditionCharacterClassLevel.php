@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models\Spells;
 
-use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\CharacterClass;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -45,7 +44,7 @@ class SpellEditionCharacterClassLevel extends AbstractModel
     public function toArrayLong(): array
     {
         return [
-            'spell_edition' => $this->spellEdition->toArray($this->renderMode, $this->excluded),
+            'spell_edition' => $this->spellEdition?->toArray($this->renderMode, $this->excluded),
             'character_class' => $this->characterClass->toArray($this->renderMode, $this->excluded),
         ];
     }
@@ -53,9 +52,7 @@ class SpellEditionCharacterClassLevel extends AbstractModel
     public function toArrayShort(): array
     {
         return [
-            'id' => $this->id,
-            'spell_edition' => $this->spellEdition->id,
-            'character_class' => $this->getCharacterClassName(),
+            'character_class' => $this->characterClass->name,
             'level' => $this->level,
         ];
     }
