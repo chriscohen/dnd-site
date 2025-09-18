@@ -41,7 +41,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Company $publisher
  * @property string $publisher_id
  * @property SourceType $source_type
- * @property SourcebookType[] $sourcebookTypes
+ * @property SourceSourcebookType[] $sourcebookTypes
  */
 class Source extends AbstractModel
 {
@@ -129,7 +129,7 @@ class Source extends AbstractModel
 
     public function sourcebookTypes(): HasMany
     {
-        return $this->hasMany(SourcebookType::class);
+        return $this->hasMany(SourceSourcebookType::class);
     }
 
     protected function sourceType(): Attribute
@@ -163,7 +163,7 @@ class Source extends AbstractModel
             $output['sourcebook_types'] = [];
 
             foreach ($this->sourcebookTypes as $sourcebookType) {
-                $output['sourcebook_types'] = $sourcebookType->toString();
+                $output['sourcebook_types'][] = $sourcebookType->sourcebook_type;
             }
         }
 

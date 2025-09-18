@@ -18,7 +18,17 @@ enum SourcebookType: int
 
     public function toString(): string
     {
-        return mb_ucfirst(mb_strtolower($this->name));
+        return match ($this) {
+            static::CORE => 'Core Rulebook',
+            static::ADVENTURE => 'Adventure',
+            static::BOXED_SET => 'Boxed Set',
+            static::CHARACTER_OPTIONS => 'Character Options',
+            static::GEAR_MAGIC_ITEMS => 'Gear & Magic Items',
+            static::MONSTERS => 'Monsters',
+            static::SPELLS => 'Spells',
+            static::CAMPAIGN_SETTING => 'Campaign Setting',
+            static::LORE => 'LORE',
+        };
     }
 
     public static function tryFromString(string $value): ?SourcebookType
