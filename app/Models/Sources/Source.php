@@ -1,11 +1,18 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Sources;
 
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Enums\PublicationType;
+use App\Enums\SourcebookType;
 use App\Enums\SourceType;
+use App\Models\AbstractModel;
+use App\Models\CampaignSetting;
+use App\Models\Company;
+use App\Models\Media;
+use App\Models\ModelCollection;
+use App\Models\ProductId;
 use App\Models\Spells\Spell;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -34,6 +41,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Company $publisher
  * @property string $publisher_id
  * @property SourceType $source_type
+ * @property SourcebookType[] $sourcebookTypes
  */
 class Source extends AbstractModel
 {
@@ -119,6 +127,11 @@ class Source extends AbstractModel
         return $this->belongsTo(Company::class, 'publisher_id');
     }
 
+    public function sourcebookTypes(): HasMany
+    {
+        return $this->hasMany(SourcebookType::class);
+    }
+
     protected function sourceType(): Attribute
     {
         return Attribute::make(
@@ -133,7 +146,7 @@ class Source extends AbstractModel
 
     public function toArrayLong(): array
     {
-        return [
+        $output = [
             'campaign_setting' => $this->campaign_setting?->toArray($this->renderMode, $this->excluded) ?? null,
             'cover_image' => $this->coverImage->toArray($this->renderMode, $this->excluded),
             'description' => $this->description,
@@ -145,6 +158,16 @@ class Source extends AbstractModel
             'publisher' => $this->publisher->toArray($this->renderMode, $this->excluded),
             'source_type' => $this->source_type,
         ];
+
+        if ($this->sourcebookTypes()->count() > 0) {
+            $output['sourcebook_types'] = [];
+
+            foreach ($this->sourcebookTypes as $sourcebookType) {
+                $output['sourcebook_types'] = $sourcebookType->toString();
+            }
+        }
+
+        return $output;
     }
 
     public function toArrayShort(): array

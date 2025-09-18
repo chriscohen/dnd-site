@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\JsonRenderMode;
+use App\Models\Sources\SourceEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;

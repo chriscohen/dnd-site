@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Models\Sources\SourceEdition;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\SourceEdition;
 
 return new class extends Migration
 {

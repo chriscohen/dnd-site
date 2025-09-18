@@ -6,8 +6,8 @@ namespace Database\Seeders;
 
 use App\Models\ModelInterface;
 use App\Models\Reference;
-use App\Models\Source;
-use App\Models\SourceEdition;
+use App\Models\Sources\Source;
+use App\Models\Sources\SourceEdition;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;

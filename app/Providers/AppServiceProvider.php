@@ -9,16 +9,16 @@ use App\Models\Creatures\CreatureType;
 use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\Items\Item;
 use App\Models\Items\ItemEdition;
-use App\Models\Source;
-use App\Models\SourceEdition;
+use App\Models\Sources\Source;
+use App\Models\Sources\SourceEdition;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
 use GraphQL\Type\Definition\PhpEnumType;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
+use Nuwave\Lighthouse\LighthouseServiceProvider;
 use Nuwave\Lighthouse\OrderBy\OrderByServiceProvider;
 use Nuwave\Lighthouse\Schema\TypeRegistry;
-use Nuwave\Lighthouse\LighthouseServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

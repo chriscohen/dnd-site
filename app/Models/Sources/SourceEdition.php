@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Sources;
 
 use App\Enums\Binding;
 use App\Enums\JsonRenderMode;
+use App\Models\AbstractModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;

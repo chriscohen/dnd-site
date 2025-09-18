@@ -7,15 +7,17 @@ namespace Database\Seeders;
 use App\Enums\Binding;
 use App\Enums\GameEdition;
 use App\Enums\PublicationType;
+use App\Enums\SourcebookType;
 use App\Enums\SourceFormat;
 use App\Enums\SourceType;
 use App\Models\CampaignSetting;
 use App\Models\Company;
 use App\Models\Media;
 use App\Models\ProductId;
-use App\Models\Source;
-use App\Models\SourceEdition;
-use App\Models\SourceEditionFormat;
+use App\Models\Sources\Source;
+use App\Models\Sources\SourceEdition;
+use App\Models\Sources\SourceEditionFormat;
+use App\Models\Sources\SourceSourcebookType;
 use Carbon\Carbon;
 
 class SourceSeeder extends AbstractYmlSeeder
@@ -70,6 +72,14 @@ class SourceSeeder extends AbstractYmlSeeder
                 $productId->product_id = $value;
                 $productId->source()->associate($source);
                 $productId->save();
+            }
+
+            foreach ($datum['sourcebook_types'] ?? [] as $type) {
+                $sourcebookType = SourcebookType::tryFromString($type);
+                $model = new SourceSourcebookType();
+                $model->source()->associate($source);
+                $model->sourcebook_type = $sourcebookType;
+                $model->save();
             }
 
             foreach ($datum['editions'] as $editionData) {

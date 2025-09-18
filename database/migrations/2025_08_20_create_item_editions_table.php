@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Models\Items\Item;
-use App\Models\Source;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

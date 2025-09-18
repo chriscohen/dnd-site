@@ -1,11 +1,12 @@
 [
     {
-        "id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
-        "slug": "wizards-of-the-coast",
-        "name": "Wizards of the Coast",
-        "logo": "wotc-logo.png",
-        "short_name": "WotC",
-        "website": "https://company.wizards.com/en"
+        "id": "bcdd6788-ad27-4074-bd9c-f366e3106f21",
+        "slug": "alchemists-workshops",
+        "name": "Alchemists Workshops",
+        "logo": "alchemists-workshops.webp",
+        "product_url": "product/{{id}}",
+        "short_name": "Alchemists",
+        "website": "https://alchemistsworkshops.com"
     },
     {
         "id": "0f063d69-07ea-49ac-8bae-b26dd3a2bdf9",
@@ -23,5 +24,13 @@
         "logo": "dtrpg-logo-small.png",
         "product_url": "product/{{id}}",
         "website": "https://www.drivethrurpg.com"
+    },
+    {
+        "id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "slug": "wizards-of-the-coast",
+        "name": "Wizards of the Coast",
+        "logo": "wotc-logo.png",
+        "short_name": "WotC",
+        "website": "https://company.wizards.com/en"
     }
 ]

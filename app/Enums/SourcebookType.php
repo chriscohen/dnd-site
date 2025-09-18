@@ -13,6 +13,8 @@ enum SourcebookType: int
     case GEAR_MAGIC_ITEMS = 5;
     case MONSTERS = 6;
     case SPELLS = 7;
+    case CAMPAIGN_SETTING = 8;
+    case LORE = 9;
 
     public function toString(): string
     {
@@ -21,7 +23,7 @@ enum SourcebookType: int
 
     public static function tryFromString(string $value): ?SourcebookType
     {
-        return match(mb_strtoupper($value)) {
+        return match (mb_strtoupper($value)) {
             'CORE' => self::CORE,
             'ADVENTURE' => self::ADVENTURE,
             'BOXED_SET' => self::BOXED_SET,
@@ -29,6 +31,8 @@ enum SourcebookType: int
             'GEAR_MAGIC_ITEMS' => self::GEAR_MAGIC_ITEMS,
             'MONSTERS' => self::MONSTERS,
             'SPELLS' => self::SPELLS,
+            'CAMPAIGN_SETTING' => self::CAMPAIGN_SETTING,
+            'LORE' => self::LORE,
             default => null,
         };
     }
