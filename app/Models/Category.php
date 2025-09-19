@@ -42,8 +42,8 @@ class Category extends AbstractModel
     public function toArrayLong(): array
     {
         return [
-            'image' => $this->image->toArray($this->renderMode, $this->excluded),
-            'parent' => $this->parent->toArray($this->renderMode, []),
+            'image' => $this->image?->toArray($this->renderMode, $this->excluded),
+            'parent' => $this->parent?->toArray($this->renderMode, []),
         ];
     }
 
