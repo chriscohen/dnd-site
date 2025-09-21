@@ -11,6 +11,18 @@
         "description": "Takes creatures from their natural planes and brings them to the caster."
     },
     {
+        "id": "charm",
+        "name": "Charm",
+        "parent": "enchantment",
+        "description": "The target of the spell believes someone has a good relationship with them, such as believing an enemy is a friend."
+    },
+    {
+        "id": "compulsion",
+        "name": "Compulsion",
+        "parent": "enchantment",
+        "description": "Force the target to do something beyond their natural will."
+    },
+    {
         "id": "conjuration",
         "name": "Conjuration",
         "description": "Calls materials, creatures, or energy to the caster or could be reversed to cause the opposite effect, possibly over long distances, or from another plane of existence."
@@ -23,15 +35,30 @@
     },
     {
         "id": "divination",
-        "name": "Divination"
+        "name": "Divination",
+        "description": "Allows the caster to see things that are not normally visible, or a great distance away."
     },
     {
         "id": "enchantment",
-        "name": "Enchantment"
+        "name": "Enchantment",
+        "description": "The power to manipulate the minds of others."
     },
     {
         "id": "evocation",
-        "name": "Evocation"
+        "name": "Evocation",
+        "description": "Manipulate energy or tap an unseen source of power to produce something from nothing. Often used to cause large amounts of damage."
+    },
+    {
+        "id": "figment",
+        "name": "Figment",
+        "parent": "illusion",
+        "description": "Creates an image or sound of something htat isn't there."
+    },
+    {
+        "id": "glamer",
+        "name": "Glamer",
+        "parent": "illusion",
+        "description": "A spell with the ability to fool any of the senses, or make creatures or objects appear or disappear."
     },
     {
         "id": "healing",
@@ -41,11 +68,37 @@
     },
     {
         "id": "illusion",
-        "name": "Illusion"
+        "name": "Illusion",
+        "description": "The ability to deceive the minds of others, making them believe they are seeing or hearing things that are not there, or remembering things that never happened."
     },
     {
         "id": "necromancy",
-        "name": "Necromancy"
+        "name": "Necromancy",
+        "description": "The Dark Art, manipulating the energy of the dead, to extend life, drain life from others, or create undead."
+    },
+    {
+        "id": "pattern",
+        "name": "Pattern",
+        "parent": "illusion",
+        "description": "Alter the mind of a perceiver, often with negative effects."
+    },
+    {
+        "id": "phantasm",
+        "name": "Phantasm",
+        "parent": "illusion",
+        "description": "Cast a personal mental image into the mind of another, making them believe they are witnessing something that is not true."
+    },
+    {
+        "id": "scrying",
+        "name": "Scrying",
+        "parent": "divination",
+        "description": "Create an invisible sensor to perceive the world and transmit that information back to the caster."
+    },
+    {
+        "id": "shadow",
+        "name": "Shadow",
+        "parent": "illusion",
+        "description": "A part-illusion, part-reality spell that can affect the world around it for real."
     },
     {
         "id": "summoning",
@@ -61,6 +114,7 @@
     },
     {
         "id": "transmutation",
-        "name": "Transmutation"
+        "name": "Transmutation",
+        "description": "Change the physical properties of creatures or objects. Formerly known as alteration."
     }
 ]
