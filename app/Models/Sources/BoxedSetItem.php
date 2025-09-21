@@ -17,7 +17,7 @@ use Ramsey\Uuid\Uuid;
  * @property string $slug
  * @property string $name
  *
- * @property SourceContentType $contentType
+ * @property ?SourceContentType $contentType
  * @property ?int $pages
  * @property SourceEdition $parent
  * @property int $quantity
@@ -35,7 +35,7 @@ class BoxedSetItem extends AbstractModel
     protected function contentType(): Attribute
     {
         return Attribute::make(
-            get: fn (int $value) => SourceContentType::tryFrom($value)->toString(),
+            get: fn (?int $value) => SourceContentType::tryFrom($value ?? 0)?->toString() ?? null,
         );
     }
 

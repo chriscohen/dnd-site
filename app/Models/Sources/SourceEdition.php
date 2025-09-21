@@ -5,6 +5,7 @@ namespace App\Models\Sources;
 use App\Enums\Binding;
 use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
+use App\Models\ModelCollection;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -17,6 +18,7 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  *
  * @property ?Binding $binding
+ * @property Collection<BoxedSetItem> $boxedSetItems
  * @property Collection $formats
  * @property bool $is_primary
  * @property ?string $isbn10
@@ -63,6 +65,11 @@ class SourceEdition extends AbstractModel
         );
     }
 
+    public function boxedSetItems(): HasMany
+    {
+        return $this->hasMany(BoxedSetItem::class, 'parent_id');
+    }
+
     public function formatReleaseDate(): string
     {
         $format = $this->release_date_month_only ? 'Y-m' : 'Y-m-d';
@@ -97,6 +104,8 @@ class SourceEdition extends AbstractModel
     {
         return [
             'binding' => $this->binding,
+            'boxed_set_items' => ModelCollection::make($this->boxedSetItems)
+                ->toArray($this->renderMode, $this->excluded),
             //'formats' => ModelCollection::make($this->formats)->toString(),
             'is_primary' => $this->is_primary,
             'isbn10' => $this->isbn10,

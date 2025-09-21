@@ -49,10 +49,10 @@ abstract class AbstractController implements ControllerInterface
         }
 
         // Fiddle the results so 3rd edition includes 3.5 and vice versa.
-        if (in_array(GameEdition::THIRD->value, $parameters)) {
-            $parameters[] = GameEdition::TPF->value;
-        } elseif (in_array(GameEdition::TPF->value, $parameters)) {
-            $parameters[] = GameEdition::THIRD->value;
+        if (in_array(GameEdition::THIRD, $parameters)) {
+            $parameters[] = GameEdition::TPF;
+        } elseif (in_array(GameEdition::TPF, $parameters)) {
+            $parameters[] = GameEdition::THIRD;
         }
 
         return $parameters;
