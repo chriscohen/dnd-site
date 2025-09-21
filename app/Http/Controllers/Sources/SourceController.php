@@ -6,9 +6,32 @@ namespace App\Http\Controllers\Sources;
 
 use App\Http\Controllers\AbstractController;
 use App\Models\Sources\Source;
+use App\Rules\ValidGameEdition;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class SourceController extends AbstractController
 {
     protected string $entityType = Source::class;
     protected string $orderKey = 'name';
+
+    public function index(Request $request): JsonResponse
+    {
+        $request->validate([
+            'edition' => ['string', new ValidGameEdition()]
+        ]);
+
+        if (!empty($request->get('edition'))) {
+            $this->editionQuery($request->get('edition'));
+        }
+
+        $result = $this->query->get();
+        $output = [];
+
+        foreach ($result as $item) {
+            $output[] = $item->toArray($this->getMode($request));
+        }
+
+        return response()->json($output);
+    }
 }

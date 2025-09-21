@@ -13,10 +13,16 @@ abstract class AbstractController implements ControllerInterface
     protected string $entityType = AbstractModel::class;
     protected string $order = 'ASC';
     protected string $orderKey = '';
+    protected Builder $query;
+
+    public function __construct()
+    {
+        $this->query = $this->getQuery();
+    }
 
     public function get(Request $request, string $slug): JsonResponse
     {
-        $model = $this->getQuery()->where('slug', $slug)->first();
+        $model = $this->query->where('slug', $slug)->first();
 
         return response()->json($model->toArray($this->getMode($request)));
     }
@@ -36,7 +42,7 @@ abstract class AbstractController implements ControllerInterface
 
     public function index(Request $request): JsonResponse
     {
-        $items = $this->getQuery()->get();
+        $items = $this->query->get();
         $output = [];
 
         foreach ($items as $item) {
@@ -44,5 +50,12 @@ abstract class AbstractController implements ControllerInterface
         }
 
         return response()->json($output);
+    }
+
+    public function editionQuery(string $editions): self
+    {
+        $editions = explode(',', $editions);
+        $this->query->whereIn('game_edition', $editions);
+        return $this;
     }
 }
