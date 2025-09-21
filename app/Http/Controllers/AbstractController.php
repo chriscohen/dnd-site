@@ -55,6 +55,19 @@ abstract class AbstractController implements ControllerInterface
     public function editionQuery(string $editions): self
     {
         $editions = explode(',', $editions);
+
+        // If all editions, don't add anything to the query.
+        if (in_array('all', $editions)) {
+            return $this;
+        }
+
+        // Fiddle the results so 3rd edition includes 3.5 and vice versa.
+        if (in_array('3e', $editions)) {
+            $editions[] = '3.5';
+        } elseif (in_array('3.5', $editions)) {
+            $editions[] = '3e';
+        }
+
         $this->query->whereIn('game_edition', $editions);
         return $this;
     }

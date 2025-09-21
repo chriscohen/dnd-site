@@ -21,8 +21,8 @@ class SourceController extends AbstractController
             'edition' => ['string', new ValidGameEdition()]
         ]);
 
-        if (!empty($request->get('edition'))) {
-            $this->editionQuery($request->get('edition'));
+        if (!empty($request->get('editions'))) {
+            $this->editionQuery($request->get('editions'));
         }
 
         $result = $this->query->get();
