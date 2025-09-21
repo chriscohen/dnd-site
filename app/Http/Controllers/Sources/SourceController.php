@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Sources;
 
+use App\Enums\GameEdition;
 use App\Http\Controllers\AbstractController;
 use App\Models\Sources\Source;
 use App\Rules\ValidGameEdition;
@@ -33,5 +34,13 @@ class SourceController extends AbstractController
         }
 
         return response()->json($output);
+    }
+
+    public function editionQuery(string $editions): self
+    {
+        $parameters = $this->getEditionsFromQueryString($editions);
+
+        $this->query->whereIn('game_edition', $parameters);
+        return $this;
     }
 }
