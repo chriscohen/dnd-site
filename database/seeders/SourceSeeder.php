@@ -8,12 +8,14 @@ use App\Enums\Binding;
 use App\Enums\GameEdition;
 use App\Enums\PublicationType;
 use App\Enums\SourcebookType;
+use App\Enums\SourceContentType;
 use App\Enums\SourceFormat;
 use App\Enums\SourceType;
 use App\Models\CampaignSetting;
 use App\Models\Company;
 use App\Models\Media;
 use App\Models\ProductId;
+use App\Models\Sources\BoxedSetItem;
 use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
 use App\Models\Sources\SourceEditionFormat;
@@ -82,6 +84,9 @@ class SourceSeeder extends AbstractYmlSeeder
                 $model->save();
             }
 
+            /**
+             * Editions
+             */
             foreach ($datum['editions'] as $editionData) {
                 $edition = new SourceEdition();
                 $edition->id = $editionData['id'];
@@ -107,6 +112,19 @@ class SourceSeeder extends AbstractYmlSeeder
                     $format->format = $formatEnum;
                     $format->edition()->associate($edition);
                     $format->save();
+                }
+
+                foreach ($editionData['contents'] ?? [] as $contentData) {
+                    $content = new BoxedSetItem();
+                    $content->id = $contentData['id'];
+                    $content->slug = $contentData['slug'];
+                    $content->name = $contentData['name'];
+                    $content->parent()->associate($edition);
+                    $content->content_type = SourceContentType::tryFromString($contentData['content_type']);
+                    $content->pages = $contentData['pages'] ?? null;
+                    $content->quantity = $contentData['quantity'] ?? 1;
+
+                    $content->save();
                 }
 
                 $source->editions->add($edition);

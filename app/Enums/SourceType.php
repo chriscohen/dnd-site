@@ -10,10 +10,17 @@ enum SourceType: int
     case NOVEL = 2;
     case WEBSITE = 3;
     case MAGAZINE = 4;
+    case BOXED_SET = 5;
 
     public function toString(): string
     {
-        return mb_ucfirst(mb_strtolower($this->name));
+        return match ($this) {
+            self::SOURCEBOOK => 'sourcebook',
+            self::NOVEL => 'novel',
+            self::WEBSITE => 'website',
+            self::MAGAZINE => 'magazine',
+            self::BOXED_SET => 'boxed-set',
+        };
     }
 
     public static function tryFromString(string $value): ?SourceType
@@ -23,6 +30,7 @@ enum SourceType: int
             'NOVEL' => self::NOVEL,
             'WEBSITE' => self::WEBSITE,
             'MAGAZINE' => self::MAGAZINE,
+            'BOXED_SET' => self::BOXED_SET,
             default => null,
         };
     }

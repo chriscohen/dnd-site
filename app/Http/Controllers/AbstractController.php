@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use Illuminate\Database\Eloquent\Builder;
@@ -61,14 +62,24 @@ abstract class AbstractController implements ControllerInterface
             return $this;
         }
 
-        // Fiddle the results so 3rd edition includes 3.5 and vice versa.
-        if (in_array('3e', $editions)) {
-            $editions[] = '3.5';
-        } elseif (in_array('3.5', $editions)) {
-            $editions[] = '3e';
+        $parameters = [];
+
+        foreach ($editions as $edition) {
+            $enum = GameEdition::tryFromString($edition);
+
+            if (!empty($enum)) {
+                $parameters[] = $enum;
+            }
         }
 
-        $this->query->whereIn('game_edition', $editions);
+        // Fiddle the results so 3rd edition includes 3.5 and vice versa.
+        if (in_array(GameEdition::THIRD->value, $parameters)) {
+            $parameters[] = GameEdition::TPF->value;
+        } elseif (in_array(GameEdition::TPF->value, $parameters)) {
+            $parameters[] = GameEdition::THIRD->value;
+        }
+
+        $this->query->whereIn('game_edition', $parameters);
         return $this;
     }
 }
