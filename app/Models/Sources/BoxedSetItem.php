@@ -17,7 +17,7 @@ use Ramsey\Uuid\Uuid;
  * @property string $slug
  * @property string $name
  *
- * @property ?SourceContentType $contentType
+ * @property ?SourceContentType $content_type
  * @property ?int $pages
  * @property SourceEdition $parent
  * @property int $quantity
@@ -47,7 +47,7 @@ class BoxedSetItem extends AbstractModel
     public function toArrayLong(): array
     {
         return [
-            'content_type' => $this->contentType,
+            'content_type' => $this->content_type,
             'pages' => $this->pages,
             'parent' => $this->parent->toArray(JsonRenderMode::SHORT, []),
             'quantity' => $this->quantity,
