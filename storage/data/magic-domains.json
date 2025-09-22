@@ -1,10 +1,478 @@
 [
     {
+        "id": "air",
+        "name": "Air"
+    },
+    {
+        "id": "animal",
+        "name": "Animal"
+    },
+    {
+        "id": "arcana",
+        "name": "Arcana"
+    },
+    {
+        "id": "avarice",
+        "name": "Avarice"
+    },
+    {
+        "id": "balance",
+        "name": "Balance"
+    },
+    {
+        "id": "bestial",
+        "name": "Bestial"
+    },
+    {
+        "id": "blightbringer",
+        "name": "Blightbringer"
+    },
+    {
+        "id": "cavern",
+        "name": "Cavern"
+    },
+    {
+        "id": "celestial",
+        "name": "Celestial"
+    },
+    {
+        "id": "change",
+        "name": "Change"
+    },
+    {
         "id": "chaos",
         "name": "Chaos"
     },
     {
+        "id": "charity",
+        "name": "Charity"
+    },
+    {
+        "id": "charm",
+        "name": "Charm"
+    },
+    {
+        "id": "chastity",
+        "name": "Chastity"
+    },
+    {
+        "id": "civilization",
+        "name": "Civilization"
+    },
+    {
+        "id": "cold",
+        "name": "Cold"
+    },
+    {
+        "id": "community",
+        "name": "Community"
+    },
+    {
+        "id": "corruption",
+        "name": "Corruption"
+    },
+    {
+        "id": "craft",
+        "name": "Craft"
+    },
+    {
+        "id": "creation",
+        "name": "Creation"
+    },
+    {
+        "id": "darkness",
+        "name": "Darkness"
+    },
+    {
+        "id": "death",
+        "name": "Death"
+    },
+    {
+        "id": "demonic",
+        "name": "Demonic"
+    },
+    {
+        "id": "destruction",
+        "name": "Destruction"
+    },
+    {
+        "id": "diabolic",
+        "name": "Diabolic"
+    },
+    {
+        "id": "dream",
+        "name": "Dream"
+    },
+    {
+        "id": "drow",
+        "name": "Drow"
+    },
+    {
+        "id": "dwarf",
+        "name": "Dwarf"
+    },
+    {
+        "id": "earth",
+        "name": "Earth"
+    },
+    {
+        "id": "elf",
+        "name": "Elf"
+    },
+    {
+        "id": "endurance",
+        "name": "Endurance"
+    },
+    {
+        "id": "envy",
+        "name": "Envy"
+    },
+    {
         "id": "evil",
         "name": "Evil"
+    },
+    {
+        "id": "family",
+        "name": "Family"
+    },
+    {
+        "id": "fate",
+        "name": "Fate"
+    },
+    {
+        "id": "fey",
+        "name": "Fey"
+    },
+    {
+        "id": "fire",
+        "name": "Fire"
+    },
+    {
+        "id": "forge",
+        "name": "Forge"
+    },
+    {
+        "id": "freedom",
+        "name": "Freedom"
+    },
+    {
+        "id": "generosity",
+        "name": "Generosity"
+    },
+    {
+        "id": "glory",
+        "name": "Glory"
+    },
+    {
+        "id": "gluttony",
+        "name": "Gluttony"
+    },
+    {
+        "id": "gnome",
+        "name": "Gnome"
+    },
+    {
+        "id": "good",
+        "name": "Good"
+    },
+    {
+        "id": "grave",
+        "name": "Grave"
+    },
+    {
+        "id": "greed",
+        "name": "Greed"
+    },
+    {
+        "id": "halfling",
+        "name": "Halfling"
+    },
+    {
+        "id": "hatred",
+        "name": "Hatred"
+    },
+    {
+        "id": "healing",
+        "name": "Healing"
+    },
+    {
+        "id": "herald",
+        "name": "Herald"
+    },
+    {
+        "id": "hope",
+        "name": "Hope"
+    },
+    {
+        "id": "humility",
+        "name": "Humility"
+    },
+    {
+        "id": "hunt",
+        "name": "Hunt"
+    },
+    {
+        "id": "illusion",
+        "name": "Illusion"
+    },
+    {
+        "id": "joy",
+        "name": "Joy"
+    },
+    {
+        "id": "justice",
+        "name": "Justice"
+    },
+    {
+        "id": "knowledge",
+        "name": "Knowledge"
+    },
+    {
+        "id": "law",
+        "name": "Law"
+    },
+    {
+        "id": "life",
+        "name": "Life"
+    },
+    {
+        "id": "light",
+        "name": "Light"
+    },
+    {
+        "id": "love",
+        "name": "Love"
+    },
+    {
+        "id": "luck",
+        "name": "Luck"
+    },
+    {
+        "id": "lust",
+        "name": "Lust"
+    },
+    {
+        "id": "madness",
+        "name": "Madness"
+    },
+    {
+        "id": "magic",
+        "name": "Magic"
+    },
+    {
+        "id": "mentalism",
+        "name": "Mentalism"
+    },
+    {
+        "id": "metal",
+        "name": "Metal"
+    },
+    {
+        "id": "mind",
+        "name": "Mind"
+    },
+    {
+        "id": "moon",
+        "name": "Moon"
+    },
+    {
+        "id": "nature",
+        "name": "Nature"
+    },
+    {
+        "id": "nobility",
+        "name": "Nobility"
+    },
+    {
+        "id": "ocean",
+        "name": "Ocean"
+    },
+    {
+        "id": "orc",
+        "name": "Orc"
+    },
+    {
+        "id": "order",
+        "name": "Order"
+    },
+    {
+        "id": "pain",
+        "name": "Pain"
+    },
+    {
+        "id": "patience",
+        "name": "Patience"
+    },
+    {
+        "id": "peace",
+        "name": "Peace"
+    },
+    {
+        "id": "planning",
+        "name": "Planning"
+    },
+    {
+        "id": "plant",
+        "name": "Plant"
+    },
+    {
+        "id": "pleasure",
+        "name": "Pleasure"
+    },
+    {
+        "id": "poison",
+        "name": "Poison"
+    },
+    {
+        "id": "portal",
+        "name": "Portal"
+    },
+    {
+        "id": "pride",
+        "name": "Pride"
+    },
+    {
+        "id": "protection",
+        "name": "Protection"
+    },
+    {
+        "id": "radiance",
+        "name": "Radiance"
+    },
+    {
+        "id": "renewal",
+        "name": "Renewal"
+    },
+    {
+        "id": "repose",
+        "name": "Repose"
+    },
+    {
+        "id": "retribution",
+        "name": "Retribution"
+    },
+    {
+        "id": "rune",
+        "name": "Rune"
+    },
+    {
+        "id": "scalykind",
+        "name": "Scalykind"
+    },
+    {
+        "id": "sea",
+        "name": "Sea"
+    },
+    {
+        "id": "skill",
+        "name": "Skill"
+    },
+    {
+        "id": "slime",
+        "name": "Slime"
+    },
+    {
+        "id": "sloth",
+        "name": "Sloth"
+    },
+    {
+        "id": "spell",
+        "name": "Spell"
+    },
+    {
+        "id": "spider",
+        "name": "Spider"
+    },
+    {
+        "id": "storm",
+        "name": "Storm"
+    },
+    {
+        "id": "strength",
+        "name": "Strength"
+    },
+    {
+        "id": "strife",
+        "name": "Strife"
+    },
+    {
+        "id": "suffering",
+        "name": "Suffering"
+    },
+    {
+        "id": "sun",
+        "name": "Sun"
+    },
+    {
+        "id": "temperance",
+        "name": "Temperance"
+    },
+    {
+        "id": "tempest",
+        "name": "Tempest"
+    },
+    {
+        "id": "time",
+        "name": "Time"
+    },
+    {
+        "id": "torment",
+        "name": "Torment"
+    },
+    {
+        "id": "trade",
+        "name": "Trade"
+    },
+    {
+        "id": "travel",
+        "name": "Travel"
+    },
+    {
+        "id": "trickery",
+        "name": "Trickery"
+    },
+    {
+        "id": "twilight",
+        "name": "Twilight"
+    },
+    {
+        "id": "tyranny",
+        "name": "Tyranny"
+    },
+    {
+        "id": "undeath",
+        "name": "Undeath"
+    },
+    {
+        "id": "vengeance",
+        "name": "Vengeance"
+    },
+    {
+        "id": "war",
+        "name": "War"
+    },
+    {
+        "id": "water",
+        "name": "Water"
+    },
+    {
+        "id": "watery-death",
+        "name": "Watery death"
+    },
+    {
+        "id": "wilderness",
+        "name": "Wilderness"
+    },
+    {
+        "id": "winter",
+        "name": "Winter"
+    },
+    {
+        "id": "wrath",
+        "name": "Wrath"
+    },
+    {
+        "id": "zeal",
+        "name": "Zeal"
     }
 ]

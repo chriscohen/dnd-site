@@ -6,8 +6,13 @@ use App\Enums\Distance;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Enums\MaterialComponentMode;
+use App\Enums\SavingThrowMultiplier;
+use App\Enums\SavingThrowType;
 use App\Enums\SpellComponentType;
+use App\Enums\TimeUnit;
 use App\Models\AbstractModel;
+use App\Models\Area;
+use App\Models\DamageInstance;
 use App\Models\Items\ItemEdition;
 use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
@@ -27,11 +32,17 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
 /**
  * @property Uuid $id
  *
+ * @property ?Area $area
+ * @property int $casting_time_number
+ * @property TimeUnit $casting_time_unit
  * @property Collection<SpellEditionCharacterClassLevel> $classLevels
+ * @property Collection<DamageInstance> $damageInstances
  * @property string $description
  * @property Collection<MagicDomain> $domains
  * @property ?string $focus
  * @property GameEdition $game_edition
+ * @property ?bool $has_saving_throw
+ * @property ?bool $has_spell_resistance
  * @property string $higher_level
  * @property bool $is_default
  * @property Collection<ItemEdition> $itemEditions
@@ -39,6 +50,8 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Collection<SpellMaterialComponent> $materialComponents
  * @property Range $range
  * @property Uuid $range_id
+ * @property ?SavingThrowMultiplier $saving_throw_multiplier
+ * @property ?SavingThrowType $saving_throw_type
  * @property MagicSchool $school
  * @property Spell $spell
  * @property string $spell_components
@@ -53,12 +66,17 @@ class SpellEdition extends AbstractModel
     public function toArrayLong(): array
     {
         return [
+            'casting_time' => $this->casting_time_unit->format($this->casting_time_number),
             'class_levels' => ModelCollection::make($this->classLevels)
+                ->toArray(JsonRenderMode::SHORT, $this->excluded),
+            'damage_instances' => ModelCollection::make($this->damageInstances)
                 ->toArray(JsonRenderMode::SHORT, $this->excluded),
             'description' => $this->description,
             'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode, $this->excluded),
             'focus' => $this->focus,
             'game_edition' => $this->game_edition,
+            'has_saving_throw' => $this->has_saving_throw,
+            'has_spell_resistance' => $this->has_spell_resistance,
             'higher_level' => $this->higher_level,
             'is_default' => $this->is_default,
             'item_editions' => ModelCollection::make($this->itemEditions)->toArray($this->renderMode, $this->excluded),
@@ -69,6 +87,8 @@ class SpellEdition extends AbstractModel
                 $this->excluded
             ),
             'range' => $this->range->toArray($this->renderMode, $this->excluded),
+            'saving_throw_multiplier' => $this->saving_throw_multiplier,
+            'saving_throw_type' => $this->saving_throw_type,
             'school' => $this->school?->toArray($this->renderMode, $this->excluded) ?? null,
             'spell' => $this->spell->toArray($this->renderMode, $this->excluded),
             'spell_components' => $this->spell_components,
@@ -84,24 +104,29 @@ class SpellEdition extends AbstractModel
     }
 
     public $casts = [
+        'casting_time_unit' => TimeUnit::class,
         'game_edition' => GameEdition::class,
+        'has_saving_throw' => 'bool',
         'is_default' => 'bool',
         'material_component_mode' => MaterialComponentMode::class,
         'range_unit' => Distance::class,
+        'saving_throw_multiplier' => SavingThrowMultiplier::class,
+        'saving_throw_type' => SavingThrowType::class,
     ];
 
-    public array $schema = [
-        JsonRenderMode::SHORT->value => [
-
-        ],
-        JsonRenderMode::FULL->value => [
-
-        ]
-    ];
+    public function area(): BelongsTo
+    {
+        return $this->belongsTo(Area::class, 'area_id');
+    }
 
     public function classLevels(): HasMany
     {
         return $this->hasMany(SpellEditionCharacterClassLevel::class, 'spell_edition_id');
+    }
+
+    public function damageInstances(): MorphMany
+    {
+        return $this->morphMany(DamageInstance::class, 'entity');
     }
 
     protected function description(): Attribute

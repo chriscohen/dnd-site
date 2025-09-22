@@ -4,11 +4,19 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Enums\AreaType;
+use App\Enums\DamageType;
 use App\Enums\GameEdition;
 use App\Enums\MaterialComponentMode;
+use App\Enums\PerLevelMode;
+use App\Enums\SavingThrowMultiplier;
+use App\Enums\SavingThrowType;
 use App\Enums\SpellComponentType;
+use App\Enums\TimeUnit;
+use App\Models\Area;
 use App\Models\CharacterClass;
 use App\Enums\Distance;
+use App\Models\DamageInstance;
 use App\Models\Items\Item;
 use App\Models\Magic\MagicSchool;
 use App\Models\Range;
@@ -47,32 +55,38 @@ class SpellSeeder extends AbstractYmlSeeder
                     MaterialComponentMode::tryFrom($editionData['material_component_mode']) : null;
 
                 // Range
-                $range = new Range();
-                $range->number = $editionData['range']['number'] ?? null;
-                $range->per_level = $editionData['range']['per_level'] ?? null;
-                $range->unit = !empty($editionData['range']['unit']) ?
-                    Distance::tryFromString($editionData['range']['unit']) :
-                    null;
-                $range->is_self = $editionData['range']['is_self'] ?? false;
-                $range->is_touch = $editionData['range']['is_touch'] ?? false;
-                $range->save();
-                $edition->range()->associate($range);
-                $edition->spell_components = $editionData['spell_components'];
+                $this->makeRange($editionData['range'], $edition);
+
+                // Area
+                if (!empty($editionData['area'])) {
+                    $this->makeArea($editionData['area'], $edition);
+                }
+
+                // Saving throws
+                $edition->has_saving_throw = $editionData['has_saving_throw'] ?? null;
+                $edition->saving_throw_multiplier = !empty($editionData['saving_throw_multiplier']) ?
+                    SavingThrowMultiplier::tryFromString($editionData['saving_throw_multiplier']) : null;
+                $edition->saving_throw_type = !empty($editionData['saving_throw_type']) ?
+                    SavingThrowType::tryFromString($editionData['saving_throw_type']) : null;
+
+                $edition->spell_components = $editionData['spell_components'] ?? null;
+                $edition->has_spell_resistance = $editionData['has_spell_resistance'] ?? null;
 
                 $school = MagicSchool::query()->where('name', ucfirst($editionData['school']))->firstOrFail();
                 $edition->school()->associate($school);
 
+                // Casting time.
+                $edition->casting_time_number = $editionData['casting_time_number'] ?? 1;
+                $edition->casting_time_unit = TimeUnit::tryFromString($editionData['casting_time_unit']);
+
                 $edition->save();
 
+                // Damage.
+                $this->makeDamageInstances($editionData['damage'] ?? [], $edition);
+
+                // Character classes.
                 foreach ($editionData['classes'] as $classData) {
-                    $class = CharacterClass::query()->where('id', $classData['class'])->firstOrFail();
-
-                    $sccl = new SpellEditionCharacterClassLevel();
-                    $sccl->characterClass()->associate($class);
-                    $sccl->spellEdition()->associate($edition);
-                    $sccl->level = $classData['level'];
-
-                    $sccl->save();
+                    $this->makeCharacterClass($classData, $edition);
                 }
 
                 foreach ($editionData['material_components'] ?? [] as $materialData) {
@@ -94,5 +108,59 @@ class SpellSeeder extends AbstractYmlSeeder
                 }
             }
         }
+    }
+
+    protected function makeArea(array $data, SpellEdition $edition): void
+    {
+        $area = new Area();
+        $area->type = AreaType::tryFromString($data['type']);
+        $area->height = $data['height'] ?? null;
+        $area->length = $data['length'] ?? null;
+        $area->radius = $data['radius'] ?? null;
+        $area->save();
+        $edition->area()->associate($area);
+    }
+
+    protected function makeCharacterClass(array $data, SpellEdition $edition): void
+    {
+        $class = CharacterClass::query()->where('id', $data['class'])->firstOrFail();
+
+        $sccl = new SpellEditionCharacterClassLevel();
+        $sccl->characterClass()->associate($class);
+        $sccl->spellEdition()->associate($edition);
+        $sccl->level = $data['level'];
+
+        $sccl->save();
+    }
+
+    protected function makeDamageInstances(array $data, SpellEdition $edition): void
+    {
+        foreach ($data as $datum) {
+            $damageInstance = new DamageInstance();
+            $damageInstance->entity()->associate($edition);
+
+            $damageInstance->die_quantity = $datum['die_quantity'] ?? null;
+            $damageInstance->die_quantity_maximum = $datum['die_quantity_maximum'] ?? null;
+            $damageInstance->die_faces = $datum['die_faces'];
+            $damageInstance->damage_type = DamageType::tryFromString($datum['damage_type']);
+            $damageInstance->modifier = $datum['modifier'] ?? 0;
+            $damageInstance->per_level_mode = PerLevelMode::tryFromString($datum['per_level_mode']);
+
+            $damageInstance->save();
+        }
+    }
+
+    protected function makeRange(array $data, SpellEdition $edition): void
+    {
+        $range = new Range();
+        $range->number = $data['range']['number'] ?? null;
+        $range->per_level = $data['range']['per_level'] ?? null;
+        $range->unit = !empty($data['range']['unit']) ?
+            Distance::tryFromString($data['range']['unit']) :
+            null;
+        $range->is_self = $data['range']['is_self'] ?? false;
+        $range->is_touch = $data['range']['is_touch'] ?? false;
+        $range->save();
+        $edition->range()->associate($range);
     }
 }

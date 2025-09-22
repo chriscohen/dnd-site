@@ -8,8 +8,9 @@ use App\Models\AbstractModel;
 use App\Models\Category;
 use App\Models\ModelCollection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 
@@ -17,8 +18,7 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  * @property string $slug
  *
- * @property Uuid $category_id
- * @property Category $category
+ * @property Collection<Category> $categories
  * @property Collection<ItemEdition> $editions
  * @property string $name
  */
@@ -28,9 +28,9 @@ class Item extends AbstractModel
 
     public $timestamps = false;
 
-    public function category(): BelongsTo
+    public function categories(): MorphToMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->morphToMany(Category::class, 'entity', 'entity_category');
     }
 
     public function primaryEdition(): ItemEdition

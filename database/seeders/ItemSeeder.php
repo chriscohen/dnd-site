@@ -28,9 +28,6 @@ class ItemSeeder extends AbstractYmlSeeder
             $item->slug = $datum['slug'] ?? self::makeSlug($datum['name']);
             $item->name = $datum['name'];
 
-            $category = Category::query()->where('slug', $datum['category'])->firstOrFail();
-            $item->category()->associate($category);
-
             $item->save();
 
             foreach ($datum['editions'] ?? [] as $editionData) {
@@ -54,6 +51,11 @@ class ItemSeeder extends AbstractYmlSeeder
 
                 $edition->save();
                 $item->editions->add($edition);
+            }
+
+            foreach ($datum['categories'] as $categoryData) {
+                $category = Category::query()->where('slug', $categoryData)->firstOrFail();
+                $item->categories->add($category);
             }
         }
     }
