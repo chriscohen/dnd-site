@@ -33,6 +33,41 @@
         "source_type": "sourcebook"
     },
     {
+        "id": "8c3b1167-5315-4f9c-a167-5f346a4ac15d",
+        "slug": "chains-of-asmodeus",
+        "name": "Chains of Asmodeus",
+        "cover_image": "chains-of-asmodeus.webp",
+        "description": "Chains of Asmodeus is a 286-page source book and adventure for the Nine Hells written by legendary game designer James Ohlen (Baldur's Gate, Baldur's Gate II, Star Wars: Knights of the Old Republic, Dragon Age: Origins) and award-winning author Adrian Tchaikovsky (Children of Time, The Tiger and the Wolf, The Doors of Eden). This book is beautifully illustrated with haunting art from Sergei Sarichev, Sergey Musin, Julian Calle, Sebastion Kowoll, Paul Adams, Luis Lasahido, and the Aaron Sims Company.",
+        "editions": [
+            {
+                "id": "14869371-e1fb-45ce-b1ff-59f6668a74d0",
+                "name": "original",
+                "binding": "softcover_and_hardcover",
+                "formats": [
+                    "print",
+                    "pdf",
+                    "roll_20"
+                ],
+                "is_primary": true,
+                "pages": 286,
+                "release_date": "2023-10-30"
+            }
+        ],
+        "game_edition": "5e",
+        "product_ids": {
+            "dungeon-masters-guild": "457996",
+            "drivethru-rpg": "457996"
+        },
+        "publication_type": "official",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "sourcebook_types": [
+            "adventure",
+            "gear_magic_items",
+            "monsters"
+        ],
+        "source_type": "sourcebook"
+    },
+    {
         "id": "0f9e2836-dbcf-49f4-9f98-10d36b422c8b",
         "slug": "champions-of-ruin",
         "name": "Champions of Ruin",
@@ -222,6 +257,42 @@
         "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
         "sourcebook_types": [
             "campaign_setting"
+        ],
+        "source_type": "sourcebook"
+    },
+    {
+        "id": "32fc8dab-0701-40ae-8776-916f0174fb65",
+        "slug": "players-guide-to-faerun",
+        "name": "Player's Guide to Faerûn",
+        "cover_image": "players-guide-to-faerun.webp",
+        "description": "The heroes of the Forgotten Realms are as diverse and varied as the regions from which they hail. This collection of Faerûnian lore and arcana allows you to create and equip an endless array of characters braced for the challenges they'll encounter.\n\nFrom races, feats, and spells to prestige classes, magic items, and more, Player's Guide to Faerûn provides a v.3.5 update to the Forgotten Realms setting, reintroduces some old favorites from 1st and 2nd Edition, and offers all-new character-building material.\n\n- Over 60 feats\n- More than 30 prestige classes\n- 90 spells.",
+        "editions": [
+            {
+                "id": "fb943c2d-a123-4b57-b551-18b574b732f4",
+                "name": "original",
+                "binding": "hardcover",
+                "formats": ["print", "pdf"],
+                "is_primary": true,
+                "isbn10": "0786931345",
+                "isbn13": "9780786931347",
+                "pages": 192,
+                "release_date": "2004-03",
+                "release_date_month_only": true
+            }
+        ],
+        "game_edition": "3.5",
+        "product_code": "886470000",
+        "product_ids": {
+            "dungeon-masters-guild": "29520",
+            "drivethru-rpg": "29520"
+        },
+        "publication_type": "official",
+        "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "sourcebook_types": [
+            "character_options",
+            "gear_magic_items",
+            "lore",
+            "spells"
         ],
         "source_type": "sourcebook"
     },

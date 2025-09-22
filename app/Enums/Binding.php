@@ -9,13 +9,15 @@ enum Binding: int
     case HARDCOVER = 1;
     case PAPERBACK = 2;
     case BOXED_SET = 3;
+    case SOFTCOVER_AND_HARDCOVER = 4;
 
     public function toString(): string
     {
-        return match ($this->value) {
-            1 => 'hardcover',
-            2 => 'paperback',
-            3 => 'boxed set',
+        return match ($this) {
+            self::HARDCOVER => 'hardcover',
+            self::PAPERBACK => 'paperback',
+            self::BOXED_SET => 'boxed set',
+            self::SOFTCOVER_AND_HARDCOVER => 'softcover and hardcover',
         };
     }
 
@@ -25,6 +27,7 @@ enum Binding: int
             'BOXED_SET' => Binding::BOXED_SET,
             'HARDCOVER' => self::HARDCOVER,
             'PAPERBACK' => self::PAPERBACK,
+            'SOFTCOVER_AND_HARDCOVER' => self::SOFTCOVER_AND_HARDCOVER,
             default => null,
         };
     }
