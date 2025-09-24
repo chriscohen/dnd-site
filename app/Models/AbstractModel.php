@@ -8,15 +8,18 @@ use App\Enums\JsonRenderMode;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Ramsey\Uuid\Uuid;
 
 abstract class AbstractModel extends Model implements Arrayable, ModelInterface
 {
     /**
      * A list of class names that will be excluded from nested JSON rendering to prevent infinite recursion.
      *
-     * @var string[]
+     * @var array{
+     *     string: array
+     * }
      */
-    protected array $excluded = [];
+    public static array $excluded = [];
 
     protected JsonRenderMode $renderMode = JsonRenderMode::SHORT;
 
@@ -25,25 +28,9 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
         return ModelCollection::make($input);
     }
 
-    public function isExcluded(string $className): bool
-    {
-        return in_array($className, $this->excluded);
-    }
-
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT, array $exclude = []): array
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
     {
         $this->renderMode = $mode;
-        $this->excluded = array_merge_recursive($this->excluded, $exclude);
-
-        // If we reach here and this class is already excluded, don't render it to an array, to prevent infinite
-        // recursion.
-        if ($this->isExcluded(static::class)) {
-            return [
-                'recursion' => '*',
-            ];
-        }
-
-        $this->excluded[] = static::class;
 
         $output = $this->toArrayShort();
 

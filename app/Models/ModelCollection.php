@@ -55,12 +55,12 @@ class ModelCollection
         return $collection;
     }
 
-    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT, array $excluded = []): array
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array
     {
         $output = [];
 
         foreach ($this->items as $item) {
-            $output[] = $item->toArray($mode, $excluded);
+            $output[] = $item->toArray($mode);
         }
 
         return $output;

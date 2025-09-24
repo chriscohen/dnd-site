@@ -46,8 +46,8 @@ class Reference extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'entity' => $this->entity->toArray($this->renderMode, $this->excluded),
-            'edition' => $this->edition->toArray($this->renderMode, $this->excluded),
+            'entity' => $this->entity->toArray($this->renderMode),
+            'edition' => $this->edition->toArray($this->renderMode),
         ];
     }
 
@@ -57,12 +57,15 @@ class Reference extends AbstractModel
             'id' => $this->id,
             'page_from' => $this->page_from,
             'page_to' => $this->page_to,
-            'source' => $this->edition->source->name,
+            'source' => $this->edition->source?->name,
+            'slug' => $this->edition->source?->slug,
         ];
     }
 
     public function toArrayTeaser(): array
     {
-        return [];
+        return [
+            'image' => $this->edition->source->coverImage->toArray($this->renderMode),
+        ];
     }
 }

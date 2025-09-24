@@ -15,10 +15,7 @@ interface ModelInterface
      *   it, we don't want Spell to ALSO have SpellEdition inside, otherwise we get infinite recursion.
      * @return array
      */
-    public function toArray(
-        JsonRenderMode $mode = JsonRenderMode::SHORT,
-        array $exclude = []
-    ): array;
+    public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array;
 
     public function toArrayFull(): array;
     public function toArrayShort(): array;

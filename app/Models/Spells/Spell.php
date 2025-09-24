@@ -36,7 +36,7 @@ class Spell extends AbstractModel
 
     public function editions(): HasMany
     {
-        return $this->hasMany(SpellEdition::class);
+        return $this->hasMany(SpellEdition::class, 'spell_id');
     }
 
     public function image(): BelongsTo
@@ -46,9 +46,7 @@ class Spell extends AbstractModel
 
     public function toArrayFull(): array
     {
-        return [
-            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
-        ];
+        return [];
     }
 
     public function toArrayShort(): array
@@ -57,7 +55,6 @@ class Spell extends AbstractModel
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
-            'image' => $this->image->toArray($this->renderMode, $this->excluded),
         ];
     }
 
@@ -67,8 +64,8 @@ class Spell extends AbstractModel
         $edition = $this->editions()->where('is_default', true)->first() ?? $this->editions()->first();
 
         return [
-            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
-            'image' => $this->image->toArray($this->renderMode, $this->excluded),
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
+            'image' => $this->image->toArray($this->renderMode),
             'lowest_level' => $edition->getLowestLevel(),
             'school' => $edition->school?->name,
         ];

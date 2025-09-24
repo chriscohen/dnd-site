@@ -53,6 +53,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Collection<SpellMaterialComponent> $materialComponents
  * @property Range $range
  * @property Uuid $range_id
+ * @property Collection<Reference> $references
  * @property ?SavingThrowMultiplier $saving_throw_multiplier
  * @property ?\App\Enums\SavingThrows\SavingThrowType $saving_throw_type
  * @property MagicSchool $school
@@ -207,32 +208,32 @@ class SpellEdition extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'area' => $this->area?->toArray($this->renderMode, $this->excluded) ?? null,
+            'area' => $this->area?->toArray($this->renderMode) ?? null,
             'casting_time' => $this->casting_time_unit->format($this->casting_time_number),
             'class_levels' => ModelCollection::make($this->classLevels)
-                ->toArray(JsonRenderMode::SHORT, $this->excluded),
+                ->toArray(JsonRenderMode::SHORT),
             'damage_instances' => ModelCollection::make($this->damageInstances)
-                ->toArray(JsonRenderMode::SHORT, $this->excluded),
+                ->toArray(JsonRenderMode::SHORT),
             'description' => $this->description,
-            'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode, $this->excluded),
+            'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode),
             'focus' => $this->focus,
             'frequency' => $this->frequency,
             'has_saving_throw' => $this->has_saving_throw,
             'has_spell_resistance' => $this->has_spell_resistance,
             'higher_level' => $this->higher_level,
             'is_default' => $this->is_default,
-            'item_editions' => ModelCollection::make($this->itemEditions)->toArray($this->renderMode, $this->excluded),
+            'item_editions' => ModelCollection::make($this->itemEditions)->toArray($this->renderMode),
             'lowest_level' => $this->getLowestLevel(),
             'material_component_mode' => $this->material_component_mode,
             'material_components' => ModelCollection::make($this->materialComponents)->toArray(
                 $this->renderMode,
                 $this->excluded
             ),
-            'range' => $this->range->toArray($this->renderMode, $this->excluded),
+            'range' => $this->range->toArray($this->renderMode),
+            'references' => ModelCollection::make($this->references)->toArray(JsonRenderMode::TEASER),
             'saving_throw_multiplier' => $this->saving_throw_multiplier,
             'saving_throw_type' => $this->saving_throw_type,
-            'school' => $this->school?->toArray($this->renderMode, $this->excluded) ?? null,
-            'spell' => $this->spell->toArray($this->renderMode, $this->excluded),
+            'school' => $this->school?->toArray($this->renderMode) ?? null,
             'spell_components' => $this->spell_components,
         ];
     }
