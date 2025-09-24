@@ -242,6 +242,12 @@
                     "number": 100,
                     "unit": "ft"
                 },
+                "references": [
+                    {
+                        "source": "players-handbook-4th-edition",
+                        "page_from": 136
+                    }
+                ],
                 "spell_frequency": "daily",
                 "spell_type": "attack"
             }

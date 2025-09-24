@@ -103,7 +103,7 @@ class SpellSeeder extends AbstractYmlSeeder
                 }
 
                 // Damage.
-                $this->makeDamageInstances($editionData['damage'] ?? [], $edition);
+                $this->makeDamageInstances($editionData['damage'] ?? [], $edition, $editionData);
 
                 // Character classes.
                 foreach ($editionData['classes'] as $classData) {
@@ -166,7 +166,7 @@ class SpellSeeder extends AbstractYmlSeeder
         $sccl->save();
     }
 
-    protected function makeDamageInstances(array $data, SpellEdition $edition): void
+    protected function makeDamageInstances(array $data, SpellEdition $edition, array $editionData): void
     {
         foreach ($data as $datum) {
             $damageInstance = new DamageInstance();
@@ -193,7 +193,7 @@ class SpellSeeder extends AbstractYmlSeeder
 
             if (!empty($datum['status_condition'])) {
                 $statusConditionEdition = StatusConditionEdition::query()
-                    ->where('game_edition', $edition->game_edition->value)
+                    ->where('game_edition', GameEdition::tryFromString($editionData['game_edition'])->value)
                     ->whereHas('statusCondition', function ($query) use ($datum) {
                     })
                     ->firstOrFail();
