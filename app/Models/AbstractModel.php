@@ -8,8 +8,6 @@ use App\Enums\JsonRenderMode;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use BadMethodCallException;
-use Illuminate\Support\Js;
 
 abstract class AbstractModel extends Model implements Arrayable, ModelInterface
 {

@@ -197,6 +197,7 @@ class SpellEdition extends AbstractModel
     public function toArrayFull(): array
     {
         return [
+            'area' => $this->area?->toArray($this->renderMode, $this->excluded) ?? null,
             'casting_time' => $this->casting_time_unit->format($this->casting_time_number),
             'class_levels' => ModelCollection::make($this->classLevels)
                 ->toArray(JsonRenderMode::SHORT, $this->excluded),
@@ -205,7 +206,6 @@ class SpellEdition extends AbstractModel
             'description' => $this->description,
             'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode, $this->excluded),
             'focus' => $this->focus,
-            'game_edition' => $this->game_edition,
             'has_saving_throw' => $this->has_saving_throw,
             'has_spell_resistance' => $this->has_spell_resistance,
             'higher_level' => $this->higher_level,
@@ -236,6 +236,8 @@ class SpellEdition extends AbstractModel
 
     public function toArrayTeaser(): array
     {
-        return [];
+        return [
+            'game_edition' => $this->game_edition,
+        ];
     }
 }
