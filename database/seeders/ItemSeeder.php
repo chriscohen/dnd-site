@@ -8,6 +8,7 @@ use App\Enums\GameEdition;
 use App\Models\Category;
 use App\Models\Items\Item;
 use App\Models\Items\ItemEdition;
+use App\Models\Media;
 
 class ItemSeeder extends AbstractYmlSeeder
 {
@@ -27,6 +28,15 @@ class ItemSeeder extends AbstractYmlSeeder
             // If no slug, assume we can just urlencode the name.
             $item->slug = $datum['slug'] ?? self::makeSlug($datum['name']);
             $item->name = $datum['name'];
+
+            if (!empty($datum['image'])) {
+                $media = Media::createFromExisting([
+                    'filename' => '/items/' . $datum['image'],
+                    'disk' => 's3',
+                    'collection_name' => 'spells',
+                ]);
+                $item->image()->associate($media);
+            }
 
             $item->save();
 

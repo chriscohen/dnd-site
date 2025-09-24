@@ -6,8 +6,10 @@ namespace App\Models\Items;
 
 use App\Models\AbstractModel;
 use App\Models\Category;
+use App\Models\Media;
 use App\Models\ModelCollection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -20,6 +22,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property Collection<Category> $categories
  * @property Collection<ItemEdition> $editions
+ * @property ?Media $image
  * @property string $name
  */
 class Item extends AbstractModel
@@ -43,6 +46,11 @@ class Item extends AbstractModel
         return $this->hasMany(ItemEdition::class);
     }
 
+    public function image(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'image_id');
+    }
+
     public function toArrayFull(): array
     {
         return [
@@ -62,6 +70,9 @@ class Item extends AbstractModel
 
     public function toArrayTeaser(): array
     {
-        return [];
+        return [
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
+            'image' => $this->image->toArray($this->renderMode, $this->excluded),
+        ];
     }
 }
