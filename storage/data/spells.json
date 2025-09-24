@@ -186,8 +186,8 @@
                 "game_edition": "3.5",
                 "casting_time_unit": "standard action",
                 "classes": [
-                    { "class":  "cleric", "level":  9 },
-                    { "class":  "druid", "level":  9 }
+                    { "class": "cleric", "level": 9 },
+                    { "class": "druid", "level": 9 }
                 ],
                 "description": "You can permanently break the divine link between  your deity and a lower-level cleric, druid, ranger, or paladin of your faith, or upon a common worshiper. The spell has no effect on spellcasters of a faith other than your own. You can pronounce an anathema upon any character of your faith, no matter where they are, even if on a different plane. You cannot pronounce an anathema against someone who is already dead.\n\nSome deities do not allow an anathema to be pronounced against the innocent or against their chosen, while others grant their high-level clerics free use of this most terrible of divine curses.\n\nAn individual under anathema can no longer cast divine spells or call upon the power of their god to turn or command undead, heal, harm, smite, shape change, or use any other divine power associated with their character class.\n\nAn ordinary worshiper placed under anathema is not allowed to take advantage of any of the faith's services, such as healing, naming, marrying, or burial of the dead. Anyone who dies while under anathema is barred from entry into their deity's plane just as though they had never declared allegiance to a god. Their soul is condemned to eternally writhe in the Wall of the Faithless.\n\nOn a more personal level, the anathema spell marks the subject as accursed with regard to others of the faith. Others are not allowed to speak to them, look at them, or even acknowledge their existence. The common members of the faith are only aware that the subject is under anathema if so informed by the church hierarchy, however, clerics, paladins, druids and rangers of the faith can automatically detect an anathema effect simply by looking at the subject.\n\nThe effect is permanent until lifted, either by the original spellcaster, or by a cleric of the same faith, of a higher level than the caster, who casts an atonement spell upon the subject. The subject of an anathema can also remove its effect by changing their divine allegiance (see Changing Deities, page 233 of the Forgotten Realms Campaign Setting).",
                 "focus": "The subject's name must be inscribed in a book or scroll especially consecrated for this purpose and detailing the crimes (real or imagined) for which the subject is being condemned. The book is not consumed in the process.",
@@ -206,5 +206,147 @@
             }
         ],
         "image": "anathema.webp"
+    },
+    {
+        "id": "d79199f2-4866-4a74-8918-e7c5e34f8c56",
+        "slug": "ice-storm",
+        "name": "Ice Storm",
+        "editions": [
+            {
+                "game_edition": "4e",
+                "area": {
+                    "radius": 15,
+                    "height": 15,
+                    "type": "cylinder"
+                },
+                "attack_attribute": "int",
+                "attack_save": "fortitude",
+                "casting_time_unit": "standard action",
+                "classes": [
+                    { "class": "sorcerer", "level": 9 },
+                    { "class": "wizard", "level": 9 }
+                ],
+                "damage": [
+                    {
+                        "damage_type": "cold",
+                        "die_faces": 8,
+                        "die_quantity": 2,
+                        "attribute_modifier": "int",
+                        "status_condition": "immobilized"
+                    }
+                ],
+                "description": "A shower of bitterly cold hailstones pummels a wide swath of ground and covers the area in ice.",
+                "hit": "2d8 + Intelligence modifier cold damage, and the target is immobilized (save ends)",
+                "is_default": true,
+                "range": {
+                    "number": 100,
+                    "unit": "ft"
+                },
+                "spell_frequency": "daily",
+                "spell_type": "attack"
+            }
+        ],
+        "image": "ice-storm.webp"
+    },
+    {
+        "id": "f33f6898-aff9-4c14-88e7-427e634380ae",
+        "slug": "magic-missile",
+        "name": "Magic Missile",
+        "editions": [
+            {
+                "game_edition": "2e",
+                "area": {
+                    "radius": 10,
+                    "type": "cube"
+                },
+                "casting_time_unit": "standard action",
+                "classes": [
+                    { "class": "wizard", "level": 1 }
+                ],
+                "damage": [
+                    {
+                        "die_faces": 4,
+                        "die_quantity": 1
+                    }
+                ],
+                "description": "Creates up to five missiles of magical energy that dart forth from the wizard's fingertip and unerringly strike their target. This includes enemy creatures in a melee. The target creature must be seen or otherwise detected to be hit, however, so near-total concealment, such as that offered by arrow slits, can render the spell ineffective.\n\nLikewise, the caster must be able to identify the target. The caster cannot direct a magic missile to \"Strike the commander of the legion,\" unless they can single out the commander from the rest of the soldiers. Specific parts of a creature cannot be singled out. Inanimate objects (locks, etc.) cannot be damaged by the spell, and any attempt to do so wastes the missiles to no effect.\n\nAgainst creatures, each missile inflicts 1d4 + 1 points of damage. For every two extra levels of experience, the wizard gains an additional missile—two at 3rd level, three at 5th level, four at 7th level, etc., up to a total of five missiles at 9th level. If the wizard has multiple missile capability, they can have them strike a single target creature or several creatures, as desired.",
+                "has_saving_throw": false,
+                "is_default": true,
+                "range": {
+                    "number": 60,
+                    "per_level": 10,
+                    "unit": "yds"
+                },
+                "references": [
+                    {
+                        "source": "players-handbook-2nd-edition",
+                        "page_from": 136
+                    }
+                ],
+                "school": "evocation",
+                "spell_components": "VS"
+            },
+            {
+                "game_edition": "5e",
+                "casting_time_unit": "standard action",
+                "classes": [
+                    { "class": "sorcerer", "level": 1 },
+                    { "class": "wizard", "level": 1 }
+                ],
+                "damage": [
+                    {
+                        "damage_type": "force",
+                        "quantity": 3,
+                        "die_faces": 4,
+                        "die_quantity": 1
+                    }
+                ],
+                "description": "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several",
+                "higher_levels": "When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.",
+                "range": {
+                    "number": 120,
+                    "unit": "ft"
+                },
+                "references": [
+                    {
+                        "source": "players-handbook-5th-edition",
+                        "page_from": 257
+                    }
+                ],
+                "school": "evocation",
+                "spell_components": "VS"
+            },
+            {
+                "game_edition": "5e (2024)",
+                "casting_time_unit": "standard action",
+                "classes": [
+                    { "class": "sorcerer", "level": 1 },
+                    { "class": "wizard", "level": 1 }
+                ],
+                "damage": [
+                    {
+                        "damage_type": "force",
+                        "quantity": 3,
+                        "die_faces": 4,
+                        "die_quantity": 1
+                    }
+                ],
+                "description": "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several",
+                "higher_levels": "The spell creates one more dart for each slot level above 1.",
+                "range": {
+                    "number": 120,
+                    "unit": "ft"
+                },
+                "references": [
+                    {
+                        "source": "players-handbook-2024",
+                        "page_from": 257
+                    }
+                ],
+                "school": "evocation",
+                "spell_components": "VS"
+            }
+        ],
+        "image": "magic-missile.webp"
     }
 ]

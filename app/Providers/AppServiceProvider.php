@@ -13,6 +13,7 @@ use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
+use App\Models\Spells\SpellEdition4e;
 use GraphQL\Type\Definition\PhpEnumType;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
@@ -58,6 +59,7 @@ class AppServiceProvider extends ServiceProvider
             'source_edition' => SourceEdition::class,
             'spell' => Spell::class,
             'spell_edition' => SpellEdition::class,
+            'spell_edition_4e' => SpellEdition4e::class,
         ]);
     }
 }

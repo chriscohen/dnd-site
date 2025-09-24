@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Sources;
 
 use App\Enums\JsonRenderMode;
-use App\Enums\SourceContentType;
+use App\Enums\Sources\SourceContentType;
 use App\Models\AbstractModel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -17,7 +17,7 @@ use Ramsey\Uuid\Uuid;
  * @property string $slug
  * @property string $name
  *
- * @property ?SourceContentType $content_type
+ * @property ?\App\Enums\Sources\SourceContentType $content_type
  * @property ?int $pages
  * @property SourceEdition $parent
  * @property int $quantity

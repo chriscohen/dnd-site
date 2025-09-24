@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Sources;
 
-use App\Enums\SourcebookType;
+use App\Enums\Sources\SourcebookType;
 use App\Models\AbstractModel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             CompanySeeder::class,
             SkillSeeder::class,
+            StatusConditionSeeder::class,
             CharacterClassSeeder::class,
             MagicSchoolSeeder::class,
             MagicDomainSeeder::class,

@@ -5,10 +5,11 @@ namespace App\Models\Spells;
 use App\Enums\Distance;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
-use App\Enums\MaterialComponentMode;
-use App\Enums\SavingThrowMultiplier;
-use App\Enums\SavingThrowType;
-use App\Enums\SpellComponentType;
+use App\Enums\SavingThrows\SavingThrowMultiplier;
+use App\Enums\SavingThrows\SavingThrowType;
+use App\Enums\Spells\MaterialComponentMode;
+use App\Enums\Spells\SpellComponentType;
+use App\Enums\Spells\SpellFrequency;
 use App\Enums\TimeUnit;
 use App\Models\AbstractModel;
 use App\Models\Area;
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
@@ -41,6 +43,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Collection<MagicDomain> $domains
  * @property ?string $focus
  * @property GameEdition $game_edition
+ * @property string $gameEdition,
  * @property ?bool $has_saving_throw
  * @property ?bool $has_spell_resistance
  * @property string $higher_level
@@ -51,10 +54,11 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Range $range
  * @property Uuid $range_id
  * @property ?SavingThrowMultiplier $saving_throw_multiplier
- * @property ?SavingThrowType $saving_throw_type
+ * @property ?\App\Enums\SavingThrows\SavingThrowType $saving_throw_type
  * @property MagicSchool $school
  * @property Spell $spell
  * @property string $spell_components
+ * @property ?SpellEdition4e $spellEdition4e
  * @property Uuid $spell_id
  */
 class SpellEdition extends AbstractModel
@@ -65,6 +69,7 @@ class SpellEdition extends AbstractModel
 
     public $casts = [
         'casting_time_unit' => TimeUnit::class,
+        'frequency' => SpellFrequency::class,
         'game_edition' => GameEdition::class,
         'has_saving_throw' => 'bool',
         'is_default' => 'bool',
@@ -194,6 +199,11 @@ class SpellEdition extends AbstractModel
         return $this->belongsTo(Spell::class);
     }
 
+    public function spellEdition4e(): HasOne
+    {
+        return $this->hasOne(SpellEdition4e::class);
+    }
+
     public function toArrayFull(): array
     {
         return [
@@ -206,6 +216,7 @@ class SpellEdition extends AbstractModel
             'description' => $this->description,
             'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode, $this->excluded),
             'focus' => $this->focus,
+            'frequency' => $this->frequency,
             'has_saving_throw' => $this->has_saving_throw,
             'has_spell_resistance' => $this->has_spell_resistance,
             'higher_level' => $this->higher_level,

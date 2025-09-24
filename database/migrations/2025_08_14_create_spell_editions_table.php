@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('game_edition')->index();
             $table->text('higher_level')->nullable();
             $table->boolean('is_default')->default(false);
-            $table->string('magic_school_id')->index();
+            $table->string('magic_school_id')->nullable()->index();
             $table->unsignedSmallInteger('material_component_mode')->nullable();
 
             // Range / area
@@ -40,7 +40,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('saving_throw_multiplier')->nullable();
 
             // Components
-            $table->string('spell_components', 10);
+            $table->string('spell_components', 10)->nullable();
             $table->boolean('has_spell_resistance')->nullable();
 
             $table->unique(['spell_id', 'game_edition']);

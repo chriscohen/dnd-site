@@ -32,13 +32,13 @@ enum Attribute: int
 
     public static function tryFromString(string $value): Attribute
     {
-        return match ($value) {
-            'STR' => self::STR,
-            'DEX' => self::DEX,
-            'CON' => self::CON,
-            'INT' => self::INT,
-            'WIS' => self::WIS,
-            'CHA' => self::CHA,
+        return match (mb_strtolower($value)) {
+            'str', 'strength' => self::STR,
+            'dex', 'dexterity' => self::DEX,
+            'con', 'constitution' => self::CON,
+            'int', 'intelligence' => self::INT,
+            'wis', 'wisdom' => self::WIS,
+            'cha', 'charisma' => self::CHA,
         };
     }
 }

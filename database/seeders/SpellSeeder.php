@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Enums\AreaType;
+use App\Enums\Attribute;
 use App\Enums\DamageType;
+use App\Enums\Distance;
 use App\Enums\GameEdition;
-use App\Enums\MaterialComponentMode;
 use App\Enums\PerLevelMode;
-use App\Enums\SavingThrowMultiplier;
-use App\Enums\SavingThrowType;
-use App\Enums\SpellComponentType;
+use App\Enums\SavingThrows\SavingThrowMultiplier;
+use App\Enums\SavingThrows\SavingThrowType;
+use App\Enums\Spells\MaterialComponentMode;
+use App\Enums\Spells\SpellFrequency;
+use App\Enums\Spells\SpellType4e;
 use App\Enums\TimeUnit;
 use App\Models\Area;
 use App\Models\CharacterClass;
-use App\Enums\Distance;
 use App\Models\DamageInstance;
 use App\Models\Items\Item;
 use App\Models\Magic\MagicSchool;
@@ -23,8 +25,10 @@ use App\Models\Media;
 use App\Models\Range;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
+use App\Models\Spells\SpellEdition4e;
 use App\Models\Spells\SpellEditionCharacterClassLevel;
 use App\Models\Spells\SpellMaterialComponent;
+use App\Models\StatusConditions\StatusConditionEdition;
 
 class SpellSeeder extends AbstractYmlSeeder
 {
@@ -40,6 +44,8 @@ class SpellSeeder extends AbstractYmlSeeder
             $item->id = $datum['id'];
             $item->slug = $datum['slug'];
             $item->name = $datum['name'];
+
+            print $item->name . PHP_EOL;
 
             $media = Media::createFromExisting([
                 'filename' => '/spells/' . $datum['image'],
@@ -80,14 +86,21 @@ class SpellSeeder extends AbstractYmlSeeder
                 $edition->spell_components = $editionData['spell_components'] ?? null;
                 $edition->has_spell_resistance = $editionData['has_spell_resistance'] ?? null;
 
-                $school = MagicSchool::query()->where('name', ucfirst($editionData['school']))->firstOrFail();
-                $edition->school()->associate($school);
+                if (!empty($editionData['school'])) {
+                    $school = MagicSchool::query()->where('name', ucfirst($editionData['school']))->firstOrFail();
+                    $edition->school()->associate($school);
+                }
 
                 // Casting time.
                 $edition->casting_time_number = $editionData['casting_time_number'] ?? 1;
                 $edition->casting_time_unit = TimeUnit::tryFromString($editionData['casting_time_unit']);
 
                 $edition->save();
+
+                // 4th edition stuff.
+                if ($edition->game_edition === GameEdition::FOURTH) {
+                    $this->make4e($editionData, $edition);
+                }
 
                 // Damage.
                 $this->makeDamageInstances($editionData['damage'] ?? [], $edition);
@@ -116,6 +129,18 @@ class SpellSeeder extends AbstractYmlSeeder
                 }
             }
         }
+    }
+
+    protected function make4e(array $data, SpellEdition $edition): void
+    {
+        $spellEdition4e = new SpellEdition4e();
+        $spellEdition4e->spellEdition()->associate($edition);
+
+        $spellEdition4e->type = SpellType4e::tryFromString($data['spell_type']);
+        $spellEdition4e->frequency = SpellFrequency::tryFromString($data['spell_frequency']);
+        //$spellEdition4e->
+
+        $spellEdition4e->save();
     }
 
     protected function makeArea(array $data, SpellEdition $edition): void
@@ -150,9 +175,30 @@ class SpellSeeder extends AbstractYmlSeeder
             $damageInstance->die_quantity = $datum['die_quantity'] ?? null;
             $damageInstance->die_quantity_maximum = $datum['die_quantity_maximum'] ?? null;
             $damageInstance->die_faces = $datum['die_faces'];
-            $damageInstance->damage_type = DamageType::tryFromString($datum['damage_type']);
+
+            if (!empty($datum['damage_type'])) {
+                $damageInstance->damage_type = DamageType::tryFromString($datum['damage_type']);
+            }
+
             $damageInstance->modifier = $datum['modifier'] ?? 0;
-            $damageInstance->per_level_mode = PerLevelMode::tryFromString($datum['per_level_mode']);
+
+            if (!empty($datum['attribute_modifier'])) {
+                $damageInstance->attribute_modifier = Attribute::tryFromString($datum['attribute_modifier']);
+                $damageInstance->attribute_modifier_quantity = $datum['attribute_modifier_quantity'] ?? 1;
+            }
+
+            $damageInstance->per_level_mode = empty($datum['per_level_mode']) ?
+                PerLevelMode::NONE :
+                PerLevelMode::tryFromString($datum['per_level_mode']);
+
+            if (!empty($datum['status_condition'])) {
+                $statusConditionEdition = StatusConditionEdition::query()
+                    ->where('game_edition', $edition->game_edition->value)
+                    ->whereHas('statusCondition', function ($query) use ($datum) {
+                    })
+                    ->firstOrFail();
+                $damageInstance->statusConditionEdition()->associate($statusConditionEdition);
+            }
 
             $damageInstance->save();
         }

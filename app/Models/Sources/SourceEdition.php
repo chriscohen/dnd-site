@@ -43,21 +43,6 @@ class SourceEdition extends AbstractModel
         'release_date_month_only' => 'boolean',
     ];
 
-    public array $schema = [
-        JsonRenderMode::SHORT->value => [
-            'id' => 'string',
-            'name' => 'string',
-        ],
-        JsonRenderMode::FULL->value => [
-            'binding' => 'string',
-            'formats' => 'getFormatsAsArray()',
-            '?pages' => 'int',
-            'is_primary' => 'bool',
-            '?isbn10' => 'string',
-            '?isbn13' => 'string',
-        ],
-    ];
-
     protected function binding(): Attribute
     {
         return Attribute::make(

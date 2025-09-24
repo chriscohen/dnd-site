@@ -5,7 +5,6 @@ namespace App\Models\Sources;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Enums\PublicationType;
-use App\Enums\SourcebookType;
 use App\Enums\SourceType;
 use App\Models\AbstractModel;
 use App\Models\CampaignSetting;
@@ -53,25 +52,6 @@ class Source extends AbstractModel
         'game_edition' => GameEdition::class,
         'publication_type' => PublicationType::class,
         'source_type' => SourceType::class,
-    ];
-
-    public array $schema = [
-        JsonRenderMode::SHORT->value => [
-            'id' => 'uuid',
-            'name' => 'string',
-            'slug' => 'string',
-        ],
-        JsonRenderMode::FULL->value => [
-            '?campaign_setting' => CampaignSetting::class,
-            'cover_image' => Media::class,
-            'description' => 'string',
-            //'editions' =>
-            '?game_edition' => 'gameEdition()',
-            '?product_code' => 'string',
-            //'product_ids' =>
-            'publication_type' => 'publicationType()',
-            'source_type' => 'sourceType()',
-        ],
     ];
 
     public function campaignSetting(): BelongsTo
@@ -181,6 +161,8 @@ class Source extends AbstractModel
 
     public function toArrayTeaser(): array
     {
-        return [];
+        return [
+            'cover_image' => $this->coverImage->toArray($this->renderMode, $this->excluded),
+        ];
     }
 }

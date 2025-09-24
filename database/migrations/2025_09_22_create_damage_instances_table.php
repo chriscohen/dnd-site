@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use App\Models\StatusConditions\StatusConditionEdition;
 
 return new class extends Migration
 {
@@ -17,11 +18,15 @@ return new class extends Migration
             $table->uuid('entity_id');
             $table->string('entity_type');
 
+            $table->unsignedSmallInteger('quantity')->default(1);
             $table->unsignedSmallInteger('die_quantity')->nullable();
             $table->unsignedSmallInteger('die_quantity_maximum')->nullable();
             $table->unsignedSmallInteger('die_faces');
-            $table->unsignedSmallInteger('damage_type');
+            $table->unsignedSmallInteger('damage_type')->nullable();
             $table->smallInteger('modifier')->default(0);
+            $table->unsignedSmallInteger('attribute_modifier')->nullable();
+            $table->unsignedSmallInteger('attribute_modifier_quantity')->nullable();
+            $table->foreignIdFor(StatusConditionEdition::class, 'status_condition_edition_id')->nullable();
             $table->unsignedSmallInteger('per_level_mode')->default(0);
 
             $table->index(['entity_id', 'entity_type']);

@@ -64,13 +64,13 @@ class Spell extends AbstractModel
     public function toArrayTeaser(): array
     {
         /** @var SpellEdition $edition */
-        $edition = $this->editions()->where('is_default', true)->first();
+        $edition = $this->editions()->where('is_default', true)->first() ?? $this->editions()->first();
 
         return [
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
             'image' => $this->image->toArray($this->renderMode, $this->excluded),
             'lowest_level' => $edition->getLowestLevel(),
-            'school' => $edition->school->name,
+            'school' => $edition->school?->name,
         ];
     }
 }

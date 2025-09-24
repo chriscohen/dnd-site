@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Sources;
 
-use App\Enums\SourceFormat;
+use App\Enums\Sources\SourceFormat;
 use App\Models\AbstractModel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
