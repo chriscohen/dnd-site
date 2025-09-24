@@ -51,7 +51,7 @@ class CampaignSetting extends AbstractModel
         return $this->belongsTo(Company::class, 'publisher_id');
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'logo' => $this->logo?->toArray($this->renderMode, $this->excluded),
@@ -67,5 +67,10 @@ class CampaignSetting extends AbstractModel
             'slug' => $this->slug,
             'name' => $this->name,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

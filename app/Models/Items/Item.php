@@ -43,7 +43,7 @@ class Item extends AbstractModel
         return $this->hasMany(ItemEdition::class);
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'category' => $this->category->toArray($this->renderMode, $this->excluded),
@@ -58,5 +58,10 @@ class Item extends AbstractModel
             'slug' => $this->slug,
             'name' => $this->name,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

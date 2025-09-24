@@ -29,14 +29,7 @@ class Area extends AbstractModel
         'type' => AreaType::class,
     ];
 
-    public function toArrayShort(): array
-    {
-        return [
-            'string' => $this->toString(),
-        ];
-    }
-
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'id' => $this->id,
@@ -48,6 +41,18 @@ class Area extends AbstractModel
             'width' => $this->width,
             'type' => $this->type->toString(),
         ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'string' => $this->toString(),
+        ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 
     public function toString(): string

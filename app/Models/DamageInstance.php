@@ -42,7 +42,7 @@ class DamageInstance extends AbstractModel
         return empty($this->die_quantity) ? '' . $this->die_faces : $this->die_quantity . 'd' . $this->die_faces;
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'id' => $this->id,
@@ -61,6 +61,11 @@ class DamageInstance extends AbstractModel
         return [
             'string' => $this->toString(),
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 
     /**

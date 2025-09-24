@@ -27,7 +27,7 @@ class CreatureType extends AbstractModel
         return $this->hasMany(CreatureTypeEdition::class, 'creature_type_id');
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
@@ -41,5 +41,10 @@ class CreatureType extends AbstractModel
             'slug' => $this->slug,
             'name' => $this->name,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

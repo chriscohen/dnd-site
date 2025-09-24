@@ -35,12 +35,17 @@ class SourceSourcebookType extends AbstractModel
         );
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [];
     }
 
     public function toArrayShort(): array
+    {
+        return [];
+    }
+
+    public function toArrayTeaser(): array
     {
         return [];
     }

@@ -22,7 +22,8 @@
                 "school": "transmutation",
                 "spell_components": "VS"
             }
-        ]
+        ],
+        "image": "absorb-weapon.webp"
     },
     {
         "id": "01df701f-16c0-4b69-9553-bd4f80c5e19d",
@@ -48,7 +49,8 @@
                 "school": "abjuration",
                 "spell_components": "VS"
             }
-        ]
+        ],
+        "image": "absorption.webp"
     },
     {
         "id": "eaadebfa-706b-422d-8f1e-2d7dda62f128",
@@ -81,7 +83,8 @@
                 "school": "conjuration",
                 "spell_components": "VS"
             }
-        ]
+        ],
+        "image": "abyssal-army.webp"
     },
     {
         "id": "aa783c17-4749-4c51-abaf-1a31dd7bf964",
@@ -129,7 +132,8 @@
                 "school": "evocation",
                 "spell_components": "VSM"
             }
-        ]
+        ],
+        "image": "acid-storm.webp"
     },
     {
         "id": "d89d5b6f-f4b2-428a-82bf-db9773707574",
@@ -170,7 +174,8 @@
                 "school": "transmutation",
                 "spell_components": "SM"
             }
-        ]
+        ],
+        "image": "air-breathing.webp"
     },
     {
         "id": "29d1b9e4-3e16-4eac-b6c6-7fcd6b753428",
@@ -199,6 +204,7 @@
                 "school": "enchantment",
                 "spell_components": "VSF"
             }
-        ]
+        ],
+        "image": "anathema.webp"
     }
 ]

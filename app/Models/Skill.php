@@ -25,7 +25,7 @@ class Skill extends AbstractModel
         'related_attribute' => Attribute::class,
     ];
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [];
     }
@@ -38,5 +38,10 @@ class Skill extends AbstractModel
             'name' => $this->name,
             'related_attribute' => $this->related_attribute
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

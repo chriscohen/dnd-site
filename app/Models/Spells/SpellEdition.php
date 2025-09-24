@@ -63,46 +63,6 @@ class SpellEdition extends AbstractModel
 
     public $timestamps = false;
 
-    public function toArrayLong(): array
-    {
-        return [
-            'casting_time' => $this->casting_time_unit->format($this->casting_time_number),
-            'class_levels' => ModelCollection::make($this->classLevels)
-                ->toArray(JsonRenderMode::SHORT, $this->excluded),
-            'damage_instances' => ModelCollection::make($this->damageInstances)
-                ->toArray(JsonRenderMode::SHORT, $this->excluded),
-            'description' => $this->description,
-            'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode, $this->excluded),
-            'focus' => $this->focus,
-            'game_edition' => $this->game_edition,
-            'has_saving_throw' => $this->has_saving_throw,
-            'has_spell_resistance' => $this->has_spell_resistance,
-            'higher_level' => $this->higher_level,
-            'is_default' => $this->is_default,
-            'item_editions' => ModelCollection::make($this->itemEditions)->toArray($this->renderMode, $this->excluded),
-            'lowest_level' => $this->getLowestLevel(),
-            'material_component_mode' => $this->material_component_mode,
-            'material_components' => ModelCollection::make($this->materialComponents)->toArray(
-                $this->renderMode,
-                $this->excluded
-            ),
-            'range' => $this->range->toArray($this->renderMode, $this->excluded),
-            'saving_throw_multiplier' => $this->saving_throw_multiplier,
-            'saving_throw_type' => $this->saving_throw_type,
-            'school' => $this->school?->toArray($this->renderMode, $this->excluded) ?? null,
-            'spell' => $this->spell->toArray($this->renderMode, $this->excluded),
-            'spell_components' => $this->spell_components,
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'spell_id' => $this->spell_id,
-        ];
-    }
-
     public $casts = [
         'casting_time_unit' => TimeUnit::class,
         'game_edition' => GameEdition::class,
@@ -232,5 +192,50 @@ class SpellEdition extends AbstractModel
     public function spell(): BelongsTo
     {
         return $this->belongsTo(Spell::class);
+    }
+
+    public function toArrayFull(): array
+    {
+        return [
+            'casting_time' => $this->casting_time_unit->format($this->casting_time_number),
+            'class_levels' => ModelCollection::make($this->classLevels)
+                ->toArray(JsonRenderMode::SHORT, $this->excluded),
+            'damage_instances' => ModelCollection::make($this->damageInstances)
+                ->toArray(JsonRenderMode::SHORT, $this->excluded),
+            'description' => $this->description,
+            'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode, $this->excluded),
+            'focus' => $this->focus,
+            'game_edition' => $this->game_edition,
+            'has_saving_throw' => $this->has_saving_throw,
+            'has_spell_resistance' => $this->has_spell_resistance,
+            'higher_level' => $this->higher_level,
+            'is_default' => $this->is_default,
+            'item_editions' => ModelCollection::make($this->itemEditions)->toArray($this->renderMode, $this->excluded),
+            'lowest_level' => $this->getLowestLevel(),
+            'material_component_mode' => $this->material_component_mode,
+            'material_components' => ModelCollection::make($this->materialComponents)->toArray(
+                $this->renderMode,
+                $this->excluded
+            ),
+            'range' => $this->range->toArray($this->renderMode, $this->excluded),
+            'saving_throw_multiplier' => $this->saving_throw_multiplier,
+            'saving_throw_type' => $this->saving_throw_type,
+            'school' => $this->school?->toArray($this->renderMode, $this->excluded) ?? null,
+            'spell' => $this->spell->toArray($this->renderMode, $this->excluded),
+            'spell_components' => $this->spell_components,
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'id' => $this->id,
+            'spell_id' => $this->spell_id,
+        ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

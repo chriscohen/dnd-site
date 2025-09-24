@@ -7,12 +7,14 @@ namespace App\Enums;
 enum JsonRenderMode: int
 {
     case SHORT = 1;
-    case FULL = 2;
+    case TEASER = 2;
+    case FULL = 3;
 
     public static function tryFromString(string $value): ?self
     {
         return match (mb_strtoupper($value)) {
             'SHORT' => JsonRenderMode::SHORT,
+            'TEASER' => JsonRenderMode::TEASER,
             'FULL' => JsonRenderMode::FULL,
             default => null,
         };

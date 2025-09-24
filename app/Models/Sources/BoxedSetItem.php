@@ -44,7 +44,7 @@ class BoxedSetItem extends AbstractModel
         return $this->belongsTo(SourceEdition::class, 'parent_id');
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'content_type' => $this->content_type,
@@ -61,5 +61,10 @@ class BoxedSetItem extends AbstractModel
             'slug' => $this->slug,
             'name' => $this->name,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

@@ -53,6 +53,12 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
             return $output;
         }
 
-        return array_merge_recursive($output, $this->toArrayLong());
+        $output = array_merge_recursive($output, $this->toArrayTeaser());
+
+        if ($mode == JsonRenderMode::TEASER) {
+            return $output;
+        }
+
+        return array_merge_recursive($output, $this->toArrayFull());
     }
 }

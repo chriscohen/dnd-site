@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
+use App\Rules\ValidGameEdition;
+use App\Rules\ValidMode;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -60,6 +62,8 @@ abstract class AbstractController implements ControllerInterface
 
     public function get(Request $request, string $slug): JsonResponse
     {
+        $this->preValidate($request);
+
         $model = $this->query->where('slug', $slug)->first();
 
         return response()->json($model->toArray($this->getMode($request)));
@@ -80,6 +84,8 @@ abstract class AbstractController implements ControllerInterface
 
     public function index(Request $request): JsonResponse
     {
+        $this->preValidate($request);
+
         $items = $this->query->get();
         $output = [];
 
@@ -88,5 +94,12 @@ abstract class AbstractController implements ControllerInterface
         }
 
         return response()->json($output);
+    }
+
+    public function preValidate(Request $request): void
+    {
+        $request->validate([
+            'mode' => ['string', new ValidMode()],
+        ]);
     }
 }

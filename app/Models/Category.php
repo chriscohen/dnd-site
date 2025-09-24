@@ -39,7 +39,7 @@ class Category extends AbstractModel
         return $this->belongsTo(Category::class);
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'image' => $this->image?->toArray($this->renderMode, $this->excluded),
@@ -54,5 +54,10 @@ class Category extends AbstractModel
             'slug' => $this->slug,
             'name' => $this->name,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

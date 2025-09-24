@@ -47,7 +47,7 @@ class Range extends AbstractModel
         return $this->number !== null && $this->number < 0;
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'is_self' => $this->is_self,
@@ -66,9 +66,14 @@ class Range extends AbstractModel
         ];
     }
 
+    public function toArrayTeaser(): array
+    {
+        return [];
+    }
+
     public function toString(): string
     {
-        if ($this->number < 0) {
+        if (empty($this->number) || $this->number < 0) {
             return 'Unlimited';
         } elseif ($this->is_self) {
             return 'Self';

@@ -30,7 +30,7 @@ class CreatureMajorType extends AbstractModel
         return $this->hasMany(CreatureMajorTypeEdition::class, 'creature_major_type_id');
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
@@ -45,5 +45,10 @@ class CreatureMajorType extends AbstractModel
             'name' => $this->name,
             'plural '=> $this->plural,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

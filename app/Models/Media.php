@@ -56,7 +56,7 @@ class Media extends AbstractModel
         return Storage::disk($this->disk)->url($this->filename);
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'filename' => $this->filename,
@@ -71,5 +71,10 @@ class Media extends AbstractModel
             'id' => $this->id,
             'url' => $this->getUrl(),
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

@@ -17,7 +17,7 @@ class AttackType extends AbstractModel
 
     public $timestamps = false;
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [];
     }
@@ -28,5 +28,10 @@ class AttackType extends AbstractModel
             'id' => $this->id,
             'name' => $this->name,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

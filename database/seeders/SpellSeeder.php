@@ -19,6 +19,7 @@ use App\Enums\Distance;
 use App\Models\DamageInstance;
 use App\Models\Items\Item;
 use App\Models\Magic\MagicSchool;
+use App\Models\Media;
 use App\Models\Range;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
@@ -39,6 +40,13 @@ class SpellSeeder extends AbstractYmlSeeder
             $item->id = $datum['id'];
             $item->slug = $datum['slug'];
             $item->name = $datum['name'];
+
+            $media = Media::createFromExisting([
+                'filename' => '/spells/' . $datum['image'],
+                'disk' => 's3',
+                'collection_name' => 'spells',
+            ]);
+            $item->image()->associate($media);
 
             $item->save();
 

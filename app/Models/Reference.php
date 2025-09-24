@@ -43,7 +43,7 @@ class Reference extends AbstractModel
         return $this->edition->source?->slug;
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'entity' => $this->entity->toArray($this->renderMode, $this->excluded),
@@ -59,5 +59,10 @@ class Reference extends AbstractModel
             'page_to' => $this->page_to,
             'source' => $this->edition->source->name,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

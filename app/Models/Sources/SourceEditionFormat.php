@@ -40,7 +40,7 @@ class SourceEditionFormat extends AbstractModel
         return $this->belongsTo(SourceEdition::class, 'source_edition_id');
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'edition' => $this->edition->toArray($this->renderMode, $this->excluded),
@@ -53,6 +53,11 @@ class SourceEditionFormat extends AbstractModel
         return [
             'id' => $this->id,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 
     public function toString(): Attribute

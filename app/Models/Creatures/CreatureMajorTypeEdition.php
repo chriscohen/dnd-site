@@ -42,7 +42,7 @@ class CreatureMajorTypeEdition extends AbstractModel
         );
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'creature_major_type' => $this->creatureMajorType->toArray($this->renderMode, $this->excluded),
@@ -57,5 +57,10 @@ class CreatureMajorTypeEdition extends AbstractModel
             'id' => $this->id,
             'creature_major_type_id' => $this->creature_major_type_id,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

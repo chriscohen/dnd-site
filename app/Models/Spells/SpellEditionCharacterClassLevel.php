@@ -41,7 +41,7 @@ class SpellEditionCharacterClassLevel extends AbstractModel
         return $this->belongsTo(Spell::class, 'spell_edition_id');
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'spell_edition' => $this->spellEdition?->toArray($this->renderMode, $this->excluded),
@@ -55,5 +55,10 @@ class SpellEditionCharacterClassLevel extends AbstractModel
             'character_class' => $this->characterClass->name,
             'level' => $this->level,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

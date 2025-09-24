@@ -49,7 +49,7 @@ class SpellMaterialComponent extends AbstractModel
         return $this->belongsTo(SpellEdition::class);
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'is_consumed' => $this->is_consumed,
@@ -66,5 +66,10 @@ class SpellMaterialComponent extends AbstractModel
             'item_edition_id' => $this->itemEdition->id,
             'spell_edition_id' => $this->spellEdition->id,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

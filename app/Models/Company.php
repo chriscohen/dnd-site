@@ -37,7 +37,7 @@ class Company extends AbstractModel
         return $this->belongsTo(Media::class, 'logo_id');
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'logo' => $this->logo->toArray($this->renderMode, $this->excluded),
@@ -54,5 +54,10 @@ class Company extends AbstractModel
             'slug' => $this->slug,
             'name' => $this->name,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

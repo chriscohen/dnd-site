@@ -20,6 +20,7 @@ interface ModelInterface
         array $exclude = []
     ): array;
 
-    public function toArrayLong(): array;
+    public function toArrayFull(): array;
     public function toArrayShort(): array;
+    public function toArrayTeaser(): array;
 }

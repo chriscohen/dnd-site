@@ -100,7 +100,7 @@ class SourceEdition extends AbstractModel
         return $this->belongsTo(Source::class);
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'binding' => $this->binding,
@@ -124,5 +124,10 @@ class SourceEdition extends AbstractModel
             'id' => $this->id,
             'name' => $this->name,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

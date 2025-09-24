@@ -60,4 +60,14 @@ class Spell extends AbstractModel
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
         ];
     }
+
+    public function toArrayTeaser(): array
+    {
+        /** @var SpellEdition $edition */
+        $edition = $this->editions()->where('is_default', true)->first();
+
+        return [
+            'game_edition' => $edition->game_edition,
+        ];
+    }
 }

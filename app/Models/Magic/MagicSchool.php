@@ -33,7 +33,7 @@ class MagicSchool extends AbstractModel
         return $this->belongsTo(MagicSchool::class, 'parent_id');
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'description' => $this->description,
@@ -48,5 +48,10 @@ class MagicSchool extends AbstractModel
             'id' => $this->id,
             'name' => $this->name,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

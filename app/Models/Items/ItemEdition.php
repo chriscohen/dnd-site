@@ -76,7 +76,7 @@ class ItemEdition extends AbstractModel
         return $this->belongsToMany(SpellEdition::class, 'spell_material_components');
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         return [
             'game_edition' => $this->game_edition,
@@ -93,5 +93,10 @@ class ItemEdition extends AbstractModel
             'id' => $this->id,
             'is_primary' => $this->is_primary,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }

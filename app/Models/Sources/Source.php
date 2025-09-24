@@ -144,7 +144,7 @@ class Source extends AbstractModel
         return $this->morphedByMany(Spell::class, 'entity');
     }
 
-    public function toArrayLong(): array
+    public function toArrayFull(): array
     {
         $output = [
             'campaign_setting' => $this->campaign_setting?->toArray($this->renderMode, $this->excluded) ?? null,
@@ -177,5 +177,10 @@ class Source extends AbstractModel
             'slug' => $this->slug,
             'name' => $this->name,
         ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
     }
 }
