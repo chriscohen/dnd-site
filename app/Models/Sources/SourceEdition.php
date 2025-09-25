@@ -90,16 +90,13 @@ class SourceEdition extends AbstractModel
         return [
             'binding' => $this->binding,
             'boxed_set_items' => ModelCollection::make($this->boxedSetItems)
-                ->toArray($this->renderMode, $this->excluded),
+                ->toArray($this->renderMode),
             //'formats' => ModelCollection::make($this->formats)->toString(),
             'is_primary' => $this->is_primary,
             'isbn10' => $this->isbn10,
             'isbn13' => $this->isbn13,
             'pages' => $this->pages,
             'release_date' => $this->formatReleaseDate(),
-            'source' => $this->isExcluded(Source::class) ?
-                $this->source_id :
-                $this->source->toArray($this->renderMode, $this->excluded),
         ];
     }
 

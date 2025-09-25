@@ -128,7 +128,6 @@ class Source extends AbstractModel
     {
         $output = [
             'campaign_setting' => $this->campaign_setting?->toArray($this->renderMode, $this->excluded) ?? null,
-            'cover_image' => $this->coverImage->toArray($this->renderMode, $this->excluded),
             'description' => $this->description,
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
             'game_edition' => $this->game_edition,
