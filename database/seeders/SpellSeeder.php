@@ -207,13 +207,13 @@ class SpellSeeder extends AbstractYmlSeeder
     protected function makeRange(array $data, SpellEdition $edition): void
     {
         $range = new Range();
-        $range->number = $data['range']['number'] ?? null;
-        $range->per_level = $data['range']['per_level'] ?? null;
-        $range->unit = !empty($data['range']['unit']) ?
-            Distance::tryFromString($data['range']['unit']) :
+        $range->number = $data['number'] ?? null;
+        $range->per_level = $data['per_level'] ?? null;
+        $range->unit = !empty($data['unit']) ?
+            Distance::tryFromString($data['unit']) :
             null;
-        $range->is_self = $data['range']['is_self'] ?? false;
-        $range->is_touch = $data['range']['is_touch'] ?? false;
+        $range->is_self = $data['is_self'] ?? false;
+        $range->is_touch = $data['is_touch'] ?? false;
         $range->save();
         $edition->range()->associate($range);
     }

@@ -73,12 +73,12 @@ class Range extends AbstractModel
 
     public function toString(): string
     {
-        if (empty($this->number) || $this->number < 0) {
-            return 'Unlimited';
+        if ($this->is_touch) {
+            return 'Touch';
         } elseif ($this->is_self) {
             return 'Self';
-        } elseif ($this->is_touch) {
-            return 'Touch';
+        } elseif (empty($this->number) || $this->number < 0) {
+            return 'Unlimited';
         }
 
         $output = $this->format($this->number, $this->unit);
