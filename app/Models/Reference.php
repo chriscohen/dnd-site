@@ -46,7 +46,6 @@ class Reference extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'entity' => $this->entity->toArray($this->renderMode),
             'edition' => $this->edition->toArray($this->renderMode),
         ];
     }

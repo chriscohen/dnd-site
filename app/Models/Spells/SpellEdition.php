@@ -48,14 +48,13 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property ?bool $has_spell_resistance
  * @property string $higher_level
  * @property bool $is_default
- * @property Collection<ItemEdition> $itemEditions
  * @property MaterialComponentMode $material_component_mode
  * @property Collection<SpellMaterialComponent> $materialComponents
  * @property Range $range
  * @property Uuid $range_id
  * @property Collection<Reference> $references
  * @property ?SavingThrowMultiplier $saving_throw_multiplier
- * @property ?\App\Enums\SavingThrows\SavingThrowType $saving_throw_type
+ * @property ?SavingThrowType $saving_throw_type
  * @property MagicSchool $school
  * @property Spell $spell
  * @property string $spell_components
@@ -146,11 +145,6 @@ class SpellEdition extends AbstractModel
         return str_contains($this->spell_components, $componentType->value);
     }
 
-    public function itemEditions(): BelongsToMany
-    {
-        return $this->belongsToMany(ItemEdition::class, 'spell_material_components');
-    }
-
     protected function materialComponentMode(): Attribute
     {
         return Attribute::make(
@@ -211,24 +205,19 @@ class SpellEdition extends AbstractModel
             'area' => $this->area?->toArray($this->renderMode) ?? null,
             'casting_time' => $this->casting_time_unit->format($this->casting_time_number),
             'class_levels' => ModelCollection::make($this->classLevels)
-                ->toArray(JsonRenderMode::SHORT),
+                ->toArray(),
             'damage_instances' => ModelCollection::make($this->damageInstances)
-                ->toArray(JsonRenderMode::SHORT),
+                ->toArray(),
             'description' => $this->description,
             'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode),
             'focus' => $this->focus,
-            'frequency' => $this->frequency,
             'has_saving_throw' => $this->has_saving_throw,
             'has_spell_resistance' => $this->has_spell_resistance,
             'higher_level' => $this->higher_level,
             'is_default' => $this->is_default,
-            'item_editions' => ModelCollection::make($this->itemEditions)->toArray($this->renderMode),
             'lowest_level' => $this->getLowestLevel(),
             'material_component_mode' => $this->material_component_mode,
-            'material_components' => ModelCollection::make($this->materialComponents)->toArray(
-                $this->renderMode,
-                $this->excluded
-            ),
+            'material_components' => ModelCollection::make($this->materialComponents)->toArray($this->renderMode),
             'range' => $this->range->toArray($this->renderMode),
             'references' => ModelCollection::make($this->references)->toArray(JsonRenderMode::TEASER),
             'saving_throw_multiplier' => $this->saving_throw_multiplier,

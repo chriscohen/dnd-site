@@ -53,9 +53,9 @@ class SpellMaterialComponent extends AbstractModel
     {
         return [
             'is_consumed' => $this->is_consumed,
-            'item_edition' => $this->itemEdition->toArray($this->renderMode, $this->excluded),
+            //'item_edition' => $this->itemEdition->toArray($this->renderMode),
             'quantity' => $this->quantity,
-            'spell_edition' => $this->spellEdition->toArray($this->renderMode, $this->excluded),
+            //'spell_edition' => $this->spellEdition->toArray($this->renderMode),
         ];
     }
 
