@@ -65,7 +65,7 @@ class ItemSeeder extends AbstractYmlSeeder
 
             foreach ($datum['categories'] as $categoryData) {
                 $category = Category::query()->where('slug', $categoryData)->firstOrFail();
-                $item->categories->add($category);
+                $item->categories()->save($category);
             }
         }
     }

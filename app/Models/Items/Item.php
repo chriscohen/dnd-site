@@ -11,7 +11,6 @@ use App\Models\ModelCollection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
@@ -54,8 +53,8 @@ class Item extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'category' => $this->category->toArray($this->renderMode, $this->excluded),
-            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
+            'categories' => ModelCollection::make($this->categories)->toArray($this->renderMode),
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
         ];
     }
 
@@ -71,8 +70,8 @@ class Item extends AbstractModel
     public function toArrayTeaser(): array
     {
         return [
-            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
-            'image' => $this->image->toArray($this->renderMode, $this->excluded),
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
+            'image' => $this->image?->toArray($this->renderMode),
         ];
     }
 }

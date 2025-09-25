@@ -42,7 +42,7 @@ class Category extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'image' => $this->image?->toArray($this->renderMode, $this->excluded),
+            'image' => $this->image?->toArray($this->renderMode),
             'parent' => $this->parent?->toArray($this->renderMode, []),
         ];
     }
