@@ -14,7 +14,7 @@ use App\Enums\TimeUnit;
 use App\Models\AbstractModel;
 use App\Models\Area;
 use App\Models\DamageInstance;
-use App\Models\Items\ItemEdition;
+use App\Models\Duration;
 use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
 use App\Models\ModelCollection;
@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 use Spatie\LaravelMarkdown\MarkdownRenderer;
@@ -41,6 +42,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Collection<DamageInstance> $damageInstances
  * @property string $description
  * @property Collection<MagicDomain> $domains
+ * @property Duration $duration
  * @property ?string $focus
  * @property GameEdition $game_edition
  * @property string $gameEdition,
@@ -72,6 +74,7 @@ class SpellEdition extends AbstractModel
         'frequency' => SpellFrequency::class,
         'game_edition' => GameEdition::class,
         'has_saving_throw' => 'bool',
+        'has_spell_resistance' => 'bool',
         'is_default' => 'bool',
         'material_component_mode' => MaterialComponentMode::class,
         'range_unit' => Distance::class,
@@ -104,6 +107,11 @@ class SpellEdition extends AbstractModel
     public function domains(): BelongsToMany
     {
         return $this->belongsToMany(MagicDomain::class, 'spell_editions_magic_domains');
+    }
+
+    public function duration(): MorphOne
+    {
+        return $this->morphOne(Duration::class, 'entity');
     }
 
     protected function gameEdition(): Attribute
@@ -210,6 +218,7 @@ class SpellEdition extends AbstractModel
                 ->toArray(),
             'description' => $this->description,
             'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode),
+            'duration' => $this->duration->toArray($this->renderMode),
             'focus' => $this->focus,
             'has_saving_throw' => $this->has_saving_throw,
             'has_spell_resistance' => $this->has_spell_resistance,
@@ -220,8 +229,8 @@ class SpellEdition extends AbstractModel
             'material_components' => ModelCollection::make($this->materialComponents)->toArray($this->renderMode),
             'range' => $this->range->toArray($this->renderMode),
             'references' => ModelCollection::make($this->references)->toArray(JsonRenderMode::TEASER),
-            'saving_throw_multiplier' => $this->saving_throw_multiplier,
-            'saving_throw_type' => $this->saving_throw_type,
+            'saving_throw_multiplier' => $this->saving_throw_multiplier?->toString(),
+            'saving_throw_type' => $this->saving_throw_type?->toString(),
             'school' => $this->school?->toArray($this->renderMode) ?? null,
             'spell_components' => $this->spell_components,
         ];

@@ -4,7 +4,7 @@ namespace App\Models\Items;
 
 use App\CommonMark\InternalLinkGenerator;
 use App\Enums\GameEdition;
-use App\Enums\JsonRenderMode;
+use App\Enums\Rarity;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use App\Models\Reference;
@@ -24,11 +24,13 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  *
  * @property string $description
  * @property GameEdition $game_edition
- * @property bool $is_primary
+ * @property bool $is_default
+ * @property bool $is_unique
  * @property Item $item
  * @property Uuid $item_id
  * @property int $price
  * @property int $quantity
+ * @property Rarity $rarity
  * @property Collection<Reference> $references
  * @property Collection<SpellEdition> $spells
  * @property float $weight
@@ -42,6 +44,8 @@ class ItemEdition extends AbstractModel
     public $casts = [
         'game_edition' => GameEdition::class,
         'is_primary' => 'boolean',
+        'is_unique' => 'boolean',
+        'rarity' => Rarity::class,
     ];
 
     public function description(): Attribute
@@ -79,9 +83,12 @@ class ItemEdition extends AbstractModel
     public function toArrayFull(): array
     {
         return [
+            'description' => $this->description(),
             'game_edition' => $this->game_edition,
+            'is_unique' => $this->is_unique,
             'price' => $this->price,
             'quantity' => $this->quantity,
+            'rarity' => $this->rarity->toString(),
             'references' => ModelCollection::make($this->references)->toArray($this->renderMode, $this->excluded),
             'weight' => $this->weight,
         ];
@@ -91,7 +98,7 @@ class ItemEdition extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'is_primary' => $this->is_primary,
+            'is_default' => $this->is_default,
         ];
     }
 

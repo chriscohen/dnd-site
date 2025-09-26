@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Enums\GameEdition;
+use App\Enums\Rarity;
 use App\Models\Category;
 use App\Models\Items\Item;
 use App\Models\Items\ItemEdition;
@@ -45,13 +46,17 @@ class ItemSeeder extends AbstractYmlSeeder
                 $edition->id = $editionData['id'];
                 $edition->item_id = $datum['id'];
 
-                $edition->is_primary = (count($datum['editions']) == 1) ?
+                $edition->is_default = (count($datum['editions']) == 1) ?
                     true :
-                    $editionData['is_primary'] ?? false;
+                    $editionData['is_default'] ?? false;
 
                 $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
                 $edition->description = $editionData['description'];
-                $edition->price = $editionData['price'] ?? null;
+                $edition->is_unique = $editionData['is_unique'] ?? false;
+                $edition->price = !empty($editionData['price']) ?
+                    $edition->priceFromString($editionData['price']) :
+                    null;
+                $edition->rarity = Rarity::tryFromString($editionData['rarity']);
                 $edition->quantity = $editionData['quantity'] ?? 1;
                 $edition->weight = $editionData['weight'] ?? null;
 

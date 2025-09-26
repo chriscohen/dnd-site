@@ -15,13 +15,15 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignIdFor(Item::class, 'item_id');
             $table->smallInteger('game_edition');
-            $table->boolean('is_primary')->default(false);
 
             //$table->morphs('itemable');
 
             $table->text('description')->nullable();
-            $table->smallInteger('price')->nullable();
-            $table->smallInteger('quantity')->default(1);
+            $table->boolean('is_default')->default(false);
+            $table->boolean('is_unique')->default(false);
+            $table->unsignedInteger('price')->nullable();
+            $table->unsignedSmallInteger('quantity')->default(1);
+            $table->unsignedSmallInteger('rarity');
             $table->float('weight')->nullable();
         });
     }

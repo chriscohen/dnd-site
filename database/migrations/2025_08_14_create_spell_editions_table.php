@@ -30,7 +30,7 @@ return new class extends Migration
             $table->foreignIdFor(Range::class, 'range_id');
             $table->foreignIdFor(Area::class, 'area_id')->nullable();
 
-            // Casting time
+            // Casting time + duration
             $table->unsignedSmallInteger('casting_time_number');
             $table->unsignedSmallInteger('casting_time_unit');
 

@@ -8,7 +8,9 @@
                 "id": "c649f83b-56ef-41a8-87a0-48799c9d0827",
                 "game_edition": "3.5",
                 "description": "As an action, you can splash the contents of this vial onto a creature within 5 feet of you or throw the vial up to 20 feet, shattering it on impact. In either case, make a ranged attack against a creature or object, treating the acid as an improvised weapon. On a hit, the target takes 2d6 acid damage.",
-                "price": 25,
+                "is_default": true,
+                "price": "25 gp",
+                "rarity": "common",
                 "references": [
                     {
                         "source": "players-handbook-5th-edition",
@@ -29,12 +31,80 @@
                 "id": "6126021d-e3d2-4c03-a032-fb69f537de9b",
                 "game_edition": "2e",
                 "description": "Arabellan Cheddar is a cheese crafted in Arabel. It was also sold through @source:auroras-whole-realms-catalogue:Aurora's Whole Realms Catalogue.",
+                "is_default": true,
+                "rarity": "uncommon",
                 "references": [
                     {
                         "source": "auroras-whole-realms-catalogue",
                         "page_from": 122
                     }
                 ]
+            }
+        ]
+    },
+    {
+        "id": "839165c6-976d-4522-acca-52ce15825d9b",
+        "name": "Arrow",
+        "categories": ["arrows"],
+        "editions": [
+            {
+                "id": "97f43128-a01f-4646-9730-bed21b4f9d50",
+                "game_edition": "5e",
+                "description": "A single normal wooden arrow.",
+                "is_default": true,
+                "price": "5 sp",
+                "rarity": "common",
+                "references": [
+                    {
+                        "source": "players-handbook-5th-edition",
+                        "page_from": 150
+                    }
+                ],
+                "weight": 0.05
+            }
+        ]
+    },
+    {
+        "id": "3d494313-bdd9-4158-afac-f8f0c33aeca4",
+        "name": "Arrow (flight)",
+        "categories": ["arrows"],
+        "editions": [
+            {
+                "id": "98858d0f-52e2-42d2-8465-874e3f6257a1",
+                "game_edition": "2e",
+                "description": "A long-range arrow suitable for hunting.",
+                "is_default": true,
+                "price": "25 cp",
+                "rarity": "common",
+                "references": [
+                    {
+                        "source": "players-handbook-2nd-edition",
+                        "page_from": 68
+                    }
+                ],
+                "weight": 0.1
+            }
+        ]
+    },
+    {
+        "id": "14af2f76-5651-427a-a8f3-88d4fbb8a132",
+        "name": "Arrow (sheaf)",
+        "categories": ["arrows"],
+        "editions": [
+            {
+                "id": "ed159fc7-2c8f-4131-bfed-8149fc1e7c7e",
+                "game_edition": "2e",
+                "description": "An arrow with a strong metal head suitable for warfare.",
+                "is_default": true,
+                "price": "50 cp",
+                "rarity": "common",
+                "references": [
+                    {
+                        "source": "players-handbook-2nd-edition",
+                        "page_from": 68
+                    }
+                ],
+                "weight": 0.1
             }
         ]
     },
@@ -46,7 +116,9 @@
             {
                 "id": "dfa983ce-577e-4667-af4f-3c4a8cf196a9",
                 "game_edition": "3.5",
-                "description": "A tall, slender-leaved plant of the grass family, which grows in water or on marshy ground."
+                "description": "A tall, slender-leaved plant of the grass family, which grows in water or on marshy ground.",
+                "is_default": true,
+                "rarity": "common"
             }
         ]
     },
@@ -58,7 +130,9 @@
             {
                 "id": "e2e2f2b9-580d-4296-ae97-59b948a536b8",
                 "game_edition": "3.5",
-                "description": "A dried grain stalk, used especially as fodder or as material for thatching, packing, or weaving."
+                "description": "A dried grain stalk, used especially as fodder or as material for thatching, packing, or weaving.",
+                "is_default": true,
+                "rarity": "common"
             }
         ]
     }

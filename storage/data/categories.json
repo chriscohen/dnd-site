@@ -8,6 +8,22 @@
         "parent_id": "410f4a52-b640-4fdf-9984-7b8867c8a8e6"
     },
     {
+        "id": "d59bdd89-fcb1-4ad3-939b-c4bb7586dba6",
+        "slug": "ammunition",
+        "name": "Ammunition",
+        "entity_type": "item",
+        "parent": "equipment",
+        "parent_id": "410f4a52-b640-4fdf-9984-7b8867c8a8e6"
+    },
+    {
+        "id": "b7227efa-2941-4059-ad9b-2ebbc264fce7",
+        "slug": "arrows",
+        "name": "Arrows",
+        "entity_type": "item",
+        "parent": "ammunition",
+        "parent_id": "d59bdd89-fcb1-4ad3-939b-c4bb7586dba6"
+    },
+    {
         "id": "aa4ea0d8-1736-45ea-8280-b67b366d4b2f",
         "slug": "cheese",
         "name": "Cheese",

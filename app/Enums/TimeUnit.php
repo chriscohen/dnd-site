@@ -15,12 +15,15 @@ enum TimeUnit: int
     case MINUTE = 7;
     case HOUR = 8;
     case DAY = 9;
+    case PERMANENT = 10;
 
-    public function format(int $number): string
+    public function format(?int $number): string
     {
-        $plural = $number === 1 ? '' : 's';
+        $plural = (!empty($number) && $number === 1) ? '' : 's';
 
-        return $number . ' ' . $this->toString() . $plural;
+        return empty($number) ?
+            $this->toString() :
+            $number . ' ' . $this->toString() . $plural;
     }
 
     public function toString(): string
@@ -35,6 +38,7 @@ enum TimeUnit: int
             self::MINUTE => 'minute',
             self::HOUR => 'hour',
             self::DAY => 'day',
+            self::PERMANENT => 'permanent',
         };
     }
 
@@ -50,6 +54,7 @@ enum TimeUnit: int
             'minute' => self::MINUTE,
             'hour' => self::HOUR,
             'day' => self::DAY,
+            'permanent' => self::PERMANENT,
             default => null,
         };
     }

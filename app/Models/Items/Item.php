@@ -35,9 +35,9 @@ class Item extends AbstractModel
         return $this->morphToMany(Category::class, 'entity', 'entity_category');
     }
 
-    public function primaryEdition(): ItemEdition
+    public function defaultEdition(): ItemEdition
     {
-        return $this->editions->where('is_primary', true)->firstOrFail();
+        return $this->editions->where('is_default', true)->firstOrFail();
     }
 
     public function editions(): HasMany

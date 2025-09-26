@@ -19,6 +19,7 @@ use App\Enums\TimeUnit;
 use App\Models\Area;
 use App\Models\CharacterClass;
 use App\Models\DamageInstance;
+use App\Models\Duration;
 use App\Models\Items\Item;
 use App\Models\Magic\MagicSchool;
 use App\Models\Media;
@@ -97,6 +98,9 @@ class SpellSeeder extends AbstractYmlSeeder
 
                 $edition->save();
 
+                // duration.
+                $this->makeDuration($editionData['duration'], $edition);
+
                 // 4th edition stuff.
                 if ($edition->game_edition === GameEdition::FOURTH) {
                     $this->make4e($editionData, $edition);
@@ -115,7 +119,7 @@ class SpellSeeder extends AbstractYmlSeeder
                     $material->spellEdition()->associate($edition);
 
                     $materialItem = Item::query()->where('slug', $materialData['item'])->firstOrFail();
-                    $itemEdition = $materialItem->primaryEdition();
+                    $itemEdition = $materialItem->defaultEdition();
                     $material->itemEdition()->associate($itemEdition);
 
                     $material->quantity = $materialData['quantity'] ?? 1;
@@ -202,6 +206,21 @@ class SpellSeeder extends AbstractYmlSeeder
 
             $damageInstance->save();
         }
+    }
+
+    protected function makeDuration(array $data, SpellEdition $edition): void
+    {
+        $duration = new Duration();
+        $duration->entity()->associate($edition);
+
+        $duration->per_level = $data['per_level'] ?? null;
+        $duration->per_level_mode = empty($data['per_level_mode']) ?
+            null :
+            PerLevelMode::tryFromString($data['per_level_mode']);
+        $duration->unit = TimeUnit::tryFromString($data['unit']);
+        $duration->value = $data['value'] ?? null;
+
+        $duration->save();
     }
 
     protected function makeRange(array $data, SpellEdition $edition): void
