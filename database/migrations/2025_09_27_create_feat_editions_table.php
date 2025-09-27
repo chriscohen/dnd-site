@@ -14,6 +14,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('feat_id')->unique();
 
+            $table->unsignedSmallInteger('game_edition')->index();
             $table->text('description')->nullable();
         });
     }
