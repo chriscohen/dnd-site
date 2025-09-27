@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Feats;
 
+use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
@@ -19,6 +20,7 @@ use Illuminate\Support\Collection;
  * @property string $name
  *
  * @property ?string $description
+ * @property GameEdition $game_edition
  * @property Collection<Prerequisite> $prerequisites
  */
 class FeatEdition extends AbstractModel
@@ -26,6 +28,10 @@ class FeatEdition extends AbstractModel
     use HasUuids;
 
     public $timestamps = false;
+
+    public $casts = [
+        'game_edition' => GameEdition::class,
+    ];
 
     public function feat(): BelongsTo
     {

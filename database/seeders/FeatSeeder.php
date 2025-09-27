@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Enums\GameEdition;
 use App\Enums\PrerequisiteType;
 use App\Models\Feats\Feat;
 use App\Models\Feats\FeatEdition;
@@ -11,7 +12,6 @@ use App\Models\Prerequisites\Prerequisite;
 use App\Models\Prerequisites\PrerequisiteValue;
 use App\Models\Reference;
 use App\Models\Sources\Source;
-use App\Models\Sources\SourceEdition;
 
 class FeatSeeder extends AbstractYmlSeeder
 {
@@ -27,7 +27,6 @@ class FeatSeeder extends AbstractYmlSeeder
             $item->id = $datum['id'];
             $item->name = $datum['name'];
             $item->slug = $datum['slug'] ?? $this->makeSlug($datum['name']);
-            $item->description = $datum['description'] ?? null;
 
             $item->save();
 
@@ -36,6 +35,7 @@ class FeatSeeder extends AbstractYmlSeeder
                 $edition->feat()->associate($item);
                 $edition->id = $editionData['id'];
                 $edition->description = $editionData['description'] ?? null;
+                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
 
                 $edition->save();
 
