@@ -7,6 +7,8 @@ use App\Enums\GameEdition;
 use App\Enums\SourceType;
 use App\Models\Creatures\CreatureType;
 use App\Models\Creatures\CreatureTypeEdition;
+use App\Models\Feats\Feat;
+use App\Models\Feats\FeatEdition;
 use App\Models\Items\Item;
 use App\Models\Items\ItemEdition;
 use App\Models\Sources\Source;
@@ -53,6 +55,8 @@ class AppServiceProvider extends ServiceProvider
         Relation::enforceMorphMap([
             'creature_type' => CreatureType::class,
             'creature_type_edition' => CreatureTypeEdition::class,
+            'feat' => Feat::class,
+            'feat_edition' => FeatEdition::class,
             'item' => Item::class,
             'item_edition' => ItemEdition::class,
             'source' => Source::class,

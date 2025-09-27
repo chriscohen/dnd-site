@@ -37,8 +37,8 @@ class MagicSchool extends AbstractModel
     {
         return [
             'description' => $this->description,
-            'image' => $this->image?->toArray($this->renderMode, $this->excluded),
-            'parent' => $this->parent?->toArray(),
+            'image' => $this->image?->toArray($this->renderMode),
+            'parent' => $this->parent?->toArray($this->renderMode),
         ];
     }
 

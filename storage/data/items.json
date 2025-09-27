@@ -62,11 +62,13 @@
                 ],
                 "weight": 0.05
             }
-        ]
+        ],
+        "image": "arrow.webp"
     },
     {
         "id": "3d494313-bdd9-4158-afac-f8f0c33aeca4",
         "name": "Arrow (flight)",
+        "slug": "flight-arrow",
         "categories": ["arrows"],
         "editions": [
             {
@@ -87,8 +89,32 @@
         ]
     },
     {
+        "id": "0928ffb3-1005-47fd-95f6-da58f51ccd53",
+        "name": "Arrow (masterwork)",
+        "slug": "masterwork-arrow",
+        "categories": ["arrows"],
+        "editions": [
+            {
+                "id": "3acf3901-59f3-4f7c-b669-91b29b860acc",
+                "game_edition": "3.5",
+                "description": "An extremely finely crafted arrow.",
+                "is_default": true,
+                "price": "7 gp",
+                "rarity": "uncommon",
+                "references": [
+                    {
+                        "source": "players-handbook-3-5-edition",
+                        "page_from": 122
+                    }
+                ],
+                "weight": 0.1
+            }
+        ]
+    },
+    {
         "id": "14af2f76-5651-427a-a8f3-88d4fbb8a132",
         "name": "Arrow (sheaf)",
+        "slug": "sheaf-arrow",
         "categories": ["arrows"],
         "editions": [
             {

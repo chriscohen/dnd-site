@@ -11,8 +11,18 @@ class CharacterClassSeeder extends AbstractYmlSeeder
     protected string $path = 'character-classes.json';
     protected string $model = CharacterClass::class;
 
-    protected array $schema = [
-        'id',
-        'name',
-    ];
+    public function run(): void
+    {
+        $data = $this->getDataFromFile();
+
+        foreach ($data as $datum) {
+            $item = new CharacterClass();
+            $item->id = $datum['id'];
+            $item->slug = $datum['slug'] ?? $this->makeSlug($datum['name']);
+            $item->name = $datum['name'];
+            $item->is_prestige = $datum['is_prestige'] ?? false;
+
+            $item->save();
+        }
+    }
 }

@@ -8,17 +8,11 @@ namespace App\Models;
  * @property string $id
  * @property string $slug
  * @property string $name
- *
- * @property bool $is_prestige
  */
-class CharacterClass extends AbstractModel
+class Species extends AbstractModel
 {
     public $timestamps = false;
     public $incrementing = false;
-
-    public $casts = [
-        'is_prestige' => 'boolean',
-    ];
 
     public function toArrayFull(): array
     {
@@ -31,7 +25,6 @@ class CharacterClass extends AbstractModel
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
-            'is_prestige' => $this->is_prestige,
         ];
     }
 

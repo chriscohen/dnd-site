@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\FeatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampaignSettingController;
 use App\Http\Controllers\CategoryController;
@@ -20,6 +21,9 @@ Route::prefix('api')->group(function () {
     Route::get('/categories', [CategoryController::class, 'index']);
 
     Route::get('/domains', [MagicDomainController::class, 'index']);
+
+    Route::get('/feat/{slug}', [FeatController::class, 'get']);
+    Route::get('/feats', [FeatController::class, 'index']);
 
     Route::get('/item/{slug}', [ItemController::class, 'get']);
     Route::get('/items', [ItemController::class, 'index']);

@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             CompanySeeder::class,
+            DeitySeeder::class,
+            SpeciesSeeder::class,
             SkillSeeder::class,
             StatusConditionSeeder::class,
             CharacterClassSeeder::class,
@@ -26,6 +28,7 @@ class DatabaseSeeder extends Seeder
             CampaignSettingSeeder::class,
             SourceSeeder::class,
 
+            FeatSeeder::class,
             ItemSeeder::class,
             SpellSeeder::class,
         ]);

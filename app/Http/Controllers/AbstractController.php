@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
-use App\Rules\ValidGameEdition;
 use App\Rules\ValidMode;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
@@ -15,7 +14,7 @@ abstract class AbstractController implements ControllerInterface
 {
     protected string $entityType = AbstractModel::class;
     protected string $order = 'ASC';
-    protected string $orderKey = '';
+    protected string $orderKey = 'name';
     protected Builder $query;
 
     public function __construct()

@@ -4,12 +4,37 @@
         "name": "Assassin"
     },
     {
+        "id": "barbarian",
+        "name": "Barbarian"
+    },
+    {
+        "id": "bard",
+        "name": "Bard"
+    },
+    {
         "id": "cleric",
         "name": "Cleric"
     },
     {
         "id": "druid",
         "name": "Druid"
+    },
+    {
+        "id": "fighter",
+        "name": "Fighter"
+    },
+    {
+        "id": "initiate-of-gruumsh",
+        "name": "Initiate of Gruumsh",
+        "prestige": true
+    },
+    {
+        "id": "ranger",
+        "name": "Ranger"
+    },
+    {
+        "id": "rogue",
+        "name": "Rogue"
     },
     {
         "id": "sorcerer",

@@ -2,27 +2,35 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Feats;
+
+use App\Models\AbstractModel;
+use App\Models\ModelCollection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * @property string $id
  * @property string $slug
  * @property string $name
  *
- * @property bool $is_prestige
+ * @property Collection<FeatEdition> $editions
  */
-class CharacterClass extends AbstractModel
+class Feat extends AbstractModel
 {
     public $timestamps = false;
     public $incrementing = false;
 
-    public $casts = [
-        'is_prestige' => 'boolean',
-    ];
+    public function editions(): HasMany
+    {
+        return $this->hasMany(FeatEdition::class);
+    }
 
     public function toArrayFull(): array
     {
-        return [];
+        return [
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
+        ];
     }
 
     public function toArrayShort(): array
@@ -31,7 +39,6 @@ class CharacterClass extends AbstractModel
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
-            'is_prestige' => $this->is_prestige,
         ];
     }
 

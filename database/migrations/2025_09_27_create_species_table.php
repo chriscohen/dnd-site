@@ -10,16 +10,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('character_classes', function (Blueprint $table) {
+        Schema::create('species', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->index();
-            $table->boolean('is_prestige')->default(false);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('character_classes');
+        Schema::dropIfExists('species');
     }
 };

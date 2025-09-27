@@ -1,0 +1,12 @@
+[
+    {
+        "id": "half-orc",
+        "slug": "half-orc",
+        "name": "half-orc"
+    },
+    {
+        "id": "orc",
+        "slug": "orc",
+        "name": "orc"
+    }
+]
