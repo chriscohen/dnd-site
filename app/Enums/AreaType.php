@@ -11,6 +11,7 @@ enum AreaType: int
     case CONE = 3;
     case SPHERE = 4;
     case CYLINDER = 5;
+    case CONTIGUOUS_SQUARE = 6;
 
     public function toString(): string
     {
@@ -19,6 +20,7 @@ enum AreaType: int
             self::CUBE => 'CUBE',
             self::CONE => 'CONE',
             self::SPHERE => 'SPHERE',
+            self::CONTIGUOUS_SQUARE => 'CONTIGUOUS_SQUARE',
             self::CYLINDER => 'CYLINDER',
         };
     }
@@ -31,6 +33,7 @@ enum AreaType: int
             'CONE' => self::CONE,
             'SPHERE' => self::SPHERE,
             'CYLINDER' => self::CYLINDER,
+            'CONTIGUOUS_SQUARE', 'SQUARE' => self::CONTIGUOUS_SQUARE,
             default => null,
         };
     }

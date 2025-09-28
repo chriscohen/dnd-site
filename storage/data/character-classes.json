@@ -24,11 +24,6 @@
         "name": "Fighter"
     },
     {
-        "id": "initiate-of-gruumsh",
-        "name": "Initiate of Gruumsh",
-        "prestige": true
-    },
-    {
         "id": "ranger",
         "name": "Ranger"
     },

@@ -20,15 +20,19 @@ use App\Models\Area;
 use App\Models\CharacterClass;
 use App\Models\DamageInstance;
 use App\Models\Duration;
+use App\Models\Feats\Feat;
 use App\Models\Items\Item;
+use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
 use App\Models\Media;
 use App\Models\Range;
+use App\Models\SavingThrow;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
 use App\Models\Spells\SpellEdition4e;
-use App\Models\Spells\SpellEditionCharacterClassLevel;
+use App\Models\Spells\SpellEditionLevel;
 use App\Models\Spells\SpellMaterialComponent;
+use App\Models\StatusConditions\StatusCondition;
 use App\Models\StatusConditions\StatusConditionEdition;
 
 class SpellSeeder extends AbstractYmlSeeder
@@ -77,12 +81,10 @@ class SpellSeeder extends AbstractYmlSeeder
                     $this->makeArea($editionData['area'], $edition);
                 }
 
-                // Saving throws
-                $edition->has_saving_throw = $editionData['has_saving_throw'] ?? null;
-                $edition->saving_throw_multiplier = !empty($editionData['saving_throw_multiplier']) ?
-                    SavingThrowMultiplier::tryFromString($editionData['saving_throw_multiplier']) : null;
-                $edition->saving_throw_type = !empty($editionData['saving_throw_type']) ?
-                    SavingThrowType::tryFromString($editionData['saving_throw_type']) : null;
+                // Domains
+                foreach ($editionData['domains'] ?? [] as $domainData) {
+                    $edition->domains->add(MagicDomain::query()->where('id', $domainData)->first());
+                }
 
                 $edition->spell_components = $editionData['spell_components'] ?? null;
                 $edition->has_spell_resistance = $editionData['has_spell_resistance'] ?? null;
@@ -98,6 +100,11 @@ class SpellSeeder extends AbstractYmlSeeder
 
                 $edition->save();
 
+                // Saving throws
+                if (!empty($editionData['saving_throw'])) {
+                    $this->makeSavingThrow($editionData['saving_throw'], $edition);
+                }
+
                 // duration.
                 $this->makeDuration($editionData['duration'], $edition);
 
@@ -110,8 +117,8 @@ class SpellSeeder extends AbstractYmlSeeder
                 $this->makeDamageInstances($editionData['damage'] ?? [], $edition, $editionData);
 
                 // Character classes.
-                foreach ($editionData['classes'] as $classData) {
-                    $this->makeCharacterClass($classData, $edition);
+                foreach ($editionData['levels'] as $levelData) {
+                    $this->makeLevel($levelData, $edition);
                 }
 
                 foreach ($editionData['material_components'] ?? [] as $materialData) {
@@ -158,16 +165,21 @@ class SpellSeeder extends AbstractYmlSeeder
         $edition->area()->associate($area);
     }
 
-    protected function makeCharacterClass(array $data, SpellEdition $edition): void
+    protected function makeLevel(array $data, SpellEdition $edition): void
     {
-        $class = CharacterClass::query()->where('id', $data['class'])->firstOrFail();
+        if (!empty($data['class'])) {
+            $entity = CharacterClass::query()->where('id', $data['class'])->firstOrFail();
+        } else {
+            $feat = Feat::query()->where('id', $data['feat'])->firstOrFail();
+            $entity = $feat->editions()->firstOrFail();
+        }
 
-        $sccl = new SpellEditionCharacterClassLevel();
-        $sccl->characterClass()->associate($class);
-        $sccl->spellEdition()->associate($edition);
-        $sccl->level = $data['level'];
+        $level = new SpellEditionLevel();
+        $level->entity()->associate($entity);
+        $level->spellEdition()->associate($edition);
+        $level->level = $data['level'];
 
-        $sccl->save();
+        $level->save();
     }
 
     protected function makeDamageInstances(array $data, SpellEdition $edition, array $editionData): void
@@ -235,5 +247,32 @@ class SpellSeeder extends AbstractYmlSeeder
         $range->is_touch = $data['is_touch'] ?? false;
         $range->save();
         $edition->range()->associate($range);
+    }
+
+    protected function makeSavingThrow(array $data, SpellEdition $edition): void
+    {
+        $savingThrow = new SavingThrow();
+        $savingThrow->spellEdition()->associate($edition);
+        $savingThrow->type = SavingThrowType::tryFromString($data['type']);
+
+        if (!empty($data['multiplier'])) {
+            $savingThrow->multiplier = SavingThrowMultiplier::tryFromString($data['multiplier']);
+        }
+
+        if (!empty($data['fail_status'])) {
+            $condition = StatusCondition::query()
+                ->where('slug', $data['fail_status'])
+                ->first();
+
+            if (empty($condition)) {
+                throw new \Exception("Invalid fail_status: " . $data['fail_status']);
+            }
+
+            $savingThrow->failStatus()->associate(
+                $condition->editions->where('game_edition', $edition->game_edition)->first()
+            );
+        }
+
+        $savingThrow->save();
     }
 }

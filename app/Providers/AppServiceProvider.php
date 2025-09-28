@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Enums\Binding;
 use App\Enums\GameEdition;
 use App\Enums\SourceType;
+use App\Models\CharacterClass;
 use App\Models\Creatures\CreatureType;
 use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\Feats\Feat;
@@ -53,6 +54,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Relation::enforceMorphMap([
+            'character_class' => CharacterClass::class,
             'creature_type' => CreatureType::class,
             'creature_type_edition' => CreatureTypeEdition::class,
             'feat' => Feat::class,

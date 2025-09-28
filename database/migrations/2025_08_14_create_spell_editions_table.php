@@ -7,6 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Spells\Spell;
 use App\Models\Range;
+use App\Models\Feats\Feat;
 use App\Models\Area;
 
 return new class extends Migration
@@ -26,6 +27,9 @@ return new class extends Migration
             $table->string('magic_school_id')->nullable()->index();
             $table->unsignedSmallInteger('material_component_mode')->nullable();
 
+            // Feat?
+            $table->foreignIdFor(Feat::class, 'feat_id')->nullable();
+
             // Range / area
             $table->foreignIdFor(Range::class, 'range_id');
             $table->foreignIdFor(Area::class, 'area_id')->nullable();
@@ -33,11 +37,6 @@ return new class extends Migration
             // Casting time + duration
             $table->unsignedSmallInteger('casting_time_number');
             $table->unsignedSmallInteger('casting_time_unit');
-
-            // Saving throws
-            $table->boolean('has_saving_throw')->nullable();
-            $table->unsignedSmallInteger('saving_throw_type')->nullable();
-            $table->unsignedSmallInteger('saving_throw_multiplier')->nullable();
 
             // Components
             $table->string('spell_components', 10)->nullable();

@@ -15,11 +15,13 @@ use App\Models\AbstractModel;
 use App\Models\Area;
 use App\Models\DamageInstance;
 use App\Models\Duration;
+use App\Models\Feats\Feat;
 use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
 use App\Models\ModelCollection;
 use App\Models\Range;
 use App\Models\Reference;
+use App\Models\SavingThrow;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -38,15 +40,15 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property ?Area $area
  * @property int $casting_time_number
  * @property TimeUnit $casting_time_unit
- * @property Collection<SpellEditionCharacterClassLevel> $classLevels
+ * @property Collection<SpellEditionLevel> $classLevels
  * @property Collection<DamageInstance> $damageInstances
  * @property string $description
  * @property Collection<MagicDomain> $domains
  * @property Duration $duration
+ * @property ?Feat $feat
  * @property ?string $focus
  * @property GameEdition $game_edition
  * @property string $gameEdition,
- * @property ?bool $has_saving_throw
  * @property ?bool $has_spell_resistance
  * @property string $higher_level
  * @property bool $is_default
@@ -55,8 +57,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Range $range
  * @property Uuid $range_id
  * @property Collection<Reference> $references
- * @property ?SavingThrowMultiplier $saving_throw_multiplier
- * @property ?SavingThrowType $saving_throw_type
+ * @property ?SavingThrow $savingThrow
  * @property MagicSchool $school
  * @property Spell $spell
  * @property string $spell_components
@@ -73,13 +74,10 @@ class SpellEdition extends AbstractModel
         'casting_time_unit' => TimeUnit::class,
         'frequency' => SpellFrequency::class,
         'game_edition' => GameEdition::class,
-        'has_saving_throw' => 'bool',
         'has_spell_resistance' => 'bool',
         'is_default' => 'bool',
         'material_component_mode' => MaterialComponentMode::class,
         'range_unit' => Distance::class,
-        'saving_throw_multiplier' => SavingThrowMultiplier::class,
-        'saving_throw_type' => SavingThrowType::class,
     ];
 
     public function area(): BelongsTo
@@ -87,9 +85,9 @@ class SpellEdition extends AbstractModel
         return $this->belongsTo(Area::class, 'area_id');
     }
 
-    public function classLevels(): HasMany
+    public function levels(): MorphMany
     {
-        return $this->hasMany(SpellEditionCharacterClassLevel::class, 'spell_edition_id');
+        return $this->morphMany(SpellEditionLevel::class, 'entity');
     }
 
     public function damageInstances(): MorphMany
@@ -112,6 +110,11 @@ class SpellEdition extends AbstractModel
     public function duration(): MorphOne
     {
         return $this->morphOne(Duration::class, 'entity');
+    }
+
+    public function feat(): BelongsTo
+    {
+        return $this->belongsTo(Feat::class, 'feat_id');
     }
 
     protected function gameEdition(): Attribute
@@ -139,9 +142,9 @@ class SpellEdition extends AbstractModel
     {
         $lowest = 99;
 
-        foreach ($this->classLevels as $classLevel) {
-            if ($classLevel->level < $lowest) {
-                $lowest = $classLevel->level;
+        foreach ($this->levels as $level) {
+            if ($level->level < $lowest) {
+                $lowest = $level->level;
             }
         }
 
@@ -182,6 +185,16 @@ class SpellEdition extends AbstractModel
         );
     }
 
+    public function references(): MorphMany
+    {
+        return $this->morphMany(Reference::class, 'entity');
+    }
+
+    public function savingThrow(): HasOne
+    {
+        return $this->hasOne(SavingThrow::class, 'spell_edition_id');
+    }
+
     public function school(): BelongsTo
     {
         return $this->belongsTo(MagicSchool::class, 'magic_school_id');
@@ -190,11 +203,6 @@ class SpellEdition extends AbstractModel
     public function schoolAsString(): string
     {
         return $this->school->name;
-    }
-
-    public function references(): MorphMany
-    {
-        return $this->morphMany(Reference::class, 'entity');
     }
 
     public function spell(): BelongsTo
@@ -212,8 +220,6 @@ class SpellEdition extends AbstractModel
         return [
             'area' => $this->area?->toArray($this->renderMode) ?? null,
             'casting_time' => $this->casting_time_unit->format($this->casting_time_number),
-            'class_levels' => ModelCollection::make($this->classLevels)
-                ->toArray(),
             'damage_instances' => ModelCollection::make($this->damageInstances)
                 ->toArray(),
             'description' => $this->description,
@@ -224,13 +230,13 @@ class SpellEdition extends AbstractModel
             'has_spell_resistance' => $this->has_spell_resistance,
             'higher_level' => $this->higher_level,
             'is_default' => $this->is_default,
+            'levels' => ModelCollection::make($this->levels)->toArray(),
             'lowest_level' => $this->getLowestLevel(),
             'material_component_mode' => $this->material_component_mode,
             'material_components' => ModelCollection::make($this->materialComponents)->toArray($this->renderMode),
             'range' => $this->range->toArray($this->renderMode),
             'references' => ModelCollection::make($this->references)->toArray(JsonRenderMode::TEASER),
-            'saving_throw_multiplier' => $this->saving_throw_multiplier?->toString(),
-            'saving_throw_type' => $this->saving_throw_type?->toString(),
+            'saving_throw' => $this->savingThrow?->toArray($this->renderMode),
             'school' => $this->school?->toArray($this->renderMode) ?? null,
             'spell_components' => $this->spell_components,
         ];

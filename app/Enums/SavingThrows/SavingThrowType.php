@@ -24,9 +24,9 @@ enum SavingThrowType: int
     public static function tryFromString(string $value): ?self
     {
         return match (mb_strtolower(mb_strtolower($value))) {
-            'fortitude' => self::FORTITUDE,
-            'reflex' => self::REFLEX,
-            'willpower' => self::WILLPOWER,
+            'fort', 'fortitude' => self::FORTITUDE,
+            'ref', 'reflex' => self::REFLEX,
+            'will', 'willpower' => self::WILLPOWER,
             'ac' => self::AC,
             default => null,
         };

@@ -6,6 +6,7 @@ use App\Http\Controllers\FeatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampaignSettingController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CharacterClassController;
 use App\Http\Controllers\Items\ItemController;
 use App\Http\Controllers\Magic\MagicDomainController;
 use App\Http\Controllers\Magic\MagicSchoolController;
@@ -19,6 +20,9 @@ Route::prefix('api')->group(function () {
 
     Route::get('/category/{slug}', [CategoryController::class, 'get']);
     Route::get('/categories', [CategoryController::class, 'index']);
+
+    Route::get('/class/{slug}', [CharacterClassController::class, 'get']);
+    Route::get('/classes', [CharacterClassController::class, 'index']);
 
     Route::get('/domains', [MagicDomainController::class, 'index']);
 

@@ -6,6 +6,7 @@ namespace App\Enums\Spells;
 
 enum SpellComponentType: string
 {
+    case DIVINE_FOCUS = 'DF';
     case FOCUS = 'F';
     case MATERIAL = 'M';
     case SOMATIC = 'S';

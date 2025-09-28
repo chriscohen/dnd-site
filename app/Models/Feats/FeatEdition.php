@@ -9,9 +9,11 @@ use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use App\Models\Prerequisites\Prerequisite;
+use App\Models\Reference;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 
 /**
@@ -22,6 +24,7 @@ use Illuminate\Support\Collection;
  * @property ?string $description
  * @property GameEdition $game_edition
  * @property Collection<Prerequisite> $prerequisites
+ * @property Collection<Reference> $references
  */
 class FeatEdition extends AbstractModel
 {
@@ -43,11 +46,17 @@ class FeatEdition extends AbstractModel
         return $this->hasMany(Prerequisite::class);
     }
 
+    public function references(): MorphMany
+    {
+        return $this->morphMany(Reference::class, 'entity');
+    }
+
     public function toArrayFull(): array
     {
         return [
             'feat' => $this->feat->toArray(JsonRenderMode::SHORT),
             'prerequisites' => ModelCollection::make($this->prerequisites)->toArray($this->renderMode),
+            'references' => ModelCollection::make($this->references)->toArray(),
         ];
     }
 
@@ -64,6 +73,7 @@ class FeatEdition extends AbstractModel
     {
         return [
             'description' => $this->description,
+            'game_edition' => $this->game_edition->toStringShort(),
         ];
     }
 }
