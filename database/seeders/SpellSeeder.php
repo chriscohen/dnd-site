@@ -116,23 +116,13 @@ class SpellSeeder extends AbstractYmlSeeder
                 // Damage.
                 $this->makeDamageInstances($editionData['damage'] ?? [], $edition, $editionData);
 
-                // Character classes.
+                // Levels.
                 foreach ($editionData['levels'] as $levelData) {
                     $this->makeLevel($levelData, $edition);
                 }
 
                 foreach ($editionData['material_components'] ?? [] as $materialData) {
-                    $material = new SpellMaterialComponent();
-                    $material->spellEdition()->associate($edition);
-
-                    $materialItem = Item::query()->where('slug', $materialData['item'])->firstOrFail();
-                    $itemEdition = $materialItem->defaultEdition();
-                    $material->itemEdition()->associate($itemEdition);
-
-                    $material->quantity = $materialData['quantity'] ?? 1;
-                    $material->is_consumed = $materialData['is_consumed'] ?? false;
-
-                    $material->save();
+                    $this->makeMaterialComponent($materialData, $edition);
                 }
 
                 if (!empty($editionData['references'])) {
@@ -163,23 +153,6 @@ class SpellSeeder extends AbstractYmlSeeder
         $area->radius = $data['radius'] ?? null;
         $area->save();
         $edition->area()->associate($area);
-    }
-
-    protected function makeLevel(array $data, SpellEdition $edition): void
-    {
-        if (!empty($data['class'])) {
-            $entity = CharacterClass::query()->where('id', $data['class'])->firstOrFail();
-        } else {
-            $feat = Feat::query()->where('id', $data['feat'])->firstOrFail();
-            $entity = $feat->editions()->firstOrFail();
-        }
-
-        $level = new SpellEditionLevel();
-        $level->entity()->associate($entity);
-        $level->spellEdition()->associate($edition);
-        $level->level = $data['level'];
-
-        $level->save();
     }
 
     protected function makeDamageInstances(array $data, SpellEdition $edition, array $editionData): void
@@ -233,6 +206,39 @@ class SpellSeeder extends AbstractYmlSeeder
         $duration->value = $data['value'] ?? null;
 
         $duration->save();
+    }
+
+    protected function makeLevel(array $data, SpellEdition $edition): void
+    {
+        if (!empty($data['class'])) {
+            $entity = CharacterClass::query()->where('id', $data['class'])->firstOrFail();
+        } else {
+            $feat = Feat::query()->where('id', $data['feat'])->firstOrFail();
+            $entity = $feat->editions()->firstOrFail();
+        }
+
+        $level = new SpellEditionLevel();
+        $level->entity()->associate($entity);
+        $level->spellEdition()->associate($edition);
+        $level->level = $data['level'];
+
+        $level->save();
+    }
+
+    protected function makeMaterialComponent(array $data, SpellEdition $edition): void
+    {
+        $material = new SpellMaterialComponent();
+        $material->spellEdition()->associate($edition);
+
+        $materialItem = Item::query()->where('slug', $data['item'])->firstOrFail();
+        $itemEdition = $materialItem->defaultEdition();
+        $material->itemEdition()->associate($itemEdition);
+
+        $material->description = $data['description'] ?? null;
+        $material->quantity = $data['quantity'] ?? 1;
+        $material->is_consumed = $data['is_consumed'] ?? false;
+
+        $material->save();
     }
 
     protected function makeRange(array $data, SpellEdition $edition): void

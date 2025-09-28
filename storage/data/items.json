@@ -135,6 +135,28 @@
         ]
     },
     {
+        "id": "df70a1bd-f9f4-42a4-ab2c-82c3ed3bf899",
+        "name": "Drop of Blood",
+        "slug": "drop-of-blood",
+        "categories": ["body-parts"],
+        "editions": [
+            {
+                "id": "f26800ab-7b13-487e-bb42-1fcf30c42a8b",
+                "game_edition": "3.5",
+                "description": "A drop of blood.",
+                "is_default": true,
+                "rarity": "common",
+                "references": [
+                    {
+                        "source": "champions-of-ruin",
+                        "page_from": 29
+                    }
+                ]
+            }
+        ],
+        "image": "drop-of-blood.webp"
+    },
+    {
         "id": "d92b3b3c-6d5d-419f-a51f-0eb82f92bc75",
         "name": "Reed",
         "categories": ["grass"],

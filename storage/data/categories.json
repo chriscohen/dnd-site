@@ -24,6 +24,20 @@
         "parent_id": "d59bdd89-fcb1-4ad3-939b-c4bb7586dba6"
     },
     {
+        "id": "15b95fd3-2b84-4cdb-8b1f-a6d8665e89f7",
+        "slug": "biological",
+        "name": "Biological",
+        "entity_type": "item"
+    },
+    {
+        "id": "af5cd6b8-7247-4472-8d1c-8715b35b2714",
+        "slug": "body-parts",
+        "name": "Body Parts",
+        "entity_type": "item",
+        "parent": "biological",
+        "parent_id": "15b95fd3-2b84-4cdb-8b1f-a6d8665e89f7"
+    },
+    {
         "id": "aa4ea0d8-1736-45ea-8280-b67b366d4b2f",
         "slug": "cheese",
         "name": "Cheese",

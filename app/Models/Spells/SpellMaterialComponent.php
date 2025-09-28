@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace App\Models\Spells;
 
 use App\Models\AbstractModel;
-use App\Models\Items\Item;
 use App\Models\Items\ItemEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
  *
+ * @property ?string $description
  * @property bool $is_consumed
  * @property Uuid $item_edition_id
  * @property ItemEdition $itemEdition
@@ -52,10 +51,9 @@ class SpellMaterialComponent extends AbstractModel
     public function toArrayFull(): array
     {
         return [
+            'description' => $this->description,
             'is_consumed' => $this->is_consumed,
-            //'item_edition' => $this->itemEdition->toArray($this->renderMode),
             'quantity' => $this->quantity,
-            //'spell_edition' => $this->spellEdition->toArray($this->renderMode),
         ];
     }
 

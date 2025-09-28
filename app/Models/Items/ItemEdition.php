@@ -84,7 +84,7 @@ class ItemEdition extends AbstractModel
     {
         return [
             'description' => $this->description(),
-            'game_edition' => $this->game_edition,
+            'game_edition' => $this->game_edition->toStringShort(),
             'is_unique' => $this->is_unique,
             'price' => $this->price,
             'quantity' => $this->quantity,

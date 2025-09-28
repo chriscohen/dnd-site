@@ -5,8 +5,6 @@ namespace App\Models\Spells;
 use App\Enums\Distance;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
-use App\Enums\SavingThrows\SavingThrowMultiplier;
-use App\Enums\SavingThrows\SavingThrowType;
 use App\Enums\Spells\MaterialComponentMode;
 use App\Enums\Spells\SpellComponentType;
 use App\Enums\Spells\SpellFrequency;
@@ -40,7 +38,6 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property ?Area $area
  * @property int $casting_time_number
  * @property TimeUnit $casting_time_unit
- * @property Collection<SpellEditionLevel> $classLevels
  * @property Collection<DamageInstance> $damageInstances
  * @property string $description
  * @property Collection<MagicDomain> $domains
@@ -52,6 +49,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property ?bool $has_spell_resistance
  * @property string $higher_level
  * @property bool $is_default
+ * @property Collection<SpellEditionLevel> $levels
  * @property MaterialComponentMode $material_component_mode
  * @property Collection<SpellMaterialComponent> $materialComponents
  * @property Range $range
@@ -83,11 +81,6 @@ class SpellEdition extends AbstractModel
     public function area(): BelongsTo
     {
         return $this->belongsTo(Area::class, 'area_id');
-    }
-
-    public function levels(): MorphMany
-    {
-        return $this->morphMany(SpellEditionLevel::class, 'entity');
     }
 
     public function damageInstances(): MorphMany
@@ -154,6 +147,11 @@ class SpellEdition extends AbstractModel
     public function hasComponent(SpellComponentType $componentType): bool
     {
         return str_contains($this->spell_components, $componentType->value);
+    }
+
+    public function levels(): HasMany
+    {
+        return $this->hasMany(SpellEditionLevel::class, 'spell_edition_id');
     }
 
     protected function materialComponentMode(): Attribute

@@ -33,11 +33,6 @@ class SpellEditionLevel extends AbstractModel
         return $this->morphTo();
     }
 
-    public function getCharacterClassName(): string
-    {
-        return $this->characterClass->name;
-    }
-
     public function spellEdition(): BelongsTo
     {
         return $this->belongsTo(Spell::class, 'spell_edition_id');
@@ -54,7 +49,7 @@ class SpellEditionLevel extends AbstractModel
     public function toArrayShort(): array
     {
         return [
-            'character_class' => $this->characterClass->name,
+            'name' => $this->entity->name,
             'level' => $this->level,
         ];
     }

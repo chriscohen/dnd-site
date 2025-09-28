@@ -12,6 +12,11 @@
         "name": "Bard"
     },
     {
+        "id": "blackguard",
+        "name": "Blackguard",
+        "is_prestige": true
+    },
+    {
         "id": "cleric",
         "name": "Cleric"
     },

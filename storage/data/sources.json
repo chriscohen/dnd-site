@@ -336,7 +336,7 @@
             {
                 "id": "bdbfe78e-1af1-4047-8a7e-3e82691133cd",
                 "name": "original",
-                "binding": "hardcover and softcover",
+                "binding": "softcover and hardcover",
                 "formats": ["print", "pdf"],
                 "is_primary": true,
                 "isbn10": "0786928867",
@@ -348,7 +348,7 @@
             {
                 "id": "aa467855-8f2a-4d8c-8abd-bd8cf12a1fe3",
                 "name": "premium",
-                "binding": "hardcover and softcover",
+                "binding": "softcover and hardcover",
                 "formats": ["print", "pdf"],
                 "isbn10": "0786962461",
                 "isbn13": "9780786962464",
@@ -463,7 +463,7 @@
         "id": "397cd5d7-8e67-4c35-ac11-94c2413a341f",
         "name": "Spell Compendium",
         "cover_image": "spell-compendium.webp",
-        "description": "The essential spellcaster's companion, Spell Compendium gather over 1,000 of the best spell from previously published Dungeons & Dragons game supplements and campaign settings, Dragon magazine articles, and articles posted on the Wizards of the Coast website.\n\nThe spells contained herein complement those presented in the Player's Handbook and have been updated to include official errata. In addition, this book contains descriptive read-aloud text telling you what a spell looks like, sounds like, or feels like.",
+        "description": "The essential spellcaster's companion, Spell Compendium gathers over 1,000 of the best spell from previously published Dungeons & Dragons game supplements and campaign settings, Dragon magazine articles, and articles posted on the Wizards of the Coast website.\n\nThe spells contained herein complement those presented in the Player's Handbook and have been updated to include official errata. In addition, this book contains descriptive read-aloud text telling you what a spell looks like, sounds like, or feels like.",
         "editions": [
             {
                 "id": "a482661a-f6ae-4efb-a006-5bf972e3c8cf",

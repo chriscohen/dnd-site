@@ -46,7 +46,7 @@ class SourceEdition extends AbstractModel
     protected function binding(): Attribute
     {
         return Attribute::make(
-            get: fn (int $value) => Binding::tryFrom($value)->toString(),
+            get: fn (?int $value) => empty($value) ? null : Binding::tryFrom($value)->toString(),
         );
     }
 

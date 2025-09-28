@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(SpellEdition::class, 'spell_edition_id');
 
             $table->unsignedSmallInteger('quantity')->default(1);
+            $table->text('description')->nullable();
             $table->boolean('is_consumed')->default(false);
 
             $table->unique(['item_edition_id', 'spell_edition_id'], 'spell_edition_item_edition');
