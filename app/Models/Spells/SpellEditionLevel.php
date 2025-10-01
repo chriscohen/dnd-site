@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models\Spells;
 
 use App\Models\AbstractModel;
-use App\Models\CharacterClass;
 use App\Models\Feats\FeatEdition;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -51,7 +50,9 @@ class SpellEditionLevel extends AbstractModel
     {
         return [
             'name' => $this->entity->getName(),
+            'slug' => $this->entity->getSlug(),
             'level' => $this->level,
+            'type' => $this->entity::class == FeatEdition::class ? 'feat' : 'class',
         ];
     }
 

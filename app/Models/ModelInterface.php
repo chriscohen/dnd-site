@@ -16,6 +16,15 @@ interface ModelInterface
     public function getName(): string;
 
     /**
+     * The slug of this thing, which might be the parent's slug.
+     *
+     * For example, SpellEdition entities don't have their own slug, but the parent Spell does.
+     *
+     * @return string
+     */
+    public function getSlug(): string;
+
+    /**
      * @param  JsonRenderMode  $mode The render mode to use, whether to only return basic fields, or all of them.
      * @param  array  $exclude
      *   When nesting, this will cause some fields to be excluded. For example, if SpellEdition has Spell nested inside

@@ -22,6 +22,7 @@ use Illuminate\Support\Collection;
  * @property string $name
  *
  * @property ?string $description
+ * @property Feat $feat
  * @property GameEdition $game_edition
  * @property Collection<Prerequisite> $prerequisites
  * @property Collection<Reference> $references
@@ -44,6 +45,11 @@ class FeatEdition extends AbstractModel
     public function getName(): string
     {
         return $this->feat->getName();
+    }
+
+    public function getSlug(): string
+    {
+        return $this->feat->getSlug();
     }
 
     public function prerequisites(): HasMany

@@ -8,8 +8,6 @@ use App\Enums\JsonRenderMode;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Nette\NotImplementedException;
-use Ramsey\Uuid\Uuid;
 
 abstract class AbstractModel extends Model implements Arrayable, ModelInterface
 {
@@ -48,6 +46,11 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 
     public function priceFromString(string $input): ?int
