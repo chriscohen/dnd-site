@@ -1,0 +1,59 @@
+{
+    "id": "aa783c17-4749-4c51-abaf-1a31dd7bf964",
+    "slug": "acid-storm",
+    "name": "Acid Storm",
+    "editions": [
+        {
+            "game_edition": "3.5",
+            "area": {
+                "type": "cylinder",
+                "height": 20,
+                "radius": 20
+            },
+            "casting_time_unit": "standard action",
+            "damage": [
+                {
+                    "damage_type": "acid",
+                    "die_quantity": 1,
+                    "die_quantity_maximum": 15,
+                    "die_faces": 8,
+                    "per_level_mode": "caster"
+                }
+            ],
+            "description": "You cause acid to rain downward. The acid deals 1d8 points of acid damage per caster level (maximum 15d8) to each creature in the area.",
+            "domains": ["acid"],
+            "duration": { "unit": "instantaneous" },
+            "has_spell_resistance": false,
+            "is_default": true,
+            "levels": [
+                { "class": "sorcerer", "level": 6 },
+                { "class": "wizard", "level": 6 }
+            ],
+            "material_components": [
+                {
+                    "item": "acid-flask",
+                    "quantity": 1,
+                    "is_consumed": true
+                }
+            ],
+            "range": {
+                "number": 100,
+                "per_level": 10,
+                "unit": "ft"
+            },
+            "references": [
+                {
+                    "source": "spell-compendium",
+                    "page_from": 7
+                }
+            ],
+            "saving_throw": {
+                "multiplier": "half",
+                "type": "reflex"
+            },
+            "school": "creation",
+            "spell_components": "V,S,M"
+        }
+    ],
+    "image": "acid-storm.webp"
+}

@@ -12,6 +12,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
+ * @property bool $is_from_caster
  * @property bool $is_self
  * @property bool $is_touch
  * @property int $number
@@ -27,6 +28,7 @@ class Range extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
+        'is_from_caster' => 'boolean',
         'is_self' => 'boolean',
         'is_touch' => 'boolean',
         'unit' => Distance::class,
@@ -50,6 +52,7 @@ class Range extends AbstractModel
     public function toArrayFull(): array
     {
         return [
+            'is_from_caster' => $this->is_from_caster,
             'is_self' => $this->is_self,
             'is_touch' => $this->is_touch,
             'number' => $this?->number ?? null,
@@ -73,7 +76,9 @@ class Range extends AbstractModel
 
     public function toString(): string
     {
-        if ($this->is_touch) {
+        if ($this->is_from_caster) {
+            return 'From caster';
+        } elseif ($this->is_touch) {
             return 'Touch';
         } elseif ($this->is_self) {
             return 'Self';

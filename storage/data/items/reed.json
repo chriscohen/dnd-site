@@ -1,0 +1,14 @@
+{
+    "id": "d92b3b3c-6d5d-419f-a51f-0eb82f92bc75",
+    "name": "Reed",
+    "categories": ["grass"],
+    "editions": [
+        {
+            "id": "dfa983ce-577e-4667-af4f-3c4a8cf196a9",
+            "game_edition": "3.5",
+            "description": "A tall, slender-leaved plant of the grass family, which grows in water or on marshy ground.",
+            "is_default": true,
+            "rarity": "common"
+        }
+    ]
+}

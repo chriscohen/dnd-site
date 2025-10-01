@@ -1,0 +1,40 @@
+{
+    "id": "4a9e5236-6162-4953-8f0f-64a7c07cff24",
+    "slug": "acid-breath",
+    "name": "Acid Breath",
+    "editions": [
+        {
+            "area": {
+                "type": "cone",
+                "radius": 15,
+                "length": 15
+            },
+            "game_edition": "3.5",
+            "casting_time_unit": "standard action",
+            "damage": [
+                {
+                    "damage_type": "acid",
+                    "die_faces": 6,
+                    "per_level": 1,
+                    "per_level_mode": "caster level",
+                    "die_quantity_maximum": "10"
+                }
+            ],
+            "description": "You pop the fire ants into your mouth and exhale quickly. The ants distill into drops of pure acid in mid air, spattering against your foes and leaving smoking holes.\n\nYou breathe forth a cone of acidic droplets. The cone deals 1d6 points of acid damage per caster level (maximum 10d6).",
+            "duration": { "unit": "instantaneous" },
+            "has_spell_resistance": true,
+            "levels": [
+                { "class": "sorcerer", "level": 3 },
+                { "class": "wizard", "level": 3 }
+            ],
+            "material_components": [
+                {
+                    "item": "fire-ant",
+                    "quantity_text": "a handful of fire ants (alive or dead)",
+                    "is_consumed": true
+                }
+            ]
+        }
+    ],
+    "image": "acid-breath.webp"
+}

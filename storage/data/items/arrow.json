@@ -1,0 +1,23 @@
+{
+    "id": "839165c6-976d-4522-acca-52ce15825d9b",
+    "name": "Arrow",
+    "categories": ["arrows"],
+    "editions": [
+        {
+            "id": "97f43128-a01f-4646-9730-bed21b4f9d50",
+            "game_edition": "5e",
+            "description": "A single normal wooden arrow.",
+            "is_default": true,
+            "price": "5 sp",
+            "rarity": "common",
+            "references": [
+                {
+                    "source": "players-handbook-5th-edition",
+                    "page_from": 150
+                }
+            ],
+            "weight": 0.05
+        }
+    ],
+    "image": "arrow.webp"
+}

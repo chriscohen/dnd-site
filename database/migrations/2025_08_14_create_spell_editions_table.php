@@ -31,7 +31,7 @@ return new class extends Migration
             $table->foreignIdFor(Feat::class, 'feat_id')->nullable();
 
             // Range / area
-            $table->foreignIdFor(Range::class, 'range_id');
+            $table->foreignIdFor(Range::class, 'range_id')->nullable();
             $table->foreignIdFor(Area::class, 'area_id')->nullable();
 
             // Casting time + duration

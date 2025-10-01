@@ -91,6 +91,14 @@
         "parent_id": "dda993d3-66a5-4eeb-8872-88a22bcc95ff"
     },
     {
+        "id": "2103f091-c08d-4453-91ec-bfce2eca4590",
+        "slug": "insects",
+        "name": "Insects",
+        "entity_type": "item",
+        "parent": "biological",
+        "parent_id": "15b95fd3-2b84-4cdb-8b1f-a6d8665e89f7"
+    },
+    {
         "id": "5d619da9-a3ac-4641-82c2-25246bee7f16",
         "slug": "loot",
         "name": "Loot",

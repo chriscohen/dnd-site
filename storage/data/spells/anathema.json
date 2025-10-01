@@ -1,0 +1,38 @@
+{
+    "id": "29d1b9e4-3e16-4eac-b6c6-7fcd6b753428",
+    "slug": "anathema",
+    "name": "Anathema",
+    "editions": [
+        {
+            "game_edition": "3.5",
+            "casting_time_unit": "standard action",
+            "description": "You can permanently break the divine link between  your deity and a lower-level cleric, druid, ranger, or paladin of your faith, or upon a common worshiper. The spell has no effect on spellcasters of a faith other than your own. You can pronounce an anathema upon any character of your faith, no matter where they are, even if on a different plane. You cannot pronounce an anathema against someone who is already dead.\n\nSome deities do not allow an anathema to be pronounced against the innocent or against their chosen, while others grant their high-level clerics free use of this most terrible of divine curses.\n\nAn individual under anathema can no longer cast divine spells or call upon the power of their god to turn or command undead, heal, harm, smite, shape change, or use any other divine power associated with their character class.\n\nAn ordinary worshiper placed under anathema is not allowed to take advantage of any of the faith's services, such as healing, naming, marrying, or burial of the dead. Anyone who dies while under anathema is barred from entry into their deity's plane just as though they had never declared allegiance to a god. Their soul is condemned to eternally writhe in the Wall of the Faithless.\n\nOn a more personal level, the anathema spell marks the subject as accursed with regard to others of the faith. Others are not allowed to speak to them, look at them, or even acknowledge their existence. The common members of the faith are only aware that the subject is under anathema if so informed by the church hierarchy, however, clerics, paladins, druids and rangers of the faith can automatically detect an anathema effect simply by looking at the subject.\n\nThe effect is permanent until lifted, either by the original spellcaster, or by a cleric of the same faith, of a higher level than the caster, who casts an atonement spell upon the subject. The subject of an anathema can also remove its effect by changing their divine allegiance (see Changing Deities, page 233 of the Forgotten Realms Campaign Setting).",
+            "duration": {
+                "unit": "permanent"
+            },
+            "focus": "The subject's name must be inscribed in a book or scroll especially consecrated for this purpose and detailing the crimes (real or imagined) for which the subject is being condemned. The book is not consumed in the process.",
+            "has_spell_resistance": false,
+            "is_default": true,
+            "levels": [
+                { "class": "cleric", "level": 9 },
+                { "class": "druid", "level": 9 }
+            ],
+            "range": {
+                "number": -1
+            },
+            "references": [
+                {
+                    "source": "champions-of-ruin",
+                    "page_from": 28
+                }
+            ],
+            "school": "enchantment",
+            "spell_components": "V,S,F",
+            "target": {
+                "description": "creature of the same faith as the caster",
+                "type": "creature"
+            }
+        }
+    ],
+    "image": "anathema.webp"
+}

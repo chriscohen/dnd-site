@@ -1,0 +1,23 @@
+{
+    "id": "0928ffb3-1005-47fd-95f6-da58f51ccd53",
+    "name": "Arrow (masterwork)",
+    "slug": "masterwork-arrow",
+    "categories": ["arrows"],
+    "editions": [
+        {
+            "id": "3acf3901-59f3-4f7c-b669-91b29b860acc",
+            "game_edition": "3.5",
+            "description": "An extremely finely crafted arrow.",
+            "is_default": true,
+            "price": "7 gp",
+            "rarity": "uncommon",
+            "references": [
+                {
+                    "source": "players-handbook-3-5-edition",
+                    "page_from": 122
+                }
+            ],
+            "weight": 0.1
+        }
+    ]
+}

@@ -25,7 +25,7 @@ enum TargetType: int
         };
     }
 
-    public function tryFromString(string $value): ?self
+    public static function tryFromString(string $value): ?self
     {
         return match (str_replace(' ', '_', mb_strtolower($value))) {
             'creature' => self::CREATURE,

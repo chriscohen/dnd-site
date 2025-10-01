@@ -1,0 +1,23 @@
+{
+    "id": "486c7d38-1227-4841-b9c1-5933e1e546d1",
+    "name": "Acid Flask",
+    "categories": ["adventuring-gear", "potion"],
+    "editions": [
+        {
+            "id": "c649f83b-56ef-41a8-87a0-48799c9d0827",
+            "game_edition": "3.5",
+            "description": "As an action, you can splash the contents of this vial onto a creature within 5 feet of you or throw the vial up to 20 feet, shattering it on impact. In either case, make a ranged attack against a creature or object, treating the acid as an improvised weapon. On a hit, the target takes 2d6 acid damage.",
+            "is_default": true,
+            "price": "25 gp",
+            "rarity": "common",
+            "references": [
+                {
+                    "source": "players-handbook-5th-edition",
+                    "page_from": 148
+                }
+            ],
+            "weight": 1
+        }
+    ],
+    "image": "acid-flask.webp"
+}

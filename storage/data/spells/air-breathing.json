@@ -1,0 +1,52 @@
+{
+    "id": "d89d5b6f-f4b2-428a-82bf-db9773707574",
+    "slug": "air-breathing",
+    "name": "Air Breathing",
+    "editions": [
+        {
+            "game_edition": "3.5",
+            "casting_time_unit": "standard action",
+            "description": "The transmuted creatures can breathe air freely. Divide the duration evenly among all the creatures you touch.\n\nThe spell does not make creatures unable to breathe water. Air breathing dispels and counters water breathing.",
+            "duration": {
+                "unit": "hour",
+                "per_level": 2,
+                "per_level_mode": "per level"
+            },
+            "has_spell_resistance": true,
+            "is_default": true,
+            "levels": [
+                { "class":  "cleric", "level":  3 },
+                { "class":  "druid", "level":  3 },
+                { "class":  "sorcerer", "level":  3 },
+                { "class":  "wizard", "level":  3 }
+            ],
+            "material_components": [
+                {
+                    "item": "reed",
+                    "quantity": 1,
+                    "is_consumed": true
+                },
+                {
+                    "item": "straw",
+                    "quantity": 1,
+                    "is_consumed": true
+                }
+            ],
+            "material_component_mode": "or",
+            "range": { "is_touch": true },
+            "references": [
+                {
+                    "source": "champions-of-ruin",
+                    "page_from": 28
+                }
+            ],
+            "saving_throw": {
+                "multiplier": "negates",
+                "type": "willpower"
+            },
+            "school": "transmutation",
+            "spell_components": "S,M"
+        }
+    ],
+    "image": "air-breathing.webp"
+}

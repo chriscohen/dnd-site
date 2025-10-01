@@ -28,6 +28,13 @@ abstract class AbstractYmlSeeder extends Seeder
     protected string $path;
 
     /**
+     * The path to a directory where multiple JSON files of the same type can be found.
+     *
+     * @var string
+     */
+    protected string $dir;
+
+    /**
      * The class of the model that should be used for the data.
      *
      * @var string
@@ -77,6 +84,21 @@ abstract class AbstractYmlSeeder extends Seeder
         }
 
         return json_decode(Storage::disk('data')->get($this->path), true);
+    }
+
+    public function getDataFromDirectory(): array
+    {
+        if (!Storage::disk('data')->exists($this->dir)) {
+            throw new FileNotFoundException('storage/data/' . $this->dir . ' not found');
+        }
+
+        $output = [];
+
+        foreach (Storage::disk('data')->files($this->dir) as $file) {
+            $output[] = json_decode(Storage::disk('data')->get($file), true);
+        }
+
+        return $output;
     }
 
     public function preSave(array &$datum): void

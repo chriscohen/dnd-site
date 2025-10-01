@@ -20,6 +20,7 @@ use App\Models\ModelCollection;
 use App\Models\Range;
 use App\Models\Reference;
 use App\Models\SavingThrow;
+use App\Models\Target;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -50,10 +51,10 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property string $higher_level
  * @property bool $is_default
  * @property Collection<SpellEditionLevel> $levels
- * @property MaterialComponentMode $material_component_mode
+ * @property ?MaterialComponentMode $material_component_mode
  * @property Collection<SpellMaterialComponent> $materialComponents
- * @property Range $range
- * @property Uuid $range_id
+ * @property ?Range $range
+ * @property ?Uuid $range_id
  * @property Collection<Reference> $references
  * @property ?SavingThrow $savingThrow
  * @property MagicSchool $school
@@ -61,6 +62,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property string $spell_components
  * @property ?SpellEdition4e $spellEdition4e
  * @property Uuid $spell_id
+ * @property Collection<Target> $targets
  */
 class SpellEdition extends AbstractModel
 {
@@ -211,6 +213,11 @@ class SpellEdition extends AbstractModel
     public function spellEdition4e(): HasOne
     {
         return $this->hasOne(SpellEdition4e::class);
+    }
+
+    public function targets(): HasMany
+    {
+        return $this->hasMany(Target::class, 'spell_edition_id');
     }
 
     public function toArrayFull(): array

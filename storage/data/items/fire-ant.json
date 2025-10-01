@@ -1,0 +1,22 @@
+{
+    "id": "4ffc83de-78ce-4174-83ad-c97d94929095",
+    "name": "Fire Ant(s)",
+    "slug": "fire-ant",
+    "categories": ["insects"],
+    "editions": [
+        {
+            "id": "60add432-fe1a-478d-b81a-10f3de21a98a",
+            "game_edition": "3.5",
+            "description": "A fire ant, or group of them.",
+            "is_default": true,
+            "rarity": "common",
+            "references": [
+                {
+                    "source": "spell-compendium",
+                    "page_from": 7
+                }
+            ]
+        }
+    ],
+    "image": "fire-ant.webp"
+}

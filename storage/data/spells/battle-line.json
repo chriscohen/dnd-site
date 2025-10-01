@@ -1,0 +1,46 @@
+{
+    "id": "4a35f7cb-b95f-446f-b40e-399900a56c0e",
+    "slug": "battle-line",
+    "name": "Battle Line",
+    "editions": [
+        {
+            "game_edition": "3.5",
+            "area": {
+                "per_level": 2,
+                "per_level_mode": "per level",
+                "type": "square"
+            },
+            "casting_time_unit": "standard action",
+            "description": "By means of this spell you draw a visible, unholy \"line in the sand\" that causes a feeling of dread and hesitation in all creatures that cross it. Any creature entering the affected area must make a Will save or become shaken. A creature that successfully saves cannot be affected again by the same spellcaster's battle line spells for 24 hours.",
+            "duration": {
+                "per_level": 1,
+                "per_level_mode": "per level",
+                "unit": "round"
+            },
+            "has_spell_resistance": true,
+            "is_default": true,
+            "levels": [
+                { "feat":  "initiate-of-gruumsh", "level": 2 }
+            ],
+            "range": {
+                "number": 25,
+                "per_level": 5,
+                "per_level_mode": "2 levels",
+                "unit": "ft"
+            },
+            "references": [
+                {
+                    "source": "champions-of-ruin",
+                    "page_from": 28
+                }
+            ],
+            "saving_throw": {
+                "fail_status": "shaken",
+                "type": "willpower"
+            },
+            "school": "abjuration",
+            "spell_components": "V,S,DF"
+        }
+    ],
+    "image": "battle-line.webp"
+}

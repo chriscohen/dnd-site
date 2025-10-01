@@ -15,6 +15,7 @@ use App\Enums\SavingThrows\SavingThrowType;
 use App\Enums\Spells\MaterialComponentMode;
 use App\Enums\Spells\SpellFrequency;
 use App\Enums\Spells\SpellType4e;
+use App\Enums\TargetType;
 use App\Enums\TimeUnit;
 use App\Models\Area;
 use App\Models\CharacterClass;
@@ -34,17 +35,16 @@ use App\Models\Spells\SpellEditionLevel;
 use App\Models\Spells\SpellMaterialComponent;
 use App\Models\StatusConditions\StatusCondition;
 use App\Models\StatusConditions\StatusConditionEdition;
+use App\Models\Target;
 
 class SpellSeeder extends AbstractYmlSeeder
 {
-    protected string $path = 'spells.json';
+    protected string $dir = 'spells';
     protected string $model = Spell::class;
 
     public function run(): void
     {
-        $data = $this->getDataFromFile();
-
-        foreach ($data as $datum) {
+        foreach ($this->getDataFromDirectory() as $datum) {
             $item = new Spell();
             $item->id = $datum['id'];
             $item->slug = $datum['slug'];
@@ -74,7 +74,9 @@ class SpellSeeder extends AbstractYmlSeeder
                     MaterialComponentMode::tryFromString($editionData['material_component_mode']) : null;
 
                 // Range
-                $this->makeRange($editionData['range'], $edition);
+                if (!empty($editionData['range'])) {
+                    $this->makeRange($editionData['range'], $edition);
+                }
 
                 // Area
                 if (!empty($editionData['area'])) {
@@ -121,10 +123,17 @@ class SpellSeeder extends AbstractYmlSeeder
                     $this->makeLevel($levelData, $edition);
                 }
 
+                // Material components
                 foreach ($editionData['material_components'] ?? [] as $materialData) {
                     $this->makeMaterialComponent($materialData, $edition);
                 }
 
+                // Target
+                if (!empty($editionData['target'])) {
+                    $this->makeTarget($editionData['target'], $edition);
+                }
+
+                // References
                 if (!empty($editionData['references'])) {
                     $this->setReferences($editionData['references'], $edition);
                 }
@@ -236,7 +245,9 @@ class SpellSeeder extends AbstractYmlSeeder
 
         $material->description = $data['description'] ?? null;
         $material->quantity = $data['quantity'] ?? 1;
+        $material->quantity_text = $data['quantity_text'] ?? null;
         $material->is_consumed = $data['is_consumed'] ?? false;
+        $material->is_plural = $data['is_plural'] ?? false;
 
         $material->save();
     }
@@ -280,5 +291,21 @@ class SpellSeeder extends AbstractYmlSeeder
         }
 
         $savingThrow->save();
+    }
+
+    protected function makeTarget(array $data, SpellEdition $edition): void
+    {
+        $target = new Target();
+        $target->spellEdition()->associate($edition);
+        $target->type = TargetType::tryFromString($data['type']);
+
+        $target->description = $data['description'] ?? null;
+        $target->in_area = $data['in_area'] ?? false;
+        $target->quantity = $data['quantity'] ?? 1;
+        $target->per_level = $data['per_level'] ?? null;
+        $target->per_level_mode = empty($data['per_level_mode']) ?
+            null :
+            PerLevelMode::tryFromString($data['per_level_mode']);
+        $target->save();
     }
 }

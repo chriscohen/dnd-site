@@ -1,0 +1,51 @@
+{
+    "id": "d79199f2-4866-4a74-8918-e7c5e34f8c56",
+    "slug": "ice-storm",
+    "name": "Ice Storm",
+    "editions": [
+        {
+            "game_edition": "4e",
+            "area": {
+                "radius": 15,
+                "height": 15,
+                "type": "cylinder"
+            },
+            "attack_attribute": "int",
+            "attack_save": "fortitude",
+            "casting_time_unit": "standard action",
+            "damage": [
+                {
+                    "damage_type": "cold",
+                    "die_faces": 8,
+                    "die_quantity": 2,
+                    "attribute_modifier": "int",
+                    "status_condition": "immobilized"
+                }
+            ],
+            "description": "A shower of bitterly cold hailstones pummels a wide swath of ground and covers the area in ice.",
+            "duration": {
+                "unit": "minute",
+                "value": 5
+            },
+            "hit": "2d8 + Intelligence modifier cold damage, and the target is immobilized (save ends)",
+            "is_default": true,
+            "levels": [
+                { "class": "sorcerer", "level": 9 },
+                { "class": "wizard", "level": 9 }
+            ],
+            "range": {
+                "number": 100,
+                "unit": "ft"
+            },
+            "references": [
+                {
+                    "source": "players-handbook-4th-edition",
+                    "page_from": 136
+                }
+            ],
+            "spell_frequency": "daily",
+            "spell_type": "attack"
+        }
+    ],
+    "image": "ice-storm.webp"
+}

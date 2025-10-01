@@ -13,7 +13,7 @@ use App\Models\Media;
 
 class ItemSeeder extends AbstractYmlSeeder
 {
-    protected string $path = 'items.json';
+    protected string $dir = 'items';
     protected string $model = Item::class;
     protected array $excludedProperties = [
         'cover_image'
@@ -21,9 +21,7 @@ class ItemSeeder extends AbstractYmlSeeder
 
     public function run(): void
     {
-        $data = $this->getDataFromFile();
-
-        foreach ($data as $datum) {
+        foreach ($this->getDataFromDirectory() as $datum) {
             $item = new Item();
             $item->id = $datum['id'];
             // If no slug, assume we can just urlencode the name.
