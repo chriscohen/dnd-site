@@ -41,6 +41,11 @@ class FeatEdition extends AbstractModel
         return $this->belongsTo(Feat::class);
     }
 
+    public function getName(): string
+    {
+        return $this->feat->getName();
+    }
+
     public function prerequisites(): HasMany
     {
         return $this->hasMany(Prerequisite::class);

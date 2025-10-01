@@ -6,6 +6,7 @@ namespace App\Models\Spells;
 
 use App\Models\AbstractModel;
 use App\Models\CharacterClass;
+use App\Models\Feats\FeatEdition;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -49,7 +50,7 @@ class SpellEditionLevel extends AbstractModel
     public function toArrayShort(): array
     {
         return [
-            'name' => $this->entity->name,
+            'name' => $this->entity->getName(),
             'level' => $this->level,
         ];
     }
