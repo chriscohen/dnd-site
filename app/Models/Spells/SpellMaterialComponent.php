@@ -65,7 +65,7 @@ class SpellMaterialComponent extends AbstractModel
             'is_consumed' => $this->is_consumed,
             'is_focus' => $this->is_focus,
             'is_plural' => $this->is_plural,
-            'minimum_value' => $this->formatPrice($this->minimum_value),
+            'minimum_value' => empty($this->minimum_value) ? null : $this->formatPrice($this->minimum_value),
             'quantity' => $this->quantity,
             'quantity_text' => $this->quantity_text,
         ];
