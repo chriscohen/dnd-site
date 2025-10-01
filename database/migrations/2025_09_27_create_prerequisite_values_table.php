@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignIdFor(Prerequisite::class, 'prerequisite_id');
 
             $table->string('value');
+            $table->smallInteger('skill_ranks')->nullable();
+            $table->unsignedSmallInteger('craft_type')->nullable();
+            $table->unsignedSmallInteger('weapon_focus_type')->nullable();
         });
     }
 

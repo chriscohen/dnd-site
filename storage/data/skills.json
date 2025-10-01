@@ -1,110 +1,455 @@
+
 [
     {
-        "id": "ff6bce28-a213-46da-ae28-912b99a6ed57",
-        "slug": "athletics",
-        "name": "Athletics",
-        "related_attribute": "STR"
+        "id": "bdf01679-001a-4f6c-86a4-e25f84feb861",
+        "slug": "animal-handling",
+        "name": "Animal Handling",
+        "editions": [
+            {
+                "game_edition": "3.5",
+                "alternate_name": "Handle Animal"
+            },
+            {
+                "game_edition": "5e",
+                "related_attribute": "WIS"
+            }
+        ]
     },
     {
-        "id": "4d8ceaf2-330f-4657-a27e-7c33f5c0c049",
-        "slug": "acrobatics",
-        "name": "Acrobatics",
-        "related_attribute": "DEX"
-    },
-    {
-        "id": "c2630c65-91f0-4487-9f56-417f449dffe1",
-        "slug": "sleight-of-hand",
-        "name": "Sleight of Hand",
-        "related_attribute": "DEX"
-    },
-    {
-        "id": "91fe69ec-76fd-4316-8ad1-8e440561ad28",
-        "slug": "stealth",
-        "name": "Stealth",
-        "related_attribute": "DEX"
+        "id": "c5ecd40a-b016-4e97-b769-fb86f848c1f7",
+        "slug": "appraise",
+        "name": "Appraise",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
     },
     {
         "id": "2dbfbb18-db20-4f76-8584-5100a2fa644a",
         "slug": "arcana",
         "name": "Arcana",
-        "related_attribute": "INT"
+        "editions": [
+            {
+                "game_edition": "5e",
+                "related_attribute": "INT"
+            }
+        ]
     },
     {
-        "id": "4432f7f1-6179-4539-9a2d-878c677031e7",
-        "slug": "history",
-        "name": "History",
-        "related_attribute": "INT"
+        "id": "ff6bce28-a213-46da-ae28-912b99a6ed57",
+        "slug": "athletics",
+        "name": "Athletics",
+        "editions": [
+            {
+                "game_edition": "5e",
+                "related_attribute": "STR"
+            }
+        ]
     },
     {
-        "id": "bb3d2e71-ea75-4bf2-b5cd-0f4d291081de",
-        "slug": "investigation",
-        "name": "Investigation",
-        "related_attribute": "INT"
+        "id": "4d8ceaf2-330f-4657-a27e-7c33f5c0c049",
+        "slug": "acrobatics",
+        "name": "Acrobatics",
+        "editions": [
+            {
+                "game_edition": "5e",
+                "related_attribute": "DEX"
+            }
+        ]
     },
     {
-        "id": "eaf34917-bc01-41b6-bca7-82342f075167",
-        "slug": "nature",
-        "name": "Nature",
-        "related_attribute": "INT"
+        "id": "bbe68def-582a-40f4-9afc-536f9176eadd",
+        "slug": "balance",
+        "name": "Balance",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
     },
     {
-        "id": "227a4f39-7036-4ee6-b84b-6fecd63814cf",
-        "slug": "religion",
-        "name": "Religion",
-        "related_attribute": "INT"
+        "id": "8c93e1a6-b48a-433a-a0c3-e76096d22817",
+        "slug": "bluff",
+        "name": "Bluff",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
     },
     {
-        "id": "bdf01679-001a-4f6c-86a4-e25f84feb861",
-        "slug": "animal-handling",
-        "name": "Animal Handling",
-        "related_attribute": "WIS"
+        "id": "a1c85bc6-2641-4353-85d1-36e45b5b9cdb",
+        "slug": "climb",
+        "name": "Climb",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
     },
     {
-        "id": "588244fa-41aa-49f1-aaab-49f301054867",
-        "slug": "insight",
-        "name": "Insight",
-        "related_attribute": "WIS"
+        "id": "4676aa91-3658-4a03-a768-3ac6f6c61b16",
+        "slug": "concentration",
+        "name": "Concentration",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
     },
     {
-        "id": "9d296ce5-0c96-4f24-b73d-54c9f42acbee",
-        "slug": "medicine",
-        "name": "Medicine",
-        "related_attribute": "WIS"
-    },
-    {
-        "id": "01f33ad0-6613-4a49-ba0f-6443fed00765",
-        "slug": "perception",
-        "name": "Perception",
-        "related_attribute": "WIS"
-    },
-    {
-        "id": "04b740de-e1df-4d82-84cf-a054c5a93bd6",
-        "slug": "survival",
-        "name": "Survival",
-        "related_attribute": "WIS"
+        "id": "91b016ec-b0b4-4ea3-a202-f98e21dbb6ab",
+        "slug": "craft",
+        "name": "Craft",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
     },
     {
         "id": "494df4de-dac7-44be-a509-418288104b20",
         "slug": "deception",
         "name": "Deception",
-        "related_attribute": "CHA"
+        "editions": [
+            {
+                "game_edition": "5e",
+                "related_attribute": "CHA"
+            }
+        ]
+    },
+    {
+        "id": "6d99556c-e6f1-4589-ad18-aefb26615c5e",
+        "slug": "decipher-script",
+        "name": "Decipher Script",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "fff034b8-b1b0-4742-a1de-7b54bc7c52cf",
+        "slug": "diplomacy",
+        "name": "Diplomacy",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "834cc096-70db-4a95-9da4-ba75f6e0d018",
+        "slug": "disable-device",
+        "name": "Disable Device",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "d9561b48-ed74-45a1-b0cb-1253f109d5e6",
+        "slug": "disguise",
+        "name": "Disguise",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "d83d7d5a-e9bb-489c-addd-925488e53d06",
+        "slug": "escape-artist",
+        "name": "Escape Artist",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "f32d87b0-a26c-4b53-86b3-0de47e3d211a",
+        "slug": "forgery",
+        "name": "Forgery",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "2fa808f0-2b03-4c49-9a76-0c241b83d496",
+        "slug": "gather-information",
+        "name": "Gather Information",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "58fe3372-bdca-444a-9b2b-6e3aef267816",
+        "slug": "hide",
+        "name": "Hide",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "4432f7f1-6179-4539-9a2d-878c677031e7",
+        "slug": "history",
+        "name": "History",
+        "editions": [
+            {
+                "game_edition": "5e",
+                "related_attribute": "INT"
+            }
+        ]
+    },
+    {
+        "id": "588244fa-41aa-49f1-aaab-49f301054867",
+        "slug": "insight",
+        "name": "Insight",
+        "editions": [
+            {
+                "game_edition": "5e",
+                "related_attribute": "WIS"
+            }
+        ]
     },
     {
         "id": "dbfb6ad7-5925-42b0-8357-9ac04e990681",
         "slug": "intimidation",
         "name": "Intimidation",
-        "related_attribute": "CHA"
+        "editions": [
+            {
+                "game_edition": "3.5",
+                "alternate_name": "Intimidate"
+            },
+            {
+                "game_edition": "5e",
+                "related_attribute": "CHA"
+            }
+        ]
+    },
+    {
+        "id": "bb3d2e71-ea75-4bf2-b5cd-0f4d291081de",
+        "slug": "investigation",
+        "name": "Investigation",
+        "editions": [
+            {
+                "game_edition": "5e",
+                "related_attribute": "INT"
+            }
+        ]
+    },
+    {
+        "id": "15205d12-9ec7-46d7-a138-222d5e98a1d6",
+        "slug": "jump",
+        "name": "Jump",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "8353be90-932f-4cff-ae9e-d29b31f8804d",
+        "slug": "knowledge",
+        "name": "Knowledge",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "e2c327af-cbb6-4d25-8479-75214cea2887",
+        "slug": "listen",
+        "name": "Listen",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "9d296ce5-0c96-4f24-b73d-54c9f42acbee",
+        "slug": "medicine",
+        "name": "Medicine",
+        "editions": [
+            {
+                "game_edition": "3.5",
+                "alternate_name": "Heal"
+            },
+            {
+                "game_edition": "5e",
+                "related_attribute": "WIS"
+            }
+        ]
+    },
+    {
+        "id": "eaf34917-bc01-41b6-bca7-82342f075167",
+        "slug": "nature",
+        "name": "Nature",
+        "editions": [
+            {
+                "game_edition": "5e",
+                "related_attribute": "INT"
+            }
+        ]
+    },
+    {
+        "id": "171aabd7-f6b1-4d73-8e0f-4cfd77f23259",
+        "slug": "open-lock",
+        "name": "Open Lock",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "01f33ad0-6613-4a49-ba0f-6443fed00765",
+        "slug": "perception",
+        "name": "Perception",
+        "editions": [
+            {
+                "game_edition": "5e",
+                "related_attribute": "WIS"
+            }
+        ]
     },
     {
         "id": "dad286cb-e0f5-41b8-a432-1aa78c350db3",
         "slug": "performance",
         "name": "Performance",
-        "related_attribute": "CHA"
+        "editions": [
+            {
+                "game_edition": "3.5",
+                "alternate_name": "Perform"
+            },
+            {
+                "game_edition": "5e",
+                "related_attribute": "CHA"
+            }
+        ]
     },
     {
         "id": "92d03c8c-7eb0-49d1-9cd1-0050ccb00de0",
         "slug": "persuasion",
         "name": "Persuasion",
-        "related_attribute": "CHA"
+        "editions": [
+            {
+                "game_edition": "5e",
+                "related_attribute": "CHA"
+            }
+        ]
+    },
+    {
+        "id": "e5621738-a403-4f61-989c-90c425aaa934",
+        "slug": "profession",
+        "name": "Profession",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "227a4f39-7036-4ee6-b84b-6fecd63814cf",
+        "slug": "religion",
+        "name": "Religion",
+        "editions": [
+            {
+                "game_edition": "5e",
+                "related_attribute": "INT"
+            }
+        ]
+    },
+    {
+        "id": "4bcfca26-f59e-43f2-81a6-80d7d8038c5a",
+        "slug": "ride",
+        "name": "Ride",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "5070d6ad-2fd0-46da-a619-bdd8f07e46cf",
+        "slug": "search",
+        "name": "Search",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "843a746d-b6ab-41cd-9e70-99958141b7d2",
+        "slug": "sense-motive",
+        "name": "Sense Motive",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "c2630c65-91f0-4487-9f56-417f449dffe1",
+        "slug": "sleight-of-hand",
+        "name": "Sleight of Hand",
+        "editions": [
+            { "game_edition": "3.5" },
+            {
+                "game_edition": "5e",
+                "related_attribute": "DEX"
+            }
+        ]
+    },
+    {
+        "id": "2aa2914d-821d-42f5-9670-df9ee9643d21",
+        "slug": "speak-language",
+        "name": "Speak Language",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "05f44935-fad8-4c8c-bab3-2ec5ec7598c3",
+        "slug": "spellcraft",
+        "name": "Spellcraft",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "e529d20d-058f-4168-935b-d03cd625f471",
+        "slug": "spot",
+        "name": "Spot",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "91fe69ec-76fd-4316-8ad1-8e440561ad28",
+        "slug": "stealth",
+        "name": "Stealth",
+        "editions": [
+            {
+                "game_edition": "3.5",
+                "alternate_name": "Move Silently"
+            },
+            {
+                "game_edition": "5e",
+                "related_attribute": "DEX"
+            }
+        ]
+    },
+    {
+        "id": "04b740de-e1df-4d82-84cf-a054c5a93bd6",
+        "slug": "survival",
+        "name": "Survival",
+        "editions": [
+            { "game_edition": "3.5" },
+            {
+                "game_edition": "5e",
+                "related_attribute": "WIS"
+            }
+        ]
+    },
+    {
+        "id": "278782c0-d514-454e-8d37-be0c4499fdb8",
+        "slug": "swim",
+        "name": "Swim",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "c653404e-8b93-4fd3-9166-19a71a81b387",
+        "slug": "tumble",
+        "name": "Tumble",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "8bda839e-fea3-46e1-a939-c1384118fb8e",
+        "slug": "use-magic-device",
+        "name": "Use Magic Device",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
+    },
+    {
+        "id": "fc0eebe3-9b13-4cbd-8c74-d31b501101a3",
+        "slug": "use-rope",
+        "name": "Use Rope",
+        "editions": [
+            { "game_edition":  "3.5" }
+        ]
     }
 ]

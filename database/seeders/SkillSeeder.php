@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Enums\Attribute;
-use App\Models\Skill;
+use App\Enums\GameEdition;
+use App\Models\Skills\Skill;
+use App\Models\Skills\SkillEdition;
 
 class SkillSeeder extends AbstractYmlSeeder
 {
@@ -31,8 +33,22 @@ class SkillSeeder extends AbstractYmlSeeder
             $skill->id = $datum['id'];
             $skill->slug = $datum['slug'];
             $skill->name = $datum['name'];
-            $skill->related_attribute = Attribute::tryFromString($datum['related_attribute']);
+
             $skill->save();
+
+            foreach ($datum['editions'] as $editionData) {
+                $edition = new SkillEdition();
+                $edition->skill()->associate($skill);
+
+                $edition->alternate_name = $editionData['alternate_name'] ?? null;
+                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
+
+                if (!empty($editionData['related_attribute'])) {
+                    $edition->related_attribute = Attribute::tryFromString($editionData['related_attribute']);
+                }
+
+                $edition->save();
+            }
         }
     }
 }

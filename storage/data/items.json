@@ -183,5 +183,27 @@
                 "rarity": "common"
             }
         ]
+    },
+    {
+        "id": "38cc3a1d-64ac-40f8-93e4-114ee64f6af1",
+        "name": "Iron Statuette of Imp",
+        "slug": "iron-statuette-of-imp",
+        "categories": ["statues"],
+        "editions": [
+            {
+                "id": "faad198f-5e69-4e72-9ae2-1c6b9eb38ca3",
+                "game_edition": "3.5",
+                "description": "A tiny iron statuette of a devil or an imp.",
+                "is_default": true,
+                "rarity": "uncommon",
+                "references": [
+                    {
+                        "source": "champions-of-ruin",
+                        "page_from": 29
+                    }
+                ]
+            }
+        ],
+        "image": "iron-statuette-of-imp.webp"
     }
 ]

@@ -24,6 +24,14 @@
         "parent_id": "d59bdd89-fcb1-4ad3-939b-c4bb7586dba6"
     },
     {
+        "id": "198d7e6f-0f0e-4c54-b696-b5404855023e",
+        "slug": "art-objects",
+        "name": "Art Objects",
+        "entity_type": "item",
+        "parent": "loot",
+        "parent_id": "5d619da9-a3ac-4641-82c2-25246bee7f16"
+    },
+    {
         "id": "15b95fd3-2b84-4cdb-8b1f-a6d8665e89f7",
         "slug": "biological",
         "name": "Biological",
@@ -83,11 +91,25 @@
         "parent_id": "dda993d3-66a5-4eeb-8872-88a22bcc95ff"
     },
     {
+        "id": "5d619da9-a3ac-4641-82c2-25246bee7f16",
+        "slug": "loot",
+        "name": "Loot",
+        "entity_type": "item"
+    },
+    {
         "id": "0362b610-5c6e-4dfa-b034-613816d7c5fb",
         "slug": "potion",
         "name": "Potion",
         "entity_type": "item",
         "parent": "consumable",
         "parent_id": "350515c4-09d1-49fd-bf62-71d9870d53d0"
+    },
+    {
+        "id": "a6fb72c3-1b8d-4c79-b92d-8026d8eb6b2e",
+        "slug": "statues",
+        "name": "Statues",
+        "entity_type": "item",
+        "parent": "loot",
+        "parent_id": "5d619da9-a3ac-4641-82c2-25246bee7f16"
     }
 ]

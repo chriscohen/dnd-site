@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
+use InvalidArgumentException;
+
 enum SpellcasterType: int
 {
     case ARCANE = 1;
@@ -19,13 +21,15 @@ enum SpellcasterType: int
         };
     }
 
-    public static function tryFromString(string $value): ?self
+    public static function tryFromString(string $value, bool $throw = false): ?self
     {
         return match (mb_strtolower($value)) {
             'arcane' => self::ARCANE,
             'divine' => self::DIVINE,
             'any' => self::ANY,
-            default => null,
+            default => $throw ?
+                throw new InvalidArgumentException('"' . $value . '" is not a valid SpellcasterType.') :
+                null,
         };
     }
 }

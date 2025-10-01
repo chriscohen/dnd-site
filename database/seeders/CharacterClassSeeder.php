@@ -23,6 +23,9 @@ class CharacterClassSeeder extends AbstractYmlSeeder
             $item->is_prestige = $datum['is_prestige'] ?? false;
 
             $item->save();
+
+            $this->setPrerequisites($datum['prerequisites'] ?? [], $item);
+            $this->setReferences($datum['references'] ?? [], $item);
         }
     }
 }

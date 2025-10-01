@@ -2,18 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Skills;
 
-use App\Enums\Attribute;
+use App\Models\AbstractModel;
+use App\Models\ModelCollection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
  * @property string $slug
  *
+ * @property Collection<SkillEdition> $editions
  * @property string $name
- * @property Attribute $related_attribute
  */
 class Skill extends AbstractModel
 {
@@ -21,13 +24,16 @@ class Skill extends AbstractModel
 
     public $timestamps = false;
 
-    public $casts = [
-        'related_attribute' => Attribute::class,
-    ];
+    public function editions(): HasMany
+    {
+        return $this->hasMany(SkillEdition::class, 'skill_id');
+    }
 
     public function toArrayFull(): array
     {
-        return [];
+        return [
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
+        ];
     }
 
     public function toArrayShort(): array
@@ -36,7 +42,6 @@ class Skill extends AbstractModel
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
-            'related_attribute' => $this->related_attribute
         ];
     }
 

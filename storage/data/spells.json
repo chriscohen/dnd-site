@@ -200,7 +200,7 @@
                         "is_consumed": true
                     }
                 ],
-                "material_component_mode": 2,
+                "material_component_mode": "or",
                 "range": { "is_touch": true },
                 "references": [
                     {
@@ -362,16 +362,76 @@
                         "item": "drop-of-blood",
                         "quantity": 1,
                         "is_consumed": true
+                    },
+                    {
+                        "item": "iron-statuette-of-imp",
+                        "quantity": 1,
+                        "is_consumed": false
                     }
                 ],
+                "material_component_mode": "and",
                 "range": {
                     "is_self": true
                 },
+                "references": [
+                    {
+                        "source": "champions-of-ruin",
+                        "page_from": 29
+                    }
+                ],
                 "school": "summoning",
                 "spell_components": "V,S,M"
             }
         ],
         "image": "bedevil.webp"
+    },
+    {
+        "id": "f456e019-c443-42b4-97a4-befa13afc046",
+        "slug": "bloodfreeze-arrow",
+        "name": "Bloodfreeze Arrow",
+        "editions": [
+            {
+                "game_edition": "3.5",
+                "casting_time_unit": "bonus action",
+                "damage": [
+                    {
+                        "damage_type": "cold",
+                        "die_faces": 6,
+                        "die_quantity": 2,
+                        "status_condition": "paralyzed"
+                    }
+                ],
+                "description": "This spell is cast upon a masterwork arrow or bolt, transforming its head into blue ice. In addition to taking normal damage from the missle, the target takes 2d6 points of cold damage and is paralyzed. A successful Fortitude save negates the paralysis, and the target can make a new save each round (at the start of the caster's turn).",
+                "duration": { "unit": "instantaneous" },
+                "has_spell_resistance": true,
+                "levels": [
+                    { "class": "assassin", "level": 4 },
+                    { "class": "ranger", "level": 4 },
+                    { "class": "justice-of-weald-and-woe", "level": 4 }
+                ],
+                "material_components": [
+                    {
+                        "item": "masterwork-arrow",
+                        "quantity": 1,
+                        "is_consumed": true
+                    }
+                ],
+                "range": { "is_touch": true },
+                "references": [
+                    {
+                        "source": "champions-of-ruin",
+                        "page_from": 29
+                    }
+                ],
+                "saving_throw": {
+                    "type": "fortitude",
+                    "succeed_status": "paralyzed"
+                },
+                "school": "transmutation",
+                "spell_components": "V,M"
+            }
+        ],
+        "image": "bloodfreeze-arrow.webp"
     },
     {
         "id": "d79199f2-4866-4a74-8918-e7c5e34f8c56",
@@ -465,6 +525,39 @@
                 "spell_components": "V,S"
             },
             {
+                "game_edition": "3.5",
+                "casting_time_unit": "standard action",
+                "damage": [
+                    {
+                        "damage_type": "force",
+                        "die_faces": 4,
+                        "die_quantity": 1
+                    }
+                ],
+                "description": "A missile of magical energy darts forth from your fingertip and strikes its target, dealing 1d4 + 1 points of force damage.\n\nThe missile strikes unerringly, even if the target is in melee combat or has less than total cover or total concealment. Specific parts of a creature can't be singled out. Inanimate objects are not damaged by the spell.\n\nFor every two caster levels beyond 1st, you gain an additional missile—two at 3rd level, three at 5th, four at 7th, and the maximum of five missiles at 9th level or higher. If you shoot multiple missiles, you can have them strike a single creature or several creatures. A single missile can strike only one creature. You must designate targets before you check for spell resistance or roll damage.",
+                "domains": ["force"],
+                "duration": { "unit": "instantaneous" },
+                "has_spell_resistance": true,
+                "levels": [
+                    { "class": "sorcerer", "level": 1 },
+                    { "class": "wizard", "level": 1 }
+                ],
+                "range": {
+                    "number": 100,
+                    "per_level": 10,
+                    "per_level_mode": "per level",
+                    "unit": "ft"
+                },
+                "references": [
+                    {
+                        "source": "players-handbook-3-5-edition",
+                        "page_from": 251
+                    }
+                ],
+                "school": "glamer",
+                "spell_components": "V,S"
+            },
+            {
                 "game_edition": "5e",
                 "casting_time_unit": "standard action",
                 "damage": [
@@ -475,10 +568,10 @@
                         "die_quantity": 1
                     }
                 ],
+                "description": "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several",
                 "duration": {
                     "unit": "instantaneous"
                 },
-                "description": "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several",
                 "higher_levels": "When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.",
                 "levels": [
                     { "class": "sorcerer", "level": 1 },

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('type');
             $table->unsignedSmallInteger('multiplier')->nullable();
             $table->foreignIdFor(StatusConditionEdition::class, 'fail_status_id')->nullable();
+            $table->foreignIdFor(StatusConditionEdition::class, 'succeed_status_id')->nullable();
         });
     }
 

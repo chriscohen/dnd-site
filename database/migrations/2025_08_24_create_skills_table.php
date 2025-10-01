@@ -14,7 +14,6 @@ return new class extends Migration
             $table->string('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->index();
-            $table->unsignedSmallInteger('related_attribute')->index();
         });
     }
 

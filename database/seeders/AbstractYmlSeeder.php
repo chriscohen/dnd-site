@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Enums\Prerequisites\CraftType;
+use App\Enums\Prerequisites\PrerequisiteType;
+use App\Enums\Prerequisites\WeaponFocusType;
 use App\Models\ModelInterface;
+use App\Models\Prerequisites\Prerequisite;
+use App\Models\Prerequisites\PrerequisiteValue;
 use App\Models\Reference;
 use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
@@ -119,15 +124,43 @@ abstract class AbstractYmlSeeder extends Seeder
         return $this;
     }
 
-    /**
-     * @param  array{
-     *     edition_id: ?string,
-     *     page_from: int,
-     *     page_to: ?int,
-     *     source: ?string
-     * } $data
-     * @return self
-     */
+    public function setPrerequisites(array $data, ModelInterface $me): self
+    {
+        foreach ($data as $prerequisiteData) {
+            $prerequisite = new Prerequisite();
+            $prerequisite->featEdition()->associate($me);
+            $prerequisite->type = PrerequisiteType::tryFromString($prerequisiteData['type'], true);
+
+            $prerequisite->save();
+
+            foreach ($prerequisiteData['values'] ?? [] as $valueData) {
+                $value = new PrerequisiteValue();
+                $value->prerequisite()->associate($prerequisite);
+
+                if (is_array($valueData)) {
+                    $value->skill_ranks = $valueData['skill_ranks'] ?? null;
+                    $value->value = $valueData['value'];
+
+                    if (!empty($valueData['craft_type'])) {
+                        $value->craft_type = CraftType::tryFromString($valueData['craft_type'], true);
+                    }
+                    if (!empty($valueData['weapon_focus_type'])) {
+                        $value->weapon_focus_type = WeaponFocusType::tryFromString(
+                            $valueData['weapon_focus_type'],
+                            true
+                        );
+                    }
+                } else {
+                    $value->value = $valueData;
+                }
+
+                $value->save();
+            }
+        }
+        return $this;
+    }
+
+
     public function setReferences(array $data, ModelInterface $me): self
     {
         foreach ($data as $datum) {

@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Enums;
+namespace App\Enums\Prerequisites;
+
+use InvalidArgumentException;
 
 enum PrerequisiteType: int
 {
@@ -14,6 +16,8 @@ enum PrerequisiteType: int
     case CHARACTER_CLASS = 6;
     case SPELLCASTER_TYPE = 7;
     case SPECIES = 8;
+    case SKILL = 9;
+    case WEAPON_PROFICIENCY = 10;
 
     public function toString(): string
     {
@@ -26,21 +30,27 @@ enum PrerequisiteType: int
             self::CHARACTER_CLASS => 'class',
             self::SPELLCASTER_TYPE => 'spellcaster type',
             self::SPECIES => 'species',
+            self::SKILL => 'skill',
+            self::WEAPON_PROFICIENCY => 'weapon proficiency',
         };
     }
 
-    public static function tryFromString(string $value): ?self
+    public static function tryFromString(string $value, bool $throw = false): ?self
     {
         return match (str_replace(' ', '_', mb_strtolower($value))) {
-            'minimum level' => self::MINIMUM_LEVEL,
-            'patron deity' => self::PATRON_DEITY,
+            'minimum_level' => self::MINIMUM_LEVEL,
+            'patron_deity' => self::PATRON_DEITY,
             'alignment' => self::ALIGNMENT,
-            'minimum base attack bonus' => self::MINIMUM_BASE_ATTACK_BONUS,
+            'base_attack_bonus', 'minimum_base_attack_bonus' => self::MINIMUM_BASE_ATTACK_BONUS,
             'feat' => self::FEAT,
             'class' => self::CHARACTER_CLASS,
-            'spellcaster type' => self::SPELLCASTER_TYPE,
+            'spellcaster_type' => self::SPELLCASTER_TYPE,
             'species' => self::SPECIES,
-            default => null,
+            'skill' => self::SKILL,
+            'weapon_proficiency' => self::WEAPON_PROFICIENCY,
+            default => $throw ?
+                throw new InvalidArgumentException('"' . $value . '" is not a valid prerequisite type.') :
+                null,
         };
     }
 }

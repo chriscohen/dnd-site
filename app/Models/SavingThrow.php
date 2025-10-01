@@ -7,7 +7,6 @@ namespace App\Models;
 use App\Enums\SavingThrows\SavingThrowMultiplier;
 use App\Enums\SavingThrows\SavingThrowType;
 use App\Models\Spells\SpellEdition;
-use App\Models\StatusConditions\StatusCondition;
 use App\Models\StatusConditions\StatusConditionEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,10 +15,11 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property ?StatusCondition $failStatus
+ * @property ?StatusConditionEdition $failStatus
  * @property ?Uuid $fail_status_id
  * @property ?SavingThrowMultiplier $multiplier
  * @property SpellEdition $spellEdition
+ * @property ?StatusConditionEdition $succeedStatus
  * @property SavingThrowType $type
  */
 class SavingThrow extends AbstractModel
@@ -29,7 +29,6 @@ class SavingThrow extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'fail_status' => StatusConditionEdition::class,
         'multiplier' => SavingThrowMultiplier::class,
         'type' => SavingThrowType::class,
     ];
@@ -42,6 +41,11 @@ class SavingThrow extends AbstractModel
     public function spellEdition(): BelongsTo
     {
         return $this->belongsTo(SpellEdition::class, 'spell_edition_id');
+    }
+
+    public function succeedStatus(): BelongsTo
+    {
+        return $this->belongsTo(StatusConditionEdition::class, 'succeed_status_id');
     }
 
     public function toArrayFull(): array
@@ -63,6 +67,7 @@ class SavingThrow extends AbstractModel
         return [
             'fail_status' => $this->failStatus?->toArray($this->renderMode),
             'multiplier' => $this->multiplier?->toString(),
+            'succeed_status' => $this->succeedStatus?->toArray($this->renderMode),
         ];
     }
 }

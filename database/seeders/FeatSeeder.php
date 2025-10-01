@@ -5,13 +5,8 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Enums\GameEdition;
-use App\Enums\PrerequisiteType;
 use App\Models\Feats\Feat;
 use App\Models\Feats\FeatEdition;
-use App\Models\Prerequisites\Prerequisite;
-use App\Models\Prerequisites\PrerequisiteValue;
-use App\Models\Reference;
-use App\Models\Sources\Source;
 
 class FeatSeeder extends AbstractYmlSeeder
 {
@@ -39,30 +34,8 @@ class FeatSeeder extends AbstractYmlSeeder
 
                 $edition->save();
 
-                foreach ($editionData['references'] as $referenceData) {
-                    $reference = new Reference();
-                    $reference->entity()->associate($edition);
-                    $source = Source::query()->where('slug', $referenceData['source'])->first();
-                    $reference->edition()->associate($source->primaryEdition());
-                    $reference->page_from = $referenceData['page_from'];
-                    $reference->page_to = $referenceData['page_to'] ?? null;
-                    $reference->save();
-                }
-
-                foreach ($editionData['prerequisites'] as $prerequisiteData) {
-                    $prerequisite = new Prerequisite();
-                    $prerequisite->featEdition()->associate($edition);
-                    $prerequisite->type = PrerequisiteType::tryFromString($prerequisiteData['type']);
-
-                    $prerequisite->save();
-
-                    foreach ($prerequisiteData['values'] as $valueData) {
-                        $value = new PrerequisiteValue();
-                        $value->prerequisite()->associate($prerequisite);
-                        $value->value = $valueData;
-                        $value->save();
-                    }
-                }
+                $this->setReferences($editionData['references'] ?? [], $edition);
+                $this->setPrerequisites($editionData['prerequisites'] ?? [], $edition);
             }
         }
     }

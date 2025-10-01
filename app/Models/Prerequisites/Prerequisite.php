@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Prerequisites;
 
 use App\Enums\Alignment;
-use App\Enums\JsonRenderMode;
-use App\Enums\PrerequisiteType;
+use App\Enums\Prerequisites\PrerequisiteType;
 use App\Enums\SpellcasterType;
 use App\Models\AbstractModel;
 use App\Models\CharacterClass;

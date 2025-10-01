@@ -71,7 +71,7 @@ class SpellSeeder extends AbstractYmlSeeder
                 $edition->higher_level = $editionData['higher_level'] ?? null;
                 $edition->is_default = $editionData['is_default'] ?? false;
                 $edition->material_component_mode = !empty($editionData['material_component_mode']) ?
-                    MaterialComponentMode::tryFrom($editionData['material_component_mode']) : null;
+                    MaterialComponentMode::tryFromString($editionData['material_component_mode']) : null;
 
                 // Range
                 $this->makeRange($editionData['range'], $edition);
@@ -163,7 +163,7 @@ class SpellSeeder extends AbstractYmlSeeder
 
             $damageInstance->die_quantity = $datum['die_quantity'] ?? null;
             $damageInstance->die_quantity_maximum = $datum['die_quantity_maximum'] ?? null;
-            $damageInstance->die_faces = $datum['die_faces'];
+            $damageInstance->die_faces = $datum['die_faces'] ?? null;
 
             if (!empty($datum['damage_type'])) {
                 $damageInstance->damage_type = DamageType::tryFromString($datum['damage_type']);

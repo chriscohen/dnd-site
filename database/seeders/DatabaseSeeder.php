@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             SpeciesSeeder::class,
             SkillSeeder::class,
             StatusConditionSeeder::class,
-            CharacterClassSeeder::class,
             MagicSchoolSeeder::class,
             MagicDomainSeeder::class,
             CreatureMajorTypeSeeder::class,
@@ -29,6 +28,7 @@ class DatabaseSeeder extends Seeder
             SourceSeeder::class,
 
             FeatSeeder::class,
+            CharacterClassSeeder::class,
             ItemSeeder::class,
             SpellSeeder::class,
         ]);
