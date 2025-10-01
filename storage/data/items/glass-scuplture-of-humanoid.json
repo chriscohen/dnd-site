@@ -1,0 +1,20 @@
+{
+    "id": "8518c27c-be6d-4fdd-b54a-23cfffe8adcd",
+    "name": "Glass Sculpture of a Humanoid",
+    "slug": "glass-sculpture-of-a-humanoid",
+    "categories": ["statues"],
+    "editions": [
+        {
+            "id": "87353c91-dbc6-4a5c-86c5-cf85bdf34f38",
+            "game_edition": "3.5",
+            "description": "A glass sculpture of a humanoid.",
+            "is_default": true,
+            "rarity": "common",
+            "references": {
+                "source": "spell-compendium",
+                "page_from": 7
+            }
+        }
+    ],
+    "image": "glass-sculpture-of-a-humanoid.webp"
+}

@@ -1,0 +1,51 @@
+{
+    "id": "cf767767-b9ca-4fa3-87c3-3cd6d8c96231",
+    "slug": "acid-sheath",
+    "name": "Acid Sheath",
+    "editions": [
+        {
+            "game_edition": "3.5",
+            "casting_time_unit": "standard action",
+            "damage": [
+                {
+                    "damage_type": "acid",
+                    "fixed_damage_maximum": 30,
+                    "per_level_fixed_damage": 2,
+                    "per_level_mode": "per caster level"
+                }
+            ],
+            "description": "You crush the fire ants between your fingers and rub the smashed mixture over your exposed flesh. The smashed ants liquefy, and the liquid covers your body in a thick, translucent sheath.\n\nYou enclose yourself in a fluid sheath of acid that does not harm you. You can breathe normally and cast spells while the acid sheath is present. Any creature striking you deals normal damage, but at the same time the attacker takes 2 points of acid damage per caster level (maximum 30 points). Reach weapons, such as longspears, do not endanger their users in this way.\n\nThe acid sheath does not protect you against other attack forms, such as fire.\n\nIf you are in a grapple, other creatures in the grapple take acid damage once per round at the beginning of their turn.\n\nAny spell you cast with the acid descriptor while the sheath surrounds you deals an extra 1 point of damage per die.",
+            "domains": ["acid"],
+            "duration": {
+                "per_level": 1,
+                "unit": "round"
+            },
+            "has_spell_resistance": false,
+            "levels": [
+                { "feat":  "sorcerer", "level": 5 },
+                { "feat":  "wizard", "level": 5 }
+            ],
+            "material_components": [
+                {
+                    "item": "fire-ant",
+                    "description": "a handful of fire ants (alive or dead)",
+                    "is_consumed": true
+                },
+                {
+                    "item": "glass-sculpture-of-a-humanoid",
+                    "is_focus": true,
+                    "minimum_value": 500000
+                }
+            ],
+            "range": { "unit": "self" },
+            "references": {
+                "source": "spell-compendium",
+                "page_from": 7
+            },
+            "school": "creation",
+            "spell_components": "V,S,M,F",
+            "target": { "type": "self" }
+        }
+    ],
+    "image": "acid-sheath.webp"
+}

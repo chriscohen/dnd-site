@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 
@@ -12,6 +13,7 @@ use Illuminate\Support\Collection;
  * @property string $slug
  * @property string $name
  *
+ * @property ?Media $image
  * @property bool $is_prestige
  * @property Collection<Reference> $references
  */
@@ -23,6 +25,11 @@ class CharacterClass extends AbstractModel
     public $casts = [
         'is_prestige' => 'boolean',
     ];
+
+    public function image(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'image_id');
+    }
 
     public function references(): MorphMany
     {
@@ -46,6 +53,8 @@ class CharacterClass extends AbstractModel
 
     public function toArrayTeaser(): array
     {
-        return [];
+        return [
+            'image' => $this->image?->toArray($this->renderMode),
+        ];
     }
 }

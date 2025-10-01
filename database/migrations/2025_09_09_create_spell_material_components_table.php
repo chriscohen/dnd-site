@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('quantity_text')->nullable();
             $table->text('description')->nullable();
             $table->boolean('is_consumed')->default(false);
+            $table->boolean('is_focus')->default(false);
             $table->boolean('is_plural')->default(false);
+            $table->unsignedInteger('minimum_value')->nullable();
 
             $table->unique(['item_edition_id', 'spell_edition_id'], 'spell_edition_item_edition');
         });

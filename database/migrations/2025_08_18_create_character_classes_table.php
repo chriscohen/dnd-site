@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use App\Models\Media;
 
 return new class extends Migration
 {
@@ -15,6 +16,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('name')->index();
             $table->boolean('is_prestige')->default(false);
+            $table->foreignIdFor(Media::class, 'image_id')->nullable();
         });
     }
 

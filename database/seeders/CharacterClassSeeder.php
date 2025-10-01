@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\CharacterClass;
+use App\Models\Media;
 
 class CharacterClassSeeder extends AbstractYmlSeeder
 {
@@ -21,6 +22,15 @@ class CharacterClassSeeder extends AbstractYmlSeeder
             $item->slug = $datum['slug'] ?? $this->makeSlug($datum['name']);
             $item->name = $datum['name'];
             $item->is_prestige = $datum['is_prestige'] ?? false;
+
+            if (!empty($datum['image'])) {
+                $media = Media::createFromExisting([
+                    'filename' => '/classes/' . $datum['image'],
+                    'disk' => 's3',
+                    'collection_name' => 'classes',
+                ]);
+                $item->image()->associate($media);
+            }
 
             $item->save();
 

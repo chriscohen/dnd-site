@@ -15,11 +15,13 @@ use Ramsey\Uuid\Uuid;
  *
  * @property ?string $description
  * @property bool $is_consumed
+ * @property bool $is_focus
  * @property bool $is_plural
  * @property Uuid $item_edition_id
  * @property ItemEdition $itemEdition
- * @property int $quantity
- * @property string $quantity_text
+ * @property ?int $minimum_value
+ * @property ?int $quantity
+ * @property ?string $quantity_text
  * @property Uuid $spell_edition_id
  * @property SpellEdition $spellEdition
  */
@@ -28,6 +30,12 @@ class SpellMaterialComponent extends AbstractModel
     use HasUuids;
 
     public $timestamps = false;
+
+    public $casts = [
+        'is_consumed' => 'boolean',
+        'is_focus' => 'boolean',
+        'is_plural' => 'boolean',
+    ];
 
     public function getItemData(): array
     {
@@ -55,7 +63,9 @@ class SpellMaterialComponent extends AbstractModel
         return [
             'description' => $this->description,
             'is_consumed' => $this->is_consumed,
+            'is_focus' => $this->is_focus,
             'is_plural' => $this->is_plural,
+            'minimum_value' => $this->formatPrice($this->minimum_value),
             'quantity' => $this->quantity,
             'quantity_text' => $this->quantity_text,
         ];

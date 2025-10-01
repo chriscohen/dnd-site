@@ -20,11 +20,16 @@ use Ramsey\Uuid\Uuid;
  * @property ?int $attribute_modifier_quantity
  * @property DamageType $damage_type
  * @property int $die_faces
+ * @property ?int $fixed_damage
+ * @property ?int $fixed_damage_maximum
  * @property ?int $die_quantity
  * @property ?int $die_quantity_maximum
  * @property ModelInterface $entity
  * @property int $modifier
- * @property PerLevelMode $per_level_mode
+ * @property ?int $per_level_die_faces
+ * @property ?int $per_level_die_quantity
+ * @property ?int $per_level_fixed_damage
+ * @property ?PerLevelMode $per_level_mode
  * @property int $quantity
  * @property ?StatusConditionEdition $statusConditionEdition
  */
@@ -62,8 +67,13 @@ class DamageInstance extends AbstractModel
             'die_faces' => $this->die_faces,
             'die_quantity' => $this->die_quantity,
             'die_quantity_maximum' => $this->die_quantity_maximum,
+            'fixed_damage' => $this->fixed_damage,
+            'fixed_damage_maximum' => $this->fixed_damage_maximum,
             'entity_id' => $this->entity->id,
             'modifier' => $this->modifier,
+            'per_level_die_faces' => $this->per_level_die_faces,
+            'per_level_die_quantity' => $this->per_level_die_quantity,
+            'per_level_fixed_damage' => $this->per_level_fixed_damage,
             'per_level_mode' => $this->per_level_mode,
             'quantity' => $this->quantity,
         ];

@@ -18,16 +18,36 @@ return new class extends Migration
             $table->uuid('entity_id');
             $table->string('entity_type');
 
+            // # of instances.
             $table->unsignedSmallInteger('quantity')->default(1);
+
+            // Damage numbers.
+            $table->unsignedSmallInteger('fixed_damage')->nullable();
             $table->unsignedSmallInteger('die_quantity')->nullable();
-            $table->unsignedSmallInteger('die_quantity_maximum')->nullable();
             $table->unsignedSmallInteger('die_faces');
+
+            // Maximums
+            $table->unsignedSmallInteger('die_quantity_maximum')->nullable();
+            $table->unsignedSmallInteger('fixed_damage_maximum')->nullable();
+
+            // Type.
             $table->unsignedSmallInteger('damage_type')->nullable();
+
+            // Modifier.
             $table->smallInteger('modifier')->default(0);
+
+            // Attribute modifier.
             $table->unsignedSmallInteger('attribute_modifier')->nullable();
             $table->unsignedSmallInteger('attribute_modifier_quantity')->nullable();
+
+            // Status condition.
             $table->foreignIdFor(StatusConditionEdition::class, 'status_condition_edition_id')->nullable();
-            $table->unsignedSmallInteger('per_level_mode')->default(0);
+
+            // Per level damage numbers.
+            $table->unsignedSmallInteger('per_level_die_quantity')->nullable();
+            $table->unsignedSmallInteger('per_level_die_faces')->nullable();
+            $table->unsignedSmallInteger('per_level_fixed_damage')->nullable();
+            $table->unsignedSmallInteger('per_level_mode')->nullable();
 
             $table->index(['entity_id', 'entity_type']);
         });

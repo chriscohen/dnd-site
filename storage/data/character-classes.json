@@ -22,11 +22,13 @@
     },
     {
         "id": "druid",
-        "name": "Druid"
+        "name": "Druid",
+        "image": "druid.webp"
     },
     {
         "id": "fighter",
-        "name": "Fighter"
+        "name": "Fighter",
+        "image": "fighter.webp"
     },
     {
         "id": "justice-of-weald-and-woe",
@@ -65,18 +67,22 @@
     },
     {
         "id": "ranger",
-        "name": "Ranger"
+        "name": "Ranger",
+        "image": "ranger.webp"
     },
     {
         "id": "rogue",
-        "name": "Rogue"
+        "name": "Rogue",
+        "image": "rogue.webp"
     },
     {
         "id": "sorcerer",
-        "name": "Sorcerer"
+        "name": "Sorcerer",
+        "image": "sorcerer.webp"
     },
     {
         "id": "wizard",
-        "name": "Wizard"
+        "name": "Wizard",
+        "image": "wizard.webp"
     }
 ]
