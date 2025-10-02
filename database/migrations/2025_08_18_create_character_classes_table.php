@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->index();
-            $table->boolean('is_prestige')->default(false);
+
             $table->foreignIdFor(Media::class, 'image_id')->nullable();
         });
     }

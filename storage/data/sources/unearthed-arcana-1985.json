@@ -1,0 +1,36 @@
+{
+    "id": "1af2cf7e-6314-4218-880e-b40c45547043",
+    "slug": "unearthed-arcana-1985",
+    "name": "Unearthed Arcana (1985)",
+    "cover_image": "unearthed-arcana-1985.webp",
+    "description": "...All the new discoveries, plus a wealth of just uncovered secrets, between one pair of covers.\" This, the latest of the AD&D game books, further defines and describes the game system. Inside are new spells, character classes, magic items, weapons, and much more for both players and Dungeon Masters.",
+    "editions": [
+        {
+            "id": "cbbc22d1-0137-4ace-952f-e0dba2d46e2c",
+            "name": "original",
+            "binding": "hardcover",
+            "formats": ["print", "pdf"],
+            "is_primary": true,
+            "isbn10": "0880380845",
+            "isbn13": "9780880380843",
+            "pages": 128,
+            "release_date": "1985-06",
+            "release_date_month_only": true
+        }
+    ],
+    "game_edition": "1e",
+    "product_code": "TSR2017",
+    "product_ids": {
+        "dungeon-masters-guild": "170096",
+        "drivethru-rpg": "170096"
+    },
+    "publication_type": "official",
+    "publisher_id": "25d0e571-e37a-4a07-8ec5-73db0e00a502",
+    "publisher_name": "TSR",
+    "sourcebook_types": [
+        "character_options",
+        "gear_magic_items",
+        "spells"
+    ],
+    "source_type": "sourcebook"
+}

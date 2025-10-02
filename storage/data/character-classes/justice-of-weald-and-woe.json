@@ -1,0 +1,42 @@
+{
+    "id": "justice-of-weald-and-woe",
+    "name": "Justice of Weald and Woe",
+    "caption": "The go-to person when something unsavoury—usually involving the removal of humans—needs doing",
+    "editions": [
+        {
+            "id": "e4765c22-fd7e-43c9-8bf0-5c20cbd8480a",
+            "game_edition": "3.5",
+            "is_prestige": true,
+            "prerequisites": [
+                {
+                    "type": "minimum base attack bonus",
+                    "values": [6]
+                },
+                {
+                    "type": "skill",
+                    "values": [
+                        { "value": "craft", "skill_ranks": 8, "craft_type": "bowmaking" },
+                        { "value": "hide", "skill_ranks": 8 },
+                        { "value": "knowledge", "skill_ranks": 4 },
+                        { "value": "stealth", "skill_ranks": 8 },
+                        { "value": "survival", "skill_ranks": 8 }
+                    ]
+                },
+                {
+                    "type": "feat",
+                    "values": [
+                        "point-blank-shot",
+                        { "value": "weapon-focus", "weapon_focus_type": "longbow" }
+                    ]
+                }
+            ],
+            "references": [
+                {
+                    "source": "champions-of-ruin",
+                    "page_from": 48,
+                    "page_to": 53
+                }
+            ]
+        }
+    ]
+}

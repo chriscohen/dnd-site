@@ -26,6 +26,12 @@
         "website": "https://www.drivethrurpg.com"
     },
     {
+        "id": "25d0e571-e37a-4a07-8ec5-73db0e00a502",
+        "slug": "tsr",
+        "name": "TSR, Inc.",
+        "logo": "tsr-logo.webp"
+    },
+    {
         "id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
         "slug": "wizards-of-the-coast",
         "name": "Wizards of the Coast",

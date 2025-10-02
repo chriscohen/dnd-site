@@ -1,0 +1,34 @@
+{
+    "id": "ad548d8b-b55f-4ae5-acd9-bdc22fce193b",
+    "slug": "sword-coast-adventurers-guide",
+    "name": "Sword Coast Adventurer's Guide",
+    "cover_image": "sword-coast-adventurers-guide.webp",
+    "description": "WELCOME TO THE SWORD COAST\n\nA region of the Forgotten Realms®, the Sword Coast comprises shining paragons of civilization, perilous locales fraught with evil, and, encompassing them all, a wilderness that offers an explorer both vast opportunity and great danger.\n\nThe Sword Coast Adventurer's Guide™ is a valuable resource for Dungeon Masters and players alike. In addition to describing the peoples and places of the Sword Coast, the book contains a plethora of new character options to intrigue and inspire every adventuring party.\n\nFor use with the fifth edition Player's Handbook®, Monster Manual®, and Dungeon Master's Guide®, this book provides the setting, story, and character options needed to participate in a D&D game anywhere along the Sword Coast of Faerûn.",
+    "editions": [
+        {
+            "id": "f8f796c1-47ef-4dfa-bf67-1656bee97ded",
+            "name": "original",
+            "binding": "hardcover",
+            "formats": [
+                "roll_20"
+            ],
+            "isbn10": "0786965800",
+            "isbn13": "9780786965809",
+            "pages": 160,
+            "release_date": "2015-11-03"
+        }
+    ],
+    "game_edition": "5e",
+    "product_ids": {
+        "drivethru-rpg": "442496",
+        "dungeon-masters-guild": "442496"
+    },
+    "publication_type": "official",
+    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebook_types": [
+        "lore",
+        "monsters",
+        "spells"
+    ],
+    "source_type": "sourcebook"
+}

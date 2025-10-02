@@ -6,18 +6,20 @@ namespace App\Enums;
 
 enum GameEdition: int
 {
-    case FIRST = 1;
-    case SECOND = 2;
+    case ZERO = 1;
+    case FIRST = 2;
+    case SECOND = 3;
     case TPF = 4;
     case THIRD = 5;
-    case FOURTH = 6;
-    case FIFTH = 7;
-    case FIFTH_REVISED = 8;
+    case FOURTH = 7;
+    case FIFTH = 8;
+    case FIFTH_REVISED = 9;
 
     public function toString($short = false): string
     {
         if ($short) {
             return match ($this->name) {
+                'ZERO' => '0e',
                 'FIRST' => '1e',
                 'SECOND' => '2e',
                 'THIRD' => '3e',
@@ -28,6 +30,7 @@ enum GameEdition: int
             };
         } else {
             return match ($this->name) {
+                'ZERO' => 'Original Edition',
                 'FIRST' => 'First Edition',
                 'SECOND' => 'AD&D Second Edition',
                 'THIRD' => 'Third Edition',
@@ -47,6 +50,7 @@ enum GameEdition: int
     public static function tryFromString(string $value): ?GameEdition
     {
         return match (mb_strtolower($value)) {
+            '0th', '0e', 'od&d', 'original' => self::ZERO,
             '1st', '1e', 'first' => self::FIRST,
             '2nd', '2e', 'second' => self::SECOND,
             '3rd', '3e', 'third' => self::THIRD,

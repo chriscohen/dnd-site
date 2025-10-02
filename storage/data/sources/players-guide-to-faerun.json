@@ -1,0 +1,36 @@
+{
+    "id": "32fc8dab-0701-40ae-8776-916f0174fb65",
+    "slug": "players-guide-to-faerun",
+    "name": "Player's Guide to Faerûn",
+    "cover_image": "players-guide-to-faerun.webp",
+    "description": "The heroes of the Forgotten Realms are as diverse and varied as the regions from which they hail. This collection of Faerûnian lore and arcana allows you to create and equip an endless array of characters braced for the challenges they'll encounter.\n\nFrom races, feats, and spells to prestige classes, magic items, and more, Player's Guide to Faerûn provides a v.3.5 update to the Forgotten Realms setting, reintroduces some old favorites from 1st and 2nd Edition, and offers all-new character-building material.\n\n- Over 60 feats\n- More than 30 prestige classes\n- 90 spells.",
+    "editions": [
+        {
+            "id": "fb943c2d-a123-4b57-b551-18b574b732f4",
+            "name": "original",
+            "binding": "hardcover",
+            "formats": ["print", "pdf"],
+            "is_primary": true,
+            "isbn10": "0786931345",
+            "isbn13": "9780786931347",
+            "pages": 192,
+            "release_date": "2004-03",
+            "release_date_month_only": true
+        }
+    ],
+    "game_edition": "3.5",
+    "product_code": "886470000",
+    "product_ids": {
+        "dungeon-masters-guild": "29520",
+        "drivethru-rpg": "29520"
+    },
+    "publication_type": "official",
+    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebook_types": [
+        "character_options",
+        "gear_magic_items",
+        "lore",
+        "spells"
+    ],
+    "source_type": "sourcebook"
+}

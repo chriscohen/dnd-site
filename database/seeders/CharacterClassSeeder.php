@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\CharacterClass;
+use App\Enums\GameEdition;
+use App\Models\CharacterClasses\CharacterClass;
+use App\Models\CharacterClasses\CharacterClassEdition;
 use App\Models\Media;
 
 class CharacterClassSeeder extends AbstractYmlSeeder
 {
-    protected string $path = 'character-classes.json';
+    protected string $dir = 'character-classes';
     protected string $model = CharacterClass::class;
 
     public function run(): void
     {
-        $data = $this->getDataFromFile();
-
-        foreach ($data as $datum) {
+        foreach ($this->getDataFromDirectory() as $datum) {
             $item = new CharacterClass();
             $item->id = $datum['id'];
             $item->slug = $datum['slug'] ?? $this->makeSlug($datum['name']);
             $item->name = $datum['name'];
-            $item->is_prestige = $datum['is_prestige'] ?? false;
+            print $item->name . "\n";
 
             if (!empty($datum['image'])) {
                 $media = Media::createFromExisting([
@@ -34,8 +34,22 @@ class CharacterClassSeeder extends AbstractYmlSeeder
 
             $item->save();
 
-            $this->setPrerequisites($datum['prerequisites'] ?? [], $item);
-            $this->setReferences($datum['references'] ?? [], $item);
+            foreach ($datum['editions'] ?? [] as $editionData) {
+                $edition = new CharacterClassEdition();
+                $edition->characterClass()->associate($item);
+
+                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
+                $edition->alternate_name = $editionData['alternate_name'] ?? null;
+                $edition->caption = $editionData['caption'] ?? null;
+                $edition->hit_die_faces = $editionData['hit_die_faces'] ?? null;
+                $edition->is_prestige = $editionData['is_prestige'] ?? false;
+                $edition->parent_id = $editionData['parent_id'] ?? null;
+
+                $edition->save();
+
+                $this->setPrerequisites($editionData['prerequisites'] ?? [], $edition);
+                $this->setReferences($editionData['references'] ?? [], $edition);
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ use Carbon\Carbon;
 
 class SourceSeeder extends AbstractYmlSeeder
 {
-    protected string $path = 'sources.json';
+    protected string $dir = 'sources';
     protected string $model = Source::class;
     protected array $excludedProperties = [
         'cover_image'
@@ -36,9 +36,7 @@ class SourceSeeder extends AbstractYmlSeeder
 
     public function run(): void
     {
-        $data = $this->getDataFromFile();
-
-        foreach ($data as $datum) {
+        foreach ($this->getDataFromDirectory() as $datum) {
             $source = new Source();
             $source->id = $datum['id'];
             // If no slug, assume we can just urlencode the name.

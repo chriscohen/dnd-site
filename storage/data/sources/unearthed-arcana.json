@@ -1,0 +1,35 @@
+{
+    "id": "f17ba616-db54-41eb-8616-5779c9e60f78",
+    "name": "Unearthed Arcana",
+    "cover_image": "unearthed-arcana.webp",
+    "description": "A new guide to variant rules for the Dungeons & Dragons roleplaying game, this sourcebook provides players and DMs with a wide choice of alternate rules for roleplaying in a D&D campaign. Designed to expand the options available for customizing gameplay, these variant rules are modular and can be imported into any campaign in any amount desired. Examples of variant rules include playing core classes as prestige classes and alternate damage systems. Brand-new rules also include a new system of metamagic feats and a new spell system.",
+    "editions": [
+        {
+            "id": "5518baa8-9175-4b5a-b689-72d58f3a2eeb",
+            "name": "original",
+            "binding": "hardcover",
+            "formats": [
+                "print",
+                "pdf"
+            ],
+            "isbn10": "0768031310",
+            "pages": 224,
+            "release_date": "2004-02-01",
+            "release_date_month_only": true
+        }
+    ],
+    "game_edition": "3e",
+    "product_code": "881560000",
+    "product_ids": {
+        "drivethru-rpg": "3734",
+        "dungeon-masters-guild": "3734"
+    },
+    "publication_type": "official",
+    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebook_types": [
+        "character_options",
+        "gear_magic_items",
+        "spells"
+    ],
+    "source_type": "sourcebook"
+}

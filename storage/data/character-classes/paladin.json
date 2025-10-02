@@ -1,0 +1,35 @@
+{
+    "id": "paladin",
+    "name": "Paladin",
+    "image": "paladin.webp",
+    "editions": [
+        {
+            "id": "223bf760-7233-4de6-b24d-520df656d6b2",
+            "game_edition": "0e",
+            "parent_id": "788e3f95-de4a-46a0-8bde-bcf9b9b3daf7"
+        },
+        {
+            "id": "a69b97fa-ebed-4c51-8cb9-ea15c1a79511",
+            "game_edition": "1e",
+            "parent_id": "ccc9a6e6-0efe-45a7-b7a8-cbee2af8bd98",
+            "parent_name": "cavalier",
+            "references": [
+                {
+                    "source": "unearthed-arcana-1985",
+                    "page_from": 16
+                }
+            ]
+        },
+        {
+            "id": "4818c6b5-f02e-4838-bf32-9508fc4a5a07",
+            "game_edition": "2e",
+            "references": [
+                {
+                    "source": "players-handbook-2nd-edition",
+                    "page_from": 27,
+                    "page_to": 28
+                }
+            ]
+        }
+    ]
+}

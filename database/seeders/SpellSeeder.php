@@ -18,7 +18,7 @@ use App\Enums\Spells\SpellType4e;
 use App\Enums\TargetType;
 use App\Enums\TimeUnit;
 use App\Models\Area;
-use App\Models\CharacterClass;
+use App\Models\CharacterClasses\CharacterClass;
 use App\Models\DamageInstance;
 use App\Models\Duration;
 use App\Models\Feats\Feat;
@@ -52,12 +52,14 @@ class SpellSeeder extends AbstractYmlSeeder
 
             print $item->name . PHP_EOL;
 
-            $media = Media::createFromExisting([
-                'filename' => '/spells/' . $datum['image'],
-                'disk' => 's3',
-                'collection_name' => 'spells',
-            ]);
-            $item->image()->associate($media);
+            if (!empty($datum['image'])) {
+                $media = Media::createFromExisting([
+                    'filename' => '/spells/'.$datum['image'],
+                    'disk' => 's3',
+                    'collection_name' => 'spells',
+                ]);
+                $item->image()->associate($media);
+            }
 
             $item->save();
 

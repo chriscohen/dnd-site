@@ -1,0 +1,31 @@
+{
+    "id": "ranger",
+    "name": "Ranger",
+    "image": "ranger.webp",
+    "editions": [
+        {
+            "id": "ff630373-0520-46a3-b839-b7e4066cf082",
+            "game_edition": "1e",
+            "parent_id": "788e3f95-de4a-46a0-8bde-bcf9b9b3daf7",
+            "parent_name": "fighter",
+            "references": [
+                {
+                    "source": "unearthed-arcana-1985",
+                    "page_from": 21,
+                    "page_to": 22
+                }
+            ]
+        },
+        {
+            "id": "2a3c222f-36e1-4d69-899e-badd6274e8bb",
+            "game_edition": "2e",
+            "references": [
+                {
+                    "source": "players-handbook_2nd_edition",
+                    "page_from": 28,
+                    "page_to": 29
+                }
+            ]
+        }
+    ]
+}

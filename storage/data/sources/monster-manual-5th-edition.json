@@ -1,0 +1,30 @@
+{
+    "id": "38158381-4523-4a0b-a699-8b252c15f9b9",
+    "name": "Monster Manual",
+    "slug": "monster-manual-5th-edition",
+    "cover_image": "monster-manual-5th-edition.webp",
+    "description": "The A to Z Fantasy Bestiary\n\nThe Monster Manual presents a horde of classic Dungeons & Dragons creatures, including dragons, giants, mind flayers, and beholders—a monstrous feast for Dungeon Masters ready to challenge their players and populate their adventures.\n\nThe monsters contained herein are culled from the D&D game's illustrious history, with easy-to-use game statistics and thrilling stories to feed your imagination.",
+    "editions": [
+        {
+            "id": "eae1620a-303e-4825-b16f-c2cae8949e29",
+            "name": "original",
+            "binding": "hardcover",
+            "formats": ["print", "roll_20"],
+            "isbn10": "0786965614",
+            "isbn13": "9780786965614",
+            "pages": 352,
+            "release_date": "2014-09-30"
+        }
+    ],
+    "game_edition": "5.2014",
+    "product_ids": {
+        "drivethru-rpg": "442459",
+        "dungeon-masters-guild": "442459"
+    },
+    "publication_type": "official",
+    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebook_types": [
+        "monsters"
+    ],
+    "source_type": "sourcebook"
+}

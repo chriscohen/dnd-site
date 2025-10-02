@@ -1,0 +1,20 @@
+{
+    "id": "barbarian",
+    "name": "Barbarian",
+    "image": "barbarian.webp",
+    "editions": [
+        {
+            "id": "9d2390fa-fd83-4606-8879-4c62b371c812",
+            "game_edition": "1e",
+            "parent_id": "788e3f95-de4a-46a0-8bde-bcf9b9b3daf7",
+            "parent_name": "fighter",
+            "references": [
+                {
+                    "source": "unearthed-arcana-1985",
+                    "page_from": 18,
+                    "page_to": 21
+                }
+            ]
+        }
+    ]
+}

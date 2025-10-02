@@ -1,0 +1,18 @@
+{
+    "id": "druid",
+    "name": "Druid",
+    "image": "druid.webp",
+    "editions": [
+        {
+            "id": "6fbb1c53-276e-4508-bd85-80799847bc4e",
+            "game_edition": "1e",
+            "references": [
+                {
+                    "source": "unearthed-arcana-1985",
+                    "page_from": 16,
+                    "page_to": 17
+                }
+            ]
+        }
+    ]
+}

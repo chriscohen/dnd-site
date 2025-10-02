@@ -1,0 +1,32 @@
+{
+    "id": "b1ab839d-a975-415e-bb81-f4cf7910a546",
+    "slug": "eberron-campaign-setting-3-5-edition",
+    "name": "Eberron Campaign Setting (3.5 Edition)",
+    "campaign_setting": "eberron",
+    "cover_image": "eberron-campaign-setting-35-cover.webp",
+    "description": "Find Action Around Every Corner of the World\n\nGrab your pack and leap into the action-packed, intrigue-laced world of cinematic adventure. Within the Eberron Campaign Setting, you'll discover a vast, richly detailed world infused with magic, and waiting to be filled with daring escapades and dangerous exploits. Throw open the cover—and be ready for anything.\n\nInside this book, you'll find all the details you'll need to embark on Dungeons & Dragons adventures in the exciting world of Eberron:\n\n* 4 new races: changeling, kalashtar, shifter, and warforged\n* Over 70 new feats, 8 new prestige classes, and a new character class: the artificer\n* New equipment, weapons, spells, and magic items\n* New monsters and monster templates\nHighly detailed regions, new organizations, and a short adventure to launch your campaign",
+    "editions": [
+        {
+            "id": "2ba7d79b-fa84-44dc-a759-0c73d3cf6a91",
+            "name": "original",
+            "binding": "hardcover",
+            "formats": ["print", "pdf"],
+            "isbn10": "0786932740",
+            "isbn13": "9780786932740",
+            "pages": 324,
+            "release_date": "2004-06-01",
+            "release_date_month_only": true
+        }
+    ],
+    "game_edition": "3.5",
+    "product_ids": {
+        "drivethru-rpg": "28474",
+        "dungeon-masters-guild": "28474"
+    },
+    "publication_type": "official",
+    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebook_types": [
+        "campaign_setting"
+    ],
+    "source_type": "sourcebook"
+}

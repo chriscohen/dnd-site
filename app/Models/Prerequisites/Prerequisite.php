@@ -8,7 +8,7 @@ use App\Enums\Alignment;
 use App\Enums\Prerequisites\PrerequisiteType;
 use App\Enums\SpellcasterType;
 use App\Models\AbstractModel;
-use App\Models\CharacterClass;
+use App\Models\CharacterClasses\CharacterClass;
 use App\Models\Deity;
 use App\Models\Feats\Feat;
 use App\Models\Feats\FeatEdition;
@@ -43,7 +43,7 @@ class Prerequisite extends AbstractModel
     }
 
     /**
-     * @return Collection<string|Deity|Alignment|\App\Models\Feats\Feat|CharacterClass|SpellcasterType>
+     * @return Collection<string|Deity|Alignment|\App\Models\Feats\Feat|\App\Models\CharacterClasses\CharacterClass|SpellcasterType>
      */
     public function getValues(): Collection
     {

@@ -1,0 +1,12 @@
+{
+    "id": "wizard",
+    "name": "Wizard",
+    "image": "wizard.webp",
+    "editions": [
+        {
+            "id": "384fe0f1-130e-4e9a-a16c-d49ea1405149",
+            "game_edition": "1e",
+            "alternate_name": "Magic-User"
+        }
+    ]
+}

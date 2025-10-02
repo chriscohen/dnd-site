@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(Media::class, 'logo_id')->nullable();
             $table->string('product_url')->nullable();
             $table->string('short_name')->nullable()->index();
-            $table->string('website');
+            $table->string('website')->nullable();
         });
     }
 

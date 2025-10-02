@@ -24,7 +24,7 @@ return new class extends Migration
             // Damage numbers.
             $table->unsignedSmallInteger('fixed_damage')->nullable();
             $table->unsignedSmallInteger('die_quantity')->nullable();
-            $table->unsignedSmallInteger('die_faces');
+            $table->unsignedSmallInteger('die_faces')->nullable();
 
             // Maximums
             $table->unsignedSmallInteger('die_quantity_maximum')->nullable();

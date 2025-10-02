@@ -1,0 +1,11 @@
+{
+    "id": "cleric",
+    "name": "Cleric",
+    "image": "cleric.webp",
+    "editions": [
+        {
+            "id": "48d56ea3-66e3-4c4b-81ba-f55c8a7830b0",
+            "game_edition": "1e"
+        }
+    ]
+}

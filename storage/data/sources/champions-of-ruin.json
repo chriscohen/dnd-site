@@ -1,0 +1,35 @@
+{
+    "id": "0f9e2836-dbcf-49f4-9f98-10d36b422c8b",
+    "slug": "champions-of-ruin",
+    "name": "Champions of Ruin",
+    "campaign_setting": "forgotten-realms",
+    "cover_image": "champions-of-ruin.webp",
+    "description": "",
+    "editions": [
+        {
+            "id": "7b064d3c-36ed-47ff-b35b-0a824de399f3",
+            "name": "original",
+            "binding": "hardcover",
+            "formats": ["print", "pdf"],
+            "isbn10": "0786936924",
+            "isbn13": "9780786936922",
+            "pages": 160,
+            "release_date": "2005-05",
+            "release_date_month_only": true
+        }
+    ],
+    "game_edition": "3.5",
+    "product_code": "178720000",
+    "product_ids": {
+        "drivethru-rpg": "3730",
+        "dungeon-masters-guild": "3730"
+    },
+    "publication_type": "official",
+    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebook_types": [
+        "character_options",
+        "gear_magic_items",
+        "spells"
+    ],
+    "source_type": "sourcebook"
+}

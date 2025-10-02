@@ -1,0 +1,41 @@
+{
+    "id": "night-mask-deathbringer",
+    "name": "Night Mask Deathbringer",
+    "caption": "The phantoms of Westgate, able to walk among mortals during the day but possessed of some of undeath's most ghastly powers",
+    "editions": [
+        {
+            "id": "b5353694-0660-4bc6-8685-8c104e68de47",
+            "game_edition": "3.5",
+            "is_prestige": true,
+            "prerequisites": [
+                {
+                    "type": "alignment",
+                    "values": ["any evil"]
+                },
+                {
+                    "type": "skill",
+                    "values": [
+                        { "value": "hide", "skill_ranks": 8 },
+                        { "value": "knowledge", "skill_ranks": 3, "knowledge_type": "local" },
+                        { "value": "stealth", "skill_ranks": 8 }
+                    ]
+                },
+                {
+                    "type": "feat",
+                    "values": ["great-fortitude"]
+                },
+                {
+                    "type": "special",
+                    "values": ["Evasion and uncanny dodge class features"]
+                }
+            ],
+            "references": [
+                {
+                    "source": "champions-of-ruin",
+                    "page_from": 53,
+                    "page_to": 58
+                }
+            ]
+        }
+    ]
+}

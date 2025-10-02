@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Enums\Prerequisites\CraftType;
+use App\Enums\Prerequisites\KnowledgeType;
 use App\Enums\Prerequisites\PrerequisiteType;
 use App\Enums\Prerequisites\WeaponFocusType;
+use App\Models\Language;
 use App\Models\ModelInterface;
 use App\Models\Prerequisites\Prerequisite;
 use App\Models\Prerequisites\PrerequisiteValue;
@@ -163,8 +165,16 @@ abstract class AbstractYmlSeeder extends Seeder
                     $value->skill_ranks = $valueData['skill_ranks'] ?? null;
                     $value->value = $valueData['value'];
 
+                    if ($valueData['value'] == 'speak language') {
+                        $language = Language::query()->where('id', $valueData['language'])->firstOrFail();
+                        $value->language()->associate($language);
+                    }
+
                     if (!empty($valueData['craft_type'])) {
                         $value->craft_type = CraftType::tryFromString($valueData['craft_type'], true);
+                    }
+                    if (!empty($valueData['knowledge_type'])) {
+                        $value->knowledge_type = KnowledgeType::tryFromString($valueData['knowledge_type'], true);
                     }
                     if (!empty($valueData['weapon_focus_type'])) {
                         $value->weapon_focus_type = WeaponFocusType::tryFromString(

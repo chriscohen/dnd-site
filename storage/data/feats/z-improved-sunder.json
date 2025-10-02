@@ -1,0 +1,21 @@
+{
+    "id": "improved-sunder",
+    "name": "Improved Sunder",
+    "editions": [
+        {
+            "id": "2bbbaf10-fa6f-41de-bb99-ea316b72058e",
+            "game_edition": "3.5",
+            "description": "When you strike at an object held or carried by an opponent (such as a weapon or shield), you do not provoke an attack of opportunity.\n\nYou also gain a +4 bonus on any attack roll made to attack an object held or carried by another character.\n\nWithout this feat, you provoke an attack of opportunity when you strike at an object held or carried by another character.\n\nA fighter may select Improved Sunder as one of his fighter bonus feats.",
+            "prerequisites": [
+                {
+                    "type": "ability score",
+                    "values": ["str:13"]
+                },
+                {
+                    "type": "feat",
+                    "values": ["power-attack"]
+                }
+            ]
+        }
+    ]
+}

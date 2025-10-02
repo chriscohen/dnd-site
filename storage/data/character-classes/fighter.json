@@ -1,0 +1,33 @@
+{
+    "id": "fighter",
+    "name": "Fighter",
+    "image": "fighter.webp",
+    "editions": [
+        {
+            "id": "788e3f95-de4a-46a0-8bde-bcf9b9b3daf7",
+            "game_edition": "0e",
+            "alternate_name": "Fighting-Man"
+        },
+        {
+            "id": "2302317a-adb6-4b96-8e74-e7f461b8f583",
+            "game_edition": "1e",
+            "references": [
+                {
+                    "source": "unearthed-arcana-1985",
+                    "page_from": 18
+                }
+            ]
+        },
+        {
+            "id": "5e3eeef1-86cf-4158-a89b-3c60f4f5de9b",
+            "game_edition": "2e",
+            "references": [
+                {
+                    "source": "players-handbook-2nd-edition",
+                    "page_from": 26,
+                    "page_to": 27
+                }
+            ]
+        }
+    ]
+}

@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use App\Models\Prerequisites\Prerequisite;
+use App\Models\Language;
 
 return new class extends Migration
 {
@@ -18,7 +19,9 @@ return new class extends Migration
             $table->string('value');
             $table->smallInteger('skill_ranks')->nullable();
             $table->unsignedSmallInteger('craft_type')->nullable();
+            $table->unsignedSmallInteger('knowledge_type')->nullable();
             $table->unsignedSmallInteger('weapon_focus_type')->nullable();
+            $table->foreignIdFor(Language::class, 'language_id')->nullable();
         });
     }
 

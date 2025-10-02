@@ -1,0 +1,43 @@
+{
+    "id": "thayan-gladiator",
+    "name": "Thayan Gladiator",
+    "caption": "Taken from all over Faerûn by slavers, or entering the arena voluntarily, either to avoid work or to attempt to win a better life",
+    "editions": [
+        {
+            "id": "f63f20bf-0a39-4f0e-81b0-378667dffe99",
+            "game_edition": "3.5",
+            "is_prestige": true,
+            "prerequisites": [
+                {
+                    "type": "alignment",
+                    "values": ["any evil"]
+                },
+                {
+                    "type": "minimum base attack bonus",
+                    "values": [5]
+                },
+                {
+                    "type": "feat",
+                    "values": [
+                        "toughness",
+                        { "value": "weapon-focus", "weapon_focus_type": "natural weapon" }
+                    ]
+                },
+                {
+                    "type": "special",
+                    "values": [
+                        "Must possess at least one natural weapon",
+                        "Must undergo a ritual developed by the Zulkir of Transmutation that grants the class its abilities"
+                    ]
+                }
+            ],
+            "references": [
+                {
+                    "source": "champions-of-ruin",
+                    "page_from": 63,
+                    "page_to": 67
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,48 @@
+{
+    "id": "shade-hunter",
+    "name": "Shade Hunter",
+    "caption": "A breed of adventurer who lives for the thrill of finding lost treasures, defeating ancient traps, and surviving deadly curses",
+    "editions": [
+        {
+            "id": "724032c4-2bed-4da0-ac9c-42db9de61844",
+            "game_edition": "3.5",
+            "is_prestige": true,
+            "prerequisites": [
+                {
+                    "type": "alignment",
+                    "values": ["any evil"]
+                },
+                {
+                    "type": "skill",
+                    "values": [
+                        { "value": "climb", "skill_ranks": 4 },
+                        { "value": "decipher-script", "skill_ranks": 4 },
+                        { "value": "disable-device", "skill_ranks": 5 },
+                        { "value": "jump", "skill_ranks": 4 },
+                        { "value": "knowledge", "skill_ranks": 6, "knowledge_type": "dungeoneering" },
+                        { "value": "knowledge", "skill_ranks": 2, "knowledge_type": "history" },
+                        { "value": "search", "skill_ranks": 8 },
+                        { "value": "speak-language", "language": "netherese" },
+                        { "value": "survival", "skill_ranks": 6 },
+                        { "value": "use-magic-device", "skill_ranks": 5 }
+                    ]
+                },
+                {
+                    "type": "feat",
+                    "values": ["track"]
+                },
+                {
+                    "type": "special",
+                    "values": ["Shades as a favored enemy, trapfinding class feature"]
+                }
+            ],
+            "references": [
+                {
+                    "source": "champions-of-ruin",
+                    "page_from": 58,
+                    "page_to": 63
+                }
+            ]
+        }
+    ]
+}

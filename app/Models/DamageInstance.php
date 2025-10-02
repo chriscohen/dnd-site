@@ -19,13 +19,13 @@ use Ramsey\Uuid\Uuid;
  * @property ?Attribute $attribute_modifier
  * @property ?int $attribute_modifier_quantity
  * @property DamageType $damage_type
- * @property int $die_faces
+ * @property ?int $die_faces
  * @property ?int $fixed_damage
  * @property ?int $fixed_damage_maximum
  * @property ?int $die_quantity
  * @property ?int $die_quantity_maximum
  * @property ModelInterface $entity
- * @property int $modifier
+ * @property ?int $modifier
  * @property ?int $per_level_die_faces
  * @property ?int $per_level_die_quantity
  * @property ?int $per_level_fixed_damage

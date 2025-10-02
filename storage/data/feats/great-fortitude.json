@@ -1,0 +1,11 @@
+{
+    "id": "great-fortitude",
+    "name": "Great Fortitude",
+    "editions": [
+        {
+            "id": "e01024bf-9651-4019-9c3f-b7fa2871e784",
+            "game_edition": "3.5",
+            "description": "You get a +2 bonus on all Fortitude saving throws."
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "id": "d5721fa6-cbb6-46b2-b362-0ca43a202d5f",
+    "slug": "blackmoor",
+    "name": "Blackmoor",
+    "cover_image": "blackmoor.webp",
+    "description": "Caution! This is the second supplement to the highly addictive game Dungeons & Dragons. Handle it at your own risk. Even a brief perusal can infect the reader with the desire to do heroic deeds, cast mighty magical spells, and seek to wrest treasure from hideous monsters. The most insidious factor, however, is the secondary nature of this work. Any reader who becomes infected from this work will immediately develop a craving for the other parts, i.e. Dungeons & Dragons, Greyhawk (Supplement I), Chainmail (Medieval Miniatures Rules), polyhedral dice, and various and sundry other items. Anyone so completely ex- posed will certainly be hopelessly lost. In short, if you are not already an addict of fantasy ad- venture, put this booklet down quickly and flee!\n\nAs with the first supplement, the material herein is arranged to follow the format of Dungeons & Dragons, with corrections, additions, new rules, and so forth being shown so players will be able to distinguish material at a glance. All of it is, of course, optional, for the premise of the whole game system is flexibility and personalization within the broad framework of the rules.\n\n\"Blackmoor\" also contains some interesting and amusing information regarding the actual campaign of that name. It is the oldest and longest running Dungeons & Dragons game, and readers should find such material quite helpful in assuring the longevity of their own campaigns.",
+    "editions": [
+        {
+            "id": "28bfcaa3-dbfe-4e8a-b2f7-a501e00916c4",
+            "name": "original",
+            "binding": "softcover",
+            "formats": ["print", "pdf"],
+            "is_primary": true,
+            "pages": 60,
+            "release_date": "1971-01",
+            "release_date_month_only": true
+        }
+    ],
+    "game_edition": "1e",
+    "product_ids": {
+        "dungeon-masters-guild": "17172",
+        "drivethru-rpg": "17172"
+    },
+    "publication_type": "official",
+    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "publisher_name": "TSR",
+    "sourcebook_types": ["campaign_setting"],
+    "source_type": "sourcebook"
+}

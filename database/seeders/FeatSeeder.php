@@ -10,17 +10,16 @@ use App\Models\Feats\FeatEdition;
 
 class FeatSeeder extends AbstractYmlSeeder
 {
-    protected string $path = 'feats.json';
+    protected string $dir = 'feats';
     protected string $model = Feat::class;
 
     public function run(): void
     {
-        $data = $this->getDataFromFile();
-
-        foreach ($data as $datum) {
+        foreach ($this->getDataFromDirectory() as $datum) {
             $item = new Feat();
             $item->id = $datum['id'];
             $item->name = $datum['name'];
+            print $item->name . "\n";
             $item->slug = $datum['slug'] ?? $this->makeSlug($datum['name']);
 
             $item->save();

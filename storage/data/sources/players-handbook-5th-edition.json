@@ -1,0 +1,29 @@
+{
+    "id": "a9804476-25d1-4f04-b8d1-de8412117b15",
+    "slug": "players-handbook-5th-edition",
+    "name": "Player's Handbook 5th Edition",
+    "cover_image": "players-handbook-5th-edition.webp",
+    "description": "**Arm yourself for adventure**\n\nThe Player's Handbook® is the essential reference for every Dungeons & Dragons® roleplayer. It contains rules for character creation and advancement, backgrounds and skills, exploration and combat, equipment, spells, and much more.\n\nUse this book to create exciting characters from among the most iconic D&D® races and classes.\n\nDungeons & Dragons immerses you in a world of adventure. Explore ancient ruins and deadly dungeons. Battle monsters while searching for legendary treasures. Gain experience and power as you trek across uncharted lands with your companions.\n\nThe world needs heroes. Will you answer the call?",
+    "editions": [
+        {
+            "id": "30a44713-7aac-4095-aa5d-5469cec19e61",
+            "name": "original",
+            "binding": "hardcover",
+            "formats": ["print", "pdf", "foundry", "roll_20"],
+            "is_primary": true,
+            "isbn10": "0786965606",
+            "isbn13": "9780786965606",
+            "pages": 320,
+            "release_date": "2014-08-19"
+        }
+    ],
+    "game_edition": "5e",
+    "product_ids": {
+        "dungeon-masters-guild": "442461",
+        "drivethru-rpg": "442461"
+    },
+    "publication_type": "official",
+    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebook_types": ["core"],
+    "source_type": "sourcebook"
+}

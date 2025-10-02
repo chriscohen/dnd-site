@@ -18,7 +18,7 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  *
  * @property Collection<SpellEdition> $editions
- * @property Media $image
+ * @property ?Media $image
  * @property string $name
  * @property string $slug
  */
@@ -65,7 +65,7 @@ class Spell extends AbstractModel
 
         return [
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
-            'image' => $this->image->toArray($this->renderMode),
+            'image' => $this->image?->toArray($this->renderMode),
             'lowest_level' => $edition->getLowestLevel(),
             'school' => $edition->school?->name,
         ];

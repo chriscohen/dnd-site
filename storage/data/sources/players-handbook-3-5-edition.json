@@ -1,0 +1,40 @@
+{
+    "id": "4b698d5d-cc7f-4502-985d-877c0c61af87",
+    "slug": "players-handbook-3-5-edition",
+    "name": "Player's Handbook 3.5 Edition",
+    "cover_image": "players-handbook-3-5-edition.webp",
+    "description": "Endless adventure and untold excitement await! Prepare to venture forth with your bold companions into a world of heroic fantasy. Within these pages, you'll discover all the tools and options you need to create characters worthy of song and legend for the Dungeons & Dragons roleplaying game.\nThe revised Player's Handbook is the definitive rulebook for the Dungeons & Dragons game. It contains complete rules for the newest edition and is an essential purchase for anyone who wants to play the game.\n\nThe revised Player's Handbook received revisions to character classes to make them more balanced, including updates to the bard, druid, monk, paladin, and ranger. Spell lists for characters have been revised and some spell levels adjusted. Skills have been consolidated somewhat and clarified. A larger number of feats have been added to give even more options for character customization in this area. In addition, the new and revised content instructs players on how to take full advantage of the tie-in D&D miniatures line planned to release in the fall of 2003 from Wizards of the Coast, Inc.",
+    "editions": [
+        {
+            "id": "bdbfe78e-1af1-4047-8a7e-3e82691133cd",
+            "name": "original",
+            "binding": "softcover and hardcover",
+            "formats": ["print", "pdf"],
+            "is_primary": true,
+            "isbn10": "0786928867",
+            "isbn13": "9780786928866",
+            "pages": 320,
+            "release_date": "2003-07",
+            "release_date_month_only": true
+        },
+        {
+            "id": "aa467855-8f2a-4d8c-8abd-bd8cf12a1fe3",
+            "name": "premium",
+            "binding": "softcover and hardcover",
+            "formats": ["print", "pdf"],
+            "isbn10": "0786962461",
+            "isbn13": "9780786962464",
+            "pages": 320,
+            "release_date": "2012-09-18"
+        }
+    ],
+    "game_edition": "2e",
+    "product_ids": {
+        "dungeon-masters-guild": "148008",
+        "drivethru-rpg": "148008"
+    },
+    "publication_type": "official",
+    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebook_types": ["core"],
+    "source_type": "sourcebook"
+}

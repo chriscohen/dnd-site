@@ -10,11 +10,12 @@
             "description": "A glass sculpture of a humanoid.",
             "is_default": true,
             "rarity": "common",
-            "references": {
-                "source": "spell-compendium",
-                "page_from": 7
-            }
+            "references": [
+                {
+                    "source": "spell-compendium",
+                    "page_from": 7
+                }
+            ]
         }
-    ],
-    "image": "glass-sculpture-of-a-humanoid.webp"
+    ]
 }

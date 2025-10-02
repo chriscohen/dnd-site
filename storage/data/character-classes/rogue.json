@@ -1,0 +1,22 @@
+{
+    "id": "rogue",
+    "name": "Rogue",
+    "image": "rogue.webp",
+    "editions": [
+        {
+            "id": "59d87955-e65e-41c8-a7ee-740fa1703309",
+            "game_edition": "0e",
+            "alternate_name": "Thief"
+        },
+        {
+            "id": "9bf0bfc0-e140-4b15-9ba1-ceee7ab82d87",
+            "game_edition": "1e",
+            "references": [
+                {
+                    "source": "unearthed-arcana-1985",
+                    "page_from": 22
+                }
+            ]
+        }
+    ]
+}

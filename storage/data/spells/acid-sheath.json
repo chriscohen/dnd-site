@@ -22,8 +22,8 @@
             },
             "has_spell_resistance": false,
             "levels": [
-                { "feat":  "sorcerer", "level": 5 },
-                { "feat":  "wizard", "level": 5 }
+                { "class":  "sorcerer", "level": 5 },
+                { "class":  "wizard", "level": 5 }
             ],
             "material_components": [
                 {
@@ -38,14 +38,15 @@
                 }
             ],
             "range": { "unit": "self" },
-            "references": {
-                "source": "spell-compendium",
-                "page_from": 7
-            },
+            "references": [
+                {
+                    "source": "spell-compendium",
+                    "page_from": 7
+                }
+            ],
             "school": "creation",
             "spell_components": "V,S,M,F",
             "target": { "type": "self" }
         }
-    ],
-    "image": "acid-sheath.webp"
+    ]
 }

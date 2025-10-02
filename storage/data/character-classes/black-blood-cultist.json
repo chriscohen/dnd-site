@@ -1,0 +1,47 @@
+{
+    "id": "black-blood-cultist",
+    "name": "Black Blood Cultist",
+    "caption": "The People of the Black Blood venerate Malar with bloody rites that claim hundreds of lives every year",
+    "editions": [
+        {
+            "id": "5da02e44-7a23-44d2-9369-55004761b53d",
+            "game_edition": "3.5",
+            "is_prestige": true,
+            "prerequisites": [
+                {
+                    "type": "alignment",
+                    "values": [
+                        "chaotic evil",
+                        "chaotic neutral",
+                        "neutral evil"
+                    ]
+                },
+                {
+                    "type": "skill",
+                    "values": [
+                        { "value": "knowledge", "skill_ranks": 2, "knowledge_type": "nature" },
+                        { "value": "survival", "skill_ranks": 8 }
+                    ]
+                },
+                {
+                    "type": "feat",
+                    "values": [
+                        "improved-unarmed-strike",
+                        "track"
+                    ]
+                },
+                {
+                    "type": "special",
+                    "values": ["Ability to rage"]
+                }
+            ],
+            "references": [
+                {
+                    "source": "champions-of-ruin",
+                    "page_from": 44,
+                    "page_to": 48
+                }
+            ]
+        }
+    ]
+}

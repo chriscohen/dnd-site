@@ -1,0 +1,19 @@
+{
+    "id": "monk",
+    "name": "Monk",
+    "image": "monk.webp",
+    "editions": [
+        {
+            "id": "4b6f305e-b0b0-4f30-b74a-0025d084fa26",
+            "game_edition": "1e",
+            "parent_id": "48d56ea3-66e3-4c4b-81ba-f55c8a7830b0",
+            "parent_name": "cleric",
+            "references": [
+                {
+                    "source": "blackmoor",
+                    "page_from": 1
+                }
+            ]
+        }
+    ]
+}

@@ -30,7 +30,7 @@ enum Attribute: int
         return $this->name;
     }
 
-    public static function tryFromString(string $value): Attribute
+    public static function tryFromString(string $value): ?self
     {
         return match (mb_strtolower($value)) {
             'str', 'strength' => self::STR,
@@ -39,6 +39,7 @@ enum Attribute: int
             'int', 'intelligence' => self::INT,
             'wis', 'wisdom' => self::WIS,
             'cha', 'charisma' => self::CHA,
+            default => null,
         };
     }
 }
