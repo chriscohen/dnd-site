@@ -14,6 +14,28 @@
                     "page_from": 1
                 }
             ]
+        },
+        {
+            "id": "e8df3db9-1a4d-47ea-a6b9-e1c41df0aa67",
+            "game_edition": "3.5",
+            "references": [
+                {
+                    "source": "players-handbook-3-5-edition",
+                    "page_from": 39,
+                    "page_to": 42
+                }
+            ]
+        },
+        {
+            "id": "31d7de25-6465-4b3b-8a85-b2cc5abeb110",
+            "game_edition": "5e",
+            "references": [
+                {
+                    "source": "players-handbook-5th-edition",
+                    "page_from": 76,
+                    "page_to": 81
+                }
+            ]
         }
     ]
 }

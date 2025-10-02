@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
+use App\Rules\ValidGameEdition;
 use App\Rules\ValidMode;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
@@ -20,6 +21,17 @@ abstract class AbstractController implements ControllerInterface
     public function __construct()
     {
         $this->query = $this->getQuery();
+    }
+
+    public function editionQuery(string $editions): self
+    {
+        $parameters = $this->getEditionsFromQueryString($editions);
+
+        $this->query->whereHas('editions', function ($query) use ($parameters) {
+            $query->whereIn('game_edition', $parameters);
+        });
+
+        return $this;
     }
 
     /**
@@ -63,6 +75,10 @@ abstract class AbstractController implements ControllerInterface
     {
         $this->preValidate($request);
 
+        if (!empty($request->get('editions'))) {
+            $this->editionQuery($request->get('editions'));
+        }
+
         $model = $this->query->where('slug', $slug)->first();
 
         return response()->json($model->toArray($this->getMode($request)));
@@ -85,6 +101,10 @@ abstract class AbstractController implements ControllerInterface
     {
         $this->preValidate($request);
 
+        if (!empty($request->get('editions'))) {
+            $this->editionQuery($request->get('editions'));
+        }
+
         $items = $this->query->get();
         $output = [];
 
@@ -98,6 +118,7 @@ abstract class AbstractController implements ControllerInterface
     public function preValidate(Request $request): void
     {
         $request->validate([
+            'editions' => ['string', new ValidGameEdition()],
             'mode' => ['string', new ValidMode()],
         ]);
     }

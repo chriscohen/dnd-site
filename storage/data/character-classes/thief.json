@@ -1,0 +1,34 @@
+{
+    "id": "thief",
+    "name": "Thief",
+    "image": "rogue.webp",
+    "editions": [
+        {
+            "id": "59d87955-e65e-41c8-a7ee-740fa1703309",
+            "game_edition": "0e"
+        },
+        {
+            "id": "9bf0bfc0-e140-4b15-9ba1-ceee7ab82d87",
+            "game_edition": "1e",
+            "references": [
+                {
+                    "source": "unearthed-arcana-1985",
+                    "page_from": 22
+                }
+            ]
+        },
+        {
+            "id": "67582c6b-acd0-4da7-8115-dfe290b90886",
+            "game_edition": "2e",
+            "parent_id": "bc09c919-a268-4324-982e-f4f9a10043ac",
+            "parent_name": "rogue",
+            "references": [
+                {
+                    "source": "players-handbook-2nd-edition",
+                    "page_from": 38,
+                    "page_to": 41
+                }
+            ]
+        }
+    ]
+}

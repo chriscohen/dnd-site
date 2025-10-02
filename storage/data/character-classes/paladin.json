@@ -30,6 +30,39 @@
                     "page_to": 28
                 }
             ]
+        },
+        {
+            "id": "04da47b8-8c1a-4a28-a4bb-1d22499503a5",
+            "game_edition": "3.5",
+            "references": [
+                {
+                    "source": "players-handbook-3-5-edition",
+                    "page_from": 42,
+                    "page_to": 46
+                }
+            ]
+        },
+        {
+            "id": "f0cf960c-da57-41a4-b6d5-cbc156b30584",
+            "game_edition": "4e",
+            "references": [
+                {
+                    "source": "players-handbook-4th-edition",
+                    "page_from": 88,
+                    "page_to": 102
+                }
+            ]
+        },
+        {
+            "id": "d3f94661-becd-4e68-a1c3-7f55326b5482",
+            "game_edition": "5e",
+            "references": [
+                {
+                    "source": "players-handbook-5th-edition",
+                    "page_from": 82,
+                    "page_to": 88
+                }
+            ]
         }
     ]
 }

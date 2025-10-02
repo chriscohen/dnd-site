@@ -104,7 +104,7 @@ class SourceEdition extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'name' => $this->name
         ];
     }
 

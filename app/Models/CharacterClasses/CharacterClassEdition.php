@@ -22,6 +22,7 @@ use Ramsey\Uuid\Uuid;
  * @property CharacterClass $characterClass
  * @property GameEdition $game_edition
  * @property ?int $hit_die_faces
+ * @property bool $is_group_only
  * @property bool $is_prestige
  * @property ?CharacterClassEdition $parent
  * @property ?Uuid $parent_id
@@ -35,6 +36,7 @@ class CharacterClassEdition extends AbstractModel
 
     public $casts = [
         'game_edition' => GameEdition::class,
+        'is_group_only' => 'boolean',
         'is_prestige' => 'boolean',
     ];
 
@@ -57,7 +59,7 @@ class CharacterClassEdition extends AbstractModel
     {
         return [
             'hit_die_faces' => $this->hit_die_faces,
-            'parent' => $this->parent()->toArray($this->renderMode),
+            'parent' => $this->parent?->toArray($this->renderMode),
             'references' => ModelCollection::make($this->references)->toArray($this->renderMode),
         ];
     }
@@ -67,6 +69,7 @@ class CharacterClassEdition extends AbstractModel
         return [
             'id' => $this->id,
             'game_edition' => $this->game_edition->toStringShort(),
+            'is_group_only' => $this->is_group_only,
             'is_prestige' => $this->is_prestige,
         ];
     }

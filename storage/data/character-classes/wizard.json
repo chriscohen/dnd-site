@@ -7,6 +7,51 @@
             "id": "384fe0f1-130e-4e9a-a16c-d49ea1405149",
             "game_edition": "1e",
             "alternate_name": "Magic-User"
+        },
+        {
+            "id": "ba9f59b3-6857-47d9-a0a8-87b71b6b02d6",
+            "game_edition": "2e",
+            "is_group_only": true,
+            "references": [
+                {
+                    "source": "players-handbook-2nd-edition",
+                    "page_from": 30,
+                    "page_to": 31
+                }
+            ]
+        },
+        {
+            "id": "a903c7c0-54b0-4a16-a399-e876cd199753",
+            "game_edition": "3.5",
+            "references": [
+                {
+                    "source": "players-handbook-3-5-edition",
+                    "page_from": 55,
+                    "page_to": 58
+                }
+            ]
+        },
+        {
+            "id": "0fc0402e-b6d7-4620-b21c-129fa166ac83",
+            "game_edition": "4e",
+            "references": [
+                {
+                    "source": "players-handbook-4th-edition",
+                    "page_from": 156,
+                    "page_to": 171
+                }
+            ]
+        },
+        {
+            "id": "c0e3ae27-52b3-418b-addb-9caac81db0ec",
+            "game_edition": "5e",
+            "references": [
+                {
+                    "source": "players-handbook-5th-edition",
+                    "page_from": 112,
+                    "page_to": 119
+                }
+            ]
         }
     ]
 }

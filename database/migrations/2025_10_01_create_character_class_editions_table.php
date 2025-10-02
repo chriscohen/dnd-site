@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('alternate_name')->nullable();
             $table->unsignedSmallInteger('game_edition');
             $table->text('caption')->nullable();
+            $table->boolean('is_group_only')->default(false);
             $table->boolean('is_prestige')->default(false);
             $table->unsignedSmallInteger('hit_die_faces')->nullable();
         });

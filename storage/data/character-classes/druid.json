@@ -13,6 +13,41 @@
                     "page_to": 17
                 }
             ]
+        },
+        {
+            "id": "6b41c423-2e00-41e3-af42-ca063f8d0fd2",
+            "game_edition": "2e",
+            "parent_id": "4f4d537a-b3d2-4cd9-b442-715183e29f9e",
+            "parent_name": "priest",
+            "references": [
+                {
+                    "source": "players-handbook-2nd-edition",
+                    "page_from": 35,
+                    "page_to": 38
+                }
+            ]
+        },
+        {
+            "id": "e32c70bf-6164-4c66-a34a-f7c6285fba45",
+            "game_edition": "3.5",
+            "references": [
+                {
+                    "source": "players-handbook-3-5-edition",
+                    "page_from": 33,
+                    "page_to": 37
+                }
+            ]
+        },
+        {
+            "id": "c7a8e724-e96a-4eca-bff9-cd2626963cdd",
+            "game_edition": "5e",
+            "references": [
+                {
+                    "source": "players-handbook-5th-edition",
+                    "page_from": 64,
+                    "page_to": 69
+                }
+            ]
         }
     ]
 }

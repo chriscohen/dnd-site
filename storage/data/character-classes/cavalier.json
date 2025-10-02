@@ -1,6 +1,7 @@
 {
     "id": "cavalier",
     "name": "Cavalier",
+    "image": "cavalier.webp",
     "editions": [
         {
             "id": "ccc9a6e6-0efe-45a7-b7a8-cbee2af8bd98",

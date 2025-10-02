@@ -1,5 +1,29 @@
 {
     "id": "warlock",
     "name": "Warlock",
-    "image": "warlock.webp"
+    "image": "warlock.webp",
+    "editions": [
+        {
+            "id": "7a814d41-59d5-415a-96a5-360e4304c88c",
+            "game_edition": "4e",
+            "references": [
+                {
+                    "source": "players-handbook-4th-edition",
+                    "page_from": 129,
+                    "page_to": 142
+                }
+            ]
+        },
+        {
+            "id": "ce1d5645-24b0-42a5-843e-4d444b26cd5b",
+            "game_edition": "5e",
+            "references": [
+                {
+                    "source": "players-handbook-5th-edition",
+                    "page_from": 105,
+                    "page_to": 111
+                }
+            ]
+        }
+    ]
 }

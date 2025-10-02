@@ -1,6 +1,7 @@
 {
     "id": "blackguard",
     "name": "Blackguard",
+    "image": "blackguard.webp",
     "editions": [
         {
             "id": "2c0be74c-a15b-431a-a77b-b3edb4134ab0",

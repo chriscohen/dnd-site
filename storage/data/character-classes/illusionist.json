@@ -1,0 +1,18 @@
+{
+    "id": "illusionist",
+    "name": "Illusionist",
+    "editions": [
+        {
+            "id": "c7244d94-d9e7-4fd2-a0e9-5f5a2e7d84da",
+            "game_edition": "2e",
+            "parent_id": "ba9f59b3-6857-47d9-a0a8-87b71b6b02d6",
+            "parent_name": "wizard",
+            "references": [
+                {
+                    "source": "players-handbook-2nd-edition",
+                    "page_from": 32
+                }
+            ]
+        }
+    ]
+}

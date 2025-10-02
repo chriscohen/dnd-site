@@ -1,5 +1,42 @@
 {
     "id": "bard",
     "name": "Bard",
-    "image": "bard.webp"
+    "image": "bard.webp",
+    "editions": [
+        {
+            "id": "6aa0ea0b-7e6d-4b7b-a69b-f500e9a8cdea",
+            "game_edition": "2e",
+            "parent_id": "bc09c919-a268-4324-982e-f4f9a10043ac",
+            "parent_name": "rogue",
+            "references": [
+                {
+                    "source": "players-handbook-2nd-edition",
+                    "page_from": 41,
+                    "page_to": 44
+                }
+            ]
+        },
+        {
+            "id": "51524270-908e-42a2-9596-30d0ef2063a6",
+            "game_edition": "3.5",
+            "references": [
+                {
+                    "source": "players-handbook-3-5-edition",
+                    "page_from": 26,
+                    "page_to": 30
+                }
+            ]
+        },
+        {
+            "id": "7e87e68e-a39b-47d7-9f68-a230f920c19d",
+            "game_edition": "5e",
+            "references": [
+                {
+                    "source": "players-handbook-5th-edition",
+                    "page_from": 51,
+                    "page_to": 55
+                }
+            ]
+        }
+    ]
 }
