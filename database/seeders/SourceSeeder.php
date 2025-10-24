@@ -95,7 +95,9 @@ class SourceSeeder extends AbstractYmlSeeder
                     true :
                     ($editionData['is_primary'] ?? false);
 
-                $edition->binding = Binding::tryFromString($editionData['binding']);
+                $edition->binding = empty($editionData['binding']) ?
+                    null :
+                    Binding::tryFromString($editionData['binding']);
                 $edition->isbn10 = $editionData['isbn10'] ?? null;
                 $edition->isbn13 = $editionData['isbn13'] ?? null;
                 $edition->pages = $editionData['pages'] ?? null;

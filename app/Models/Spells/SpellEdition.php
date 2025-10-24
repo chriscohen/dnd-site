@@ -239,7 +239,7 @@ class SpellEdition extends AbstractModel
             'lowest_level' => $this->getLowestLevel(),
             'material_component_mode' => $this->material_component_mode,
             'material_components' => ModelCollection::make($this->materialComponents)->toArray($this->renderMode),
-            'range' => $this->range->toArray($this->renderMode),
+            'range' => $this->range?->toArray($this->renderMode),
             'references' => ModelCollection::make($this->references)->toArray(JsonRenderMode::TEASER),
             'saving_throw' => $this->savingThrow?->toArray($this->renderMode),
             'school' => $this->school?->toArray($this->renderMode) ?? null,

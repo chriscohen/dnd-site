@@ -17,6 +17,7 @@ abstract class AbstractController implements ControllerInterface
     protected string $order = 'ASC';
     protected string $orderKey = 'name';
     protected Builder $query;
+    protected string $whereField = 'slug';
 
     public function __construct()
     {
@@ -79,7 +80,7 @@ abstract class AbstractController implements ControllerInterface
             $this->editionQuery($request->get('editions'));
         }
 
-        $model = $this->query->where('slug', $slug)->first();
+        $model = $this->query->where($this->whereField, $slug)->first();
 
         return response()->json($model->toArray($this->getMode($request)));
     }

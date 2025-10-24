@@ -13,7 +13,7 @@ class ValidGameEdition implements ValidationRule
         $editions = explode(',', $value);
 
         foreach ($editions as $edition) {
-            if (empty(GameEdition::tryFromString($value))) {
+            if (empty(GameEdition::tryFromString($edition))) {
                 $fail('"' . $edition . '" is not a valid game edition');
             };
         }

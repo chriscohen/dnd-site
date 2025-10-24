@@ -15,6 +15,7 @@ enum SourcebookType: int
     case SPELLS = 7;
     case CAMPAIGN_SETTING = 8;
     case LORE = 9;
+    case ENCOUNTERS = 10;
 
     public function toString(): string
     {
@@ -27,22 +28,24 @@ enum SourcebookType: int
             static::MONSTERS => 'Monsters',
             static::SPELLS => 'Spells',
             static::CAMPAIGN_SETTING => 'Campaign Setting',
-            static::LORE => 'LORE',
+            static::LORE => 'Lore',
+            static::ENCOUNTERS => 'Encounters'
         };
     }
 
     public static function tryFromString(string $value): ?SourcebookType
     {
-        return match (mb_strtoupper($value)) {
-            'CORE' => self::CORE,
-            'ADVENTURE' => self::ADVENTURE,
-            'BOXED_SET' => self::BOXED_SET,
-            'CHARACTER_OPTIONS' => self::CHARACTER_OPTIONS,
-            'GEAR_MAGIC_ITEMS' => self::GEAR_MAGIC_ITEMS,
-            'MONSTERS' => self::MONSTERS,
-            'SPELLS' => self::SPELLS,
-            'CAMPAIGN_SETTING' => self::CAMPAIGN_SETTING,
-            'LORE' => self::LORE,
+        return match (str_replace("_", " ", mb_strtolower($value))) {
+            'core' => self::CORE,
+            'adventure' => self::ADVENTURE,
+            'boxed set' => self::BOXED_SET,
+            'character options' => self::CHARACTER_OPTIONS,
+            'gear magic items' => self::GEAR_MAGIC_ITEMS,
+            'monsters' => self::MONSTERS,
+            'spells' => self::SPELLS,
+            'campaign setting' => self::CAMPAIGN_SETTING,
+            'lore' => self::LORE,
+            'encounters' => self::ENCOUNTERS,
             default => null,
         };
     }

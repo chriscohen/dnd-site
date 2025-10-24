@@ -12,19 +12,19 @@ enum PublicationType: int
 
     public function toString(): string
     {
-        return match ($this->name) {
-            'OFFICIAL' => 'official',
-            'THIRD_PARTY' => 'third party',
-            'HOMEBREW' => 'homebrew',
+        return match ($this) {
+            self::OFFICIAL => 'official',
+            self::THIRD_PARTY => 'third party',
+            self::HOMEBREW => 'homebrew',
         };
     }
 
     public static function tryFromString(string $value): ?PublicationType
     {
-        return match (mb_strtoupper($value)) {
-            'OFFICIAL' => self::OFFICIAL,
-            'THIRD_PARTY' => self::THIRD_PARTY,
-            'HOMEBREW' => self::HOMEBREW,
+        return match (str_replace("_", " ", mb_strtolower($value))) {
+            'official' => self::OFFICIAL,
+            'third party', '3rd party' => self::THIRD_PARTY,
+            'homebrew' => self::HOMEBREW,
             default => null,
         };
     }

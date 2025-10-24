@@ -34,6 +34,7 @@ Route::prefix('api')->group(function () {
 
     Route::get('/references', [ReferenceController::class, 'index']);
 
+    Route::get('/school/{slug}', [MagicSchoolController::class, 'get']);
     Route::get('/schools', [MagicSchoolController::class, 'index']);
 
     Route::get('/source/{slug}', [SourceController::class, 'get']);
