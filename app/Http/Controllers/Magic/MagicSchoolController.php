@@ -12,4 +12,5 @@ class MagicSchoolController extends AbstractController
     protected string $entityType = MagicSchool::class;
     protected string $orderKey = 'id';
     protected string $whereField = 'id';
+    protected bool $hasEditions = false;
 }

@@ -18,6 +18,7 @@ abstract class AbstractController implements ControllerInterface
     protected string $orderKey = 'name';
     protected Builder $query;
     protected string $whereField = 'slug';
+    protected bool $hasEditions = true;
 
     public function __construct()
     {
@@ -26,11 +27,13 @@ abstract class AbstractController implements ControllerInterface
 
     public function editionQuery(string $editions): self
     {
-        $parameters = $this->getEditionsFromQueryString($editions);
+        if ($this->hasEditions) {
+            $parameters = $this->getEditionsFromQueryString($editions);
 
-        $this->query->whereHas('editions', function ($query) use ($parameters) {
-            $query->whereIn('game_edition', $parameters);
-        });
+            $this->query->whereHas('editions', function ($query) use ($parameters) {
+                $query->whereIn('game_edition', $parameters);
+            });
+        }
 
         return $this;
     }
