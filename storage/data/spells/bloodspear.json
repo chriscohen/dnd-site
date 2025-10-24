@@ -17,6 +17,7 @@
                 { "feat":  "initiate-of-gruumsh", "level": 3 }
             ],
             "range": { "is_touch": true },
+            "rarity": "uncommon",
             "references": [
                 {
                     "source": "champions-of-ruin",

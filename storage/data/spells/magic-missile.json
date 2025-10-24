@@ -29,6 +29,7 @@
                 "per_level": 10,
                 "unit": "yds"
             },
+            "rarity": "common",
             "references": [
                 {
                     "source": "players-handbook-2nd-edition",
@@ -62,6 +63,7 @@
                 "per_level_mode": "per level",
                 "unit": "ft"
             },
+            "rarity": "common",
             "references": [
                 {
                     "source": "players-handbook-3-5-edition",
@@ -95,6 +97,7 @@
                 "number": 120,
                 "unit": "ft"
             },
+            "rarity": "common",
             "references": [
                 {
                     "source": "players-handbook-5th-edition",
@@ -128,6 +131,7 @@
                 "number": 120,
                 "unit": "ft"
             },
+            "rarity": "common",
             "references": [
                 {
                     "source": "players-handbook-2024",

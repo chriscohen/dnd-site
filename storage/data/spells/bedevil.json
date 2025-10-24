@@ -35,6 +35,7 @@
             "range": {
                 "is_self": true
             },
+            "rarity": "uncommon",
             "references": [
                 {
                     "source": "champions-of-ruin",

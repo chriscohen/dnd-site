@@ -37,6 +37,7 @@
                 "number": 100,
                 "unit": "ft"
             },
+            "rarity": "uncommon",
             "references": [
                 {
                     "source": "players-handbook-4th-edition",

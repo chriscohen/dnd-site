@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('is_default')->default(false);
             $table->string('magic_school_id')->nullable()->index();
             $table->unsignedSmallInteger('material_component_mode')->nullable();
+            $table->unsignedSmallInteger('rarity')->index();
 
             // Feat?
             $table->foreignIdFor(Feat::class, 'feat_id')->nullable();

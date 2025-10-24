@@ -38,6 +38,7 @@
                 }
             ],
             "range": { "unit": "self" },
+            "rarity": "uncommon",
             "references": [
                 {
                     "source": "spell-compendium",

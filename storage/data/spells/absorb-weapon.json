@@ -18,6 +18,7 @@
                 { "class": "assassin", "level": 2 }
             ],
             "range": { "is_touch": true },
+            "rarity": "uncommon",
             "references": [
                 {
                     "source": "spell-compendium",

@@ -34,6 +34,7 @@
             ],
             "material_component_mode": "or",
             "range": { "is_touch": true },
+            "rarity": "uncommon",
             "references": [
                 {
                     "source": "champions-of-ruin",

@@ -5,6 +5,7 @@ namespace App\Models\Spells;
 use App\Enums\Distance;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
+use App\Enums\Rarity;
 use App\Enums\Spells\MaterialComponentMode;
 use App\Enums\Spells\SpellComponentType;
 use App\Enums\Spells\SpellFrequency;
@@ -55,6 +56,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Collection<SpellMaterialComponent> $materialComponents
  * @property ?Range $range
  * @property ?Uuid $range_id
+ * @property Rarity $rarity
  * @property Collection<Reference> $references
  * @property ?SavingThrow $savingThrow
  * @property MagicSchool $school
@@ -78,6 +80,7 @@ class SpellEdition extends AbstractModel
         'is_default' => 'bool',
         'material_component_mode' => MaterialComponentMode::class,
         'range_unit' => Distance::class,
+        'rarity' => Rarity::class,
     ];
 
     public function area(): BelongsTo
@@ -240,6 +243,7 @@ class SpellEdition extends AbstractModel
             'material_component_mode' => $this->material_component_mode,
             'material_components' => ModelCollection::make($this->materialComponents)->toArray($this->renderMode),
             'range' => $this->range?->toArray($this->renderMode),
+            'rarity' => $this->rarity->toString(),
             'references' => ModelCollection::make($this->references)->toArray(JsonRenderMode::TEASER),
             'saving_throw' => $this->savingThrow?->toArray($this->renderMode),
             'school' => $this->school?->toArray($this->renderMode) ?? null,

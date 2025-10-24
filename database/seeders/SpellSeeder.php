@@ -10,6 +10,7 @@ use App\Enums\DamageType;
 use App\Enums\Distance;
 use App\Enums\GameEdition;
 use App\Enums\PerLevelMode;
+use App\Enums\Rarity;
 use App\Enums\SavingThrows\SavingThrowMultiplier;
 use App\Enums\SavingThrows\SavingThrowType;
 use App\Enums\Spells\MaterialComponentMode;
@@ -74,6 +75,7 @@ class SpellSeeder extends AbstractYmlSeeder
                 $edition->is_default = $editionData['is_default'] ?? false;
                 $edition->material_component_mode = !empty($editionData['material_component_mode']) ?
                     MaterialComponentMode::tryFromString($editionData['material_component_mode']) : null;
+                $edition->rarity = Rarity::tryFromString($editionData['rarity']);
 
                 // Range
                 if (!empty($editionData['range'])) {

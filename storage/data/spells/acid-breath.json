@@ -4,12 +4,12 @@
     "name": "Acid Breath",
     "editions": [
         {
+            "game_edition": "3.5",
             "area": {
                 "type": "cone",
                 "radius": 15,
                 "length": 15
             },
-            "game_edition": "3.5",
             "casting_time_unit": "standard action",
             "damage": [
                 {
@@ -21,6 +21,7 @@
                 }
             ],
             "description": "You pop the fire ants into your mouth and exhale quickly. The ants distill into drops of pure acid in mid air, spattering against your foes and leaving smoking holes.\n\nYou breathe forth a cone of acidic droplets. The cone deals 1d6 points of acid damage per caster level (maximum 10d6).",
+            "domains": ["acid"],
             "duration": { "unit": "instantaneous" },
             "has_spell_resistance": true,
             "levels": [
@@ -33,7 +34,16 @@
                     "quantity_text": "a handful of fire ants (alive or dead)",
                     "is_consumed": true
                 }
-            ]
+            ],
+            "rarity": "uncommon",
+            "references": [
+                {
+                    "source": "spell-compendium",
+                    "page_from": 7
+                }
+            ],
+            "school": "creation",
+            "spell_components": "V,S,M"
         }
     ],
     "image": "acid-breath.webp"

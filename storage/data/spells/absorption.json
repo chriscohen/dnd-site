@@ -18,6 +18,7 @@
                 { "class": "wizard", "level":  9 }
             ],
             "range": { "is_self": true },
+            "rarity": "uncommon",
             "references": [
                 {
                     "source": "spell-compendium",

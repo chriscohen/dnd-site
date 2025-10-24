@@ -22,6 +22,7 @@
                 "per_level": 5,
                 "per_level_mode": "2 levels"
             },
+            "rarity": "uncommon",
             "references": [
                 {
                     "source": "champions-of-ruin",

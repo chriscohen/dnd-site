@@ -26,6 +26,7 @@
                 "per_level": 10,
                 "unit": "ft"
             },
+            "rarity": "uncommon",
             "references": [
                 {
                     "source": "spell-compendium",

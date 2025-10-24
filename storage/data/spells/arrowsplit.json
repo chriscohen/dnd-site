@@ -24,6 +24,7 @@
             "range": {
                 "is_touch": true
             },
+            "rarity": "uncommon",
             "references": [
                 {
                     "source": "champions-of-ruin",
