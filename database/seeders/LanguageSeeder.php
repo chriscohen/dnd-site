@@ -10,11 +10,6 @@ class LanguageSeeder extends AbstractYmlSeeder
 {
     protected string $path = 'languages.json';
     protected string $model = Language::class;
-    protected array $schema = [
-        'id',
-        'slug',
-        'name',
-    ];
 
     public function run(): void
     {
@@ -26,6 +21,8 @@ class LanguageSeeder extends AbstractYmlSeeder
             $language->name = $datum['name'];
             $language->slug = self::makeSlug($datum['name']);
             $language->id = $language->slug;
+            $language->isExotic = $datum['isExotic'];
+            $language->scriptName = $datum['scriptName'] ?? null;
             $language->save();
         }
     }

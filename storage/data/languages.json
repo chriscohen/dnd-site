@@ -1,8 +1,124 @@
 [
     {
-        "name": "Common"
+        "name": "Bothii",
+        "slug": "bothii",
+        "isExotic": true
     },
     {
-        "name": "Netherese"
+        "name": "Common",
+        "slug": "common",
+        "isExotic": false,
+        "scriptName": "Common"
+    },
+    {
+        "name": "Dwarvish",
+        "slug": "dwarvish",
+        "isExotic": false,
+        "scriptName": "Dwarvish"
+    },
+    {
+        "name": "Elvish",
+        "slug": "elvish",
+        "isExotic": false,
+        "scriptName": "Elvish"
+    },
+    {
+        "name": "Giant",
+        "slug": "giant",
+        "isExotic": false,
+        "scriptName": "Dwarvish"
+    },
+    {
+        "name": "Gnomish",
+        "slug": "gnomish",
+        "isExotic": false,
+        "scriptName": "Dwarvish"
+    },
+    {
+        "name": "Goblin",
+        "slug": "goblin",
+        "isExotic": false,
+        "scriptName": "Dwarvish"
+    },
+    {
+        "name": "Halfling",
+        "slug": "halfling",
+        "isExotic": false,
+        "scriptName": "Common"
+    },
+    {
+        "name": "Orc",
+        "slug": "orc",
+        "isExotic": false,
+        "scriptName": "Dwarvish"
+    },
+    {
+        "name": "Abyssal",
+        "slug": "abyssal",
+        "isExotic": true,
+        "scriptName": "Infernal"
+    },
+    {
+        "name": "Celestial",
+        "slug": "celestial",
+        "isExotic": true,
+        "scriptName": "Celestial"
+    },
+    {
+        "name": "Draconic",
+        "slug": "draconic",
+        "isExotic": true,
+        "scriptName": "Draconic"
+    },
+    {
+        "name": "Deep Speech",
+        "slug": "deep-speech",
+        "isExotic": true
+    },
+    {
+        "name": "Infernal",
+        "slug": "infernal",
+        "isExotic": true,
+        "scriptName": "Infernal"
+    },
+    {
+        "name": "Auran",
+        "slug": "auran",
+        "isExotic": true,
+        "group": "primordial",
+        "scriptName": "Dwarvish"
+    },
+    {
+        "name": "Aquan",
+        "slug": "aquan",
+        "isExotic": true,
+        "group": "primordial",
+        "scriptName": "Dwavish"
+    },
+    {
+        "name": "Ignan",
+        "slug": "ignan",
+        "isExotic": true,
+        "group": "primordial",
+        "scriptName": "Dwavish"
+    },
+    {
+        "name": "Terran",
+        "slug": "terran",
+        "isExotic": true,
+        "group": "primordial",
+        "scriptName": "Dwavish"
+    },
+    {
+        "name": "Sylvan",
+        "slug": "sylvan",
+        "isExotic": true,
+        "scriptName": "Elvish"
+    },
+    {
+        "name": "Undercommon",
+        "slug": "undercommon",
+        "isExotic": true,
+        "scriptName": "Elvish"
     }
 ]

@@ -42,6 +42,8 @@ class SourceSeeder extends AbstractYmlSeeder
             // If no slug, assume we can just urlencode the name.
             $source->slug = $datum['slug'] ?? self::makeSlug($datum['name']);
             $source->name = $datum['name'];
+            $source->shortName = $datum['shortName'] ?? null;
+            $source->parent_id = $datum['parent'] ?? null;
 
             if (!empty($datum['campaign_setting'])) {
                 $setting = CampaignSetting::query()->where('slug', $datum['campaign_setting'])->firstOrFail();

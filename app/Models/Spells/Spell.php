@@ -67,6 +67,7 @@ class Spell extends AbstractModel
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
             'image' => $this->image?->toArray($this->renderMode),
             'lowest_level' => $edition->getLowestLevel(),
+            'rarity' => $edition->rarity->toString(),
             'school' => $edition->school?->name,
         ];
     }

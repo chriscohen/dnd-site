@@ -12,6 +12,9 @@ use Ramsey\Uuid\Uuid;
  * @property string $slug
  * @property string $name
  *
+ * @property bool $isExotic
+ * @property string $scriptName
+ *
  */
 class Language extends AbstractModel
 {
@@ -30,6 +33,8 @@ class Language extends AbstractModel
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
+            'isExotic' => $this->isExotic,
+            'scriptName' => $this->scriptName,
         ];
     }
 

@@ -1,0 +1,27 @@
+{
+    "id": "ee9e27a8-5fd8-4bd2-9979-64098bb0e03a",
+    "name": "Spelljammer: Adventures in Space",
+    "slug": "spelljammer-adventures-in-space",
+    "campaign_setting": "planescape",
+    "cover_image": "spelljammer-adventures-in-space.webp",
+    "description": "Set sail through the Astral Sea in a space-based campaign setting and adventure.",
+    "editions": [
+        {
+            "id": "00df085c-a204-4443-83b6-968f15296b70",
+            "name": "original",
+            "formats": ["print", "dnd_beyond"],
+            "release_date": "2022-08-16"
+        }
+    ],
+    "game_edition": "5e",
+    "product_ids": {
+        "wizards-of-the-coast": "SRC-00090"
+    },
+    "publication_type": "official",
+    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebook_types": [
+        "boxed_set",
+        "campaign_setting"
+    ],
+    "source_type": "boxed_set"
+}

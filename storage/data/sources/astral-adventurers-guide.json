@@ -1,0 +1,26 @@
+{
+    "id": "536b06cc-e08c-413e-a14c-533663decdec",
+    "name": "Astral Adventurer's Guide",
+    "shortName": "AAG",
+    "slug": "astral-adventurers-guide",
+    "campaign_setting": "planescape",
+    "cover_image": "astral-adventurers-guide.webp",
+    "description": "Set sail through the Astral Sea in a space-based campaign setting and adventure.",
+    "editions": [
+        {
+            "id": "3295ccb2-9e4e-4daf-93cb-14508c55b347",
+            "name": "original",
+            "formats": ["print", "dnd_beyond"],
+            "pages": 64,
+            "release_date": "2022-08-16"
+        }
+    ],
+    "game_edition": "5e",
+    "parent": "ee9e27a8-5fd8-4bd2-9979-64098bb0e03a",
+    "publication_type": "official",
+    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebook_types": [
+        "character_options"
+    ],
+    "source_type": "sourcebook"
+}

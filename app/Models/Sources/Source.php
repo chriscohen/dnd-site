@@ -3,7 +3,6 @@
 namespace App\Models\Sources;
 
 use App\Enums\GameEdition;
-use App\Enums\JsonRenderMode;
 use App\Enums\PublicationType;
 use App\Enums\SourceType;
 use App\Models\AbstractModel;
@@ -25,6 +24,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
 /**
  * @property Uuid $id
  * @property string $slug
+ * @property string $name
  *
  * @property ?CampaignSetting $campaign_setting
  * @property ?Uuid $campaign_setting_id
@@ -33,12 +33,14 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property ?string $description
  * @property Collection<SourceEdition> $editions
  * @property ?GameEdition $game_edition
- * @property string $name
+ * @property ?Source $parent
+ * @property Uuid $parent_id
  * @property ?string $product_code
  * @property Collection $productIds
  * @property PublicationType $publication_type
  * @property Company $publisher
  * @property string $publisher_id
+ * @property ?string $shortName
  * @property SourceType $source_type
  * @property SourceSourcebookType[] $sourcebookTypes
  */
@@ -57,6 +59,11 @@ class Source extends AbstractModel
     public function campaignSetting(): BelongsTo
     {
         return $this->belongsTo(CampaignSetting::class, 'campaign_setting_id');
+    }
+
+    public function children(): HasMany
+    {
+        return $this->hasMany(Source::class, 'parent_id');
     }
 
     public function coverImage(): BelongsTo
@@ -81,6 +88,11 @@ class Source extends AbstractModel
         return Attribute::make(
             get: fn (int $value) => GameEdition::tryFrom($value)?->toString(true),
         );
+    }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Source::class, 'parent_id');
     }
 
     public function primaryEdition(): ?SourceEdition
@@ -151,17 +163,27 @@ class Source extends AbstractModel
 
     public function toArrayShort(): array
     {
-        return [
+        $output = [
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
+            'shortName' => $this->shortName,
         ];
+
+        if ($this->children->count() > 0) {
+            foreach ($this->children as $child) {
+                $output['children'][] = $child->toArrayShort();
+            }
+        }
+
+        return $output;
     }
 
     public function toArrayTeaser(): array
     {
         return [
             'cover_image' => $this->coverImage->toArray($this->renderMode, $this->excluded),
+            'parent_id' => $this->parent_id,
         ];
     }
 }
