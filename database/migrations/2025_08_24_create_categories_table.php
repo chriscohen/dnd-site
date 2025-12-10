@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('name')->index();
             $table->string('entity_type')->index();
-            $table->foreignIdFor(Category::class, 'parentId')->nullable()->index();
+            $table->foreignIdFor(Category::class, 'parent_id')->nullable()->index();
 
             // Images.
-            $table->foreignIdFor(Media::class, 'imageId')->nullable();
+            $table->foreignIdFor(Media::class, 'image_id')->nullable();
         });
     }
 

@@ -86,9 +86,4 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
 
         return array_merge_recursive($output, $this->toArrayFull());
     }
-
-    public static function makeSlug(string $input): string
-    {
-        return str_replace('+', '-', urlencode(mb_strtolower($input)));
-    }
 }

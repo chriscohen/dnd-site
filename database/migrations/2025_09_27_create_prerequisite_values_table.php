@@ -12,21 +12,21 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('prerequisiteValues', function (Blueprint $table) {
+        Schema::create('prerequisite_values', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(Prerequisite::class, 'prerequisiteId');
+            $table->foreignIdFor(Prerequisite::class, 'prerequisite_id');
 
             $table->string('value');
-            $table->smallInteger('skillRanks')->nullable();
-            $table->unsignedSmallInteger('craftType')->nullable();
-            $table->unsignedSmallInteger('knowledgeType')->nullable();
-            $table->unsignedSmallInteger('weaponFocusType')->nullable();
-            $table->foreignIdFor(Language::class, 'languageId')->nullable();
+            $table->smallInteger('skill_ranks')->nullable();
+            $table->unsignedSmallInteger('craft_type')->nullable();
+            $table->unsignedSmallInteger('knowledge_type')->nullable();
+            $table->unsignedSmallInteger('weapon_focus_type')->nullable();
+            $table->foreignIdFor(Language::class, 'language_id')->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('prerequisiteValues');
+        Schema::dropIfExists('prerequisite_values');
     }
 };

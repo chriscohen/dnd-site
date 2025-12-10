@@ -11,11 +11,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('boxedSetItems', function (Blueprint $table) {
+        Schema::create('boxed_set_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name');
-            $table->foreignIdFor(SourceEdition::class, 'parentId');
+            $table->foreignIdFor(SourceEdition::class, 'parent_id');
 
             $table->unsignedSmallInteger('content_type')->nullable();
             $table->unsignedSmallInteger('pages')->nullable();
@@ -25,6 +25,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('boxedSetItems');
+        Schema::dropIfExists('boxed_set_items');
     }
 };

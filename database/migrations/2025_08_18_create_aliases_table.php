@@ -13,10 +13,10 @@ return new class extends Migration
         Schema::create('aliases', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name')->index();
-            $table->uuid('entityId');
-            $table->string('entityType');
+            $table->uuid('entity_id');
+            $table->string('entity_type');
 
-            $table->index(['entityId', 'entityType']);
+            $table->index(['entity_id', 'entity_type']);
         });
     }
 

@@ -40,11 +40,11 @@ class SkillSeeder extends AbstractYmlSeeder
                 $edition = new SkillEdition();
                 $edition->skill()->associate($skill);
 
-                $edition->alternateName = $editionData['alternate_name'] ?? null;
-                $edition->gameEdition = GameEdition::tryFromString($editionData['game_edition']);
+                $edition->alternate_name = $editionData['alternate_name'] ?? null;
+                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
 
                 if (!empty($editionData['related_attribute'])) {
-                    $edition->relatedAttribute = Attribute::tryFromString($editionData['related_attribute']);
+                    $edition->related_attribute = Attribute::tryFromString($editionData['related_attribute']);
                 }
 
                 $edition->save();

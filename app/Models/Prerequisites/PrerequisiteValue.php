@@ -24,13 +24,13 @@ use InvalidArgumentException;
 /**
  * @property Uuid $id
  *
- * @property ?CraftType $craftType
- * @property ?KnowledgeType $knowledgeType
+ * @property ?CraftType $craft_type
+ * @property ?KnowledgeType $knowledge_type
  * @property ?Language $language
  * @property Prerequisite $prerequisite
- * @property ?int $skillRanks
+ * @property ?int $skill_ranks
  * @property string $value
- * @property ?WeaponFocusType $weaponFocusType
+ * @property ?WeaponFocusType $weapon_focus_type
  */
 class PrerequisiteValue extends AbstractModel
 {
@@ -39,9 +39,9 @@ class PrerequisiteValue extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'craftType' => CraftType::class,
-        'knowledgeType' => KnowledgeType::class,
-        'weaponFocusType' => WeaponFocusType::class,
+        'craft_type' => CraftType::class,
+        'knowledge_type' => KnowledgeType::class,
+        'weapon_focus_type' => WeaponFocusType::class,
     ];
 
     public function language(): BelongsTo
@@ -62,10 +62,10 @@ class PrerequisiteValue extends AbstractModel
     public function toArrayShort(): array
     {
         return [
-            'craftType' => $this->craftType?->toString(),
-            'skillRanks' => $this->skillRanks,
+            'craft_type' => $this->craft_type?->toString(),
+            'skill_ranks' => $this->skill_ranks,
             'value' => $this->value,
-            'weaponFocusType' => $this->weaponFocusType?->toString(),
+            'weapon_focus_type' => $this->weapon_focus_type?->toString(),
         ];
     }
 

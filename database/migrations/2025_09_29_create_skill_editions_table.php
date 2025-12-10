@@ -11,18 +11,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('skillEditions', function (Blueprint $table) {
+        Schema::create('skill_editions', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->foreignIdFor(Skill::class, 'skillId');
+            $table->foreignIdFor(Skill::class, 'skill_id');
 
-            $table->string('alternateName')->nullable();
-            $table->unsignedSmallInteger('gameEdition')->index();
-            $table->unsignedSmallInteger('relatedAttribute')->nullable()->index();
+            $table->string('alternate_name')->nullable();
+            $table->unsignedSmallInteger('game_edition')->index();
+            $table->unsignedSmallInteger('related_attribute')->nullable()->index();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('skillEditions');
+        Schema::dropIfExists('skill_editions');
     }
 };

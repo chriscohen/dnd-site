@@ -11,9 +11,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('sourceEditionFormats', function (Blueprint $table) {
+        Schema::create('source_edition_formats', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(SourceEdition::class, 'sourceEditionId');
+            $table->foreignIdFor(SourceEdition::class, 'source_edition_id');
             $table->unsignedSmallInteger('format');
 
             $table->unique(['source_edition_id', 'format']);
@@ -22,6 +22,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('sourceEditionFormats');
+        Schema::dropIfExists('source_edition_formats');
     }
 };

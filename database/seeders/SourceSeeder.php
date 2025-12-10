@@ -43,7 +43,7 @@ class SourceSeeder extends AbstractYmlSeeder
             $source->slug = $datum['slug'] ?? self::makeSlug($datum['name']);
             $source->name = $datum['name'];
             $source->shortName = $datum['shortName'] ?? null;
-            $source->parentId = $datum['parent'] ?? null;
+            $source->parent_id = $datum['parent'] ?? null;
 
             if (!empty($datum['campaign_setting'])) {
                 $setting = CampaignSetting::query()->where('slug', $datum['campaign_setting'])->firstOrFail();
@@ -58,12 +58,12 @@ class SourceSeeder extends AbstractYmlSeeder
                 $source->coverImage()->associate($media);
             }
             $source->description = $datum['description'] ?? null;
-            $source->gameEdition = GameEdition::tryFromString($datum['game_edition']);
-            $source->productCode = $datum['product_code'] ?? null;
+            $source->game_edition = GameEdition::tryFromString($datum['game_edition']);
+            $source->product_code = $datum['product_code'] ?? null;
 
-            $source->publicationType = PublicationType::tryFromString($datum['publication_type']);
-            $source->publisherId = $datum['publisher_id'] ?? null;
-            $source->sourceType = SourceType::tryFromString($datum['source_type']);
+            $source->publication_type = PublicationType::tryFromString($datum['publication_type']);
+            $source->publisher_id = $datum['publisher_id'] ?? null;
+            $source->source_type = SourceType::tryFromString($datum['source_type']);
 
             $source->save();
 
@@ -71,7 +71,7 @@ class SourceSeeder extends AbstractYmlSeeder
                 $company = Company::query()->where('slug', $key)->firstOrFail();
                 $productId = new ProductId();
                 $productId->origin()->associate($company);
-                $productId->productId = $value;
+                $productId->product_id = $value;
                 $productId->source()->associate($source);
                 $productId->save();
             }
@@ -80,7 +80,7 @@ class SourceSeeder extends AbstractYmlSeeder
                 $sourcebookType = SourcebookType::tryFromString($type);
                 $model = new SourceSourcebookType();
                 $model->source()->associate($source);
-                $model->sourcebookType = $sourcebookType;
+                $model->sourcebook_type = $sourcebookType;
                 $model->save();
             }
 
@@ -90,10 +90,10 @@ class SourceSeeder extends AbstractYmlSeeder
             foreach ($datum['editions'] as $editionData) {
                 $edition = new SourceEdition();
                 $edition->id = $editionData['id'];
-                $edition->sourceId = $datum['id'];
+                $edition->source_id = $datum['id'];
                 $edition->name = $editionData['name'];
 
-                $edition->isPrimary = (count($datum['editions']) == 1) ?
+                $edition->is_primary = (count($datum['editions']) == 1) ?
                     true :
                     ($editionData['is_primary'] ?? false);
 
@@ -103,8 +103,8 @@ class SourceSeeder extends AbstractYmlSeeder
                 $edition->isbn10 = $editionData['isbn10'] ?? null;
                 $edition->isbn13 = $editionData['isbn13'] ?? null;
                 $edition->pages = $editionData['pages'] ?? null;
-                $edition->releaseDate = new Carbon($editionData['release_date']) ?? null;
-                $edition->releaseDateMonthOnly = $editionData['release_date_month_only'] ?? false;
+                $edition->release_date = new Carbon($editionData['release_date']) ?? null;
+                $edition->release_date_month_only = $editionData['release_date_month_only'] ?? false;
 
                 $edition->save();
 
@@ -122,7 +122,7 @@ class SourceSeeder extends AbstractYmlSeeder
                     $content->slug = $contentData['slug'];
                     $content->name = $contentData['name'];
                     $content->parent()->associate($edition);
-                    $content->contentType = SourceContentType::tryFromString($contentData['content_type']);
+                    $content->content_type = SourceContentType::tryFromString($contentData['content_type']);
                     $content->pages = $contentData['pages'] ?? null;
                     $content->quantity = $contentData['quantity'] ?? 1;
 

@@ -14,15 +14,15 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  *
  * @property ?string $description
- * @property bool $isConsumed
- * @property bool $isFocus
- * @property bool $isPlural
- * @property Uuid $itemEditionId
+ * @property bool $is_consumed
+ * @property bool $is_focus
+ * @property bool $is_plural
+ * @property Uuid $item_edition_id
  * @property ItemEdition $itemEdition
  * @property ?int $minimum_value
  * @property ?int $quantity
- * @property ?string $quantityText
- * @property Uuid $spellEditionId
+ * @property ?string $quantity_text
+ * @property Uuid $spell_edition_id
  * @property SpellEdition $spellEdition
  */
 class SpellMaterialComponent extends AbstractModel
@@ -32,9 +32,9 @@ class SpellMaterialComponent extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'isConsumed' => 'boolean',
-        'isFocus' => 'boolean',
-        'isPlural' => 'boolean',
+        'is_consumed' => 'boolean',
+        'is_focus' => 'boolean',
+        'is_plural' => 'boolean',
     ];
 
     public function getItemData(): array
@@ -62,12 +62,12 @@ class SpellMaterialComponent extends AbstractModel
     {
         return [
             'description' => $this->description,
-            'isConsumed' => $this->isConsumed,
-            'isFocus' => $this->isFocus,
-            'isPlural' => $this->isPlural,
-            'minimumValue' => empty($this->minimum_value) ? null : $this->formatPrice($this->minimum_value),
+            'is_consumed' => $this->is_consumed,
+            'is_focus' => $this->is_focus,
+            'is_plural' => $this->is_plural,
+            'minimum_value' => empty($this->minimum_value) ? null : $this->formatPrice($this->minimum_value),
             'quantity' => $this->quantity,
-            'quantityText' => $this->quantityText,
+            'quantity_text' => $this->quantity_text,
         ];
     }
 
@@ -75,8 +75,8 @@ class SpellMaterialComponent extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'itemEditionId' => $this->itemEdition->id,
-            'spellEditionId' => $this->spellEdition->id,
+            'item_edition_id' => $this->itemEdition->id,
+            'spell_edition_id' => $this->spellEdition->id,
         ];
     }
 
@@ -89,11 +89,11 @@ class SpellMaterialComponent extends AbstractModel
 
     public function toString(): string
     {
-        if (!empty($this->quantityText)) {
-            return $this->quantityText;
+        if (!empty($this->quantity_text)) {
+            return $this->quantity_text;
         }
 
-        $plural = $this->isPlural || (empty($this->quantityText) && $this->quantity > 1);
+        $plural = $this->is_plural || (empty($this->quantity_text) && $this->quantity > 1);
         $output = $this->quantity;
         $output .= ' ' . $this->itemEdition->item->name . ($plural ? 's' : '') . 's';
         return $output;

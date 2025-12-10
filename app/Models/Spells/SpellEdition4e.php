@@ -18,8 +18,8 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property ?Attribute $attackAttribute
- * @property ?SavingThrowType $attackSave
+ * @property ?Attribute $attack_attribute
+ * @property ?SavingThrowType $attack_save
  * @property ?SpellFrequency $frequency
  * @property SpellEdition $spellEdition
  * @property Collection<SpellTrait> $spellTraits
@@ -29,12 +29,12 @@ class SpellEdition4e extends AbstractModel
 {
     use HasUuids;
 
-    public $table = 'spellEditions4e';
+    public $table = 'spell_editions_4e';
     public $timestamps = false;
 
     public $casts = [
-        'attackAttribute' => Attribute::class,
-        'attackSave' => SavingThrowType::class,
+        'attack_attribute' => Attribute::class,
+        'attack_save' => SavingThrowType::class,
         'frequency' => SpellFrequency::class,
         'type' => SpellType4e::class,
     ];
@@ -48,9 +48,9 @@ class SpellEdition4e extends AbstractModel
     {
         return $this->belongsToMany(
             SpellTrait::class,
-            'spellEditions4eTraits',
-            'spellTraitId',
-            'spellEdition4eId'
+            'spell_editions_4e_traits',
+            'spell_trait_id',
+            'spell_edition_4e_id'
         );
     }
 

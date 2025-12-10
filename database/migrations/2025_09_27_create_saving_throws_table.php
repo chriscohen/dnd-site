@@ -12,18 +12,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('savingThrows', function (Blueprint $table) {
+        Schema::create('saving_throws', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(SpellEdition::class, 'spellEditionId');
+            $table->foreignIdFor(SpellEdition::class, 'spell_edition_id');
             $table->unsignedSmallInteger('type');
             $table->unsignedSmallInteger('multiplier')->nullable();
-            $table->foreignIdFor(StatusConditionEdition::class, 'failStatusId')->nullable();
-            $table->foreignIdFor(StatusConditionEdition::class, 'succeedStatusId')->nullable();
+            $table->foreignIdFor(StatusConditionEdition::class, 'fail_status_id')->nullable();
+            $table->foreignIdFor(StatusConditionEdition::class, 'succeed_status_id')->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('savingThrows');
+        Schema::dropIfExists('saving_throws');
     }
 };

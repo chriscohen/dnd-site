@@ -37,9 +37,6 @@ class AttackType extends AbstractModel
 
     public static function fromInternalJson(array $value): static
     {
-        $item = new static();
-        $item->id = $value['id'] ?? Uuid::uuid4();
-        $item->name = $value['name'] ?? null;
-        return $item;
+        throw new \Exception('Not implemented');
     }
 }

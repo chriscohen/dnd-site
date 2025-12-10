@@ -16,7 +16,7 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  *
  * @property CreatureType $creatureType
- * @property Uuid $creatureTypeId
+ * @property $creature_type_id
  * @property Collection<Reference> $references
  */
 class CreatureTypeEdition extends AbstractModel
@@ -34,21 +34,6 @@ class CreatureTypeEdition extends AbstractModel
     }
 
     public static function fromInternalJson(array $value): static
-    {
-        throw new \Exception('Not implemented');
-    }
-
-    public function toArrayFull(): array
-    {
-        throw new \Exception('Not implemented');
-    }
-
-    public function toArrayShort(): array
-    {
-        throw new \Exception('Not implemented');
-    }
-
-    public function toArrayTeaser(): array
     {
         throw new \Exception('Not implemented');
     }

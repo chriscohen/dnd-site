@@ -29,7 +29,7 @@ class FeatSeeder extends AbstractYmlSeeder
                 $edition->feat()->associate($item);
                 $edition->id = $editionData['id'];
                 $edition->description = $editionData['description'] ?? null;
-                $edition->gameEdition = GameEdition::tryFromString($editionData['game_edition']);
+                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
 
                 $edition->save();
 

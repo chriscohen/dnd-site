@@ -11,15 +11,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('statusConditionRules', function (Blueprint $table) {
+        Schema::create('status_condition_rules', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(StatusConditionEdition::class, 'statusConditionEditionId');
+            $table->foreignIdFor(StatusConditionEdition::class, 'status_condition_edition_id');
             $table->text('rule');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('statusConditionRules');
+        Schema::dropIfExists('status_condition_rules');
     }
 };

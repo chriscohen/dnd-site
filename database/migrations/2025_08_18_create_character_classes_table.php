@@ -11,17 +11,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('characterClasses', function (Blueprint $table) {
+        Schema::create('character_classes', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->index();
 
-            $table->foreignIdFor(Media::class, 'imageId')->nullable();
+            $table->foreignIdFor(Media::class, 'image_id')->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('characterClasses');
+        Schema::dropIfExists('character_classes');
     }
 };

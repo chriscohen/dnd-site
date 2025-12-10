@@ -14,7 +14,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('spellEditions', function (Blueprint $table) {
+        Schema::create('spell_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
             $table->foreignIdFor(Spell::class, 'spellId');
@@ -49,6 +49,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('spellEditions');
+        Schema::dropIfExists('spell_editions');
     }
 };

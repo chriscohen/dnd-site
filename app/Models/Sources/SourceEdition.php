@@ -3,6 +3,7 @@
 namespace App\Models\Sources;
 
 use App\Enums\Binding;
+use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use Carbon\Carbon;
@@ -19,15 +20,15 @@ use Ramsey\Uuid\Uuid;
  * @property ?Binding $binding
  * @property Collection<BoxedSetItem> $boxedSetItems
  * @property Collection $formats
- * @property bool $isPrimary
+ * @property bool $is_primary
  * @property ?string $isbn10
  * @property ?string $isbn13
  * @property string $name
  * @property ?int $pages
- * @property ?Carbon $releaseDate
- * @property bool $releaseDateMonthOnly
+ * @property ?Carbon $release_date
+ * @property bool $release_date_month_only
  * @property Source $source
- * @property string $sourceId
+ * @property string $source_id
  */
 class SourceEdition extends AbstractModel
 {
@@ -37,9 +38,9 @@ class SourceEdition extends AbstractModel
 
     public $casts = [
         'binding' => Binding::class,
-        'isPrimary' => 'boolean',
-        'releaseDate' => 'date',
-        'releaseDateMonthOnly' => 'boolean',
+        'is_primary' => 'boolean',
+        'release_date' => 'date',
+        'release_date_month_only' => 'boolean',
     ];
 
     protected function binding(): Attribute
@@ -51,18 +52,18 @@ class SourceEdition extends AbstractModel
 
     public function boxedSetItems(): HasMany
     {
-        return $this->hasMany(BoxedSetItem::class, 'parentId');
+        return $this->hasMany(BoxedSetItem::class, 'parent_id');
     }
 
     public function formatReleaseDate(): string
     {
-        $format = $this->releaseDateMonthOnly ? 'Y-m' : 'Y-m-d';
-        return $this->releaseDate->format($format);
+        $format = $this->release_date_month_only ? 'Y-m' : 'Y-m-d';
+        return $this->release_date->format($format);
     }
 
     public function formats(): HasMany
     {
-        return $this->hasMany(SourceEditionFormat::class, 'sourceEditionId');
+        return $this->hasMany(SourceEditionFormat::class, 'source_edition_id');
     }
 
     /**
@@ -88,13 +89,14 @@ class SourceEdition extends AbstractModel
     {
         return [
             'binding' => $this->binding,
-            'boxedSetItems' => ModelCollection::make($this->boxedSetItems)
+            'boxed_set_items' => ModelCollection::make($this->boxedSetItems)
                 ->toArray($this->renderMode),
-            'isPrimary' => $this->isPrimary,
+            //'formats' => ModelCollection::make($this->formats)->toString(),
+            'is_primary' => $this->is_primary,
             'isbn10' => $this->isbn10,
             'isbn13' => $this->isbn13,
             'pages' => $this->pages,
-            'releaseDate' => $this->formatReleaseDate(),
+            'release_date' => $this->formatReleaseDate(),
         ];
     }
 

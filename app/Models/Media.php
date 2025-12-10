@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\JsonRenderMode;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Support\Facades\Storage;
@@ -12,10 +13,10 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property ?string $collectionName
+ * @property ?string $collection_name
  * @property string $disk
  * @property string $filename
- * @property ?string $mimeType
+ * @property ?string $mime_type
  * @property ?string $name
  * @property ?int $size
  */
@@ -28,8 +29,8 @@ class Media extends AbstractModel
      *     filename: string,
      *     disk: string,
      *     name?: string,
-     *     collectionName?: string,
-     *     mimeType?: string
+     *     collection_name?: string,
+     *     mime_type?: string
      * } $data
      * @return self
      */
@@ -45,7 +46,7 @@ class Media extends AbstractModel
         }
 
         $data['size'] = $disk->size($data['filename']);
-        $data['mimeType'] = $disk->mimeType($data['filename']);
+        $data['mime_type'] = $disk->mimeType($data['filename']);
 
         return Media::create($data);
     }
@@ -59,7 +60,7 @@ class Media extends AbstractModel
     {
         return [
             'filename' => $this->filename,
-            'mimeType' => $this->mime_type,
+            'mime_type' => $this->mime_type,
             'size' => $this->size,
         ];
     }
@@ -79,14 +80,6 @@ class Media extends AbstractModel
 
     public static function fromInternalJson(array $value): static
     {
-        $item = new static();
-        $item->id = $value['id'] ?? Uuid::uuid4();
-        $item->collectionName = $value['collectionName'] ?? null;
-        $item->disk = $value['disk'];
-        $item->filename = $value['filename'];
-        $item->mimeType = $value['mimeType'] ?? null;
-        $item->name = $value['name'] ?? null;
-        $item->size = $value['size'] ?? null;
-        return $item;
+        throw new \Exception('Not implemented');
     }
 }

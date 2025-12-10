@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('collectionName')->nullable()->index();
+            $table->string('collection_name')->nullable()->index();
             $table->string('name')->nullable()->index();
             $table->string('filename');
-            $table->string('mimeType')->nullable();
+            $table->string('mime_type')->nullable();
             $table->string('disk', 16);
             $table->unsignedBigInteger('size')->nullable();
 

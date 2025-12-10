@@ -22,7 +22,6 @@ use Ramsey\Uuid\Uuid;
  * @property Collection<Category> $categories
  * @property Collection<ItemEdition> $editions
  * @property ?Media $image
- * @property ?string $imageId
  * @property string $name
  */
 class Item extends AbstractModel
@@ -33,7 +32,7 @@ class Item extends AbstractModel
 
     public function categories(): MorphToMany
     {
-        return $this->morphToMany(Category::class, 'entity', 'entityCategory');
+        return $this->morphToMany(Category::class, 'entity', 'entity_category');
     }
 
     public function defaultEdition(): ItemEdition

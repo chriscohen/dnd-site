@@ -26,22 +26,22 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property string $slug
  * @property string $name
  *
- * @property ?CampaignSetting $campaignSetting
- * @property ?Uuid $campaignSettingId
- * @property ?Uuid $coverImageId
+ * @property ?CampaignSetting $campaign_setting
+ * @property ?Uuid $campaign_setting_id
+ * @property ?Uuid $cover_image_id
  * @property ?Media $coverImage
  * @property ?string $description
  * @property Collection<SourceEdition> $editions
- * @property ?GameEdition $gameEdition
+ * @property ?GameEdition $game_edition
  * @property ?Source $parent
- * @property Uuid $parentId
- * @property ?string $productCode
+ * @property Uuid $parent_id
+ * @property ?string $product_code
  * @property Collection $productIds
- * @property PublicationType $publicationType
+ * @property PublicationType $publication_type
  * @property Company $publisher
- * @property string $publisherId
+ * @property string $publisher_id
  * @property ?string $shortName
- * @property SourceType $sourceType
+ * @property SourceType $source_type
  * @property SourceSourcebookType[] $sourcebookTypes
  */
 class Source extends AbstractModel
@@ -51,24 +51,24 @@ class Source extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'gameEdition' => GameEdition::class,
-        'publicationType' => PublicationType::class,
-        'sourceType' => SourceType::class,
+        'game_edition' => GameEdition::class,
+        'publication_type' => PublicationType::class,
+        'source_type' => SourceType::class,
     ];
 
     public function campaignSetting(): BelongsTo
     {
-        return $this->belongsTo(CampaignSetting::class, 'campaignSettingId');
+        return $this->belongsTo(CampaignSetting::class, 'campaign_setting_id');
     }
 
     public function children(): HasMany
     {
-        return $this->hasMany(Source::class, 'parentId');
+        return $this->hasMany(Source::class, 'parent_id');
     }
 
     public function coverImage(): BelongsTo
     {
-        return $this->belongsTo(Media::class, 'coverImageId');
+        return $this->belongsTo(Media::class, 'cover_image_id');
     }
 
     protected function description(): Attribute
@@ -92,13 +92,13 @@ class Source extends AbstractModel
 
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(Source::class, 'parentId');
+        return $this->belongsTo(Source::class, 'parent_id');
     }
 
     public function primaryEdition(): ?SourceEdition
     {
         /** @var SourceEdition|null $edition */
-        $edition = $this->editions->where('isPrimary', true)->firstOrFail();
+        $edition = $this->editions->where('is_primary', true)->firstOrFail();
         return $edition;
     }
 
@@ -116,7 +116,7 @@ class Source extends AbstractModel
 
     public function publisher(): BelongsTo
     {
-        return $this->belongsTo(Company::class, 'publisherId');
+        return $this->belongsTo(Company::class, 'publisher_id');
     }
 
     public function sourcebookTypes(): HasMany
@@ -139,22 +139,22 @@ class Source extends AbstractModel
     public function toArrayFull(): array
     {
         $output = [
-            'campaignSetting' => $this->campaignSetting?->toArray($this->renderMode) ?? null,
+            'campaignSetting' => $this->campaign_setting?->toArray($this->renderMode) ?? null,
             'description' => $this->description,
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
-            'gameEdition' => $this->gameEdition,
-            'productCode' => $this->productCode,
+            'gameEdition' => $this->game_edition,
+            'productCode' => $this->product_code,
             'productIds' => $this->productIds->collect()->toArray(),
-            'publicationType' => $this->publicationType,
+            'publicationType' => $this->publication_type,
             'publisher' => $this->publisher->toArray($this->renderMode),
-            'sourceType' => $this->sourceType,
+            'sourceType' => $this->source_type,
         ];
 
         if ($this->sourcebookTypes()->count() > 0) {
-            $output['sourcebookTypes'] = [];
+            $output['sourcebook_types'] = [];
 
             foreach ($this->sourcebookTypes as $sourcebookType) {
-                $output['sourcebookTypes'][] = $sourcebookType->sourcebookType;
+                $output['sourcebook_types'][] = $sourcebookType->sourcebook_type;
             }
         }
 
@@ -183,7 +183,7 @@ class Source extends AbstractModel
     {
         return [
             'coverImage' => $this->coverImage->toArray($this->renderMode),
-            'parentId' => $this->parentId,
+            'parentId' => $this->parent_id,
         ];
     }
 

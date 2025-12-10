@@ -48,10 +48,9 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property ?Feat $feat
  * @property ?string $focus
  * @property GameEdition $gameEdition
- * @property bool $hasSavingThrow
  * @property ?bool $hasSpellResistance
  * @property string $higherLevel
- * @property bool $isDefault
+ * @property bool $is_default
  * @property Collection<SpellEditionLevel> $levels
  * @property ?MaterialComponentMode $materialComponentMode
  * @property Collection<SpellMaterialComponent> $materialComponents
@@ -103,7 +102,7 @@ class SpellEdition extends AbstractModel
 
     public function domains(): BelongsToMany
     {
-        return $this->belongsToMany(MagicDomain::class, 'spellEditionsMagicDomains');
+        return $this->belongsToMany(MagicDomain::class, 'spell_editions_magic_domains');
     }
 
     public function duration(): MorphOne
@@ -157,7 +156,7 @@ class SpellEdition extends AbstractModel
 
     public function levels(): HasMany
     {
-        return $this->hasMany(SpellEditionLevel::class, 'spellEditionId');
+        return $this->hasMany(SpellEditionLevel::class, 'spell_edition_id');
     }
 
     protected function materialComponentMode(): Attribute
@@ -196,7 +195,7 @@ class SpellEdition extends AbstractModel
 
     public function savingThrow(): HasOne
     {
-        return $this->hasOne(SavingThrow::class, 'spellEditionId');
+        return $this->hasOne(SavingThrow::class, 'spell_edition_id');
     }
 
     public function school(): BelongsTo
@@ -221,7 +220,7 @@ class SpellEdition extends AbstractModel
 
     public function targets(): HasMany
     {
-        return $this->hasMany(Target::class, 'spellEditionId');
+        return $this->hasMany(Target::class, 'spell_edition_id');
     }
 
     public function toArrayFull(): array
@@ -235,10 +234,10 @@ class SpellEdition extends AbstractModel
             'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode),
             'duration' => $this->duration->toArray($this->renderMode),
             'focus' => $this->focus,
-            'hasSavingThrow' => $this->hasSavingThrow,
+            'hasSavingThrow' => $this->has_saving_throw,
             'hasSpellResistance' => $this->hasSpellResistance,
             'higherLevel' => $this->higherLevel,
-            'isDefault' => $this->isDefault,
+            'isDefault' => $this->is_default,
             'levels' => ModelCollection::make($this->levels)->toArray(),
             'lowestLevel' => $this->getLowestLevel(),
             'materialComponentMode' => $this->materialComponentMode,

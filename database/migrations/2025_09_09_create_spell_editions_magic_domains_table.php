@@ -10,16 +10,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('spellEditionsMagicDomains', function (Blueprint $table) {
-            $table->uuid('spellEditionId');
-            $table->string('magicDomainId');
+        Schema::create('spell_editions_magic_domains', function (Blueprint $table) {
+            $table->uuid('spell_edition_id');
+            $table->string('magic_domain_id');
 
-            $table->primary(['spellEditionId', 'magicDomainId']);
+            $table->primary(['spell_edition_id', 'magic_domain_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('spellEditionsMagicDomains');
+        Schema::dropIfExists('spell_editions_magic_domains');
     }
 };

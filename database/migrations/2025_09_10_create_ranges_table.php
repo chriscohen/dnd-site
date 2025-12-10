@@ -12,12 +12,12 @@ return new class extends Migration
     {
         Schema::create('ranges', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->boolean('isFromCaster')->default(false);
-            $table->boolean('isSelf')->default(false);
-            $table->boolean('isTouch')->default(false);
+            $table->boolean('is_from_caster')->default(false);
+            $table->boolean('is_self')->default(false);
+            $table->boolean('is_touch')->default(false);
             $table->smallInteger('number')->nullable();
-            $table->unsignedSmallInteger('perLevel')->nullable();
-            $table->unsignedSmallInteger('perLevelIncrement')->default(1);
+            $table->unsignedSmallInteger('per_level')->nullable();
+            $table->unsignedSmallInteger('per_level_increment')->default(1);
             $table->unsignedSmallInteger('unit')->nullable();
         });
     }

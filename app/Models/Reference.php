@@ -13,8 +13,8 @@ use Ramsey\Uuid\Uuid;
  *
  * @property SourceEdition $edition
  * @property ModelInterface $entity
- * @property ?int $pageFrom
- * @property ?int $pageTo
+ * @property ?int $page_from
+ * @property ?int $page_to
  *
  */
 class Reference extends AbstractModel
@@ -25,7 +25,7 @@ class Reference extends AbstractModel
 
     public function edition(): BelongsTo
     {
-        return $this->belongsTo(SourceEdition::class, 'sourceEditionId');
+        return $this->belongsTo(SourceEdition::class, 'source_edition_id');
     }
 
     public function entity(): MorphTo
@@ -54,8 +54,8 @@ class Reference extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'pageFrom' => $this->pageFrom,
-            'pageTo' => $this->pageTo,
+            'page_from' => $this->page_from,
+            'page_to' => $this->page_to,
             'source' => $this->edition->source?->name,
             'slug' => $this->edition->source?->slug,
         ];

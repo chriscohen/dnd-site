@@ -11,18 +11,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('creatureMajorTypeEditions', function (Blueprint $table) {
+        Schema::create('creature_major_type_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(CreatureMajorType::class, 'creatureMajorTypeId');
-            $table->unsignedSmallInteger('gameEdition')->index();
+            $table->foreignIdFor(CreatureMajorType::class, 'creature_major_type_id');
+            $table->unsignedSmallInteger('game_edition')->index();
             $table->text('description')->nullable();
 
-            $table->unique(['creatureMajorTypeId', 'gameEdition'], 'creatureEditionUnique');
+            $table->unique(['creature_major_type_id', 'game_edition'], 'creature_edition_unique');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('creatureMajorTypeEditions');
+        Schema::dropIfExists('creature_major_type_editions');
     }
 };

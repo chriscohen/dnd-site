@@ -11,50 +11,50 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('damageInstances', function (Blueprint $table) {
+        Schema::create('damage_instances', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
             // The thing that is applying the damage, eg spell edition, item edition.
-            $table->uuid('entityId');
-            $table->string('entityType');
+            $table->uuid('entity_id');
+            $table->string('entity_type');
 
             // # of instances.
             $table->unsignedSmallInteger('quantity')->default(1);
 
             // Damage numbers.
-            $table->unsignedSmallInteger('fixedDamage')->nullable();
-            $table->unsignedSmallInteger('dieQuantity')->nullable();
-            $table->unsignedSmallInteger('dieFaces')->nullable();
+            $table->unsignedSmallInteger('fixed_damage')->nullable();
+            $table->unsignedSmallInteger('die_quantity')->nullable();
+            $table->unsignedSmallInteger('die_faces')->nullable();
 
             // Maximums
-            $table->unsignedSmallInteger('dieQuantityMaximum')->nullable();
-            $table->unsignedSmallInteger('fixedDamageMaximum')->nullable();
+            $table->unsignedSmallInteger('die_quantity_maximum')->nullable();
+            $table->unsignedSmallInteger('fixed_damage_maximum')->nullable();
 
             // Type.
-            $table->unsignedSmallInteger('damageType')->nullable();
+            $table->unsignedSmallInteger('damage_type')->nullable();
 
             // Modifier.
             $table->smallInteger('modifier')->default(0);
 
             // Attribute modifier.
-            $table->unsignedSmallInteger('attributeModifier')->nullable();
-            $table->unsignedSmallInteger('attributeModifierQuantity')->nullable();
+            $table->unsignedSmallInteger('attribute_modifier')->nullable();
+            $table->unsignedSmallInteger('attribute_modifier_quantity')->nullable();
 
             // Status condition.
-            $table->foreignIdFor(StatusConditionEdition::class, 'statusConditionEditionId')->nullable();
+            $table->foreignIdFor(StatusConditionEdition::class, 'status_condition_edition_id')->nullable();
 
             // Per level damage numbers.
-            $table->unsignedSmallInteger('perLevelDieQuantity')->nullable();
-            $table->unsignedSmallInteger('perLevelDieFaces')->nullable();
-            $table->unsignedSmallInteger('perLevelFixedDamage')->nullable();
-            $table->unsignedSmallInteger('perLevelMode')->nullable();
+            $table->unsignedSmallInteger('per_level_die_quantity')->nullable();
+            $table->unsignedSmallInteger('per_level_die_faces')->nullable();
+            $table->unsignedSmallInteger('per_level_fixed_damage')->nullable();
+            $table->unsignedSmallInteger('per_level_mode')->nullable();
 
-            $table->index(['entityId', 'entityType']);
+            $table->index(['entity_id', 'entity_type']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('damageInstances');
+        Schema::dropIfExists('damage_instances');
     }
 };

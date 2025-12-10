@@ -10,13 +10,13 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('spellTraits', function (Blueprint $table) {
+        Schema::create('spell_traits', function (Blueprint $table) {
             $table->string('id')->primary();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('spellTraits');
+        Schema::dropIfExists('spell_traits');
     }
 };

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('magic_schools', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name');
-            $table->foreignIdFor(Media::class, 'imageId')->nullable();
-            $table->string('parentId')->nullable();
+            $table->foreignIdFor(Media::class, 'image_id')->nullable();
+            $table->string('parent_id')->nullable();
             $table->text('description')->nullable();
             $table->string('shortName', 8)->nullable()->index();
         });

@@ -16,7 +16,7 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  *
  * @property ?StatusConditionEdition $failStatus
- * @property ?Uuid $failStatusId
+ * @property ?Uuid $fail_status_id
  * @property ?SavingThrowMultiplier $multiplier
  * @property SpellEdition $spellEdition
  * @property ?StatusConditionEdition $succeedStatus
@@ -35,17 +35,17 @@ class SavingThrow extends AbstractModel
 
     public function failStatus(): BelongsTo
     {
-        return $this->belongsTo(StatusConditionEdition::class, 'failStatusId');
+        return $this->belongsTo(StatusConditionEdition::class, 'fail_status_id');
     }
 
     public function spellEdition(): BelongsTo
     {
-        return $this->belongsTo(SpellEdition::class, 'spellEditionId');
+        return $this->belongsTo(SpellEdition::class, 'spell_edition_id');
     }
 
     public function succeedStatus(): BelongsTo
     {
-        return $this->belongsTo(StatusConditionEdition::class, 'succeedStatusId');
+        return $this->belongsTo(StatusConditionEdition::class, 'succeed_status_id');
     }
 
     public function toArrayFull(): array
@@ -65,9 +65,9 @@ class SavingThrow extends AbstractModel
     public function toArrayTeaser(): array
     {
         return [
-            'failStatus' => $this->failStatus?->toArray($this->renderMode),
+            'fail_status' => $this->failStatus?->toArray($this->renderMode),
             'multiplier' => $this->multiplier?->toString(),
-            'succeedStatus' => $this->succeedStatus?->toArray($this->renderMode),
+            'succeed_status' => $this->succeedStatus?->toArray($this->renderMode),
         ];
     }
 

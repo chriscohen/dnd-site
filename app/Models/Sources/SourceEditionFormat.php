@@ -15,7 +15,7 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  *
  * @property SourceEdition $edition
- * @property Uuid $sourceEditionId
+ * @property Uuid $source_edition_id
  * @property SourceFormat $format
  */
 class SourceEditionFormat extends AbstractModel
@@ -37,7 +37,7 @@ class SourceEditionFormat extends AbstractModel
 
     public function edition(): BelongsTo
     {
-        return $this->belongsTo(SourceEdition::class, 'sourceEditionDd');
+        return $this->belongsTo(SourceEdition::class, 'source_edition_id');
     }
 
     public function toArrayFull(): array

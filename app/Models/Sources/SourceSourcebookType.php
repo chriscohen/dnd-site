@@ -12,8 +12,8 @@ use Ramsey\Uuid\Uuid;
 
 /**
  * @property Source $source
- * @property Uuid $sourceId
- * @property SourcebookType $sourcebookType
+ * @property Uuid $source_id
+ * @property SourcebookType $sourcebook_type
  */
 class SourceSourcebookType extends AbstractModel
 {

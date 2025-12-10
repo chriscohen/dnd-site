@@ -16,8 +16,8 @@ use Ramsey\Uuid\Uuid;
  *
  * @property SourceEdition $edition
  * @property Company $origin
- * @property string $productId
- * @property Uuid $sourceEditionId
+ * @property string $product_id
+ * @property Uuid $source_edition_id
  */
 class ProductId extends AbstractModel
 {
@@ -27,18 +27,18 @@ class ProductId extends AbstractModel
 
     public function origin(): BelongsTo
     {
-        return $this->belongsTo(Company::class, 'originId');
+        return $this->belongsTo(Company::class, 'origin_id');
     }
 
     public function source(): BelongsTo
     {
-        return $this->belongsTo(Source::class, 'sourceId');
+        return $this->belongsTo(Source::class, 'source_id');
     }
 
     public function toArrayFull(): array
     {
         return [
-            'edition' => $this->edition->toArray($this->renderMode),
+            'edition' => $this->edition->toArray($this->renderMode, $this->excluded),
         ];
     }
 
@@ -47,7 +47,7 @@ class ProductId extends AbstractModel
         return [
             'id' => $this->id,
             'origin' => $this->origin->toArray(JsonRenderMode::FULL),
-            'productId' => $this->productId,
+            'product_id' => $this->product_id,
             'url' => $this->url(),
         ];
     }
@@ -59,9 +59,9 @@ class ProductId extends AbstractModel
 
     public function url(): ?string
     {
-        return empty($this->origin->productUrl) ?
+        return empty($this->origin->product_url) ?
             null :
-            $this->origin->website . '/' . $this->origin->getProductUrl($this->productId);
+            $this->origin->website . '/' . $this->origin->getProductUrl($this->product_id);
     }
 
     public static function fromInternalJson(array $value): static

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('prerequisites', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(FeatEdition::class, 'featEditionId');
+            $table->foreignIdFor(FeatEdition::class, 'feat_edition_id');
 
             $table->string('type', 32);
         });

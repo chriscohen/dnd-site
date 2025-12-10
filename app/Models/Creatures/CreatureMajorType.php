@@ -27,13 +27,13 @@ class CreatureMajorType extends AbstractModel
 
     public function editions(): HasMany
     {
-        return $this->hasMany(CreatureMajorTypeEdition::class, 'creatureMajorTypeId');
+        return $this->hasMany(CreatureMajorTypeEdition::class, 'creature_major_type_id');
     }
 
     public function toArrayFull(): array
     {
         return [
-            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
         ];
     }
 
@@ -43,7 +43,7 @@ class CreatureMajorType extends AbstractModel
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
-            'plural' => $this->plural,
+            'plural '=> $this->plural,
         ];
     }
 

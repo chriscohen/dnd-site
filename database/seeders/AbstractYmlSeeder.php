@@ -162,7 +162,7 @@ abstract class AbstractYmlSeeder extends Seeder
                 $value->prerequisite()->associate($prerequisite);
 
                 if (is_array($valueData)) {
-                    $value->skillRanks = $valueData['skill_ranks'] ?? null;
+                    $value->skill_ranks = $valueData['skill_ranks'] ?? null;
                     $value->value = $valueData['value'];
 
                     if ($valueData['value'] == 'speak language') {
@@ -171,13 +171,13 @@ abstract class AbstractYmlSeeder extends Seeder
                     }
 
                     if (!empty($valueData['craft_type'])) {
-                        $value->craftType = CraftType::tryFromString($valueData['craft_type'], true);
+                        $value->craft_type = CraftType::tryFromString($valueData['craft_type'], true);
                     }
                     if (!empty($valueData['knowledge_type'])) {
-                        $value->knowledgeType = KnowledgeType::tryFromString($valueData['knowledge_type'], true);
+                        $value->knowledge_type = KnowledgeType::tryFromString($valueData['knowledge_type'], true);
                     }
                     if (!empty($valueData['weapon_focus_type'])) {
-                        $value->weaponFocusType = WeaponFocusType::tryFromString(
+                        $value->weapon_focus_type = WeaponFocusType::tryFromString(
                             $valueData['weapon_focus_type'],
                             true
                         );
@@ -210,8 +210,8 @@ abstract class AbstractYmlSeeder extends Seeder
             }
 
             $reference->edition()->associate($sourceEdition);
-            $reference->pageFrom = $datum['page_from'];
-            $reference->pageTo = $datum['page_to'] ?? null;
+            $reference->page_from = $datum['page_from'];
+            $reference->page_to = $datum['page_to'] ?? null;
             $reference->entity()->associate($me);
 
             $reference->save();

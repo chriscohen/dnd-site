@@ -11,28 +11,28 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('spellEditions4e', function (Blueprint $table) {
+        Schema::create('spell_editions_4e', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(SpellEdition::class, 'spellEditionId');
+            $table->foreignIdFor(SpellEdition::class, 'spell_edition_id');
 
             $table->unsignedSmallInteger('type');
             $table->unsignedSmallInteger('frequency')->nullable();
-            $table->unsignedSmallInteger('attackAttribute')->nullable();
-            $table->unsignedSmallInteger('attackSave')->nullable();
-            $table->text('hitPrimary')->nullable();
-            $table->text('hitSecondary')->nullable();
+            $table->unsignedSmallInteger('attack_attribute')->nullable();
+            $table->unsignedSmallInteger('attack_save')->nullable();
+            $table->text('hit_primary')->nullable();
+            $table->text('hit_secondary')->nullable();
             $table->text('miss')->nullable();
             $table->text('effect')->nullable();
 
             // targets
 
-            $table->string('specialNname')->nullable();
+            $table->string('special_name')->nullable();
             $table->text('special')->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('spellEditions4e');
+        Schema::dropIfExists('spell_editions_4e');
     }
 };

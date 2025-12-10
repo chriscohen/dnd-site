@@ -15,9 +15,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @property ?string $description
  * @property Media $image
- * @property string $imageId
  * @property ?MagicSchool $parent
- * @property string $parentId
+ * @property string $parent_id
  * @property ?string $shortName
  */
 class MagicSchool extends AbstractModel
@@ -27,7 +26,7 @@ class MagicSchool extends AbstractModel
 
     public function image(): BelongsTo
     {
-        return $this->belongsTo(Media::class, 'imageId');
+        return $this->belongsTo(Media::class, 'image_id');
     }
 
     public function parent(): BelongsTo
@@ -60,19 +59,6 @@ class MagicSchool extends AbstractModel
 
     public static function fromInternalJson(array $value): static
     {
-        $item = new static();
-        $item->id = $value['id'];
-        $item->name = $value['name'];
-        $item->shortName = $value['shortName'] ?? null;
-
-        $item->description = $value['description'] ?? null;
-        $item->parentId = $value['parentId'] ?? null;
-
-        if (!empty($value['image'])) {
-            $image = Media::query()->where('id', $value['image'])->firstOrFail();
-            $item->image()->associate($image);
-        }
-
-        return $item;
+        throw new \Exception('Not implemented');
     }
 }

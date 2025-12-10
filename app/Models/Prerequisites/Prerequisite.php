@@ -43,7 +43,7 @@ class Prerequisite extends AbstractModel
     }
 
     /**
-     * @return Collection<string|Deity|Alignment|Feat|CharacterClass|SpellcasterType>
+     * @return Collection<string|Deity|Alignment|\App\Models\Feats\Feat|\App\Models\CharacterClasses\CharacterClass|SpellcasterType>
      */
     public function getValues(): Collection
     {
@@ -68,7 +68,7 @@ class Prerequisite extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'featEdition' => $this->featEdition->toArray(),
+            'feat_edition' => $this->featEdition->toArray(),
             'id' => $this->id,
         ];
     }

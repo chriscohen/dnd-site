@@ -11,19 +11,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('statusConditionEditions', function (Blueprint $table) {
+        Schema::create('status_condition_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(StatusCondition::class, 'statusConditionId');
-            $table->unsignedSmallInteger('gameEdition');
+            $table->foreignIdFor(StatusCondition::class, 'status_condition_id');
+            $table->unsignedSmallInteger('game_edition');
 
             $table->text('description')->nullable();
 
-            $table->unique(['statusConditionId', 'gameEdition'], 'statusEdition');
+            $table->unique(['status_condition_id', 'game_edition'], 'status_edition');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('statusConditionEditions');
+        Schema::dropIfExists('status_condition_editions');
     }
 };

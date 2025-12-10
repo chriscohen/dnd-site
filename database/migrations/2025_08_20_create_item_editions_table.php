@@ -11,14 +11,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('itemEditions', function (Blueprint $table) {
+        Schema::create('item_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(Item::class, 'itemId');
-            $table->unsignedSmallInteger('gameEdition');
+            $table->foreignIdFor(Item::class, 'item_id');
+            $table->smallInteger('game_edition');
+
+            //$table->morphs('itemable');
 
             $table->text('description')->nullable();
-            $table->boolean('isDefault')->default(false);
-            $table->boolean('isUnique')->default(false);
+            $table->boolean('is_default')->default(false);
+            $table->boolean('is_unique')->default(false);
             $table->unsignedInteger('price')->nullable();
             $table->unsignedSmallInteger('quantity')->default(1);
             $table->unsignedSmallInteger('rarity');
@@ -28,6 +30,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('itemEditions');
+        Schema::dropIfExists('item_editions');
     }
 };

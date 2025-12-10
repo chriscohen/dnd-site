@@ -24,13 +24,13 @@ class CreatureType extends AbstractModel
 
     public function editions(): HasMany
     {
-        return $this->hasMany(CreatureTypeEdition::class, 'creatureTypeId');
+        return $this->hasMany(CreatureTypeEdition::class, 'creature_type_id');
     }
 
     public function toArrayFull(): array
     {
         return [
-            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
         ];
     }
 

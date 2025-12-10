@@ -42,15 +42,15 @@ class ItemSeeder extends AbstractYmlSeeder
             foreach ($datum['editions'] ?? [] as $editionData) {
                 $edition = new ItemEdition();
                 $edition->id = $editionData['id'];
-                $edition->itemId = $datum['id'];
+                $edition->item_id = $datum['id'];
 
-                $edition->isDefault = (count($datum['editions']) == 1) ?
+                $edition->is_default = (count($datum['editions']) == 1) ?
                     true :
                     $editionData['is_default'] ?? false;
 
-                $edition->gameEdition = GameEdition::tryFromString($editionData['game_edition']);
+                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
                 $edition->description = $editionData['description'];
-                $edition->isUnique = $editionData['is_unique'] ?? false;
+                $edition->is_unique = $editionData['is_unique'] ?? false;
                 $edition->price = !empty($editionData['price']) ?
                     $edition->priceFromString($editionData['price']) :
                     null;

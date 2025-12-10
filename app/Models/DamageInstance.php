@@ -16,20 +16,20 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property ?Attribute $attributeModifier
- * @property ?int $attributeModifierQuantity
- * @property DamageType $damageType
- * @property ?int $dieFaces
- * @property ?int $fixedDamage
- * @property ?int $fixedDamageMaximum
- * @property ?int $dieQuantity
- * @property ?int $dieQuantityMaximum
+ * @property ?Attribute $attribute_modifier
+ * @property ?int $attribute_modifier_quantity
+ * @property DamageType $damage_type
+ * @property ?int $die_faces
+ * @property ?int $fixed_damage
+ * @property ?int $fixed_damage_maximum
+ * @property ?int $die_quantity
+ * @property ?int $die_quantity_maximum
  * @property ModelInterface $entity
  * @property ?int $modifier
- * @property ?int $perLevelDieFaces
- * @property ?int $perLevelDieQuantity
- * @property ?int $perLevelFixedDamage
- * @property ?PerLevelMode $perLeveLMode
+ * @property ?int $per_level_die_faces
+ * @property ?int $per_level_die_quantity
+ * @property ?int $per_level_fixed_damage
+ * @property ?PerLevelMode $per_level_mode
  * @property int $quantity
  * @property ?StatusConditionEdition $statusConditionEdition
  */
@@ -40,8 +40,8 @@ class DamageInstance extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'damageDype' => DamageType::class,
-        'perLevelMode' => PerLevelMode::class,
+        'damage_type' => DamageType::class,
+        'per_level_mode' => PerLevelMode::class,
     ];
 
     public function entity(): MorphTo
@@ -51,7 +51,7 @@ class DamageInstance extends AbstractModel
 
     public function formatDice(): string
     {
-        return empty($this->dieQuantity) ? '' . $this->dieFaces : $this->dieQuantity . 'd' . $this->dieFaces;
+        return empty($this->die_quantity) ? '' . $this->die_faces : $this->die_quantity . 'd' . $this->die_faces;
     }
 
     public function statusConditionEdition(): BelongsTo
@@ -63,18 +63,18 @@ class DamageInstance extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'damageType' => $this->damageType,
-            'dieFaces' => $this->dieFaces,
-            'dieQuantity' => $this->dieQuantity,
-            'dieQuantityMaximum' => $this->dieQuantityMaximum,
-            'fixedDamage' => $this->fixedDamage,
-            'fixedDamageMaximum' => $this->fixedDamageMaximum,
-            'entityId' => $this->entity->id,
+            'damage_type' => $this->damage_type,
+            'die_faces' => $this->die_faces,
+            'die_quantity' => $this->die_quantity,
+            'die_quantity_maximum' => $this->die_quantity_maximum,
+            'fixed_damage' => $this->fixed_damage,
+            'fixed_damage_maximum' => $this->fixed_damage_maximum,
+            'entity_id' => $this->entity->id,
             'modifier' => $this->modifier,
-            'perLevelDieFaces' => $this->perLevelDieFaces,
-            'perLevelDieQuantity' => $this->perLevelDieQuantity,
-            'perLevelFixedDamage' => $this->perLevelFixedDamage,
-            'perLevelMode' => $this->perLeveLMode,
+            'per_level_die_faces' => $this->per_level_die_faces,
+            'per_level_die_quantity' => $this->per_level_die_quantity,
+            'per_level_fixed_damage' => $this->per_level_fixed_damage,
+            'per_level_mode' => $this->per_level_mode,
             'quantity' => $this->quantity,
         ];
     }
@@ -106,16 +106,16 @@ class DamageInstance extends AbstractModel
                 ' - ' . $this->modifier;
         }
 
-        $output .= ' ' . $this->damageType?->toString() . ' damage';
+        $output .= ' ' . $this->damage_type?->toString() . ' damage';
 
-        $output .= match ($this->perLeveLMode) {
+        $output .= match ($this->per_level_mode) {
             PerLevelMode::NONE => $output,
             PerLevelMode::PER_LEVEL, PerLevelMode::PER_CASTER_LEVEL =>
-                $output . '/' . $this->perLeveLMode->toString(),
+                $output . '/' . $this->per_level_mode->toString(),
         };
 
-        if (!empty($this->dieQuantityMaximum)) {
-            $output .= ' (maximum ' . $this->dieQuantityMaximum . 'd' . $this->dieFaces . ')';
+        if (!empty($this->die_quantity_maximum)) {
+            $output .= ' (maximum ' . $this->die_quantity_maximum . 'd' . $this->die_faces . ')';
         }
 
         // Add overall quantity.

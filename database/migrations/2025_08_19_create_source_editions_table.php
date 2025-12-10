@@ -10,24 +10,24 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('sourceEditions', function (Blueprint $table) {
+        Schema::create('source_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('sourceId')
+            $table->foreignUuid('source_id')
                 ->references('id')
                 ->on('sources');
             $table->string('name');
             $table->smallInteger('binding')->nullable();
-            $table->boolean('isPrimary')->default(false)->index();
+            $table->boolean('is_primary')->default(false)->index();
             $table->string('isbn10', 10)->unique()->nullable();
             $table->string('isbn13', 13)->unique()->nullable();
             $table->smallInteger('pages')->nullable();
-            $table->date('releaseDate')->nullable();
-            $table->boolean('releaseDateMonthOnly')->default(false);
+            $table->date('release_date')->nullable();
+            $table->boolean('release_date_month_only')->default(false);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('sourceEditions');
+        Schema::dropIfExists('sources');
     }
 };

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\JsonRenderMode;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
@@ -14,8 +15,8 @@ use Ramsey\Uuid\Uuid;
  *
  * @property Media $logo
  * @property string $name
- * @property ?string $productUrl
- * @property ?string $shortName
+ * @property ?string $product_url
+ * @property ?string $short_name
  * @property string $website
  */
 class Company extends AbstractModel
@@ -26,22 +27,22 @@ class Company extends AbstractModel
 
     public function getProductUrl(string|Uuid $id): ?string
     {
-        return empty($this->productUrl) ?
+        return empty($this->product_url) ?
             null :
-            str_replace('{{id}}', $id, $this->productUrl);
+            str_replace('{{id}}', $id, $this->product_url);
     }
 
     public function logo(): BelongsTo
     {
-        return $this->belongsTo(Media::class, 'logoId');
+        return $this->belongsTo(Media::class, 'logo_id');
     }
 
     public function toArrayFull(): array
     {
         return [
-            'logo' => $this->logo->toArray($this->renderMode),
-            'productUrl' => $this->productUrl,
-            'shortName' => $this->shortName,
+            'logo' => $this->logo->toArray($this->renderMode, $this->excluded),
+            'product_url' => $this->product_url,
+            'short_name' => $this->short_name,
             'website' => $this->website,
         ];
     }

@@ -17,15 +17,15 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property ?string $alternateName
+ * @property ?string $alternate_name
  * @property ?string $caption
  * @property CharacterClass $characterClass
- * @property GameEdition $gameEdition
- * @property ?int $hitDieFaces
- * @property bool $isGroupOnly
- * @property bool $isPrestige
+ * @property GameEdition $game_edition
+ * @property ?int $hit_die_faces
+ * @property bool $is_group_only
+ * @property bool $is_prestige
  * @property ?CharacterClassEdition $parent
- * @property ?Uuid $parentId
+ * @property ?Uuid $parent_id
  * @property Collection<Reference> $references
  */
 class CharacterClassEdition extends AbstractModel
@@ -35,9 +35,9 @@ class CharacterClassEdition extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'gameEdition' => GameEdition::class,
-        'isGroupOnly' => 'boolean',
-        'isPrestige' => 'boolean',
+        'game_edition' => GameEdition::class,
+        'is_group_only' => 'boolean',
+        'is_prestige' => 'boolean',
     ];
 
     public function characterClass(): BelongsTo
@@ -47,7 +47,7 @@ class CharacterClassEdition extends AbstractModel
 
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(CharacterClassEdition::class, 'parentId');
+        return $this->belongsTo(CharacterClassEdition::class, 'parent_id');
     }
 
     public function references(): MorphMany
@@ -58,7 +58,7 @@ class CharacterClassEdition extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'hitDieFaces' => $this->hitDieFaces,
+            'hit_die_faces' => $this->hit_die_faces,
             'parent' => $this->parent?->toArray($this->renderMode),
             'references' => ModelCollection::make($this->references)->toArray($this->renderMode),
         ];
@@ -68,16 +68,16 @@ class CharacterClassEdition extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'gameEdition' => $this->gameEdition->toStringShort(),
-            'isGroupOnly' => $this->isGroupOnly,
-            'isPrestige' => $this->isPrestige,
+            'game_edition' => $this->game_edition->toStringShort(),
+            'is_group_only' => $this->is_group_only,
+            'is_prestige' => $this->is_prestige,
         ];
     }
 
     public function toArrayTeaser(): array
     {
         return [
-            'alternate_name' => $this->alternateName,
+            'alternate_name' => $this->alternate_name,
             'caption' => $this->caption,
         ];
     }

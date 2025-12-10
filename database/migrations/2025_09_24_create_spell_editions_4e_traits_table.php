@@ -12,16 +12,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('spellEditions4eTraits', function (Blueprint $table) {
-            $table->foreignIdFor(SpellEdition4e::class, 'spellEdition4eId');
-            $table->foreignIdFor(SpellTrait::class, 'spellTraitId');
+        Schema::create('spell_editions_4e_traits', function (Blueprint $table) {
+            $table->foreignIdFor(SpellEdition4e::class, 'spell_edition_4e_id');
+            $table->foreignIdFor(SpellTrait::class, 'spell_trait_id');
 
-            $table->primary(['spellEdition4eId', 'spellTraitId'], 'editionTrait');
+            $table->primary(['spell_edition_4e_id', 'spell_trait_id'], 'edition_trait');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('spellEditions4eTraits');
+        Schema::dropIfExists('spell_editions_4e_traits');
     }
 };

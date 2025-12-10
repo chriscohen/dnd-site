@@ -15,9 +15,9 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  * @property string $slug
  *
- * @property string $alternateName
- * @property GameEdition $gameEdition
- * @property ?Attribute $relatedAttribute
+ * @property string $alternate_name
+ * @property GameEdition $game_edition
+ * @property ?Attribute $related_attribute
  * @property Skill $skill
  */
 class SkillEdition extends AbstractModel
@@ -27,13 +27,13 @@ class SkillEdition extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'gameEdition' => GameEdition::class,
-        'relatedAttribute' => Attribute::class,
+        'game_edition' => GameEdition::class,
+        'related_attribute' => Attribute::class,
     ];
 
     public function skill(): BelongsTo
     {
-        return $this->belongsTo(Skill::class, 'skillId');
+        return $this->belongsTo(Skill::class, 'skill_id');
     }
 
     public function toArrayFull(): array
@@ -45,9 +45,9 @@ class SkillEdition extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'alternateName' => $this->alternateName,
-            'gameEdition' => $this->gameEdition->toStringShort(),
-            'relatedAttribute' => $this->relatedAttribute->toStringShort()
+            'alternate_name' => $this->alternate_name,
+            'game_edition' => $this->game_edition->toStringShort(),
+            'related_attribute' => $this->related_attribute->toStringShort()
         ];
     }
 

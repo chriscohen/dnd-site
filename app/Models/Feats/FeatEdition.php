@@ -23,7 +23,7 @@ use Illuminate\Support\Collection;
  *
  * @property ?string $description
  * @property Feat $feat
- * @property GameEdition $gameEdition
+ * @property GameEdition $game_edition
  * @property Collection<Prerequisite> $prerequisites
  * @property Collection<Reference> $references
  */
@@ -34,7 +34,7 @@ class FeatEdition extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'gameEdition' => GameEdition::class,
+        'game_edition' => GameEdition::class,
     ];
 
     public function feat(): BelongsTo
@@ -65,7 +65,7 @@ class FeatEdition extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'feat' => $this->feat->toArray($this->renderMode),
+            'feat' => $this->feat->toArray(JsonRenderMode::SHORT),
             'prerequisites' => ModelCollection::make($this->prerequisites)->toArray($this->renderMode),
             'references' => ModelCollection::make($this->references)->toArray(),
         ];
@@ -84,7 +84,7 @@ class FeatEdition extends AbstractModel
     {
         return [
             'description' => $this->description,
-            'gameEdition' => $this->gameEdition->toStringShort(),
+            'game_edition' => $this->game_edition->toStringShort(),
         ];
     }
 
