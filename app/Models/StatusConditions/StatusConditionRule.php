@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\StatusConditions;
 
 use App\Models\AbstractModel;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -61,8 +62,14 @@ class StatusConditionRule extends AbstractModel
         return $this->rule;
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+
+        $item->rule = $value;
+        $item->statusConditionEdition()->associate($parent);
+
+        $item->save();
+        return $item;
     }
 }

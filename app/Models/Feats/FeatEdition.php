@@ -8,6 +8,7 @@ use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
+use App\Models\ModelInterface;
 use App\Models\Prerequisites\Prerequisite;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -15,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @property string $id
@@ -84,12 +86,28 @@ class FeatEdition extends AbstractModel
     {
         return [
             'description' => $this->description,
-            'game_edition' => $this->game_edition->toStringShort(),
+            'gameEdition' => $this->game_edition->toStringShort(),
         ];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->feat()->associate($parent);
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
+        $item->description = $value['description'] ?? null;
+        $item->save();
+
+        foreach ($value['references'] ?? [] as $reference) {
+            Reference::fromInternalJson($reference, $item);
+        }
+        foreach ($value['prerequisites'] ?? [] as $prerequisiteData) {
+            $prerequisite = Prerequisite::fromInternalJson($prerequisiteData, $item);
+            $item->prerequisites()->save($prerequisite);
+        }
+
+        $item->save();
+        return $item;
     }
 }

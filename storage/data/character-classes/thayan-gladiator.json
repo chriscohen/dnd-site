@@ -20,7 +20,7 @@
                     "type": "feat",
                     "values": [
                         "toughness",
-                        { "value": "weapon-focus", "weapon_focus_type": "natural weapon" }
+                        { "value": "weapon-focus", "weaponFocusType": "natural weapon" }
                     ]
                 },
                 {

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('type');
             $table->unsignedSmallInteger('height')->nullable();
             $table->unsignedSmallInteger('length')->nullable();
-            $table->unsignedSmallInteger('per_level')->nullable();
+            $table->unsignedSmallInteger('perLevel')->nullable();
             $table->unsignedSmallInteger('quantity')->default(1);
             $table->unsignedSmallInteger('radius')->nullable();
             $table->unsignedSmallInteger('width')->nullable();

@@ -6,6 +6,7 @@ namespace App\Models\Creatures;
 
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
@@ -48,7 +49,7 @@ class CreatureType extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         throw new \Exception('Not implemented');
     }

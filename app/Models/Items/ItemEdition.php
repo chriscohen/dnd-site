@@ -7,6 +7,7 @@ use App\Enums\GameEdition;
 use App\Enums\Rarity;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
+use App\Models\ModelInterface;
 use App\Models\Reference;
 use App\Models\Spells\SpellEdition;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -107,7 +108,7 @@ class ItemEdition extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         throw new \Exception('Not implemented');
     }

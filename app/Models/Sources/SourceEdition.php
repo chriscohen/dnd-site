@@ -3,9 +3,9 @@
 namespace App\Models\Sources;
 
 use App\Enums\Binding;
-use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
+use App\Models\ModelInterface;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -19,7 +19,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property ?Binding $binding
  * @property Collection<BoxedSetItem> $boxedSetItems
- * @property Collection $formats
+ * @property Collection<SourceEditionFormat> $formats
  * @property bool $is_primary
  * @property ?string $isbn10
  * @property ?string $isbn13
@@ -113,8 +113,31 @@ class SourceEdition extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->source()->associate($parent);
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->name = $value['name'] ?? 'original';
+
+        if (!empty($value['binding'])) {
+            $item->binding = Binding::tryFromString($value['binding']);
+        }
+        if (!empty($value['formats'])) {
+            foreach ($value['formats'] as $formatData) {
+                $format = SourceEditionFormat::fromInternalJson($formatData, $item);
+                $item->formats()->save($format);
+            }
+        }
+
+        $item->is_primary = $value['isPrimary'] ?? false;
+        $item->isbn10 = $value['isbn10'] ?? null;
+        $item->isbn13 = $value['isbn13'] ?? null;
+        $item->pages = $value['pages'] ?? null;
+        $item->release_date = new Carbon($value['releaseDate']) ?? null;
+        $item->release_date_month_only = $value['releaseDateMonthOnly'] ?? false;
+
+        $item->save();
+        return $item;
     }
 }

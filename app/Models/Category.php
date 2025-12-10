@@ -61,8 +61,23 @@ class Category extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->name = $value['name'] ?? null;
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+        $item->entity_type = $value['entityType'] ?? null;
+        $item->parent_id = $value['parentId'] ?? null;
+
+        if (!empty($value['image'])) {
+            $image = Media::fromInternalJson([
+                'filename' => '/categories/' . $value['image'],
+            ], $parent);
+            $item->image()->associate($image);
+        }
+
+        $item->save();
+        return $item;
     }
 }

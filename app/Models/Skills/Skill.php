@@ -6,6 +6,7 @@ namespace App\Models\Skills;
 
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
@@ -50,8 +51,19 @@ class Skill extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->name = $value['name'];
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+
+        foreach ($value['editions'] ?? [] as $editionData) {
+            $edition = SkillEdition::fromInternalJson($editionData, $item);
+            $item->editions()->save($edition);
+        }
+
+        $item->save();
+        return $item;
     }
 }

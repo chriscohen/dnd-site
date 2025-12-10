@@ -6,8 +6,10 @@ namespace App\Models\Feats;
 
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @property string $id
@@ -47,8 +49,20 @@ class Feat extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'];
+        $item->name = $value['name'];
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+        $item->save();
+
+        foreach ($value['editions'] ?? [] as $editionData) {
+            $edition = FeatEdition::fromInternalJson($editionData, $item);
+            $item->editions()->save($edition);
+        }
+
+        $item->save();
+        return $item;
     }
 }

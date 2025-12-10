@@ -11,10 +11,11 @@ interface ModelInterface
     /**
      * Create a new instance from an internal JSON representation, as an array.
      *
-     * @param  array  $value
+     * @param  array|string|int  $value
+     * @param  ModelInterface|null  $parent
      * @return static
      */
-    public static function fromInternalJson(array $value): static;
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static;
 
     /**
      * Get the human-readable name of this thing.

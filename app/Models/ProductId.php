@@ -17,7 +17,8 @@ use Ramsey\Uuid\Uuid;
  * @property SourceEdition $edition
  * @property Company $origin
  * @property string $product_id
- * @property Uuid $source_edition_id
+ * @property Source $source
+ * @property Uuid $source_id
  */
 class ProductId extends AbstractModel
 {
@@ -38,7 +39,7 @@ class ProductId extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'edition' => $this->edition->toArray($this->renderMode, $this->excluded),
+            'sourceId' => $this->source_id,
         ];
     }
 
@@ -47,7 +48,7 @@ class ProductId extends AbstractModel
         return [
             'id' => $this->id,
             'origin' => $this->origin->toArray(JsonRenderMode::FULL),
-            'product_id' => $this->product_id,
+            'productId' => $this->product_id,
             'url' => $this->url(),
         ];
     }
@@ -64,8 +65,18 @@ class ProductId extends AbstractModel
             $this->origin->website . '/' . $this->origin->getProductUrl($this->product_id);
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->product_id = $value['productId'];
+
+        $company = Company::query()->where('slug', $value['company'])->firstOrFail();
+        $item->origin()->associate($company);
+
+        $item->source()->associate($parent);
+
+        $item->save();
+        return $item;
     }
 }

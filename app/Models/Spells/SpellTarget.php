@@ -6,6 +6,7 @@ namespace App\Models\Spells;
 
 use App\Enums\TargetType;
 use App\Models\AbstractModel;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Ramsey\Uuid\Uuid;
 
@@ -41,7 +42,7 @@ class SpellTarget extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         throw new \Exception('Not implemented');
     }

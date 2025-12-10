@@ -2,7 +2,7 @@
     "id": "5af57f48-b028-45a1-9865-562f19d40436",
     "name": "Mythic Odysseys of Theros",
     "slug": "mythic-odysseys-of-theros",
-    "cover_image": "mythic-odysseys-of-theros.webp",
+    "coverImage": "mythic-odysseys-of-theros.webp",
     "description": "Will Your Story Be One of Legend—or of Tragedy?\n\nIn this D&D campaign setting, you’ll explore the Magic: The Gathering plane of Theros, a world inspired by the gripping epics, unforgettable monsters, and rich mythology of Ancient Greece.\n\nSet off on an epic voyage across the Siren Sea, where mystic isles hide untold wonders and mythic monsters lurk in the deep. Visit the necropolies of the Returned—where melancholy golden masks mark those who dared escape the Underworld. Or journey into an enchanted valley to join satyrs in their indulgent revelry.\n\nFrom the starry realm of Nyx, the gods rule over all. They seek champions—heroes to enact their schemes and spread their ideals. But are their gifts ever truly free?",
     "editions": [
         {
@@ -14,23 +14,23 @@
                 "dnd_beyond",
                 "roll_20"
             ],
-            "is_primary": true,
+            "isPrimary": true,
             "isbn13": "9780786967018",
             "pages": 256,
-            "release_date": "2020-06-02"
+            "releaseDate": "2020-06-02"
         }
     ],
-    "game_edition": "5e",
-    "product_code": "SRC-00061",
-    "product_ids": {
+    "gameEdition": "5e",
+    "productCode": "SRC-00061",
+    "productIds": {
         "drivethru-rpg": "442494",
         "dungeon-masters-guild": "442494",
         "alchemists-workshops": "dungeons-dragons-mythic-odysseys-of-theros"
     },
-    "publication_type": "official",
-    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
-    "sourcebook_types": [
-        "campaign_setting"
+    "publicationType": "official",
+    "publisherId": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebookTypes": [
+        "campaignSetting"
     ],
-    "source_type": "sourcebook"
+    "sourceType": "sourcebook"
 }

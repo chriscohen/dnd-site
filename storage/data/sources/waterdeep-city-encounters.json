@@ -2,26 +2,26 @@
     "id": "c0c0e191-2f5e-44df-9e31-4ae7776c1811",
     "name": "Waterdeep: City Encounters",
     "slug": "waterdeep-city-encounters",
-    "cover_image": "waterdeep-city-encounters.webp",
+    "coverImage": "waterdeep-city-encounters.webp",
     "description": "BRING THE CITY OF SPLENDORS TO LIFE IN THIS COMPANION SUPPLEMENT FOR WATERDEEP: DRAGON HEIST™!\n\nPresenting over ONE-HUNDRED short encounters that bring the City of Splendors to life in YOUR game. This supplement includes a plethora of highly replayable random street encounters that draw on the story of Waterdeep: Dragon Heist™, with emphasis on the central themes of intrigue, espionage, and peril. One-shot encounters are presented for almost every location mentioned in \"Volo’s Waterdeep Enchiridion\" (Chapter 9), meaning you'll never get caught short for a dramatic scene as your players explore the city.\n\nWaterdeep: City Encounters is brought to you by the Guild Adepts: Alan Patrick, Cindy Moore, Greg Marks, James Introcaso, M.T. Black, Rich Lescouflair, Robert Adducci, Shawn Merwin, Travis Woodall, and Will Doyle.\n\nThis product is a DMs Guild Adepts adventure supplement! The Dungeon Masters Guild Adept program brings highly talented individuals together for creative development. Guild Adept products are identified with the golden ampersand and logo.",
     "editions": [
         {
             "id": "628c3a84-fa40-4bee-a4f3-912276722bb8",
             "name": "original",
             "formats": ["pdf"],
-            "is_primary": true,
+            "isPrimary": true,
             "pages": 38,
-            "release_date": "2018-09-07"
+            "releaseDate": "2018-09-07"
         }
     ],
-    "game_edition": "5e",
-    "product_ids": {
+    "gameEdition": "5e",
+    "productIds": {
         "drivethru-rpg": "251816",
         "dungeon-masters-guild": "251816"
     },
-    "publication_type": "third party",
-    "publisher_id": "0f063d69-07ea-49ac-8bae-b26dd3a2bdf9",
+    "publicationType": "third party",
+    "publisherId": "0f063d69-07ea-49ac-8bae-b26dd3a2bdf9",
     "publisher_name": "dungeon-masters-guild",
-    "sourcebook_types": ["encounters"],
-    "source_type": "sourcebook"
+    "sourcebookTypes": ["encounters"],
+    "sourceType": "sourcebook"
 }

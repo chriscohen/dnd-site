@@ -35,15 +35,15 @@ enum SourcebookType: int
 
     public static function tryFromString(string $value): ?SourcebookType
     {
-        return match (str_replace("_", " ", mb_strtolower($value))) {
+        return match (str_replace("_", "", mb_strtolower($value))) {
             'core' => self::CORE,
             'adventure' => self::ADVENTURE,
-            'boxed set' => self::BOXED_SET,
-            'character options' => self::CHARACTER_OPTIONS,
-            'gear magic items' => self::GEAR_MAGIC_ITEMS,
+            'boxedset' => self::BOXED_SET,
+            'characteroptions' => self::CHARACTER_OPTIONS,
+            'gearmagicitems' => self::GEAR_MAGIC_ITEMS,
             'monsters' => self::MONSTERS,
             'spells' => self::SPELLS,
-            'campaign setting' => self::CAMPAIGN_SETTING,
+            'campaignsetting' => self::CAMPAIGN_SETTING,
             'lore' => self::LORE,
             'encounters' => self::ENCOUNTERS,
             default => null,

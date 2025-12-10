@@ -16,26 +16,8 @@ class FeatSeeder extends AbstractYmlSeeder
     public function run(): void
     {
         foreach ($this->getDataFromDirectory() as $datum) {
-            $item = new Feat();
-            $item->id = $datum['id'];
-            $item->name = $datum['name'];
-            print $item->name . "\n";
-            $item->slug = $datum['slug'] ?? $this->makeSlug($datum['name']);
-
-            $item->save();
-
-            foreach ($datum['editions'] as $editionData) {
-                $edition = new FeatEdition();
-                $edition->feat()->associate($item);
-                $edition->id = $editionData['id'];
-                $edition->description = $editionData['description'] ?? null;
-                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
-
-                $edition->save();
-
-                $this->setReferences($editionData['references'] ?? [], $edition);
-                $this->setPrerequisites($editionData['prerequisites'] ?? [], $edition);
-            }
+            print "Creating Feat " . $datum['name'] . "...\n";
+            Feat::fromInternalJson($datum);
         }
     }
 }

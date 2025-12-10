@@ -3,121 +3,121 @@
         "id": "f70b60f8-f33f-497b-9ba2-1902aa201be0",
         "slug": "adventuring-gear",
         "name": "Adventuring Gear",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "equipment",
-        "parent_id": "410f4a52-b640-4fdf-9984-7b8867c8a8e6"
+        "parentId": "410f4a52-b640-4fdf-9984-7b8867c8a8e6"
     },
     {
         "id": "d59bdd89-fcb1-4ad3-939b-c4bb7586dba6",
         "slug": "ammunition",
         "name": "Ammunition",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "equipment",
-        "parent_id": "410f4a52-b640-4fdf-9984-7b8867c8a8e6"
+        "parentId": "410f4a52-b640-4fdf-9984-7b8867c8a8e6"
     },
     {
         "id": "b7227efa-2941-4059-ad9b-2ebbc264fce7",
         "slug": "arrows",
         "name": "Arrows",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "ammunition",
-        "parent_id": "d59bdd89-fcb1-4ad3-939b-c4bb7586dba6"
+        "parentId": "d59bdd89-fcb1-4ad3-939b-c4bb7586dba6"
     },
     {
         "id": "198d7e6f-0f0e-4c54-b696-b5404855023e",
         "slug": "art-objects",
         "name": "Art Objects",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "loot",
-        "parent_id": "5d619da9-a3ac-4641-82c2-25246bee7f16"
+        "parentId": "5d619da9-a3ac-4641-82c2-25246bee7f16"
     },
     {
         "id": "15b95fd3-2b84-4cdb-8b1f-a6d8665e89f7",
         "slug": "biological",
         "name": "Biological",
-        "entity_type": "item"
+        "entityType": "item"
     },
     {
         "id": "af5cd6b8-7247-4472-8d1c-8715b35b2714",
         "slug": "body-parts",
         "name": "Body Parts",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "biological",
-        "parent_id": "15b95fd3-2b84-4cdb-8b1f-a6d8665e89f7"
+        "parentId": "15b95fd3-2b84-4cdb-8b1f-a6d8665e89f7"
     },
     {
         "id": "aa4ea0d8-1736-45ea-8280-b67b366d4b2f",
         "slug": "cheese",
         "name": "Cheese",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "food",
-        "parent_id": "89d0088a-7909-4345-9147-1cf175d1ce13",
+        "parentId": "89d0088a-7909-4345-9147-1cf175d1ce13",
         "image": "cheese.jpg"
     },
     {
         "id": "350515c4-09d1-49fd-bf62-71d9870d53d0",
         "slug": "consumable",
         "name": "Consumable",
-        "entity_type": "item"
+        "entityType": "item"
     },
     {
         "id": "410f4a52-b640-4fdf-9984-7b8867c8a8e6",
         "slug": "equipment",
         "name": "Equipment",
-        "entity_type": "item"
+        "entityType": "item"
     },
     {
         "id": "89d0088a-7909-4345-9147-1cf175d1ce13",
         "slug": "food",
         "name": "Food",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "consumable",
-        "parent_id": "350515c4-09d1-49fd-bf62-71d9870d53d0"
+        "parentId": "350515c4-09d1-49fd-bf62-71d9870d53d0"
     },
     {
         "id": "dda993d3-66a5-4eeb-8872-88a22bcc95ff",
         "slug": "flora",
         "name": "Flora",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "consumable",
-        "parent_id": "350515c4-09d1-49fd-bf62-71d9870d53d0"
+        "parentId": "350515c4-09d1-49fd-bf62-71d9870d53d0"
     },
     {
         "id": "833777b6-a8c6-4d8d-8880-65de5be3a768",
         "slug": "grass",
         "name": "Grass",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "flora",
-        "parent_id": "dda993d3-66a5-4eeb-8872-88a22bcc95ff"
+        "parentId": "dda993d3-66a5-4eeb-8872-88a22bcc95ff"
     },
     {
         "id": "2103f091-c08d-4453-91ec-bfce2eca4590",
         "slug": "insects",
         "name": "Insects",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "biological",
-        "parent_id": "15b95fd3-2b84-4cdb-8b1f-a6d8665e89f7"
+        "parentId": "15b95fd3-2b84-4cdb-8b1f-a6d8665e89f7"
     },
     {
         "id": "5d619da9-a3ac-4641-82c2-25246bee7f16",
         "slug": "loot",
         "name": "Loot",
-        "entity_type": "item"
+        "entityType": "item"
     },
     {
         "id": "0362b610-5c6e-4dfa-b034-613816d7c5fb",
         "slug": "potion",
         "name": "Potion",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "consumable",
-        "parent_id": "350515c4-09d1-49fd-bf62-71d9870d53d0"
+        "parentId": "350515c4-09d1-49fd-bf62-71d9870d53d0"
     },
     {
         "id": "a6fb72c3-1b8d-4c79-b92d-8026d8eb6b2e",
         "slug": "statues",
         "name": "Statues",
-        "entity_type": "item",
+        "entityType": "item",
         "parent": "loot",
-        "parent_id": "5d619da9-a3ac-4641-82c2-25246bee7f16"
+        "parentId": "5d619da9-a3ac-4641-82c2-25246bee7f16"
     }
 ]

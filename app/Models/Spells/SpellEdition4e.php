@@ -9,6 +9,7 @@ use App\Enums\SavingThrows\SavingThrowType;
 use App\Enums\Spells\SpellFrequency;
 use App\Enums\Spells\SpellType4e;
 use App\Models\AbstractModel;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -69,7 +70,7 @@ class SpellEdition4e extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         throw new \Exception('Not implemented');
     }

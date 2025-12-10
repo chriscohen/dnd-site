@@ -15,18 +15,18 @@
                 {
                     "type": "skill",
                     "values": [
-                        { "value": "craft", "skill_ranks": 8, "craft_type": "bowmaking" },
-                        { "value": "hide", "skill_ranks": 8 },
-                        { "value": "knowledge", "skill_ranks": 4 },
-                        { "value": "stealth", "skill_ranks": 8 },
-                        { "value": "survival", "skill_ranks": 8 }
+                        { "value": "craft", "skillRanks": 8, "craftType": "bowmaking" },
+                        { "value": "hide", "skillRanks": 8 },
+                        { "value": "knowledge", "skillRanks": 4 },
+                        { "value": "stealth", "skillRanks": 8 },
+                        { "value": "survival", "skillRanks": 8 }
                     ]
                 },
                 {
                     "type": "feat",
                     "values": [
                         "point-blank-shot",
-                        { "value": "weapon-focus", "weapon_focus_type": "longbow" }
+                        { "value": "weapon-focus", "weaponFocusType": "longbow" }
                     ]
                 }
             ],

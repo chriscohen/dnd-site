@@ -15,9 +15,9 @@
                 {
                     "type": "skill",
                     "values": [
-                        { "value": "hide", "skill_ranks": 8 },
-                        { "value": "knowledge", "skill_ranks": 3, "knowledge_type": "local" },
-                        { "value": "stealth", "skill_ranks": 8 }
+                        { "value": "hide", "skillRanks": 8 },
+                        { "value": "knowledge", "skillRanks": 3, "knowledgeType": "local" },
+                        { "value": "stealth", "skillRanks": 8 }
                     ]
                 },
                 {

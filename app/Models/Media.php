@@ -78,8 +78,16 @@ class Media extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->collectionName = $value['collectionName'] ?? null;
+        $item->disk = $value['disk'] ?? 's3';
+        $item->filename = $value['filename'];
+        $item->mimeType = $value['mimeType'] ?? null;
+        $item->name = $value['name'] ?? null;
+        $item->size = $value['size'] ?? null;
+        return $item;
     }
 }

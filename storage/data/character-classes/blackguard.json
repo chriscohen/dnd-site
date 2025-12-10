@@ -20,8 +20,8 @@
                 {
                     "type": "skill",
                     "values": [
-                        { "value": "hide", "skill_ranks": 5 },
-                        { "value": "knowledge", "skill_ranks": 2, "knowledge_type": "religion" }
+                        { "value": "hide", "skillRanks": 5 },
+                        { "value": "knowledge", "skillRanks": 2, "knowledgeType": "religion" }
                     ]
                 },
                 {

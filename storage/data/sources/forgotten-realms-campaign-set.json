@@ -2,7 +2,7 @@
     "id": "3e8228ef-e14e-4676-a92f-4a58cda138f9",
     "slug":  "forgotten-realms-campaign-set",
     "name": "Forgotten Realms Campaign Set",
-    "cover_image": "forgotten-realms-campaign-set.webp",
+    "coverImage": "forgotten-realms-campaign-set.webp",
     "description": "Within this box is everything needed to visit the fabulous Forgotten Realms. The 96-page player's book contains entries on all known areas, cities, people, and things, presented in alphabetical order. Numerous maps outline the more well-known cities and lands. The 96-page DM's book contains all the information pertinent to running a campaign set in this fantasy world, from how to bring existing characters into the Forgotten Realms to two complete introductory mini-adventures to a listing of known magical texts and the magics contained therein. Four full-color maps show the entire lands and details of the more well-known areas. Adventuring rules specific to the Forgotten Realms have been included.\n\n*Everything you need is here—save for your imagination.*",
     "editions": [
         {
@@ -14,47 +14,47 @@
                     "id": "5e4edd44-8e4c-4b21-96a7-1839a6beb6cf",
                     "slug": "dungeon-masters-sourcebook",
                     "name": "Dungeon Master's Sourcebook",
-                    "content_type": "book",
+                    "contentType": "book",
                     "pages": 96
                 },
                 {
                     "id": "1c7a71d3-7f51-414b-8202-30ede2a4ba9f",
                     "slug": "cyclopedia-of-the-realms",
                     "name": "Cyclopedia of the Realms",
-                    "content_type": "book",
+                    "contentType": "book",
                     "pages": 96
                 },
                 {
                     "id": "0a548d16-3f59-4e89-87c0-d92248ce0b37",
                     "slug": "frcs-maps",
                     "name": "Fold-out maps",
-                    "content_type": "map",
+                    "contentType": "map",
                     "quantity": 4
                 },
                 {
                     "id": "49564e34-33c9-42c8-83e2-4583715861c9",
                     "slug": "frcs-map-overlays",
                     "name": "Hex-grid transparencies",
-                    "content_type": "map_overlay",
+                    "contentType": "map_overlay",
                     "quantity": 2
                 }
             ],
             "formats": ["print", "pdf"],
             "isbn10": "0880384727",
             "isbn13": "9780880384728",
-            "release_date": "1987-07",
-            "release_date_month_only": true
+            "releaseDate": "1987-07",
+            "releaseDateMonthOnly": true
         }
     ],
-    "game_edition": "1e",
-    "product_ids": {
+    "gameEdition": "1e",
+    "productIds": {
         "drivethru-rpg": "478917",
         "dungeon-masters-guild": "478917"
     },
-    "publication_type": "official",
-    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
-    "sourcebook_types": [
-        "campaign_setting"
+    "publicationType": "official",
+    "publisherId": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebookTypes": [
+        "campaignSetting"
     ],
-    "source_type": "boxed_set"
+    "sourceType": "boxed_set"
 }

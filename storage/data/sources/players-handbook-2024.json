@@ -2,7 +2,7 @@
     "id": "1eabc7a7-603b-41bd-abc6-6923aff3a44a",
     "slug": "players-handbook-2024",
     "name": "Player's Handbook 5th Edition (2024)",
-    "cover_image": "players-handbook-2024.webp",
+    "coverImage": "players-handbook-2024.webp",
     "description": "**Create Heroic Characters**\n\nThis revised and expanded Player's Handbook is the essential reference for every fifth edition DUNGEONS & DRAGONS player. It contains rules for character creation and advancement, exploration, combat, equipment, spells, and much more.\n\nCreate fantastic D&D heroes from the wide selection of character origins, classes, and subclasses provided. Explore ancient ruins and deadly dungeons. Battle monsters while searching for legendary treasures. Gain experience and power as you trek across uncharted lands with your companions.",
     "editions": [
         {
@@ -15,20 +15,20 @@
                 "foundry",
                 "roll_20"
             ],
-            "is_primary": true,
+            "isPrimary": true,
             "isbn10": "0786969512",
             "isbn13": "9780786969517",
             "pages": 302,
-            "release_date": "2024-09-03"
+            "releaseDate": "2024-09-03"
         }
     ],
-    "game_edition": "5e (2024)",
-    "product_ids": {
+    "gameEdition": "5e (2024)",
+    "productIds": {
         "dungeon-masters-guild": "484613",
         "drivethru-rpg": "484613"
     },
-    "publication_type": "official",
-    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
-    "sourcebook_types": ["core"],
-    "source_type": "sourcebook"
+    "publicationType": "official",
+    "publisherId": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebookTypes": ["core"],
+    "sourceType": "sourcebook"
 }

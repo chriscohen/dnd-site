@@ -6,6 +6,7 @@ namespace App\Models\Spells;
 
 use App\Models\AbstractModel;
 use App\Models\Items\ItemEdition;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
@@ -99,7 +100,7 @@ class SpellMaterialComponent extends AbstractModel
         return $output;
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         throw new \Exception('Not implemented');
     }

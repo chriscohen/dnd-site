@@ -6,6 +6,7 @@ namespace App\Models\Sources;
 
 use App\Enums\Sources\SourceFormat;
 use App\Models\AbstractModel;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -65,8 +66,12 @@ class SourceEditionFormat extends AbstractModel
         return $this->format();
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->source_edition_id = $parent->id;
+        $item->format = SourceFormat::tryFromString($value);
+        $item->save();
+        return $item;
     }
 }

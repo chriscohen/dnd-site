@@ -1,7 +1,7 @@
 {
     "id": "397cd5d7-8e67-4c35-ac11-94c2413a341f",
     "name": "Spell Compendium",
-    "cover_image": "spell-compendium.webp",
+    "coverImage": "spell-compendium.webp",
     "description": "The essential spellcaster's companion, Spell Compendium gathers over 1,000 of the best spell from previously published Dungeons & Dragons game supplements and campaign settings, Dragon magazine articles, and articles posted on the Wizards of the Coast website.\n\nThe spells contained herein complement those presented in the Player's Handbook and have been updated to include official errata. In addition, this book contains descriptive read-aloud text telling you what a spell looks like, sounds like, or feels like.",
     "editions": [
         {
@@ -12,12 +12,12 @@
                 "print",
                 "pdf"
             ],
-            "is_primary": true,
+            "isPrimary": true,
             "isbn10": "0786937025",
             "isbn13": "9780786937028",
             "pages": 288,
-            "release_date": "2005-12-01",
-            "release_date_month_only": true
+            "releaseDate": "2005-12-01",
+            "releaseDateMonthOnly": true
         },
         {
             "id": "db6c7e1f-86a3-4502-89e6-4b08d752c6e1",
@@ -30,19 +30,19 @@
             "isbn10": "0786964480",
             "isbn13": "9780786964482",
             "pages": 288,
-            "release_date": "2013-04-16"
+            "releaseDate": "2013-04-16"
         }
     ],
-    "game_edition": "3e",
-    "product_code": "885987200",
-    "product_ids": {
+    "gameEdition": "3e",
+    "productCode": "885987200",
+    "productIds": {
         "drivethru-rpg": "28314",
         "dungeon-masters-guild": "28314"
     },
-    "publication_type": "official",
-    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
-    "sourcebook_types": [
+    "publicationType": "official",
+    "publisherId": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebookTypes": [
         "spells"
     ],
-    "source_type": "sourcebook"
+    "sourceType": "sourcebook"
 }

@@ -74,8 +74,29 @@ class CampaignSetting extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->name = $value['name'] ?? null;
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+        $item->short_name = $value['shortName'] ?? null;
+
+        if (!empty($value['logo'])) {
+            $logo = Media::fromInternalJson([
+                'filename' => '/campaign-settings/' . $value['logo']
+            ]);
+            $item->logo()->associate($logo);
+        }
+        if ($value['publisher']) {
+            $publisher = Company::query()->where('slug', $value['publisher'])->firstOrFail();
+            $item->publisher()->associate($publisher);
+        }
+        if (!empty($value['publicationType'])) {
+            $item->publication_type = PublicationType::tryFromString($value['publicationType']);
+        }
+
+        $item->save();
+        return $item;
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignIdFor(SourceEdition::class, 'parent_id');
 
-            $table->unsignedSmallInteger('content_type')->nullable();
+            $table->unsignedSmallInteger('contentType')->nullable();
             $table->unsignedSmallInteger('pages')->nullable();
             $table->unsignedSmallInteger('quantity')->default(1);
         });

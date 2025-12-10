@@ -2,7 +2,7 @@
     "id": "8c3b1167-5315-4f9c-a167-5f346a4ac15d",
     "slug": "chains-of-asmodeus",
     "name": "Chains of Asmodeus",
-    "cover_image": "chains-of-asmodeus.webp",
+    "coverImage": "chains-of-asmodeus.webp",
     "description": "Chains of Asmodeus is a 286-page source book and adventure for the Nine Hells written by legendary game designer James Ohlen (Baldur's Gate, Baldur's Gate II, Star Wars: Knights of the Old Republic, Dragon Age: Origins) and award-winning author Adrian Tchaikovsky (Children of Time, The Tiger and the Wolf, The Doors of Eden). This book is beautifully illustrated with haunting art from Sergei Sarichev, Sergey Musin, Julian Calle, Sebastion Kowoll, Paul Adams, Luis Lasahido, and the Aaron Sims Company.",
     "editions": [
         {
@@ -14,23 +14,23 @@
                 "pdf",
                 "roll_20"
             ],
-            "is_primary": true,
+            "isPrimary": true,
             "pages": 286,
-            "release_date": "2023-10-30"
+            "releaseDate": "2023-10-30"
         }
     ],
-    "game_edition": "5e",
-    "product_ids": {
+    "gameEdition": "5e",
+    "productIds": {
         "dungeon-masters-guild": "457996",
         "drivethru-rpg": "457996"
     },
-    "publication_type": "official",
-    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "publicationType": "official",
+    "publisherId": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
     "publisher_name": "WotC",
-    "sourcebook_types": [
+    "sourcebookTypes": [
         "adventure",
         "gear_magic_items",
         "monsters"
     ],
-    "source_type": "sourcebook"
+    "sourceType": "sourcebook"
 }

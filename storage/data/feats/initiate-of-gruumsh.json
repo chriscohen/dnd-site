@@ -4,7 +4,7 @@
     "editions": [
         {
             "id": "b413e6c8-b9d9-4dbb-8d85-ac2ba2a7dba1",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "description": "Cast a prepared cure spell or spontaneously cast an inflict spell as a swift action. Cleric spell list is expanded.",
             "prerequisites": [
                 {
@@ -18,7 +18,7 @@
             "references": [
                 {
                     "source": "champions-of-ruin",
-                    "page_from": 18
+                    "pageFrom": 18
                 }
             ]
         }

@@ -5,7 +5,7 @@
         "name": "Bleeding",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "description": "A common effect of many critical strikes is bleeding. Bleeding falls into three categories: minor, major, and severe. In many cases, bleeding may prove more dangerous than the original injury."
             }
         ]
@@ -16,18 +16,18 @@
         "name": "Blinded",
         "editions": [
             {
-                "game_edition": "2e"
+                "gameEdition": "2e"
             },
             {
-                "game_edition": "3e",
+                "gameEdition": "3e",
                 "description": "The character cannot see at all, and thus everything has full concealment to him. He has a 50% chance to miss in combat, loses his positive Dexterity bonus to AC (if any), and grants a +2 bonus on attack rolls to enemies that attack him, just as if all his enemies were invisible. He moves at half speed and suffers a -4 penalty on most Strength and Dexterity-based skills. He cannot make Spot skill checks or perform any other activity (such as reading) that requires vision."
             },
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "The character cannot see. He takes a –2 penalty to Armor Class, loses his Dexterity bonus to AC (if any), moves at half speed, and takes a –4 penalty on Search checks and on most Strength- and Dexterity-based skill checks. All checks and activities that rely on vision (such as reading and Spot checks) automatically fail. All opponents are considered to have total concealment (50% miss chance) to the blinded character. Characters who remain blinded for a long time grow accustomed to these drawbacks and can overcome some of them."
             },
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You grant combat advantage.",
                     "You can't see any target (your targets have total concealment).",
@@ -36,7 +36,7 @@
                 ]
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "A blinded creature can’t see and automatically fails any ability check that requires sight.",
                     "Attack rolls against the creature have advantage, and the creature’s attack rolls have disadvantage."
@@ -50,7 +50,7 @@
         "name": "Charmed",
         "editions": [
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "A charmed creature can’t attack the charmer or target the charmer with harmful abilities or magical effects.",
                     "The charmer has advantage on any ability check to interact socially with the creature."
@@ -64,7 +64,7 @@
         "name": "Checked",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "Prevented from achieving forward motion by an applied force, such as wind. Checked creatures on the ground merely stop. Checked flying creatures move back a distance specified in the description of the effect."
             }
         ]
@@ -75,7 +75,7 @@
         "name": "Confused",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A confused character’s actions are determined by rolling d% at the beginning of his turn: 01-10, attack caster with melee or ranged weapons (or close with caster if attacking is not possible); 11-20, act normally; 21-50, do nothing but babble incoherently; 51-70, flee away from caster at top possible speed; 71-100, attack nearest creature (for this purpose, a familiar counts as part of the subject’s self). A confused character who can’t carry out the indicated action does nothing but babble incoherently. Attackers are not at any special advantage when attacking a confused character. Any confused character who is attacked automatically attacks its attackers on its next turn, as long as it is still confused when its turn comes. A confused character does not make attacks of opportunity against any creature that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked)."
             }
         ]
@@ -86,7 +86,7 @@
         "name": "Cowering",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "The character is frozen in fear and can take no actions. A cowering character takes a -2 penalty to Armor Class and loses her Dexterity bonus (if any)."
             }
         ]
@@ -97,11 +97,11 @@
         "name": "Dazed",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "The creature is unable to see well because of overstimulation of the eyes. A dazzled creature takes a -1 penalty on attack rolls, Search checks, and Spot checks."
             },
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You grant combat advantage.",
                     "You can take either a standard action, a move action, or a minor action on your turn (you can also take free actions). You can’t take immediate actions or opportunity actions.",
@@ -116,7 +116,7 @@
         "name": "Dead",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "The character’s hit points are reduced to -10, his Constitution drops to 0, or he is killed outright by a spell or effect. The character’s soul leaves his body. Dead characters cannot benefit from normal or magical healing, but they can be restored to life via magic. A dead body decays normally unless magically preserved, but magic that restores a dead character to life also restores the body either to full health or to its condition at the time of death (depending on the spell or device). Either way, resurrected characters need not worry about rigor mortis, decomposition, and other conditions that affect dead bodies."
             }
         ]
@@ -127,18 +127,18 @@
         "name": "Deafened",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A deafened character cannot hear. She takes a -4 penalty on initiative checks, automatically fails Listen checks, and has a 20% chance of spell failure when casting spells with verbal components. Characters who remain deafened for a long time grow accustomed to these drawbacks and can overcome some of them."
             },
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You can’t hear anything.",
                     "You take a −10 penalty to Perception checks."
                 ]
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "A deafened creature can’t hear and automatically fails any ability check that requires hearing."
                 ]
@@ -151,7 +151,7 @@
         "name": "Deluded",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "description": "A deluded creature believes they are someone else, or becomes paranoid, or becomes a kleptomaniac."
             }
         ]
@@ -162,7 +162,7 @@
         "name": "Disabled",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A character with 0 hit points, or one who has negative hit points but has become stable and conscious, is disabled. A disabled character may take a single move action or standard action each round (but not both, nor can she take full-round actions). She moves at half speed. Taking move actions doesn’t risk further injury, but performing any standard action (or any other action the game master deems strenuous, including some free actions such as casting a quickened spell) deals 1 point of damage after the completion of the act. Unless the action increased the disabled character’s hit points, she is now in negative hit points and dying.\n\nA disabled character with negative hit points recovers hit points naturally if she is being helped. Otherwise, each day she has a 10% chance to start recovering hit points naturally (starting with that day); otherwise, she loses 1 hit point. Once an unaided character starts recovering hit points naturally, she is no longer in danger of losing hit points (even if her current hit points are negative)."
             }
         ]
@@ -173,7 +173,7 @@
         "name": "Diseased",
         "editions": [
             {
-                "game_edition": "2e"
+                "gameEdition": "2e"
             }
         ]
     },
@@ -183,7 +183,7 @@
         "name": "Dominated",
         "editions": [
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You can't take actions. Instead, the dominator chooses a single action for you to take on your turn (standard, move, minor or free). The dominator may only choose powers or game features that can be used at-will, such as at-will powers. Anything with a limited used once per encounter or once per day doesn't qualify.",
                     "You grant combat advantage.",
@@ -200,11 +200,11 @@
         "name": "Dying",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A dying character is unconscious and near death. She has -1 to -9 current hit points. A dying character can take no actions and is unconscious. At the end of each round (starting with the round in which the character dropped below 0 hit points), the character rolls d% to see whether they become stable. They have a 10% chance to become stable. If they do not, they loses 1 hit point. If a dying character reaches -10 hit points, they are dead."
             },
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "description": "Monsters don't normally receive this condition, as they are either automatically killed at 0 hit points, or knocked unconscious.\n\nDying creatures may be stabilized with a DC 15 Heal skill check.\n\nWhen receiving healing, the hit point total is first increased to 0 before applying the additional hit points. If the healing effect requires spending a healing surge but none are left, the adventurer still has the hit point total restored to 1.\n\nA stable but unconscious character can still regain hit points at the end of an extended rest.",
                 "rules": [
                     "The creature is unconscious .",
@@ -220,7 +220,7 @@
         "name": "Energy Drained",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "The character gains one or more negative levels, which might permanently drain the character’s levels. If the subject has at least as many negative levels as Hit Dice, he dies. Each negative level gives a creature the following penalties: -1 penalty on attack rolls, saving throws, skill checks, ability checks; loss of 5 hit points; and -1 to effective level (for determining the power, duration, DC, and other details of spells or special abilities). In addition, a spellcaster loses one spell or spell slot from the highest spell level castable."
             }
         ]
@@ -231,7 +231,7 @@
         "name": "Entangled",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "The character is ensnared. Being entangled impedes movement, but does not entirely prevent it unless the bonds are anchored to an immobile object or tethered by an opposing force. An entangled creature moves at half speed, cannot run or charge, and takes a -2 penalty on all attack rolls and a -4 penalty to Dexterity. An entangled character who attempts to cast a spell must make a Concentration check (DC 15 + the spell’s level) or lose the spell."
             }
         ]
@@ -242,14 +242,14 @@
         "name": "Exhausted",
         "editions": [
             {
-                "game_edition": "2e"
+                "gameEdition": "2e"
             },
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "An exhausted character moves at half speed and takes a -6 penalty to Strength and Dexterity. After 1 hour of complete rest, an exhausted character becomes fatigued. A fatigued character becomes exhausted by doing something else that would normally cause fatigue."
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "description": "Some special abilities and environmental hazards, such as starvation and the long-term effects of freezing or scorching temperatures, can lead to a special condition called exhaustion. Exhaustion is measured in six levels. An effect can give a creature one or more levels of exhaustion, as specified in the effect’s description.\n\n- At level 1: disadvantage on ability checks\n- At level 2: speed halved\n- At level 3: disadvantage on attack roles and saving throws\n- At level 4: hit point maximum halved\n- At level 5: speed reduced to 0\n- At level 6: death\n\nIf an already exhausted creature suffers another effect that causes exhaustion, its current level of exhaustion increases by the amount specified in the effect’s description.\n\nA creature suffers the effect of its current level of exhaustion as well as all lower levels. For example, a creature suffering level 2 exhaustion has its speed halved and has disadvantage on ability checks.\n\nAn effect that removes exhaustion reduces its level as specified in the effect’s description, with all exhaustion effects ending if a creature’s exhaustion level is reduced below 1.\n\nFinishing a long rest reduces a creature’s exhaustion level by 1, provided that the creature has also ingested some food and drink."
             }
         ]
@@ -260,7 +260,7 @@
         "name": "Fascinated",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A fascinated creature is entranced by a supernatural or spell effect. The creature stands or sits quietly, taking no actions other than to pay attention to the fascinating effect, for as long as the effect lasts. It takes a -4 penalty on skill checks made as reactions, such as Listen and Spot checks. Any potential threat, such as a hostile creature approaching, allows the fascinated creature a new saving throw against the fascinating effect. Any obvious threat, such as someone drawing a weapon, casting a spell, or aiming a ranged weapon at the fascinated creature, automatically breaks the effect. A fascinated creature’s ally may shake it free of the spell as a standard action."
             }
         ]
@@ -271,10 +271,10 @@
         "name": "Fatigued",
         "editions": [
             {
-                "game_edition": "2e"
+                "gameEdition": "2e"
             },
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A fatigued character can neither run nor charge and takes a -2 penalty to Strength and Dexterity. Doing anything that would normally cause fatigue causes the fatigued character to become exhausted. After 8 hours of complete rest, fatigued characters are no longer fatigued."
             }
         ]
@@ -285,7 +285,7 @@
         "name": "Feebleminded",
         "editions": [
             {
-                "game_edition": "2e"
+                "gameEdition": "2e"
             }
         ]
     },
@@ -295,7 +295,7 @@
         "name": "Flat-Footed",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A character who has not yet acted during a combat is flat-footed, not yet reacting normally to the situation. A flat-footed character loses his Dexterity bonus to AC (if any) and cannot make attacks of opportunity."
             }
         ]
@@ -306,11 +306,11 @@
         "name": "Frightened",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A frightened creature flees from the source of its fear as best it can. If unable to flee, it may fight. A frightened creature takes a -2 penalty on all attack rolls, saving throws, skill checks, and ability checks. A frightened creature can use special abilities, including spells, to flee; indeed, the creature must use such means if they are the only way to escape.\n\nFrightened is like shaken, except that the creature must flee if possible. Panicked is a more extreme state of fear."
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "A frightened creature has disadvantage on ability checks and attack rolls while the source of its fear is within line of sight.",
                     "The creature can’t willingly move closer to the source of its fear."
@@ -324,7 +324,7 @@
         "name": "Grabbed",
         "editions": [
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "description": "Grabbed is a condition that affects movement. A grabbed creature is immobilized as long as the grab persists, and can be forced to move by the grabber.\n\nThe grabbed condition ends when the grabber stops maintaining the grab, or the grabber becomes unable to take actions, or the grabbed creature leaves the grabbing effect's range.[PH:290][RC:231] The condition also ends if the grabbed creature makes a successful escape.\n\nThe grab attack can cause a creature to become grabbed, as well as various other powers and effects."
             }
         ]
@@ -335,15 +335,15 @@
         "name": "Grappled",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "description": "Grappled characters are physically restrained by their foes. There are a number of ways to grapple with an opponent; wrestling, martial holds, pinning, and grabbing are all possible. In addition, some monsters have special attacks that grapple their victims. For example, a giant scorpion can pin its prey in its claws, or an owlbear can hug a victim."
             },
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "Engaged in wrestling or some other form of hand-to-hand struggle with one or more attackers. A grappling character can undertake only a limited number of actions. He does not threaten any squares, and loses his Dexterity bonus to AC (if any) against opponents he isn’t grappling. See Grapple."
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "A grappled creature’s speed becomes 0, and it can’t benefit from any bonus to its speed.",
                     "The condition ends if the grappler is incapacitated (see the condition).",
@@ -358,7 +358,7 @@
         "name": "Hastened",
         "editions": [
             {
-                "game_edition": "2e"
+                "gameEdition": "2e"
             }
         ]
     },
@@ -368,11 +368,11 @@
         "name": "Helpless",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A helpless character is paralyzed, held, bound, sleeping, unconscious, or otherwise completely at an opponent’s mercy. A helpless target is treated as having a Dexterity of 0 (-5 modifier). Melee attacks against a helpless target get a +4 bonus (equivalent to attacking a prone target). Ranged attacks gets no special bonus against helpless targets. Rogues can sneak attack helpless targets.\n\nAs a full-round action, an enemy can use a melee weapon to deliver a coup de grace to a helpless foe. An enemy can also use a bow or crossbow, provided he is adjacent to the target. The attacker automatically hits and scores a critical hit. (A rogue also gets her sneak attack damage bonus against a helpless foe when delivering a coup de grace.) If the defender survives, he must make a Fortitude save (DC 10 + damage dealt) or die.\n\nDelivering a coup de grace provokes attacks of opportunity.\n\nCreatures that are immune to critical hits do not take critical damage, nor do they need to make Fortitude saves to avoid being killed by a coup de grace."
             },
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You grant combat advantage.",
                     "You can be the target of a coup de grace."
@@ -386,7 +386,7 @@
         "name": "Immobilized",
         "editions": [
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "description": "Immobilized is a condition that affects movement. You can’t move from your space, although you can teleport and can be forced to move by a pull, a push, or a slide. You can otherwise attack and take actions normally."
             }
         ]
@@ -397,7 +397,7 @@
         "name": "Incapacitated",
         "editions": [
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "An incapacitated creature can’t take actions or reactions."
                 ]
@@ -410,7 +410,7 @@
         "name": "Incorporeal",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "Having no physical body. Incorporeal creatures are immune to all nonmagical attack forms. They can be harmed only by other incorporeal creatures, +1 or better magic weapons, spells, spell-like effects, or supernatural effects."
             }
         ]
@@ -421,11 +421,11 @@
         "name": "Invisible",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "Visually undetectable. An invisible creature gains a +2 bonus on attack rolls against sighted opponents, and ignores its opponents’ Dexterity bonuses to AC (if any). (See Invisibility, under Special Abilities.)"
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "An invisible creature is impossible to see without the aid of magic or a special sense. For the purpose of hiding, the creature is heavily obscured. The creature’s location can be detected by any noise it makes or any tracks it leaves.",
                     "Attack rolls against the creature have disadvantage, and the creature’s attack rolls have advantage."
@@ -439,7 +439,7 @@
         "name": "Knocked Down",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "Depending on their size, creatures can be knocked down by winds of high velocity. Creatures on the ground are knocked prone by the force of the wind. Flying creatures are instead blown back 1d6 × 10 feet."
             }
         ]
@@ -450,7 +450,7 @@
         "name": "Marked",
         "editions": [
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You take a −2 penalty to attack rolls for any attack that doesn't target the creature that marked you.",
                     "You can be subjected only to one mark at a time. Newer marks supersede older ones.",
@@ -465,7 +465,7 @@
         "name": "Nauseated",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "Experiencing stomach distress. Nauseated creatures are unable to attack, cast spells, concentrate on spells, or do anything else requiring attention. The only action such a character can take is a single move action per turn."
             }
         ]
@@ -476,7 +476,7 @@
         "name": "Panicked",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A panicked creature must drop anything it holds and flee at top speed from the source of its fear, as well as any other dangers it encounters, along a random path. It can’t take any other actions. In addition, the creature takes a -2 penalty on all saving throws, skill checks, and ability checks. If cornered, a panicked creature cowers. A panicked creature can use special abilities, including spells, to flee; indeed, the creature must use such means if they are the only way to escape.\n\nPanicked is a more extreme state of fear than shaken or frightened."
             }
         ]
@@ -487,15 +487,15 @@
         "name": "Paralyzed",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "description": "A character or creature affected by paralysis becomes immobile for the duration of the spell's effect. The victim can breathe, think, see, and hear, but he is unable to speak or move. Coherent thought needed to trigger magical items or innate powers is still possible. Paralysis affects only the general motor functions of the body and is not the ultimate destroyer of powerful creatures. It can be particularly potent on flying creatures, however."
             },
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A paralyzed character is frozen in place and unable to move or act. A paralyzed character has effective Dexterity and Strength scores of 0 and is helpless, but can take purely mental actions. A winged creature flying in the air at the time that it becomes paralyzed cannot flap its wings and falls. A paralyzed swimmer can’t swim and may drown. A creature can move through a space occupied by a paralyzed creature—ally or not. Each square occupied by a paralyzed creature, however, counts as 2 squares."
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "A paralyzed creature is incapacitated (see the condition) and can’t move or speak.",
                     "The creature automatically fails Strength and Dexterity saving throws.",
@@ -511,11 +511,11 @@
         "name": "Petrified",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A petrified character has been turned to stone and is considered unconscious. If a petrified character cracks or breaks, but the broken pieces are joined with the body as he returns to flesh, he is unharmed. If the character’s petrified body is incomplete when it returns to flesh, the body is likewise incomplete and there is some amount of permanent hit point loss and/or debilitation."
             },
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You have been turned to stone.",
                     "You are unconscious.",
@@ -524,7 +524,7 @@
                 ]
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.",
                     "The creature is incapacitated (see the condition), can’t move or speak, and is unaware of its surroundings.",
@@ -542,7 +542,7 @@
         "name": "Pinned",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "Held immobile (but not helpless) in a grapple."
             }
         ]
@@ -553,11 +553,11 @@
         "name": "Poisoned",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "description": "Bites, stings, deadly potions, drugged wines, and bad food all await characters at the hands of malevolent wizards, evil assassins, hideous monsters, and incompetent innkeepers. Spiders, snakes, centipedes, scorpions, wyverns, and some giant frogs all have poisons deadly to characters. Wise heroes quickly learn to respect and fear such creatures."
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "A poisoned creature has disadvantage on attack rolls and ability checks."
                 ]
@@ -570,15 +570,15 @@
         "name": "Prone",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "description": "Characters may sit, kneel, or fall prone as a no-move action. Getting up from sitting or kneeling is considered a half-move action, so a character can stand and still fire a missile or make an attack. Standing up from a prone position is treated as a full-move action, so the character can do nothing else in that round except rise."
             },
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "The character is on the ground. An attacker who is prone has a -4 penalty on melee attack rolls and cannot use a ranged weapon (except for a crossbow). A defender who is prone gains a +4 bonus to Armor Class against ranged attacks, but takes a -4 penalty to AC against melee attacks.\n\nStanding up is a move-equivalent action that provokes an attack of opportunity."
             },
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You grant combat advantage to enemies making melee attacks against you.",
                     "You get a +2 bonus to all defenses against ranged attacks from nonadjacent enemies.",
@@ -587,7 +587,7 @@
                 ]
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "A prone creature’s only movement option is to crawl, unless it stands up and thereby ends the condition.",
                     "The creature has disadvantage on attack rolls.",
@@ -602,7 +602,7 @@
         "name": "Reeling",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "description": "This status effect is not defined by any known rule.\n\nThis can be caused by Stinking Cloud (Wizard Spell) & Power Word, Stun (Wizard Spell) for example."
             }
         ]
@@ -613,7 +613,7 @@
         "name": "Removed from Play",
         "editions": [
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "The creature can’t take actions.",
                     "The creature has neither line of sight nor line of effect to anything, and nothing has line of sight or line of effect to it."
@@ -627,7 +627,7 @@
         "name": "Restrained",
         "editions": [
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You can't move, unless you teleport. You can't be pulled, pushed or slid.",
                     "You take a −2 penalty to attack rolls.",
@@ -635,7 +635,7 @@
                 ]
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "A restrained creature’s speed becomes 0, and it can’t benefit from any bonus to its speed.",
                     "Attack rolls against the creature have advantage, and the creature’s attack rolls have disadvantage.",
@@ -650,7 +650,7 @@
         "name": "Scorched",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "description": "Scorched characters suffer a -2 penalty to attack rolls until the injury heals. A cure light wounds spell or magic capable of restoring 5 lost hit points heals a scorch. A scorch heals naturally as if it were a wound of 2d6 hp damage."
             }
         ]
@@ -661,7 +661,7 @@
         "name": "Shaken",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A shaken character takes a -2 penalty on attack rolls, saving throws, skill checks, and ability checks.\n\nShaken is a less severe state of fear than frightened or panicked."
             }
         ]
@@ -672,7 +672,7 @@
         "name": "Shocked",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "description": "Shocked characters usually fall down, though they sometimes drop something instead. If the critical hit table doesn't list an effect, the victim falls down (see Knockdowns, page 121 in Spells & Magic, for details)."
             }
         ]
@@ -683,7 +683,7 @@
         "name": "Sickened",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "The character takes a -2 penalty on all attack rolls, weapon damage rolls, saving throws, skill checks, and ability checks."
             }
         ]
@@ -694,7 +694,7 @@
         "name": "Silenced",
         "editions": [
             {
-                "game_edition": "2e"
+                "gameEdition": "2e"
             }
         ]
     },
@@ -704,7 +704,7 @@
         "name": "Sleep",
         "editions": [
             {
-                "game_edition": "2e"
+                "gameEdition": "2e"
             }
         ]
     },
@@ -714,10 +714,10 @@
         "name": "Slowed",
         "editions": [
             {
-                "game_edition": "2e"
+                "gameEdition": "2e"
             },
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "The creature's speed becomes 2 if it was higher than that. This speed applies to all your movement modes, but it does not apply to forced movement, teleportation or any movement that doesn't use the creature's speed. A creature that is slowed while moving must stop moving if it has already moved 2 or more squares.",
                     "The creature can't benefit from bonuses to speed, but may use powers or actions that allow you to move farther than your speed (e.g. the run action)",
@@ -733,7 +733,7 @@
         "name": "Spasms",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "description": "Spasms distract a character for several rounds. If the critical hit table does not specify a duration, the spasms last 1d4 rounds; a character suffering from spasms has a -2 penalty to attack rolls while they last."
             }
         ]
@@ -744,7 +744,7 @@
         "name": "Stable",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A character who was dying but who has stopped losing hit points and still has negative hit points is stable. The character is no longer dying, but is still unconscious. If the character has become stable because of aid from another character (such as a Heal check or magical healing), then the character no longer loses hit points. He has a 10% chance each hour of becoming conscious and disabled (even though his hit points are still negative).\n\nIf the character became stable on his own and hasn’t had help, he is still at risk of losing hit points. Each hour, he has a 10% chance of becoming conscious and disabled. Otherwise he loses 1 hit point."
             }
         ]
@@ -755,7 +755,7 @@
         "name": "Staggered",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A character whose nonlethal damage exactly equals his current hit points is staggered. A staggered character may take a single move action or standard action each round (but not both, nor can she take full-round actions).\n\nA character whose current hit points exceed his nonlethal damage is no longer staggered; a character whose nonlethal damage exceeds his hit points becomes unconscious."
             }
         ]
@@ -766,7 +766,7 @@
         "name": "Stunned",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "rules": [
                     "Stunned—reeling and unable to think coherently or act. (Power Word, Stun (Wizard Spell))",
                     "Stunned creatures drop what they are holding and cannot take any meaningful actions. (Symbol (Wizard Spell))",
@@ -774,11 +774,11 @@
                 ]
             },
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "A stunned creature drops everything held, can’t take actions, takes a -2 penalty to AC, and loses their Dexterity bonus to AC (if any)."
             },
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You grant combat advantage.",
                     "You can’t take actions.",
@@ -787,7 +787,7 @@
                 ]
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "A stunned creature is incapacitated (see the condition), can’t move, and can speak only falteringly.",
                     "The creature automatically fails Strength and Dexterity saving throws.",
@@ -802,7 +802,7 @@
         "name": "Surprised",
         "editions": [
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You grant combat advantage.",
                     "You can’t take actions.",
@@ -817,7 +817,7 @@
         "name": "Threatened",
         "editions": [
             {
-                "game_edition": "2e",
+                "gameEdition": "2e",
                 "description": "Any square that a creature can reach with its weapons or claws also threatens those squares and therefore any characters or creatures standing in one of the threatened squares. The character's own facing doesn't matter—it's possible to be threatened by someone standing behind you."
             }
         ]
@@ -828,7 +828,7 @@
         "name": "Turned",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "Affected by a turn undead attempt. Turned undead flee for 10 rounds (1 minute) by the best and fastest means available to them. If they cannot flee, they cower."
             }
         ]
@@ -839,11 +839,11 @@
         "name": "Unconscious",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "description": "Knocked out and helpless. Unconsciousness can result from having current hit points between -1 and -9, or from nonlethal damage in excess of current hit points."
             },
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "You’re helpless.",
                     "You take a −5 penalty to all defenses.",
@@ -854,7 +854,7 @@
                 ]
             },
             {
-                "game_edition": "5e",
+                "gameEdition": "5e",
                 "rules": [
                     "An unconscious creature is incapacitated (see the condition), can’t move or speak, and is unaware of its surroundings.",
                     "The creature drops whatever it’s holding and falls prone.",
@@ -871,7 +871,7 @@
         "name": "Weakened",
         "editions": [
             {
-                "game_edition": "4e",
+                "gameEdition": "4e",
                 "rules": [
                     "Your attacks deal half damage. However, two kinds of damage that you deal are not affected: ongoing damage, and damage that isn't generated by an attack roll."
                 ]

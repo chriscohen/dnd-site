@@ -18,6 +18,7 @@ use App\Models\Feats\Feat;
 use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
 use App\Models\ModelCollection;
+use App\Models\ModelInterface;
 use App\Models\Range;
 use App\Models\Reference;
 use App\Models\SavingThrow;
@@ -267,7 +268,7 @@ class SpellEdition extends AbstractModel
     }
 
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
 

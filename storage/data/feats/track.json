@@ -4,7 +4,7 @@
     "editions": [
         {
             "id": "f9d86353-1025-43dd-852f-cd67e1db85f2",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "description": "To find tracks or to follow them for 1 mile requires a successful Survival check. You must make another Survival check every time the tracks become difficult to follow.\n\nYou move at half your normal speed (or at your normal speed with a -5 penalty on the check, or at up to twice your normal speed with a -20 penalty on the check). The DC depends on the surface and the prevailing conditions, as given on Table: Track DC."
         }
     ]

@@ -4,7 +4,7 @@
     "editions": [
         {
             "id": "e624de0e-1c50-4e2c-8d04-8717b3bfd737",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "description": "You gain +3 hit points. A character may gain this feat multiple times. Its effects stack."
         }
     ]

@@ -6,6 +6,7 @@ namespace App\Models\Sources;
 
 use App\Enums\Sources\SourcebookType;
 use App\Models\AbstractModel;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
@@ -50,8 +51,17 @@ class SourceSourcebookType extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->source()->associate($parent);
+        $item->sourcebook_type = SourcebookType::tryFromString($value);
+
+        if (empty($item->sourcebook_type)) {
+            throw new \InvalidArgumentException('"' . $value . '" is not a valid sourcebook type.');
+        }
+
+        $item->save();
+        return $item;
     }
 }

@@ -4,7 +4,7 @@
     "editions": [
         {
             "id": "f8e6a286-c252-4e4e-9f1e-af416e2a80ac",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "description": "You get a +1 bonus on attack and damage rolls with ranged weapons at ranges of up to 30 feet."
         }
     ]

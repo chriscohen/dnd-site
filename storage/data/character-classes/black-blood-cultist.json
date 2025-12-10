@@ -19,8 +19,8 @@
                 {
                     "type": "skill",
                     "values": [
-                        { "value": "knowledge", "skill_ranks": 2, "knowledge_type": "nature" },
-                        { "value": "survival", "skill_ranks": 8 }
+                        { "value": "knowledge", "skillRanks": 2, "knowledgeType": "nature" },
+                        { "value": "survival", "skillRanks": 8 }
                     ]
                 },
                 {

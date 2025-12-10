@@ -2,8 +2,8 @@
     "id": "2cb9aad8-9447-40f1-a861-cc49261d2cf9",
     "name": "Aurora's Whole Realms Catalogue",
     "slug": "auroras-whole-realms-catalogue",
-    "campaign_setting": "forgotten-realms",
-    "cover_image": "auroras-whole-realms-catalogue.webp",
+    "campaignSetting": "forgotten-realms",
+    "coverImage": "auroras-whole-realms-catalogue.webp",
     "description": "At last! Complete in one catalog, all the finest merchandise Faerûn has to offer is presented by the enterprising entrepreneur, Aurora the Eclectic.\nUseful for players in any AD&D fantasy campaign (and other role-playing games, too!), this is a handy listing of items and goods of all kinds, from farming tools to scribes' pens, from imported Shou Lung silks to Maztican cotton, from wines and ales to breads and cheeses. Prices are given in the gold piece standard, for simple conversion. Players' \"shopping trips\" will never be the same!\n\nIt is our hope that players and DMs will find this Catalogue both useful and enjoyable. Aurora is not above editorializing about her wares, but we think her opinions will be informative as well as entertaining.",
     "editions": [
         {
@@ -14,20 +14,20 @@
             "isbn10": "1560763272",
             "isbn13": "9781560763277",
             "pages": 160,
-            "release_date": "1992-06-01",
-            "release_date_month_only": true
+            "releaseDate": "1992-06-01",
+            "releaseDateMonthOnly": true
         }
     ],
-    "game_edition": "2e",
-    "product_code": "TSR9358",
-    "product_ids": {
+    "gameEdition": "2e",
+    "productCode": "TSR9358",
+    "productIds": {
         "drivethru-rpg": "16384",
         "dungeon-masters-guild": "16834"
     },
-    "publication_type": "official",
-    "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
-    "sourcebook_types": [
+    "publicationType": "official",
+    "publisherId": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebookTypes": [
         "gear_magic_items"
     ],
-    "source_type": "sourcebook"
+    "sourceType": "sourcebook"
 }

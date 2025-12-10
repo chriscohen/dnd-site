@@ -15,16 +15,16 @@
                 {
                     "type": "skill",
                     "values": [
-                        { "value": "climb", "skill_ranks": 4 },
-                        { "value": "decipher-script", "skill_ranks": 4 },
-                        { "value": "disable-device", "skill_ranks": 5 },
-                        { "value": "jump", "skill_ranks": 4 },
-                        { "value": "knowledge", "skill_ranks": 6, "knowledge_type": "dungeoneering" },
-                        { "value": "knowledge", "skill_ranks": 2, "knowledge_type": "history" },
-                        { "value": "search", "skill_ranks": 8 },
+                        { "value": "climb", "skillRanks": 4 },
+                        { "value": "decipher-script", "skillRanks": 4 },
+                        { "value": "disable-device", "skillRanks": 5 },
+                        { "value": "jump", "skillRanks": 4 },
+                        { "value": "knowledge", "skillRanks": 6, "knowledgeType": "dungeoneering" },
+                        { "value": "knowledge", "skillRanks": 2, "knowledgeType": "history" },
+                        { "value": "search", "skillRanks": 8 },
                         { "value": "speak-language", "language": "netherese" },
-                        { "value": "survival", "skill_ranks": 6 },
-                        { "value": "use-magic-device", "skill_ranks": 5 }
+                        { "value": "survival", "skillRanks": 6 },
+                        { "value": "use-magic-device", "skillRanks": 5 }
                     ]
                 },
                 {

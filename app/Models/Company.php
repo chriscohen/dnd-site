@@ -61,8 +61,24 @@ class Company extends AbstractModel
         return [];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->name = $value['name'] ?? null;
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+        $item->productUrl = $value['productUrl'] ?? null;
+        $item->shortName = $value['shortName'] ?? null;
+        $item->website = $value['website'] ?? null;
+
+        if (!empty($value['logo'])) {
+            $image = Media::fromInternalJson([
+                'filename' => '/companies/'.$value['logo'],
+            ], $parent);
+            $item->logo()->associate($image);
+        }
+
+        $item->save();
+        return $item;
     }
 }

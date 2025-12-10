@@ -26,16 +26,26 @@ class CategorySeeder extends AbstractYmlSeeder
         'image',
     ];
 
+    public function run(): void
+    {
+        $data = $this->getDataFromFile();
+
+        // For each item in the JSON file...
+        foreach ($data as $datum) {
+            Category::fromInternalJson($datum, null);
+        }
+    }
+
     public function postSave(Model $model, array $datum): Model
     {
         /** @var Category $model */
-        $model->parent_id = !empty($datum['parent_id']) ? $datum['parent_id'] : null;
+        $model->parentId = !empty($datum['parentId']) ? $datum['parentId'] : null;
 
         if (!empty($datum['image'])) {
             $media = Media::createFromExisting([
                 'filename' => '/categories/' . $datum['image'],
                 'disk' => 's3',
-                'collection_name' => 'images',
+                'collectionName' => 'images',
             ]);
 
             $model->image()->associate($media);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Creatures;
 
 use App\Models\AbstractModel;
+use App\Models\ModelInterface;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,7 +34,7 @@ class CreatureTypeEdition extends AbstractModel
         return $this->morphMany(Reference::class, 'entity');
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         throw new \Exception('Not implemented');
     }

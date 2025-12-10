@@ -12,6 +12,7 @@ use App\Enums\SpellcasterType;
 use App\Models\AbstractModel;
 use App\Models\Feats\Feat;
 use App\Models\Language;
+use App\Models\ModelInterface;
 use App\Models\Skills\Skill;
 use App\Models\Species;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -110,8 +111,37 @@ class PrerequisiteValue extends AbstractModel
         );
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->prerequisite()->associate($parent);
+
+        if (is_array($value)) {
+            $item->skill_ranks = $value['skillRanks'] ?? null;
+            $item->value = $value['value'];
+
+            if ($value['value'] == 'speak language') {
+                $language = Language::query()->where('id', $value['language'])->firstOrFail();
+                $item->language()->associate($language);
+            }
+
+            if (!empty($value['craftType'])) {
+                $item->craft_type = CraftType::tryFromString($value['craftType'], true);
+            }
+            if (!empty($value['knowledgeType'])) {
+                $item->knowledge_type = KnowledgeType::tryFromString($value['knowledgeType'], true);
+            }
+            if (!empty($valueData['weaponFocusType'])) {
+                $item->weapon_focus_type = WeaponFocusType::tryFromString(
+                    $valueData['weaponFocusType'],
+                    true
+                );
+            }
+        } else {
+            $item->value = $value;
+        }
+
+        $item->save();
+        return $item;
     }
 }

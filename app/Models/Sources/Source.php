@@ -4,12 +4,14 @@ namespace App\Models\Sources;
 
 use App\Enums\GameEdition;
 use App\Enums\PublicationType;
+use App\Enums\Sources\SourcebookType;
 use App\Enums\SourceType;
 use App\Models\AbstractModel;
 use App\Models\CampaignSetting;
 use App\Models\Company;
 use App\Models\Media;
 use App\Models\ModelCollection;
+use App\Models\ModelInterface;
 use App\Models\ProductId;
 use App\Models\Spells\Spell;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -35,6 +37,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property ?GameEdition $game_edition
  * @property ?Source $parent
  * @property Uuid $parent_id
+ * @property ?SourceEdition $primaryEdition
  * @property ?string $product_code
  * @property Collection $productIds
  * @property PublicationType $publication_type
@@ -97,9 +100,12 @@ class Source extends AbstractModel
 
     public function primaryEdition(): ?SourceEdition
     {
-        /** @var SourceEdition|null $edition */
-        $edition = $this->editions->where('is_primary', true)->firstOrFail();
-        return $edition;
+        // If we can't find a primary edition, return the first edition. Fail only if there are no editions.
+        /** @var ?SourceEdition $primary */
+        $primary = $this->editions->where('is_primary', '=', true)->first();
+        /** @var ?SourceEdition $first */
+        $first = $this->editions->first();
+        return $primary ?? $first ?? null;
     }
 
     public function productIds(): HasMany
@@ -151,10 +157,10 @@ class Source extends AbstractModel
         ];
 
         if ($this->sourcebookTypes()->count() > 0) {
-            $output['sourcebook_types'] = [];
+            $output['sourcebookTypes'] = [];
 
             foreach ($this->sourcebookTypes as $sourcebookType) {
-                $output['sourcebook_types'][] = $sourcebookType->sourcebook_type;
+                $output['sourcebookTypes'][] = $sourcebookType->sourcebook_type;
             }
         }
 
@@ -187,8 +193,73 @@ class Source extends AbstractModel
         ];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->name = $value['name'];
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+
+        $item->description = $value['description'] ?? null;
+        $item->shortName = $value['shortName'] ?? null;
+        $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
+        $item->product_code = $value['productCode'] ?? null;
+
+        if (!empty($value['campaignSetting'])) {
+            $campaignSetting = CampaignSetting::query()->where('slug', $value['campaignSetting'])->firstOrFail();
+            $item->campaignSetting()->associate($campaignSetting);
+        }
+        if (!empty($value['coverImage'])) {
+            $coverImage = Media::fromInternalJson([
+                'filename' => '/books/' . $value['coverImage'],
+            ]);
+            $item->coverImage()->associate($coverImage);
+        }
+
+        foreach ($value['productIds'] ?? [] as $vendor => $productIdData) {
+            $productId = ProductId::fromInternalJson([
+                'company' => $vendor,
+                'productId' => $productIdData
+            ], $item);
+            $item->productIds()->save($productId);
+        }
+
+        // Allow for both publisherId (uuid) or publisher (slug).
+        if (!empty($value['publisherId'])) {
+            $company = Company::query()->where('id', $value['publisherId'])->firstOrFail();
+            $item->publisher()->associate($company);
+        } elseif (!empty($value['publisher'])) {
+            $company = Company::query()->where('slug', $value['publisher'])->firstOrFail();
+            $item->publisher()->associate($company);
+        }
+
+        $item->publication_type = PublicationType::tryFromString($value['publicationType']);
+
+        foreach ($value['sourcebookTypes'] ?? [] as $sourcebookType) {
+            $sst = SourceSourcebookType::fromInternalJson($sourcebookType, $item);
+            $item->sourcebookTypes()->save($sst);
+        }
+
+        $item->source_type = SourceType::tryFromString($value['sourceType']);
+        $item->save();
+
+        foreach ($value['editions'] ?? [] as $edition) {
+            $edition = SourceEdition::fromInternalJson($edition, $item);
+            $item->editions()->save($edition);
+        }
+
+        if ($item->editions->count() === 0) {
+            throw new \Exception("Source {$item->name} has no editions.");
+        }
+        if ($item->editions->count() === 1) {
+            // Make sure that at least one edition is the primary one.
+            /** @var SourceEdition $first */
+            $first = $item->editions->first();
+            $first->is_primary = true;
+            $first->save();
+        }
+
+        $item->save();
+        return $item;
     }
 }

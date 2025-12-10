@@ -2,193 +2,193 @@
     {
         "id": "2c39d46d-f6ff-4769-8803-d93015df5c81",
         "name": "Birthright",
-        "short_name": "BR",
+        "shortName": "BR",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "50781e64-d37c-4e9d-84fa-acdeced8281f",
         "name": "Blackmoor",
-        "short_name": "BM",
+        "shortName": "BM",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "c2dc6552-7a37-4fa9-aa64-f672589b9092",
         "name": "Conan and Red Sonja",
-        "short_name": "C&RS",
+        "shortName": "C&RS",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "60a0ac87-89e9-4ccd-85eb-a965f48e77c1",
         "name": "Council of Wyrms",
-        "short_name": "CoW",
+        "shortName": "CoW",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "e15219b6-bdfd-496a-b6b8-96120ec08b88",
         "name": "Dark Sun",
-        "short_name": "DS",
+        "shortName": "DS",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "9bfe277c-d37a-45f7-9d1d-4f828ba3257c",
         "name": "Diablo II",
-        "short_name": "D2",
+        "shortName": "D2",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "4b84c93c-17dc-4c37-ac0f-fb04c2651f6d",
         "name": "Dragon Fist",
-        "short_name": "DF",
+        "shortName": "DF",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "2fa8dddd-96ef-4df3-8b60-ca550ea3aeab",
         "name": "Dragonlance",
-        "short_name": "DL",
+        "shortName": "DL",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "f42692cf-dcf8-4119-b17d-6d84736642fd",
         "name": "Eberron",
-        "short_name": "Ebr",
+        "shortName": "Ebr",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official",
+        "publicationType": "official",
         "logo": "eberron-logo.webp"
     },
     {
         "id": "26a1861f-c5f5-4e83-b672-48dda7192d4c",
         "name": "Exandria",
-        "short_name": "EX",
+        "shortName": "EX",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "d391eda0-80f8-4c6d-9d10-34a0148a60c4",
         "name": "Forgotten Realms",
-        "short_name": "FR",
-        "publication_type": "official",
+        "shortName": "FR",
+        "publicationType": "official",
         "publisher": "wizards-of-the-coast",
         "logo": "forgotten-realms.png"
     },
     {
         "id": "be045376-158f-4b0b-81a9-8fe262550da0",
         "name": "Ghostwalk",
-        "short_name": "GW",
+        "shortName": "GW",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "98d1ad61-5fbc-441d-926e-c76ba8699595",
         "name": "Greyhawk",
-        "short_name": "GH",
+        "shortName": "GH",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "8fa3fa97-1757-4a39-97ba-54b274d768c3",
         "name": "Jakandor",
-        "short_name": "Jak",
+        "shortName": "Jak",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "c0cf1754-399f-474f-b116-fd59a770b343",
         "name": "Kingdoms of Kalamar",
-        "short_name": "KoK",
+        "shortName": "KoK",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "2b9cab05-56d8-4cde-94cf-d50341f5dc9c",
         "name": "Lankhmar",
-        "short_name": "LM",
+        "shortName": "LM",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "bcfa4d10-ad5c-4452-b9ba-a5a032d2150f",
         "name": "Magic: The Gathering Planes",
-        "short_name": "MtGP",
+        "shortName": "MtGP",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "945991a9-afb2-4715-af92-5cc7e3bc380d",
         "name": "Mahasarpa",
-        "short_name": "Maha",
+        "shortName": "Maha",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "256cdfd1-b6b9-458f-9173-21cfd1819e90",
         "name": "Mystara",
-        "short_name": "Mys",
+        "shortName": "Mys",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "115e8aae-8aa5-4eb0-aa64-9ac3e3a3385c",
         "name": "Nentir Vale",
-        "short_name": "NV",
+        "shortName": "NV",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "3e05cc1a-2c1e-4551-a2cd-55ec2527c079",
         "name": "Pelinore",
-        "short_name": "Peli",
+        "shortName": "Peli",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "b0c5d219-006d-4dce-a740-46d938111098",
         "name": "Planescape",
-        "short_name": "PS",
+        "shortName": "PS",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "97cf4b3f-c639-4bce-9fda-b89e58eff0d6",
         "name": "Radiant Citadel",
-        "short_name": "RC",
+        "shortName": "RC",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "854db455-162c-4d17-9df2-7cbbabc609ed",
         "name": "Ravenloft",
-        "short_name": "RL",
+        "shortName": "RL",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official",
+        "publicationType": "official",
         "logo": "ravenloft.webp"
     },
     {
         "id": "92343471-d0bb-4da6-84d9-6fd6539df24e",
         "name": "Rokugan",
-        "short_name": "Roku",
+        "shortName": "Roku",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "52d76add-ad89-4360-824c-8555c0a7c687",
         "name": "Spelljammer",
-        "short_name": "SJ",
+        "shortName": "SJ",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     },
     {
         "id": "ad54cc86-cc6b-4b74-a811-19f25c908091",
         "name": "Warcraft",
-        "short_name": "WC",
+        "shortName": "WC",
         "publisher": "wizards-of-the-coast",
-        "publication_type": "official"
+        "publicationType": "official"
     }
 ]

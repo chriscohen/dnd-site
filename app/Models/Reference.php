@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -68,8 +69,26 @@ class Reference extends AbstractModel
         ];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->entity()->associate($parent);
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->page_from = $value['pageFrom'];
+        $item->page_to = $value['pageTo'] ?? null;
+
+        if (!empty($value['editionId'])) {
+            $sourceEdition = SourceEdition::query()
+                ->where('id', $value['editionId'])
+                ->firstOrFail();
+            $item->edition()->associate($sourceEdition);
+        } else {
+            $source = Source::query()->where('slug', $value['source'])->firstOrFail();
+            $sourceEdition = $source->primaryEdition();
+            $item->edition()->associate($sourceEdition);
+        }
+
+        $item->save();
+        return $item;
     }
 }

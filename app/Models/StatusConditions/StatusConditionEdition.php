@@ -6,6 +6,7 @@ namespace App\Models\StatusConditions;
 
 use App\Enums\GameEdition;
 use App\Models\AbstractModel;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,10 +19,10 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Uuid $id
  *
  * @property ?string $description
- * @property string $game_edition
- * @property GameEdition $gameEdition
+ * @property GameEdition $game_edition
  * @property Collection<StatusConditionRule> $rules
  * @property StatusCondition $statusCondition
+ * @property Uuid $statusConditionId
  */
 class StatusConditionEdition extends AbstractModel
 {
@@ -60,7 +61,7 @@ class StatusConditionEdition extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'status_condition' => $this->statusCondition->toArray($this->renderMode, $this->excluded),
+            'status_condition' => $this->statusCondition->toArray($this->renderMode),
         ];
     }
 
@@ -83,8 +84,20 @@ class StatusConditionEdition extends AbstractModel
         return $this->description;
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->description = $value['description'] ?? null;
+        $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
+        $item->statusCondition()->associate($parent);
+
+        foreach ($value['rules'] ?? [] as $rule) {
+            StatusConditionRule::fromInternalJson($rule, $item);
+        }
+
+        $item->save();
+        return $item;
     }
 }

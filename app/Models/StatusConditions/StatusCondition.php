@@ -6,6 +6,7 @@ namespace App\Models\StatusConditions;
 
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
@@ -52,8 +53,20 @@ class StatusCondition extends AbstractModel
         ];
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = Uuid::fromString($value['id']);
+        $item->name = $value['name'];
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+        $item->save();
+
+        foreach ($value['editions'] ?? [] as $edition) {
+            $edition = StatusConditionEdition::fromInternalJson($edition, $item);
+            $item->editions()->save($edition);
+        }
+
+        $item->save();
+        return $item;
     }
 }

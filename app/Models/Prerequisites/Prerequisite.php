@@ -13,6 +13,7 @@ use App\Models\Deity;
 use App\Models\Feats\Feat;
 use App\Models\Feats\FeatEdition;
 use App\Models\ModelCollection;
+use App\Models\ModelInterface;
 use App\Models\Species;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -92,8 +93,18 @@ class Prerequisite extends AbstractModel
         return $this->hasMany(PrerequisiteValue::class);
     }
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->featEdition()->associate($parent);
+        $item->type = PrerequisiteType::tryFromString($value['type'], true);
+        $item->save();
+
+        foreach ($value['values'] ?? [] as $valueData) {
+            PrerequisiteValue::fromInternalJson($valueData, $item);
+        }
+
+        $item->save();
+        return $item;
     }
 }

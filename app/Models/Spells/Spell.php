@@ -8,6 +8,7 @@ use App\Enums\GameEdition;
 use App\Models\AbstractModel;
 use App\Models\Media;
 use App\Models\ModelCollection;
+use App\Models\ModelInterface;
 use App\Models\Sources\Source;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -74,7 +75,7 @@ class Spell extends AbstractModel
     }
 
 
-    public static function fromInternalJson(array $value): static
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
 
