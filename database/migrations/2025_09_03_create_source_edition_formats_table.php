@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(SourceEdition::class, 'sourceEditionId');
             $table->unsignedSmallInteger('format');
 
-            $table->unique(['sourceEditionId', 'format']);
+            $table->unique(['source_edition_id', 'format']);
         });
     }
 

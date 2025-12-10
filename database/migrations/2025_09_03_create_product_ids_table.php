@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(Company::class, 'originId');
             $table->string('productId');
 
-            $table->unique(['originId', 'productId']);
+            $table->unique(['origin_id', 'productId']);
         });
     }
 
