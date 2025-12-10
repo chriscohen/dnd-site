@@ -17,33 +17,33 @@ return new class extends Migration
         Schema::create('spell_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->foreignIdFor(Spell::class, 'spell_id');
+            $table->foreignIdFor(Spell::class, 'spellId');
 
             $table->text('description')->nullable();
             $table->text('focus')->nullable();
-            $table->unsignedSmallInteger('game_edition')->index();
-            $table->text('higher_level')->nullable();
-            $table->boolean('is_default')->default(false);
-            $table->string('magic_school_id')->nullable()->index();
-            $table->unsignedSmallInteger('material_component_mode')->nullable();
+            $table->unsignedSmallInteger('gameEdition')->index();
+            $table->text('higherLevel')->nullable();
+            $table->boolean('isDefault')->default(false);
+            $table->string('magicSchoolId')->nullable()->index();
+            $table->unsignedSmallInteger('materialComponentMode')->nullable();
             $table->unsignedSmallInteger('rarity')->index();
 
             // Feat?
-            $table->foreignIdFor(Feat::class, 'feat_id')->nullable();
+            $table->foreignIdFor(Feat::class, 'featId')->nullable();
 
             // Range / area
-            $table->foreignIdFor(Range::class, 'range_id')->nullable();
-            $table->foreignIdFor(Area::class, 'area_id')->nullable();
+            $table->foreignIdFor(Range::class, 'rangeId')->nullable();
+            $table->foreignIdFor(Area::class, 'areaId')->nullable();
 
             // Casting time + duration
-            $table->unsignedSmallInteger('casting_time_number');
-            $table->unsignedSmallInteger('casting_time_unit');
+            $table->unsignedSmallInteger('castingTimeNumber');
+            $table->unsignedSmallInteger('castingTimeUnit');
 
             // Components
-            $table->string('spell_components', 10)->nullable();
-            $table->boolean('has_spell_resistance')->nullable();
+            $table->string('spellComponents', 10)->nullable();
+            $table->boolean('hasSpellResistance')->nullable();
 
-            $table->unique(['spell_id', 'game_edition']);
+            $table->unique(['spellId', 'gameEdition']);
         });
     }
 

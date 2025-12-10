@@ -74,4 +74,9 @@ class Item extends AbstractModel
             'image' => $this->image?->toArray($this->renderMode),
         ];
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

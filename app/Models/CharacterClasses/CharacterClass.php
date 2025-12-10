@@ -68,4 +68,9 @@ class CharacterClass extends AbstractModel
             'is_prestige' => $this->isPrestige(),
         ];
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

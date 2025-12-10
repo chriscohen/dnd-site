@@ -60,4 +60,9 @@ class StatusConditionRule extends AbstractModel
     {
         return $this->rule;
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

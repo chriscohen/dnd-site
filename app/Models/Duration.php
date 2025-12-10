@@ -75,4 +75,9 @@ class Duration extends AbstractModel
 
         return $output;
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

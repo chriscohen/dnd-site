@@ -21,6 +21,7 @@ use App\Models\ModelCollection;
 use App\Models\Range;
 use App\Models\Reference;
 use App\Models\SavingThrow;
+use App\Models\Sources\Source;
 use App\Models\Target;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -38,32 +39,31 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Uuid $id
  *
  * @property ?Area $area
- * @property int $casting_time_number
- * @property TimeUnit $casting_time_unit
+ * @property int $castingTimeNumber
+ * @property TimeUnit $castingTimeUnit
  * @property Collection<DamageInstance> $damageInstances
  * @property string $description
  * @property Collection<MagicDomain> $domains
  * @property Duration $duration
  * @property ?Feat $feat
  * @property ?string $focus
- * @property GameEdition $game_edition
- * @property string $gameEdition,
- * @property ?bool $has_spell_resistance
- * @property string $higher_level
+ * @property GameEdition $gameEdition
+ * @property ?bool $hasSpellResistance
+ * @property string $higherLevel
  * @property bool $is_default
  * @property Collection<SpellEditionLevel> $levels
- * @property ?MaterialComponentMode $material_component_mode
+ * @property ?MaterialComponentMode $materialComponentMode
  * @property Collection<SpellMaterialComponent> $materialComponents
  * @property ?Range $range
- * @property ?Uuid $range_id
+ * @property ?Uuid $rangeId
  * @property Rarity $rarity
  * @property Collection<Reference> $references
  * @property ?SavingThrow $savingThrow
  * @property MagicSchool $school
  * @property Spell $spell
- * @property string $spell_components
+ * @property string $spellComponents
  * @property ?SpellEdition4e $spellEdition4e
- * @property Uuid $spell_id
+ * @property Uuid $spellId
  * @property Collection<Target> $targets
  */
 class SpellEdition extends AbstractModel
@@ -73,19 +73,19 @@ class SpellEdition extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'casting_time_unit' => TimeUnit::class,
+        'castingTimeUnit' => TimeUnit::class,
         'frequency' => SpellFrequency::class,
-        'game_edition' => GameEdition::class,
-        'has_spell_resistance' => 'bool',
-        'is_default' => 'bool',
-        'material_component_mode' => MaterialComponentMode::class,
-        'range_unit' => Distance::class,
+        'gameEdition' => GameEdition::class,
+        'hasSpellResistance' => 'bool',
+        'isDefault' => 'bool',
+        'materialComponentMode' => MaterialComponentMode::class,
+        'rangeUnit' => Distance::class,
         'rarity' => Rarity::class,
     ];
 
     public function area(): BelongsTo
     {
-        return $this->belongsTo(Area::class, 'area_id');
+        return $this->belongsTo(Area::class, 'areaId');
     }
 
     public function damageInstances(): MorphMany
@@ -112,7 +112,7 @@ class SpellEdition extends AbstractModel
 
     public function feat(): BelongsTo
     {
-        return $this->belongsTo(Feat::class, 'feat_id');
+        return $this->belongsTo(Feat::class, 'featId');
     }
 
     protected function gameEdition(): Attribute
@@ -151,7 +151,7 @@ class SpellEdition extends AbstractModel
 
     public function hasComponent(SpellComponentType $componentType): bool
     {
-        return str_contains($this->spell_components, $componentType->value);
+        return str_contains($this->spellComponents, $componentType->value);
     }
 
     public function levels(): HasMany
@@ -200,7 +200,7 @@ class SpellEdition extends AbstractModel
 
     public function school(): BelongsTo
     {
-        return $this->belongsTo(MagicSchool::class, 'magic_school_id');
+        return $this->belongsTo(MagicSchool::class, 'magicSchoolId');
     }
 
     public function schoolAsString(): string
@@ -227,27 +227,27 @@ class SpellEdition extends AbstractModel
     {
         return [
             'area' => $this->area?->toArray($this->renderMode) ?? null,
-            'casting_time' => $this->casting_time_unit->format($this->casting_time_number),
-            'damage_instances' => ModelCollection::make($this->damageInstances)
+            'castingTime' => $this->castingTimeUnit->format($this->castingTimeNumber),
+            'damageInstances' => ModelCollection::make($this->damageInstances)
                 ->toArray(),
             'description' => $this->description,
             'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode),
             'duration' => $this->duration->toArray($this->renderMode),
             'focus' => $this->focus,
-            'has_saving_throw' => $this->has_saving_throw,
-            'has_spell_resistance' => $this->has_spell_resistance,
-            'higher_level' => $this->higher_level,
-            'is_default' => $this->is_default,
+            'hasSavingThrow' => $this->has_saving_throw,
+            'hasSpellResistance' => $this->hasSpellResistance,
+            'higherLevel' => $this->higherLevel,
+            'isDefault' => $this->is_default,
             'levels' => ModelCollection::make($this->levels)->toArray(),
-            'lowest_level' => $this->getLowestLevel(),
-            'material_component_mode' => $this->material_component_mode,
-            'material_components' => ModelCollection::make($this->materialComponents)->toArray($this->renderMode),
+            'lowestLevel' => $this->getLowestLevel(),
+            'materialComponentMode' => $this->materialComponentMode,
+            'materialComponents' => ModelCollection::make($this->materialComponents)->toArray($this->renderMode),
             'range' => $this->range?->toArray($this->renderMode),
             'rarity' => $this->rarity->toString(),
             'references' => ModelCollection::make($this->references)->toArray(JsonRenderMode::TEASER),
-            'saving_throw' => $this->savingThrow?->toArray($this->renderMode),
+            'savingThrow' => $this->savingThrow?->toArray($this->renderMode),
             'school' => $this->school?->toArray($this->renderMode) ?? null,
-            'spell_components' => $this->spell_components,
+            'spellComponents' => $this->spellComponents,
         ];
     }
 
@@ -255,14 +255,69 @@ class SpellEdition extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'spell_id' => $this->spell_id,
+            'spellId' => $this->spellId,
         ];
     }
 
     public function toArrayTeaser(): array
     {
         return [
-            'game_edition' => $this->game_edition,
+            'gameEdition' => $this->gameEdition,
         ];
+    }
+
+
+    public static function fromInternalJson(array $value): static
+    {
+        $item = new static();
+
+        return $item;
+    }
+
+    public static function fromFeJson(array $value, ?Spell $spell = null): self
+    {
+        $item = new static();
+        $item->id = Uuid::uuid4();
+        $item->name = $value['name'];
+        $item->gameEdition = GameEdition::FIFTH_REVISED;
+
+        if (!empty($spell)) {
+            $item->spell()->associate($spell);
+        }
+
+        // Description.
+        if (!empty($value['entries'])) {
+            $item->description = '';
+
+            foreach ($value['entries'] as $entry) {
+                $item->description .= $entry['text'] . "\n";
+            }
+        }
+        // At Higher Levels...
+        if (is_array($value['entriesHigherLevel'])) {
+            $item->higherLevel = '';
+
+            foreach ($value['entriesHigherLevel'] as $higherLevelEntry) {
+                if (is_array($higherLevelEntry['entries'])) {
+                    foreach ($higherLevelEntry['entries'] as $entry) {
+                        $item->higherLevel .= $entry . "\n";
+                    }
+                }
+            }
+        }
+
+        // Magic school.
+        if (!empty($value['school'])) {
+            $school = MagicSchool::query()->where('shortName', mb_strtoupper($value['school']))->firstOrFail();
+            $item->school()->associate($school);
+        }
+
+        // References.
+        if (!empty($value['source'])) {
+            $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
+
+        }
+
+        return $item;
     }
 }

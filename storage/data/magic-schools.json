@@ -2,6 +2,7 @@
     {
         "id": "abjuration",
         "name": "Abjuration",
+        "shortName": "A",
         "description": "Encompasses protective spells, though some have aggressive uses. Can create magical barriers, negate magical or physical abilities, harm trespassers, or even banish to another plane."
     },
     {
@@ -25,6 +26,7 @@
     {
         "id": "conjuration",
         "name": "Conjuration",
+        "shortName": "C",
         "description": "Calls materials, creatures, or energy to the caster or could be reversed to cause the opposite effect, possibly over long distances, or from another plane of existence."
     },
     {
@@ -36,11 +38,13 @@
     {
         "id": "divination",
         "name": "Divination",
+        "shortName": "D",
         "description": "Allows the caster to see things that are not normally visible, or a great distance away."
     },
     {
         "id": "enchantment",
         "name": "Enchantment",
+        "shortName": "E",
         "description": "The power to manipulate the minds of others."
     },
     {
@@ -69,11 +73,13 @@
     {
         "id": "illusion",
         "name": "Illusion",
+        "shortName": "I",
         "description": "The ability to deceive the minds of others, making them believe they are seeing or hearing things that are not there, or remembering things that never happened."
     },
     {
         "id": "necromancy",
         "name": "Necromancy",
+        "shortName": "N",
         "description": "The Dark Art, manipulating the energy of the dead, to extend life, drain life from others, or create undead."
     },
     {
@@ -115,6 +121,7 @@
     {
         "id": "transmutation",
         "name": "Transmutation",
+        "shortName": "T",
         "description": "Change the physical properties of creatures or objects. Formerly known as alteration."
     }
 ]

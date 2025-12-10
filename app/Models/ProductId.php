@@ -63,4 +63,9 @@ class ProductId extends AbstractModel
             null :
             $this->origin->website . '/' . $this->origin->getProductUrl($this->product_id);
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

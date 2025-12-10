@@ -67,4 +67,9 @@ class Reference extends AbstractModel
             'image' => $this->edition->source->coverImage->toArray($this->renderMode),
         ];
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

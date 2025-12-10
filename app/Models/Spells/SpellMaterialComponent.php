@@ -98,4 +98,9 @@ class SpellMaterialComponent extends AbstractModel
         $output .= ' ' . $this->itemEdition->item->name . ($plural ? 's' : '') . 's';
         return $output;
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

@@ -91,4 +91,9 @@ class Prerequisite extends AbstractModel
     {
         return $this->hasMany(PrerequisiteValue::class);
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

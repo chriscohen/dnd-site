@@ -23,6 +23,7 @@ class MagicSchoolSeeder extends AbstractYmlSeeder
 
             $item->description = $datum['description'] ?? null;
             $item->parent_id = $datum['parent'] ?? null;
+            $item->shortName = $datum['short_name'] ?? null;
 
             // If there's no parent, it's a subschool, so there's no image.
             if (empty($datum['parent'])) {

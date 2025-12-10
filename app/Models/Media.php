@@ -77,4 +77,9 @@ class Media extends AbstractModel
     {
         return [];
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

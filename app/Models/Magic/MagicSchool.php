@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Media $image
  * @property ?MagicSchool $parent
  * @property string $parent_id
+ * @property ?string $shortName
  */
 class MagicSchool extends AbstractModel
 {
@@ -47,11 +48,17 @@ class MagicSchool extends AbstractModel
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'shortName' => $this->shortName,
         ];
     }
 
     public function toArrayTeaser(): array
     {
         return [];
+    }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
     }
 }

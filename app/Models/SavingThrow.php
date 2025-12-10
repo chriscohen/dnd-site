@@ -70,4 +70,9 @@ class SavingThrow extends AbstractModel
             'succeed_status' => $this->succeedStatus?->toArray($this->renderMode),
         ];
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

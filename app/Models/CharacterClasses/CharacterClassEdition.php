@@ -81,4 +81,9 @@ class CharacterClassEdition extends AbstractModel
             'caption' => $this->caption,
         ];
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

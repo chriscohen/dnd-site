@@ -97,4 +97,9 @@ class Area extends AbstractModel
                 );
         }
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

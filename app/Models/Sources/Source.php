@@ -139,15 +139,15 @@ class Source extends AbstractModel
     public function toArrayFull(): array
     {
         $output = [
-            'campaign_setting' => $this->campaign_setting?->toArray($this->renderMode, $this->excluded) ?? null,
+            'campaignSetting' => $this->campaign_setting?->toArray($this->renderMode) ?? null,
             'description' => $this->description,
-            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
-            'game_edition' => $this->game_edition,
-            'product_code' => $this->product_code,
-            'product_ids' => $this->productIds->collect()->toArray(),
-            'publication_type' => $this->publication_type,
-            'publisher' => $this->publisher->toArray($this->renderMode, $this->excluded),
-            'source_type' => $this->source_type,
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
+            'gameEdition' => $this->game_edition,
+            'productCode' => $this->product_code,
+            'productIds' => $this->productIds->collect()->toArray(),
+            'publicationType' => $this->publication_type,
+            'publisher' => $this->publisher->toArray($this->renderMode),
+            'sourceType' => $this->source_type,
         ];
 
         if ($this->sourcebookTypes()->count() > 0) {
@@ -182,8 +182,13 @@ class Source extends AbstractModel
     public function toArrayTeaser(): array
     {
         return [
-            'cover_image' => $this->coverImage->toArray($this->renderMode, $this->excluded),
-            'parent_id' => $this->parent_id,
+            'coverImage' => $this->coverImage->toArray($this->renderMode),
+            'parentId' => $this->parent_id,
         ];
+    }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
     }
 }

@@ -87,4 +87,9 @@ class FeatEdition extends AbstractModel
             'game_edition' => $this->game_edition->toStringShort(),
         ];
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

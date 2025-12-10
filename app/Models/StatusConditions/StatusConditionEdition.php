@@ -82,4 +82,9 @@ class StatusConditionEdition extends AbstractModel
     {
         return $this->description;
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

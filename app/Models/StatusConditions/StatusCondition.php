@@ -51,4 +51,9 @@ class StatusCondition extends AbstractModel
             'editions' => ModelCollection::make($this->rules)->toArray($this->renderMode, $this->excluded),
         ];
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

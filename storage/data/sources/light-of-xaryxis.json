@@ -1,28 +1,26 @@
 {
-    "id": "ee9e27a8-5fd8-4bd2-9979-64098bb0e03a",
-    "name": "Spelljammer: Adventures in Space",
-    "slug": "spelljammer-adventures-in-space",
+    "id": "8cfba71d-ef65-49a4-a6f5-8c28d400befd",
+    "name": "Light of Xaryxis",
+    "shortName": "LoX",
+    "slug": "light-of-xaryxis",
     "campaign_setting": "planescape",
-    "cover_image": "spelljammer-adventures-in-space.webp",
+    "cover_image": "light-of-xaryxis.webp",
     "description": "Set sail through the Astral Sea in a space-based campaign setting and adventure.",
     "editions": [
         {
-            "id": "00df085c-a204-4443-83b6-968f15296b70",
+            "id": "096bed4f-ead5-458e-8e33-deaf386c91e4",
             "name": "original",
             "formats": ["print", "dnd_beyond"],
-            "isbn13": "9780786968169",
+            "pages": 64,
             "release_date": "2022-08-16"
         }
     ],
     "game_edition": "5e",
-    "product_ids": {
-        "wizards-of-the-coast": "SRC-00090"
-    },
+    "parent": "ee9e27a8-5fd8-4bd2-9979-64098bb0e03a",
     "publication_type": "official",
     "publisher_id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
     "sourcebook_types": [
-        "boxed_set",
-        "campaign_setting"
+        "adventure"
     ],
-    "source_type": "boxed_set"
+    "source_type": "sourcebook"
 }

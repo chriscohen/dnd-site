@@ -109,4 +109,9 @@ class PrerequisiteValue extends AbstractModel
             set: fn (string $value) => $this->validateValue($value),
         );
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

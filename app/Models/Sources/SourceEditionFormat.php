@@ -64,4 +64,9 @@ class SourceEditionFormat extends AbstractModel
     {
         return $this->format();
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

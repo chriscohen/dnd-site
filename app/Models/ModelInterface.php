@@ -9,6 +9,14 @@ use App\Enums\JsonRenderMode;
 interface ModelInterface
 {
     /**
+     * Create a new instance from an internal JSON representation, as an array.
+     *
+     * @param  array  $value
+     * @return static
+     */
+    public static function fromInternalJson(array $value): static;
+
+    /**
      * Get the human-readable name of this thing.
      *
      * @return string

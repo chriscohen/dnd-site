@@ -70,10 +70,10 @@ class SpellSeeder extends AbstractYmlSeeder
 
                 $edition->description = $editionData['description'] ?? null;
                 $edition->focus = $editionData['focus'] ?? null;
-                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
-                $edition->higher_level = $editionData['higher_level'] ?? null;
+                $edition->gameEdition = GameEdition::tryFromString($editionData['game_edition']);
+                $edition->higherLevel = $editionData['higher_level'] ?? null;
                 $edition->is_default = $editionData['is_default'] ?? false;
-                $edition->material_component_mode = !empty($editionData['material_component_mode']) ?
+                $edition->materialComponentMode = !empty($editionData['material_component_mode']) ?
                     MaterialComponentMode::tryFromString($editionData['material_component_mode']) : null;
                 $edition->rarity = Rarity::tryFromString($editionData['rarity']);
 
@@ -92,8 +92,8 @@ class SpellSeeder extends AbstractYmlSeeder
                     $edition->domains->add(MagicDomain::query()->where('id', $domainData)->first());
                 }
 
-                $edition->spell_components = $editionData['spell_components'] ?? null;
-                $edition->has_spell_resistance = $editionData['has_spell_resistance'] ?? null;
+                $edition->spellComponents = $editionData['spell_components'] ?? null;
+                $edition->hasSpellResistance = $editionData['has_spell_resistance'] ?? null;
 
                 if (!empty($editionData['school'])) {
                     $school = MagicSchool::query()->where('name', ucfirst($editionData['school']))->firstOrFail();
@@ -101,8 +101,8 @@ class SpellSeeder extends AbstractYmlSeeder
                 }
 
                 // Casting time.
-                $edition->casting_time_number = $editionData['casting_time_number'] ?? 1;
-                $edition->casting_time_unit = TimeUnit::tryFromString($editionData['casting_time_unit']);
+                $edition->castingTimeNumber = $editionData['casting_time_number'] ?? 1;
+                $edition->castingTimeUnit = TimeUnit::tryFromString($editionData['casting_time_unit']);
 
                 $edition->save();
 
@@ -115,7 +115,7 @@ class SpellSeeder extends AbstractYmlSeeder
                 $this->makeDuration($editionData['duration'], $edition);
 
                 // 4th edition stuff.
-                if ($edition->game_edition === GameEdition::FOURTH) {
+                if ($edition->gameEdition === GameEdition::FOURTH) {
                     $this->make4e($editionData, $edition);
                 }
 
@@ -290,7 +290,7 @@ class SpellSeeder extends AbstractYmlSeeder
             }
 
             $savingThrow->failStatus()->associate(
-                $condition->editions->where('game_edition', $edition->game_edition)->first()
+                $condition->editions->where('game_edition', $edition->gameEdition)->first()
             );
         }
 

@@ -8,6 +8,7 @@ use App\Enums\GameEdition;
 use App\Models\AbstractModel;
 use App\Models\Media;
 use App\Models\ModelCollection;
+use App\Models\Sources\Source;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -70,5 +71,28 @@ class Spell extends AbstractModel
             'rarity' => $edition->rarity->toString(),
             'school' => $edition->school?->name,
         ];
+    }
+
+
+    public static function fromInternalJson(array $value): static
+    {
+        $item = new static();
+
+        return $item;
+    }
+
+    public static function fromFeJson(array $value): self
+    {
+        $item = new static();
+
+        $item->name = $value['name'];
+        if (!empty($value['source'])) {
+            $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
+            $item->source = null;
+        }
+
+
+
+        return $item;
     }
 }

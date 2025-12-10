@@ -54,4 +54,9 @@ class SpellTrait extends AbstractModel
     {
         return $this->id;
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }

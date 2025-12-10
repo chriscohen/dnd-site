@@ -32,4 +32,9 @@ class CreatureTypeEdition extends AbstractModel
     {
         return $this->morphMany(Reference::class, 'entity');
     }
+
+    public static function fromInternalJson(array $value): static
+    {
+        throw new \Exception('Not implemented');
+    }
 }
