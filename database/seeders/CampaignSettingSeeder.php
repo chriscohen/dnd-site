@@ -28,12 +28,12 @@ class CampaignSettingSeeder extends AbstractYmlSeeder
             // If no slug, assume we can just urlencode the name.
             $item->slug = $datum['slug'] ?? self::makeSlug($datum['name']);
             $item->name = $datum['name'];
-            $item->short_name = $datum['short_name'];
+            $item->shortName = $datum['short_name'];
 
             $publisher = Company::query()->where('slug', $datum['publisher'])->firstOrFail();
             $item->publisher()->associate($publisher);
 
-            $item->publication_type = PublicationType::tryFromString($datum['publication_type']);
+            $item->publicationType = PublicationType::tryFromString($datum['publication_type']);
 
             if (!empty($datum['logo'])) {
                 $media = Media::createFromExisting([

@@ -11,15 +11,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('source_sourcebook_types', function (Blueprint $table) {
-            $table->foreignIdFor(Source::class, 'source_id');
-            $table->unsignedSmallInteger('sourcebook_type');
-            $table->primary(['source_id', 'sourcebook_type']);
+        Schema::create('sourceSourcebookTypes', function (Blueprint $table) {
+            $table->foreignIdFor(Source::class, 'sourceId');
+            $table->unsignedSmallInteger('sourcebookType');
+            $table->primary(['sourceId', 'sourcebookType']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('source_sourcebook_types');
+        Schema::dropIfExists('sourceSourcebookTypes');
     }
 };

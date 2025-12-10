@@ -25,16 +25,16 @@ class SpellTrait extends AbstractModel
     {
         return $this->belongsToMany(
             SpellEdition4e::class,
-            'spell_editions_4e_traits',
-            'spell_edition_4e_id',
-            'spell_trait_id'
+            'spellEditions4eTraits',
+            'spellEdition4eId',
+            'spellTraitId'
         );
     }
 
     public function toArrayFull(): array
     {
         return [
-            'spell_edition' => ModelCollection::make($this->spellEditions4e)->toArray(),
+            'spellEdition' => ModelCollection::make($this->spellEditions4e)->toArray(),
         ];
     }
 

@@ -29,20 +29,14 @@ class Spell extends AbstractModel
 
     public $timestamps = false;
 
-    public $casts = [
-        'game_edition' => GameEdition::class,
-        'range_is_touch' => 'boolean',
-        'range_is_self' => 'boolean',
-    ];
-
     public function editions(): HasMany
     {
-        return $this->hasMany(SpellEdition::class, 'spell_id');
+        return $this->hasMany(SpellEdition::class, 'spellId');
     }
 
     public function image(): BelongsTo
     {
-        return $this->belongsTo(Media::class, 'image_id');
+        return $this->belongsTo(Media::class, 'imageId');
     }
 
     public function toArrayFull(): array
@@ -67,7 +61,7 @@ class Spell extends AbstractModel
         return [
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
             'image' => $this->image?->toArray($this->renderMode),
-            'lowest_level' => $edition->getLowestLevel(),
+            'lowestLevel' => $edition->getLowestLevel(),
             'rarity' => $edition->rarity->toString(),
             'school' => $edition->school?->name,
         ];
@@ -76,6 +70,7 @@ class Spell extends AbstractModel
 
     public static function fromInternalJson(array $value): static
     {
+        // TODO: unfinished
         $item = new static();
 
         return $item;
@@ -83,6 +78,7 @@ class Spell extends AbstractModel
 
     public static function fromFeJson(array $value): self
     {
+        // TODO: unfinished
         $item = new static();
 
         $item->name = $value['name'];

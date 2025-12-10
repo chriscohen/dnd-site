@@ -18,7 +18,6 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Uuid $id
  *
  * @property ?string $description
- * @property string $game_edition
  * @property GameEdition $gameEdition
  * @property Collection<StatusConditionRule> $rules
  * @property StatusCondition $statusCondition
@@ -60,7 +59,7 @@ class StatusConditionEdition extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'status_condition' => $this->statusCondition->toArray($this->renderMode, $this->excluded),
+            'statusCondition' => $this->statusCondition->toArray($this->renderMode),
         ];
     }
 

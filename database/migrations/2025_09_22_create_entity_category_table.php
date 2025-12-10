@@ -11,17 +11,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('entity_category', function (Blueprint $table) {
-            $table->foreignIdFor(Category::class, 'category_id');
-            $table->string('entity_id');
-            $table->string('entity_type');
+        Schema::create('entityCategory', function (Blueprint $table) {
+            $table->foreignIdFor(Category::class, 'categoryId');
+            $table->string('entityId');
+            $table->string('entityType');
 
-            $table->primary(['category_id', 'entity_id', 'entity_type']);
+            $table->primary(['categoryId', 'entityId', 'entityType']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('entity_category');
+        Schema::dropIfExists('entityCategory');
     }
 };

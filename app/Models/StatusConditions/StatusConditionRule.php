@@ -38,7 +38,7 @@ class StatusConditionRule extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'status_condition_edition' => $this->statusConditionEdition->toArray($this->renderMode, $this->excluded),
+            'statusConditionEdition' => $this->statusConditionEdition->toArray($this->renderMode),
         ];
     }
 

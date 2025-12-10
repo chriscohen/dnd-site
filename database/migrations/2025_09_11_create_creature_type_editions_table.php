@@ -11,14 +11,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('creature_type_editions', function (Blueprint $table) {
+        Schema::create('creatureTypeEditions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(CreatureType::class, 'creature_type_id');
+            $table->foreignIdFor(CreatureType::class, 'creatureTypeId');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('creature_type_editions');
+        Schema::dropIfExists('creatureTypeEditions');
     }
 };

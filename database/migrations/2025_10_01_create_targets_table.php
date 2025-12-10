@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('targets', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(SpellEdition::class, 'spell_edition_id');
+            $table->foreignIdFor(SpellEdition::class, 'spellEditionId');
 
             $table->unsignedSmallInteger('type')->index();
             $table->text('description')->nullable();
-            $table->boolean('in_area')->default(false);
+            $table->boolean('inArea')->default(false);
             $table->unsignedSmallInteger('quantity')->default(1);
-            $table->unsignedSmallInteger('per_level')->nullable();
-            $table->unsignedSmallInteger('per_level_mode')->nullable();
+            $table->unsignedSmallInteger('perLevel')->nullable();
+            $table->unsignedSmallInteger('perLevelMode')->nullable();
         });
     }
 

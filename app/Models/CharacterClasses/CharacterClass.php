@@ -26,18 +26,18 @@ class CharacterClass extends AbstractModel
 
     public function editions(): HasMany
     {
-        return $this->hasMany(CharacterClassEdition::class, 'character_class_id');
+        return $this->hasMany(CharacterClassEdition::class, 'characterClassId');
     }
 
     public function image(): BelongsTo
     {
-        return $this->belongsTo(Media::class, 'image_id');
+        return $this->belongsTo(Media::class, 'imageId');
     }
 
     public function isPrestige(): bool
     {
         foreach ($this->editions as $edition) {
-            if ($edition->is_prestige) {
+            if ($edition->isPrestige) {
                 return true;
             }
         }

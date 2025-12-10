@@ -17,7 +17,7 @@ use Ramsey\Uuid\Uuid;
  * @property string $slug
  * @property string $name
  *
- * @property ?\App\Enums\Sources\SourceContentType $content_type
+ * @property ?SourceContentType $contentType
  * @property ?int $pages
  * @property SourceEdition $parent
  * @property int $quantity
@@ -41,13 +41,13 @@ class BoxedSetItem extends AbstractModel
 
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(SourceEdition::class, 'parent_id');
+        return $this->belongsTo(SourceEdition::class, 'parentId');
     }
 
     public function toArrayFull(): array
     {
         return [
-            'content_type' => $this->content_type,
+            'contentType' => $this->contentType,
             'pages' => $this->pages,
             'parent' => $this->parent->toArray(JsonRenderMode::SHORT, []),
             'quantity' => $this->quantity,

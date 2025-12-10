@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->index();
-            $table->foreignIdFor(Media::class, 'image_id')->nullable();
+            $table->foreignIdFor(Media::class, 'imageId')->nullable();
         });
     }
 

@@ -15,9 +15,9 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  *
  * @property ?string $description
- * @property bool $in_area
- * @property ?int $per_level
- * @property ?PerLevelMode $per_level_mode
+ * @property bool $inArea
+ * @property ?int $perLevel
+ * @property ?PerLevelMode $perLevelMode
  * @property int $quantity
  * @property SpellEdition
  * @property TargetType $type
@@ -29,14 +29,14 @@ class Target extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'in_area' => 'boolean',
-        'per_level_mode' => PerLevelMode::class,
+        'inArea' => 'boolean',
+        'perLevelMode' => PerLevelMode::class,
         'type' => TargetType::class,
     ];
 
     public function spellEdition(): BelongsTo
     {
-        return $this->belongsTo(SpellEdition::class, 'spell_edition_id');
+        return $this->belongsTo(SpellEdition::class, 'spellEditionId');
     }
 
     public function toArrayFull(): array
@@ -44,9 +44,9 @@ class Target extends AbstractModel
         return [
             'id' => $this->id,
             'description' => $this->description,
-            'in_area' => $this->in_area,
-            'per_level' => $this->per_level,
-            'per_level_mode' => $this->per_level_mode?->toString(),
+            'inArea' => $this->inArea,
+            'perLevel' => $this->perLevel,
+            'perLevelMode' => $this->perLevelMode?->toString(),
             'quantity' => $this->quantity,
             'type' => $this->type->toString(),
         ];
@@ -79,11 +79,11 @@ class Target extends AbstractModel
             $output .= $this->type->toString() . ($plural ? 's' : '');
         }
 
-        if (!empty($this->per_level) && !empty($this->per_level_mode)) {
-            $output .= ' + ' . $this->per_level . ' ' . $this->per_level_mode->toString();
+        if (!empty($this->perLevel) && !empty($this->perLevelMode)) {
+            $output .= ' + ' . $this->perLevel . ' ' . $this->perLevelMode->toString();
         }
 
-        if ($this->in_area) {
+        if ($this->inArea) {
             $output .= ' in area';
         }
 

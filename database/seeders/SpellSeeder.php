@@ -72,7 +72,7 @@ class SpellSeeder extends AbstractYmlSeeder
                 $edition->focus = $editionData['focus'] ?? null;
                 $edition->gameEdition = GameEdition::tryFromString($editionData['game_edition']);
                 $edition->higherLevel = $editionData['higher_level'] ?? null;
-                $edition->is_default = $editionData['is_default'] ?? false;
+                $edition->isDefault = $editionData['is_default'] ?? false;
                 $edition->materialComponentMode = !empty($editionData['material_component_mode']) ?
                     MaterialComponentMode::tryFromString($editionData['material_component_mode']) : null;
                 $edition->rarity = Rarity::tryFromString($editionData['rarity']);
@@ -174,22 +174,22 @@ class SpellSeeder extends AbstractYmlSeeder
             $damageInstance = new DamageInstance();
             $damageInstance->entity()->associate($edition);
 
-            $damageInstance->die_quantity = $datum['die_quantity'] ?? null;
-            $damageInstance->die_quantity_maximum = $datum['die_quantity_maximum'] ?? null;
-            $damageInstance->die_faces = $datum['die_faces'] ?? null;
+            $damageInstance->dieQuantity = $datum['die_quantity'] ?? null;
+            $damageInstance->dieQuantityMaximum = $datum['die_quantity_maximum'] ?? null;
+            $damageInstance->dieFaces = $datum['die_faces'] ?? null;
 
             if (!empty($datum['damage_type'])) {
-                $damageInstance->damage_type = DamageType::tryFromString($datum['damage_type']);
+                $damageInstance->damageType = DamageType::tryFromString($datum['damage_type']);
             }
 
             $damageInstance->modifier = $datum['modifier'] ?? 0;
 
             if (!empty($datum['attribute_modifier'])) {
-                $damageInstance->attribute_modifier = Attribute::tryFromString($datum['attribute_modifier']);
-                $damageInstance->attribute_modifier_quantity = $datum['attribute_modifier_quantity'] ?? 1;
+                $damageInstance->attributeModifier = Attribute::tryFromString($datum['attribute_modifier']);
+                $damageInstance->attributeModifierQuantity = $datum['attribute_modifier_quantity'] ?? 1;
             }
 
-            $damageInstance->per_level_mode = empty($datum['per_level_mode']) ?
+            $damageInstance->perLeveLMode = empty($datum['per_level_mode']) ?
                 PerLevelMode::NONE :
                 PerLevelMode::tryFromString($datum['per_level_mode']);
 
@@ -211,8 +211,8 @@ class SpellSeeder extends AbstractYmlSeeder
         $duration = new Duration();
         $duration->entity()->associate($edition);
 
-        $duration->per_level = $data['per_level'] ?? null;
-        $duration->per_level_mode = empty($data['per_level_mode']) ?
+        $duration->perLevel = $data['per_level'] ?? null;
+        $duration->perLevelMode = empty($data['per_level_mode']) ?
             null :
             PerLevelMode::tryFromString($data['per_level_mode']);
         $duration->unit = TimeUnit::tryFromString($data['unit']);
@@ -249,9 +249,9 @@ class SpellSeeder extends AbstractYmlSeeder
 
         $material->description = $data['description'] ?? null;
         $material->quantity = $data['quantity'] ?? 1;
-        $material->quantity_text = $data['quantity_text'] ?? null;
-        $material->is_consumed = $data['is_consumed'] ?? false;
-        $material->is_plural = $data['is_plural'] ?? false;
+        $material->quantityText = $data['quantity_text'] ?? null;
+        $material->isConsumed = $data['is_consumed'] ?? false;
+        $material->isPlural = $data['is_plural'] ?? false;
 
         $material->save();
     }
@@ -260,12 +260,12 @@ class SpellSeeder extends AbstractYmlSeeder
     {
         $range = new Range();
         $range->number = $data['number'] ?? null;
-        $range->per_level = $data['per_level'] ?? null;
+        $range->perLevel = $data['per_level'] ?? null;
         $range->unit = !empty($data['unit']) ?
             Distance::tryFromString($data['unit']) :
             null;
-        $range->is_self = $data['is_self'] ?? false;
-        $range->is_touch = $data['is_touch'] ?? false;
+        $range->isSelf = $data['is_self'] ?? false;
+        $range->isTouch = $data['is_touch'] ?? false;
         $range->save();
         $edition->range()->associate($range);
     }
@@ -304,10 +304,10 @@ class SpellSeeder extends AbstractYmlSeeder
         $target->type = TargetType::tryFromString($data['type']);
 
         $target->description = $data['description'] ?? null;
-        $target->in_area = $data['in_area'] ?? false;
+        $target->inArea = $data['in_area'] ?? false;
         $target->quantity = $data['quantity'] ?? 1;
-        $target->per_level = $data['per_level'] ?? null;
-        $target->per_level_mode = empty($data['per_level_mode']) ?
+        $target->perLevel = $data['per_level'] ?? null;
+        $target->perLevelMode = empty($data['per_level_mode']) ?
             null :
             PerLevelMode::tryFromString($data['per_level_mode']);
         $target->save();

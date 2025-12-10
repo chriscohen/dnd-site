@@ -12,25 +12,25 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('spell_material_components', function (Blueprint $table) {
+        Schema::create('spellMaterialComponents', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(ItemEdition::class, 'item_edition_id');
-            $table->foreignIdFor(SpellEdition::class, 'spell_edition_id');
+            $table->foreignIdFor(ItemEdition::class, 'itemEditionId');
+            $table->foreignIdFor(SpellEdition::class, 'spellEditionId');
 
             $table->unsignedSmallInteger('quantity')->default(1);
-            $table->string('quantity_text')->nullable();
+            $table->string('quantityText')->nullable();
             $table->text('description')->nullable();
-            $table->boolean('is_consumed')->default(false);
-            $table->boolean('is_focus')->default(false);
-            $table->boolean('is_plural')->default(false);
-            $table->unsignedInteger('minimum_value')->nullable();
+            $table->boolean('isConsumed')->default(false);
+            $table->boolean('isFocus')->default(false);
+            $table->boolean('isPlural')->default(false);
+            $table->unsignedInteger('minimumValue')->nullable();
 
-            $table->unique(['item_edition_id', 'spell_edition_id'], 'spell_edition_item_edition');
+            $table->unique(['itemEditionId', 'spellEditionId'], 'spellEditionItemEdition');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('spell_material_components');
+        Schema::dropIfExists('spellMaterialComponents');
     }
 };

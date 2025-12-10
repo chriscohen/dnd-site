@@ -26,7 +26,7 @@ class Skill extends AbstractModel
 
     public function editions(): HasMany
     {
-        return $this->hasMany(SkillEdition::class, 'skill_id');
+        return $this->hasMany(SkillEdition::class, 'skillId');
     }
 
     public function toArrayFull(): array

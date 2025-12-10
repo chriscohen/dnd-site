@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\JsonRenderMode;
 use App\Enums\PublicationType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -16,12 +15,12 @@ use Ramsey\Uuid\Uuid;
  * @property string $slug
  *
  * @property Media $logo
- * @property Uuid $logo_id
+ * @property Uuid $logoId
  * @property string $name
  * @property Company $publisher
- * @property Uuid $publisher_id
- * @property PublicationType $publication_type
- * @property string $short_name
+ * @property Uuid $publisherId
+ * @property PublicationType $publicationType
+ * @property string $shortName
  */
 class CampaignSetting extends AbstractModel
 {
@@ -31,12 +30,12 @@ class CampaignSetting extends AbstractModel
     protected $primaryKey = 'id';
 
     public $casts = [
-        'publication_type' => PublicationType::class,
+        'publicationType' => PublicationType::class,
     ];
 
     public function logo(): BelongsTo
     {
-        return $this->belongsTo(Media::class, 'logo_id');
+        return $this->belongsTo(Media::class, 'logoId');
     }
 
     public function publicationType(): Attribute
@@ -48,15 +47,15 @@ class CampaignSetting extends AbstractModel
 
     public function publisher(): BelongsTo
     {
-        return $this->belongsTo(Company::class, 'publisher_id');
+        return $this->belongsTo(Company::class, 'publisherId');
     }
 
     public function toArrayFull(): array
     {
         return [
-            'logo' => $this->logo?->toArray($this->renderMode, $this->excluded),
-            'publication_type' => $this->publication_type,
-            'publisher' => $this->publisher->toArray($this->renderMode, $this->excluded),
+            'logo' => $this->logo?->toArray($this->renderMode),
+            'publicationType' => $this->publicationType,
+            'publisher' => $this->publisher->toArray($this->renderMode),
         ];
     }
 
@@ -76,6 +75,10 @@ class CampaignSetting extends AbstractModel
 
     public static function fromInternalJson(array $value): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'];
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+
+        return $item;
     }
 }

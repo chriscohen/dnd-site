@@ -11,16 +11,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('creature_types', function (Blueprint $table) {
+        Schema::create('creatureTypes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->index();
-            $table->foreignIdFor(Media::class, 'main_image_id')->nullable();
+            $table->foreignIdFor(Media::class, 'mainImageId')->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('creature_types');
+        Schema::dropIfExists('creatureTypes');
     }
 };

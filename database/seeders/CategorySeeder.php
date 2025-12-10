@@ -29,7 +29,7 @@ class CategorySeeder extends AbstractYmlSeeder
     public function postSave(Model $model, array $datum): Model
     {
         /** @var Category $model */
-        $model->parent_id = !empty($datum['parent_id']) ? $datum['parent_id'] : null;
+        $model->parentId = !empty($datum['parent_id']) ? $datum['parent_id'] : null;
 
         if (!empty($datum['image'])) {
             $media = Media::createFromExisting([

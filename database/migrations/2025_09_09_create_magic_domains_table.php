@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('magic_domains', function (Blueprint $table) {
+        Schema::create('magicDomains', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name')->unique();
         });
@@ -18,6 +18,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('magic_domains');
+        Schema::dropIfExists('magicDomains');
     }
 };

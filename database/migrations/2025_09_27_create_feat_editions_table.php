@@ -10,17 +10,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('feat_editions', function (Blueprint $table) {
+        Schema::create('featEditions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('feat_id')->unique();
+            $table->string('featId')->unique();
 
-            $table->unsignedSmallInteger('game_edition')->index();
+            $table->unsignedSmallInteger('gameEdition')->index();
             $table->text('description')->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('feat_editions');
+        Schema::dropIfExists('featEditions');
     }
 };

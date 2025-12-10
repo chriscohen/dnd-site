@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('references', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->foreignIdFor(SourceEdition::class, 'source_edition_id');
-            $table->unsignedSmallInteger('page_from');
-            $table->unsignedSmallInteger('page_to')->nullable();
+            $table->foreignIdFor(SourceEdition::class, 'sourceEditionId');
+            $table->unsignedSmallInteger('pageFrom');
+            $table->unsignedSmallInteger('pageTo')->nullable();
 
-            $table->uuid('entity_id');
-            $table->string('entity_type');
+            $table->uuid('entityId');
+            $table->string('entityType');
         });
     }
 

@@ -26,8 +26,8 @@ class CompanySeeder extends AbstractYmlSeeder
             $company->id = $datum['id'];
             $company->slug = $datum['slug'];
             $company->name = $datum['name'];
-            $company->product_url = $datum['product_url'] ?? null;
-            $company->short_name = $datum['short_name'] ?? null;
+            $company->productUrl = $datum['product_url'] ?? null;
+            $company->shortName = $datum['short_name'] ?? null;
             $company->website = $datum['website'] ?? null;
 
             if (!empty($datum['logo'])) {

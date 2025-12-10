@@ -5,19 +5,18 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\Distance;
-use App\Enums\JsonRenderMode;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
  *
- * @property bool $is_from_caster
- * @property bool $is_self
- * @property bool $is_touch
+ * @property bool $isFromCaster
+ * @property bool $isSelf
+ * @property bool $isTouch
  * @property int $number
- * @property int $per_level
- * @property int $per_level_increment
+ * @property int $perLevel
+ * @property int $perLevelIncrement
  *   How many levels to go up by. For example, a value of 2 would be "per 2 levels".
  * @property Distance $unit
  */
@@ -28,9 +27,9 @@ class Range extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'is_from_caster' => 'boolean',
-        'is_self' => 'boolean',
-        'is_touch' => 'boolean',
+        'isFromCaster' => 'boolean',
+        'isSelf' => 'boolean',
+        'isTouch' => 'boolean',
         'unit' => Distance::class,
     ];
 
@@ -52,11 +51,11 @@ class Range extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'is_from_caster' => $this->is_from_caster,
-            'is_self' => $this->is_self,
-            'is_touch' => $this->is_touch,
+            'isFromCaster' => $this->isFromCaster,
+            'isSelf' => $this->isSelf,
+            'isTouch' => $this->isTouch,
             'number' => $this?->number ?? null,
-            'per_level' => $this?->per_level ?? null,
+            'perLevel' => $this?->perLevel ?? null,
             'unit' => $this?->unit?->toString() ?? null,
         ];
     }
@@ -76,11 +75,11 @@ class Range extends AbstractModel
 
     public function toString(): string
     {
-        if ($this->is_from_caster) {
+        if ($this->isFromCaster) {
             return 'From caster';
-        } elseif ($this->is_touch) {
+        } elseif ($this->isTouch) {
             return 'Touch';
-        } elseif ($this->is_self) {
+        } elseif ($this->isSelf) {
             return 'Self';
         } elseif (empty($this->number) || $this->number < 0) {
             return 'Unlimited';
@@ -88,9 +87,9 @@ class Range extends AbstractModel
 
         $output = $this->format($this->number, $this->unit);
 
-        if ($this->per_level !== null) {
-            $output .= ' + ' . $this->format($this->per_level, $this->unit) . ' ' .
-                $this->formatLevelIncrement($this->per_level_increment);
+        if ($this->perLevel !== null) {
+            $output .= ' + ' . $this->format($this->perLevel, $this->unit) . ' ' .
+                $this->formatLevelIncrement($this->perLevelIncrement);
         }
 
         return $output;

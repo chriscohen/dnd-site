@@ -23,11 +23,11 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Uuid $id
  *
  * @property string $description
- * @property GameEdition $game_edition
- * @property bool $is_default
- * @property bool $is_unique
+ * @property GameEdition $gameEdition
+ * @property bool $isDefault
+ * @property bool $isUnique
  * @property Item $item
- * @property Uuid $item_id
+ * @property Uuid $itemId
  * @property int $price
  * @property int $quantity
  * @property Rarity $rarity
@@ -42,9 +42,9 @@ class ItemEdition extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'game_edition' => GameEdition::class,
-        'is_primary' => 'boolean',
-        'is_unique' => 'boolean',
+        'gameEdition' => GameEdition::class,
+        'isPrimary' => 'boolean',
+        'isUnique' => 'boolean',
         'rarity' => Rarity::class,
     ];
 
@@ -67,7 +67,7 @@ class ItemEdition extends AbstractModel
 
     public function item(): BelongsTo
     {
-        return $this->belongsTo(Item::class, 'item_id');
+        return $this->belongsTo(Item::class, 'itemId');
     }
 
     public function references(): MorphMany
@@ -77,19 +77,19 @@ class ItemEdition extends AbstractModel
 
     public function spells(): BelongsToMany
     {
-        return $this->belongsToMany(SpellEdition::class, 'spell_material_components');
+        return $this->belongsToMany(SpellEdition::class, 'spellMaterialComponents');
     }
 
     public function toArrayFull(): array
     {
         return [
             'description' => $this->description(),
-            'game_edition' => $this->game_edition->toStringShort(),
-            'is_unique' => $this->is_unique,
+            'gameEdition' => $this->gameEdition->toStringShort(),
+            'isUnique' => $this->isUnique,
             'price' => $this->price,
             'quantity' => $this->quantity,
             'rarity' => $this->rarity->toString(),
-            'references' => ModelCollection::make($this->references)->toArray($this->renderMode, $this->excluded),
+            'references' => ModelCollection::make($this->references)->toArray($this->renderMode,),
             'weight' => $this->weight,
         ];
     }
@@ -98,7 +98,7 @@ class ItemEdition extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'is_default' => $this->is_default,
+            'isDefault' => $this->isDefault,
         ];
     }
 

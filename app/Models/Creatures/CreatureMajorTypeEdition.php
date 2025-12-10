@@ -14,11 +14,10 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property Uuid $creature_major_type_id
+ * @property Uuid $creatureMajorTypeId
  * @property CreatureMajorType $creatureMajorType
  * @property string $description
- * @property int $game_edition
- * @property string $gameEdition
+ * @property GameEdition $gameEdition
  */
 class CreatureMajorTypeEdition extends AbstractModel
 {
@@ -27,12 +26,12 @@ class CreatureMajorTypeEdition extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'game_edition' => GameEdition::class,
+        'gameEdition' => GameEdition::class,
     ];
 
     public function creatureMajorType(): BelongsTo
     {
-        return $this->belongsTo(CreatureMajorType::class, 'creature_major_type_id');
+        return $this->belongsTo(CreatureMajorType::class, 'creatureMajorTypeId');
     }
 
     protected function gameEdition(): Attribute
@@ -45,9 +44,9 @@ class CreatureMajorTypeEdition extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'creature_major_type' => $this->creatureMajorType->toArray($this->renderMode, $this->excluded),
+            'creatureMajorType' => $this->creatureMajorType->toArray($this->renderMode),
             'description' => $this->description,
-            'game_edition' => $this->game_edition,
+            'gameEdition' => $this->gameEdition,
         ];
     }
 
@@ -55,7 +54,7 @@ class CreatureMajorTypeEdition extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'creature_major_type_id' => $this->creature_major_type_id,
+            'creatureMajorTypeId' => $this->creatureMajorTypeId,
         ];
     }
 

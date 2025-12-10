@@ -32,7 +32,7 @@ class CreatureMajorTypeSeeder extends AbstractYmlSeeder
             foreach ($datum['editions'] as $editionData) {
                 $edition = new CreatureMajorTypeEdition();
                 $edition->description = $editionData['description'];
-                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition'])->value;
+                $edition->gameEdition = GameEdition::tryFromString($editionData['game_edition'])->value;
                 $edition->creatureMajorType()->associate($item);
                 $edition->save();
             }

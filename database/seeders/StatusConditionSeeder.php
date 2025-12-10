@@ -29,7 +29,7 @@ class StatusConditionSeeder extends AbstractYmlSeeder
             foreach ($datum['editions'] ?? [] as $editionData) {
                 $edition = new StatusConditionEdition();
                 $edition->statusCondition()->associate($item);
-                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
+                $edition->gameEdition = GameEdition::tryFromString($editionData['game_edition']);
                 $edition->description = $editionData['description'] ?? null;
                 $edition->save();
 

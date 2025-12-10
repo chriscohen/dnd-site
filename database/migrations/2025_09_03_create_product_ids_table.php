@@ -12,18 +12,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('product_ids', function (Blueprint $table) {
+        Schema::create('productIds', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(Source::class, 'source_id');
-            $table->foreignIdFor(Company::class, 'origin_id');
-            $table->string('product_id');
+            $table->foreignIdFor(Source::class, 'sourceId');
+            $table->foreignIdFor(Company::class, 'originId');
+            $table->string('productId');
 
-            $table->unique(['origin_id', 'product_id']);
+            $table->unique(['origin_id', 'productId']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('product_ids');
+        Schema::dropIfExists('productIds');
     }
 };

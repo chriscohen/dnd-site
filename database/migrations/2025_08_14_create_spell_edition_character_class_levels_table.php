@@ -11,20 +11,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('spell_edition_levels', function (Blueprint $table) {
+        Schema::create('spellEditionLevels', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->foreignIdFor(SpellEdition::class, 'spell_edition_id');
-            $table->string('entity_id');
-            $table->string('entity_type');
+            $table->foreignIdFor(SpellEdition::class, 'spellEditionId');
+            $table->string('entityId');
+            $table->string('entityType');
             $table->unsignedSmallInteger('level')->index();
 
-            $table->unique(['spell_edition_id', 'entity_id', 'entity_type'], 'spell_edition_level_index');
+            $table->unique(['spelEdition_id', 'entityId', 'entityType'], 'spellEditionLevelIndex');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('spell_edition_levels');
+        Schema::dropIfExists('spellEditionLevels');
     }
 };

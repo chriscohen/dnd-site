@@ -12,13 +12,13 @@ return new class extends Migration
     {
         Schema::create('durations', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('entity_id');
-            $table->string('entity_type');
+            $table->uuid('entityId');
+            $table->string('entityType');
 
             $table->unsignedSmallInteger('value')->nullable();
             $table->unsignedSmallInteger('unit');
-            $table->unsignedSmallInteger('per_level')->nullable();
-            $table->unsignedSmallInteger('per_level_mode')->nullable();
+            $table->unsignedSmallInteger('perLevel')->nullable();
+            $table->unsignedSmallInteger('perLevelMode')->nullable();
         });
     }
 

@@ -12,21 +12,21 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('campaign_settings', function (Blueprint $table) {
+        Schema::create('campaignSettings', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->index();
-            $table->string('short_name', 16)->unique();
-            $table->foreignIdFor(Company::class, 'publisher_id')->index();
-            $table->smallInteger('publication_type')->index();
+            $table->string('shortName', 16)->unique();
+            $table->foreignIdFor(Company::class, 'publisherId')->index();
+            $table->smallInteger('publicationType')->index();
 
             // Images.
-            $table->foreignidFor(Media::class, 'logo_id')->nullable();
+            $table->foreignidFor(Media::class, 'logoId')->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('campaign_settings');
+        Schema::dropIfExists('campaignSettings');
     }
 };

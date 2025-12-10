@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property ?int $height
  * @property ?int $length
- * @property ?int $per_level
+ * @property ?int $perLevel
  * @property int $quantity
  * @property ?int $radius
  * @property ?int $width
@@ -35,7 +35,7 @@ class Area extends AbstractModel
             'id' => $this->id,
             'height' => $this->height,
             'length' => $this->length,
-            'per_level' => $this->per_level,
+            'per_level' => $this->perLevel,
             'quantity' => $this->quantity,
             'radius' => $this->radius,
             'width' => $this->width,
@@ -74,7 +74,7 @@ class Area extends AbstractModel
                     $this->quantity,
                     $this->length
                 );
-                return empty($this->per_level) ? $base : $base . '/level';
+                return empty($this->perLevel) ? $base : $base . '/level';
 
             case AreaType::CONE:
                 return sprintf(

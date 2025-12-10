@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\Company;
 use App\Models\CampaignSetting;
 use App\Models\Media;
-use App\Models\Sources\Source;
 
 return new class extends Migration
 {
@@ -20,16 +19,16 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('shortName')->unique()->nullable();
             $table->text('description')->nullable();
-            $table->string('product_code')->nullable();
-            $table->smallInteger('source_type')->index();
-            $table->smallInteger('game_edition')->nullable()->index();
-            $table->smallInteger('publication_type')->index();
-            $table->foreignIdFor(Company::class, 'publisher_id')->nullable()->index();
-            $table->foreignIdFor(CampaignSetting::class, 'campaign_setting_id')->nullable()->index();
-            $table->string('parent_id')->nullable()->index();
+            $table->string('productCode')->nullable();
+            $table->smallInteger('sourceType')->index();
+            $table->smallInteger('gameEdition')->nullable()->index();
+            $table->smallInteger('publicationType')->index();
+            $table->foreignIdFor(Company::class, 'publisherId')->nullable()->index();
+            $table->foreignIdFor(CampaignSetting::class, 'campaignSettingId')->nullable()->index();
+            $table->string('parentId')->nullable()->index();
 
             // Images.
-            $table->foreignIdFor(Media::class, 'cover_image_id')->nullable();
+            $table->foreignIdFor(Media::class, 'coverImageId')->nullable();
         });
     }
 

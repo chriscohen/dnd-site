@@ -38,12 +38,12 @@ class CharacterClassSeeder extends AbstractYmlSeeder
                 $edition = new CharacterClassEdition();
                 $edition->characterClass()->associate($item);
 
-                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
-                $edition->alternate_name = $editionData['alternate_name'] ?? null;
+                $edition->gameEdition = GameEdition::tryFromString($editionData['game_edition']);
+                $edition->alternateName = $editionData['alternate_name'] ?? null;
                 $edition->caption = $editionData['caption'] ?? null;
-                $edition->hit_die_faces = $editionData['hit_die_faces'] ?? null;
-                $edition->is_prestige = $editionData['is_prestige'] ?? false;
-                $edition->parent_id = $editionData['parent_id'] ?? null;
+                $edition->hitDieFaces = $editionData['hit_die_faces'] ?? null;
+                $edition->isPrestige = $editionData['is_prestige'] ?? false;
+                $edition->parentId = $editionData['parent_id'] ?? null;
 
                 $edition->save();
 

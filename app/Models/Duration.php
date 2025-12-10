@@ -13,8 +13,8 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property ?int $per_level
- * @property ?PerLevelMode $per_level_mode
+ * @property ?int $perLevel
+ * @property ?PerLevelMode $perLevelMode
  * @property TimeUnit $unit
  * @property ?int $value
  */
@@ -25,7 +25,7 @@ class Duration extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'per_level_mode' => PerLevelMode::class,
+        'perLevelMode' => PerLevelMode::class,
         'unit' => TimeUnit::class,
     ];
 
@@ -38,8 +38,8 @@ class Duration extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'per_level' => $this->per_level,
-            'per_level_mode' => $this->per_level_mode?->toString(),
+            'perLevel' => $this->perLevel,
+            'perLevelMode' => $this->perLevelMode?->toString(),
             'unit' => $this->unit->toString(),
             'value' => $this->value,
         ];
@@ -59,18 +59,18 @@ class Duration extends AbstractModel
 
     public function toString(): string
     {
-        if (empty($this->value) && empty($this->per_level)) {
+        if (empty($this->value) && empty($this->perLevel)) {
             return $this->unit->toString();
         }
 
-        if (empty($this->value) && !empty($this->per_level) && !empty($this->per_level_mode)) {
-            return $this->unit->format($this->per_level) . ' ' . $this->per_level_mode->toString();
+        if (empty($this->value) && !empty($this->perLevel) && !empty($this->perLevelMode)) {
+            return $this->unit->format($this->perLevel) . ' ' . $this->perLevelMode->toString();
         }
 
         $output = $this->unit->format($this->value);
 
-        if (!empty($this->per_level_mode)) {
-            $output .= ' + ' . $this->unit->format($this->per_level) . ' ' . $this->per_level_mode->toString();
+        if (!empty($this->perLevelMode)) {
+            $output .= ' + ' . $this->unit->format($this->perLevel) . ' ' . $this->perLevelMode->toString();
         }
 
         return $output;

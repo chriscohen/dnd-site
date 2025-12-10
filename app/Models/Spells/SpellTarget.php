@@ -12,7 +12,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property ?bool $all_in_area
+ * @property ?bool $allInArea
  * @property int $quantity
  * @property TargetType $type
  */

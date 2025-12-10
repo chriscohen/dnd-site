@@ -10,17 +10,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('spells_classes', function (Blueprint $table) {
-            $table->uuid('spell_id');
-            $table->string('class_id');
+        Schema::create('spellsClasses', function (Blueprint $table) {
+            $table->uuid('spellId');
+            $table->string('classId');
             $table->smallInteger('level');
 
-            $table->primary(['spell_id', 'class_id']);
+            $table->primary(['spellId', 'classId']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('spells_classes');
+        Schema::dropIfExists('spellsClasses');
     }
 };

@@ -32,7 +32,7 @@ class StatusCondition extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'editions' => ModelCollection::make($this->rules)->toArray($this->renderMode, $this->excluded),
+            'editions' => ModelCollection::make($this->rules)->toArray($this->renderMode),
         ];
     }
 
@@ -48,7 +48,7 @@ class StatusCondition extends AbstractModel
     public function toArrayTeaser(): array
     {
         return [
-            'editions' => ModelCollection::make($this->rules)->toArray($this->renderMode, $this->excluded),
+            'editions' => ModelCollection::make($this->rules)->toArray($this->renderMode),
         ];
     }
 
