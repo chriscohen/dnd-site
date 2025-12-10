@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->index();
-            $table->string('entity_type')->index();
+            $table->string('entityType')->index();
             $table->foreignIdFor(Category::class, 'parentId')->nullable()->index();
 
             // Images.

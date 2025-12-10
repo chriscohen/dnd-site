@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('entityType');
             $table->unsignedSmallInteger('level')->index();
 
-            $table->unique(['spelEdition_id', 'entityId', 'entityType'], 'spellEditionLevelIndex');
+            $table->unique(['spellEditionId', 'entityId', 'entityType'], 'spellEditionLevelIndex');
         });
     }
 
