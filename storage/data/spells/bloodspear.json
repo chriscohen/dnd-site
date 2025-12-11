@@ -5,18 +5,18 @@
     "editions": [
         {
             "game_edition": "3.5",
-            "casting_time_unit": "standard action",
+            "castingTime_unit": "standard action",
             "description": "This spell allows you to channel the fury of Gruumsh into the god's favored weapon—a spear. The weapon's tip beings to drip blood, and the spear acts as if it had the wounding special ability (see Dungeon Master's Guide page 226) for the duration of the spell. The spell is automatically canceled 1 round after the weapon leaves your hand.\n\nYou cannot have more than one bloodspear in effect at a time. This spell has no effect on a spear that already has the wounding special ability, and it does not work on artifacts.",
             "duration": {
-                "per_level": 1,
-                "per_level_mode": "per level",
+                "perLevel": 1,
+                "perLevelMode": "per level",
                 "unit":  "round"
             },
-            "has_spell_resistance": false,
+            "hasSpellResistance": false,
             "levels": [
                 { "feat":  "initiate-of-gruumsh", "level": 3 }
             ],
-            "range": { "is_touch": true },
+            "range": { "isTouch": true },
             "rarity": "uncommon",
             "references": [
                 {
@@ -25,7 +25,7 @@
                 }
             ],
             "school": "transmutation",
-            "spell_components": "V,S",
+            "spellComponents": "V,S",
             "target": {
                 "type": "object",
                 "description": "spear touched"

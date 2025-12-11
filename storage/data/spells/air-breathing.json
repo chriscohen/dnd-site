@@ -5,35 +5,35 @@
     "editions": [
         {
             "game_edition": "3.5",
-            "casting_time_unit": "standard action",
+            "castingTime_unit": "standard action",
             "description": "The transmuted creatures can breathe air freely. Divide the duration evenly among all the creatures you touch.\n\nThe spell does not make creatures unable to breathe water. Air breathing dispels and counters water breathing.",
             "duration": {
                 "unit": "hour",
-                "per_level": 2,
-                "per_level_mode": "per level"
+                "perLevel": 2,
+                "perLevelMode": "per level"
             },
-            "has_spell_resistance": true,
-            "is_default": true,
+            "hasSpellResistance": true,
+            "isDefault": true,
             "levels": [
                 { "class":  "cleric", "level":  3 },
                 { "class":  "druid", "level":  3 },
                 { "class":  "sorcerer", "level":  3 },
                 { "class":  "wizard", "level":  3 }
             ],
-            "material_components": [
+            "materialComponents": [
                 {
                     "item": "reed",
                     "quantity": 1,
-                    "is_consumed": true
+                    "isConsumed": true
                 },
                 {
                     "item": "straw",
                     "quantity": 1,
-                    "is_consumed": true
+                    "isConsumed": true
                 }
             ],
-            "material_component_mode": "or",
-            "range": { "is_touch": true },
+            "materialComponentMode": "or",
+            "range": { "isTouch": true },
             "rarity": "uncommon",
             "references": [
                 {
@@ -46,7 +46,7 @@
                 "type": "willpower"
             },
             "school": "transmutation",
-            "spell_components": "S,M"
+            "spellComponents": "S,M"
         }
     ],
     "image": "air-breathing.webp"

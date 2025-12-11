@@ -8,7 +8,7 @@
             "id": "87353c91-dbc6-4a5c-86c5-cf85bdf34f38",
             "game_edition": "3.5",
             "description": "A glass sculpture of a humanoid.",
-            "is_default": true,
+            "isDefault": true,
             "rarity": "common",
             "references": [
                 {

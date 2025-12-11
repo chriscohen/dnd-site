@@ -86,14 +86,23 @@ class Spell extends AbstractModel
     {
         $item = new static();
 
+        $item->id = $value['id'] ?? Uuid::uuid4();
         $item->name = $value['name'];
-        if (!empty($value['source'])) {
-            $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
-            $item->source = null;
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+
+        if (!empty($value['image'])) {
+            $image = Media::fromInternalJson([
+                'filename' => '/spells/' . $value['image'],
+            ], $item);
+            $item->image()->associate($image);
         }
 
+        foreach ($value['editions'] ?? [] as $editionData) {
+            $edition = SpellEdition::fromInternalJson($editionData, $item);
+            $item->editions()->save($edition);
+        }
 
-
+        $item->save();
         return $item;
     }
 }

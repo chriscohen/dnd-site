@@ -5,7 +5,7 @@
     "editions": [
         {
             "game_edition": "3.5",
-            "casting_time_unit": "bonus action",
+            "castingTime_unit": "bonus action",
             "damage": [
                 {
                     "damage_type": "cold",
@@ -16,20 +16,20 @@
             ],
             "description": "This spell is cast upon a masterwork arrow or bolt, transforming its head into blue ice. In addition to taking normal damage from the missle, the target takes 2d6 points of cold damage and is paralyzed. A successful Fortitude save negates the paralysis, and the target can make a new save each round (at the start of the caster's turn).",
             "duration": { "unit": "instantaneous" },
-            "has_spell_resistance": true,
+            "hasSpellResistance": true,
             "levels": [
                 { "class": "assassin", "level": 4 },
                 { "class": "ranger", "level": 4 },
                 { "class": "justice-of-weald-and-woe", "level": 4 }
             ],
-            "material_components": [
+            "materialComponents": [
                 {
                     "item": "masterwork-arrow",
                     "quantity": 1,
-                    "is_consumed": true
+                    "isConsumed": true
                 }
             ],
-            "range": { "is_touch": true },
+            "range": { "isTouch": true },
             "rarity": "uncommon",
             "references": [
                 {
@@ -42,7 +42,7 @@
                 "succeed_status": "paralyzed"
             },
             "school": "transmutation",
-            "spell_components": "V,M"
+            "spellComponents": "V,M"
         }
     ],
     "image": "bloodfreeze-arrow.webp"

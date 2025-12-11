@@ -92,6 +92,19 @@ class Target extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->spellEdition()->associate($parent);
+        $item->type = TargetType::tryFromString($value['type']);
+
+        $item->description = $value['description'] ?? null;
+        $item->in_area = $value['inArea'] ?? false;
+        $item->quantity = $value['quantity'] ?? 1;
+        $item->per_level = $value['perLevel'] ?? null;
+        $item->per_level_mode = empty($value['perLevelNode']) ?
+            null :
+            PerLevelMode::tryFromString($value['perLevelMode']);
+
+        $item->save();
+        return $item;
     }
 }

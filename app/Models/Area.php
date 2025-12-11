@@ -100,6 +100,15 @@ class Area extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->type = AreaType::tryFromString($value['type']);
+        $item->quantity = $value['quantity'] ?? 1;
+        $item->height = $value['height'] ?? null;
+        $item->length = $value['length'] ?? null;
+        $item->per_level = $value['perLevel'] ?? null;
+        $item->radius = $value['radius'] ?? null;
+        $item->width = $value['width'] ?? null;
+        $item->save();
+        return $item;
     }
 }

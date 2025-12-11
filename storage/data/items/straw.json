@@ -7,7 +7,7 @@
             "id": "e2e2f2b9-580d-4296-ae97-59b948a536b8",
             "game_edition": "3.5",
             "description": "A dried grain stalk, used especially as fodder or as material for thatching, packing, or weaving.",
-            "is_default": true,
+            "isDefault": true,
             "rarity": "common"
         }
     ]

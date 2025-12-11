@@ -78,6 +78,14 @@ class Duration extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->entity()->associate($parent);
+        $item->unit = TimeUnit::tryFromString($value['unit']);
+        $item->value = $value['value'] ?? null;
+        $item->per_level = $value['perLevel'] ?? null;
+        $item->per_level_mode = PerLevelMode::tryFromString($value['perLevelMode'] ?? null);
+
+        $item->save();
+        return $item;
     }
 }

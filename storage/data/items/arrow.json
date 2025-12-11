@@ -7,7 +7,7 @@
             "id": "97f43128-a01f-4646-9730-bed21b4f9d50",
             "game_edition": "5e",
             "description": "A single normal wooden arrow.",
-            "is_default": true,
+            "isDefault": true,
             "price": "5 sp",
             "rarity": "common",
             "references": [

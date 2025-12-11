@@ -8,7 +8,7 @@
             "id": "60add432-fe1a-478d-b81a-10f3de21a98a",
             "game_edition": "3.5",
             "description": "A fire ant, or group of them.",
-            "is_default": true,
+            "isDefault": true,
             "rarity": "common",
             "references": [
                 {

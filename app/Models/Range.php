@@ -98,6 +98,15 @@ class Range extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->is_from_caster = $value['isFromCaster'] ?? false;
+        $item->is_self = $value['isSelf'] ?? false;
+        $item->is_touch = $value['isTouch'] ?? false;
+        $item->number = $value['number'] ?? null;
+        $item->per_level = $value['perLevel'] ?? null;
+        $item->per_level_increment = $value['perLevelIncrement'] ?? 1;
+        $item->unit = Distance::tryFromString($value['unit'] ?? 'ft');
+        $item->save();
+        return $item;
     }
 }

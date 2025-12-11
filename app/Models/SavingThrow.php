@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\SavingThrows\SavingThrowMultiplier;
 use App\Enums\SavingThrows\SavingThrowType;
 use App\Models\Spells\SpellEdition;
+use App\Models\StatusConditions\StatusCondition;
 use App\Models\StatusConditions\StatusConditionEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -73,6 +74,30 @@ class SavingThrow extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->spellEdition()->associate($parent);
+        $item->id = $value['id'];
+        $item->type = SavingThrowType::tryFromString($value['type']);
+
+        if (!empty($data['multiplier'])) {
+            $item->multiplier = SavingThrowMultiplier::tryFromString($value['multiplier']);
+        }
+
+        if (!empty($value['failStatus'])) {
+            $condition = StatusCondition::query()
+                ->where('slug', $value['failStatus'])
+                ->first();
+
+            if (empty($condition)) {
+                throw new \Exception("Invalid fail_status: " . $value['failStatus']);
+            }
+
+            $item->failStatus()->associate(
+                $condition->editions->where('game_edition', $parent->gameEdition)->firstOrFail()
+            );
+        }
+
+        $item->save();
+        return $item;
     }
 }

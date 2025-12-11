@@ -10,35 +10,35 @@
                 "height": 20,
                 "radius": 20
             },
-            "casting_time_unit": "standard action",
+            "castingTime_unit": "standard action",
             "damage": [
                 {
                     "damage_type": "acid",
                     "die_quantity": 1,
                     "die_quantity_maximum": 15,
                     "die_faces": 8,
-                    "per_level_mode": "caster"
+                    "perLevelMode": "caster"
                 }
             ],
             "description": "You cause acid to rain downward. The acid deals 1d8 points of acid damage per caster level (maximum 15d8) to each creature in the area.",
             "domains": ["acid"],
             "duration": { "unit": "instantaneous" },
-            "has_spell_resistance": false,
-            "is_default": true,
+            "hasSpellResistance": false,
+            "isDefault": true,
             "levels": [
                 { "class": "sorcerer", "level": 6 },
                 { "class": "wizard", "level": 6 }
             ],
-            "material_components": [
+            "materialComponents": [
                 {
                     "item": "acid-flask",
                     "quantity": 1,
-                    "is_consumed": true
+                    "isConsumed": true
                 }
             ],
             "range": {
                 "number": 100,
-                "per_level": 10,
+                "perLevel": 10,
                 "unit": "ft"
             },
             "rarity": "uncommon",
@@ -53,7 +53,7 @@
                 "type": "reflex"
             },
             "school": "creation",
-            "spell_components": "V,S,M"
+            "spellComponents": "V,S,M"
         }
     ],
     "image": "acid-storm.webp"

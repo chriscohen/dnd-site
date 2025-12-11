@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Spells;
 
 use App\Models\AbstractModel;
+use App\Models\Items\Item;
 use App\Models\Items\ItemEdition;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -63,12 +64,12 @@ class SpellMaterialComponent extends AbstractModel
     {
         return [
             'description' => $this->description,
-            'is_consumed' => $this->is_consumed,
-            'is_focus' => $this->is_focus,
-            'is_plural' => $this->is_plural,
-            'minimum_value' => empty($this->minimum_value) ? null : $this->formatPrice($this->minimum_value),
+            'isConsumed' => $this->is_consumed,
+            'isFocus' => $this->is_focus,
+            'isPlural' => $this->is_plural,
+            'minimumValue' => empty($this->minimum_value) ? null : $this->formatPrice($this->minimum_value),
             'quantity' => $this->quantity,
-            'quantity_text' => $this->quantity_text,
+            'quantityText' => $this->quantity_text,
         ];
     }
 
@@ -102,6 +103,21 @@ class SpellMaterialComponent extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->spellEdition()->associate($parent);
+
+        $itemItem = Item::query()->where('slug', $value['item'])->firstOrFail();
+        $itemEdition = $itemItem->defaultEdition();
+        $item->itemEdition()->associate($itemEdition);
+
+        $item->description = $value['description'] ?? null;
+        $item->quantity = $value['quantity'] ?? 1;
+        $item->quantity_text = $value['quantityText'] ?? null;
+        $item->is_consumed = $value['isConsumed'] ?? false;
+        $item->is_plural = $value['isPlural'] ?? false;
+
+
+        $item->save();
+        return $item;
     }
 }

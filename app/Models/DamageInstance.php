@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Enums\Attribute;
 use App\Enums\DamageType;
+use App\Enums\GameEdition;
 use App\Enums\PerLevelMode;
 use App\Models\StatusConditions\StatusConditionEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -128,6 +129,38 @@ class DamageInstance extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->entity()->associate($parent);
+
+        $item->die_quantity = $value['die_quantity'] ?? null;
+        $item->die_quantity_maximum = $value['die_quantity_maximum'] ?? null;
+        $item->die_faces = $value['die_faces'] ?? null;
+
+        if (!empty($value['damage_type'])) {
+            $item->damage_type = DamageType::tryFromString($value['damage_type']);
+        }
+
+        $item->modifier = $value['modifier'] ?? 0;
+
+        if (!empty($value['attribute_modifier'])) {
+            $item->attribute_modifier = Attribute::tryFromString($value['attribute_modifier']);
+            $item->attribute_modifier_quantity = $value['attribute_modifier_quantity'] ?? 1;
+        }
+
+        $item->per_level_mode = empty($value['per_level_mode']) ?
+            PerLevelMode::NONE :
+            PerLevelMode::tryFromString($value['per_level_mode']);
+
+        if (!empty($value['status_condition'])) {
+            $statusConditionEdition = StatusConditionEdition::query()
+                ->where('game_edition', GameEdition::tryFromString($parent->gameEdition)->value)
+                ->whereHas('status_condition', function ($query) use ($value) {
+                })
+                ->firstOrFail();
+            $item->statusConditionEdition()->associate($statusConditionEdition);
+        }
+
+        $item->save();
+        return $item;
     }
 }

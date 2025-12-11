@@ -6,7 +6,7 @@
         {
             "id": "5da02e44-7a23-44d2-9369-55004761b53d",
             "game_edition": "3.5",
-            "is_prestige": true,
+            "isPrestige": true,
             "prerequisites": [
                 {
                     "type": "alignment",

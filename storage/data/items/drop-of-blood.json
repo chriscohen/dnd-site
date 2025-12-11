@@ -8,7 +8,7 @@
             "id": "f26800ab-7b13-487e-bb42-1fcf30c42a8b",
             "game_edition": "3.5",
             "description": "A drop of blood.",
-            "is_default": true,
+            "isDefault": true,
             "rarity": "common",
             "references": [
                 {

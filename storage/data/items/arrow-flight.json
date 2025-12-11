@@ -8,7 +8,7 @@
             "id": "98858d0f-52e2-42d2-8465-874e3f6257a1",
             "game_edition": "2e",
             "description": "A long-range arrow suitable for hunting.",
-            "is_default": true,
+            "isDefault": true,
             "price": "25 cp",
             "rarity": "common",
             "references": [

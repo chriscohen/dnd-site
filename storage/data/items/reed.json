@@ -7,7 +7,7 @@
             "id": "dfa983ce-577e-4667-af4f-3c4a8cf196a9",
             "game_edition": "3.5",
             "description": "A tall, slender-leaved plant of the grass family, which grows in water or on marshy ground.",
-            "is_default": true,
+            "isDefault": true,
             "rarity": "common"
         }
     ]

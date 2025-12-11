@@ -8,7 +8,7 @@
             "id": "3acf3901-59f3-4f7c-b669-91b29b860acc",
             "game_edition": "3.5",
             "description": "An extremely finely crafted arrow.",
-            "is_default": true,
+            "isDefault": true,
             "price": "7 gp",
             "rarity": "uncommon",
             "references": [

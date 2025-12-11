@@ -72,6 +72,11 @@ class SpellEdition4e extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->spellEdition()->associate($parent);
+        $item->type = SpellType4e::tryFromString($value['spell_type']);
+        $item->frequency = SpellFrequency::tryFromString($value['spell_frequency']);
+        $item->save();
+        return $item;
     }
 }

@@ -12,7 +12,7 @@
             },
             "attack_attribute": "int",
             "attack_save": "fortitude",
-            "casting_time_unit": "standard action",
+            "castingTime_unit": "standard action",
             "damage": [
                 {
                     "damage_type": "cold",
@@ -28,7 +28,7 @@
                 "value": 5
             },
             "hit": "2d8 + Intelligence modifier cold damage, and the target is immobilized (save ends)",
-            "is_default": true,
+            "isDefault": true,
             "levels": [
                 { "class": "sorcerer", "level": 9 },
                 { "class": "wizard", "level": 9 }

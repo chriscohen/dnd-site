@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Models\Spells;
 
 use App\Models\AbstractModel;
+use App\Models\CharacterClasses\CharacterClass;
+use App\Models\Feats\Feat;
 use App\Models\Feats\FeatEdition;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -18,7 +20,7 @@ use Ramsey\Uuid\Uuid;
  * @property ModelInterface $entity
  * @property Uuid $entity_id
  * @property string $entity_type
- * @property int $level
+ * @property int $item
  * @property SpellEdition $spellEdition
  * @property Uuid $spell_edition_id
  */
@@ -63,6 +65,19 @@ class SpellEditionLevel extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->spellEdition()->associate($parent);
+
+        if (!empty($value['class'])) {
+            $entity = CharacterClass::query()->where('id', $value['class'])->firstOrFail();
+        } else {
+            $feat = Feat::query()->where('id', $value['feat'])->firstOrFail();
+            $entity = $feat->editions()->firstOrFail();
+        }
+        $item->entity()->associate($entity);
+        $item->level = $value['level'];
+
+        $item->save();
+        return $item;
     }
 }

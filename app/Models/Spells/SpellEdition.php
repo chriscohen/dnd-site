@@ -40,7 +40,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Uuid $id
  *
  * @property ?Area $area
- * @property int $castingTimeNumber
+ * @property int $casting_time_number
  * @property TimeUnit $castingTimeUnit
  * @property Collection<DamageInstance> $damageInstances
  * @property string $description
@@ -49,22 +49,22 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property ?Feat $feat
  * @property ?string $focus
  * @property GameEdition $gameEdition
- * @property ?bool $hasSpellResistance
+ * @property ?bool $has_spell_resistance
  * @property string $higherLevel
  * @property bool $is_default
  * @property Collection<SpellEditionLevel> $levels
  * @property ?MaterialComponentMode $materialComponentMode
  * @property Collection<SpellMaterialComponent> $materialComponents
  * @property ?Range $range
- * @property ?Uuid $rangeId
+ * @property ?Uuid $range_id
  * @property Rarity $rarity
  * @property Collection<Reference> $references
  * @property ?SavingThrow $savingThrow
  * @property MagicSchool $school
  * @property Spell $spell
- * @property string $spellComponents
+ * @property string $spell_components
  * @property ?SpellEdition4e $spellEdition4e
- * @property Uuid $spellId
+ * @property Uuid $spell_id
  * @property Collection<Target> $targets
  */
 class SpellEdition extends AbstractModel
@@ -152,7 +152,7 @@ class SpellEdition extends AbstractModel
 
     public function hasComponent(SpellComponentType $componentType): bool
     {
-        return str_contains($this->spellComponents, $componentType->value);
+        return str_contains($this->spell_components, $componentType->value);
     }
 
     public function levels(): HasMany
@@ -228,7 +228,7 @@ class SpellEdition extends AbstractModel
     {
         return [
             'area' => $this->area?->toArray($this->renderMode) ?? null,
-            'castingTime' => $this->castingTimeUnit->format($this->castingTimeNumber),
+            'castingTime' => $this->castingTimeUnit->format($this->casting_time_number),
             'damageInstances' => ModelCollection::make($this->damageInstances)
                 ->toArray(),
             'description' => $this->description,
@@ -236,7 +236,7 @@ class SpellEdition extends AbstractModel
             'duration' => $this->duration->toArray($this->renderMode),
             'focus' => $this->focus,
             'hasSavingThrow' => $this->has_saving_throw,
-            'hasSpellResistance' => $this->hasSpellResistance,
+            'hasSpellResistance' => $this->has_spell_resistance,
             'higherLevel' => $this->higherLevel,
             'isDefault' => $this->is_default,
             'levels' => ModelCollection::make($this->levels)->toArray(),
@@ -248,7 +248,7 @@ class SpellEdition extends AbstractModel
             'references' => ModelCollection::make($this->references)->toArray(JsonRenderMode::TEASER),
             'savingThrow' => $this->savingThrow?->toArray($this->renderMode),
             'school' => $this->school?->toArray($this->renderMode) ?? null,
-            'spellComponents' => $this->spellComponents,
+            'spellComponents' => $this->spell_components,
         ];
     }
 
@@ -256,7 +256,7 @@ class SpellEdition extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'spellId' => $this->spellId,
+            'spellId' => $this->spell_id,
         ];
     }
 
@@ -271,7 +271,94 @@ class SpellEdition extends AbstractModel
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
+        $item->spell()->associate($parent);
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->description = $value['description'] ?? null;
+        $item->focus = $value['focus'] ?? null;
+        $item->gameEdition = GameEdition::tryFromString($value['gameEdition']);
+        $item->higherLevel = $value['higherLevel'] ?? null;
+        $item->is_default = $value['isDefault'] ?? false;
+        $item->materialComponentMode = !empty($value['materialComponentMode']) ?
+            MaterialComponentMode::tryFromString($value['materialComponentMode']) : null;
+        $item->rarity = Rarity::tryFromString($value['rarity']);
 
+        if (!empty($value['range'])) {
+            $range = Range::fromInternalJson($value['range'], $item);
+            $item->range()->associate($range);
+        }
+
+        // Area
+        if (!empty($value['area'])) {
+            $area = Area::fromInternalJson($value['area'], $item);
+            $item->area()->associate($area);
+        }
+
+        // Domains
+        foreach ($value['domains'] ?? [] as $domainData) {
+            $domain = MagicDomain::query()->where('id', $domainData)->firstOrFail();
+            $item->domains()->attach($domain);
+        }
+
+        $item->spell_components = $value['spellComponents'] ?? null;
+        $item->has_spell_resistance = $value['hasSpellResistance'] ?? null;
+
+        if (!empty($value['school'])) {
+            $school = MagicSchool::query()->where('name', ucfirst($value['school']))->firstOrFail();
+            $item->school()->associate($school);
+        }
+
+        // Casting time.
+        $item->casting_time_number = $value['castingTimeNumber'] ?? 1;
+        $item->castingTimeUnit = TimeUnit::tryFromString($value['castingTimeUnit']);
+
+        $item->save();
+
+        // Saving throws
+        if (!empty($value['saving_throw'])) {
+            $savingThrow = SavingThrow::fromInternalJson($value['saving_throw'], $item);
+            $item->savingThrow()->save($savingThrow);
+        }
+
+        // duration.
+        $duration = Duration::fromInternalJson($value['duration'], $item);
+        $item->duration()->save($duration);
+
+        // 4th edition stuff.
+        if ($item->gameEdition === GameEdition::FOURTH) {
+            $spellEdition4e = SpellEdition4e::fromInternalJson($value, $item);
+            $item->spellEdition4e()->save($spellEdition4e);
+        }
+
+        // Damage.
+        foreach ($value['damage'] ?? [] as $damageData) {
+            $damageInstance = DamageInstance::fromInternalJson($damageData, $item);
+            $item->damageInstances()->save($damageInstance);
+        }
+
+        // Levels.
+        foreach ($value['levels'] as $levelData) {
+            $spellEditionLevel = SpellEditionLevel::fromInternalJson($levelData, $item);
+            $item->levels()->save($spellEditionLevel);
+        }
+
+        // Material components
+        foreach ($value['material_components'] ?? [] as $materialData) {
+            $materialComponent = SpellMaterialComponent::fromInternalJson($materialData, $item);
+            $item->materialComponents()->save($materialComponent);
+        }
+
+        // Target
+        if (!empty($value['target'])) {
+            $target = Target::fromInternalJson($value['target'], $item);
+            $item->targets()->save($target);
+        }
+
+        // References
+        if (!empty($value['references'])) {
+            Reference::fromInternalJson($value['references'], $item);
+        }
+
+        $item->save();
         return $item;
     }
 
