@@ -5,12 +5,12 @@
     "editions": [
         {
             "id": "9c077618-9d8a-417d-ac82-1c6286f89152",
-            "game_edition": "4e",
+            "gameEdition": "4e",
             "references": [
                 {
                     "source": "players-handbook-4th-edition",
-                    "page_from": 143,
-                    "page_to": 155
+                    "pageFrom": 143,
+                    "pageTo": 155
                 }
             ]
         }

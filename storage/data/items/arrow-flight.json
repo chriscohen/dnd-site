@@ -6,7 +6,7 @@
     "editions": [
         {
             "id": "98858d0f-52e2-42d2-8465-874e3f6257a1",
-            "game_edition": "2e",
+            "gameEdition": "2e",
             "description": "A long-range arrow suitable for hunting.",
             "isDefault": true,
             "price": "25 cp",
@@ -14,7 +14,7 @@
             "references": [
                 {
                     "source": "players-handbook-2nd-edition",
-                    "page_from": 68
+                    "pageFrom": 68
                 }
             ],
             "weight": 0.1

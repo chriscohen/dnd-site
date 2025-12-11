@@ -5,23 +5,23 @@
     "editions": [
         {
             "id": "5696986a-ab87-40e6-ab12-fda46e0aae41",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "references": [
                 {
                     "source": "players-handbook-3-5-edition",
-                    "page_from": 51,
-                    "page_to": 55
+                    "pageFrom": 51,
+                    "pageTo": 55
                 }
             ]
         },
         {
             "id": "4e9d2541-ba8d-4e8b-8bf1-f096a21b2fde",
-            "game_edition": "5e",
+            "gameEdition": "5e",
             "references": [
                 {
                     "source": "players-handbook-5th-edition",
-                    "page_from": 99,
-                    "page_to": 104
+                    "pageFrom": 99,
+                    "pageTo": 104
                 }
             ]
         }

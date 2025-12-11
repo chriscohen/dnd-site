@@ -4,13 +4,13 @@
     "name": "Battle Line",
     "editions": [
         {
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "area": {
                 "perLevel": 2,
                 "perLevelMode": "per level",
                 "type": "square"
             },
-            "castingTime_unit": "standard action",
+            "castingTimeUnit": "standard action",
             "description": "By means of this spell you draw a visible, unholy \"line in the sand\" that causes a feeling of dread and hesitation in all creatures that cross it. Any creature entering the affected area must make a Will save or become shaken. A creature that successfully saves cannot be affected again by the same spellcaster's battle line spells for 24 hours.",
             "duration": {
                 "perLevel": 1,
@@ -32,7 +32,7 @@
             "references": [
                 {
                     "source": "champions-of-ruin",
-                    "page_from": 28
+                    "pageFrom": 28
                 }
             ],
             "saving_throw": {

@@ -4,12 +4,12 @@
     "name": "Magic Missile",
     "editions": [
         {
-            "game_edition": "2e",
+            "gameEdition": "2e",
             "area": {
                 "radius": 10,
                 "type": "cube"
             },
-            "castingTime_unit": "standard action",
+            "castingTimeUnit": "standard action",
             "damage": [
                 {
                     "die_faces": 4,
@@ -33,15 +33,15 @@
             "references": [
                 {
                     "source": "players-handbook-2nd-edition",
-                    "page_from": 136
+                    "pageFrom": 136
                 }
             ],
             "school": "evocation",
             "spellComponents": "V,S"
         },
         {
-            "game_edition": "3.5",
-            "castingTime_unit": "standard action",
+            "gameEdition": "3.5",
+            "castingTimeUnit": "standard action",
             "damage": [
                 {
                     "damage_type": "force",
@@ -67,15 +67,15 @@
             "references": [
                 {
                     "source": "players-handbook-3-5-edition",
-                    "page_from": 251
+                    "pageFrom": 251
                 }
             ],
             "school": "evocation",
             "spellComponents": "V,S"
         },
         {
-            "game_edition": "5e",
-            "castingTime_unit": "standard action",
+            "gameEdition": "5e",
+            "castingTimeUnit": "standard action",
             "damage": [
                 {
                     "damage_type": "force",
@@ -101,15 +101,15 @@
             "references": [
                 {
                     "source": "players-handbook-5th-edition",
-                    "page_from": 257
+                    "pageFrom": 257
                 }
             ],
             "school": "evocation",
             "spellComponents": "V,S"
         },
         {
-            "game_edition": "5e (2024)",
-            "castingTime_unit": "standard action",
+            "gameEdition": "5e (2024)",
+            "castingTimeUnit": "standard action",
             "damage": [
                 {
                     "damage_type": "force",
@@ -135,7 +135,7 @@
             "references": [
                 {
                     "source": "players-handbook-2024",
-                    "page_from": 257
+                    "pageFrom": 257
                 }
             ],
             "school": "evocation",

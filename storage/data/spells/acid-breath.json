@@ -4,13 +4,13 @@
     "name": "Acid Breath",
     "editions": [
         {
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "area": {
                 "type": "cone",
                 "radius": 15,
                 "length": 15
             },
-            "castingTime_unit": "standard action",
+            "castingTimeUnit": "standard action",
             "damage": [
                 {
                     "damage_type": "acid",
@@ -39,7 +39,7 @@
             "references": [
                 {
                     "source": "spell-compendium",
-                    "page_from": 7
+                    "pageFrom": 7
                 }
             ],
             "school": "creation",

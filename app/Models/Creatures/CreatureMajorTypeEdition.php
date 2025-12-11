@@ -67,6 +67,11 @@ class CreatureMajorTypeEdition extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->creatureMajorType()->associate($parent);
+        $item->description = $value['description'];
+        $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
+        $item->save();
+        return $item;
     }
 }

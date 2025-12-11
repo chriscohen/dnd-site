@@ -1,5 +1,9 @@
 [
     {
+        "id": "acid",
+        "name": "Acid"
+    },
+    {
         "id": "air",
         "name": "Air"
     },
@@ -146,6 +150,10 @@
     {
         "id": "fire",
         "name": "Fire"
+    },
+    {
+        "id": "force",
+        "name": "Force"
     },
     {
         "id": "forge",

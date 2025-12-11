@@ -83,7 +83,9 @@ class Duration extends AbstractModel
         $item->unit = TimeUnit::tryFromString($value['unit']);
         $item->value = $value['value'] ?? null;
         $item->per_level = $value['perLevel'] ?? null;
-        $item->per_level_mode = PerLevelMode::tryFromString($value['perLevelMode'] ?? null);
+        $item->per_level_mode = !empty($value['perLevelMode']) ?
+            PerLevelMode::tryFromString($value['perLevelMode']) :
+            null;
 
         $item->save();
         return $item;

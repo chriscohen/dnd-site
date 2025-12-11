@@ -6,12 +6,12 @@
         "name": "Animal Handling",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "alternate_name": "Handle Animal"
             },
             {
-                "game_edition": "5e",
-                "related_attribute": "WIS"
+                "gameEdition": "5e",
+                "relatedAttribute": "WIS"
             }
         ]
     },
@@ -20,7 +20,7 @@
         "slug": "appraise",
         "name": "Appraise",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -29,8 +29,8 @@
         "name": "Arcana",
         "editions": [
             {
-                "game_edition": "5e",
-                "related_attribute": "INT"
+                "gameEdition": "5e",
+                "relatedAttribute": "INT"
             }
         ]
     },
@@ -40,8 +40,8 @@
         "name": "Athletics",
         "editions": [
             {
-                "game_edition": "5e",
-                "related_attribute": "STR"
+                "gameEdition": "5e",
+                "relatedAttribute": "STR"
             }
         ]
     },
@@ -51,8 +51,8 @@
         "name": "Acrobatics",
         "editions": [
             {
-                "game_edition": "5e",
-                "related_attribute": "DEX"
+                "gameEdition": "5e",
+                "relatedAttribute": "DEX"
             }
         ]
     },
@@ -61,7 +61,7 @@
         "slug": "balance",
         "name": "Balance",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -69,7 +69,7 @@
         "slug": "bluff",
         "name": "Bluff",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -77,7 +77,7 @@
         "slug": "climb",
         "name": "Climb",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -85,7 +85,7 @@
         "slug": "concentration",
         "name": "Concentration",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -93,7 +93,7 @@
         "slug": "craft",
         "name": "Craft",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -102,8 +102,8 @@
         "name": "Deception",
         "editions": [
             {
-                "game_edition": "5e",
-                "related_attribute": "CHA"
+                "gameEdition": "5e",
+                "relatedAttribute": "CHA"
             }
         ]
     },
@@ -112,7 +112,7 @@
         "slug": "decipher-script",
         "name": "Decipher Script",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -120,7 +120,7 @@
         "slug": "diplomacy",
         "name": "Diplomacy",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -128,7 +128,7 @@
         "slug": "disable-device",
         "name": "Disable Device",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -136,7 +136,7 @@
         "slug": "disguise",
         "name": "Disguise",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -144,7 +144,7 @@
         "slug": "escape-artist",
         "name": "Escape Artist",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -152,7 +152,7 @@
         "slug": "forgery",
         "name": "Forgery",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -160,7 +160,7 @@
         "slug": "gather-information",
         "name": "Gather Information",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -168,7 +168,7 @@
         "slug": "hide",
         "name": "Hide",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -177,8 +177,8 @@
         "name": "History",
         "editions": [
             {
-                "game_edition": "5e",
-                "related_attribute": "INT"
+                "gameEdition": "5e",
+                "relatedAttribute": "INT"
             }
         ]
     },
@@ -188,8 +188,8 @@
         "name": "Insight",
         "editions": [
             {
-                "game_edition": "5e",
-                "related_attribute": "WIS"
+                "gameEdition": "5e",
+                "relatedAttribute": "WIS"
             }
         ]
     },
@@ -199,12 +199,12 @@
         "name": "Intimidation",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "alternate_name": "Intimidate"
             },
             {
-                "game_edition": "5e",
-                "related_attribute": "CHA"
+                "gameEdition": "5e",
+                "relatedAttribute": "CHA"
             }
         ]
     },
@@ -214,8 +214,8 @@
         "name": "Investigation",
         "editions": [
             {
-                "game_edition": "5e",
-                "related_attribute": "INT"
+                "gameEdition": "5e",
+                "relatedAttribute": "INT"
             }
         ]
     },
@@ -224,7 +224,7 @@
         "slug": "jump",
         "name": "Jump",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -232,7 +232,7 @@
         "slug": "knowledge",
         "name": "Knowledge",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -240,7 +240,7 @@
         "slug": "listen",
         "name": "Listen",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -249,12 +249,12 @@
         "name": "Medicine",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "alternate_name": "Heal"
             },
             {
-                "game_edition": "5e",
-                "related_attribute": "WIS"
+                "gameEdition": "5e",
+                "relatedAttribute": "WIS"
             }
         ]
     },
@@ -264,8 +264,8 @@
         "name": "Nature",
         "editions": [
             {
-                "game_edition": "5e",
-                "related_attribute": "INT"
+                "gameEdition": "5e",
+                "relatedAttribute": "INT"
             }
         ]
     },
@@ -274,7 +274,7 @@
         "slug": "open-lock",
         "name": "Open Lock",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -283,8 +283,8 @@
         "name": "Perception",
         "editions": [
             {
-                "game_edition": "5e",
-                "related_attribute": "WIS"
+                "gameEdition": "5e",
+                "relatedAttribute": "WIS"
             }
         ]
     },
@@ -294,12 +294,12 @@
         "name": "Performance",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "alternate_name": "Perform"
             },
             {
-                "game_edition": "5e",
-                "related_attribute": "CHA"
+                "gameEdition": "5e",
+                "relatedAttribute": "CHA"
             }
         ]
     },
@@ -309,8 +309,8 @@
         "name": "Persuasion",
         "editions": [
             {
-                "game_edition": "5e",
-                "related_attribute": "CHA"
+                "gameEdition": "5e",
+                "relatedAttribute": "CHA"
             }
         ]
     },
@@ -319,7 +319,7 @@
         "slug": "profession",
         "name": "Profession",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -328,8 +328,8 @@
         "name": "Religion",
         "editions": [
             {
-                "game_edition": "5e",
-                "related_attribute": "INT"
+                "gameEdition": "5e",
+                "relatedAttribute": "INT"
             }
         ]
     },
@@ -338,7 +338,7 @@
         "slug": "ride",
         "name": "Ride",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -346,7 +346,7 @@
         "slug": "search",
         "name": "Search",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -354,7 +354,7 @@
         "slug": "sense-motive",
         "name": "Sense Motive",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -362,10 +362,10 @@
         "slug": "sleight-of-hand",
         "name": "Sleight of Hand",
         "editions": [
-            { "game_edition": "3.5" },
+            { "gameEdition": "3.5" },
             {
-                "game_edition": "5e",
-                "related_attribute": "DEX"
+                "gameEdition": "5e",
+                "relatedAttribute": "DEX"
             }
         ]
     },
@@ -374,7 +374,7 @@
         "slug": "speak-language",
         "name": "Speak Language",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -382,7 +382,7 @@
         "slug": "spellcraft",
         "name": "Spellcraft",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -390,7 +390,7 @@
         "slug": "spot",
         "name": "Spot",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -399,12 +399,12 @@
         "name": "Stealth",
         "editions": [
             {
-                "game_edition": "3.5",
+                "gameEdition": "3.5",
                 "alternate_name": "Move Silently"
             },
             {
-                "game_edition": "5e",
-                "related_attribute": "DEX"
+                "gameEdition": "5e",
+                "relatedAttribute": "DEX"
             }
         ]
     },
@@ -413,10 +413,10 @@
         "slug": "survival",
         "name": "Survival",
         "editions": [
-            { "game_edition": "3.5" },
+            { "gameEdition": "3.5" },
             {
-                "game_edition": "5e",
-                "related_attribute": "WIS"
+                "gameEdition": "5e",
+                "relatedAttribute": "WIS"
             }
         ]
     },
@@ -425,7 +425,7 @@
         "slug": "swim",
         "name": "Swim",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -433,7 +433,7 @@
         "slug": "tumble",
         "name": "Tumble",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -441,7 +441,7 @@
         "slug": "use-magic-device",
         "name": "Use Magic Device",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     },
     {
@@ -449,7 +449,7 @@
         "slug": "use-rope",
         "name": "Use Rope",
         "editions": [
-            { "game_edition":  "3.5" }
+            { "gameEdition":  "3.5" }
         ]
     }
 ]

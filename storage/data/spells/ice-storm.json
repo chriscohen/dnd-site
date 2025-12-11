@@ -4,7 +4,7 @@
     "name": "Ice Storm",
     "editions": [
         {
-            "game_edition": "4e",
+            "gameEdition": "4e",
             "area": {
                 "radius": 15,
                 "height": 15,
@@ -12,7 +12,7 @@
             },
             "attack_attribute": "int",
             "attack_save": "fortitude",
-            "castingTime_unit": "standard action",
+            "castingTimeUnit": "standard action",
             "damage": [
                 {
                     "damage_type": "cold",
@@ -41,7 +41,7 @@
             "references": [
                 {
                     "source": "players-handbook-4th-edition",
-                    "page_from": 136
+                    "pageFrom": 136
                 }
             ],
             "spell_frequency": "daily",

@@ -72,30 +72,36 @@ class SavingThrow extends AbstractModel
         ];
     }
 
+    /**
+     * @param array|string|int $value
+     * @param SpellEdition $parent
+     */
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
         $item->spellEdition()->associate($parent);
-        $item->id = $value['id'];
+        $item->id = $value['id'] ?? Uuid::uuid4();
         $item->type = SavingThrowType::tryFromString($value['type']);
 
         if (!empty($data['multiplier'])) {
             $item->multiplier = SavingThrowMultiplier::tryFromString($value['multiplier']);
         }
 
-        if (!empty($value['failStatus'])) {
-            $condition = StatusCondition::query()
-                ->where('slug', $value['failStatus'])
-                ->first();
-
-            if (empty($condition)) {
-                throw new \Exception("Invalid fail_status: " . $value['failStatus']);
-            }
-
-            $item->failStatus()->associate(
-                $condition->editions->where('game_edition', $parent->gameEdition)->firstOrFail()
-            );
-        }
+        // TODO: revisit this
+//        if (!empty($value['failStatus'])) {
+//            $condition = StatusCondition::query()
+//                ->where('slug', $value['failStatus'])
+//                ->first();
+//
+//            if (empty($condition)) {
+//                throw new \Exception("Invalid fail_status: " . $value['failStatus']);
+//            }
+//
+//            $x = $parent->game_edition;
+//            $item->failStatus()->associate(
+//                $condition->editions->where('game_edition', $parent->game_edition)->firstOrFail()
+//            );
+//        }
 
         $item->save();
         return $item;

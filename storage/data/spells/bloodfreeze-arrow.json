@@ -4,8 +4,8 @@
     "name": "Bloodfreeze Arrow",
     "editions": [
         {
-            "game_edition": "3.5",
-            "castingTime_unit": "bonus action",
+            "gameEdition": "3.5",
+            "castingTimeUnit": "bonus action",
             "damage": [
                 {
                     "damage_type": "cold",
@@ -34,7 +34,7 @@
             "references": [
                 {
                     "source": "champions-of-ruin",
-                    "page_from": 29
+                    "pageFrom": 29
                 }
             ],
             "saving_throw": {

@@ -8,6 +8,7 @@ use App\Enums\Attribute;
 use App\Enums\DamageType;
 use App\Enums\GameEdition;
 use App\Enums\PerLevelMode;
+use App\Models\Spells\SpellEdition;
 use App\Models\StatusConditions\StatusConditionEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -110,6 +111,7 @@ class DamageInstance extends AbstractModel
         $output .= ' ' . $this->damage_type?->toString() . ' damage';
 
         $output .= match ($this->per_level_mode) {
+            default => '',
             PerLevelMode::NONE => $output,
             PerLevelMode::PER_LEVEL, PerLevelMode::PER_CASTER_LEVEL =>
                 $output . '/' . $this->per_level_mode->toString(),
@@ -127,6 +129,10 @@ class DamageInstance extends AbstractModel
         return $output;
     }
 
+    /**
+     * @param array|string|int $value
+     * @param SpellEdition $parent
+     */
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
@@ -147,18 +153,20 @@ class DamageInstance extends AbstractModel
             $item->attribute_modifier_quantity = $value['attribute_modifier_quantity'] ?? 1;
         }
 
-        $item->per_level_mode = empty($value['per_level_mode']) ?
-            PerLevelMode::NONE :
-            PerLevelMode::tryFromString($value['per_level_mode']);
-
-        if (!empty($value['status_condition'])) {
-            $statusConditionEdition = StatusConditionEdition::query()
-                ->where('game_edition', GameEdition::tryFromString($parent->gameEdition)->value)
-                ->whereHas('status_condition', function ($query) use ($value) {
-                })
-                ->firstOrFail();
-            $item->statusConditionEdition()->associate($statusConditionEdition);
-        }
+        // TODO: revisit this.
+//        $item->per_level_mode = empty($value['per_level_mode']) ?
+//            PerLevelMode::NONE :
+//            PerLevelMode::tryFromString($value['per_level_mode']);
+//
+//        if (!empty($value['status_condition'])) {
+//            $statusConditionEdition = StatusConditionEdition::query()
+//                ->where('game_edition', $parent->game_edition)
+//                ->value
+//                ->whereHas('status_condition', function ($query) use ($value) {
+//                })
+//                ->firstOrFail();
+//            $item->statusConditionEdition()->associate($statusConditionEdition);
+//        }
 
         $item->save();
         return $item;

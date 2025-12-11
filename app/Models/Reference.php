@@ -55,8 +55,8 @@ class Reference extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'page_from' => $this->page_from,
-            'page_to' => $this->page_to,
+            'pageFrom' => $this->page_from,
+            'pageTo' => $this->page_to,
             'source' => $this->edition->source?->name,
             'slug' => $this->edition->source?->slug,
         ];
@@ -65,7 +65,7 @@ class Reference extends AbstractModel
     public function toArrayTeaser(): array
     {
         return [
-            'image' => $this->edition->source->coverImage->toArray($this->renderMode),
+            'image' => $this->edition?->source?->coverImage?->toArray($this->renderMode),
         ];
     }
 
@@ -74,7 +74,7 @@ class Reference extends AbstractModel
         $item = new static();
         $item->entity()->associate($parent);
         $item->id = $value['id'] ?? Uuid::uuid4();
-        $item->page_from = $value['pageFrom'];
+        $item->page_from = $value['pageFrom'] ?? null;
         $item->page_to = $value['pageTo'] ?? null;
 
         if (!empty($value['editionId'])) {

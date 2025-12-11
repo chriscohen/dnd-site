@@ -4,14 +4,14 @@
     "editions": [
         {
             "id": "bcb0153b-4c27-43f5-8971-a967a940f1fc",
-            "game_edition": "2e",
+            "gameEdition": "2e",
             "parent_id": "ba9f59b3-6857-47d9-a0a8-87b71b6b02d6",
             "parent_name": "wizard",
             "references": [
                 {
                     "source": "players-handbook-2nd-edition",
-                    "page_from": 31,
-                    "page_to": 32
+                    "pageFrom": 31,
+                    "pageTo": 32
                 }
             ]
         }

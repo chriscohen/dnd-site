@@ -5,62 +5,62 @@
     "editions": [
         {
             "id": "223bf760-7233-4de6-b24d-520df656d6b2",
-            "game_edition": "0e",
+            "gameEdition": "0e",
             "parent_id": "788e3f95-de4a-46a0-8bde-bcf9b9b3daf7"
         },
         {
             "id": "a69b97fa-ebed-4c51-8cb9-ea15c1a79511",
-            "game_edition": "1e",
+            "gameEdition": "1e",
             "parent_id": "ccc9a6e6-0efe-45a7-b7a8-cbee2af8bd98",
             "parent_name": "cavalier",
             "references": [
                 {
                     "source": "unearthed-arcana-1985",
-                    "page_from": 16
+                    "pageFrom": 16
                 }
             ]
         },
         {
             "id": "4818c6b5-f02e-4838-bf32-9508fc4a5a07",
-            "game_edition": "2e",
+            "gameEdition": "2e",
             "references": [
                 {
                     "source": "players-handbook-2nd-edition",
-                    "page_from": 27,
-                    "page_to": 28
+                    "pageFrom": 27,
+                    "pageTo": 28
                 }
             ]
         },
         {
             "id": "04da47b8-8c1a-4a28-a4bb-1d22499503a5",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "references": [
                 {
                     "source": "players-handbook-3-5-edition",
-                    "page_from": 42,
-                    "page_to": 46
+                    "pageFrom": 42,
+                    "pageTo": 46
                 }
             ]
         },
         {
             "id": "f0cf960c-da57-41a4-b6d5-cbc156b30584",
-            "game_edition": "4e",
+            "gameEdition": "4e",
             "references": [
                 {
                     "source": "players-handbook-4th-edition",
-                    "page_from": 88,
-                    "page_to": 102
+                    "pageFrom": 88,
+                    "pageTo": 102
                 }
             ]
         },
         {
             "id": "d3f94661-becd-4e68-a1c3-7f55326b5482",
-            "game_edition": "5e",
+            "gameEdition": "5e",
             "references": [
                 {
                     "source": "players-handbook-5th-edition",
-                    "page_from": 82,
-                    "page_to": 88
+                    "pageFrom": 82,
+                    "pageTo": 88
                 }
             ]
         }

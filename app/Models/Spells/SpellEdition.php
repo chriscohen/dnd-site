@@ -17,6 +17,7 @@ use App\Models\Duration;
 use App\Models\Feats\Feat;
 use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
+use App\Models\Media;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\Range;
@@ -41,19 +42,20 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  *
  * @property ?Area $area
  * @property int $casting_time_number
- * @property TimeUnit $castingTimeUnit
+ * @property TimeUnit $casting_time_unit
  * @property Collection<DamageInstance> $damageInstances
  * @property string $description
  * @property Collection<MagicDomain> $domains
  * @property Duration $duration
  * @property ?Feat $feat
  * @property ?string $focus
+ * @property string $game_edition
  * @property GameEdition $gameEdition
  * @property ?bool $has_spell_resistance
- * @property string $higherLevel
+ * @property string $higher_level
  * @property bool $is_default
  * @property Collection<SpellEditionLevel> $levels
- * @property ?MaterialComponentMode $materialComponentMode
+ * @property ?MaterialComponentMode $material_component_mode
  * @property Collection<SpellMaterialComponent> $materialComponents
  * @property ?Range $range
  * @property ?Uuid $range_id
@@ -74,19 +76,19 @@ class SpellEdition extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'castingTimeUnit' => TimeUnit::class,
+        'casting_time_unit' => TimeUnit::class,
         'frequency' => SpellFrequency::class,
-        'gameEdition' => GameEdition::class,
-        'hasSpellResistance' => 'bool',
-        'isDefault' => 'bool',
-        'materialComponentMode' => MaterialComponentMode::class,
-        'rangeUnit' => Distance::class,
+        'game_edition' => GameEdition::class,
+        'has_spell_resistance' => 'bool',
+        'is_default' => 'bool',
+        'material_component_mode' => MaterialComponentMode::class,
+        'range_unit' => Distance::class,
         'rarity' => Rarity::class,
     ];
 
     public function area(): BelongsTo
     {
-        return $this->belongsTo(Area::class, 'areaId');
+        return $this->belongsTo(Area::class, 'area_id');
     }
 
     public function damageInstances(): MorphMany
@@ -116,10 +118,10 @@ class SpellEdition extends AbstractModel
         return $this->belongsTo(Feat::class, 'featId');
     }
 
-    protected function gameEdition(): Attribute
+    protected function gameEdition(): ?Attribute
     {
         return Attribute::make(
-            get: fn (int $value) => GameEdition::tryFrom($value)->toStringShort(),
+            get: fn (?int $value) => GameEdition::tryFrom($value)?->toStringShort(),
         );
     }
 
@@ -201,7 +203,7 @@ class SpellEdition extends AbstractModel
 
     public function school(): BelongsTo
     {
-        return $this->belongsTo(MagicSchool::class, 'magicSchoolId');
+        return $this->belongsTo(MagicSchool::class, 'magic_school_id');
     }
 
     public function schoolAsString(): string
@@ -228,7 +230,7 @@ class SpellEdition extends AbstractModel
     {
         return [
             'area' => $this->area?->toArray($this->renderMode) ?? null,
-            'castingTime' => $this->castingTimeUnit->format($this->casting_time_number),
+            'castingTime' => $this->casting_time_unit->format($this->casting_time_number),
             'damageInstances' => ModelCollection::make($this->damageInstances)
                 ->toArray(),
             'description' => $this->description,
@@ -275,10 +277,10 @@ class SpellEdition extends AbstractModel
         $item->id = $value['id'] ?? Uuid::uuid4();
         $item->description = $value['description'] ?? null;
         $item->focus = $value['focus'] ?? null;
-        $item->gameEdition = GameEdition::tryFromString($value['gameEdition']);
-        $item->higherLevel = $value['higherLevel'] ?? null;
+        $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
+        $item->higher_level = $value['higherLevel'] ?? null;
         $item->is_default = $value['isDefault'] ?? false;
-        $item->materialComponentMode = !empty($value['materialComponentMode']) ?
+        $item->material_component_mode = !empty($value['materialComponentMode']) ?
             MaterialComponentMode::tryFromString($value['materialComponentMode']) : null;
         $item->rarity = Rarity::tryFromString($value['rarity']);
 
@@ -309,7 +311,7 @@ class SpellEdition extends AbstractModel
 
         // Casting time.
         $item->casting_time_number = $value['castingTimeNumber'] ?? 1;
-        $item->castingTimeUnit = TimeUnit::tryFromString($value['castingTimeUnit']);
+        $item->casting_time_unit = TimeUnit::tryFromString($value['castingTimeUnit']);
 
         $item->save();
 
@@ -354,8 +356,12 @@ class SpellEdition extends AbstractModel
         }
 
         // References
-        if (!empty($value['references'])) {
-            Reference::fromInternalJson($value['references'], $item);
+        foreach ($value['references'] ?? [] as $reference) {
+            Reference::fromInternalJson($reference, $item);
+        }
+
+        if (empty($item->game_edition)) {
+            throw new \InvalidArgumentException('Spell edition must have a game edition.');
         }
 
         $item->save();
@@ -367,7 +373,7 @@ class SpellEdition extends AbstractModel
         $item = new static();
         $item->id = Uuid::uuid4();
         $item->name = $value['name'];
-        $item->gameEdition = GameEdition::FIFTH_REVISED;
+        $item->game_edition = GameEdition::FIFTH_REVISED;
 
         if (!empty($spell)) {
             $item->spell()->associate($spell);

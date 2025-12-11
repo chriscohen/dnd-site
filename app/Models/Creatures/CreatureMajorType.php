@@ -44,7 +44,7 @@ class CreatureMajorType extends AbstractModel
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
-            'plural '=> $this->plural,
+            'plural' => $this->plural,
         ];
     }
 
@@ -55,6 +55,18 @@ class CreatureMajorType extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->name = $value['name'];
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+        $item->plural = $value['plural'] ?? null;
+
+        foreach ($value['editions'] ?? [] as $editionData) {
+            $edition = CreatureMajorTypeEdition::fromInternalJson($editionData, $item);
+            $item->editions()->save($edition);
+        }
+
+        $item->save();
+        return $item;
     }
 }

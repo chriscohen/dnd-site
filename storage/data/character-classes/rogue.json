@@ -5,45 +5,45 @@
     "editions": [
         {
             "id": "6fce44c2-dd6d-4445-96e3-f5ed5c5ee856",
-            "game_edition": "2e",
+            "gameEdition": "2e",
             "is_group_only": true,
             "references": [
                 {
                     "source": "players-handbook-2nd-edition",
-                    "page_from": 38
+                    "pageFrom": 38
                 }
             ]
         },
         {
             "id": "bc09c919-a268-4324-982e-f4f9a10043ac",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "references": [
                 {
                     "source": "players-handbook-3-5-edition",
-                    "page_from": 49,
-                    "page_to": 51
+                    "pageFrom": 49,
+                    "pageTo": 51
                 }
             ]
         },
         {
             "id": "2241a610-32a7-46fc-b4f0-38b0fbb11237",
-            "game_edition": "4e",
+            "gameEdition": "4e",
             "references": [
                 {
                     "source": "players-handbook-4th-edition",
-                    "page_from": 116,
-                    "page_to": 128
+                    "pageFrom": 116,
+                    "pageTo": 128
                 }
             ]
         },
         {
             "id": "907fe1e5-fef3-40dd-8119-a7684224112e",
-            "game_edition": "5e",
+            "gameEdition": "5e",
             "references": [
                 {
                     "source": "players-handbook-5th-edition",
-                    "page_from": 94,
-                    "page_to": 98
+                    "pageFrom": 94,
+                    "pageTo": 98
                 }
             ]
         }

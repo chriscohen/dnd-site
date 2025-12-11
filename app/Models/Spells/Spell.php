@@ -9,7 +9,6 @@ use App\Models\AbstractModel;
 use App\Models\Media;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
-use App\Models\Sources\Source;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -43,7 +42,7 @@ class Spell extends AbstractModel
 
     public function image(): BelongsTo
     {
-        return $this->belongsTo(Media::class, 'image_id');
+        return $this->belongsTo(Media::class);
     }
 
     public function toArrayFull(): array
@@ -67,8 +66,8 @@ class Spell extends AbstractModel
 
         return [
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
-            'image' => $this->image?->toArray($this->renderMode),
-            'lowest_level' => $edition->getLowestLevel(),
+            'image' => $this->image->toArray($this->renderMode),
+            'lowestLevel' => $edition->getLowestLevel(),
             'rarity' => $edition->rarity->toString(),
             'school' => $edition->school?->name,
         ];
@@ -76,13 +75,6 @@ class Spell extends AbstractModel
 
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
-    {
-        $item = new static();
-
-        return $item;
-    }
-
-    public static function fromFeJson(array $value): self
     {
         $item = new static();
 
@@ -101,6 +93,14 @@ class Spell extends AbstractModel
             $edition = SpellEdition::fromInternalJson($editionData, $item);
             $item->editions()->save($edition);
         }
+
+        $item->save();
+        return $item;
+    }
+
+    public static function fromFeJson(array $value): self
+    {
+        $item = new static();
 
         $item->save();
         return $item;

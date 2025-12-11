@@ -5,51 +5,51 @@
     "editions": [
         {
             "id": "48d56ea3-66e3-4c4b-81ba-f55c8a7830b0",
-            "game_edition": "1e"
+            "gameEdition": "1e"
         },
         {
             "id": "69b030db-8470-41ec-a5b1-928e25429181",
-            "game_edition": "2e",
+            "gameEdition": "2e",
             "parent_id": "4f4d537a-b3d2-4cd9-b442-715183e29f9e",
             "parent_name": "priest",
             "references": [
                 {
                     "source": "players-handbook-2nd-edition",
-                    "page_from": 33,
-                    "page_to": 35
+                    "pageFrom": 33,
+                    "pageTo": 35
                 }
             ]
         },
         {
             "id": "34a23963-aa37-406a-8173-c0c751b46620",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "references": [
                 {
                     "source": "players-handbook-3-5-edition",
-                    "page_from": 30,
-                    "page_to": 33
+                    "pageFrom": 30,
+                    "pageTo": 33
                 }
             ]
         },
         {
             "id": "bf107152-d7e2-4d2e-8280-5920873b6317",
-            "game_edition": "4e",
+            "gameEdition": "4e",
             "references": [
                 {
                     "source": "players-handbook-4th-edition",
-                    "page_from": 60,
-                    "page_to": 74
+                    "pageFrom": 60,
+                    "pageTo": 74
                 }
             ]
         },
         {
             "id": "91004e89-91c0-40da-853a-13d6e2ef6619",
-            "game_edition": "5e",
+            "gameEdition": "5e",
             "references": [
                 {
                     "source": "players-handbook-5th-edition",
-                    "page_from": 56,
-                    "page_to": 63
+                    "pageFrom": 56,
+                    "pageTo": 63
                 }
             ]
         }

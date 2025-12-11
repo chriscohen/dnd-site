@@ -4,8 +4,8 @@
     "name": "Air Breathing",
     "editions": [
         {
-            "game_edition": "3.5",
-            "castingTime_unit": "standard action",
+            "gameEdition": "3.5",
+            "castingTimeUnit": "standard action",
             "description": "The transmuted creatures can breathe air freely. Divide the duration evenly among all the creatures you touch.\n\nThe spell does not make creatures unable to breathe water. Air breathing dispels and counters water breathing.",
             "duration": {
                 "unit": "hour",
@@ -38,7 +38,7 @@
             "references": [
                 {
                     "source": "champions-of-ruin",
-                    "page_from": 28
+                    "pageFrom": 28
                 }
             ],
             "saving_throw": {

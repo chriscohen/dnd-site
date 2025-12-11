@@ -8,6 +8,7 @@ use App\Enums\GameEdition;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
+use App\Models\Prerequisites\Prerequisite;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -85,6 +86,27 @@ class CharacterClassEdition extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->characterClass()->associate($parent);
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->alternate_name = $value['alternateName'] ?? null;
+        $item->caption = $value['caption'] ?? null;
+        $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
+        $item->hit_die_faces = $value['hitDieFaces'] ?? null;
+        $item->is_group_only = $value['isGroupOnly'] ?? false;
+        $item->is_prestige = $value['isPrestige'] ?? false;
+
+        $item->save();
+
+        foreach ($value['references'] ?? [] as $reference) {
+            Reference::fromInternalJson($reference, $item);
+        }
+        foreach ($value['prerequisites'] ?? [] as $prerequisiteData) {
+            // TODO: finish this - looks like prereqs aren't on CharacterClassEdition?
+            //$prequisite = Prerequisite::fromInternalJson($prerequisiteData, $item);
+        }
+
+        $item->save();
+        return $item;
     }
 }

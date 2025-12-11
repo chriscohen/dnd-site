@@ -5,14 +5,14 @@
     "editions": [
         {
             "id": "686d2e65-d4be-458f-9b8f-a80e386706ae",
-            "game_edition": "1e",
+            "gameEdition": "1e",
             "parent_id": "59d87955-e65e-41c8-a7ee-740fa1703309",
             "parent_name": "rogue (thief)",
             "references": [
                 {
                     "source": "blackmoor",
-                    "page_from": 3,
-                    "page_to": 4
+                    "pageFrom": 3,
+                    "pageTo": 4
                 }
             ]
         }

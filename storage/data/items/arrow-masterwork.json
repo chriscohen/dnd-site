@@ -6,7 +6,7 @@
     "editions": [
         {
             "id": "3acf3901-59f3-4f7c-b669-91b29b860acc",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "description": "An extremely finely crafted arrow.",
             "isDefault": true,
             "price": "7 gp",
@@ -14,7 +14,7 @@
             "references": [
                 {
                     "source": "players-handbook-3-5-edition",
-                    "page_from": 122
+                    "pageFrom": 122
                 }
             ],
             "weight": 0.1

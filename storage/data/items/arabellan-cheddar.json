@@ -5,14 +5,14 @@
     "editions": [
         {
             "id": "6126021d-e3d2-4c03-a032-fb69f537de9b",
-            "game_edition": "2e",
+            "gameEdition": "2e",
             "description": "Arabellan Cheddar is a cheese crafted in Arabel. It was also sold through @source:auroras-whole-realms-catalogue:Aurora's Whole Realms Catalogue.",
             "isDefault": true,
             "rarity": "uncommon",
             "references": [
                 {
                     "source": "auroras-whole-realms-catalogue",
-                    "page_from": 122
+                    "pageFrom": 122
                 }
             ]
         }

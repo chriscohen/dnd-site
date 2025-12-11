@@ -78,6 +78,30 @@ class Item extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->slug = $value['slug'] ?? self::makeSlug($value['name']);
+        $item->name = $value['name'];
+
+        if (!empty($value['image'])) {
+            $media = Media::fromInternalJson([
+                'filename' => '/items/' . $value['image'],
+                'collection_name' => 'spells',
+            ]);
+            $item->image()->associate($media);
+        }
+
+        foreach ($value['editions'] ?? [] as $editionData) {
+            $edition = ItemEdition::fromInternalJson($editionData, $item);
+            $item->editions()->save($edition);
+        }
+
+        foreach ($value['categories'] ?? [] as $categoryData) {
+            $category = Category::query()->where('slug', $categoryData)->firstOrFail();
+            $item->categories()->save($category);
+        }
+
+        $item->save();
+        return $item;
     }
 }

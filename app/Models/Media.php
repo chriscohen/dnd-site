@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\JsonRenderMode;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +26,7 @@ class Media extends AbstractModel
     /**
      * @param  array{
      *     filename: string,
-     *     disk: string,
+     *     disk?: string,
      *     name?: string,
      *     collection_name?: string,
      *     mime_type?: string
@@ -36,12 +35,13 @@ class Media extends AbstractModel
      */
     public static function createFromExisting(array $data): self
     {
-        $disk = Storage::disk($data['disk']);
+        $diskName = $data['disk'] ?? 's3';
+        $disk = Storage::disk($diskName);
 
         // Ensure file exists.
         if (!$disk->exists($data['filename'])) {
             throw new FileNotFoundException(
-                'Could not find file: ' . $data['filename'] . ' on disk ' . $data['disk']
+                'Could not find file: ' . $data['filename'] . ' on disk ' . $diskName
             );
         }
 
@@ -82,12 +82,13 @@ class Media extends AbstractModel
     {
         $item = new static();
         $item->id = $value['id'] ?? Uuid::uuid4();
-        $item->collectionName = $value['collectionName'] ?? null;
+        $item->collection_name = $value['collectionName'] ?? null;
         $item->disk = $value['disk'] ?? 's3';
         $item->filename = $value['filename'];
-        $item->mimeType = $value['mimeType'] ?? null;
+        $item->mime_type = $value['mimeType'] ?? null;
         $item->name = $value['name'] ?? null;
         $item->size = $value['size'] ?? null;
+        $item->save();
         return $item;
     }
 }

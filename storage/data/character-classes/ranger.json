@@ -5,58 +5,58 @@
     "editions": [
         {
             "id": "ff630373-0520-46a3-b839-b7e4066cf082",
-            "game_edition": "1e",
+            "gameEdition": "1e",
             "parent_id": "788e3f95-de4a-46a0-8bde-bcf9b9b3daf7",
             "parent_name": "fighter",
             "references": [
                 {
                     "source": "unearthed-arcana-1985",
-                    "page_from": 21,
-                    "page_to": 22
+                    "pageFrom": 21,
+                    "pageTo": 22
                 }
             ]
         },
         {
             "id": "2a3c222f-36e1-4d69-899e-badd6274e8bb",
-            "game_edition": "2e",
+            "gameEdition": "2e",
             "references": [
                 {
                     "source": "players-handbook-2nd-edition",
-                    "page_from": 28,
-                    "page_to": 29
+                    "pageFrom": 28,
+                    "pageTo": 29
                 }
             ]
         },
         {
             "id": "26dda871-0dde-41be-8979-db9d8e7dfd67",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "references": [
                 {
                     "source": "players-handbook-3-5-edition",
-                    "page_from": 46,
-                    "page_to": 49
+                    "pageFrom": 46,
+                    "pageTo": 49
                 }
             ]
         },
         {
             "id": "541f1b4f-6ba7-46d0-a093-159cf7103c53",
-            "game_edition": "4e",
+            "gameEdition": "4e",
             "references": [
                 {
                     "source": "players-handbook-4th-edition",
-                    "page_from": 103,
-                    "page_to": 115
+                    "pageFrom": 103,
+                    "pageTo": 115
                 }
             ]
         },
         {
             "id": "32738576-f520-4b60-a8e6-14cd89098296",
-            "game_edition": "5e",
+            "gameEdition": "5e",
             "references": [
                 {
                     "source": "players-handbook-5th-edition",
-                    "page_from": 89,
-                    "page_to": 93
+                    "pageFrom": 89,
+                    "pageTo": 93
                 }
             ]
         }

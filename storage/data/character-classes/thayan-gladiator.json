@@ -5,7 +5,7 @@
     "editions": [
         {
             "id": "f63f20bf-0a39-4f0e-81b0-378667dffe99",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "isPrestige": true,
             "prerequisites": [
                 {
@@ -34,8 +34,8 @@
             "references": [
                 {
                     "source": "champions-of-ruin",
-                    "page_from": 63,
-                    "page_to": 67
+                    "pageFrom": 63,
+                    "pageTo": 67
                 }
             ]
         }

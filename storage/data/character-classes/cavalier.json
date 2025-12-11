@@ -5,12 +5,12 @@
     "editions": [
         {
             "id": "ccc9a6e6-0efe-45a7-b7a8-cbee2af8bd98",
-            "game_edition": "1e",
+            "gameEdition": "1e",
             "references": [
                 {
                     "source": "unearthed-arcana-1985",
-                    "page_from": 14,
-                    "page_to": 16
+                    "pageFrom": 14,
+                    "pageTo": 16
                 }
             ]
         }

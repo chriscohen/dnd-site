@@ -4,14 +4,14 @@
     "editions": [
         {
             "id": "46bd866a-cb69-40c1-a6a9-a7cf3b0c3893",
-            "game_edition": "1e",
+            "gameEdition": "1e",
             "parent_id": "59d87955-e65e-41c8-a7ee-740fa1703309",
             "parent_name": "rogue (thief)",
             "references": [
                 {
                     "source": "unearthed-arcana-1985",
-                    "page_from": 23,
-                    "page_to": 25
+                    "pageFrom": 23,
+                    "pageTo": 25
                 }
             ]
         }

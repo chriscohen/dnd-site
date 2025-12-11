@@ -29,26 +29,8 @@ class SkillSeeder extends AbstractYmlSeeder
 
         // For each item in the JSON file...
         foreach ($data as $datum) {
-            $skill = new Skill();
-            $skill->id = $datum['id'];
-            $skill->slug = $datum['slug'];
-            $skill->name = $datum['name'];
-
-            $skill->save();
-
-            foreach ($datum['editions'] as $editionData) {
-                $edition = new SkillEdition();
-                $edition->skill()->associate($skill);
-
-                $edition->alternate_name = $editionData['alternate_name'] ?? null;
-                $edition->game_edition = GameEdition::tryFromString($editionData['game_edition']);
-
-                if (!empty($editionData['related_attribute'])) {
-                    $edition->related_attribute = Attribute::tryFromString($editionData['related_attribute']);
-                }
-
-                $edition->save();
-            }
+            print "Creating Skill " . $datum['name'] . "...\n";
+            Skill::fromInternalJson($datum);
         }
     }
 }

@@ -72,6 +72,20 @@ class CharacterClass extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'];
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+        $item->name = $value['name'];
+
+        if (!empty($value['image'])) {
+            $media = Media::fromInternalJson([
+                'filename' => '/classes/' . $value['image'],
+                'collection_name' => 'classes',
+            ]);
+            $item->image()->associate($media);
+        }
+
+        $item->save();
+        return $item;
     }
 }

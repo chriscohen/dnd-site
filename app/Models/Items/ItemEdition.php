@@ -110,6 +110,27 @@ class ItemEdition extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'];
+        $item->item()->associate($parent);
+
+        $item->is_default = $value['isDefault'] ?? false;
+
+        $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
+        $item->description = $value['description'];
+        $item->is_unique = $value['isUnique'] ?? false;
+        $item->price = !empty($value['price']) ?
+            $item->priceFromString($value['price']) :
+            null;
+        $item->rarity = Rarity::tryFromString($value['rarity']);
+        $item->quantity = $value['quantity'] ?? 1;
+        $item->weight = $value['weight'] ?? null;
+
+        foreach ($value['references'] ?? [] as $reference) {
+            Reference::fromInternalJson($reference, $item);
+        }
+
+        $item->save();
+        return $item;
     }
 }

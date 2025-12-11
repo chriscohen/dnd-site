@@ -4,8 +4,8 @@
     "name": "Arrowsplit",
     "editions": [
         {
-            "game_edition": "3.5",
-            "castingTime_unit": "bonus action",
+            "gameEdition": "3.5",
+            "castingTimeUnit": "bonus action",
             "description": "This spell is cast upon a masterwork arrow or bolt, causing it to split in mid-flight into 1d4 + 1 identical masterwork arrows or bolts. All the missiles strike the same target, and you must make a separate attack roll for each missile. The arrow or bolt must be fired during the same round the spell is cast, or the magic dissipates and is lost. The projectile is destroyed even if it misses its target.",
             "duration": { "unit": "instantaneous" },
             "hasSpellResistance": true,
@@ -28,7 +28,7 @@
             "references": [
                 {
                     "source": "champions-of-ruin",
-                    "page_from": 28
+                    "pageFrom": 28
                 }
             ],
             "school": "creation",

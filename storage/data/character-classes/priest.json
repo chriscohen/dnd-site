@@ -5,13 +5,13 @@
     "editions": [
         {
             "id": "4f4d537a-b3d2-4cd9-b442-715183e29f9e",
-            "game_edition": "2e",
+            "gameEdition": "2e",
             "is_group_only": true,
             "references": [
                 {
                     "source": "players-handbook-2nd-edition",
-                    "page_from": 32,
-                    "page_to": 33
+                    "pageFrom": 32,
+                    "pageTo": 33
                 }
             ]
         }

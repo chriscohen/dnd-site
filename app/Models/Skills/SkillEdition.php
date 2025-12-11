@@ -60,11 +60,14 @@ class SkillEdition extends AbstractModel
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
+        $item->skill()->associate($parent);
         $item->id = $value['id'] ?? Uuid::uuid4();
         $item->alternate_name = $value['alternateName'] ?? null;
         $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
-        $item->related_attribute = Attribute::tryFromString($value['relatedAttribute']);
-        $item->skill()->associate($parent);
+
+        if (!empty($value['relatedAttribute'])) {
+            $item->related_attribute = Attribute::tryFromString($value['relatedAttribute']);
+        }
 
         $item->save();
         return $item;

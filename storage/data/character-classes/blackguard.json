@@ -5,8 +5,8 @@
     "editions": [
         {
             "id": "2c0be74c-a15b-431a-a77b-b3edb4134ab0",
-            "game_edition": "3.5",
-            "hit_die_faces": 10,
+            "gameEdition": "3.5",
+            "hitDieFaces": 10,
             "isPrestige": true,
             "prerequisites": [
                 {

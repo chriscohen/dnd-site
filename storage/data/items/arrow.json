@@ -5,7 +5,7 @@
     "editions": [
         {
             "id": "97f43128-a01f-4646-9730-bed21b4f9d50",
-            "game_edition": "5e",
+            "gameEdition": "5e",
             "description": "A single normal wooden arrow.",
             "isDefault": true,
             "price": "5 sp",
@@ -13,7 +13,7 @@
             "references": [
                 {
                     "source": "players-handbook-5th-edition",
-                    "page_from": 150
+                    "pageFrom": 150
                 }
             ],
             "weight": 0.05

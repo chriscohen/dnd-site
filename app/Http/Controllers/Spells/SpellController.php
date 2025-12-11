@@ -14,9 +14,9 @@ class SpellController extends AbstractController
     protected string $entityType = Spell::class;
     protected string $orderKey = 'name';
 
-    public function editionQuery(string $edition): self
+    public function editionQuery(string $editions): self
     {
-        $parameters = $this->getEditionsFromQueryString($edition);
+        $parameters = $this->getEditionsFromQueryString($editions);
 
         $this->query->whereHas('editions', function ($query) use ($parameters) {
             $query->where('is_default', true);

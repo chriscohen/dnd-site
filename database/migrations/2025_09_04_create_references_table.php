@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
 
             $table->foreignIdFor(SourceEdition::class, 'source_edition_id');
-            $table->unsignedSmallInteger('page_from');
+            $table->unsignedSmallInteger('page_from')->nullable();
             $table->unsignedSmallInteger('page_to')->nullable();
 
             $table->uuid('entity_id');

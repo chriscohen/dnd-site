@@ -6,7 +6,7 @@
     "editions": [
         {
             "id": "ed159fc7-2c8f-4131-bfed-8149fc1e7c7e",
-            "game_edition": "2e",
+            "gameEdition": "2e",
             "description": "An arrow with a strong metal head suitable for warfare.",
             "isDefault": true,
             "price": "50 cp",
@@ -14,7 +14,7 @@
             "references": [
                 {
                     "source": "players-handbook-2nd-edition",
-                    "page_from": 68
+                    "pageFrom": 68
                 }
             ],
             "weight": 0.1

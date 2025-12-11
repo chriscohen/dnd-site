@@ -5,36 +5,36 @@
     "editions": [
         {
             "id": "9d2390fa-fd83-4606-8879-4c62b371c812",
-            "game_edition": "1e",
+            "gameEdition": "1e",
             "parent_id": "788e3f95-de4a-46a0-8bde-bcf9b9b3daf7",
             "parent_name": "fighter",
             "references": [
                 {
                     "source": "unearthed-arcana-1985",
-                    "page_from": 18,
-                    "page_to": 21
+                    "pageFrom": 18,
+                    "pageTo": 21
                 }
             ]
         },
         {
             "id": "f2bc4d5b-090d-40cb-96e1-a5df91be3fdb",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "references": [
                 {
                     "source": "players-handbook-3-5-edition",
-                    "page_from": 24,
-                    "page_to": 26
+                    "pageFrom": 24,
+                    "pageTo": 26
                 }
             ]
         },
         {
             "id": "cf2bdd59-dfdc-4df5-979f-644f68567eda",
-            "game_edition": "5e",
+            "gameEdition": "5e",
             "references": [
                 {
                     "source": "players-handbook-5th-edition",
-                    "page_from": 46,
-                    "page_to": 50
+                    "pageFrom": 46,
+                    "pageTo": 50
                 }
             ]
         }

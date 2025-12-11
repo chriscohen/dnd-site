@@ -6,14 +6,14 @@
     "editions": [
         {
             "id": "60add432-fe1a-478d-b81a-10f3de21a98a",
-            "game_edition": "3.5",
+            "gameEdition": "3.5",
             "description": "A fire ant, or group of them.",
             "isDefault": true,
             "rarity": "common",
             "references": [
                 {
                     "source": "spell-compendium",
-                    "page_from": 7
+                    "pageFrom": 7
                 }
             ]
         }
