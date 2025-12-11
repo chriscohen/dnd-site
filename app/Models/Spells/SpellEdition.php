@@ -2,7 +2,7 @@
 
 namespace App\Models\Spells;
 
-use App\Enums\Distance;
+use App\Enums\DistanceUnit;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Enums\Rarity;
@@ -17,7 +17,6 @@ use App\Models\Duration;
 use App\Models\Feats\Feat;
 use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
-use App\Models\Media;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\Range;
@@ -82,7 +81,7 @@ class SpellEdition extends AbstractModel
         'has_spell_resistance' => 'bool',
         'is_default' => 'bool',
         'material_component_mode' => MaterialComponentMode::class,
-        'range_unit' => Distance::class,
+        'range_unit' => DistanceUnit::class,
         'rarity' => Rarity::class,
     ];
 
@@ -99,7 +98,7 @@ class SpellEdition extends AbstractModel
     protected function description(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => app(MarkdownRenderer::class)->toHtml($value),
+            get: fn (?string $value = '') => app(MarkdownRenderer::class)->toHtml($value ?? ''),
         );
     }
 
@@ -187,7 +186,7 @@ class SpellEdition extends AbstractModel
     protected function rangeUnit(): Attribute
     {
         return Attribute::make(
-            get: fn (?int $value) => $value === null ? '' : Distance::tryFrom($value)->toString(),
+            get: fn (?int $value) => $value === null ? '' : DistanceUnit::tryFrom($value)->toString(),
         );
     }
 
@@ -246,7 +245,7 @@ class SpellEdition extends AbstractModel
             'materialComponentMode' => $this->materialComponentMode,
             'materialComponents' => ModelCollection::make($this->materialComponents)->toArray($this->renderMode),
             'range' => $this->range?->toArray($this->renderMode),
-            'rarity' => $this->rarity->toString(),
+            'rarity' => $this->rarity?->toString() ?? null,
             'references' => ModelCollection::make($this->references)->toArray(JsonRenderMode::TEASER),
             'savingThrow' => $this->savingThrow?->toArray($this->renderMode),
             'school' => $this->school?->toArray($this->renderMode) ?? null,
@@ -282,7 +281,10 @@ class SpellEdition extends AbstractModel
         $item->is_default = $value['isDefault'] ?? false;
         $item->material_component_mode = !empty($value['materialComponentMode']) ?
             MaterialComponentMode::tryFromString($value['materialComponentMode']) : null;
-        $item->rarity = Rarity::tryFromString($value['rarity']);
+
+        if (!empty($value['rarity'])) {
+            $item->rarity = Rarity::tryFromString($value['rarity']);
+        }
 
         if (!empty($value['range'])) {
             $range = Range::fromInternalJson($value['range'], $item);
@@ -316,8 +318,8 @@ class SpellEdition extends AbstractModel
         $item->save();
 
         // Saving throws
-        if (!empty($value['saving_throw'])) {
-            $savingThrow = SavingThrow::fromInternalJson($value['saving_throw'], $item);
+        if (!empty($value['savingThrow'])) {
+            $savingThrow = SavingThrow::fromInternalJson($value['savingThrow'], $item);
             $item->savingThrow()->save($savingThrow);
         }
 
@@ -344,7 +346,7 @@ class SpellEdition extends AbstractModel
         }
 
         // Material components
-        foreach ($value['material_components'] ?? [] as $materialData) {
+        foreach ($value['materialComponents'] ?? [] as $materialData) {
             $materialComponent = SpellMaterialComponent::fromInternalJson($materialData, $item);
             $item->materialComponents()->save($materialComponent);
         }
@@ -368,50 +370,70 @@ class SpellEdition extends AbstractModel
         return $item;
     }
 
-    public static function fromFeJson(array $value, ?Spell $spell = null): self
+    public static function fromFeJson(array $value, ModelInterface $parent = null): self
     {
         $item = new static();
-        $item->id = Uuid::uuid4();
-        $item->name = $value['name'];
         $item->game_edition = GameEdition::FIFTH_REVISED;
-
-        if (!empty($spell)) {
-            $item->spell()->associate($spell);
-        }
-
-        // Description.
-        if (!empty($value['entries'])) {
-            $item->description = '';
-
-            foreach ($value['entries'] as $entry) {
-                $item->description .= $entry['text'] . "\n";
-            }
-        }
-        // At Higher Levels...
-        if (is_array($value['entriesHigherLevel'])) {
-            $item->higherLevel = '';
-
-            foreach ($value['entriesHigherLevel'] as $higherLevelEntry) {
-                if (is_array($higherLevelEntry['entries'])) {
-                    foreach ($higherLevelEntry['entries'] as $entry) {
-                        $item->higherLevel .= $entry . "\n";
-                    }
-                }
-            }
-        }
+        $item->spell()->associate($parent);
 
         // Magic school.
-        if (!empty($value['school'])) {
-            $school = MagicSchool::query()->where('shortName', mb_strtoupper($value['school']))->firstOrFail();
-            $item->school()->associate($school);
+        $school = MagicSchool::query()->where('shortName', mb_strtoupper($value['school']))->firstOrFail();
+        $item->school()->associate($school);
+
+        // Casting time.
+        if (!empty($value['time'][0])) {
+            $item->casting_time_number = $value['time'][0]['number'];
+            $timeUnit = TimeUnit::tryFromString($value['time'][0]['unit']);
+            if (empty($timeUnit)) {
+                throw new \InvalidArgumentException('Invalid casting time unit: ' . $value['time'][0]['unit']);
+            }
+            $item->casting_time_unit = $timeUnit;
+        }
+
+        // Range.
+        if (!empty($value['range'])) {
+            $range = Range::fromFeJson($value['range'], $item);
+            $item->range()->associate($range);
+        }
+
+        $item->save();
+
+        // Spell components.
+        if (!empty($value['components'])) {
+            $componentPieces = [];
+
+            foreach ($value['components'] as $key => $component) {
+                // Keep track of the pieces eg, V, S, etc.
+                $componentPieces[] = mb_strtoupper($key);
+
+                // Material component has special values.
+                if ($key == 'm') {
+                    $material = SpellMaterialComponent::fromFeJson($component, $item);
+                    $item->materialComponents()->save($material);
+                }
+
+                // Join all the components together into a single string.
+                $item->spell_components = implode(', ', $componentPieces);
+            }
+        }
+
+        // Duration.
+        if (!empty($value['duration'][0])) {
+            $duration = Duration::fromFeJson($value['duration'][0], $item);
+            $item->duration()->save($duration);
         }
 
         // References.
         if (!empty($value['source'])) {
             $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
-
+            Reference::fromInternalJson([
+                'source' => $source->slug,
+                'editionId' => $source->primaryEdition()->id,
+                'pageFrom' => $value['page'] ?? null
+            ], $item);
         }
 
+        $item->save();
         return $item;
     }
 }

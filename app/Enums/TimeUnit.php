@@ -45,8 +45,8 @@ enum TimeUnit: int
     public static function tryFromString(string $value): ?self
     {
         return match (str_replace(' ', '_', mb_strtolower($value))) {
-            'instantaneous' => self::INSTANTANEOUS,
-            'standard_action' => self::STANDARD_ACTION,
+            'instant', 'instantaneous' => self::INSTANTANEOUS,
+            'action', 'standard_action' => self::STANDARD_ACTION,
             'bonus_action' => self::BONUS_ACTION,
             'free_action' => self::FREE_ACTION,
             'turn' => self::TURN,

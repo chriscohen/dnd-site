@@ -1,0 +1,29 @@
+{
+    "id": "5ed643d6-b7a6-4651-9d35-ef9f4d29af82",
+    "name": "Eberron Player's Guide 4th Edition",
+    "slug": "eberron-players-guide-4th-edition",
+    "coverImage": "eberron-players-guide-4th-edition.webp",
+    "description": "The Eberron Player's Guide presents the film noir world of Eberron from the point of view of the adventurer exploring it.\n\nThis product includes everything a player needs to create their character for a D&D campaign in the Eberron setting, including new feats, new character powers, new paragon paths and epic destinies, and even a new 4th edition version of a classic Eberron class: the Artificer.",
+    "editions": [
+        {
+            "id": "0d570216-db12-450e-8a52-b2e00399e94d",
+            "name": "original",
+            "binding": "hardcover",
+            "formats": ["print", "pdf"],
+            "isPrimary": true,
+            "pages": 160,
+            "releaseDate": "2015-09-06"
+        }
+    ],
+    "gameEdition": "4e",
+    "productIds": {
+        "drivethru-rpg": "150472",
+        "dungeon-masters-guild": "150472"
+    },
+    "publicationType": "official",
+    "publisherId": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+    "sourcebookTypes": [
+        "campaign_setting"
+    ],
+    "sourceType": "sourcebook"
+}

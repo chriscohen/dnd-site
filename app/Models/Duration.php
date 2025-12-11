@@ -90,4 +90,29 @@ class Duration extends AbstractModel
         $item->save();
         return $item;
     }
+
+    /**
+     * @param array{
+     *     type: string,
+     *     duration: array{
+     *         type: string,
+     *         amount: int
+     *     }
+     * } $value
+     */
+    public static function fromFeJson(array $value, ModelInterface $parent = null): Duration
+    {
+        $item = new static();
+        $item->entity()->associate($parent);
+
+        if ($value['type'] === 'instant') {
+            $item->unit = TimeUnit::INSTANTANEOUS;
+        } else {
+            $item->unit = TimeUnit::tryFromString($value['duration']['type']);
+            $item->value = $value['duration']['amount'];
+        }
+
+        $item->save();
+        return $item;
+    }
 }

@@ -91,4 +91,9 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
     {
         return str_replace('+', '-', urlencode(mb_strtolower($input)));
     }
+
+    public static function fromFeJson(array $value, ModelInterface $parent = null): ModelInterface
+    {
+        throw new \InvalidArgumentException('Not implemented');
+    }
 }

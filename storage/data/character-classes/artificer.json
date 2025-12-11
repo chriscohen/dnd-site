@@ -1,0 +1,39 @@
+{
+    "id": "artificer",
+    "name": "Artificer",
+    "editions": [
+        {
+            "id": "efddda90-3236-460a-b53e-0c0f15b3abff",
+            "gameEdition": "3.5",
+            "references": [
+                {
+                    "source": "eberron-campaign-setting-3-5-edition",
+                    "pageFrom": 29,
+                    "pageTo": 33
+                }
+            ]
+        },
+        {
+            "id": "9af8a02e-5410-483d-89fe-d3cc2071c3cd",
+            "gameEdition": "4e",
+            "references": [
+                {
+                    "source": "eberron-players-guide-4th-edition",
+                    "pageFrom": 44,
+                    "pageTo": 57
+                }
+            ]
+        },
+        {
+            "id": "b6733162-7dc4-4207-b515-f035f09360e3",
+            "gameEdition": "5e",
+            "references": [
+                {
+                    "source": "tashas-cauldron-of-everything",
+                    "pageFrom": 9,
+                    "pageTo": 23
+                }
+            ]
+        }
+    ]
+}

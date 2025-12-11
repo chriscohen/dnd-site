@@ -18,6 +18,11 @@ interface ModelInterface
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static;
 
     /**
+     * Import from the 5e.tools JSON format.
+     */
+    public static function fromFeJson(array $value, ModelInterface $parent = null): self;
+
+    /**
      * Get the human-readable name of this thing.
      *
      * @return string

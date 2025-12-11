@@ -11,6 +11,7 @@ enum TargetType: int
     case ALLY = 5;
     case ENEMY = 6;
     case AREA = 7;
+    case WILLING_CREATURE = 8;
 
     public function toString(): string
     {
@@ -22,6 +23,7 @@ enum TargetType: int
             TargetType::ALLY => 'ally',
             TargetType::ENEMY => 'enemy',
             TargetType::AREA => 'area',
+            TargetType::WILLING_CREATURE => 'willing creature',
         };
     }
 
@@ -35,6 +37,7 @@ enum TargetType: int
             'ally' => self::ALLY,
             'enemy' => self::ENEMY,
             'area' => self::AREA,
+            'willing_creature' => self::WILLING_CREATURE,
             default => null,
         };
     }

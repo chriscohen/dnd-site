@@ -44,7 +44,7 @@ class Target extends AbstractModel
         return [
             'id' => $this->id,
             'description' => $this->description,
-            'in_area' => $this->in_area,
+            'in_area' => $this->in_area ?? false,
             'per_level' => $this->per_level,
             'per_level_mode' => $this->per_level_mode?->toString(),
             'quantity' => $this->quantity,

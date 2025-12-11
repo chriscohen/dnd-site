@@ -60,6 +60,24 @@ class MagicSchool extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
-        throw new \Exception('Not implemented');
+        $item = new static();
+        $item->id = $value['id'];
+        $item->name = $value['name'];
+        $item->shortName = $value['shortName'] ?? null;
+        $item->description = $value['description'] ?? null;
+
+        if (empty($value['parent'])) {
+            // If there's no parent, it's a base school, which means there's an image.
+            $media = Media::fromInternalJson([
+                'filename' => '/magic-schools/' . $value['id'],
+            ]);
+            $item->image()->associate($media);
+        } else {
+            // If there's a parent, it won't have an image.
+            $item->parent_id = $value['parent'];
+        }
+
+        $item->save();
+        return $item;
     }
 }

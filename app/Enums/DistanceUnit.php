@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum Distance: int
+enum DistanceUnit: int
 {
     case INCH = 1;
     case FOOT = 2;

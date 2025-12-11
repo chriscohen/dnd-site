@@ -120,4 +120,15 @@ class SpellMaterialComponent extends AbstractModel
         $item->save();
         return $item;
     }
+
+    public static function fromFeJson(array $value, ModelInterface $parent = null): SpellMaterialComponent
+    {
+        $item = new static();
+        $item->spellEdition()->associate($parent);
+        $item->description = $value['text'] ?? null;
+        $item->is_consumed = $value['consume'] ?? false;
+
+        $item->save();
+        return $item;
+    }
 }

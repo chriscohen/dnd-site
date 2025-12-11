@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\Distance;
-use App\Enums\JsonRenderMode;
+use App\Enums\DistanceUnit;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Ramsey\Uuid\Uuid;
 
@@ -19,7 +18,7 @@ use Ramsey\Uuid\Uuid;
  * @property int $per_level
  * @property int $per_level_increment
  *   How many levels to go up by. For example, a value of 2 would be "per 2 levels".
- * @property Distance $unit
+ * @property DistanceUnit $unit
  */
 class Range extends AbstractModel
 {
@@ -31,10 +30,10 @@ class Range extends AbstractModel
         'is_from_caster' => 'boolean',
         'is_self' => 'boolean',
         'is_touch' => 'boolean',
-        'unit' => Distance::class,
+        'unit' => DistanceUnit::class,
     ];
 
-    public function format(int $number, Distance $distance): string
+    public function format(int $number, DistanceUnit $distance): string
     {
         return $number . ' ' . ($number == 1 ? $distance->plural() : $distance->toString());
     }
@@ -102,10 +101,36 @@ class Range extends AbstractModel
         $item->is_from_caster = $value['isFromCaster'] ?? false;
         $item->is_self = $value['isSelf'] ?? false;
         $item->is_touch = $value['isTouch'] ?? false;
-        $item->number = $value['number'] ?? null;
         $item->per_level = $value['perLevel'] ?? null;
         $item->per_level_increment = $value['perLevelIncrement'] ?? 1;
-        $item->unit = Distance::tryFromString($value['unit'] ?? 'ft');
+
+        $item->number = $value['number'] ?? null;
+        $item->unit = DistanceUnit::tryFromString($value['unit'] ?? 'ft');
+
+        $item->save();
+        return $item;
+    }
+
+    /**
+     * @param array{
+     *     type: string,
+     *     distance: array{
+     *         type: string,
+     *         amount: int
+     *     }
+     * } $value
+     */
+    public static function fromFeJson(array $value, ModelInterface $parent = null): ModelInterface
+    {
+        $item = new static();
+
+        if ($value['distance']['type'] === 'touch') {
+            $item->is_touch = true;
+        } else {
+            $item->unit = DistanceUnit::tryFromString($value['distance']['type']);
+            $item->number = $value['distance']['amount'];
+        }
+
         $item->save();
         return $item;
     }

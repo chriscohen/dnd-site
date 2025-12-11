@@ -8,7 +8,6 @@ use App\Enums\GameEdition;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
-use App\Models\Prerequisites\Prerequisite;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

@@ -4,11 +4,18 @@ declare(strict_types=1);
 
 namespace App\Models\Spells;
 
+use App\Enums\DistanceUnit;
 use App\Enums\GameEdition;
+use App\Enums\TimeUnit;
 use App\Models\AbstractModel;
+use App\Models\Duration;
+use App\Models\Magic\MagicSchool;
 use App\Models\Media;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
+use App\Models\Range;
+use App\Models\Reference;
+use App\Models\Sources\Source;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -68,7 +75,7 @@ class Spell extends AbstractModel
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
             'image' => $this->image?->toArray($this->renderMode),
             'lowestLevel' => $edition->getLowestLevel(),
-            'rarity' => $edition->rarity->toString(),
+            'rarity' => $edition->rarity?->toString() ?? null,
             'school' => $edition->school?->name,
         ];
     }
@@ -98,9 +105,15 @@ class Spell extends AbstractModel
         return $item;
     }
 
-    public static function fromFeJson(array $value): self
+    public static function fromFeJson(array $value, ModelInterface $parent = null): self
     {
         $item = new static();
+        $item->name = $value['name'];
+        $item->slug = static::makeSlug($value['name']);
+        $item->save();
+
+        $edition = SpellEdition::fromFeJson($value, $item);
+        $item->editions()->save($edition);
 
         $item->save();
         return $item;

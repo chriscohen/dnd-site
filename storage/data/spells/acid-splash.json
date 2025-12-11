@@ -1,0 +1,66 @@
+{
+    "id": "a894d2a3-c2b9-4cde-b7f2-1a21a3094b98",
+    "slug": "acid-splash",
+    "name": "Acid Splash",
+    "image": "acid-splash.webp",
+    "editions": [
+        {
+            "gameEdition": "3.5",
+            "castingTimeUnit": "standard action",
+            "damage": [
+                {
+                    "damageType": "acid",
+                    "dieFaces": 3,
+                    "dieQuantity": 1
+                }
+            ],
+            "description": "You fire a small orb of acid at the target. You must succeed on a ranged touch attack to hit your target. The orb deals 1d3 points of acid damage.",
+            "duration": { "unit": "instantaneous" },
+            "levels": [
+                { "class": "sorcerer", "level": 0 },
+                { "class":  "wizard", "level": 0 }
+            ],
+            "range": {
+                "number": 25,
+                "perLevel": 5,
+                "perLevelIncrement": 2
+            },
+            "rarity": "common",
+            "spellComponents": "V, S"
+        },
+        {
+            "gameEdition": "5e",
+            "castingTimeUnit": "standard action",
+            "damage": [
+                {
+                    "die_faces": 6,
+                    "die_quantity": 1
+                }
+            ],
+            "description": "You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage. This spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",
+            "duration": { "unit": "instantaneous" },
+            "isDefault": true,
+            "levels": [
+                { "class": "artificer", "level": 0 },
+                { "class": "sorcerer", "level": 0 },
+                { "class":  "wizard", "level": 0 }
+            ],
+            "range": {
+                "number": 60,
+                "isFromCaster": true
+            },
+            "rarity": "common",
+            "references": [
+                {
+                    "source": "players-handbook-5th-edition",
+                    "pageFrom": 211
+                }
+            ],
+            "school": "conjuration",
+            "spellComponents": "V, S",
+            "targets": [
+                { "type": "creature" }
+            ]
+        }
+    ]
+}
