@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\CharacterClasses\CharacterClass;
 use App\Models\CharacterClasses\CharacterClassEdition;
 
 return new class extends Migration
@@ -23,6 +22,8 @@ return new class extends Migration
             $table->boolean('is_group_only')->default(false);
             $table->boolean('is_prestige')->default(false);
             $table->unsignedSmallInteger('hit_die_faces')->nullable();
+
+            $table->boolean('is_srd')->default(false);
         });
     }
 

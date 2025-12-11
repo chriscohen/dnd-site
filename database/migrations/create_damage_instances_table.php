@@ -36,7 +36,7 @@ return new class extends Migration
             // Modifier.
             $table->smallInteger('modifier')->default(0);
 
-            // Attribute modifier.
+            // Ability modifier.
             $table->unsignedSmallInteger('attribute_modifier')->nullable();
             $table->unsignedSmallInteger('attribute_modifier_quantity')->nullable();
 
