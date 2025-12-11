@@ -265,7 +265,7 @@ class SpellEdition extends AbstractModel
     public function toArrayTeaser(): array
     {
         return [
-            'gameEdition' => $this->gameEdition,
+            'gameEdition' => $this->game_edition,
         ];
     }
 
