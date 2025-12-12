@@ -78,7 +78,7 @@ class Source extends AbstractModel
     protected function description(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => app(MarkdownRenderer::class)->toHtml($value),
+            get: fn (?string $value = '') => app(MarkdownRenderer::class)->toHtml($value ?? ''),
         );
     }
 
@@ -153,7 +153,7 @@ class Source extends AbstractModel
             'productCode' => $this->product_code,
             'productIds' => $this->productIds->collect()->toArray(),
             'publicationType' => $this->publication_type,
-            'publisher' => $this->publisher->toArray($this->renderMode),
+            'publisher' => $this->publisher?->toArray($this->renderMode),
             'sourceType' => $this->source_type,
         ];
 
@@ -288,9 +288,10 @@ class Source extends AbstractModel
         }
 
         // Cover image.
-        Media::fromInternalJson([
-            'filename' => '/books/' . $item->slug,
+        $coverImage = Media::fromInternalJson([
+            'filename' => '/books/' . $item->slug . '.webp',
         ]);
+        $item->coverImage()->associate($coverImage);
 
         $edition = SourceEdition::fromFeJson($value, $item);
         $item->editions()->save($edition);
