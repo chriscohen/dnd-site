@@ -171,6 +171,13 @@
         "logo": "ravenloft.webp"
     },
     {
+        "id": "072455fa-e375-4a64-8c54-a8f5383a14fa",
+        "name": "Ravnica: City of Legends",
+        "shortName": "RCL",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
         "id": "92343471-d0bb-4da6-84d9-6fd6539df24e",
         "name": "Rokugan",
         "shortName": "Roku",
@@ -185,9 +192,30 @@
         "publicationType": "official"
     },
     {
+        "id": "0b4bd1ee-20e9-4259-8b2f-95a07277a925",
+        "name": "Strixhaven",
+        "shortName": "SX",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "43dbb66b-837f-4023-a385-60bab116800e",
+        "name": "Tal'Dorei",
+        "shortName": "TD",
+        "publisher": "green-ronin-publishing",
+        "publicationType": "third party"
+    },
+    {
         "id": "ad54cc86-cc6b-4b74-a811-19f25c908091",
         "name": "Warcraft",
         "shortName": "WC",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "c468008d-8d53-4903-8eb7-25de7b45d466",
+        "name": "Wildemount",
+        "shortName": "WM",
         "publisher": "wizards-of-the-coast",
         "publicationType": "official"
     }

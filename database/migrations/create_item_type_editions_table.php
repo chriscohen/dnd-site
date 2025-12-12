@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\Items\Item;
+use App\Models\Items\ItemType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,9 +11,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('item_editions', function (Blueprint $table) {
+        Schema::create('item_type_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(Item::class, 'item_id');
+            $table->foreignIdFor(ItemType::class, 'item_type_id');
             $table->smallInteger('game_edition');
 
             //$table->morphs('itemable');
@@ -30,6 +30,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('item_editions');
+        Schema::dropIfExists('item_type_editions');
     }
 };

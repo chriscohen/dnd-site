@@ -12,6 +12,7 @@ use App\Enums\Spells\SpellFrequency;
 use App\Enums\TimeUnit;
 use App\Models\AbstractModel;
 use App\Models\Area;
+use App\Models\CharacterClasses\CharacterClass;
 use App\Models\DamageInstance;
 use App\Models\Duration;
 use App\Models\Feats\Feat;
@@ -24,6 +25,7 @@ use App\Models\Reference;
 use App\Models\SavingThrow;
 use App\Models\Sources\Source;
 use App\Models\Target;
+use App\Services\FeToolsService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -431,6 +433,31 @@ class SpellEdition extends AbstractModel
                 'editionId' => $source->primaryEdition()->id,
                 'pageFrom' => $value['page'] ?? null
             ], $item);
+        }
+
+        // Spell levels need special handling because the classes for each spell are stored in a separate file.
+        $spellSources = FeToolsService::getClassesForSpell('Air Bubble');
+
+        foreach ($spellSources as $className => $sources) {
+            $sel = new SpellEditionLevel();
+            $sel->spellEdition()->associate($item);
+            $sel->level = $value['level'];
+
+            // Get the character class.
+            $characterClass = CharacterClass::query()->where('name', $className)->firstOrFail();
+            $sel->entity()->associate($characterClass);
+            $sel->save();
+
+            // Add a reference for each source if we can determine the sourcebook from the shortName.
+            foreach ($sources as $source) {
+                $sourcebook = Source::query()->where('shortName', $source)->first();
+                if (!empty($sourcebook)) {
+                    $reference = new Reference();
+                    $reference->edition()->associate($sourcebook->primaryEdition());
+                    $reference->entity()->associate($sel);
+                    $reference->save();
+                }
+            }
         }
 
         $item->save();

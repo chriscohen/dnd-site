@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Enums\Attribute;
+use App\Enums\Ability;
 use App\Enums\GameEdition;
 use App\Models\Skills\Skill;
 use App\Models\Skills\SkillEdition;

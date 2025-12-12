@@ -14,6 +14,7 @@ use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\ProductId;
 use App\Models\Spells\Spell;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -188,7 +189,7 @@ class Source extends AbstractModel
     public function toArrayTeaser(): array
     {
         return [
-            'coverImage' => $this->coverImage->toArray($this->renderMode),
+            'coverImage' => $this->coverImage?->toArray($this->renderMode),
             'parentId' => $this->parent_id,
         ];
     }
@@ -259,6 +260,40 @@ class Source extends AbstractModel
             $first->save();
         }
 
+        $item->save();
+        return $item;
+    }
+
+    public static function fromFeJson(array $value, ModelInterface $parent = null): ModelInterface
+    {
+        $item = new static();
+        $item->id = Uuid::uuid4();
+        $item->name = $value['name'];
+        $item->slug = static::makeSlug($value['name']);
+        $item->shortName = $value['id'];
+        // Not a great way to determine official-ness but...
+        $item->publication_type = str_contains(mb_strtolower($value['author']), 'wizards') ?
+            PublicationType::OFFICIAL :
+            PublicationType::THIRD_PARTY;
+        $item->source_type = SourceType::SOURCEBOOK;
+
+        // Work out if it's 5e 2014 or 5e 2024.
+        $fifthDate = Carbon::parse('2024-09-17');
+        $myDate = Carbon::parse($value['published']);
+
+        if (str_contains($item->name, '2014') || $myDate < $fifthDate) {
+            $item->game_edition = GameEdition::FIFTH;
+        } else {
+            $item->game_edition = GameEdition::FIFTH_REVISED;
+        }
+
+        // Cover image.
+        Media::fromInternalJson([
+            'filename' => '/books/' . $item->slug,
+        ]);
+
+        $edition = SourceEdition::fromFeJson($value, $item);
+        $item->editions()->save($edition);
         $item->save();
         return $item;
     }

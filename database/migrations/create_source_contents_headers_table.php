@@ -5,22 +5,21 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\Media;
+use App\Models\Sources\SourceContents;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('source_contents_headers', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('slug')->unique();
-            $table->string('name')->index();
-            $table->foreignIdFor(Media::class, 'image_id')->nullable();
+            $table->foreignIdFor(SourceContents::class, 'source_contents_id');
+            $table->string('header')->index();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('source_contents_headers');
     }
 };

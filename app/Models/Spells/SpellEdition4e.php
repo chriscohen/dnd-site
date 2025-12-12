@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Spells;
 
-use App\Enums\Attribute;
+use App\Enums\Ability;
 use App\Enums\SavingThrows\SavingThrowType;
 use App\Enums\Spells\SpellFrequency;
 use App\Enums\Spells\SpellType4e;
@@ -19,7 +19,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property ?Attribute $attack_attribute
+ * @property ?Ability $attack_attribute
  * @property ?SavingThrowType $attack_save
  * @property ?SpellFrequency $frequency
  * @property SpellEdition $spellEdition
@@ -34,7 +34,7 @@ class SpellEdition4e extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'attack_attribute' => Attribute::class,
+        'attack_attribute' => Ability::class,
         'attack_save' => SavingThrowType::class,
         'frequency' => SpellFrequency::class,
         'type' => SpellType4e::class,

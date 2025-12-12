@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Spells\Spell;
+use App\Services\FeToolsService;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\Storage;

@@ -8,9 +8,11 @@ use App\Enums\GameEdition;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
+use App\Models\Proficiencies\StartingProficiency;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
@@ -28,6 +30,7 @@ use Ramsey\Uuid\Uuid;
  * @property ?CharacterClassEdition $parent
  * @property ?Uuid $parent_id
  * @property Collection<Reference> $references
+ * @property Collection<StartingProficiency> $startingProficiencies
  */
 class CharacterClassEdition extends AbstractModel
 {
@@ -54,6 +57,11 @@ class CharacterClassEdition extends AbstractModel
     public function references(): MorphMany
     {
         return $this->morphMany(Reference::class, 'entity');
+    }
+
+    public function startingProficiencies(): HasMany
+    {
+        return $this->hasMany(StartingProficiency::class);
     }
 
     public function toArrayFull(): array

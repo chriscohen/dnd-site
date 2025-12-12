@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use App\Models\Spells\SpellEdition;
-use App\Models\Items\ItemEdition;
+use App\Models\Items\ItemTypeEdition;
 
 return new class extends Migration
 {
@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('spell_material_components', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(ItemEdition::class, 'item_edition_id');
+            $table->foreignIdFor(ItemTypeEdition::class, 'item_edition_id');
             $table->foreignIdFor(SpellEdition::class, 'spell_edition_id');
 
             $table->unsignedSmallInteger('quantity')->default(1);

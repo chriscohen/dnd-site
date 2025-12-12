@@ -26,6 +26,13 @@
         "website": "https://www.drivethrurpg.com"
     },
     {
+        "id": "2d6846db-882a-44c7-8b46-52d106e9adb2",
+        "slug": "green-ronin-publishing",
+        "name": "Green Ronin Publishing",
+        "logo": "green-ronin-publishing.png",
+        "website": "https://greenronin.com"
+    },
+    {
         "id": "25d0e571-e37a-4a07-8ec5-73db0e00a502",
         "slug": "tsr",
         "name": "TSR, Inc.",

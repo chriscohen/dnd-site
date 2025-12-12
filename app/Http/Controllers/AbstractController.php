@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
+use App\Models\ModelInterface;
 use App\Rules\ValidGameEdition;
 use App\Rules\ValidMode;
 use Illuminate\Database\Eloquent\Builder;
@@ -83,6 +84,7 @@ abstract class AbstractController implements ControllerInterface
             $this->editionQuery($request->get('editions'));
         }
 
+        /** @var ModelInterface $model */
         $model = $this->query->where($this->whereField, $slug)->first();
 
         return response()->json($model->toArray($this->getMode($request)));

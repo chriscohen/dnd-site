@@ -11,13 +11,14 @@ use App\Models\Creatures\CreatureType;
 use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\Feats\Feat;
 use App\Models\Feats\FeatEdition;
-use App\Models\Items\Item;
-use App\Models\Items\ItemEdition;
+use App\Models\Items\ItemType;
+use App\Models\Items\ItemTypeEdition;
 use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
 use App\Models\Spells\SpellEdition4e;
+use App\Models\Spells\SpellEditionLevel;
 use GraphQL\Type\Definition\PhpEnumType;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
@@ -61,13 +62,14 @@ class AppServiceProvider extends ServiceProvider
             'creature_type_edition' => CreatureTypeEdition::class,
             'feat' => Feat::class,
             'feat_edition' => FeatEdition::class,
-            'item' => Item::class,
-            'item_edition' => ItemEdition::class,
+            'item' => ItemType::class,
+            'item_edition' => ItemTypeEdition::class,
             'source' => Source::class,
             'source_edition' => SourceEdition::class,
             'spell' => Spell::class,
             'spell_edition' => SpellEdition::class,
             'spell_edition_4e' => SpellEdition4e::class,
+            'spell_edition_level' => SpellEditionLevel::class,
         ]);
     }
 }

@@ -253,7 +253,7 @@ return [
     | Control the debug level as described in https://webonyx.github.io/graphql-php/error-handling/
     | Debugging is only applied if the global Laravel debug config is set to true.
     |
-    | When you set this value through an environment variable, use the following reference table:
+    | When you set this value through an environment variable, use the following 5etools table:
     |  0 => INCLUDE_NONE
     |  1 => INCLUDE_DEBUG_MESSAGE
     |  2 => INCLUDE_TRACE

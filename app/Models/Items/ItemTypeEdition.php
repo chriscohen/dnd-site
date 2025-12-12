@@ -27,8 +27,8 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property GameEdition $game_edition
  * @property bool $is_default
  * @property bool $is_unique
- * @property Item $item
- * @property Uuid $item_id
+ * @property ItemType $itemType
+ * @property Uuid $item_type_id
  * @property int $price
  * @property int $quantity
  * @property Rarity $rarity
@@ -36,7 +36,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Collection<SpellEdition> $spells
  * @property float $weight
  */
-class ItemEdition extends AbstractModel
+class ItemTypeEdition extends AbstractModel
 {
     use HasUuids;
 
@@ -66,9 +66,9 @@ class ItemEdition extends AbstractModel
         );
     }
 
-    public function item(): BelongsTo
+    public function itemType(): BelongsTo
     {
-        return $this->belongsTo(Item::class, 'item_id');
+        return $this->belongsTo(ItemType::class);
     }
 
     public function references(): MorphMany
@@ -85,12 +85,12 @@ class ItemEdition extends AbstractModel
     {
         return [
             'description' => $this->description(),
-            'game_edition' => $this->game_edition->toStringShort(),
-            'is_unique' => $this->is_unique,
+            'gameEdition' => $this->game_edition->toStringShort(),
+            'isUnique' => $this->is_unique,
             'price' => $this->price,
             'quantity' => $this->quantity,
             'rarity' => $this->rarity->toString(),
-            'references' => ModelCollection::make($this->references)->toArray($this->renderMode, $this->excluded),
+            'references' => ModelCollection::make($this->references)->toArray($this->renderMode),
             'weight' => $this->weight,
         ];
     }
@@ -112,7 +112,7 @@ class ItemEdition extends AbstractModel
     {
         $item = new static();
         $item->id = $value['id'];
-        $item->item()->associate($parent);
+        $item->itemType()->associate($parent);
 
         $item->is_default = $value['isDefault'] ?? false;
 

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Models\Spells;
 
 use App\Models\AbstractModel;
-use App\Models\Items\Item;
-use App\Models\Items\ItemEdition;
+use App\Models\Items\ItemType;
+use App\Models\Items\ItemTypeEdition;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,7 +20,7 @@ use Ramsey\Uuid\Uuid;
  * @property bool $is_focus
  * @property bool $is_plural
  * @property Uuid $item_edition_id
- * @property ItemEdition $itemEdition
+ * @property ItemTypeEdition $itemEdition
  * @property ?int $minimum_value
  * @property ?int $quantity
  * @property ?string $quantity_text
@@ -52,7 +52,7 @@ class SpellMaterialComponent extends AbstractModel
 
     public function itemEdition(): BelongsTo
     {
-        return $this->belongsTo(ItemEdition::class);
+        return $this->belongsTo(ItemTypeEdition::class);
     }
 
     public function spellEdition(): BelongsTo
@@ -106,7 +106,7 @@ class SpellMaterialComponent extends AbstractModel
         $item = new static();
         $item->spellEdition()->associate($parent);
 
-        $itemItem = Item::query()->where('slug', $value['item'])->firstOrFail();
+        $itemItem = ItemType::query()->where('slug', $value['item'])->firstOrFail();
         $itemEdition = $itemItem->defaultEdition();
         $item->itemEdition()->associate($itemEdition);
 

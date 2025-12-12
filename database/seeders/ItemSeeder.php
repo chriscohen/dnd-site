@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Items\Item;
+use App\Models\Items\ItemType;
 
 class ItemSeeder extends AbstractYmlSeeder
 {
     protected string $dir = 'items';
-    protected string $model = Item::class;
+    protected string $model = ItemType::class;
     protected array $excludedProperties = [
         'cover_image'
     ];
@@ -18,7 +18,7 @@ class ItemSeeder extends AbstractYmlSeeder
     {
         foreach ($this->getDataFromDirectory() as $datum) {
             print "Creating Item " . $datum['name'] . "...\n";
-            Item::fromInternalJson($datum);
+            ItemType::fromInternalJson($datum);
         }
     }
 }

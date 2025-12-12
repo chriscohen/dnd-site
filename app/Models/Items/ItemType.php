@@ -21,11 +21,11 @@ use Ramsey\Uuid\Uuid;
  * @property string $slug
  *
  * @property Collection<Category> $categories
- * @property Collection<ItemEdition> $editions
+ * @property Collection<ItemTypeEdition> $editions
  * @property ?Media $image
  * @property string $name
  */
-class Item extends AbstractModel
+class ItemType extends AbstractModel
 {
     use HasUuids;
 
@@ -36,14 +36,14 @@ class Item extends AbstractModel
         return $this->morphToMany(Category::class, 'entity', 'entity_category');
     }
 
-    public function defaultEdition(): ItemEdition
+    public function defaultEdition(): ItemTypeEdition
     {
         return $this->editions->where('is_default', true)->firstOrFail();
     }
 
     public function editions(): HasMany
     {
-        return $this->hasMany(ItemEdition::class);
+        return $this->hasMany(ItemTypeEdition::class);
     }
 
     public function image(): BelongsTo
@@ -92,7 +92,7 @@ class Item extends AbstractModel
         }
 
         foreach ($value['editions'] ?? [] as $editionData) {
-            $edition = ItemEdition::fromInternalJson($editionData, $item);
+            $edition = ItemTypeEdition::fromInternalJson($editionData, $item);
             $item->editions()->save($edition);
         }
 

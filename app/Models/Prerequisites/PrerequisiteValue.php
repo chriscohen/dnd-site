@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
-use App\Enums\Attribute as Attr;
+use App\Enums\Ability as Attr;
 use InvalidArgumentException;
 
 /**

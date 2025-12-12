@@ -3,6 +3,7 @@
 namespace App\Models\Sources;
 
 use App\Enums\Binding;
+use App\Enums\GameEdition;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
@@ -19,6 +20,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property ?Binding $binding
  * @property Collection<BoxedSetItem> $boxedSetItems
+ * @property Collection<SourceContents> $contents
  * @property Collection<SourceEditionFormat> $formats
  * @property bool $is_primary
  * @property ?string $isbn10
@@ -53,6 +55,11 @@ class SourceEdition extends AbstractModel
     public function boxedSetItems(): HasMany
     {
         return $this->hasMany(BoxedSetItem::class, 'parent_id');
+    }
+
+    public function contents(): HasMany
+    {
+        return $this->hasMany(SourceContents::class, 'source_edition_id');
     }
 
     public function formatReleaseDate(): string
@@ -136,6 +143,25 @@ class SourceEdition extends AbstractModel
         $item->pages = $value['pages'] ?? null;
         $item->release_date = new Carbon($value['releaseDate']) ?? null;
         $item->release_date_month_only = $value['releaseDateMonthOnly'] ?? false;
+
+        $item->save();
+        return $item;
+    }
+
+    public static function fromFeJson(array $value, ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->source()->associate($parent);
+
+        $item->release_date = new Carbon($value['published']);
+        $item->is_primary = true;
+        $item->name = 'original';
+        $item->save();
+
+        foreach ($value['contents'] as $contentsData) {
+            $sourceContents = SourceContents::fromFeJson($contentsData, $item);
+            $item->contents()->save($sourceContents);
+        }
 
         $item->save();
         return $item;

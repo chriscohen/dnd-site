@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum Attribute: int
+enum Ability: int
 {
     case STR = 1;
     case DEX = 2;

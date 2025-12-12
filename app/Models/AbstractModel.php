@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\JsonRenderMode;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 abstract class AbstractModel extends Model implements Arrayable, ModelInterface
 {
@@ -89,7 +92,7 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
 
     public static function makeSlug(string $input): string
     {
-        return str_replace('+', '-', urlencode(mb_strtolower($input)));
+        return Str::slug($input);
     }
 
     public static function fromFeJson(array $value, ModelInterface $parent = null): ModelInterface

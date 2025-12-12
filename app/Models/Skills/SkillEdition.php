@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Skills;
 
-use App\Enums\Attribute;
+use App\Enums\Ability;
 use App\Enums\GameEdition;
 use App\Models\AbstractModel;
 use App\Models\ModelInterface;
@@ -18,7 +18,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property ?string $alternate_name
  * @property GameEdition $game_edition
- * @property ?Attribute $related_attribute
+ * @property ?Ability $related_attribute
  * @property Skill $skill
  */
 class SkillEdition extends AbstractModel
@@ -29,7 +29,7 @@ class SkillEdition extends AbstractModel
 
     public $casts = [
         'game_edition' => GameEdition::class,
-        'related_attribute' => Attribute::class,
+        'related_attribute' => Ability::class,
     ];
 
     public function skill(): BelongsTo
@@ -66,7 +66,7 @@ class SkillEdition extends AbstractModel
         $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
 
         if (!empty($value['relatedAttribute'])) {
-            $item->related_attribute = Attribute::tryFromString($value['relatedAttribute']);
+            $item->related_attribute = Ability::tryFromString($value['relatedAttribute']);
         }
 
         $item->save();

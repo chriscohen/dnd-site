@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Sources\Source;
 
 return new class extends Migration
 {
@@ -12,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('source_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('source_id')
-                ->references('id')
-                ->on('sources');
+            $table->foreignIdFor(Source::class, 'source_id');
             $table->string('name');
             $table->smallInteger('binding')->nullable();
             $table->boolean('is_primary')->default(false)->index();
