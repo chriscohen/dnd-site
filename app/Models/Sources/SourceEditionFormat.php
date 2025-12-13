@@ -61,9 +61,9 @@ class SourceEditionFormat extends AbstractModel
         return [];
     }
 
-    public function toString(): Attribute
+    public function toString(): string
     {
-        return $this->format();
+        return $this->format;
     }
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static

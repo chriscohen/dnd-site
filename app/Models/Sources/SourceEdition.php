@@ -98,7 +98,7 @@ class SourceEdition extends AbstractModel
             'binding' => $this->binding,
             'boxed_set_items' => ModelCollection::make($this->boxedSetItems)
                 ->toArray($this->renderMode),
-            //'formats' => ModelCollection::make($this->formats)->toString(),
+            'formats' => ModelCollection::make($this->formats)->toString(),
             'is_primary' => $this->is_primary,
             'isbn10' => $this->isbn10,
             'isbn13' => $this->isbn13,
