@@ -15,7 +15,7 @@ interface ModelInterface
      * @param  ModelInterface|null  $parent
      * @return static
      */
-    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static;
+    public static function fromInternalJson(array|string|int $value, ?ModelInterface $parent = null): static;
 
     /**
      * Import from the 5e.tools JSON format.

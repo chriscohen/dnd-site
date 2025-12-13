@@ -5,19 +5,20 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\Prerequisites\PrerequisiteGroup;
+use App\Models\Actors\ActorType;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('deities', function (Blueprint $table) {
-            $table->string('id')->primary();
+        Schema::create('actor_type_editions', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->foreignIdFor(ActorType::class, 'actor_type_id');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('deities');
+        Schema::dropIfExists('actor_type_editions');
     }
 };

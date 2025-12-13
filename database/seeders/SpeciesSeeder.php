@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Species;
+use App\Models\Species\Species;
 
 class SpeciesSeeder extends AbstractYmlSeeder
 {

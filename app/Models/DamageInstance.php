@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\Ability;
+use App\Enums\AbilityScoreType;
 use App\Enums\DamageType;
 use App\Enums\GameEdition;
 use App\Enums\PerLevelMode;
@@ -18,7 +18,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property ?Ability $attribute_modifier
+ * @property ?AbilityScoreType $attribute_modifier
  * @property ?int $attribute_modifier_quantity
  * @property DamageType $damage_type
  * @property ?int $die_faces
@@ -149,7 +149,7 @@ class DamageInstance extends AbstractModel
         $item->modifier = $value['modifier'] ?? 0;
 
         if (!empty($value['attribute_modifier'])) {
-            $item->attribute_modifier = Ability::tryFromString($value['attribute_modifier']);
+            $item->attribute_modifier = AbilityScoreType::tryFromString($value['attribute_modifier']);
             $item->attribute_modifier_quantity = $value['attribute_modifier_quantity'] ?? 1;
         }
 

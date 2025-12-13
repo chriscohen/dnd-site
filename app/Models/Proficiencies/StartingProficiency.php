@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Proficiencies;
 
-use App\Enums\Ability;
+use App\Enums\AbilityScoreType;
 use App\Enums\Proficiencies\ProficiencyType;
 use App\Models\AbstractModel;
 use App\Models\CharacterClasses\CharacterClassEdition;
@@ -50,7 +50,7 @@ class StartingProficiency extends AbstractModel
     public function getValue()
     {
         return match ($this->proficiency_type) {
-            ProficiencyType::ABILITY => Ability::tryFrom($this->value),
+            ProficiencyType::ABILITY => AbilityScoreType::tryFrom($this->value),
             ProficiencyType::ARMOR =>
         };
     }

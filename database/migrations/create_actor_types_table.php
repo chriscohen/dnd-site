@@ -5,19 +5,20 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\Prerequisites\PrerequisiteGroup;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('deities', function (Blueprint $table) {
-            $table->string('id')->primary();
+        Schema::create('actor_types', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('slug')->unique();
+            $table->string('name')->index();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('deities');
+        Schema::dropIfExists('actor_types');
     }
 };

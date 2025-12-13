@@ -5,22 +5,21 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\Feats\FeatureEdition;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('prerequisites', function (Blueprint $table) {
+        Schema::create('ability_score_modifier_groups', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(FeatureEdition::class, 'feat_edition_id');
 
-            $table->string('type', 32);
+            $table->string('parent_id');
+            $table->string('parent_type');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('prerequisites');
+        Schema::dropIfExists('ability_score_modifier_groups');
     }
 };

@@ -11,13 +11,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('deities', function (Blueprint $table) {
-            $table->string('id')->primary();
+        Schema::create('prerequisite_feature_groups', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->foreignIdFor(PrerequisiteGroup::class, 'prerequisite_group_id');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('deities');
+        Schema::dropIfExists('prerequisite_feature_groups');
     }
 };

@@ -11,17 +11,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('species', function (Blueprint $table) {
+        Schema::create('species_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('slug')->unique();
-            $table->string('name')->index();
+            $table->foreignIdFor(Species::class, 'species_id');
 
-            $table->foreignIdFor(Species::class, 'parent_id')->nullable();
+            $table->unsignedSmallInteger('game_edition');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('species');
+        Schema::dropIfExists('species_editions');
     }
 };

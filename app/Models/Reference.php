@@ -91,4 +91,23 @@ class Reference extends AbstractModel
         $item->save();
         return $item;
     }
+
+    /**
+     * @param array{
+     *     source: string,
+     *     page: int
+     * } $value
+     */
+    public static function fromFeJson(array $value, ?ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->entity()->associate($parent);
+
+        $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
+        $item->edition()->associate($source->primaryEdition());
+        $item->page_from = $value['page'];
+
+        $item->save();
+        return $item;
+    }
 }

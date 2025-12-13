@@ -10,7 +10,7 @@ use App\Enums\Prerequisites\PrerequisiteType;
 use App\Enums\Prerequisites\WeaponFocusType;
 use App\Models\Language;
 use App\Models\ModelInterface;
-use App\Models\Prerequisites\Prerequisite;
+use App\Models\Prerequisites\PrerequisiteGroup;
 use App\Models\Prerequisites\PrerequisiteValue;
 use App\Models\Reference;
 use App\Models\Sources\Source;
@@ -151,7 +151,7 @@ abstract class AbstractYmlSeeder extends Seeder
     public function setPrerequisites(array $data, ModelInterface $me): self
     {
         foreach ($data as $prerequisiteData) {
-            $prerequisite = new Prerequisite();
+            $prerequisite = new PrerequisiteGroup();
             $prerequisite->featEdition()->associate($me);
             $prerequisite->type = PrerequisiteType::tryFromString($prerequisiteData['type'], true);
 

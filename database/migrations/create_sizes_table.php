@@ -5,19 +5,22 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\Prerequisites\PrerequisiteGroup;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('deities', function (Blueprint $table) {
-            $table->string('id')->primary();
+        Schema::create('sizes', function (Blueprint $table) {
+            $table->unsignedSmallInteger('size');
+            $table->string('entity_id');
+            $table->string('entity_type');
+
+            $table->unique(['size', 'entity_id', 'entity_type']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('deities');
+        Schema::dropIfExists('sizes');
     }
 };

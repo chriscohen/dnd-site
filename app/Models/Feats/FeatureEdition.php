@@ -9,7 +9,7 @@ use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
-use App\Models\Prerequisites\Prerequisite;
+use App\Models\Prerequisites\PrerequisiteGroup;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,7 +26,7 @@ use Ramsey\Uuid\Uuid;
  * @property ?string $description
  * @property Feature $feat
  * @property GameEdition $game_edition
- * @property Collection<Prerequisite> $prerequisites
+ * @property Collection<PrerequisiteGroup> $prerequisites
  * @property Collection<Reference> $references
  */
 class FeatureEdition extends AbstractModel
@@ -56,7 +56,7 @@ class FeatureEdition extends AbstractModel
 
     public function prerequisites(): HasMany
     {
-        return $this->hasMany(Prerequisite::class);
+        return $this->hasMany(PrerequisiteGroup::class);
     }
 
     public function references(): MorphMany
@@ -103,7 +103,7 @@ class FeatureEdition extends AbstractModel
             Reference::fromInternalJson($reference, $item);
         }
         foreach ($value['prerequisites'] ?? [] as $prerequisiteData) {
-            $prerequisite = Prerequisite::fromInternalJson($prerequisiteData, $item);
+            $prerequisite = PrerequisiteGroup::fromInternalJson($prerequisiteData, $item);
             $item->prerequisites()->save($prerequisite);
         }
 
