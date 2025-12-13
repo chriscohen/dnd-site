@@ -298,4 +298,37 @@ class Source extends AbstractModel
         $item->save();
         return $item;
     }
+
+    public static function fromFeJsonExtra(array|string $value, ModelInterface $parent = null): ?static
+    {
+        $item = Source::query()->where('name', $value['name'])->first();
+
+        if (empty($item)) {
+            return null;
+        }
+        // Description.
+        if (!empty($value['description'])) {
+            $item->description = $value['description'];
+        }
+        // Editions.
+        foreach ($value['editions'] ?? [] as $edition) {
+            SourceEdition::fromFeJsonExtra($edition, $item);
+        }
+
+        // Product IDs.
+        foreach ($value['productIds'] ?? [] as $key => $value) {
+            ProductId::fromInternalJson([
+                'company' => $key,
+                'productId' => $value,
+            ], $item);
+        }
+
+        // Sourcebook types.
+        foreach ($value['sourcebookTypes'] ?? [] as $sourcebookType) {
+            SourceSourcebookType::fromInternalJson($sourcebookType, $item);
+        }
+
+        $item->save();
+        return $item;
+    }
 }

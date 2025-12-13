@@ -69,7 +69,7 @@ class SourceEditionFormat extends AbstractModel
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
-        $item->source_edition_id = $parent->id;
+        $item->edition()->associate($parent);
         $item->format = SourceFormat::tryFromString($value);
         $item->save();
         return $item;

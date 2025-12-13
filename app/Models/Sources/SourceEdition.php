@@ -166,4 +166,32 @@ class SourceEdition extends AbstractModel
         $item->save();
         return $item;
     }
+
+    /**
+     * @param Source $parent
+     */
+    public static function fromFeJsonExtra(array|string $value, ModelInterface $parent = null): ?static
+    {
+        $item = $parent->editions()->where('name', $value['name'])->first();
+
+        if (empty($item)) {
+            return null;
+        }
+
+        // Binding.
+        if (!empty($value['binding'])) {
+            $item->binding = Binding::tryFromString($value['binding']);
+        }
+        // Formats.
+        foreach ($value['formats'] ?? [] as $formatData) {
+            $format = SourceEditionFormat::fromInternalJson($formatData, $item);
+            $item->formats()->save($format);
+        }
+        // ISBNs & pages.
+        $item->isbn10 = $value['isbn10'] ?? null;
+        $item->isbn13 = $value['isbn13'] ?? null;
+        $item->pages = $value['pages'] ?? null;
+        $item->save();
+        return $item;
+    }
 }

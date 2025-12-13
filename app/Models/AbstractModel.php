@@ -99,4 +99,9 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
     {
         throw new \InvalidArgumentException('Not implemented');
     }
+
+    public static function fromFeJsonExtra(array|string $value, ModelInterface $parent = null): ?static
+    {
+        throw new \InvalidArgumentException('Not implemented');
+    }
 }

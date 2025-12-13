@@ -22,15 +22,23 @@ class SourceSeeder extends AbstractYmlSeeder
     public function run(): void
     {
         foreach ($this->getDataFromDirectory() as $datum) {
-            print "Creating Source " . $datum['name'] . "...\n";
+            print "[Internal] Creating Source " . $datum['name'] . "...\n";
             Source::fromInternalJson($datum);
         }
 
         $json = json_decode(Storage::disk('data')->get('/5etools/data/books.json'), true);
 
         foreach ($json['book'] as $item) {
-            print "Creating 5eTools Source " . $item['name'] . "...\n";
+            print "[5e.tools] Creating Source " . $item['name'] . "...\n";
             Source::fromFeJson($item);
+        }
+
+        // Extra data not found in 5e.tools JSON.
+        $extra = json_decode(Storage::disk('data')->get('/5etools-x/data/books.json'), true);
+
+        foreach ($extra['book'] as $item) {
+            print "[Extra] Adding extra data for 5e.tools Source " . $item['name'] . "...\n";
+            Source::fromFeJsonExtra($item);
         }
     }
 }

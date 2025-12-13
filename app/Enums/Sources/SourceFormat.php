@@ -27,13 +27,13 @@ enum SourceFormat: int
 
     public static function tryFromString(string $value): ?SourceFormat
     {
-        return match (mb_strtoupper($value)) {
-            'PRINT' => self::PRINT,
-            'PDF' => self::PDF,
-            'ROLL_20' => self::ROLL_20,
-            'FOUNDRY' => self::FOUNDRY,
-            'FANTASY_GROUNDS' => self::FANTASY_GROUNDS,
-            'DND_BEYOND' => self::DND_BEYOND,
+        return match (mb_strtolower(str_replace(' ', '', $value))) {
+            'print' => self::PRINT,
+            'pdf' => self::PDF,
+            'roll20', 'roll-20', 'roll_20' => self::ROLL_20,
+            'foundry' => self::FOUNDRY,
+            'fantasygrounds', 'fantasy-grounds', 'fantasy_grounds' => self::FANTASY_GROUNDS,
+            'beyond', 'd&d_beyond', 'dnd_beyond', 'dndbeyond', 'd&dbeyond' => self::DND_BEYOND,
             default => null,
         };
     }

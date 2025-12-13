@@ -1,0 +1,63 @@
+{
+    "book": [
+        {
+            "name": "Player's Handbook (2014)",
+            "editions": [
+                {
+                    "name": "original",
+                    "binding": "hardcover",
+                    "formats": ["print", "pdf", "roll20"],
+                    "isbn10": "0786965606",
+                    "isbn13": "9780786965606",
+                    "pages": 320
+                }
+            ],
+            "productIds": {
+                "dungeon-masters-guild": "442461",
+                "drivethru-rpg": "442461"
+            }
+        },
+        {
+            "name": "Monster Manual (2014)",
+            "description": "The A to Z Fantasy Bestiary\n\nThe Monster Manual presents a horde of classic Dungeons & Dragons creatures, including dragons, giants, mind flayers, and beholders—a monstrous feast for Dungeon Masters ready to challenge their players and populate their adventures.\n\nThe monsters contained herein are culled from the D&D game's illustrious history, with easy-to-use game statistics and thrilling stories to feed your imagination.",
+            "editions": [
+                {
+                    "name": "original",
+                    "binding": "hardcover",
+                    "formats": ["print", "pdf", "roll20"],
+                    "isbn10": "0786965614",
+                    "isbn13": "9780786965614",
+                    "pages": 352
+                }
+            ],
+            "productIds": {
+                "dungeon-masters-guild": "442459",
+                "drivethru-rpg": "442459"
+            },
+            "sourcebookTypes": [
+                "monsters"
+            ]
+        },
+        {
+            "name": "Dungeon Master's Guide (2014)",
+            "editions": [
+                {
+                    "name": "original",
+                    "binding": "hardcover",
+                    "formats": [
+                        "print",
+                        "pdf",
+                        "roll20"
+                    ],
+                    "isbn10": "0786965622",
+                    "isbn13": "9780786965622",
+                    "pages": 320
+                }
+            ],
+            "productIds": {
+                "dungeon-masters-guild": "442458",
+                "drivethru-rpg": "442458"
+            }
+        }
+    ]
+}
