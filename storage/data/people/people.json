@@ -1,0 +1,97 @@
+[
+    {
+        "firstName": "Adam",
+        "lastName": "Lee",
+        "slug": "adam-lee"
+    },
+    {
+        "firstName": "A.J.",
+        "lastName": "Bondio",
+        "slug": "a-j-bondio",
+        "nickName": "The Salamander King",
+        "twitter": "ayejay_make_art"
+    },
+    {
+        "firstName": "Alexander",
+        "lastName": "Cloos",
+        "slug": "alexander-cloos",
+        "twitter": "varguyart"
+    },
+    {
+        "firstName": "Almir",
+        "lastName": "Gusić",
+        "slug": "almir-gusic",
+        "twitter": "almirgusic"
+    },
+    {
+        "firstName": "Ari",
+        "lastName": "Levitch",
+        "slug": "ari-levitch"
+    },
+    {
+        "firstName": "Emma",
+        "lastName": "Yasui",
+        "slug": "emma-yasui"
+    },
+    {
+        "firstName": "Jake",
+        "lastName": "Morrison",
+        "slug": "jake-morrison",
+        "twitter": "jakemorrisonart"
+    },
+    {
+        "firstName": "Jeremiah",
+        "lastName": "Crofton",
+        "slug": "jeremiah-crofton"
+    },
+    {
+        "firstName": "Kate",
+        "initials": ["Z"],
+        "lastName": "Stone",
+        "slug": "kate-z-stone"
+    },
+    {
+        "firstName": "Kellie-Ann",
+        "lastName": "Maxwell",
+        "slug": "kellie-ann-maxwell"
+    },
+    {
+        "firstName": "Matt",
+        "lastName": "Owen",
+        "slug": "matt-owen",
+        "twitter": "mrmattzan"
+    },
+    {
+        "firstName": "Otis",
+        "lastName": "Nyiti",
+        "slug": "otis-nyiti",
+        "twitter": "otis_draws"
+    },
+    {
+        "firstName": "Sarah",
+        "lastName": "Falletti-Velasco",
+        "slug": "sarah-falletti-velasco"
+    },
+    {
+        "firstName": "Scott",
+        "lastName": "Higginbotham",
+        "slug": "scott-higginbotham",
+        "twitter": "Panelperday"
+    },
+    {
+        "firstName": "Shawn",
+        "lastName": "Banerjee",
+        "slug": "shawn-banerjee"
+    },
+    {
+        "firstName": "Tony",
+        "lastName": "Casper",
+        "slug": "tony-casper"
+    },
+    {
+        "firstName": "Veronica",
+        "lastName": "Casson",
+        "slug": "veronica-casson",
+        "twitter": "saltandfog"
+    }
+]

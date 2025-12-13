@@ -40,7 +40,7 @@ class Company extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'logo' => $this->logo->toArray($this->renderMode, $this->excluded),
+            'logo' => $this->logo?->toArray($this->renderMode),
             'product_url' => $this->product_url,
             'short_name' => $this->short_name,
             'website' => $this->website,

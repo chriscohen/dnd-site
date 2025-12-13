@@ -15,7 +15,7 @@ use App\Models\Area;
 use App\Models\CharacterClasses\CharacterClass;
 use App\Models\DamageInstance;
 use App\Models\Duration;
-use App\Models\Feats\Feat;
+use App\Models\Feats\Feature;
 use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
 use App\Models\ModelCollection;
@@ -48,7 +48,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property string $description
  * @property Collection<MagicDomain> $domains
  * @property Duration $duration
- * @property ?Feat $feat
+ * @property ?Feature $feat
  * @property ?string $focus
  * @property string $game_edition
  * @property GameEdition $gameEdition
@@ -116,7 +116,7 @@ class SpellEdition extends AbstractModel
 
     public function feat(): BelongsTo
     {
-        return $this->belongsTo(Feat::class, 'featId');
+        return $this->belongsTo(Feature::class, 'featId');
     }
 
     protected function gameEdition(): ?Attribute

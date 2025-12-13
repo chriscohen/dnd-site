@@ -10,7 +10,7 @@ use App\Enums\Prerequisites\PrerequisiteType;
 use App\Enums\Prerequisites\WeaponFocusType;
 use App\Enums\SpellcasterType;
 use App\Models\AbstractModel;
-use App\Models\Feats\Feat;
+use App\Models\Feats\Feature;
 use App\Models\Language;
 use App\Models\ModelInterface;
 use App\Models\Skills\Skill;
@@ -93,7 +93,7 @@ class PrerequisiteValue extends AbstractModel
     {
         match ($this->prerequisite->type) {
             PrerequisiteType::ABILITY_SCORE => $this->validateAbilityScore($value),
-            PrerequisiteType::FEAT => Feat::query()->where('slug', $value)->firstOrFail(),
+            PrerequisiteType::FEAT => Feature::query()->where('slug', $value)->firstOrFail(),
             PrerequisiteType::SKILL => Skill::query()->where('slug', $value)->firstOrFail(),
             PrerequisiteType::SPECIES => Species::query()->where('slug', $value)->firstOrFail(),
             PrerequisiteType::SPELLCASTER_TYPE => SpellcasterType::tryFromString($value, true),

@@ -5,6 +5,7 @@ namespace App\Models\Sources;
 use App\Enums\Binding;
 use App\Enums\GameEdition;
 use App\Models\AbstractModel;
+use App\Models\Credit;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use Carbon\Carbon;
@@ -21,6 +22,7 @@ use Ramsey\Uuid\Uuid;
  * @property ?Binding $binding
  * @property Collection<BoxedSetItem> $boxedSetItems
  * @property Collection<SourceContents> $contents
+ * @property Collection<Credit> $credits
  * @property Collection<SourceEditionFormat> $formats
  * @property bool $is_primary
  * @property ?string $isbn10
@@ -60,6 +62,11 @@ class SourceEdition extends AbstractModel
     public function contents(): HasMany
     {
         return $this->hasMany(SourceContents::class, 'source_edition_id');
+    }
+
+    public function credits(): HasMany
+    {
+        return $this->hasMany(Credit::class, 'source_edition_id');
     }
 
     public function formatReleaseDate(): string
@@ -104,6 +111,8 @@ class SourceEdition extends AbstractModel
             'isbn13' => $this->isbn13,
             'pages' => $this->pages,
             'release_date' => $this->formatReleaseDate(),
+            'contents' => ModelCollection::make($this->contents)->toArray($this->renderMode),
+            'credits' => ModelCollection::make($this->credits)->toArray($this->renderMode),
         ];
     }
 
@@ -143,6 +152,23 @@ class SourceEdition extends AbstractModel
         $item->pages = $value['pages'] ?? null;
         $item->release_date = new Carbon($value['releaseDate']) ?? null;
         $item->release_date_month_only = $value['releaseDateMonthOnly'] ?? false;
+
+        // Contents.
+        foreach ($value['contents'] ?? [] as $contentsData) {
+            $sourceContents = SourceContents::fromInternalJson($contentsData, $item);
+            $item->contents()->save($sourceContents);
+        }
+
+        // Credits.
+        foreach ($value['credits'] ?? [] as $key => $creditData) {
+            foreach ($creditData as $creditPerson) {
+                $credit = Credit::fromInternalJson([
+                    'role' => $key,
+                    'person' => $creditPerson
+                ], $item);
+                $item->credits()->save($credit);
+            }
+        }
 
         $item->save();
         return $item;

@@ -7,7 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Spells\Spell;
 use App\Models\Range;
-use App\Models\Feats\Feat;
+use App\Models\Feats\Feature;
 use App\Models\Area;
 
 return new class extends Migration
@@ -28,8 +28,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('material_component_mode')->nullable();
             $table->unsignedSmallInteger('rarity')->nullable()->index();
 
-            // Feat?
-            $table->foreignIdFor(Feat::class, 'feat_id')->nullable();
+            // Feature?
+            $table->foreignIdFor(Feature::class, 'feat_id')->nullable();
 
             // Range / area
             $table->foreignIdFor(Range::class, 'range_id')->nullable();

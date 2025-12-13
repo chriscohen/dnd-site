@@ -6,6 +6,7 @@ namespace App\Models\Sources;
 
 use App\Enums\Sources\SourceContentsType;
 use App\Models\AbstractModel;
+use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -87,7 +88,7 @@ class SourceContents extends AbstractModel
             'id' => $this->id,
             'edition_id' => $this->edition->id,
             'source' => $this->edition->source->name,
-            'headers' => $this->headers->map(fn (SourceContentsHeader $header) => $header->toArrayFull())->toArray(),
+            'headers' => ModelCollection::make($this->headers)->toArray(),
         ];
     }
 
@@ -95,7 +96,7 @@ class SourceContents extends AbstractModel
     {
         return [
             'name' => $this->name,
-            'order' => $this->order,
+            'ordinal' => $this->ordinal,
             'type' => $this->type->toString(),
         ];
     }

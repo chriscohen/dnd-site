@@ -24,12 +24,12 @@ use Ramsey\Uuid\Uuid;
  * @property string $name
  *
  * @property ?string $description
- * @property Feat $feat
+ * @property Feature $feat
  * @property GameEdition $game_edition
  * @property Collection<Prerequisite> $prerequisites
  * @property Collection<Reference> $references
  */
-class FeatEdition extends AbstractModel
+class FeatureEdition extends AbstractModel
 {
     use HasUuids;
 
@@ -41,7 +41,7 @@ class FeatEdition extends AbstractModel
 
     public function feat(): BelongsTo
     {
-        return $this->belongsTo(Feat::class);
+        return $this->belongsTo(Feature::class);
     }
 
     public function getName(): string

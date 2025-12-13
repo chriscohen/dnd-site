@@ -1,0 +1,194 @@
+{
+    "id": "d690f0bc-396a-4f68-a0a2-c12f6ce80b41",
+    "name": "Obojima: Tales from the Tall Grass",
+    "slug": "obojima-tales-from-the-tall-grass",
+    "coverImage": "obojima-tales-from-the-tall-grass.webp",
+    "description": "Obojima is a leisure fantasy setting from 1985 Games that is inspired by the works of Studio Ghibli and the Legend of Zelda. Explore an island full of whimsy, mystery, and possibility! Meet spirts, uncover the secrets of the ominous Corruption spreading across the island, and eat some good ramen! Go on an unforgettably unique roleplaying adventure that everyone at your table will love!\n\nFeaturing:\n\n* 2 New Ancestries- the frog-like Nakudama and the mysterious Dara\n* 4 New Factions- witch covens, diver leagues, youth scouts, and academic adventurers\n* 2 New Skills- break and fix things with Mechanics. Find ingredients and parts with Salvaging\n* 20 New Feats- including Sword fighting skills, ancestral modifiers, and faction feats\n* 48 New Magic Items- keytars, lunar weapons, even flame trail leaving bicycles\n* 50 New Spells- use Jolt to power ancient machines back to life, make weapons out of vegetables, sculpt sand to your whim, or even create magical train stops\n* 60 New Monsters & NPCs- friends and foes! Spirit companions, legendary monsters, corrupted creatures and more\n* 11 New Subclasses- Origami-wielding wizards, mask-wearing bards, potion-brewing barbarians, and the community created sheep dragon monk\n* Potions, potions, potions!- A brand new, one of a kind, potion brewing system that can be seamlessly added into other campaigns. Includes over 60 ingredients and 180 new potions for combat, utility, and fun!\n\nFully compatible with Dungeons & Dragons 5th Edition. 5E basic rules needed for optimal gameplay",
+    "editions": [
+        {
+            "id": "cf9f262b-8222-4b8d-8630-2a728d01bf15",
+            "name": "original",
+            "formats": ["pdf"],
+            "isPrimary": true,
+            "pages": 372,
+            "releaseDate": "2025-03",
+            "releaseDateMonthOnly": true,
+            "contents": [
+                {
+                    "name": "About the World",
+                    "headers": [
+                        "Themes and Tone",
+                        "Spirit Realm",
+                        "Spirits"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 1
+                    }
+                },
+                {
+                    "name": "The Island",
+                    "headers": [
+                        "How Obojimans Live",
+                        "History",
+                        "Technology",
+                        "The Corruption",
+                        "Factions",
+                        "Regions"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 2
+                    }
+                },
+                {
+                    "name": "Locations",
+                    "headers": [
+                        "The Gift of Shuritashi",
+                        "The Land of Hot Water",
+                        "Mount Arbora",
+                        "The Gale Fields",
+                        "The Brackwater Wetlands",
+                        "The Coastal Highlands",
+                        "The Shallows",
+                        "Other Locations"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 3
+                    }
+                },
+                {
+                    "name": "Player Options",
+                    "headers": [
+                        "Ancestries of Obojima",
+                        "Subclasses",
+                        "Backgrounds",
+                        "Languages",
+                        "Equipment",
+                        "Adventuring Gear",
+                        "Feats",
+                        "Skills",
+                        "Conditions"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 4
+                    }
+                },
+                {
+                    "name": "Magic Items",
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 5
+                    }
+                },
+                {
+                    "name": "Spells & Potions",
+                    "headers": [
+                        "Spells",
+                        "Potion Brewing"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 6
+                    }
+                },
+                {
+                    "name": "Hero's Journey Boon System",
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 7
+                    }
+                },
+                {
+                    "name": "Friends & Foes",
+                    "headers": [
+                        "Companion Spirits",
+                        "Companion Types",
+                        "Thinking About Antagonists",
+                        "Creatures"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 8
+                    }
+                },
+                {
+                    "name": "Mysteries, History, and More",
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 9
+                    }
+                },
+                {
+                    "name": "Adventures",
+                    "headers": [
+                        "The Curious World Within",
+                        "Below the Shallows",
+                        "Lost Within the Crawling Canopy"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 10
+                    }
+                }
+            ],
+            "credits": {
+                "Lead Designer": [
+                    "adam-lee",
+                    "ari-levitch",
+                    "jeremiah-crofton"
+                ],
+                "Lead Writer": [
+                    "adam-lee",
+                    "ari-levitch",
+                    "jeremiah-crofton"
+                ],
+                "Rules Developer": [
+                    "jeremiah-crofton",
+                    "tony-casper"
+                ],
+                "Editor": [
+                    "jeremiah-crofton",
+                    "kellie-ann-maxwell",
+                    "shawn-banerjee",
+                    "tony-casper"
+                ],
+                "Art Director": ["jeremiah-crofton"],
+                "Cover Illustrator": ["alexander-cloos"],
+                "Potion Illustrator": ["scott-higginbotham"],
+                "Interior Illustrator": [
+                    "a-j-bondio",
+                    "alexander-cloos",
+                    "almir-gusic",
+                    "jake-morrison",
+                    "matt-owen",
+                    "otis-nyiti",
+                    "scott-higginbotham",
+                    "veronica-casson"
+                ],
+                "Graphic Designer": [
+                    "sarah-falletti-velasco",
+                    "kate-z-stone"
+                ],
+                "Cultural Consultant": ["emma-yasui"]
+            }
+        }
+    ],
+    "gameEdition": "5.24",
+    "productIds": {
+        "amazon": "1954777167"
+    },
+    "publicationType": "3rd party",
+    "publisher": "1985-games",
+    "sourcebookTypes": [
+        "campaign_setting",
+        "adventure",
+        "character_options",
+        "gear_magic_items",
+        "monsters",
+        "spells"
+    ],
+    "sourceType": "sourcebook"
+}

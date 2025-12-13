@@ -16,16 +16,16 @@ use Ramsey\Uuid\Uuid;
  * @property string $slug
  * @property string $name
  *
- * @property Collection<FeatEdition> $editions
+ * @property Collection<FeatureEdition> $editions
  */
-class Feat extends AbstractModel
+class Feature extends AbstractModel
 {
     public $timestamps = false;
     public $incrementing = false;
 
     public function editions(): HasMany
     {
-        return $this->hasMany(FeatEdition::class);
+        return $this->hasMany(FeatureEdition::class);
     }
 
     public function toArrayFull(): array
@@ -58,7 +58,7 @@ class Feat extends AbstractModel
         $item->save();
 
         foreach ($value['editions'] ?? [] as $editionData) {
-            $edition = FeatEdition::fromInternalJson($editionData, $item);
+            $edition = FeatureEdition::fromInternalJson($editionData, $item);
             $item->editions()->save($edition);
         }
 

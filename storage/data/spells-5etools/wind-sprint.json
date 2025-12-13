@@ -1,0 +1,56 @@
+{
+    "name": "Wind Sprint",
+    "level": 2,
+    "school": "V",
+    "time": [
+        {
+            "number": 1,
+            "unit": "bonus"
+        }
+    ],
+    "range": {
+        "type": "point",
+        "distance": {
+            "type": "feet",
+            "amount": 60
+        }
+    },
+    "duration": [
+        {
+            "type": "instant"
+        }
+    ],
+    "classes": {
+        "fromClassList": [
+            {
+                "name": "Wizard",
+                "source": "ObojimaTalesFromtheTallGrass"
+            },
+            {
+                "name": "Paladin",
+                "source": "ObojimaTalesFromtheTallGrass"
+            },
+            {
+                "name": "Ranger",
+                "source": "ObojimaTalesFromtheTallGrass"
+            }
+        ]
+    },
+    "entries": [
+        "A turning tempest wind lifts you up and carries you to a creature you can see within range. The next time you hit a creature with a melee weapon attack before the end of the turn, the attack deals an extra {@damage 2d6} slashing damage as the winds buffet the target."
+    ],
+    "source": "ObojimaTalesFromtheTallGrass",
+    "page": 192,
+    "components": {
+        "v": true
+    },
+    "damageInflict": [
+        "slashing"
+    ],
+    "spellAttack": [
+        "M"
+    ],
+    "miscTags": [
+        "TP"
+    ]
+}

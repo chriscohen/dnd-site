@@ -10,7 +10,6 @@ use App\Models\AbstractModel;
 use App\Models\CharacterClasses\CharacterClassEdition;
 use App\Models\ModelInterface;
 use App\Models\Skills\Skill;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;

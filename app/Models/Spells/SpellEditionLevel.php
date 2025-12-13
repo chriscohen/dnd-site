@@ -6,8 +6,8 @@ namespace App\Models\Spells;
 
 use App\Models\AbstractModel;
 use App\Models\CharacterClasses\CharacterClass;
-use App\Models\Feats\Feat;
-use App\Models\Feats\FeatEdition;
+use App\Models\Feats\Feature;
+use App\Models\Feats\FeatureEdition;
 use App\Models\ModelInterface;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -22,7 +22,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property Uuid $id
  *
- * @property CharacterClass|FeatEdition $entity
+ * @property CharacterClass|FeatureEdition $entity
  * @property Uuid $entity_id
  * @property string $entity_type
  * @property int $item
@@ -57,7 +57,7 @@ class SpellEditionLevel extends AbstractModel
         $output = [
             'spell_edition' => $this->spellEdition?->toArray($this->renderMode),
         ];
-        if ($this->entity::class == FeatEdition::class) {
+        if ($this->entity::class == FeatureEdition::class) {
             $output['feat_edition'] = $this->entity->toArray($this->renderMode);
         } else {
             $output['character_class'] = $this->entity->toArray($this->renderMode);
@@ -71,7 +71,7 @@ class SpellEditionLevel extends AbstractModel
             'name' => $this->entity->getName(),
             'slug' => $this->entity->getSlug(),
             'level' => $this->level,
-            'type' => $this->entity::class == FeatEdition::class ? 'feat' : 'class',
+            'type' => $this->entity::class == FeatureEdition::class ? 'feat' : 'class',
         ];
     }
 
@@ -88,7 +88,7 @@ class SpellEditionLevel extends AbstractModel
         if (!empty($value['class'])) {
             $entity = CharacterClass::query()->where('id', $value['class'])->firstOrFail();
         } else {
-            $feat = Feat::query()->where('id', $value['feat'])->firstOrFail();
+            $feat = Feature::query()->where('id', $value['feat'])->firstOrFail();
             $entity = $feat->editions()->firstOrFail();
         }
         $item->entity()->associate($entity);

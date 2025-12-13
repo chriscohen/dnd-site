@@ -9,8 +9,8 @@ use App\Models\CharacterClasses\CharacterClass;
 use App\Models\CharacterClasses\CharacterClassEdition;
 use App\Models\Creatures\CreatureType;
 use App\Models\Creatures\CreatureTypeEdition;
-use App\Models\Feats\Feat;
-use App\Models\Feats\FeatEdition;
+use App\Models\Feats\Feature;
+use App\Models\Feats\FeatureEdition;
 use App\Models\Items\ItemType;
 use App\Models\Items\ItemTypeEdition;
 use App\Models\Sources\Source;
@@ -60,8 +60,8 @@ class AppServiceProvider extends ServiceProvider
             'character_class_edition' => CharacterClassEdition::class,
             'creature_type' => CreatureType::class,
             'creature_type_edition' => CreatureTypeEdition::class,
-            'feat' => Feat::class,
-            'feat_edition' => FeatEdition::class,
+            'feat' => Feature::class,
+            'feat_edition' => FeatureEdition::class,
             'item' => ItemType::class,
             'item_edition' => ItemTypeEdition::class,
             'source' => Source::class,

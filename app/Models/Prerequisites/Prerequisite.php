@@ -10,8 +10,8 @@ use App\Enums\SpellcasterType;
 use App\Models\AbstractModel;
 use App\Models\CharacterClasses\CharacterClass;
 use App\Models\Deity;
-use App\Models\Feats\Feat;
-use App\Models\Feats\FeatEdition;
+use App\Models\Feats\Feature;
+use App\Models\Feats\FeatureEdition;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\Species;
@@ -24,7 +24,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property FeatEdition $featEdition
+ * @property FeatureEdition $featEdition
  * @property PrerequisiteType $type
  * @property Collection<PrerequisiteValue> $values
  */
@@ -40,11 +40,11 @@ class Prerequisite extends AbstractModel
 
     public function featEdition(): BelongsTo
     {
-        return $this->belongsTo(FeatEdition::class);
+        return $this->belongsTo(FeatureEdition::class);
     }
 
     /**
-     * @return Collection<string|Deity|Alignment|\App\Models\Feats\Feat|\App\Models\CharacterClasses\CharacterClass|SpellcasterType>
+     * @return Collection<string|Deity|Alignment|\App\Models\Feats\Feature|\App\Models\CharacterClasses\CharacterClass|SpellcasterType>
      */
     public function getValues(): Collection
     {
@@ -56,7 +56,7 @@ class Prerequisite extends AbstractModel
                 PrerequisiteType::MINIMUM_BASE_ATTACK_BONUS => $value->value,
                 PrerequisiteType::PATRON_DEITY => Deity::query()->where('id', $value->value)->first(),
                 PrerequisiteType::ALIGNMENT => Alignment::tryFromString($value->value),
-                PrerequisiteType::FEAT => Feat::query()->where('id', $value->value)->first(),
+                PrerequisiteType::FEAT => Feature::query()->where('id', $value->value)->first(),
                 PrerequisiteType::CHARACTER_CLASS => CharacterClass::query()->where('id', $value->value)->first(),
                 PrerequisiteType::SPELLCASTER_TYPE => SpellcasterType::tryFromString($value->value),
                 PrerequisiteType::SPECIES => Species::query()->where('id', $value->value)->first(),

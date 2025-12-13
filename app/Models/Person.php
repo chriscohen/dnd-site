@@ -1,0 +1,80 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
+
+/**
+ * @property Uuid $id
+ * @property string $slug
+ *
+ * @property Collection<Credit> $credits
+ * @property string $first_name
+ * @property ?string $initials
+ * @property string $last_name
+ * @property ?string $twitter
+ */
+class Person extends AbstractModel
+{
+    use HasUuids;
+
+    public $timestamps = false;
+    public $table = 'people';
+
+    public function credits(): HasMany
+    {
+        return $this->hasMany(Credit::class);
+    }
+
+    public static function fromInternalJson(int|array|string $value, ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->first_name = $value['firstName'];
+        $item->last_name = $value['lastName'];
+        $item->slug = $value['slug'] ?? (
+            empty($value['initials']) ?
+                Str::slug(implode(' ', [$item->first_name, $item->last_name])) :
+                Str::slug($item->first_name . ' ' . $item->last_name)
+        );
+
+        if (!empty($value['initials'])) {
+            $item->initials = implode('', $value['initials']);
+        }
+
+        if (!empty($value['twitter'])) {
+            $item->twitter = $value['twitter'];
+        }
+        $item->save();
+        return $item;
+    }
+
+    public function toArrayFull(): array
+    {
+        return [
+            'id' => $this->id,
+            'twitter' => $this->twitter,
+        ];
+    }
+
+    public function toArrayShort(): array
+    {
+        return [
+            'slug' => $this->slug,
+            'firstName' => $this->first_name,
+            'initials' => empty($this->initials) ? null : str_split($this->initials),
+            'lastName' => $this->last_name,
+        ];
+    }
+
+    public function toArrayTeaser(): array
+    {
+        return [];
+    }
+}

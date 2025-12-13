@@ -1,5 +1,12 @@
 [
     {
+        "id": "32f833db-8acb-4bba-ac3b-1e1d1f95d1c6",
+        "slug": "1985-games",
+        "name": "1985 Games",
+        "logo": "1985-games-logo.webp",
+        "website": "https://obojima.com/1985-games/"
+    },
+    {
         "id": "bcdd6788-ad27-4074-bd9c-f366e3106f21",
         "slug": "alchemists-workshops",
         "name": "Alchemists Workshops",
@@ -7,6 +14,14 @@
         "product_url": "product/{{id}}",
         "short_name": "Alchemists",
         "website": "https://alchemistsworkshops.com"
+    },
+    {
+        "id": "d44f456e-f7be-42d3-ab14-ea82ed06b586",
+        "slug": "amazon",
+        "name": "Amazon",
+        "product_url": "dp/{{id}}",
+        "short_name": "Amazon",
+        "website": "https://www.amazon.com"
     },
     {
         "id": "0f063d69-07ea-49ac-8bae-b26dd3a2bdf9",

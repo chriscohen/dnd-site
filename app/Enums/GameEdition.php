@@ -57,7 +57,7 @@ enum GameEdition: int
             '3.5', '3.5e' => self::TPF,
             '4th', '4e', 'fourth' => self::FOURTH,
             '5th', '5e', 'fifth', '5.14', '5.2014', '5e (2014)' => self::FIFTH,
-            '5e (2024)', '5.24', '5.2024' => self::FIFTH_REVISED,
+            '5e (2024)', '5.24', '5.2024', '5.5' => self::FIFTH_REVISED,
             default => null
         };
     }
