@@ -13,6 +13,7 @@ use App\Http\Controllers\Magic\MagicDomainController;
 use App\Http\Controllers\Magic\MagicSchoolController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\Sources\SourceController;
+use App\Http\Controllers\Species\SpeciesController;
 use App\Http\Controllers\Spells\SpellController;
 
 Route::prefix('api')->group(function () {
@@ -43,6 +44,9 @@ Route::prefix('api')->group(function () {
 
     Route::get('/source/{slug}', [SourceController::class, 'get']);
     Route::get('/sources', [SourceController::class, 'index']);
+
+    Route::get('/species/{slug}', [SpeciesController::class, 'get']);
+    Route::get('/species', [SpeciesController::class, 'index']);
 
     Route::geT('/spell/{slug}', [SpellController::class, 'get']);
     Route::get('/spells', [SpellController::class, 'index']);

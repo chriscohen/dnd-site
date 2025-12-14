@@ -16,6 +16,8 @@ use App\Models\Items\ItemTypeEdition;
 use App\Models\Languages\Language;
 use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
+use App\Models\Species\Species;
+use App\Models\Species\SpeciesEdition;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
 use App\Models\Spells\SpellEdition4e;
@@ -68,6 +70,8 @@ class AppServiceProvider extends ServiceProvider
             'language' => Language::class,
             'source' => Source::class,
             'source_edition' => SourceEdition::class,
+            'species' => Species::class,
+            'species_edition' => SpeciesEdition::class,
             'spell' => Spell::class,
             'spell_edition' => SpellEdition::class,
             'spell_edition_4e' => SpellEdition4e::class,

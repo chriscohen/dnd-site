@@ -61,13 +61,30 @@ class Species extends AbstractModel
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
+        $existing = static::query()->where('name', $value['name'])->first();
+
+        if (!empty($existing)) {
+            Reference::from5eJson([
+                'source' => $value['source'],
+                'page' => $value['page'] ?? null,
+            ], $existing);
+            return $existing;
+        }
+
         $item = new static();
         $item->id = $value['id'] ?? Uuid::uuid4();
         $item->name = $value['name'];
         $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
 
+        $item->save();
+
         $edition = SpeciesEdition::fromInternalJson($value, $item);
         $item->editions()->save($edition);
+
+        Reference::from5eJson([
+            'source' => $value['source'],
+            'page' => $value['page'] ?? null,
+        ], $item);
 
         $item->save();
         return $item;

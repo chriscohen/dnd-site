@@ -88,10 +88,8 @@ class MovementSpeedGroup extends AbstractModel
     {
         $output = [];
 
-        foreach (['burrow', 'climb', 'fly', 'swim', 'walk'] as $type) {
-            if (!empty($this->{$type})) {
-                $output[$type] = $this->{$type};
-            }
+        foreach ($this->speeds as $speed) {
+            $output[mb_strtolower($speed->type->name)] = $speed->speed;
         }
 
         if ($this->canHover) {
@@ -111,6 +109,18 @@ class MovementSpeedGroup extends AbstractModel
         $item = new static();
         $item->parent()->associate($parent);
         $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->save();
+
+        // If there's ONLY an integer passed in, we will assume this to be the walking speed.
+        if (is_scalar($value)) {
+            $movementSpeed = MovementSpeed::fromInternalJson([
+                'type' => 'walk',
+                'speed' => $value,
+            ], $item);
+            $item->speeds()->save($movementSpeed);
+            $item->save();
+            return $item;
+        }
 
         foreach ($value as $type => $speed) {
             $movementSpeed = MovementSpeed::fromInternalJson([

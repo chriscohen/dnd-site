@@ -12,10 +12,10 @@ return new class extends Migration
     {
         Schema::create('sizes', function (Blueprint $table) {
             $table->unsignedSmallInteger('size');
-            $table->string('entity_id');
-            $table->string('entity_type');
+            $table->string('parent_id');
+            $table->string('parent_type');
 
-            $table->unique(['size', 'entity_id', 'entity_type']);
+            $table->unique(['size', 'parent_id', 'parent_type']);
         });
     }
 

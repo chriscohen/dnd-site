@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property AbilityScoreType $ability_score
  * @property ?AbilityScoreModifierGroup $group
- * @property int $modifier
+ * @property int $value
  */
 class AbilityScoreModifier extends AbstractModel
 {
@@ -24,7 +24,7 @@ class AbilityScoreModifier extends AbstractModel
 
     public function group(): BelongsTo
     {
-        return $this->belongsTo(AbilityScoreModifierGroup::class);
+        return $this->belongsTo(AbilityScoreModifierGroup::class, 'ability_score_modifier_group_id');
     }
 
     public function toArrayFull(): array
@@ -38,7 +38,7 @@ class AbilityScoreModifier extends AbstractModel
     {
         return [
             'ability_score' => $this->ability_score,
-            'modifier' => $this->modifier,
+            'modifier' => $this->value,
         ];
     }
 
@@ -58,7 +58,7 @@ class AbilityScoreModifier extends AbstractModel
         $item = new static();
         $item->group()->associate($parent);
         $item->ability_score = AbilityScoreType::tryFromString($value['ability']);
-        $item->modifier = $value['modifier'];
+        $item->value = $value['modifier'];
 
         $item->save();
         return $item;

@@ -25,7 +25,7 @@ class MovementSpeed extends AbstractModel
 
     public function group(): BelongsTo
     {
-        return $this->belongsTo(MovementSpeedGroup::class);
+        return $this->belongsTo(MovementSpeedGroup::class, 'movement_speed_group_id');
     }
 
     public function toArrayFull(): array

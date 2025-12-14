@@ -13,6 +13,10 @@ return new class extends Migration
         Schema::create('ability_score_modifier_groups', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
+            $table->boolean('has_choice')->default(false);
+            $table->string('choices')->nullable();
+            $table->unsignedSmallInteger('choice_count')->nullable();
+
             $table->string('parent_id');
             $table->string('parent_type');
         });

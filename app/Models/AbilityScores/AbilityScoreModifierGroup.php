@@ -12,26 +12,34 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
  *
- * @property ?int $cha
- * @property ?int $con
- * @property ?int $dex
- * @property ?int $int
+ * @property ?int $choice_count
+ * @property ?string $choices
+ * @property bool $has_choice
  * @property Collection<AbilityScoreModifier> $modifiers
  * @property SpeciesEdition $parent
+ *
  * @property ?int $str
+ * @property ?int $dex
+ * @property ?int $con
+ * @property ?int $int
  * @property ?int $wis
+ * @property ?int $cha
  */
 class AbilityScoreModifierGroup extends AbstractModel
 {
     use HasUuids;
 
     public $timestamps = false;
+
+    public $casts = [
+        'has_choice' => 'boolean',
+    ];
 
     public function cha(): ?Attribute
     {
@@ -87,23 +95,25 @@ class AbilityScoreModifierGroup extends AbstractModel
 
     public function toArrayFull(): array
     {
-        $output = [];
-
-        foreach (['str', 'dex', 'con', 'int', 'wis', 'cha'] as $type) {
-            if (!empty($this->{$type})) {
-                $output[$type] = $this->{$type};
-            }
-        }
-
-        return $output;
+        return [];
     }
 
     public function toArrayShort(): array
     {
-        return [
-            'id' => $this->id,
-            'parent_id' => $this->pa
-        ];
+        $output = [];
+
+        foreach ($this->modifiers as $modifier) {
+            $output[mb_strtolower($modifier->ability_score->name)] = $modifier->value;
+        }
+
+        if ($this->has_choice) {
+            $output['choose'] = [
+                'from' => explode(',', $this->choices),
+                'count' => $this->choice_count ?? 0,
+            ];
+        }
+
+        return $output;
     }
 
     public function toArrayTeaser(): array
@@ -115,13 +125,29 @@ class AbilityScoreModifierGroup extends AbstractModel
     {
         $item = new static();
         $item->parent()->associate($parent);
+        $item->save();
 
-        foreach ($value as $type => $modifier) {
-            $modifier = AbilityScoreModifier::fromInternalJson([
-                'ability' => $type,
-                'modifier' => $modifier,
-            ], $item);
-            $item->modifiers()->save($modifier);
+        foreach ($value as $modifiers) {
+            // Handle each ability score key.
+            foreach (['str', 'dex', 'con', 'int', 'wis', 'cha'] as $abilityName) {
+                if (!empty($modifiers[$abilityName])) {
+                    $abilityScoreModifier = AbilityScoreModifier::fromInternalJson([
+                        'ability' => $abilityName,
+                        'modifier' => $modifiers[$abilityName],
+                    ], $item);
+                    $item->modifiers()->save($abilityScoreModifier);
+                }
+            }
+
+            // Handle "choose".
+            if (!empty($modifiers['choose'])) {
+                $item->has_choice = true;
+                // The "count" is sometimes called "amount".
+                $item->choice_count = !empty($modifiers['choose']['count']) ?
+                    $modifiers['choose']['count'] :
+                    (!empty($modifiers['choose']['amount']) ? $modifiers['choose']['amount'] : 1);
+                $item->choices = mb_strtolower(implode(',', $modifiers['choose']['from']));
+            }
         }
 
         $item->save();

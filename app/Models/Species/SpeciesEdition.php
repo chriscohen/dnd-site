@@ -12,6 +12,7 @@ use App\Models\MovementSpeeds\MovementSpeedGroup;
 use App\Models\Reference;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -50,9 +51,14 @@ class SpeciesEdition extends AbstractModel
         return $this->morphOne(MovementSpeedGroup::class, 'parent');
     }
 
-    public function size(): MorphMany
+    public function sizes(): MorphMany
     {
         return $this->morphMany(Size::class, 'parent');
+    }
+
+    public function species(): BelongsTo
+    {
+        return $this->belongsTo(Species::class);
     }
 
     public function tags(): MorphToMany
@@ -62,17 +68,24 @@ class SpeciesEdition extends AbstractModel
 
     public function toArrayFull(): array
     {
-        return [
-            'speed' => $this->movementSpeeds->toArray($this->renderMode),
-        ];
+        $output = [];
+
+        if (!empty($this->abilityScoreModifiers)) {
+            $output['ability'][] = $this->abilityScoreModifiers->toArray();
+        }
+
+        if (!empty($this->movementSpeeds)) {
+            $output['speed'] = $this->movementSpeeds->toArray();
+        }
+
+        return $output;
     }
 
     public function toArrayShort(): array
     {
         return [
             'id' => $this->id,
-            'slug' => $this->slug,
-            'name' => $this->name,
+            'size' => $this->sizes->toArray(),
             'species_id' => $this->species->id,
         ];
     }
@@ -88,20 +101,31 @@ class SpeciesEdition extends AbstractModel
         // Assume it's the most recent edition, and if the reference given below is a source from 5e (2014) we'll
         // change the edition.
         $item->game_edition = GameEdition::FIFTH_REVISED;
+        $item->species()->associate($parent);
+
+        $item->save();
 
         // Size.
-        if (is_array($value['size'])) {
-            foreach ($value['size'] as $size) {
-                $size = Size::fromInternalJson($size, $item);
+        if (!empty($value['size'])) {
+            // There's a weird case in the 5e.tools data for the "Verdan" in Acquisitions Incorporated where the size
+            // is listed as "V". Verdan can be S or M size.
+            if ($value['size'] === 'V' || $value['size'][0] === 'V') {
+                $value['size'] = ['S', 'M'];
+            }
+
+            if (is_array($value['size'])) {
+                foreach ($value['size'] as $size) {
+                    $size = Size::fromInternalJson($size, $item);
+                    $item->sizes()->save($size);
+                }
+            } elseif (is_string($value['size'])) {
+                $size = Size::fromInternalJson(['name' => $value['size']], $item);
                 $item->sizes()->save($size);
             }
-        } elseif (is_string($value['size'])) {
-            $size = Size::fromInternalJson(['name' => $value['size']], $item);
-            $item->sizes()->save($size);
         }
 
         /**
-         *
+         * Ability modifiers.
          */
         if (!empty($value['ability'])) {
             $modifierGroup = AbilityScoreModifierGroup::fromInternalJson($value['ability'], $item);
@@ -115,10 +139,8 @@ class SpeciesEdition extends AbstractModel
                 'page' => $value['page'] ?? null,
             ], $item);
             // Use the game edition of the sourcebook.
-            $item->game_edition = $reference->edition->source->game_edition;
+            $item->game_edition = GameEdition::tryFromString($reference->edition->source->game_edition);
         }
-
-        $item->save();
 
         // Movement speeds.
         if (!empty($value['speed'])) {

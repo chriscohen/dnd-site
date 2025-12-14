@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             CompanySeeder::class,
             DeitySeeder::class,
-            SpeciesSeeder::class,
             SkillSeeder::class,
             StatusConditionSeeder::class,
             MagicSchoolSeeder::class,
@@ -28,6 +27,7 @@ class DatabaseSeeder extends Seeder
             CampaignSettingSeeder::class,
             SourceSeeder::class,
             LanguageSeeder::class,
+            SpeciesSeeder::class,
 
             FeatureSeeder::class,
             CharacterClassSeeder::class,

@@ -223,6 +223,7 @@ class SourceEdition extends AbstractModel
         $item->isbn10 = $value['isbn10'] ?? null;
         $item->isbn13 = $value['isbn13'] ?? null;
         $item->pages = $value['pages'] ?? null;
+
         $item->save();
         return $item;
     }

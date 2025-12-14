@@ -280,7 +280,7 @@ class Source extends AbstractModel
         $item->id = Uuid::uuid4();
         $item->name = $value['name'];
         $item->slug = static::makeSlug($value['name']);
-        $item->shortName = $value['id'];
+        $item->shortName = !empty($value['isAdventure']) ? $value['id'] : $value['source'];
         // Not a great way to determine official-ness. If the author field is missing, or if it contains "wizards", we
         // will assume it's official.
         $item->publication_type = str_contains(mb_strtolower($value['author'] ?? 'wizards'), 'wizards') ?
