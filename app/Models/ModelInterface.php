@@ -19,10 +19,10 @@ interface ModelInterface
 
     /**
      * Import from the 5e.tools JSON format.
-     * @param array $value  The JSON from 5e.tools, as an array.
+     * @param  array|string  $value  The JSON from 5e.tools, as an array.
      * @param ModelInterface|null $parent  The parent model, if any.
      */
-    public static function fromFeJson(array $value, ModelInterface $parent = null): self;
+    public static function from5eJson(array|string $value, ModelInterface $parent = null): self;
 
     /**
      * Get the human-readable name of this thing.

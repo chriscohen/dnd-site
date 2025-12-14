@@ -6,6 +6,7 @@ use App\Enums\GameEdition;
 use App\Enums\PublicationType;
 use App\Enums\Sources\SourcebookType;
 use App\Enums\SourceType;
+use App\Exceptions\DuplicateRecordException;
 use App\Models\AbstractModel;
 use App\Models\CampaignSetting;
 use App\Models\Company;
@@ -264,18 +265,34 @@ class Source extends AbstractModel
         return $item;
     }
 
-    public static function fromFeJson(array $value, ModelInterface $parent = null): ModelInterface
+    /**
+     * @throws DuplicateRecordException
+     */
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): ModelInterface
     {
+        $existing = static::query()->where('name', $value['name'])->first();
+
+        if (!empty($existing)) {
+            throw new DuplicateRecordException("Source {$value['name']} already exists.");
+        }
+
         $item = new static();
         $item->id = Uuid::uuid4();
         $item->name = $value['name'];
         $item->slug = static::makeSlug($value['name']);
         $item->shortName = $value['id'];
-        // Not a great way to determine official-ness but...
-        $item->publication_type = str_contains(mb_strtolower($value['author']), 'wizards') ?
+        // Not a great way to determine official-ness. If the author field is missing, or if it contains "wizards", we
+        // will assume it's official.
+        $item->publication_type = str_contains(mb_strtolower($value['author'] ?? 'wizards'), 'wizards') ?
             PublicationType::OFFICIAL :
             PublicationType::THIRD_PARTY;
         $item->source_type = SourceType::SOURCEBOOK;
+
+        // Is it an adventure?
+        if (!empty($value['isAdventure'])) {
+            $sourceSourcebookType = SourceSourcebookType::fromInternalJson('adventure', $item);
+            $item->sourcebookTypes()->save($sourceSourcebookType);
+        }
 
         // Work out if it's 5e 2014 or 5e 2024.
         $fifthDate = Carbon::parse('2024-09-17');
@@ -293,7 +310,7 @@ class Source extends AbstractModel
         ]);
         $item->coverImage()->associate($coverImage);
 
-        $edition = SourceEdition::fromFeJson($value, $item);
+        $edition = SourceEdition::from5eJson($value, $item);
         $item->editions()->save($edition);
         $item->save();
         return $item;
@@ -305,6 +322,11 @@ class Source extends AbstractModel
 
         if (empty($item)) {
             return null;
+        }
+        // Campaign setting.
+        if (!empty($value['campaignSetting'])) {
+            $campaignSetting = CampaignSetting::query()->where('slug', $value['campaignSetting'])->firstOrFail();
+            $item->campaignSetting()->associate($campaignSetting);
         }
         // Description.
         if (!empty($value['description'])) {

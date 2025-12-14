@@ -10,9 +10,11 @@ use App\Models\AbstractModel;
 use App\Models\ModelInterface;
 use App\Models\MovementSpeeds\MovementSpeedGroup;
 use App\Models\Reference;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 
@@ -26,6 +28,7 @@ use Ramsey\Uuid\Uuid;
  * @property MovementSpeedGroup $movementSpeeds
  * @property Collection<Size> $sizes
  * @property Species $species
+ * @property Collection<Tag> $tags
  */
 class SpeciesEdition extends AbstractModel
 {
@@ -50,6 +53,11 @@ class SpeciesEdition extends AbstractModel
     public function size(): MorphMany
     {
         return $this->morphMany(Size::class, 'parent');
+    }
+
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     public function toArrayFull(): array
@@ -102,7 +110,7 @@ class SpeciesEdition extends AbstractModel
 
         // Reference.
         if (!empty($value['source'])) {
-            $reference = Reference::fromFeJson([
+            $reference = Reference::from5eJson([
                 'source' => $value['source'],
                 'page' => $value['page'] ?? null,
             ], $item);
@@ -122,7 +130,7 @@ class SpeciesEdition extends AbstractModel
         return $item;
     }
 
-    public static function fromFeJson(array $value, ?ModelInterface $parent = null): static
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
         return static::fromInternalJson($value, $parent);
     }

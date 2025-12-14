@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models\Feats;
 
 use App\Enums\GameEdition;
-use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
@@ -24,7 +23,7 @@ use Ramsey\Uuid\Uuid;
  * @property string $name
  *
  * @property ?string $description
- * @property Feature $feat
+ * @property Feature $feature
  * @property GameEdition $game_edition
  * @property Collection<PrerequisiteGroup> $prerequisites
  * @property Collection<Reference> $references
@@ -39,7 +38,7 @@ class FeatureEdition extends AbstractModel
         'game_edition' => GameEdition::class,
     ];
 
-    public function feat(): BelongsTo
+    public function feature(): BelongsTo
     {
         return $this->belongsTo(Feature::class);
     }
@@ -67,7 +66,7 @@ class FeatureEdition extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'feat' => $this->feat->toArray(JsonRenderMode::SHORT),
+            'feature' => $this->feat->toArray(),
             'prerequisites' => ModelCollection::make($this->prerequisites)->toArray($this->renderMode),
             'references' => ModelCollection::make($this->references)->toArray(),
         ];
@@ -93,7 +92,7 @@ class FeatureEdition extends AbstractModel
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
-        $item->feat()->associate($parent);
+        $item->feature()->associate($parent);
         $item->id = $value['id'] ?? Uuid::uuid4();
         $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
         $item->description = $value['description'] ?? null;
@@ -102,10 +101,11 @@ class FeatureEdition extends AbstractModel
         foreach ($value['references'] ?? [] as $reference) {
             Reference::fromInternalJson($reference, $item);
         }
-        foreach ($value['prerequisites'] ?? [] as $prerequisiteData) {
-            $prerequisite = PrerequisiteGroup::fromInternalJson($prerequisiteData, $item);
-            $item->prerequisites()->save($prerequisite);
-        }
+        // TODO: revisit this.
+//        foreach ($value['prerequisites'] ?? [] as $prerequisiteData) {
+//            $prerequisite = PrerequisiteGroup::fromInternalJson($prerequisiteData, $item);
+//            $item->prerequisites()->save($prerequisite);
+//        }
 
         $item->save();
         return $item;

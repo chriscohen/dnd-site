@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->foreignIdFor(AbilityScoreModifierGroup::class, 'ability_score_modifier_group_id');
 
-            $table->unique(['ability_score', 'ability_score_modifier_group_id']);
+            $table->unique(['ability_score', 'ability_score_modifier_group_id'], 'ability_score_unique');
         });
     }
 

@@ -12,7 +12,7 @@ use App\Enums\Prerequisites\WeaponFocusType;
 use App\Enums\SpellcasterType;
 use App\Models\AbstractModel;
 use App\Models\Feats\Feature;
-use App\Models\Language;
+use App\Models\Languages\Language;
 use App\Models\ModelInterface;
 use App\Models\Skills\Skill;
 use App\Models\Species\Species;

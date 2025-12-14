@@ -19,6 +19,10 @@ return new class extends Migration
             $table->boolean('is_primary')->default(false)->index();
             $table->string('isbn10', 10)->unique()->nullable();
             $table->string('isbn13', 13)->unique()->nullable();
+
+            $table->unsignedSmallInteger('level_start')->nullable();
+            $table->unsignedSmallInteger('level_end')->nullable();
+
             $table->smallInteger('pages')->nullable();
             $table->date('release_date')->nullable();
             $table->boolean('release_date_month_only')->default(false);

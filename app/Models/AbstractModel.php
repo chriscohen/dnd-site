@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\JsonRenderMode;
+use App\Models\Sources\Source;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
@@ -95,13 +96,27 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
         return Str::slug($input);
     }
 
-    public static function fromFeJson(array $value, ModelInterface $parent = null): ModelInterface
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): ModelInterface
     {
         throw new \InvalidArgumentException('Not implemented');
     }
 
-    public static function fromFeJsonExtra(array|string $value, ModelInterface $parent = null): ?static
+    public static function fromFeJsonExtra(array|string $value, ?ModelInterface $parent = null): ?static
     {
         throw new \InvalidArgumentException('Not implemented');
+    }
+
+    /**
+     * @param array{
+     *     'source': string,
+     *     'page': int
+     * } $value
+     */
+    public static function create5eToolsReference(array $value, ModelInterface $parent): void
+    {
+        Reference::from5eJson([
+            'source' => $value['source'],
+            'page' => $value['page'] ?? null,
+        ], $parent);
     }
 }

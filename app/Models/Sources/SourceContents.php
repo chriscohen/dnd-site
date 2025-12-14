@@ -50,6 +50,9 @@ class SourceContents extends AbstractModel
         $item = new static();
         $item->edition()->associate($parent);
         $item->name = $value['name'];
+        // We will use "chapter" as the default type.
+        $item->type = SourceContentsType::CHAPTER;
+
         // Sometimes there isn't an "ordinal" in the source, so we'll assume these go at the start.
         $item->ordinal = $value['ordinal']['identifier'] ?? '0';
         if (!empty($value['ordinal']['type'])) {
@@ -68,16 +71,9 @@ class SourceContents extends AbstractModel
     }
 
     /**
-     * @param array{
-     *     name: string,
-     *     ordinal: array{
-     *         identifier: int,
-     *         type: string
-     *     },
-     *     headers: string[]
-     * } $value
+     * @param  array|string  $value
      */
-    public static function fromFeJson(array $value, ModelInterface $parent = null): static
+    public static function from5eJson(array|string $value, ModelInterface $parent = null): static
     {
         return static::fromInternalJson($value, $parent);
     }

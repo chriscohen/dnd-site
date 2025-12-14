@@ -13,6 +13,7 @@ use App\Models\Feats\Feature;
 use App\Models\Feats\FeatureEdition;
 use App\Models\Items\ItemType;
 use App\Models\Items\ItemTypeEdition;
+use App\Models\Languages\Language;
 use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
 use App\Models\Spells\Spell;
@@ -64,6 +65,7 @@ class AppServiceProvider extends ServiceProvider
             'feat_edition' => FeatureEdition::class,
             'item' => ItemType::class,
             'item_edition' => ItemTypeEdition::class,
+            'language' => Language::class,
             'source' => Source::class,
             'source_edition' => SourceEdition::class,
             'spell' => Spell::class,

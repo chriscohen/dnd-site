@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Exceptions\DuplicateRecordException;
 use App\Models\Sources\Source;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,16 +22,34 @@ class SourceSeeder extends AbstractYmlSeeder
 
     public function run(): void
     {
+        // Seed from internal (non-5e.tools) data.
         foreach ($this->getDataFromDirectory() as $datum) {
             print "[Internal] Creating Source " . $datum['name'] . "...\n";
             Source::fromInternalJson($datum);
         }
 
-        $json = json_decode(Storage::disk('data')->get('/5etools/data/books.json'), true);
+        // Seed from 5e.tools "books.json" single file.
+        $json = $this->getDataFromFile('5etools/data/books.json');
 
         foreach ($json['book'] as $item) {
             print "[5e.tools] Creating Source " . $item['name'] . "...\n";
-            Source::fromFeJson($item);
+            Source::from5eJson($item);
+        }
+
+        // Seed from 5e.tools "adventures.json" single file.
+        $json = $this->getDataFromFile('5etools/data/adventures.json');
+
+        foreach ($json['adventure'] as $item) {
+            print "[5e.tools] Creating Adventure Source " . $item['name'] . "...\n";
+
+            // Inject a marker so we can tell it's an adventure.
+            $item['isAdventure'] = true;
+
+            try {
+                Source::from5eJson($item);
+            } catch (DuplicateRecordException $e) {
+                print "[5e.tools] Skipping duplicate: " . $item['name'] . "\n";
+            }
         }
 
         // Extra data not found in 5e.tools JSON.

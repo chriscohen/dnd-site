@@ -65,7 +65,7 @@ class SpellEditionTest extends TestCase
 
     public function testFromFeJson(): void
     {
-        $edition = Spell::fromFeJson($this->getTestData());
+        $edition = Spell::from5eJson($this->getTestData());
         $this->assertEquals('Air Bubble', $edition->name);
     }
 }

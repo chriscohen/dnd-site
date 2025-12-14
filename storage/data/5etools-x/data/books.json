@@ -58,6 +58,26 @@
                 "dungeon-masters-guild": "442458",
                 "drivethru-rpg": "442458"
             }
+        },
+        {
+            "name": "Light of Xaryxis",
+            "campaignSetting": "planescape",
+            "editions": [
+                {
+                    "name": "original",
+                    "binding": "paperback",
+                    "formats": [
+                        "print",
+                        "dndbeyond",
+                        "roll20"
+                    ],
+                    "pages": 64
+                }
+            ],
+            "productIds": {
+                "dungeon-masters-guild": "442488",
+                "drivethru-rpg": "442488"
+            }
         }
     ]
 }

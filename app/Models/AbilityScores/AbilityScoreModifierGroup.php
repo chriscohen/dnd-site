@@ -128,7 +128,7 @@ class AbilityScoreModifierGroup extends AbstractModel
         return $item;
     }
 
-    public static function fromFeJson(array $value, ?ModelInterface $parent = null): ModelInterface
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): ModelInterface
     {
         return static::fromInternalJson($value, $parent);
     }

@@ -9,7 +9,6 @@ use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
-use Ramsey\Uuid\Uuid;
 
 /**
  * @property string $id

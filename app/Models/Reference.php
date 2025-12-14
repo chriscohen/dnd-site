@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Exceptions\RecordNotFoundException;
 use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Ramsey\Uuid\Uuid;
@@ -93,19 +95,25 @@ class Reference extends AbstractModel
     }
 
     /**
-     * @param array{
-     *     source: string,
-     *     page: int
-     * } $value
+     * @param  array|string  $value
+     * @throws RecordNotFoundException
      */
-    public static function fromFeJson(array $value, ?ModelInterface $parent = null): static
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
         $item->entity()->associate($parent);
 
-        $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
+        try {
+            $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
+        } catch (ModelNotFoundException) {
+            throw new RecordNotFoundException("[WARNING] Could not find source with shortName: {$value['source']}");
+        }
+
         $item->edition()->associate($source->primaryEdition());
-        $item->page_from = $value['page'];
+
+        if (!empty($value['page'])) {
+            $item->page_from = $value['page'];
+        }
 
         $item->save();
         return $item;

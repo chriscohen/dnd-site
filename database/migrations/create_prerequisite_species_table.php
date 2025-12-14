@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(Species::class, 'species_id')->nullable();
             $table->string('name')->nullable();
 
-            $table->unique(['prerequisite_group_id', 'species_id']);
+            $table->unique(['prerequisite_species_group_id', 'species_id'], 'species_unique');
         });
     }
 

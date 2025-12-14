@@ -8,6 +8,7 @@ use App\Http\Controllers\CampaignSettingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CharacterClassController;
 use App\Http\Controllers\Items\ItemController;
+use App\Http\Controllers\Languages\LanguageController;
 use App\Http\Controllers\Magic\MagicDomainController;
 use App\Http\Controllers\Magic\MagicSchoolController;
 use App\Http\Controllers\ReferenceController;
@@ -27,10 +28,13 @@ Route::prefix('api')->group(function () {
     Route::get('/domains', [MagicDomainController::class, 'index']);
 
     Route::get('/feat/{slug}', [FeatController::class, 'get']);
-    Route::get('/feats', [FeatController::class, 'index']);
+    Route::get('/features', [FeatController::class, 'index']);
 
     Route::get('/item/{slug}', [ItemController::class, 'get']);
     Route::get('/items', [ItemController::class, 'index']);
+
+    Route::get('/language/{slug}', [LanguageController::class, 'get']);
+    Route::get('/languages', [LanguageController::class, 'index']);
 
     Route::get('/references', [ReferenceController::class, 'index']);
 
