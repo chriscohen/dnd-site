@@ -11,7 +11,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('prerequisite_species_groups', function (Blueprint $table) {
+        Schema::create('prerequisite_creature_groups', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignIdFor(PrerequisiteGroup::class, 'prerequisite_group_id');
         });
@@ -19,6 +19,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('prerequisite_species_groups');
+        Schema::dropIfExists('prerequisite_creature_groups');
     }
 };

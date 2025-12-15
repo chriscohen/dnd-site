@@ -11,11 +11,11 @@ use App\Enums\Prerequisites\PrerequisiteType;
 use App\Enums\Prerequisites\WeaponFocusType;
 use App\Enums\SpellcasterType;
 use App\Models\AbstractModel;
+use App\Models\Creatures\Creature;
 use App\Models\Feats\Feature;
 use App\Models\Languages\Language;
 use App\Models\ModelInterface;
 use App\Models\Skills\Skill;
-use App\Models\Species\Species;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -95,7 +95,7 @@ class PrerequisiteValue extends AbstractModel
             PrerequisiteType::ABILITY_SCORE => $this->validateAbilityScore($value),
             PrerequisiteType::FEAT => Feature::query()->where('slug', $value)->firstOrFail(),
             PrerequisiteType::SKILL => Skill::query()->where('slug', $value)->firstOrFail(),
-            PrerequisiteType::SPECIES => Species::query()->where('slug', $value)->firstOrFail(),
+            PrerequisiteType::CREATURE => Creature::query()->where('slug', $value)->firstOrFail(),
             PrerequisiteType::SPELLCASTER_TYPE => SpellcasterType::tryFromString($value, true),
             default => $x = 5,
         };

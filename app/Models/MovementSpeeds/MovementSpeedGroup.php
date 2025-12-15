@@ -6,9 +6,8 @@ namespace App\Models\MovementSpeeds;
 
 use App\Models\AbstractModel;
 use App\Models\Actors\ActorTypeEdition;
-use App\Models\ModelCollection;
+use App\Models\Creatures\CreatureEdition;
 use App\Models\ModelInterface;
-use App\Models\Species\SpeciesEdition;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,7 +17,7 @@ use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
- * @property ActorTypeEdition|SpeciesEdition $parent
+ * @property ActorTypeEdition|CreatureEdition $parent
  * @property Collection<MovementSpeed> $speeds
  */
 class MovementSpeedGroup extends AbstractModel

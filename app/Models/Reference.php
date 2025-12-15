@@ -55,13 +55,23 @@ class Reference extends AbstractModel
 
     public function toArrayShort(): array
     {
-        return [
+        $output = [
             'id' => $this->id,
-            'pageFrom' => $this->page_from,
-            'pageTo' => $this->page_to,
             'source' => $this->edition->source?->name,
             'slug' => $this->edition->source?->slug,
         ];
+
+        if (!empty($this->page_from)) {
+            $output['pageFrom'] = $this->page_from;
+        }
+        if (!empty($this->page_to)) {
+            $output['pageTo'] = $this->page_to;
+        }
+        if (!empty($this->edition->source->shortName)) {
+            $output['shortName'] = $this->edition->source->shortName;
+        }
+
+        return $output;
     }
 
     public function toArrayTeaser(): array

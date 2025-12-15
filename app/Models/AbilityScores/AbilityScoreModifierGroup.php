@@ -6,13 +6,13 @@ namespace App\Models\AbilityScores;
 
 use App\Enums\AbilityScoreType;
 use App\Models\AbstractModel;
+use App\Models\Creatures\CreatureEdition;
 use App\Models\ModelInterface;
-use App\Models\Species\SpeciesEdition;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Collection;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -22,7 +22,7 @@ use Ramsey\Uuid\Uuid;
  * @property ?string $choices
  * @property bool $has_choice
  * @property Collection<AbilityScoreModifier> $modifiers
- * @property SpeciesEdition $parent
+ * @property CreatureEdition $parent
  *
  * @property ?int $str
  * @property ?int $dex

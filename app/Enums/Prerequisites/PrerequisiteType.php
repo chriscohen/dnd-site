@@ -15,7 +15,7 @@ enum PrerequisiteType: int
     case FEAT = 5;
     case CHARACTER_CLASS = 6;
     case SPELLCASTER_TYPE = 7;
-    case SPECIES = 8;
+    case CREATURE = 8;
     case SKILL = 9;
     case WEAPON_PROFICIENCY = 10;
     case SPECIAL = 11;
@@ -32,7 +32,7 @@ enum PrerequisiteType: int
             self::FEAT => 'feat',
             self::CHARACTER_CLASS => 'class',
             self::SPELLCASTER_TYPE => 'spellcaster type',
-            self::SPECIES => 'species',
+            self::CREATURE => 'creature',
             self::SKILL => 'skill',
             self::WEAPON_PROFICIENCY => 'weapon proficiency',
             self::SPECIAL => 'special',
@@ -51,7 +51,7 @@ enum PrerequisiteType: int
             'feat' => self::FEAT,
             'class' => self::CHARACTER_CLASS,
             'spellcaster_type' => self::SPELLCASTER_TYPE,
-            'species' => self::SPECIES,
+            'creature', 'race', 'species' => self::CREATURE,
             'skill' => self::SKILL,
             'weapon_proficiency' => self::WEAPON_PROFICIENCY,
             'special' => self::SPECIAL,

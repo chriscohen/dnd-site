@@ -7,6 +7,8 @@ use App\Enums\GameEdition;
 use App\Enums\SourceType;
 use App\Models\CharacterClasses\CharacterClass;
 use App\Models\CharacterClasses\CharacterClassEdition;
+use App\Models\Creatures\Creature;
+use App\Models\Creatures\CreatureEdition;
 use App\Models\Creatures\CreatureType;
 use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\Feats\Feature;
@@ -16,8 +18,6 @@ use App\Models\Items\ItemTypeEdition;
 use App\Models\Languages\Language;
 use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
-use App\Models\Species\Species;
-use App\Models\Species\SpeciesEdition;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
 use App\Models\Spells\SpellEdition4e;
@@ -61,6 +61,8 @@ class AppServiceProvider extends ServiceProvider
         Relation::enforceMorphMap([
             'character_class' => CharacterClass::class,
             'character_class_edition' => CharacterClassEdition::class,
+            'creature' => Creature::class,
+            'creature_edition' => CreatureEdition::class,
             'creature_type' => CreatureType::class,
             'creature_type_edition' => CreatureTypeEdition::class,
             'feat' => Feature::class,
@@ -70,8 +72,6 @@ class AppServiceProvider extends ServiceProvider
             'language' => Language::class,
             'source' => Source::class,
             'source_edition' => SourceEdition::class,
-            'species' => Species::class,
-            'species_edition' => SpeciesEdition::class,
             'spell' => Spell::class,
             'spell_edition' => SpellEdition::class,
             'spell_edition_4e' => SpellEdition4e::class,
