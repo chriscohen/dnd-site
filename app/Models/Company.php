@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\JsonRenderMode;
+use App\Models\Sources\Source;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -16,6 +19,7 @@ use Ramsey\Uuid\Uuid;
  * @property Media $logo
  * @property string $name
  * @property ?string $product_url
+ * @property Collection<Source> $products
  * @property ?string $short_name
  * @property string $website
  */
@@ -37,12 +41,17 @@ class Company extends AbstractModel
         return $this->belongsTo(Media::class, 'logo_id');
     }
 
+    public function products(): HasMany
+    {
+        return $this->hasMany(Source::class, 'publisher_id');
+    }
+
     public function toArrayFull(): array
     {
         return [
             'logo' => $this->logo?->toArray($this->renderMode),
-            'product_url' => $this->product_url,
-            'short_name' => $this->short_name,
+            'products' => ModelCollection::make($this->products)->toArray(JsonRenderMode::TEASER),
+            'productUrl' => $this->product_url,
             'website' => $this->website,
         ];
     }
@@ -53,6 +62,7 @@ class Company extends AbstractModel
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
+            'shortName' => $this->short_name,
         ];
     }
 
@@ -73,7 +83,7 @@ class Company extends AbstractModel
 
         if (!empty($value['logo'])) {
             $image = Media::fromInternalJson([
-                'filename' => '/companies/'.$value['logo'],
+                'filename' => '/companies/' . $value['logo'],
             ], $parent);
             $item->logo()->associate($image);
         }

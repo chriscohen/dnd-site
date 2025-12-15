@@ -1,0 +1,110 @@
+{
+    "id": "3f73e134-b17f-4de3-ae89-020251d706a5",
+    "slug": "morgrave-miscellany",
+    "name": "Morgrave Miscellany",
+    "coverImage": "morgrave-miscellany.webp",
+    "description": "Morgrave Miscellany is the much anticipated supplement to Wayfinder's Guide to Eberron  that comes to you by way of its co-authors Keith Baker & Ruty Rutenberg who breath more life and lore into the eponymous campaign setting now released for play with the fifth edition of Dungeons & Dragons. This 164 page book gives you the information you need to delve deeper into your Eberron story or character. It includes an expansive deep dive of Khorvaire from the Demon Wastes to the coasts of the Lhazaar Principalities, and a plethora of intrigue and noir story hooks in between.\n\nThe purpose of this book is to provide you with additional rules and character options that let you delve deeper into the world: new subclasses & races, racial feats, new forms of dragonmarks, and more. It also provides you with the lore you need to build a deeper character and story. While this is presented in a player-focused way, these ideas should inspire DMs, as well as players. Even if no one at your table creates a barbarian or druid character, the information about the Druidic sects of the Eldeen Reaches or the concept of the supersoldier barbarians of House Vadalis could be the seedlings of a story yearning to develop its maturity.",
+    "editions": [
+        {
+            "id": "3c3b3689-8443-4c25-89db-82a9310b0020",
+            "name": "original",
+            "formats": ["pdf", "fantasy-grounds"],
+            "isPrimary": true,
+            "pages": 164,
+            "releaseDate": "2019-03-17",
+            "contents": [
+                {
+                    "name": "Introduction",
+                    "headers": [
+                        "About the Authors"
+                    ]
+                },
+                {
+                    "name": "Classes in Eberron",
+                    "headers": [
+                        "Barbarian",
+                        "Bard",
+                        "Cleric",
+                        "Druid",
+                        "Fighter",
+                        "Monk",
+                        "Paladin",
+                        "Ranger",
+                        "Rogue",
+                        "Sorcerer",
+                        "Warlock",
+                        "Wizard"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 1
+                    }
+                },
+                {
+                    "name": "Cultures of Eberron",
+                    "headers": [
+                        "Talenta Halflings",
+                        "Shifters",
+                        "Tieflings",
+                        "Dragonforged",
+                        "Marked by Prophecy",
+                        "Marked by Death",
+                        "Child of Khyber",
+                        "Evolutionary Feats",
+                        "Backgrounds"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 2
+                    }
+                },
+                {
+                    "name": "Fantasy Noir",
+                    "headers": [
+                        "Throes of Death",
+                        "Mastering Noir"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 3
+                    }
+                },
+                {
+                    "name": "The Gumshoe Chronicles",
+                    "headers": [
+                        "The Proach Poacher Mysteries",
+                        "Nine-Pin Pontra",
+                        "Cogs on Fire",
+                        "Siren's Whelk",
+                        "I Have Reservations",
+                        "Web of Spies",
+                        "Dear Hunter",
+                        "Gumshoe Graduation Day"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 4
+                    }
+                },
+                {
+                    "name": "Appendix: Know Your Faculty",
+                    "ordinal": {
+                        "type": "appendix"
+                    }
+                }
+            ]
+        }
+    ],
+    "gameEdition": "5e",
+    "productIds": {
+        "dungeon-masters-guild": "270012",
+        "drivethru-rpg": "270012"
+    },
+    "publicationType": "3rd party",
+    "publisher": "dungeon-masters-guild",
+    "sourcebookTypes": [
+        "lore",
+        "character_options"
+    ],
+    "sourceType": "sourcebook"
+}

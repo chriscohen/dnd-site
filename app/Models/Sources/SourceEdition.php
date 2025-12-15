@@ -8,12 +8,13 @@ use App\Models\AbstractModel;
 use App\Models\Credit;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
+use App\Models\Person;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -103,18 +104,28 @@ class SourceEdition extends AbstractModel
 
     public function toArrayFull(): array
     {
+        // Rearrange into an array of people who are grouped by their role.
+        $grouped = $this->credits->groupBy('role');
+        $credits = [];
+
+        foreach ($grouped as $roleName => $people) {
+            $credits[$roleName] = $people->map(
+                fn (Credit $credit) => $credit->person->toArray($this->renderMode)
+            )->toArray();
+        }
+
         return [
             'binding' => $this->binding,
-            'boxed_set_items' => ModelCollection::make($this->boxedSetItems)
+            'boxedSetItems' => ModelCollection::make($this->boxedSetItems)
                 ->toArray($this->renderMode),
             'formats' => ModelCollection::make($this->formats)->toString(),
-            'is_primary' => $this->is_primary,
+            'isPrimary' => $this->is_primary,
             'isbn10' => $this->isbn10,
             'isbn13' => $this->isbn13,
             'pages' => $this->pages,
-            'release_date' => $this->formatReleaseDate(),
+            'releaseDate' => $this->formatReleaseDate(),
             'contents' => ModelCollection::make($this->contents)->toArray($this->renderMode),
-            'credits' => ModelCollection::make($this->credits)->toArray($this->renderMode),
+            'credits' => $credits,
         ];
     }
 
@@ -188,6 +199,13 @@ class SourceEdition extends AbstractModel
         $item->release_date = new Carbon($value['published']);
         $item->is_primary = true;
         $item->name = 'original';
+
+        // Levels, if adventure.
+        if (!empty($value['level'])) {
+            $item->level_start = $value['level']['start'];
+            $item->level_end = $value['level']['end'] ?? null;
+        }
+
         $item->save();
 
         foreach ($value['contents'] as $contentsData) {
@@ -223,6 +241,18 @@ class SourceEdition extends AbstractModel
         $item->isbn10 = $value['isbn10'] ?? null;
         $item->isbn13 = $value['isbn13'] ?? null;
         $item->pages = $value['pages'] ?? null;
+
+        // Credits.
+        // Credits.
+        foreach ($value['credits'] ?? [] as $key => $creditData) {
+            foreach ($creditData as $creditPerson) {
+                $credit = Credit::fromInternalJson([
+                    'role' => $key,
+                    'person' => $creditPerson
+                ], $item);
+                $item->credits()->save($credit);
+            }
+        }
 
         $item->save();
         return $item;

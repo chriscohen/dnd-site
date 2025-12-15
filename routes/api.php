@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampaignSettingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CharacterClassController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Creatures\CreatureController;
 use App\Http\Controllers\Items\ItemController;
 use App\Http\Controllers\Languages\LanguageController;
@@ -25,6 +26,9 @@ Route::prefix('api')->group(function () {
 
     Route::get('/class/{slug}', [CharacterClassController::class, 'get']);
     Route::get('/classes', [CharacterClassController::class, 'index']);
+
+    Route::get('/company/{slug}', [CompanyController::class, 'get']);
+    Route::get('/companies', [CompanyController::class, 'index']);
 
     Route::get('/creature/{slug}', [CreatureController::class, 'get']);
     Route::get('/creatures', [CreatureController::class, 'index']);

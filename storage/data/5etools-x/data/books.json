@@ -1,6 +1,119 @@
 {
     "book": [
         {
+            "name": "A Zib for Your Thoughts",
+            "description": "One person's trash is sometimes another's treasure.\n\nIn this case, it’s also an opportunity for you to go on an excursion across the Tenth District, tracking down a client's very specific request…in thoughts.\n\nA 5th edition Dungeons & Dragons adventure for 2nd-level characters, set in Ravnica. Pre-generated characters are also included.",
+            "coverImage": "a-zib-for-your-thoughts.webp",
+            "editions": [
+                {
+                    "name": "original",
+                    "formats": ["pdf"],
+                    "pages": 17,
+                    "releaseDate": "2019-03-05",
+                    "credits": {
+                        "Adventure Writer": ["chris-tulach"],
+                        "Editor": ["bill-benham"],
+                        "Art Direction": ["emi-tanji"],
+                        "Graphic Designer": ["trish-yochum"],
+                        "Additional Art Direction": [
+                            "jeremy-jarvis",
+                            "dawn-murin",
+                            "shauna-narciso",
+                            "cynthia-sheppard"
+                        ],
+                        "Cartography": ["dyson-logos"],
+                        "Interior Illustrators": [
+                            "clint-cearley",
+                            "milivoj-ceran",
+                            "jedd-chevrier",
+                            "bastien-l-deharme",
+                            "mathias-kollros",
+                            "adam-paquette",
+                            "grzegorz-rutkowski",
+                            "bram-sels",
+                            "dan-scott",
+                            "magali-villeneuve"
+                        ],
+                        "Ravnica World Design": [
+                            "doug-beyer",
+                            "sam-burley",
+                            "jeremy-cranford",
+                            "kelly-digges",
+                            "brady-dommermuth",
+                            "jenna-helland",
+                            "cory-h-herndon",
+                            "jeremy-jarvis",
+                            "kimberly-kreines",
+                            "chris-letoile",
+                            "adam-lee",
+                            "ari-levitch",
+                            "alison-luhrs",
+                            "shawn-main",
+                            "dawn-murin",
+                            "richard-whitters",
+                            "mark-winters",
+                            "james-wyatt"
+                        ],
+                        "Producer": [
+                            "bill-benham",
+                            "dan-tovar"
+                        ],
+                        "Imaging Technician": ["kevin-yee"]
+                    }
+                }
+            ],
+            "productIds": {
+                "dungeon-masters-guild": "265835",
+                "drivethru-rpg": "265835"
+            },
+            "publisher": "wizards-of-the-coast",
+            "publicationType": "official",
+            "sourcebookTypes": ["adventure"]
+        },
+        {
+            "name": "Acquisitions Incorporated",
+            "description": "There are always openings available… just try not to think about why.\nWhen you're just starting out in the adventuring business, it might be nice to have a leg up. It can be a big help to have access to the powerful artifacts, expertise, and jobs that Acquisitions Incorporated (Acq. Inc.) has to offer a new franchise. Join Omin Dran, Jim Darkmagic and Viari like never before with the new Acquisitions Incorporated campaign book for Dungeons & Dragons!\n\nSet yourself up for success when pursuing your own fantasy-business endeavors, using all the ingredients you need to include Acquisitions Incorporated in your D&D campaign, to establish your own franchise and take on specialized roles therein. Plus, there are always openings coming available… just try not to think about why.",
+            "editions": [
+                {
+                    "name": "original",
+                    "binding": "hardcover",
+                    "formats": ["print", "pdf", "roll20"],
+                    "isbn10": "0786966904",
+                    "isbn13": "9780786966905",
+                    "pages": 224,
+                    "releaseDate": "2019-06-18"
+                }
+            ],
+            "publicationType": "official",
+            "publisher": "wizards-of-the-coast",
+            "productIds": {
+                "dungeon-masters-guild": "450858",
+                "drivethru-rpg": "450858"
+            },
+            "sourcebookTypes": [
+                "character_options",
+                "gear_magic_items",
+                "spells"
+            ]
+        },
+        {
+            "name": "Astarion's Book of Hungers",
+            "description": "Embrace the seductive darkness of Baldur's Gate with a shadow-kissed expansion full of blood, danger, and intrigue.\n\nThis 32-page digital supplement includes:\n\n3 vampire-themed backgrounds to shape your character's origin in shadow.\n16 vampiric feats and an updated Dhampir species, so you can embrace your inner darkness.\nPlay with Astarion in your adventuring group—two play-ready adventures allow you to team up with your favorite vampire spawn at either character level 3 or character level 12.\n5 villainous stat blocks, including infernalist vampires and servants of Mephistopheles, that bring gothic horror into your campaign.\nRat's Run tavern setting, a fully mapped adventure setting full of secrets, smuggling, and seduction that can be tied into Baldur's Gate 3 canon.",
+            "editions": [
+                {
+                    "name": "original",
+                    "formats": ["dndbeyond"],
+                    "pages": 32
+                }
+            ],
+            "publicationType": "official",
+            "publisher": "wizards-of-the-coast",
+            "sourcebookTypes": [
+                "feats",
+                "monsters"
+            ]
+        },
+        {
             "name": "Player's Handbook (2014)",
             "editions": [
                 {

@@ -1,0 +1,59 @@
+{
+    "id": "afd3d737-c756-4704-8c0c-e7603fd875e2",
+    "slug": "seekers-of-the-ashen-crown",
+    "name": "Seekers of the Ashen Crown",
+    "campaignSetting": "eberron",
+    "coverImage": "seekers-of-the-ashen-crown.webp",
+    "description": "Treasure Hunt or Battle Royal\n\nThe Ashen Crown has been lost for centuries, yet its fragments remain of great interest to Morgrave University, the King's Citadel, and other, more nefarious organizations. The discovery of a fragment beneath the city of Sharn triggers a race for the remaining pieces. Conspiracy and treachery abound as the forces of good and evil converge to reclaim the sundered crown.\n\nSeekers of the Ashen Crown takes characters from 2nd level to 5th level. The adventure is set in the Eberron campaign setting, but is easily adaptable to any D& setting. It includes two adventure books, full-color illustrations of sights ans scenes in the adventure, and a double-sided battle map designed for use with D&D Miniatures.",
+    "editions": [
+        {
+            "id": "73417e36-a33f-43f8-864a-e57fae28cd43",
+            "name": "original",
+            "binding": "paperback",
+            "formats": ["print", "pdf"],
+            "isPrimary": true,
+            "isbn10": "078695017X",
+            "isbn13": "9780786950171",
+            "level": {
+                "start": 2,
+                "end": 5
+            },
+            "pages": 96,
+            "releaseDate": "2009-07-21",
+            "credits": {
+                "Design": [
+                    "scott-fitzgerald-gray",
+                    "chris-sims"
+                ],
+                "Editing": [ "m-alexander-jurkat" ],
+                "Managing Editing": [ "kim-mohan" ],
+                "D&D Design Manager": [ "james-wyatt" ],
+                "D&D Development Manager": [ "andy-collins" ],
+                "D&D Creative Manager": [ "christopher-perkins" ],
+                "D&D Senior Art Director": [ "jon-schindehette" ],
+                "Art Director": [ "mari-kolkowsky" ],
+                "Graphic Designer": [ "soe-murayama" ],
+                "Cover Illustration": [ "wayne-reynolds" ],
+                "Interior Illustration": [
+                    "dave-allsop",
+                    "steve-argyle",
+                    "david-griffith"
+                ],
+                "Maps and Diagrams": [ "jason-a-engle" ],
+                "Publishing Production Specialist": [ "angelika-lokotz" ],
+                "Prepress Manager": [ "jefferson-dunlap" ],
+                "Imaging Technician": [ "ashley-brock" ],
+                "Production Manager": [ "cynda-callaway" ]
+            }
+        }
+    ],
+    "gameEdition": "4e",
+    "productIds": {
+        "dungeon-masters-guild": "153068",
+        "drivethru-rpg": "153068"
+    },
+    "publicationType": "official",
+    "publisher": "wizards-of-the-coast",
+    "sourcebookTypes": [ "adventure" ],
+    "sourceType": "sourcebook"
+}
