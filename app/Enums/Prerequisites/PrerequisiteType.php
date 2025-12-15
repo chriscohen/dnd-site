@@ -15,11 +15,12 @@ enum PrerequisiteType: int
     case FEAT = 5;
     case CHARACTER_CLASS = 6;
     case SPELLCASTER_TYPE = 7;
-    case SPECIES = 8;
+    case CREATURE = 8;
     case SKILL = 9;
     case WEAPON_PROFICIENCY = 10;
     case SPECIAL = 11;
     case ABILITY_SCORE = 12;
+    case OTHER = 99;
 
     public function toString(): string
     {
@@ -31,11 +32,12 @@ enum PrerequisiteType: int
             self::FEAT => 'feat',
             self::CHARACTER_CLASS => 'class',
             self::SPELLCASTER_TYPE => 'spellcaster type',
-            self::SPECIES => 'species',
+            self::CREATURE => 'creature',
             self::SKILL => 'skill',
             self::WEAPON_PROFICIENCY => 'weapon proficiency',
             self::SPECIAL => 'special',
             self::ABILITY_SCORE => 'ability score',
+            self::OTHER => 'other',
         };
     }
 
@@ -49,11 +51,12 @@ enum PrerequisiteType: int
             'feat' => self::FEAT,
             'class' => self::CHARACTER_CLASS,
             'spellcaster_type' => self::SPELLCASTER_TYPE,
-            'species' => self::SPECIES,
+            'creature', 'race', 'species' => self::CREATURE,
             'skill' => self::SKILL,
             'weapon_proficiency' => self::WEAPON_PROFICIENCY,
             'special' => self::SPECIAL,
             'ability_score' => self::ABILITY_SCORE,
+            'other' => self::OTHER,
             default => $throw ?
                 throw new InvalidArgumentException('"' . $value . '" is not a valid prerequisite type.') :
                 null,

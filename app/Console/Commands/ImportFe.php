@@ -36,7 +36,7 @@ class ImportFe extends Command
         }
 
         $json = json_decode(Storage::disk('data')->get($file), true);
-        $spell = Spell::fromFeJson($json);
+        $spell = Spell::from5eJson($json);
         print "Spell imported: {$spell->name}" . PHP_EOL;
     }
 }

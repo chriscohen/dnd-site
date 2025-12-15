@@ -372,7 +372,7 @@ class SpellEdition extends AbstractModel
         return $item;
     }
 
-    public static function fromFeJson(array $value, ModelInterface $parent = null): self
+    public static function from5eJson(array|string $value, ModelInterface $parent = null): self
     {
         $item = new static();
         $item->game_edition = GameEdition::FIFTH_REVISED;
@@ -394,7 +394,7 @@ class SpellEdition extends AbstractModel
 
         // Range.
         if (!empty($value['range'])) {
-            $range = Range::fromFeJson($value['range'], $item);
+            $range = Range::from5eJson($value['range'], $item);
             $item->range()->associate($range);
         }
 
@@ -410,7 +410,7 @@ class SpellEdition extends AbstractModel
 
                 // Material component has special values.
                 if ($key == 'm') {
-                    $material = SpellMaterialComponent::fromFeJson($component, $item);
+                    $material = SpellMaterialComponent::from5eJson($component, $item);
                     $item->materialComponents()->save($material);
                 }
 
@@ -421,7 +421,7 @@ class SpellEdition extends AbstractModel
 
         // Duration.
         if (!empty($value['duration'][0])) {
-            $duration = Duration::fromFeJson($value['duration'][0], $item);
+            $duration = Duration::from5eJson($value['duration'][0], $item);
             $item->duration()->save($duration);
         }
 

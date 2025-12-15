@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('name')->index();
             $table->foreignIdFor(SourceEdition::class, 'source_edition_id');
             $table->string('role');
-
-            $table->unique(['person_id', 'source_edition_id', 'role'], 'person_book_role');
         });
     }
 

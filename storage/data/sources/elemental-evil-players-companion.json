@@ -1,0 +1,117 @@
+{
+    "id": "44717d42-fce0-4f6f-8012-286dfb7c4f7d",
+    "slug": "elemental-evil-players-companion",
+    "name": "Elemental Evil Player's Companion",
+    "shortName": "EEPC",
+    "coverImage": "elemental-evil-players-companion.webp",
+    "description": "The Elemental Evil Player's Companion is a free, 25-page PDF for Dungeons & Dragons 5th Edition that provides players with new options, specifically four new races (aarakocra, deep gnomes, genasi, and goliaths) and over 40 new elemental spells for certain character classes. It was released to expand character options for the Princes of the Apocalypse storyline, but it can be used in any D&D 5e game.",
+    "editions": [
+        {
+            "id": "e9021cc4-92a1-449e-9cb7-82da4636772c",
+            "name": "original",
+            "formats": ["pdf"],
+            "pages": 25,
+            "releaseDate": "2015-03-10",
+            "contents": [
+                {
+                    "name": "Races",
+                    "headers": [
+                        "Aarakocra",
+                        "Deep Gnomes",
+                        "Genasi",
+                        "Goliaths"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 1
+                    }
+                },
+                {
+                    "name": "Spells",
+                    "headers": [
+                        "Spell Lists",
+                        "Sepll Descriptions"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 2
+                    }
+                }
+            ],
+            "credits": {
+                "Designer": [
+                    "rich-baker",
+                    "robert-j-schwalb",
+                    "stephen-schubert"
+                ],
+                "Editor": [
+                    "david-noonan",
+                    "stacy-janssen"
+                ],
+                "Interior Illustrator": [
+                    "mark-behm",
+                    "eric-belisle",
+                    "noah-bradley",
+                    "anna-christenson",
+                    "emrah-elmasli",
+                    "klaus-pillon",
+                    "claudio-pozas",
+                    "lee-smith"
+                ],
+                "D&D Lead Designer": [
+                    "mike-mearls",
+                    "jeremy-crawford"
+                ],
+                "Managing Editor": [
+                    "jeremy-crawford"
+                ],
+                "Additional Design": [
+                    "rodney-thompson",
+                    "peter-lee",
+                    "matt-sernett"
+                ],
+                "Producer": [
+                    "greg-bilsland"
+                ],
+                "Art Director": [
+                    "kate-irwin",
+                    "shauna-narciso"
+                ],
+                "Cover Illustrator": [
+                    "raymond-swanland"
+                ],
+                "Graphic Designer": [
+                    "emi-tanji",
+                    "matthew-stevens"
+                ],
+                "Proofreading": [
+                    "jennifer-clarke-wilkes"
+                ],
+                "Project Management": [
+                    "neil-shinkle",
+                    "john-hay"
+                ],
+                "Production Services": [
+                    "cynda-callaway",
+                    "jefferson-dunlap",
+                    "david-gershman"
+                ],
+                "Brand and Marketing": [
+                    "nathan-stewart",
+                    "liz-schuh",
+                    "chris-lindsay",
+                    "shelly-mazzanoble",
+                    "hilary-ross",
+                    "john-feil",
+                    "laura-tommervik",
+                    "kim-lundstrom",
+                    "trevor-kidd"
+                ]
+            }
+        }
+    ],
+    "gameEdition": "5e",
+    "publicationType": "official",
+    "publisher": "wizards-of-the-coast",
+    "sourceType": "sourcebook"
+}

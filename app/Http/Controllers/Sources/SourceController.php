@@ -30,6 +30,8 @@ class SourceController extends AbstractController
             $this->editionQuery($request->get('editions'));
         }
 
+        $this->query->orderBy($this->orderKey);
+
         $items = empty($request->get('includeChildren')) ?
             $this->query->whereNull('parent_id')->get() :
             $this->query->get();

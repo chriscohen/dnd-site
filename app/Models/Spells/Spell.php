@@ -105,14 +105,14 @@ class Spell extends AbstractModel
         return $item;
     }
 
-    public static function fromFeJson(array $value, ModelInterface $parent = null): self
+    public static function from5eJson(array|string $value, ModelInterface $parent = null): self
     {
         $item = new static();
         $item->name = $value['name'];
         $item->slug = static::makeSlug($value['name']);
         $item->save();
 
-        $edition = SpellEdition::fromFeJson($value, $item);
+        $edition = SpellEdition::from5eJson($value, $item);
         $item->editions()->save($edition);
 
         $item->save();

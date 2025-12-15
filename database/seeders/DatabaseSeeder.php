@@ -14,11 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             PersonSeeder::class,
-            LanguageSeeder::class,
             CategorySeeder::class,
             CompanySeeder::class,
             DeitySeeder::class,
-            SpeciesSeeder::class,
             SkillSeeder::class,
             StatusConditionSeeder::class,
             MagicSchoolSeeder::class,
@@ -28,8 +26,10 @@ class DatabaseSeeder extends Seeder
             AttackTypeSeeder::class,
             CampaignSettingSeeder::class,
             SourceSeeder::class,
+            LanguageSeeder::class,
+            CreatureSeeder::class,
 
-            FeatSeeder::class,
+            FeatureSeeder::class,
             CharacterClassSeeder::class,
             ItemSeeder::class,
             SpellSeeder::class,

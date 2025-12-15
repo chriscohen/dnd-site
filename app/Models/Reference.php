@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Exceptions\RecordNotFoundException;
 use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Ramsey\Uuid\Uuid;
@@ -53,13 +55,23 @@ class Reference extends AbstractModel
 
     public function toArrayShort(): array
     {
-        return [
+        $output = [
             'id' => $this->id,
-            'pageFrom' => $this->page_from,
-            'pageTo' => $this->page_to,
             'source' => $this->edition->source?->name,
             'slug' => $this->edition->source?->slug,
         ];
+
+        if (!empty($this->page_from)) {
+            $output['pageFrom'] = $this->page_from;
+        }
+        if (!empty($this->page_to)) {
+            $output['pageTo'] = $this->page_to;
+        }
+        if (!empty($this->edition->source->shortName)) {
+            $output['shortName'] = $this->edition->source->shortName;
+        }
+
+        return $output;
     }
 
     public function toArrayTeaser(): array
@@ -86,6 +98,31 @@ class Reference extends AbstractModel
             $source = Source::query()->where('slug', $value['source'])->firstOrFail();
             $sourceEdition = $source->primaryEdition();
             $item->edition()->associate($sourceEdition);
+        }
+
+        $item->save();
+        return $item;
+    }
+
+    /**
+     * @param  array|string  $value
+     * @throws RecordNotFoundException
+     */
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->entity()->associate($parent);
+
+        try {
+            $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
+        } catch (ModelNotFoundException) {
+            throw new RecordNotFoundException("[WARNING] Could not find source with shortName: {$value['source']}");
+        }
+
+        $item->edition()->associate($source->primaryEdition());
+
+        if (!empty($value['page'])) {
+            $item->page_from = $value['page'];
         }
 
         $item->save();

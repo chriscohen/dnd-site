@@ -3,7 +3,7 @@
 namespace App\Models\Sources;
 
 use App\Enums\Binding;
-use App\Enums\GameEdition;
+use App\Exceptions\DuplicateRecordException;
 use App\Models\AbstractModel;
 use App\Models\Credit;
 use App\Models\ModelCollection;
@@ -27,6 +27,8 @@ use Ramsey\Uuid\Uuid;
  * @property bool $is_primary
  * @property ?string $isbn10
  * @property ?string $isbn13
+ * @property ?int $level_end
+ * @property ?int $level_start
  * @property string $name
  * @property ?int $pages
  * @property ?Carbon $release_date
@@ -149,6 +151,10 @@ class SourceEdition extends AbstractModel
         $item->is_primary = $value['isPrimary'] ?? false;
         $item->isbn10 = $value['isbn10'] ?? null;
         $item->isbn13 = $value['isbn13'] ?? null;
+        if (!empty($value['level'])) {
+            $item->level_start = $value['level']['start'];
+            $item->level_end = $value['level']['end'] ?? null;
+        }
         $item->pages = $value['pages'] ?? null;
         $item->release_date = new Carbon($value['releaseDate']) ?? null;
         $item->release_date_month_only = $value['releaseDateMonthOnly'] ?? false;
@@ -174,7 +180,7 @@ class SourceEdition extends AbstractModel
         return $item;
     }
 
-    public static function fromFeJson(array $value, ModelInterface $parent = null): static
+    public static function from5eJson(array|string $value, ModelInterface $parent = null): static
     {
         $item = new static();
         $item->source()->associate($parent);
@@ -185,7 +191,7 @@ class SourceEdition extends AbstractModel
         $item->save();
 
         foreach ($value['contents'] as $contentsData) {
-            $sourceContents = SourceContents::fromFeJson($contentsData, $item);
+            $sourceContents = SourceContents::from5eJson($contentsData, $item);
             $item->contents()->save($sourceContents);
         }
 
@@ -217,6 +223,7 @@ class SourceEdition extends AbstractModel
         $item->isbn10 = $value['isbn10'] ?? null;
         $item->isbn13 = $value['isbn13'] ?? null;
         $item->pages = $value['pages'] ?? null;
+
         $item->save();
         return $item;
     }

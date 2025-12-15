@@ -112,15 +112,9 @@ class Range extends AbstractModel
     }
 
     /**
-     * @param array{
-     *     type: string,
-     *     distance: array{
-     *         type: string,
-     *         amount: int
-     *     }
-     * } $value
+     * @param  array|string  $value
      */
-    public static function fromFeJson(array $value, ModelInterface $parent = null): ModelInterface
+    public static function from5eJson(array|string $value, ModelInterface $parent = null): ModelInterface
     {
         $item = new static();
 

@@ -8,9 +8,9 @@ use App\Enums\Prerequisites\CraftType;
 use App\Enums\Prerequisites\KnowledgeType;
 use App\Enums\Prerequisites\PrerequisiteType;
 use App\Enums\Prerequisites\WeaponFocusType;
-use App\Models\Language;
+use App\Models\Languages\Language;
 use App\Models\ModelInterface;
-use App\Models\Prerequisites\Prerequisite;
+use App\Models\Prerequisites\PrerequisiteGroup;
 use App\Models\Prerequisites\PrerequisiteValue;
 use App\Models\Reference;
 use App\Models\Sources\Source;
@@ -79,24 +79,28 @@ abstract class AbstractYmlSeeder extends Seeder
         }
     }
 
-    public function getDataFromFile(): array
+    public function getDataFromFile(?string $path = null): array
     {
-        if (Storage::disk('data')->missing($this->path)) {
-            throw new FileNotFoundException('storage/data/' . $this->path . ' not found');
+        $path = $path ?? $this->path;
+
+        if (Storage::disk('data')->missing($path)) {
+            throw new FileNotFoundException('storage/data/' . $path . ' not found');
         }
 
-        return json_decode(Storage::disk('data')->get($this->path), true);
+        return json_decode(Storage::disk('data')->get($path), true);
     }
 
-    public function getDataFromDirectory(): array
+    public function getDataFromDirectory(?string $dir = null): array
     {
-        if (!Storage::disk('data')->exists($this->dir)) {
-            throw new FileNotFoundException('storage/data/' . $this->dir . ' not found');
+        $dir = $dir ?? $this->dir;
+
+        if (!Storage::disk('data')->exists($dir)) {
+            throw new FileNotFoundException('storage/data/' . $dir . ' not found');
         }
 
         $output = [];
 
-        foreach (Storage::disk('data')->files($this->dir) as $file) {
+        foreach (Storage::disk('data')->files($dir) as $file) {
             $output[] = json_decode(Storage::disk('data')->get($file), true);
         }
 
@@ -151,7 +155,7 @@ abstract class AbstractYmlSeeder extends Seeder
     public function setPrerequisites(array $data, ModelInterface $me): self
     {
         foreach ($data as $prerequisiteData) {
-            $prerequisite = new Prerequisite();
+            $prerequisite = new PrerequisiteGroup();
             $prerequisite->featEdition()->associate($me);
             $prerequisite->type = PrerequisiteType::tryFromString($prerequisiteData['type'], true);
 

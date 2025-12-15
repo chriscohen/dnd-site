@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace App\Models\Prerequisites;
 
+use App\Enums\AbilityScoreType as Attr;
 use App\Enums\Prerequisites\CraftType;
 use App\Enums\Prerequisites\KnowledgeType;
 use App\Enums\Prerequisites\PrerequisiteType;
 use App\Enums\Prerequisites\WeaponFocusType;
 use App\Enums\SpellcasterType;
 use App\Models\AbstractModel;
+use App\Models\Creatures\Creature;
 use App\Models\Feats\Feature;
-use App\Models\Language;
+use App\Models\Languages\Language;
 use App\Models\ModelInterface;
 use App\Models\Skills\Skill;
-use App\Models\Species;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Ramsey\Uuid\Uuid;
-use App\Enums\Ability as Attr;
 use InvalidArgumentException;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
@@ -28,7 +28,7 @@ use InvalidArgumentException;
  * @property ?CraftType $craft_type
  * @property ?KnowledgeType $knowledge_type
  * @property ?Language $language
- * @property Prerequisite $prerequisite
+ * @property PrerequisiteGroup $prerequisite
  * @property ?int $skill_ranks
  * @property string $value
  * @property ?WeaponFocusType $weapon_focus_type
@@ -52,7 +52,7 @@ class PrerequisiteValue extends AbstractModel
 
     public function prerequisite(): BelongsTo
     {
-        return $this->belongsTo(Prerequisite::class);
+        return $this->belongsTo(PrerequisiteGroup::class);
     }
 
     public function toArrayFull(): array
@@ -95,7 +95,7 @@ class PrerequisiteValue extends AbstractModel
             PrerequisiteType::ABILITY_SCORE => $this->validateAbilityScore($value),
             PrerequisiteType::FEAT => Feature::query()->where('slug', $value)->firstOrFail(),
             PrerequisiteType::SKILL => Skill::query()->where('slug', $value)->firstOrFail(),
-            PrerequisiteType::SPECIES => Species::query()->where('slug', $value)->firstOrFail(),
+            PrerequisiteType::CREATURE => Creature::query()->where('slug', $value)->firstOrFail(),
             PrerequisiteType::SPELLCASTER_TYPE => SpellcasterType::tryFromString($value, true),
             default => $x = 5,
         };

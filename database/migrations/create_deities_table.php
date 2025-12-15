@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\Prerequisites\Prerequisite;
+use App\Models\Prerequisites\PrerequisiteGroup;
 
 return new class extends Migration
 {
