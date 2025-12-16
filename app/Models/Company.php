@@ -50,7 +50,9 @@ class Company extends AbstractModel
     {
         return [
             'logo' => $this->logo?->toArray($this->renderMode),
-            'products' => ModelCollection::make($this->products)->toArray(JsonRenderMode::TEASER),
+            'products' => ModelCollection::make(
+                $this->products->sortByDesc('release_date')->sortByDesc('game_edition')
+            )->toArray(JsonRenderMode::TEASER),
             'productUrl' => $this->product_url,
             'website' => $this->website,
         ];
