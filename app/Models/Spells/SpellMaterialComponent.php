@@ -77,8 +77,8 @@ class SpellMaterialComponent extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'item_edition_id' => $this->itemEdition->id,
-            'spell_edition_id' => $this->spellEdition->id,
+            'itemEditionId' => $this->itemEdition->id,
+            'spellEditionId' => $this->spellEdition->id,
         ];
     }
 
@@ -93,6 +93,8 @@ class SpellMaterialComponent extends AbstractModel
     {
         if (!empty($this->quantity_text)) {
             return $this->quantity_text;
+        } elseif (empty($this->itemEdition->item?->name)) {
+            return '';
         }
 
         $plural = $this->is_plural || (empty($this->quantity_text) && $this->quantity > 1);

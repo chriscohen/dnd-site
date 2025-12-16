@@ -25,8 +25,8 @@ enum GameEdition: int
                 'THIRD' => '3e',
                 'TPF' => '3.5',
                 'FOURTH' => '4e',
-                'FIFTH' => '5e (2014)',
-                'FIFTH_REVISED' => '5e (2024)',
+                'FIFTH' => '5e',
+                'FIFTH_REVISED' => '5.5',
             };
         } else {
             return match ($this->name) {
