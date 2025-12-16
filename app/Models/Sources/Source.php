@@ -150,7 +150,6 @@ class Source extends AbstractModel
             'campaignSetting' => $this->campaign_setting?->toArray($this->renderMode) ?? null,
             'description' => $this->description,
             'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
-            'gameEdition' => $this->game_edition,
             'productCode' => $this->product_code,
             'productIds' => $this->productIds->collect()->toArray(),
             'publicationType' => $this->publication_type,
@@ -191,6 +190,7 @@ class Source extends AbstractModel
     {
         return [
             'coverImage' => $this->coverImage?->toArray($this->renderMode),
+            'gameEdition' => $this->game_edition,
             'parentId' => $this->parent_id,
         ];
     }
