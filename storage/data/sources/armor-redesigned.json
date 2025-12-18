@@ -1,0 +1,25 @@
+{
+    "id": "fc8619c6-0275-42d6-92c5-2f76a59df8d4",
+    "name": "Armor Redesigned",
+    "slug": "armor-redesigned",
+    "coverImage": "armor-redesigned.webp",
+    "description": "Experience what it is like to take Dungeons and Dragons armor to the next level, with the inclusion of an entirely new stat: \"Armor Reduction\". Combat will no longer be about either fully hitting or completely missing, instead you will have to make clever selection in your armor choices to reduce the damage monsters deal to your characters. Hobgoblins equipped head to toe in plate armor will now scare you in a way you have never experienced before.\n\nAll armor options have been rebalanced to include damage reduction, with the addition of entirely new armor types for light and medium armors. Entering the game are now Exotic leathers, which allow your characters to wear the skins of the mighty monsters you slay in your quests.\n\nFurther, now all armor pieces have their place within the game. No longer will breastplate be outshined by half plate, nor studded leather be the end all be all for light armor users. Each piece will be useful in this new redesigned armor system.\n\nIncluded in this product:\n\n-Rules for including Damage Reduction as an armor stat into your games.\n-Charts to help you include the necessary wealth and magic items needed for an optimal experience.\n-A new armor table that includes redesigned stats for light, medium, and heavy armor.\n-The ability to build armor out of adamantine, mithral, monster carapaces, silver, and more.\n-A PDF specifically designed for DMs with all the rules included, and a PDF designed for players with only the tables they need.",
+    "editions": [
+        {
+            "id": "ff0e7b67-334f-4dbb-a9cd-e9402110b5ea",
+            "name": "original",
+            "formats": ["pdf"],
+            "isPrimary": true,
+            "pages": 23,
+            "releaseDate": "2022-08",
+            "releaseDateMonthOnly": true
+        }
+    ],
+    "gameEdition": "5e",
+    "publicationType": "3rd party",
+    "publisher": "mr-rhexx-games",
+    "sourcebookTypes": [
+        "gear_magic_items"
+    ],
+    "sourceType": "sourcebook"
+}

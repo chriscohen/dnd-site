@@ -1,0 +1,25 @@
+{
+    "id": "06e3d8b3-eef5-4f35-b31c-c1b00a32448e",
+    "name": "What They Don't Tell You About Magic Items",
+    "slug": "what-they-dont-tell-you-about-magic-items",
+    "coverImage": "what-they-dont-tell-you-about-magic-items.webp",
+    "description": "Allow your players full access to the vast troves of magic items available in Dungeons and Dragons.\n\nWith this PDF, your players will be able to finally spend their hard-earned gold on more than just basic healing potions. Do you wish to purchase a +1 longsword? You now know the price. Desire to buy a sending stone? You know exactly how much to pay for it. Ever wanted to create your very own wizard's staff with spells inside of it? You now finally can, and know exactly what you need in order to accomplish it.\n\nThis PDF allows players to access magic shops and spend their gold on magic items without the need for the Dungeon Master to create shops or invent prizes. If you ever wondered how much should a Spell Scroll of Dimension Door cost, you no longer have to worry about it. We have priced out everything that you could possibly need to purchase (or create) most kinds of magic item you can think of.  We have also rebalanced a lot of the prices for magic items to make them make more sense.\n\nIncluded in this product:\n\n-Simplified rules for purchasing and creating all kinds of magical items.\n-Over 50 weapon, armor, shield, and object modular enchantments that you can mix and match to customize your character. \n-The ability to enchant spells onto a staff or any other object.\n-A comprehensive list of prices for all kinds of spell scrolls, popular potions, poisons, and oils. \n-A list of prices for many of the magic items found on the Dungeon Master's Guide.",
+    "editions": [
+        {
+            "id": "fe08ff15-93a4-4a15-8483-c2173198aafe",
+            "name": "original",
+            "formats": ["pdf"],
+            "isPrimary": true,
+            "pages": 28,
+            "releaseDate": "2023-01",
+            "releaseDateMonthOnly": true
+        }
+    ],
+    "gameEdition": "5e",
+    "publicationType": "3rd party",
+    "publisher": "mr-rhexx-games",
+    "sourcebookTypes": [
+        "gear_magic_items"
+    ],
+    "sourceType": "sourcebook"
+}
