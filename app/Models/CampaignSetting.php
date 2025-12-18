@@ -9,12 +9,14 @@ use App\Enums\PublicationType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Scout\Searchable;
 use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
  * @property string $slug
  *
+ * @property ?string $description
  * @property Media $logo
  * @property Uuid $logo_id
  * @property string $name
@@ -22,10 +24,12 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $publisher_id
  * @property PublicationType $publication_type
  * @property string $short_name
+ * @property ?int $start_year
  */
 class CampaignSetting extends AbstractModel
 {
     use HasUuids;
+    use Searchable;
 
     public $timestamps = false;
     protected $primaryKey = 'id';
@@ -53,25 +57,49 @@ class CampaignSetting extends AbstractModel
 
     public function toArrayFull(): array
     {
-        return [
-            'logo' => $this->logo?->toArray($this->renderMode, $this->excluded),
+        $output = [
             'publication_type' => $this->publication_type,
-            'publisher' => $this->publisher->toArray($this->renderMode, $this->excluded),
+            'publisher' => $this->publisher->toArray(JsonRenderMode::TEASER),
         ];
+
+        if (!empty($this->start_year)) {
+            $output['startYear'] = $this->start_year;
+        }
+        if (!empty($this->description)) {
+            $output['description'] = $this->description;
+        }
+
+        return $output;
     }
 
     public function toArrayShort(): array
     {
-        return [
+        $output = [
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
         ];
+
+        if (!empty($this->logo)) {
+            $output['logo'] = $this->logo->toArray($this->renderMode);
+        }
+
+        return $output;
     }
 
     public function toArrayTeaser(): array
     {
         return [];
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'name' => $this->name,
+            'description' => $this->description,
+        ];
     }
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
@@ -81,6 +109,8 @@ class CampaignSetting extends AbstractModel
         $item->name = $value['name'] ?? null;
         $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
         $item->short_name = $value['shortName'] ?? null;
+        $item->description = $value['description'] ?? null;
+        $item->start_year = $value['startYear'] ?? null;
 
         if (!empty($value['logo'])) {
             $logo = Media::fromInternalJson([

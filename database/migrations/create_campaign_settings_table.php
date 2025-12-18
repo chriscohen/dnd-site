@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('name')->index();
             $table->string('short_name', 16)->unique();
+            $table->text('description')->nullable();
             $table->foreignIdFor(Company::class, 'publisher_id')->index();
             $table->smallInteger('publication_type')->index();
+            $table->unsignedSmallInteger('start_year')->nullable();
 
             // Images.
             $table->foreignidFor(Media::class, 'logo_id')->nullable();

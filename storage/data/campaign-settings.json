@@ -74,9 +74,11 @@
         "id": "d391eda0-80f8-4c6d-9d10-34a0148a60c4",
         "name": "Forgotten Realms",
         "shortName": "FR",
+        "description": "Forgotten Realms was created by Ed Greenwood around 1967 as a setting for his childhood stories.\n\nIn 1987, it became part of Dungeons & Dragons when the first Forgotten Realms products were published by TSR, Inc.\n\nRoleplaying and other products have been produced for the setting ever since, including the Baldur's Gate series of video games, hundreds of novels, comic books, a movie, and an online wiki.\n\nThe setting is roughly medieval high fantasy, and focuses on the continent of Faerûn (although other parts of the same world have been detailed in some official publications).",
         "publicationType": "official",
         "publisher": "wizards-of-the-coast",
-        "logo": "forgotten-realms.png"
+        "logo": "forgotten-realms.png",
+        "startYear": 1987
     },
     {
         "id": "be045376-158f-4b0b-81a9-8fe262550da0",
