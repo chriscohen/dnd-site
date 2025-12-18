@@ -4,7 +4,6 @@ namespace App\Models\Sources;
 
 use App\Enums\GameEdition;
 use App\Enums\PublicationType;
-use App\Enums\Sources\SourcebookType;
 use App\Enums\SourceType;
 use App\Exceptions\DuplicateRecordException;
 use App\Models\AbstractModel;
@@ -22,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
+use Laravel\Scout\Searchable;
 use Ramsey\Uuid\Uuid;
 use Spatie\LaravelMarkdown\MarkdownRenderer;
 
@@ -52,6 +52,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
 class Source extends AbstractModel
 {
     use HasUuids;
+    use Searchable;
 
     public $timestamps = false;
 
@@ -192,6 +193,21 @@ class Source extends AbstractModel
             'coverImage' => $this->coverImage?->toArray($this->renderMode),
             'gameEdition' => $this->game_edition,
             'parentId' => $this->parent_id,
+        ];
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'name' => $this->name,
+            'shortName' => $this->shortName,
+            'description' => $this->description,
+            'productCode' => $this->product_code,
+            'productIds' => $this->productIds->collect()->toArray(),
+            'publicationType' => $this->publication_type,
+            'sourceType' => $this->source_type,
         ];
     }
 

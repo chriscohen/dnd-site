@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Sources;
 
 use App\Http\Controllers\AbstractController;
+use App\Models\CampaignSetting;
 use App\Models\Sources\Source;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -28,6 +29,10 @@ class SourceController extends AbstractController
 
         if (!empty($request->get('editions'))) {
             $this->editionQuery($request->get('editions'));
+        }
+
+        if (!empty($request->input('campaignSetting'))) {
+            $this->query->whereRelation('campaignSetting', 'slug', $request->input('campaignSetting'));
         }
 
         $this->query->orderBy($this->orderKey);

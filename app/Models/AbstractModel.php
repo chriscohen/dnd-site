@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\JsonRenderMode;
-use App\Models\Sources\Source;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use ReflectionClass;
 
 abstract class AbstractModel extends Model implements Arrayable, ModelInterface
 {
@@ -55,6 +53,11 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
     public function getSlug(): string
     {
         return $this->slug;
+    }
+
+    public function getType(): string
+    {
+        return mb_lcfirst((new ReflectionClass($this))->getShortName());
     }
 
     public function priceFromString(string $input): ?int
@@ -118,5 +121,18 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
             'source' => $value['source'],
             'page' => $value['page'] ?? null,
         ], $parent);
+    }
+
+    /**
+     * Create a standardized way of representing content in search JSON.
+     */
+    public function toSearchResult(): array
+    {
+        return [
+            'id' => $this->id,
+            'type' => $this->getType(),
+            'slug' => $this->slug,
+            'name' => $this->name,
+        ];
     }
 }

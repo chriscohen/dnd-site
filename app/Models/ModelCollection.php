@@ -24,7 +24,7 @@ class ModelCollection
     public function add(ModelInterface $model): ModelCollection
     {
         if ($this->isInitialised() && $this->itemClass !== $model::class) {
-            throw new InvalidArgumentException('Cannot add more than one type of model to ModelCollection');
+            //throw new InvalidArgumentException('Cannot add more than one type of model to ModelCollection');
         }
         $this->items[$model->id] = $model;
         $this->itemClass = $model::class;
@@ -72,6 +72,17 @@ class ModelCollection
 
         foreach ($this->items as $item) {
             $output[] = $item->toString();
+        }
+
+        return $output;
+    }
+
+    public function toSearchResult(): array
+    {
+        $output = [];
+
+        foreach ($this->items as $item) {
+            $output[] = $item->toSearchResult();
         }
 
         return $output;

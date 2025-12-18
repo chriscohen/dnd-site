@@ -109,7 +109,7 @@
             "publicationType": "official",
             "publisher": "wizards-of-the-coast",
             "sourcebookTypes": [
-                "feats",
+                "character_options",
                 "monsters"
             ]
         },
