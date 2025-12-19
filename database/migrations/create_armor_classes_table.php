@@ -12,8 +12,6 @@ return new class extends Migration
     {
         Schema::create('armor_classes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedSmallInteger('source');
-            $table->smallInteger('value');
         });
     }
 

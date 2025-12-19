@@ -37,6 +37,18 @@
         ]
     },
     {
+        "id": "ab04c8d4-cf90-45a9-8890-edb0b6bc06f2",
+        "slug": "animate",
+        "name": "Animate",
+        "plural": "Animates",
+        "editions": [
+            {
+                "description": "Magically activated objects or matter.",
+                "gameEdition": "4e"
+            }
+        ]
+    },
+    {
         "id": "7493a288-07a5-405b-bcbc-2c234cd7f853",
         "slug": "beast",
         "name": "beast",
@@ -49,6 +61,10 @@
             {
                 "description": "A beast is similar to an animal, but they are non-historical and usually possess darkvision. Examples include bulettes, dinosaurs, griffons, owlbears, and purple worms.",
                 "gameEdition": "3.5"
+            },
+            {
+                "description": "Non-humanoid creatures with low intelligence.",
+                "gameEdition": "4e"
             }
         ]
     },
@@ -174,6 +190,10 @@
             {
                 "description": "Humanoids are bipeds of Small or Medium size with few or no supernatural or extraordinary abilities. Larger humanoids are usually classed as giants; humanoids with monstrous traits or supernatural abilities are usually classed as monstrous humanoids. Examples include dwarves, goblins, lizardfolk, and orcs.",
                 "gameEdition": "3.5"
+            },
+            {
+                "description": "Creatures with human-like shapes.",
+                "gameEdition": "4e"
             }
         ]
     },
@@ -206,6 +226,10 @@
             {
                 "description": "A magical beast is similar to a beast, but usually has a higher intelligence, and usually possesses supernatural or extraordinary abilities. Magical beasts usually have darkvision and low-light vision. Examples include cockatrices, giant eagles, kraken, sphinxes, ropers, and the tarrasque.",
                 "gameEdition": "3.5"
+            },
+            {
+                "description": "Non-humanoid creatures with high intelligence or supernatural traits.",
+                "gameEdition": "4e"
             }
         ]
     },

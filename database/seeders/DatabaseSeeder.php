@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             StatusConditionSeeder::class,
             MagicSchoolSeeder::class,
             MagicDomainSeeder::class,
+            CreatureSubtypeSeeder::class,
+            CreatureOriginSeeder::class,
             CreatureMajorTypeSeeder::class,
 
             AttackTypeSeeder::class,

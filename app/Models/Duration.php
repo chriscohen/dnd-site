@@ -94,7 +94,7 @@ class Duration extends AbstractModel
     /**
      * @param  array|string  $value
      */
-    public static function from5eJson(array|string $value, ModelInterface $parent = null): Duration
+    public static function from5eJson(array|string $value, ModelInterface $parent = null): static
     {
         $item = new static();
         $item->entity()->associate($parent);

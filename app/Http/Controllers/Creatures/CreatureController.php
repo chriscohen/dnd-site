@@ -5,18 +5,22 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Creatures;
 
 use App\Http\Controllers\AbstractController;
+use App\Http\Requests\CreatureListRequest;
 use App\Models\Creatures\Creature;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class CreatureController extends AbstractController
 {
     protected string $entityType = Creature::class;
     protected string $orderKey = 'name';
 
-    public function index(Request $request): JsonResponse
+    public function list(CreatureListRequest $request): JsonResponse
     {
-        $this->preValidate($request);
+        $safeData = $request->validated();
+
+        if (!$request->boolean('children')) {
+            $this->query->whereNull('parent_id');
+        }
 
         $this->query->orderBy($this->orderKey);
 
@@ -26,6 +30,6 @@ class CreatureController extends AbstractController
             $output[] = $item->toArray($this->getMode($request));
         }
 
-        return response()->json($output);
+        return response()->json($output ?? []);
     }
 }

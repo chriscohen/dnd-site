@@ -114,7 +114,7 @@ class Range extends AbstractModel
     /**
      * @param  array|string  $value
      */
-    public static function from5eJson(array|string $value, ModelInterface $parent = null): ModelInterface
+    public static function from5eJson(array|string $value, ModelInterface $parent = null): static
     {
         $item = new static();
 

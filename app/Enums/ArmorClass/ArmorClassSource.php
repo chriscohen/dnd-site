@@ -23,7 +23,7 @@ enum ArmorClassSource: int
     {
         return match (mb_strtolower($value)) {
             'base' => self::BASE,
-            'natural' => self::NATURAL,
+            'natural', 'natural armor' => self::NATURAL,
             'equipment' => self::EQUIPMENT,
             default => null,
         };

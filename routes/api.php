@@ -32,7 +32,7 @@ Route::prefix('api')->group(function () {
     Route::get('/companies', [CompanyController::class, 'index']);
 
     Route::get('/creature/{slug}', [CreatureController::class, 'get']);
-    Route::get('/creatures', [CreatureController::class, 'index']);
+    Route::get('/creatures', [CreatureController::class, 'list']);
 
     Route::get('/domains', [MagicDomainController::class, 'index']);
 

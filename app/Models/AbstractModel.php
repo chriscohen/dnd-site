@@ -99,7 +99,7 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
         return Str::slug($input);
     }
 
-    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): ModelInterface
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
         throw new \InvalidArgumentException('Not implemented');
     }

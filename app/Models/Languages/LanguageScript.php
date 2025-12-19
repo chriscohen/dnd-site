@@ -58,7 +58,7 @@ class LanguageScript extends AbstractModel
         return $item;
     }
 
-    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): ModelInterface
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
         // Make sure it doesn't already exist.
         $script = static::query()->where('name', $value)->first();

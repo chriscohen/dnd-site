@@ -105,7 +105,7 @@ class Spell extends AbstractModel
         return $item;
     }
 
-    public static function from5eJson(array|string $value, ModelInterface $parent = null): self
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
         $item->name = $value['name'];

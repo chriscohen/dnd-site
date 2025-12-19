@@ -13,6 +13,10 @@ use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 
 /**
+ * Groups a collection of fields used to describe the type of creature.
+ *
+ * Each edition did this slightly differently.
+ *
  * @property Uuid $id
  * @property string $slug
  *
@@ -31,7 +35,7 @@ class CreatureType extends AbstractModel
     public function toArrayFull(): array
     {
         return [
-            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode, $this->excluded),
+            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
         ];
     }
 

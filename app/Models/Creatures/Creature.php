@@ -9,6 +9,7 @@ use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
@@ -19,6 +20,7 @@ use Ramsey\Uuid\Uuid;
  * @property string $name
  *
  * @property Collection<CreatureEdition> $editions
+ * @property ?Creature $parent
  * @property Collection<Creature> $subspecies
  */
 class Creature extends AbstractModel
@@ -31,6 +33,11 @@ class Creature extends AbstractModel
     public function editions(): HasMany
     {
         return $this->hasMany(CreatureEdition::class);
+    }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Creature::class, 'parent_id');
     }
 
     public function subspecies(): HasMany
@@ -92,6 +99,39 @@ class Creature extends AbstractModel
 
     public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
-        return static::fromInternalJson($value, $parent);
+        // Keys are the names of creatures. Values are slugs for their parent type.
+        $map = [
+            'Dragonborn (' => 'dragonborn',
+            'Elf (' => 'elf',
+            'Gnome (' => 'gnome',
+            'Goblin (' => 'goblin',
+            'Human (' => 'human',
+            'Minotaur (' => 'minotaur',
+            'Orc (' => 'orc',
+            'Yuan-ti Pureblood' => 'yuan-ti',
+        ];
+
+        // Try to get an existing item.
+        $existing = static::query()->where('name', $value['name'])->first();
+        $item = $existing ?? new static();
+        $item->name = $value['name'];
+        $item->slug = static::makeSlug($value['name']);
+
+        // Do we need to look for a parent type?
+        foreach ($map as $prefix => $slug) {
+            if (str_starts_with($value['name'], $prefix)) {
+                $parentEntity = Creature::query()->where('slug', $slug)->firstOrFail();
+                $item->parent()->associate($parentEntity);
+            }
+        }
+
+        $item->save();
+
+        // Edition.
+        $edition = CreatureEdition::from5eJson($value, $item);
+        $item->editions()->save($edition);
+
+        $item->save();
+        return $item;
     }
 }

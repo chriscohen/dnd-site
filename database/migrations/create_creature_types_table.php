@@ -5,7 +5,8 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\Media;
+use App\Models\Creatures\CreatureMajorTypeEdition;
+use App\Models\Creatures\CreatureOrigin;
 
 return new class extends Migration
 {
@@ -13,9 +14,9 @@ return new class extends Migration
     {
         Schema::create('creature_types', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('slug')->unique();
-            $table->string('name')->index();
-            $table->foreignIdFor(Media::class, 'main_image_id')->nullable();
+
+            $table->foreignIdFor(CreatureMajorTypeEdition::class, 'creature_major_type_edition_id');
+            $table->foreignIdFor(CreatureOrigin::class, 'creature_origin_id');
         });
     }
 

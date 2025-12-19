@@ -113,7 +113,7 @@ class Language extends AbstractModel
         return $item;
     }
 
-    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): ModelInterface
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
         return static::fromInternalJson($value, $parent);
     }

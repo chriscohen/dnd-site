@@ -11,8 +11,9 @@ use App\Rules\ValidMode;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
-abstract class AbstractController implements ControllerInterface
+abstract class AbstractController extends Controller implements ControllerInterface
 {
     protected string $entityType = AbstractModel::class;
     protected string $order = 'ASC';
@@ -121,7 +122,7 @@ abstract class AbstractController implements ControllerInterface
         return response()->json($output);
     }
 
-    public function preValidate(Request $request): void
+    public function preValidate(Request|array $request): void
     {
         $request->validate([
             'editions' => ['string', new ValidGameEdition()],

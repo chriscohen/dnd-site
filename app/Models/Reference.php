@@ -105,12 +105,20 @@ class Reference extends AbstractModel
     }
 
     /**
-     * @param  array|string  $value
+     * @param  array{
+     *     'source' => string,
+     *     'page'?: int
+     * }|string  $value
      * @throws RecordNotFoundException
      */
     public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
+
+        if (empty($parent)) {
+            die("Parent entity is required for Reference creation.");
+        }
+
         $item->entity()->associate($parent);
 
         try {

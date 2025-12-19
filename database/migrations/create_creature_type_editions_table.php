@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('creature_type_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->unsignedSmallInteger('game_edition');
             $table->foreignIdFor(CreatureType::class, 'creature_type_id');
         });
     }

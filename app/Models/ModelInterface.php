@@ -22,7 +22,7 @@ interface ModelInterface
      * @param  array|string  $value  The JSON from 5e.tools, as an array.
      * @param ModelInterface|null $parent  The parent model, if any.
      */
-    public static function from5eJson(array|string $value, ModelInterface $parent = null): self;
+    public static function from5eJson(array|string $value, ModelInterface $parent = null): static;
 
     /**
      * Get the human-readable name of this thing.

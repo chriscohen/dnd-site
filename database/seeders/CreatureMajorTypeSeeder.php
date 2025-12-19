@@ -9,7 +9,7 @@ use App\Models\Creatures\CreatureMajorType;
 
 class CreatureMajorTypeSeeder extends AbstractYmlSeeder
 {
-    protected string $path = 'creature-major-types.json';
+    protected string $path = 'creature--major-types.json';
     protected string $model = Category::class;
 
     public function run(): void
@@ -17,7 +17,7 @@ class CreatureMajorTypeSeeder extends AbstractYmlSeeder
         $data = $this->getDataFromFile();
 
         foreach ($data as $datum) {
-            print "Creating Creature Major Type " . $datum['name'] . "...\n";
+            print "Creating Creature Type " . $datum['name'] . "...\n";
             CreatureMajorType::fromInternalJson($datum);
         }
     }
