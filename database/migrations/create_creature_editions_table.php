@@ -28,15 +28,19 @@ return new class extends Migration
 
             $table->foreignIdFor(ArmorClass::class, 'armor_class_id')->nullable();
             $table->unsignedSmallInteger('challenge_rating')->nullable()->index();
-            $table->unsignedSmallInteger('game_edition')->default(GameEdition::FIFTH);
+            $table->json('condition_immunities')->nullable();
             $table->foreignIdFor(CreatureHitPoints::class, 'creature_hit_points_id')->nullable();
             $table->json('damage_immunities')->nullable();
             $table->json('damage_resistances')->nullable();
-            $table->json('condition_immunities')->nullable();
-            $table->unsignedSmallInteger('proficiency_bonus')->nullable();
+            $table->unsignedSmallInteger('game_edition')->default(GameEdition::FIFTH);
+            $table->unsignedSmallInteger('height')->nullable();
+            $table->string('height_modifier')->nullable();
             $table->boolean('has_fixed_proficiency_bonus')->default(false);
             $table->boolean('is_playable')->default(false);
+            $table->unsignedSmallInteger('proficiency_bonus')->nullable();
             $table->json('sizes')->nullable();
+            $table->unsignedSmallInteger('weight')->nullable();
+            $table->string('weight_modifier')->nullable();
         });
     }
 

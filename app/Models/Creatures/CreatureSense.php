@@ -19,7 +19,7 @@ use Ramsey\Uuid\Uuid;
  * @property ?string $description
  * @property SenseType $type
  * @property ?int $range
- * @property DistanceUnit $unit
+ * @property DistanceUnit $distance_unit
  */
 class CreatureSense extends AbstractModel
 {
@@ -31,7 +31,7 @@ class CreatureSense extends AbstractModel
     {
         return [
             'type' => SenseType::class,
-            'unit' => DistanceUnit::class,
+            'distance_unit' => DistanceUnit::class,
         ];
     }
 
@@ -85,8 +85,25 @@ class CreatureSense extends AbstractModel
             }
         }
         $item->range = $range;
-        $item->unit = DistanceUnit::tryFromString($unit) ?? die('Unit not recognized: ' . $unit . "\n");
+        $item->distance_unit = DistanceUnit::tryFromString($unit) ?? die('Unit not recognized: ' . $unit . "\n");
 
+        $item->save();
+        return $item;
+    }
+
+    /**
+     * @param  array{
+     *     'type': string,
+     *     'value': int,
+     * }|string  $value
+     */
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->creatureEdition()->associate($parent);
+        $item->type = SenseType::tryFromString($value['type']);
+        $item->range = $value['value'];
+        $item->distance_unit = DistanceUnit::FOOT;
         $item->save();
         return $item;
     }

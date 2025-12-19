@@ -7,10 +7,12 @@ namespace App\Models\Creatures;
 use App\Enums\Creatures\CreatureSizeUnit;
 use App\Enums\DamageType;
 use App\Enums\GameEdition;
+use App\Enums\SenseType;
 use App\Models\AbilityScores\AbilityScore;
 use App\Models\AbilityScores\AbilityScoreModifierGroup;
 use App\Models\AbstractModel;
 use App\Models\ArmorClass\ArmorClass;
+use App\Models\Dice\DiceFormula;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\MovementSpeeds\MovementSpeedGroup;
@@ -18,6 +20,7 @@ use App\Models\Reference;
 use App\Models\StatusConditions\StatusCondition;
 use App\Models\StatusConditions\StatusConditionEdition;
 use App\Models\Tag;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -26,6 +29,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\ItemNotFoundException;
 use Ramsey\Uuid\Uuid;
 
@@ -35,14 +39,18 @@ use Ramsey\Uuid\Uuid;
  * @property string $name
  *
  * @property AbilityScoreModifierGroup $abilityScoreModifiers
+ * @property Collection<CreatureAge> $ages
  * @property ?ArmorClass $armorClass
  * @property ?int $challenge_rating
  * @property Collection<StatusConditionEdition> $condition_immunities
  * @property Creature $creature
  * @property Collection<DamageType> $damage_immunities
  * @property Collection<DamageType> $damage_resistances
+ * @property ?CreatureSense $darkvision
  * @property GameEdition $game_edition
  * @property bool $has_fixed_proficiency_bonus
+ * @property ?int $height
+ * @property ?DiceFormula $height_modifier
  * @property ?CreatureHitPoints $hitPoints
  * @property bool $is_playable
  * @property MovementSpeedGroup $movementSpeeds
@@ -52,6 +60,8 @@ use Ramsey\Uuid\Uuid;
  * @property ?Collection<CreatureSizeUnit> $sizes
  * @property ?Collection<Tag> $tags
  * @property CreatureTypeEdition $type
+ * @property ?int $weight
+ * @property ?DiceFormula $weight_modifier
  *
  * @property AbilityScore $str
  * @property AbilityScore $dex
@@ -84,14 +94,21 @@ class CreatureEdition extends AbstractModel
             'damage_resistances' => 'collection',
             'game_edition' => GameEdition::class,
             'has_fixed_proficiency_bonus' => 'boolean',
+            'height_modifier' => DiceFormula::class,
             'is_playable' => 'boolean',
             'sizes' => 'collection',
+            'weight_modifier' => DiceFormula::class,
         ];
     }
 
     public function abilityScoreModifiers(): MorphOne
     {
         return $this->morphOne(AbilityScoreModifierGroup::class, 'parent');
+    }
+
+    public function ages(): HasMany
+    {
+        return $this->hasMany(CreatureAge::class);
     }
 
     public function armorClass(): BelongsTo
@@ -104,6 +121,13 @@ class CreatureEdition extends AbstractModel
         return $this->belongsTo(Creature::class);
     }
 
+    public function darkvision(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->senses->find('type', SenseType::DARKVISION)
+        );
+    }
+
     public function hasResistance(DamageType $type): bool
     {
         return $this->damage_resistances->contains($type->value);
@@ -111,7 +135,7 @@ class CreatureEdition extends AbstractModel
 
     public function hitPoints(): BelongsTo
     {
-        return $this->hasOne(CreatureHitPoints::class, 'creature_hit_points_id');
+        return $this->belongsTo(CreatureHitPoints::class, 'creature_hit_points_id');
     }
 
     public function isImmuneTo(StatusConditionEdition | DamageType $type): bool
@@ -149,12 +173,33 @@ class CreatureEdition extends AbstractModel
         $output = [];
 
         if (!empty($this->abilityScoreModifiers)) {
-            $output['ability'][] = $this->abilityScoreModifiers->toArray();
+            $output['abilityModifier'][] = $this->abilityScoreModifiers->toArray();
         }
 
-        if (!empty($this->movementSpeeds)) {
-            $output['speed'] = $this->movementSpeeds->toArray();
+        foreach (['str', 'dex', 'con', 'int', 'wis', 'cha'] as $ability) {
+            if (!empty($this->{$ability})) {
+                $output['ability'][$ability] = $this->{$ability}->toArray();
+            }
         }
+
+        foreach ($this->ages as $age) {
+            $output['age'][$age->type->toString()] = $age->value;
+        }
+        $output['challengeRating'] = $this->challenge_rating;
+        $output['conditionImmune'] = $this->condition_immunities;
+        $output['hp'] = $this->hitPoints?->toArray($this->renderMode);
+        $output['immune'] = $this->damage_immunities;
+        $output['isPlayable'] = $this->is_playable;
+        $output['proficiencyBonus'] = $this->proficiency_bonus;
+        $output['resist'] = $this->damage_resistances;
+
+        foreach ($this->senses as $sense) {
+            $output['senses'][] = $sense->toArray();
+        }
+
+        $output['speed'] = $this->movementSpeeds?->toArray() ?? [];
+        // TODO: come back to this.
+        //$output['tags'] = ModelCollection::make($this->tags)->toArray();
 
         if (!empty($this->references)) {
             $output['references'] = ModelCollection::make($this->references)->toArray();
@@ -375,7 +420,50 @@ class CreatureEdition extends AbstractModel
          */
         foreach ($value['senses'] ?? [] as $senseItem) {
             $sense = CreatureSense::from5eJson($senseItem, $item);
-            $item->senses()->save($sense);
+
+            try {
+                $item->senses()->save($sense);
+            } catch  (UniqueConstraintViolationException $e) {
+                print "[WARNING] Multiple entries for sense {$senseItem}\n";
+            }
+        }
+        // Sometimes the key is just in the $value array instead of a "senses" array.
+        if (!empty($value['darkvision']) && empty($item->darkvision)) {
+            $darkvision = CreatureSense::from5eJson([
+                'type' => 'darkvision',
+                'value' => (int) $value['darkvision']
+            ], $item);
+            $item->senses()->save($darkvision);
+        }
+
+        /**
+         * Height and Weight.
+         */
+        if (!empty($value['heightAndWeight'])) {
+            $item->height = $value['heightAndWeight']['height'] ?? $value['heightAndWeight']['baseHeight'] ?? null;
+            if (!empty($value['heightAndWeight']['heightMod'])) {
+                $item->height_modifier = $value['heightAndWeight']['heightMod'];
+            }
+            $item->weight = $value['heightAndWeight']['weight'] ?? $value['heightAndWeight']['baseWeight'] ?? null;
+            if (!empty($value['heightAndWeight']['weightMod'])) {
+                $item->weight_modifier = $value['heightAndWeight']['weightMod'];
+            }
+        }
+
+        /**
+         * Ages.
+         */
+        foreach ($value['age'] ?? [] as $ageType => $ageItem) {
+            try {
+                $age = CreatureAge::from5eJson([
+                    'type' => $ageType,
+                    'value' => $ageItem
+                ], $item);
+
+                $item->ages()->save($age);
+            } catch (UniqueConstraintViolationException $e) {
+                print "[WARNING] Multiple entries for age {$ageType}\n";
+            }
         }
 
         $item->save();

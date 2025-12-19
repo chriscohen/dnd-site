@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Dice;
 
+use App\Castables\AsDiceFormula;
 use Illuminate\Contracts\Database\Eloquent\Castable;
-use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 /**
  */
@@ -16,23 +16,9 @@ class DiceFormula implements Castable
     ) {
     }
 
-    public static function castUsing(array $arguments): CastsAttributes
+    public static function castUsing(array $arguments): string
     {
-        return new class implements CastsAttributes
-        {
-            public function get($model, string $key, $value, array $attributes): DiceFormula
-            {
-                return new DiceFormula($value ?? '');
-            }
-
-            public function set($model, string $key, $value, array $attributes): string
-            {
-                if ($value instanceof DiceFormula) {
-                    return $value->__toString();
-                }
-                return $value;
-            }
-        };
+        return AsDiceFormula::class;
     }
 
     public function roll(): int

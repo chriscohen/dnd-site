@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('first_name')->index();
             $table->string('initials')->nullable();
             $table->string('last_name')->index();
+            $table->string('instagram')->nullable();
             $table->string('twitter')->nullable();
+            $table->string('youtube')->nullable();
         });
     }
 
