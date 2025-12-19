@@ -1,0 +1,108 @@
+{
+    "id": "886d1eb3-c8ac-4414-828d-c89aefb57e9b",
+    "slug": "deadly-encounters",
+    "name": "Deadly Encounters",
+    "coverImage": "deadly-encounters.webp",
+    "description": "Welcome to “Deadly Encounters: A Collection of Breathtaking Battles” for D&D 5e, a resource designed to enhance your gaming sessions with thrilling and memorable battles. This book provides DungeonMasters with ten thoughtfully crafted encounters, each featuring a formidable boss, thematic minions, and treacherous lairs. Designed for parties from level 3 to 17, with bosses ranging from CR4 to CR20, these encounters are tailored to challenge players at various stages of their adventures.",
+    "editions": [
+        {
+            "id": "5f488172-6e3b-4920-94ad-a45ac21749a0",
+            "name": "original",
+            "formats": ["pdf"],
+            "releaseDate": "2024-06-08",
+            "contents": [
+                {
+                    "name": "Encounters",
+                    "headers": [
+                        "Ettercap Abomination",
+                        "Lizardfolk Ambbush",
+                        "Cursed Lovers",
+                        "Summoning Ritual",
+                        "Icy Roc Attack",
+                        "The Feuding Hags",
+                        "Warlord of Maglubiyet",
+                        "Rakshasa's Deception",
+                        "The Corrupted Archdruid",
+                        "The Bloodrager Overlord"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 1
+                    }
+                },
+                {
+                    "name": "Boss",
+                    "headers": [
+                        "Ettercap Abomination - CR 4",
+                        "Lizardfolk Warlock of Sess'innek - CR 4",
+                        "Lyra - CR 5",
+                        "Thorne - CR 5",
+                        "Cleric of Bhaal - CR 7",
+                        "Icy Roc - CR 13",
+                        "Zany Zilda - Annis Hag - CR 8",
+                        "Baggy Adeline Dustwart - Night Hag - CR 8",
+                        "General Krul - CR 8",
+                        "Drovash the Shadowmaster - CR 15",
+                        "Corrupted Archdruid - CR 13",
+                        "Corrupted Elemental - CR 13",
+                        "Bloodrager Overlord - CR 20"
+                    ]
+                },
+                {
+                    "name": "All the Statblocks",
+                    "headers": [
+                        "Ettercap Abomination",
+                        "Swarm of Spiders",
+                        "Lizardfolk Warlock of Sess'innek",
+                        "Lizardfolk",
+                        "Giant Lizard",
+                        "Lyra",
+                        "Thorne",
+                        "Cleric of Bhaal",
+                        "Flesh Golem",
+                        "Acolyte",
+                        "Shadow",
+                        "Icy Roc",
+                        "Ogre",
+                        "Ghoul",
+                        "Zany Zilda - Annis Hag",
+                        "Baggy Adeline Dustwart - Night Hag",
+                        "General Krul",
+                        "Hobgoblin Devastator",
+                        "Hobgoblin Captain",
+                        "Hobgoblin",
+                        "Drovash the Shadowmaster",
+                        "Spy",
+                        "Master Thief",
+                        "Corrupted Archdruid",
+                        "Wood Woad",
+                        "Corrupted Elemental",
+                        "Bloodrager Overlord",
+                        "Vrock",
+                        "Glabrezu"
+                    ]
+                }
+            ],
+            "credits": {
+                "Design and Development": ["lorenzo-cortesi"],
+                "Editing": ["lorenzo-cortesi"],
+                "Art Direction": ["lorenzo-cortesi"],
+                "Playtesting": [
+                    "lorenzo-cortesi",
+                    "gabriele-giganti",
+                    "simone-martina",
+                    "manuela-damiani"
+                ]
+            }
+        }
+    ],
+    "gameEdition": "5e",
+    "productIds": {
+        "drivethru-rpg": "485070",
+        "dungeon-masters-guild": "485070"
+    },
+    "publicationType": "3rd party",
+    "publisher": "dungeon-masters-guild",
+    "sourcebookTypes": ["monsters"],
+    "sourceType": "sourcebook"
+}

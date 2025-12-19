@@ -196,6 +196,11 @@
         "slug": "eric-belisle"
     },
     {
+        "firstName": "Gabriele",
+        "lastName": "Giganti",
+        "slug": "gabriele-giganti"
+    },
+    {
         "firstName": "Greg",
         "lastName": "Bilsland",
         "slug": "greg-bilsland"
@@ -344,9 +349,22 @@
         "slug": "liz-schuh"
     },
     {
+        "firstName": "Lorenzo",
+        "lastName": "Cortesi",
+        "slug": "lorenzo-cortesi",
+        "twitter": "lootandroll",
+        "instagram": "loot_and_roll",
+        "youtube": "lootandroll"
+    },
+    {
         "firstName": "Magali",
         "lastName": "Villeneuve",
         "slug": "magali-villeneuve"
+    },
+    {
+        "firstName": "Manuela",
+        "lastName": "Damiani",
+        "slug": "manuela-damiani"
     },
     {
         "firstName": "Mark",
@@ -491,6 +509,11 @@
         "firstName": "Shelly",
         "lastName": "Mazzanoble",
         "slug": "shelly-mazzanoble"
+    },
+    {
+        "firstName": "Simone",
+        "lastName": "Martina",
+        "slug": "simone-martina"
     },
     {
         "firstName": "Soe",
