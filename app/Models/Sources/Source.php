@@ -3,6 +3,7 @@
 namespace App\Models\Sources;
 
 use App\Enums\GameEdition;
+use App\Enums\JsonRenderMode;
 use App\Enums\PublicationType;
 use App\Enums\SourceType;
 use App\Exceptions\DuplicateRecordException;
@@ -154,7 +155,7 @@ class Source extends AbstractModel
             'productCode' => $this->product_code,
             'productIds' => $this->productIds->collect()->toArray(),
             'publicationType' => $this->publication_type,
-            'publisher' => $this->publisher?->toArray($this->renderMode),
+            'publisher' => $this->publisher?->toArray(JsonRenderMode::TEASER),
             'sourceType' => $this->source_type,
         ];
 

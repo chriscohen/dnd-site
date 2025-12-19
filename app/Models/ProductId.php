@@ -47,7 +47,7 @@ class ProductId extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'origin' => $this->origin->toArray(JsonRenderMode::FULL),
+            'origin' => $this->origin->toArray(JsonRenderMode::TEASER),
             'productId' => $this->product_id,
             'url' => $this->url(),
         ];
