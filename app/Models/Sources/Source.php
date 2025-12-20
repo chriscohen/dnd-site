@@ -120,7 +120,7 @@ class Source extends AbstractModel
     protected function publicationType(): Attribute
     {
         return Attribute::make(
-            get: fn (int $value) => PublicationType::tryFrom($value)?->toString(),
+            get: fn (?int $value) => PublicationType::tryFrom($value)?->toString() ?? null,
         );
     }
 
@@ -137,7 +137,7 @@ class Source extends AbstractModel
     protected function sourceType(): Attribute
     {
         return Attribute::make(
-            get: fn (int $value) => SourceType::tryFrom($value)?->toString(),
+            get: fn (?int $value) => SourceType::tryFrom($value)?->toString() ?? null,
         );
     }
 
@@ -197,7 +197,7 @@ class Source extends AbstractModel
         ];
     }
 
-    public function toSearchableArray()
+    public function toSearchableArray(): array
     {
         return [
             'id' => $this->id,
@@ -205,10 +205,9 @@ class Source extends AbstractModel
             'name' => $this->name,
             'shortName' => $this->shortName,
             'description' => $this->description,
-            'productCode' => $this->product_code,
-            'productIds' => $this->productIds->collect()->toArray(),
-            'publicationType' => $this->publication_type,
-            'sourceType' => $this->source_type,
+            'product_code' => $this->product_code,
+            'publication_type' => $this->publication_type,
+            'source_type' => $this->source_type,
         ];
     }
 

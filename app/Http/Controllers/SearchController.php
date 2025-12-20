@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\CampaignSetting;
+use App\Models\Creatures\Creature;
 use App\Models\ModelCollection;
 use App\Models\Sources\Source;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -25,6 +26,7 @@ class SearchController extends Controller
         // Define the models, and the order, in which we want to search things.
         $models = [
             Source::class,
+            Creature::class,
             CampaignSetting::class,
         ];
 

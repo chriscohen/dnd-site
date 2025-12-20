@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Laravel\Scout\Searchable;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -26,6 +27,7 @@ use Ramsey\Uuid\Uuid;
 class Creature extends AbstractModel
 {
     use HasUuids;
+    use Searchable;
 
     public $timestamps = false;
     public $incrementing = false;

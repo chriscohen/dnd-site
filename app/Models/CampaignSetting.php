@@ -96,7 +96,6 @@ class CampaignSetting extends AbstractModel
     {
         return [
             'id' => $this->id,
-            'type' => 'campaignSetting',
             'slug' => $this->slug,
             'name' => $this->name,
             'description' => $this->description,
