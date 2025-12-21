@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Person;
+use App\Models\People\Person;
 use Illuminate\Support\Facades\Storage;
 
 class PersonSeeder extends AbstractYmlSeeder

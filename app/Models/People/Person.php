@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\People;
 
+use App\Models\AbstractModel;
+use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
@@ -14,7 +16,7 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  * @property string $slug
  *
- * @property Collection<Credit> $credits
+ * @property Collection<BookCredit> $credits
  * @property string $first_name
  * @property ?string $initials
  * @property ?string $instagram
@@ -31,7 +33,7 @@ class Person extends AbstractModel
 
     public function credits(): HasMany
     {
-        return $this->hasMany(Credit::class);
+        return $this->hasMany(BookCredit::class);
     }
 
     public function toArrayFull(): array

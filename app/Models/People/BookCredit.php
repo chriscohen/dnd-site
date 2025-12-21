@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\People;
 
+use App\Models\AbstractModel;
+use App\Models\ModelInterface;
 use App\Models\Sources\SourceEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -16,11 +18,12 @@ use Ramsey\Uuid\Uuid;
  * @property Person $person
  * @property string $role
  */
-class Credit extends AbstractModel
+class BookCredit extends AbstractModel
 {
     use HasUuids;
 
     public $timestamps = false;
+    public $table = 'credits';
 
     public function edition(): BelongsTo
     {

@@ -3,18 +3,16 @@
 namespace App\Models\Sources;
 
 use App\Enums\Binding;
-use App\Exceptions\DuplicateRecordException;
 use App\Models\AbstractModel;
-use App\Models\Credit;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
-use App\Models\Person;
+use App\Models\People\BookCredit;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Collection;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -23,7 +21,7 @@ use Ramsey\Uuid\Uuid;
  * @property ?Binding $binding
  * @property Collection<BoxedSetItem> $boxedSetItems
  * @property Collection<SourceContents> $contents
- * @property Collection<Credit> $credits
+ * @property Collection<BookCredit> $credits
  * @property Collection<SourceEditionFormat> $formats
  * @property bool $is_primary
  * @property ?string $isbn10
@@ -69,7 +67,7 @@ class SourceEdition extends AbstractModel
 
     public function credits(): HasMany
     {
-        return $this->hasMany(Credit::class, 'source_edition_id');
+        return $this->hasMany(BookCredit::class, 'source_edition_id');
     }
 
     public function formatReleaseDate(): string
@@ -110,7 +108,7 @@ class SourceEdition extends AbstractModel
 
         foreach ($grouped as $roleName => $people) {
             $credits[$roleName] = $people->map(
-                fn (Credit $credit) => $credit->person->toArray($this->renderMode)
+                fn (BookCredit $credit) => $credit->person->toArray($this->renderMode)
             )->toArray();
         }
 
@@ -179,7 +177,7 @@ class SourceEdition extends AbstractModel
         // Credits.
         foreach ($value['credits'] ?? [] as $key => $creditData) {
             foreach ($creditData as $creditPerson) {
-                $credit = Credit::fromInternalJson([
+                $credit = BookCredit::fromInternalJson([
                     'role' => $key,
                     'person' => $creditPerson
                 ], $item);
@@ -246,7 +244,7 @@ class SourceEdition extends AbstractModel
         // Credits.
         foreach ($value['credits'] ?? [] as $key => $creditData) {
             foreach ($creditData as $creditPerson) {
-                $credit = Credit::fromInternalJson([
+                $credit = BookCredit::fromInternalJson([
                     'role' => $key,
                     'person' => $creditPerson
                 ], $item);

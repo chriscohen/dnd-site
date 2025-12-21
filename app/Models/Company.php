@@ -21,7 +21,7 @@ use Ramsey\Uuid\Uuid;
  * @property ?string $product_url
  * @property Collection<Source> $products
  * @property ?string $short_name
- * @property string $website
+ * @property ?string $website
  */
 class Company extends AbstractModel
 {

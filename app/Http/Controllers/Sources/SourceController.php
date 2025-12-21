@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Sources;
 
+use App\DTOs\Sources\SourceFullDTO;
+use App\DTOs\Sources\SourceSummaryDTO;
 use App\Http\Controllers\AbstractController;
-use App\Models\CampaignSetting;
 use App\Models\Sources\Source;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,12 +24,29 @@ class SourceController extends AbstractController
         return $this;
     }
 
+    public function get(Request $request, string $slug): JsonResponse
+    {
+        /** @var Source|null $item */
+        $item = $this->query
+            ->where('slug', $slug)
+            ->with([
+                'editions',
+                'editions.contents',
+                'editions.credits'
+            ])
+            ->first();
+
+        return response()->json(
+            $item === null ? [] : SourceFullDTO::fromModel($item)
+        );
+    }
+
     public function index(Request $request): JsonResponse
     {
         $this->preValidate($request);
 
-        if (!empty($request->get('editions'))) {
-            $this->editionQuery($request->get('editions'));
+        if (!empty($request->input('editions'))) {
+            $this->editionQuery($request->input('editions'));
         }
 
         if (!empty($request->input('campaignSetting'))) {
@@ -38,14 +56,11 @@ class SourceController extends AbstractController
         $this->query->orderBy($this->orderKey);
 
         $items = empty($request->get('includeChildren')) ?
-            $this->query->whereNull('parent_id')->get() :
-            $this->query->get();
-        $output = [];
+            $this->query->whereNull('parent_id')->paginate(50) :
+            $this->query->paginate(50);
 
-        foreach ($items as $item) {
-            $output[] = $item->toArray($this->getMode($request));
-        }
+        $items = $items->through(fn (Source $item) => SourceSummaryDTO::fromModel($item));
 
-        return response()->json($output);
+        return response()->json($items);
     }
 }
