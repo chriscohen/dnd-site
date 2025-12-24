@@ -25,24 +25,22 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\ItemNotFoundException;
-use Ramsey\Uuid\Uuid;
 
 /**
- * @property Uuid $id
- * @property string $slug
- * @property string $name
+ * @property string $id
  *
- * @property AbilityScoreModifierGroup $abilityScoreModifiers
+ * @property ?AbilityScoreModifierGroup $abilityScoreModifiers
  * @property Collection<CreatureAge> $ages
  * @property ?ArmorClass $armorClass
  * @property ?int $challenge_rating
- * @property Collection<StatusConditionEdition> $condition_immunities
+ * @property Collection<StatusConditionEdition> $conditionImmunities
  * @property Creature $creature
  * @property Collection<DamageType> $damage_immunities
  * @property Collection<DamageType> $damage_resistances
@@ -80,7 +78,6 @@ class CreatureEdition extends AbstractModel
     {
         parent::__construct();
 
-        $this->condition_immunities = new Collection();
         $this->damage_immunities = new Collection();
         $this->damage_resistances = new Collection();
         $this->sizes = new Collection();
@@ -113,7 +110,12 @@ class CreatureEdition extends AbstractModel
 
     public function armorClass(): BelongsTo
     {
-        return $this->hasOne(ArmorClass::class, 'armor_class_id');
+        return $this->belongsTo(ArmorClass::class, 'armor_class_id');
+    }
+
+    public function conditionImmunities(): BelongsToMany
+    {
+        return $this->belongsToMany(StatusConditionEdition::class, 'status_condition_immunities');
     }
 
     public function creature(): BelongsTo
@@ -140,7 +142,7 @@ class CreatureEdition extends AbstractModel
 
     public function isImmuneTo(StatusConditionEdition | DamageType $type): bool
     {
-        return $this->condition_immunities->contains($type) || $this->damage_immunities->contains($type);
+        return $this->condition_immunities?->contains($type) || $this->damage_immunities?->contains($type);
     }
 
     public function movementSpeeds(): MorphOne
@@ -385,7 +387,7 @@ class CreatureEdition extends AbstractModel
 
                 // Check if already immune.
                 if (!$item->isImmuneTo($conditionEdition)) {
-                    $item->condition_immunities->add($conditionEdition);
+                    $item->conditionImmunities()->save($conditionEdition);
                 }
             } catch (ModelNotFoundException $e) {
                 print("[WARNING] Could not find StatusCondition: {$conditionItem}\n");
