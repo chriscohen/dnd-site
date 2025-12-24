@@ -59,7 +59,7 @@ class ArmorClassItem extends AbstractModel
     /**
      * @property array{
      *     ac: int,
-     *     from: string[]
+     *     from: string
      * } $value
      */
     public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
@@ -69,6 +69,19 @@ class ArmorClassItem extends AbstractModel
         // The AC always includes the base of 10 so let's subtract that.
         $item->value = ((int) $value['ac']) - 10;
 
+        // Assume it's natural armor if we can't convert to an ArmorClassSource.
+        $item->source_type = ArmorClassSource::tryFromString($value['from']) ?? ArmorClassSource::NATURAL;
+
+        $item->save();
+        return $item;
+    }
+
+    public static function generate(ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->armorClass()->associate($parent);
+        $item->value = mt_rand(10, 18);
+        $item->source_type = ArmorClassSource::NATURAL;
         $item->save();
         return $item;
     }

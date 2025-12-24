@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Models\Creatures;
 
+use App\Enums\GameEdition;
 use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
@@ -18,18 +20,38 @@ use Ramsey\Uuid\Uuid;
  * Each edition did this slightly differently.
  *
  * @property Uuid $id
- * @property string $slug
  *
- * @property Collection<CreatureTypeEdition> $editions
- * @property string $name
+ * @property Collection<CreatureEdition> $creatures
+ * @property GameEdition $game_edition
+ * @property CreatureMajorType $majorType
+ * @property CreatureOrigin $origin
  */
 class CreatureType extends AbstractModel
 {
     use HasUuids;
 
-    public function editions(): HasMany
+    public $timestamps = false;
+
+    protected function casts(): array
     {
-        return $this->hasMany(CreatureTypeEdition::class, 'creature_type_id');
+        return [
+            'game_edition' => GameEdition::class,
+        ];
+    }
+
+    public function creatures(): HasMany
+    {
+        return $this->hasMany(CreatureEdition::class, 'creature_edition_id');
+    }
+
+    public function majorType(): BelongsTo
+    {
+        return $this->belongsTo(CreatureMajorType::class, 'creature_major_type_id');
+    }
+
+    public function origin(): BelongsTo
+    {
+        return $this->belongsTo(CreatureOrigin::class, 'creature_origin_id');
     }
 
     public function toArrayFull(): array
@@ -56,5 +78,20 @@ class CreatureType extends AbstractModel
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         throw new \Exception('Not implemented');
+    }
+
+    public static function generate(ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->game_edition = GameEdition::FIFTH;
+
+        $origin = CreatureOrigin::generate($item);
+        $item->origin()->associate($origin);
+
+        $majorType = CreatureMajorType::generate($item);
+        $item->majorType()->associate($majorType);
+
+        $item->save();
+        return $item;
     }
 }

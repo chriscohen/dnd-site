@@ -74,4 +74,15 @@ class CreatureMajorTypeEdition extends AbstractModel
         $item->save();
         return $item;
     }
+
+    public static function generate(ModelInterface $parent = null): static
+    {
+        $faker = static::getFaker();
+        $item = new static();
+        $item->creatureMajorType()->associate($parent);
+        $item->description = $faker->sentence();
+        $item->game_edition = GameEdition::FIFTH;
+        $item->save();
+        return $item;
+    }
 }

@@ -8,6 +8,7 @@ use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\Reference;
+use Faker\Factory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -134,6 +135,21 @@ class Creature extends AbstractModel
         $item->editions()->save($edition);
 
         $item->save();
+        return $item;
+    }
+
+    public static function generate(ModelInterface $parent = null): static
+    {
+        $faker = static::getFaker();
+        $item = new static();
+        $item->name = $faker->words(3, asText: true);
+        $item->slug = static::makeSlug($item->name);
+
+        $item->save();
+
+        $edition = CreatureEdition::generate($item);
+        $item->editions()->save($edition);
+
         return $item;
     }
 }

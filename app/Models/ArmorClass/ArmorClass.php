@@ -12,15 +12,18 @@ use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
  *
+ * @property ?bool $braces
+ * @property ?string $condition
  * @property CreatureEdition $creatureEdition
  * @property Collection<ArmorClassItem> $items
+ * @property ?int $value
  */
 class ArmorClass extends AbstractModel
 {
@@ -39,9 +42,9 @@ class ArmorClass extends AbstractModel
         );
     }
 
-    public function creatureEdition(): HasOne
+    public function creatureEdition(): BelongsTo
     {
-        return $this->hasOne(CreatureEdition::class, 'armor_class_id');
+        return $this->belongsTo(CreatureEdition::class, 'creature_edition_id');
     }
 
     public function items(): HasMany
@@ -64,6 +67,11 @@ class ArmorClass extends AbstractModel
         return [];
     }
 
+    public function value(): Attribute
+    {
+        return Attribute::make(get: fn () => $this->items->sum(fn (ArmorClassItem $item) => $item->value));
+    }
+
     public static function fromInternalJson(int|array|string $value, ?ModelInterface $parent = null): static
     {
         return new static();
@@ -71,9 +79,11 @@ class ArmorClass extends AbstractModel
 
     /**
      * @property array{
-     *     ac: int,
-     *     from: string[]
-     * }|int[] $value
+     *     'ac': int,
+     *     'braces': ?bool,
+     *     'condition': ?string,
+     *     'from': string[]
+     * }|int $value
      */
     public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
@@ -81,18 +91,44 @@ class ArmorClass extends AbstractModel
         $item->creatureEdition()->associate($parent);
         $item->save();
 
-        // Sometimes we only have an array of numbers.
-        if (is_array($value) && empty($value['from'])) {
-            $acItem = new ArmorClassItem();
-            $acItem->source_type = ArmorClassSource::NATURAL;
-            $acItem->value = $value[0];
-        } else {
-            foreach ($value['from'] as $fromData) {
-                $acItem = ArmorClassItem::from5eJson($value, $item);
+        // Sometimes we have a number, and sometimes a data structure.
+        if (is_array($value)) {
+            $item->braces = $value['braces'] ?? false;
+            $item->condition = $value['condition'] ?? null;
+
+            foreach ($value['from'] ?? [] as $fromData) {
+                $acItem = ArmorClassItem::from5eJson([
+                    'ac' => $value['ac'],
+                    'from' => $fromData
+                ], $item);
                 $item->items()->save($acItem);
             }
+        } else {
+            // If we just have a number, add one item to represent natural armor.
+            $acItem = new ArmorClassItem();
+            $acItem->armorClass()->associate($item);
+            $acItem->source_type = ArmorClassSource::NATURAL;
+            $acItem->value = $value;
+            $acItem->save();
+            $item->items()->save($acItem);
         }
 
+
+        $item->save();
+        return $item;
+    }
+
+    public static function generate(ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->creatureEdition()->associate($parent);
+        $item->save();
+        $item->items()->saveMany([
+            ArmorClassItem::generate($item),
+            ArmorClassItem::generate($item),
+        ]);
+        $item->braces = mt_rand(0, 1) === 1;
+        $item->condition = 'random text';
         $item->save();
         return $item;
     }

@@ -69,4 +69,20 @@ class CreatureMajorType extends AbstractModel
         $item->save();
         return $item;
     }
+
+    public static function generate(ModelInterface $parent = null): static
+    {
+        $faker = static::getFaker();
+        $item = new static();
+        $item->name = $faker->words(3, asText: true);
+        $item->slug = static::makeSlug($item->name);
+        $item->plural = $item->name . 's';
+        $item->save();
+
+        $edition = CreatureMajorTypeEdition::generate($item);
+        $item->editions()->save($edition);
+
+        $item->save();
+        return $item;
+    }
 }

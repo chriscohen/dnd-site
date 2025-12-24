@@ -40,7 +40,7 @@ use Illuminate\Support\ItemNotFoundException;
  *
  * @property ?AbilityScoreModifierGroup $abilityScoreModifiers
  * @property Collection<CreatureAge> $ages
- * @property ?ArmorClass $armorClass
+ * @property Collection<ArmorClass> $armorClass
  * @property ?int $challenge_rating
  * @property Collection<StatusConditionEdition> $conditionImmunities
  * @property Creature $creature
@@ -59,7 +59,7 @@ use Illuminate\Support\ItemNotFoundException;
  * @property Collection<CreatureSense> $senses
  * @property ?Collection<CreatureSizeUnit> $sizes
  * @property ?Collection<Tag> $tags
- * @property CreatureTypeEdition $type
+ * @property CreatureType $type
  * @property ?int $weight
  * @property ?DiceFormula $weight_modifier
  *
@@ -110,9 +110,19 @@ class CreatureEdition extends AbstractModel
         return $this->hasMany(CreatureAge::class);
     }
 
-    public function armorClass(): BelongsTo
+    public function armorClass(): HasMany
     {
-        return $this->belongsTo(ArmorClass::class, 'armor_class_id');
+        return $this->hasMany(ArmorClass::class, 'creature_edition_id');
+    }
+
+    public function cha(): BelongsTo
+    {
+        return $this->belongsTo(AbilityScore::class, 'cha_id');
+    }
+
+    public function con(): BelongsTo
+    {
+        return $this->belongsTo(AbilityScore::class, 'con_id');
     }
 
     public function conditionImmunities(): BelongsToMany
@@ -132,6 +142,11 @@ class CreatureEdition extends AbstractModel
         );
     }
 
+    public function dex(): BelongsTo
+    {
+        return $this->belongsTo(AbilityScore::class, 'dex_id');
+    }
+
     public function hasResistance(DamageType $type): bool
     {
         return $this->damage_resistances->contains($type->value);
@@ -140,6 +155,11 @@ class CreatureEdition extends AbstractModel
     public function hitPoints(): BelongsTo
     {
         return $this->belongsTo(CreatureHitPoints::class, 'creature_hit_points_id');
+    }
+
+    public function int(): BelongsTo
+    {
+        return $this->belongsTo(AbilityScore::class, 'int_id');
     }
 
     public function isImmuneTo(StatusConditionEdition | DamageType $type): bool
@@ -162,6 +182,11 @@ class CreatureEdition extends AbstractModel
         return $this->hasMany(CreatureSense::class);
     }
 
+    public function str(): BelongsTo
+    {
+        return $this->belongsTo(AbilityScore::class, 'str_id');
+    }
+
     public function tags(): MorphToMany
     {
         return $this->morphToMany(Tag::class, 'taggable');
@@ -169,7 +194,12 @@ class CreatureEdition extends AbstractModel
 
     public function type(): BelongsTo
     {
-        return $this->belongsTo(CreatureTypeEdition::class, 'creature_type_edition_id');
+        return $this->belongsTo(CreatureType::class, 'creature_type_id');
+    }
+
+    public function wis(): BelongsTo
+    {
+        return $this->belongsTo(AbilityScore::class, 'wis_id');
     }
 
     public function toArrayFull(): array
@@ -358,6 +388,8 @@ class CreatureEdition extends AbstractModel
             } catch (ModelNotFoundException $e) {
                 die("Could not find CreatureMajorType: {$value['type']}\n");
             }
+        } else {
+            throw new \InvalidArgumentException("Creature type not found: {$value['type']}");
         }
 
         /**
@@ -372,12 +404,24 @@ class CreatureEdition extends AbstractModel
 
         /**
          * Armor class.
+         *
+         * 5e.tools can have multiple armor classes for a single creature.
          */
-        if (!empty($value['ac']) && empty($item->armorClass)) {
+        if (!empty($value['ac'])) {
             // Remove the dexterity modifier from the armor class.
-            $modifier = $item->dex->modifier;
-            $ac = ArmorClass::from5eJson($value['ac'] - $modifier, $item);
-            $item->armorClass()->associate($ac);
+            $modifier = AbilityScore::getModifier($value['dex']);
+
+            // TODO - make this work somehow.
+//            if (is_array($value['ac'])) {
+//                $value['ac']['ac'] -= $modifier;
+//            } else {
+//                $value['ac'] -= $modifier;
+//            }
+
+            foreach ($value['ac'] as $acItem) {
+                $ac = ArmorClass::from5eJson($acItem, $item);
+                $item->armorClass()->save($ac);
+            }
         }
 
         /**
@@ -483,6 +527,31 @@ class CreatureEdition extends AbstractModel
             } catch (UniqueConstraintViolationException $e) {
                 print "[WARNING] Multiple entries for age {$ageType}\n";
             }
+        }
+
+        $item->save();
+        return $item;
+    }
+
+    public static function generate(ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->creature()->associate($parent);
+
+        /**
+         * Type.
+         */
+        $type = CreatureType::generate($item);
+        $item->type()->associate($type);
+
+        $item->save();
+
+        /**
+         * Armor Class.
+         */
+        for ($i = 1; $i <= mt_rand(1, 3); $i++) {
+            $ac = ArmorClass::generate($item);
+            $item->armorClass()->save($ac);
         }
 
         $item->save();

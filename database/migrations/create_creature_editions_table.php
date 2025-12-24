@@ -10,6 +10,7 @@ use App\Models\AbilityScores\AbilityScore;
 use App\Models\ArmorClass\ArmorClass;
 use App\Models\Creatures\CreatureHitPoints;
 use App\Enums\GameEdition;
+use App\Models\Creatures\CreatureType;
 
 return new class extends Migration
 {
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->foreignIdFor(ArmorClass::class, 'armor_class_id')->nullable();
             $table->unsignedSmallInteger('challenge_rating')->nullable()->index();
             $table->foreignIdFor(CreatureHitPoints::class, 'creature_hit_points_id')->nullable();
+            $table->foreignIdFor(CreatureType::class, 'creature_type_id');
             $table->json('damage_immunities')->nullable();
             $table->json('damage_resistances')->nullable();
             $table->unsignedSmallInteger('game_edition')->default(GameEdition::FIFTH);

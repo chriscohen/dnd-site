@@ -6,6 +6,8 @@ namespace App\Models\Creatures;
 
 use App\Models\AbstractModel;
 use App\Models\ModelInterface;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Creature origin is always 4th edition only.
@@ -13,6 +15,7 @@ use App\Models\ModelInterface;
  * @property string $id
  * @property string $name
  *
+ * @property Collection<CreatureType> $creatureTypes
  * @property string $origin
  * @property string $plural
  */
@@ -20,6 +23,11 @@ class CreatureOrigin extends AbstractModel
 {
     public $timestamps = false;
     public $incrementing = false;
+
+    public function creatureTypes(): HasMany
+    {
+        return $this->hasMany(CreatureType::class, 'creature_origin_id');
+    }
 
     public function toArrayFull(): array
     {
@@ -48,6 +56,18 @@ class CreatureOrigin extends AbstractModel
         $item->name = $value['name'];
         $item->origin = $value['origin'];
         $item->plural = $value['plural'];
+        $item->save();
+        return $item;
+    }
+
+    public static function generate(ModelInterface $parent = null): static
+    {
+        $faker = static::getFaker();
+        $item = new static();
+        $item->name = $faker->words(3, asText: true);
+        $item->id = static::makeSlug($item->name);
+        $item->origin = $faker->words(3, asText: true);
+        $item->plural = $item->name . 's';
         $item->save();
         return $item;
     }

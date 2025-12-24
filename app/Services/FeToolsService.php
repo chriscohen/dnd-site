@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Models\CharacterClasses\CharacterClass;
+use App\Models\Creatures\Creature;
+use App\Models\Feats\Feature;
+use App\Models\Items\ItemType;
+use App\Models\Language;
+use App\Models\Sources\Source;
+use App\Models\Spells\Spell;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\Storage;
 
@@ -62,5 +69,23 @@ class FeToolsService
         }
 
         return null;
+    }
+
+    /**
+     * Map JSON keys in 5e.tools data, to model classes.
+     */
+    public static function types(): array
+    {
+        return [
+            'book' => Source::class,
+            'class' => CharacterClass::class,
+            'item' => ItemType::class,
+            'language' => Language::class,
+            'monster' => Creature::class,
+            'monsterfeatures' => Feature::class,
+            'object' => ItemType::class,
+            'race' => Creature::class,
+            'spell' => Spell::class,
+        ];
     }
 }

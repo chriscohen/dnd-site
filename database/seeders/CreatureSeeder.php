@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Creatures\Creature;
 use App\Models\Creatures\CreatureEdition;
+use Illuminate\Support\Facades\Storage;
 
 class CreatureSeeder extends AbstractYmlSeeder
 {
@@ -16,6 +17,9 @@ class CreatureSeeder extends AbstractYmlSeeder
 
     public function run(): void
     {
+        /**
+         * Import races from JSON.
+         */
         $json = $this->getDataFromFile('5etools/data/races.json');
 
         foreach ($json['race'] as $datum) {
@@ -29,6 +33,20 @@ class CreatureSeeder extends AbstractYmlSeeder
             $edition = $creature->editions->first();
             $edition->is_playable = true;
             $edition->save();
+        }
+
+        foreach (Storage::disk('data')->files('/5etools/data/bestiary') as $file) {
+            if (str_contains('fluff', $file)) {
+                print "[5e.tools] Skipping fluff file: " . $file . "\n";
+                continue;
+            }
+
+            $json = json_decode(Storage::disk('data')->get($file), true);
+
+            foreach ($json['monster'] as $datum) {
+                print "[5e.tools] Creating Creature (Bestiary) " . $datum['name'] . "...\n";
+                Creature::from5eJson($datum);
+            }
         }
     }
 }

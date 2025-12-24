@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\Spells\Spell;
-use App\Services\FeToolsService;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +14,9 @@ class ImportFe extends Command
      *
      * @var string
      */
-    protected $signature = 'app:import-fe {file}';
+    protected $signature = 'app:import-fe
+                            {--T|type=auto}
+                            {path}';
 
     /**
      * The console command description.
@@ -29,14 +30,21 @@ class ImportFe extends Command
      */
     public function handle(): void
     {
-        $file = $this->argument('file');
+        $path = $this->argument('path');
 
-        if (Storage::disk('data')->missing($file)) {
-            throw new FileNotFoundException('storage/data/' . $file . ' not found');
+        if (Storage::disk('data')->missing($path)) {
+            throw new FileNotFoundException('storage/data/' . $path . ' not found');
         }
 
-        $json = json_decode(Storage::disk('data')->get($file), true);
-        $spell = Spell::from5eJson($json);
-        print "Spell imported: {$spell->name}" . PHP_EOL;
+        if (is_dir(Storage::disk('data')->path($path))) {
+            $files = Storage::disk('data')->files($path);
+            print "Found " . count($files) . " file(s) in {$path}" . PHP_EOL;
+
+            foreach ($files as $file) {
+                print "Importing {$file}" . PHP_EOL;
+            }
+        } else {
+            print "Importing {$path}" . PHP_EOL;
+        }
     }
 }

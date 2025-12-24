@@ -8,14 +8,20 @@ use App\Enums\AbilityScoreType;
 use App\Models\AbstractModel;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Ramsey\Uuid\Uuid;
 
 /**
+ * @property Uuid $id
+ *
  * @property int $modifier
  * @property AbilityScoreType $type
  * @property int $value
  */
 class AbilityScore extends AbstractModel
 {
+    use HasUuids;
+
     public $timestamps = false;
 
     protected function casts(): array
@@ -45,6 +51,11 @@ class AbilityScore extends AbstractModel
     public function toArrayTeaser(): array
     {
         return [];
+    }
+
+    public static function getModifier(int $abilityScore): int
+    {
+        return (int) floor(($abilityScore - 10) / 2);
     }
 
     public static function fromInternalJson(int|array|string $value, ?ModelInterface $parent = null): static

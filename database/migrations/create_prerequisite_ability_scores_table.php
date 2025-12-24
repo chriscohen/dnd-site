@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('minimum')->nullable();
             $table->unsignedSmallInteger('maximum')->nullable();
 
-            $table->unique(['prerequisite_ability_score_group_id', 'ability_score'], 'ability_score_unique');
+            $table->unique(['prerequisite_ability_score_group_id', 'ability_score'], 'ability_score_unique_02');
         });
     }
 
