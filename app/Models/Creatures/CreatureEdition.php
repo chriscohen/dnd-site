@@ -308,6 +308,15 @@ class CreatureEdition extends AbstractModel
         // Do we already have a CreatureEdition for this GameEdition? Use it, otherwise create a new one.
         $item = $parent->editions->where('game_edition', $edition)->first() ?? new static();
 
+        // In case we couldn't set an edition, assume 5th edition.
+        if (empty($item->game_edition)) {
+            $item->game_edition = GameEdition::FIFTH_REVISED;
+        }
+        if (empty($item->creature)) {
+            $item->creature()->associate($parent);
+        }
+        $item->save();
+
         // Check we don't already have this reference.
         if (!$item->references->contains('source.slug', $value['source'])) {
             $reference = Reference::from5eJson([
@@ -316,19 +325,6 @@ class CreatureEdition extends AbstractModel
             ], $item);
             $item->references()->save($reference);
         }
-
-        // In case we couldn't set an edition, assume 5th edition.
-        if (empty($item->game_edition)) {
-            $item->game_edition = GameEdition::FIFTH_REVISED;
-        }
-
-        // Do we already have an edition?
-        /** @var Creature $parent */
-        $item = $parent->editions->first() ??  new static();
-        $item->creature()->associate($parent);
-        $item->save();
-
-
 
         /**
          * Challenge Rating.
@@ -415,7 +411,7 @@ class CreatureEdition extends AbstractModel
             } catch (ItemNotFoundException $e) {
                 print sprintf(
                     "[WARNING] Could not find %s StatusConditionEdition for %s\n",
-                    $item->game_edition->toStringShort(),
+                    $item->game_edition?->toString() ?? 'unknown edition',
                     $conditionItem
                 );
             }
@@ -446,7 +442,7 @@ class CreatureEdition extends AbstractModel
 
             try {
                 $item->senses()->save($sense);
-            } catch  (UniqueConstraintViolationException $e) {
+            } catch (UniqueConstraintViolationException $e) {
                 print "[WARNING] Multiple entries for sense {$senseItem}\n";
             }
         }
