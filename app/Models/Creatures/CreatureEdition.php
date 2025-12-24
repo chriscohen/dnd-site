@@ -8,6 +8,7 @@ use App\Enums\Creatures\CreatureSizeUnit;
 use App\Enums\DamageType;
 use App\Enums\GameEdition;
 use App\Enums\SenseType;
+use App\Exceptions\RecordNotFoundException;
 use App\Models\AbilityScores\AbilityScore;
 use App\Models\AbilityScores\AbilityScoreModifierGroup;
 use App\Models\AbstractModel;
@@ -17,6 +18,7 @@ use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\MovementSpeeds\MovementSpeedGroup;
 use App\Models\Reference;
+use App\Models\Sources\Source;
 use App\Models\StatusConditions\StatusCondition;
 use App\Models\StatusConditions\StatusConditionEdition;
 use App\Models\Tag;
@@ -280,34 +282,53 @@ class CreatureEdition extends AbstractModel
         return $item;
     }
 
+    /**
+     * @param Creature $parent
+     * @throws RecordNotFoundException
+     */
     public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
+        /**
+         * Game Edition.
+         */
+        if (empty($value['source'])) {
+            throw new \InvalidArgumentException('Creature edition must have a source.');
+        }
+        try {
+            /** @var Source $source */
+            $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            throw new \InvalidArgumentException('Creature edition source not found: ' . $value['source']);
+        }
+
+        // Try to infer the game edition from the sourcebook.
+        $edition = GameEdition::tryFromString($source->game_edition) ??
+            throw new \InvalidArgumentException("Could not infer game edition from sourcebook: {$source->name}");
+
+        // Do we already have a CreatureEdition for this GameEdition? Use it, otherwise create a new one.
+        $item = $parent->editions->where('game_edition', $edition)->first() ?? new static();
+
+        // Check we don't already have this reference.
+        if (!$item->references->contains('source.slug', $value['source'])) {
+            $reference = Reference::from5eJson([
+                'source' => $value['source'],
+                'page' => $value['page'] ?? null,
+            ], $item);
+            $item->references()->save($reference);
+        }
+
+        // In case we couldn't set an edition, assume 5th edition.
+        if (empty($item->game_edition)) {
+            $item->game_edition = GameEdition::FIFTH_REVISED;
+        }
+
         // Do we already have an edition?
         /** @var Creature $parent */
         $item = $parent->editions->first() ??  new static();
         $item->creature()->associate($parent);
         $item->save();
 
-        /**
-         * Game Edition.
-         */
-        if (!empty($value['source'])) {
-            // Check we don't already have this reference.
-            if (!$item->references->contains('source.slug', $value['source'])) {
-                $reference = Reference::from5eJson([
-                    'source' => $value['source'],
-                    'page' => $value['page'] ?? null,
-                ], $item);
-                $item->references()->save($reference);
-            }
 
-            // Try to infer the game edition from the sourcebook.
-            $item->game_edition = GameEdition::tryFromString($reference->edition->source->game_edition);
-        }
-        // In case we couldn't set an edition, assume 5th edition.
-        if (empty($item->game_edition)) {
-            $item->game_edition = GameEdition::FIFTH_REVISED;
-        }
 
         /**
          * Challenge Rating.

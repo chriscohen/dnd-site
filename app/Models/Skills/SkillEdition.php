@@ -8,8 +8,12 @@ use App\Enums\AbilityScoreType;
 use App\Enums\GameEdition;
 use App\Models\AbstractModel;
 use App\Models\ModelInterface;
+use App\Models\Text\TextEntry;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -20,6 +24,7 @@ use Ramsey\Uuid\Uuid;
  * @property GameEdition $game_edition
  * @property ?AbilityScoreType $related_attribute
  * @property Skill $skill
+ * @property Collection<TextEntry> $entries
  */
 class SkillEdition extends AbstractModel
 {
@@ -35,6 +40,11 @@ class SkillEdition extends AbstractModel
     public function skill(): BelongsTo
     {
         return $this->belongsTo(Skill::class, 'skill_id');
+    }
+
+    public function entries(): MorphMany
+    {
+        return $this->morphMany(TextEntry::class, 'parent');
     }
 
     public function toArrayFull(): array
@@ -67,6 +77,11 @@ class SkillEdition extends AbstractModel
 
         if (!empty($value['relatedAttribute'])) {
             $item->related_attribute = AbilityScoreType::tryFromString($value['relatedAttribute']);
+        }
+
+        $i = 0;
+        foreach ($value['entries'] ?? [] as $entry) {
+            TextEntry::fromInternalJson($entry, $item, ++$i);
         }
 
         $item->save();

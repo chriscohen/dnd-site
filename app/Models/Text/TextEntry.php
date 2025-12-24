@@ -20,6 +20,7 @@ use Ramsey\Uuid\Uuid;
  * @property Collection<TextEntry> $children
  * @property ?string $entry_data
  * @property ?string $name
+ * @property int $order
  * @property ModelInterface $parent
  * @property ?string $text
  * @property TextEntryType $type
@@ -31,9 +32,12 @@ class TextEntry extends AbstractModel
     public $timestamps = false;
     public $table = 'text_entries';
 
-    public $casts = [
-        'type' => TextEntryType::class,
-    ];
+    public function casts(): array
+    {
+        return [
+            'type' => TextEntryType::class,
+        ];
+    }
 
     public function children(): HasMany
     {
@@ -43,49 +47,6 @@ class TextEntry extends AbstractModel
     public function parent(): MorphTo
     {
         return $this->morphTo();
-    }
-
-    public static function fromInternalJson(int|array|string $value, ?ModelInterface $parent = null): static
-    {
-        $item = new static();
-        $item->id = Uuid::uuid4();
-        $item->parent()->associate($parent);
-
-        // If the entry is just a text string, create and return it right away.
-        if (is_string($value)) {
-            $item->text = $value;
-            $item->save();
-            return $item;
-        }
-
-        $item->type = TextEntryType::tryFromString($value['type']);
-
-        if (!empty($value['name'])) {
-            $item->name = $value['name'];
-        }
-        if (!empty($value['caption'])) {
-            $item->name = $value['caption'];
-        }
-
-        if ($item->type == TextEntryType::LIST) {
-            $item->entry_data = json_encode($value['items']);
-        } elseif ($item->type == TextEntryType::TABLE) {
-            $item->entry_data = json_encode([
-                'colLabels' => $value['colLabels'] ?? [],
-                'colStyles' => $value['colStyles'] ?? [],
-                'rows' => $value['rows'] ?? [],
-            ]);
-        }
-
-        $item->save();
-
-        foreach ($value['entries'] ?? [] as $childValue) {
-            $child = static::fromInternalJson($childValue, $item);
-            $item->children()->save($child);
-        }
-
-        $item->save();
-        return $item;
     }
 
     public function toArrayFull(): array
@@ -114,5 +75,54 @@ class TextEntry extends AbstractModel
         return [
             'name' => $this->name
         ];
+    }
+
+    public static function fromInternalJson(
+        int|array|string $value,
+        ?ModelInterface $parent = null,
+        int $order = 1
+    ): static {
+        $item = new static();
+        $item->id = Uuid::uuid4();
+        $item->order = $order;
+        $item->parent()->associate($parent);
+
+        $item->type = TextEntryType::tryFromString($value['type'] ?? 'text') ??
+            throw new \InvalidArgumentException('Invalid text entry type: ' . $value['type']);
+
+        // If the entry is just a text string, create and return it right away.
+        if (is_string($value)) {
+            $item->text = $value;
+            $item->save();
+            return $item;
+        }
+
+        if (!empty($value['name'])) {
+            $item->name = $value['name'];
+        }
+        if (!empty($value['caption'])) {
+            $item->name = $value['caption'];
+        }
+
+        if ($item->type == TextEntryType::LIST) {
+            $item->entry_data = json_encode($value['items']);
+        } elseif ($item->type == TextEntryType::TABLE) {
+            $item->entry_data = json_encode([
+                'colLabels' => $value['colLabels'] ?? [],
+                'colStyles' => $value['colStyles'] ?? [],
+                'rows' => $value['rows'] ?? [],
+            ]);
+        }
+
+        $item->save();
+
+        $i = 0;
+        foreach ($value['entries'] ?? [] as $childValue) {
+            $child = static::fromInternalJson($childValue, $item, ++$i);
+            $item->children()->save($child);
+        }
+
+        $item->save();
+        return $item;
     }
 }

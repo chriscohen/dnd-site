@@ -10,21 +10,26 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('text_entry_entries', function (Blueprint $table) {
+        Schema::create('text_entries', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->text('text')->nullable();
             $table->string('name')->nullable();
-            $table->unsignedSmallInteger('type')->index();
 
-            $table->text('entry_data')->nullable();
+            // The order of items determines which appears first, second, third, etc.
+            $table->unsignedSmallInteger('order')->index();
+
+            $table->unsignedSmallInteger('type')->index();
+            $table->json('entry_data')->nullable();
 
             $table->string('parent_id');
             $table->string('parent_type');
+
+            $table->unique(['order', 'parent_id', 'parent_type'], 'order_unique');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('text_entry_entries');
+        Schema::dropIfExists('text_entries');
     }
 };

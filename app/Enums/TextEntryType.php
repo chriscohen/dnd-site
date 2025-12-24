@@ -10,6 +10,7 @@ enum TextEntryType: int
     case SECTION = 2;
     case LIST = 3;
     case ENTRIES = 4;
+    case TEXT = 5;
 
     public function toString(): string
     {
@@ -18,6 +19,7 @@ enum TextEntryType: int
             self::SECTION => 'section',
             self::LIST => 'list',
             self::ENTRIES => 'entries',
+            self::TEXT => 'text',
         };
     }
 
@@ -33,6 +35,7 @@ enum TextEntryType: int
             'table' => self::TABLE,
             'section' => self::SECTION,
             'entries' => self::ENTRIES,
+            'text' => self::TEXT,
             default => null
         };
     }
