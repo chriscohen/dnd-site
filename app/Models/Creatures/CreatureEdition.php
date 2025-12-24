@@ -338,6 +338,20 @@ class CreatureEdition extends AbstractModel
         // Do we already have a CreatureEdition for this GameEdition? Use it, otherwise create a new one.
         $item = $parent->editions->where('game_edition', $edition)->first() ?? new static();
 
+        /**
+         * Creature type.
+         */
+        if (!empty($value['type']) && empty($item->type)) {
+            try {
+                $type = CreatureType::from5eJson($value['type'], $item);
+                $item->type()->associate($type);
+            } catch (ModelNotFoundException $e) {
+                die("Could not find CreatureType.\n");
+            }
+        } else {
+            throw new \InvalidArgumentException("Creature type not found: {$value['type']}");
+        }
+
         // In case we couldn't set an edition, assume 5th edition.
         if (empty($item->game_edition)) {
             $item->game_edition = GameEdition::FIFTH_REVISED;
@@ -379,25 +393,11 @@ class CreatureEdition extends AbstractModel
         }
 
         /**
-         * Creature type.
-         */
-        if (!empty($value['type']) && empty($item->type)) {
-            try {
-                $type = CreatureMajorType::query()->where('slug', $value['type'])->firstOrFail();
-                $item->type()->associate($type);
-            } catch (ModelNotFoundException $e) {
-                die("Could not find CreatureMajorType: {$value['type']}\n");
-            }
-        } else {
-            throw new \InvalidArgumentException("Creature type not found: {$value['type']}");
-        }
-
-        /**
          * Ability scores.
          */
         foreach (['str', 'dex', 'con', 'int', 'wis', 'cha'] as $ability) {
             if (!empty($value[$ability]) && empty($item->{$ability})) {
-                $abilityScore = AbilityScore::fromNumber($value[$ability], $ability, $item);
+                $abilityScore = AbilityScore::fromNumber((int) $value[$ability], $ability, $item);
                 $item->{$ability}()->associate($abilityScore);
             }
         }
@@ -409,7 +409,7 @@ class CreatureEdition extends AbstractModel
          */
         if (!empty($value['ac'])) {
             // Remove the dexterity modifier from the armor class.
-            $modifier = AbilityScore::getModifier($value['dex']);
+            $modifier = AbilityScore::getModifier((int) $value['dex']);
 
             // TODO - make this work somehow.
 //            if (is_array($value['ac'])) {

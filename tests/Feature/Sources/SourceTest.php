@@ -9,6 +9,7 @@ use Tests\TestCase;
 
 final class SourceTest extends TestCase
 {
+
     public function testFrom5eJson(): void
     {
         $source = Source::from5eJson(self::data());

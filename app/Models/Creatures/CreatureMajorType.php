@@ -24,6 +24,12 @@ class CreatureMajorType extends AbstractModel
 {
     use HasUuids;
 
+    protected $fillable = [
+        'name',
+        'plural',
+        'slug',
+    ];
+
     public $timestamps = false;
 
     public function editions(): HasMany

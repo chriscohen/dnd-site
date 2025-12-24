@@ -57,11 +57,11 @@ enum DistanceUnit: int
     public static function tryFromString(string $value): ?self
     {
         return match ($value) {
-            'in', 'inch', 'inches' => self::INCH,
-            'ft', 'foot', 'feet' => self::FOOT,
-            'yd', 'yds', 'yard', 'yards' => self::YARD,
-            'm', 'meter', 'metre', 'meters', 'metres' => self::METER,
-            'mi', 'mis', 'mile', 'miles' => self::MILE,
+            'in', 'in.', 'inch', 'inches' => self::INCH,
+            'ft', 'ft.', 'foot', 'feet' => self::FOOT,
+            'yd', 'yd.', 'yds', 'yard', 'yards' => self::YARD,
+            'm', 'm.', 'meter', 'metre', 'meters', 'metres' => self::METER,
+            'mi', 'mi.', 'mis', 'mile', 'miles' => self::MILE,
             default => null,
         };
     }

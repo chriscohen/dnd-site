@@ -28,6 +28,10 @@ class StatusConditionEdition extends AbstractModel
 {
     use HasUuids;
 
+    protected $fillable = [
+        'game_edition',
+    ];
+
     public $timestamps = false;
 
     public $casts = [

@@ -24,7 +24,7 @@ use Ramsey\Uuid\Uuid;
  * @property Collection<CreatureEdition> $creatures
  * @property GameEdition $game_edition
  * @property CreatureMajorType $majorType
- * @property CreatureOrigin $origin
+ * @property ?CreatureOrigin $origin
  */
 class CreatureType extends AbstractModel
 {
@@ -78,6 +78,28 @@ class CreatureType extends AbstractModel
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         throw new \Exception('Not implemented');
+    }
+
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->game_edition = GameEdition::FIFTH;
+
+        if (is_array($value)) {
+            if (empty($value['type'])) {
+                throw new \InvalidArgumentException('Creature type is required.');
+            }
+
+            $typeName = $value['type'];
+        } else {
+            $typeName = $value;
+        }
+
+        $type = CreatureMajorType::query()->where('slug', $typeName)->firstOrFail();
+        $item->majorType()->associate($type);
+
+        $item->save();
+        return $item;
     }
 
     public static function generate(ModelInterface $parent = null): static

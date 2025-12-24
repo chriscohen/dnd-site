@@ -101,9 +101,16 @@ class CreatureSense extends AbstractModel
     {
         $item = new static();
         $item->creatureEdition()->associate($parent);
-        $item->type = SenseType::tryFromString($value['type']);
-        $item->range = $value['value'];
-        $item->distance_unit = DistanceUnit::FOOT;
+
+        list($senseType, $range) = explode(' ', trim($value), 2);
+
+        $senseItem = SenseType::tryFromString(mb_strtolower($senseType));
+        $item->type = $senseItem;
+
+        list($number, $unit) = explode(' ', trim($range), 2);
+        $item->range = (int) $number;
+        $item->distance_unit = DistanceUnit::tryFromString($unit);
+
         $item->save();
         return $item;
     }

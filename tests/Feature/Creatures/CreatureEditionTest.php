@@ -10,26 +10,18 @@ use Tests\TestCase;
 
 final class CreatureEditionTest extends TestCase
 {
-    public function testExample(): void
+    public function testGenerate(): void
     {
+        // Generate a creature edition.
         $creature = Creature::generate();
-
         $edition = CreatureEdition::generate($creature);
-        $this->assertTrue(true);
+
     }
 
     public static function provider(): array
     {
         return [
 
-        ];
-    }
-
-    public static function data01(): array
-    {
-        return [
-            'name' => 'Factol Skall',
-            'source' => 'AATM',
         ];
     }
 }

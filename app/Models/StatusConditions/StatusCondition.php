@@ -23,6 +23,11 @@ class StatusCondition extends AbstractModel
 {
     use HasUuids;
 
+    protected $fillable = [
+        'name',
+        'slug',
+    ];
+
     public $timestamps = false;
 
     public function editions(): HasMany
