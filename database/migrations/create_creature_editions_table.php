@@ -28,7 +28,6 @@ return new class extends Migration
 
             $table->foreignIdFor(ArmorClass::class, 'armor_class_id')->nullable();
             $table->unsignedSmallInteger('challenge_rating')->nullable()->index();
-            $table->json('condition_immunities')->nullable();
             $table->foreignIdFor(CreatureHitPoints::class, 'creature_hit_points_id')->nullable();
             $table->json('damage_immunities')->nullable();
             $table->json('damage_resistances')->nullable();
