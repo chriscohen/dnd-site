@@ -22,7 +22,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property Collection<CreatureEdition> $editions
  * @property ?Creature $parent
- * @property Collection<Creature> $subspecies
+ * @property Collection<Creature> $children
  */
 class Creature extends AbstractModel
 {
@@ -42,7 +42,7 @@ class Creature extends AbstractModel
         return $this->belongsTo(Creature::class, 'parent_id');
     }
 
-    public function subspecies(): HasMany
+    public function children(): HasMany
     {
         return $this->hasMany(Creature::class, 'parent_id');
     }
