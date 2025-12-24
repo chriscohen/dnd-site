@@ -20,11 +20,9 @@ use App\Http\Controllers\Sources\SourceController;
 use App\Http\Controllers\Spells\SpellController;
 use App\Http\Controllers\UserController;
 
-//Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/user', [UserController::class, 'self']);
-//});
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::get('/user', [UserController::class, 'self']);
 
 Route::get('/campaign-setting/{slug}', [CampaignSettingController::class, 'get']);
 Route::get('/campaign-settings', [CampaignSettingController::class, 'index']);
@@ -64,12 +62,3 @@ Route::get('/spell/{slug}', [SpellController::class, 'get']);
 Route::get('/spells', [SpellController::class, 'index']);
 
 Route::get('/search', [SearchController::class, 'search'])->where('q', '.*');
-
-Route::get('/debug-csrf', function (Illuminate\Http\Request $request) {
-    return [
-        'session_token' => $request->session()->token(), // What the server expects
-        'header_token'  => $request->header('X-XSRF-TOKEN'), // What you sent
-        'cookie_token'  => $request->cookie('XSRF-TOKEN'), // The raw cookie
-        'match'         => $request->session()->token() === $request->header('X-XSRF-TOKEN')
-    ];
-})->middleware('web');
