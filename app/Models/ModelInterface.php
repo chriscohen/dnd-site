@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\JsonRenderMode;
+use Faker\Generator as Faker;
 
 interface ModelInterface
 {
@@ -25,6 +26,11 @@ interface ModelInterface
     public static function from5eJson(array|string $value, ModelInterface $parent = null): static;
 
     /**
+     * Create a new instance, with random values.
+     */
+    public static function generate(ModelInterface $parent = null): static;
+
+    /**
      * Get the human-readable name of this thing.
      *
      * @param  ModelInterface|null  $parent
@@ -32,6 +38,11 @@ interface ModelInterface
      */
 
     public static function fromFeJsonExtra(array|string $value, ModelInterface $parent = null): ?static;
+
+    /**
+     * Get a faker instance for this model.
+     */
+    public static function getFaker(): Faker;
 
     public function getName(): string;
 

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\JsonRenderMode;
+use Faker\Factory;
+use Faker\Generator as Faker;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -23,6 +25,7 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
     public static array $excluded = [];
 
     protected JsonRenderMode $renderMode = JsonRenderMode::SHORT;
+    protected static Faker $faker;
 
     public static function collection(array|Collection $input): ModelCollection
     {
@@ -43,6 +46,20 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
         }
 
         return implode(' ', $output);
+    }
+
+    public static function generate(ModelInterface $parent = null): static
+    {
+        return new static($parent);
+    }
+
+    public static function getFaker(): Faker
+    {
+        if (empty(static::$faker)) {
+            static::$faker = Factory::create();
+        }
+
+        return static::$faker;
     }
 
     public function getName(): string
