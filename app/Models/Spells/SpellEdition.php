@@ -2,18 +2,18 @@
 
 namespace App\Models\Spells;
 
-use App\Enums\DistanceUnit;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Enums\Rarity;
 use App\Enums\Spells\MaterialComponentMode;
 use App\Enums\Spells\SpellComponentType;
 use App\Enums\Spells\SpellFrequency;
-use App\Enums\TimeUnit;
+use App\Enums\Units\DistanceUnit;
+use App\Enums\Units\TimeUnit;
 use App\Models\AbstractModel;
 use App\Models\Area;
 use App\Models\CharacterClasses\CharacterClass;
-use App\Models\DamageInstance;
+use App\Models\Damage\DamageInstance;
 use App\Models\Duration;
 use App\Models\Feats\Feature;
 use App\Models\Magic\MagicDomain;
@@ -25,6 +25,7 @@ use App\Models\Reference;
 use App\Models\SavingThrow;
 use App\Models\Sources\Source;
 use App\Models\Target;
+use App\Models\Text\TextEntry;
 use App\Services\FeToolsService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -35,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 use Spatie\LaravelMarkdown\MarkdownRenderer;
 
@@ -42,18 +44,17 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Uuid $id
  *
  * @property ?Area $area
- * @property int $casting_time_number
- * @property TimeUnit $casting_time_unit
+ * @property ?SpellCastingTime $castingTime
+ * @property Collection<SpellCastingTime> $castingTimes
  * @property Collection<DamageInstance> $damageInstances
- * @property string $description
  * @property Collection<MagicDomain> $domains
  * @property Duration $duration
+ * @property Collection<TextEntry> $entries
  * @property ?Feature $feat
  * @property ?string $focus
  * @property string $game_edition
  * @property GameEdition $gameEdition
  * @property ?bool $has_spell_resistance
- * @property string $higher_level
  * @property bool $is_default
  * @property Collection<SpellEditionLevel> $levels
  * @property ?MaterialComponentMode $material_component_mode
@@ -77,7 +78,6 @@ class SpellEdition extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'casting_time_unit' => TimeUnit::class,
         'frequency' => SpellFrequency::class,
         'game_edition' => GameEdition::class,
         'has_spell_resistance' => 'bool',
@@ -90,6 +90,16 @@ class SpellEdition extends AbstractModel
     public function area(): BelongsTo
     {
         return $this->belongsTo(Area::class, 'area_id');
+    }
+
+    public function castingTime(): Attribute
+    {
+        return Attribute::get(fn () => $this->castingTimes->first());
+    }
+
+    public function castingTimes(): HasMany
+    {
+        return $this->hasMany(SpellCastingTime::class, 'spell_edition_id');
     }
 
     public function damageInstances(): MorphMany
@@ -112,6 +122,11 @@ class SpellEdition extends AbstractModel
     public function duration(): MorphOne
     {
         return $this->morphOne(Duration::class, 'entity');
+    }
+
+    public function entries(): MorphMany
+    {
+        return $this->morphMany(TextEntry::class, 'parent');
     }
 
     public function feat(): BelongsTo
@@ -382,20 +397,30 @@ class SpellEdition extends AbstractModel
         $school = MagicSchool::query()->where('shortName', mb_strtoupper($value['school']))->firstOrFail();
         $item->school()->associate($school);
 
-        // Casting time.
-        if (!empty($value['time'][0])) {
-            $item->casting_time_number = $value['time'][0]['number'];
-            $timeUnit = TimeUnit::tryFromString($value['time'][0]['unit']);
-            if (empty($timeUnit)) {
-                throw new \InvalidArgumentException('Invalid casting time unit: ' . $value['time'][0]['unit']);
+        $item->save();
+
+        /**
+         * Casting time.
+         */
+        if (!empty($value['time'])) {
+            foreach ($value['time'] as $timeData) {
+                $castingTime = SpellCastingTime::from5eJson($timeData, $item);
+                $item->castingTimes()->save($castingTime);
             }
-            $item->casting_time_unit = $timeUnit;
         }
 
         // Range.
         if (!empty($value['range'])) {
             $range = Range::from5eJson($value['range'], $item);
             $item->range()->associate($range);
+        }
+
+        // Duration.
+        if (!empty($value['duration'])) {
+            foreach ($value['duration'] as $durationData) {
+                $duration = Duration::from5eJson($durationData, $item);
+                $item->duration()->save($duration);
+            }
         }
 
         $item->save();
@@ -419,13 +444,9 @@ class SpellEdition extends AbstractModel
             }
         }
 
-        // Duration.
-        if (!empty($value['duration'][0])) {
-            $duration = Duration::from5eJson($value['duration'][0], $item);
-            $item->duration()->save($duration);
-        }
-
-        // References.
+        /**
+         * References.
+         */
         if (!empty($value['source'])) {
             $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
             Reference::fromInternalJson([
@@ -435,8 +456,25 @@ class SpellEdition extends AbstractModel
             ], $item);
         }
 
+        /**
+         * Text entries.
+         */
+        $order = 0;
+
+        foreach ($value['entries'] ?? [] as $entry) {
+            TextEntry::fromInternalJson($entry, $item, ++$order);
+        }
+        foreach ($value['entriesHigherLevel'] ?? [] as $entry) {
+            TextEntry::fromInternalJson($entry, $item, ++$order);
+        }
+
         // Spell levels need special handling because the classes for each spell are stored in a separate file.
-        $spellSources = FeToolsService::getClassesForSpell('Air Bubble');
+        try {
+            $spellSources = FeToolsService::getClassesForSpell('Air Bubble');
+        } catch (InvalidArgumentException $e) {
+            // We will just silently ignore this.
+            $spellSources = [];
+        }
 
         foreach ($spellSources as $className => $sources) {
             $sel = new SpellEditionLevel();

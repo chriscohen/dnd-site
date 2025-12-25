@@ -5,7 +5,7 @@ namespace App\Models\Sources;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Enums\PublicationType;
-use App\Enums\SourceType;
+use App\Enums\Sources\SourceType;
 use App\Exceptions\DuplicateRecordException;
 use App\Models\AbstractModel;
 use App\Models\CampaignSetting;

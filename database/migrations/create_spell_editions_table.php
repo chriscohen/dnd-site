@@ -19,10 +19,8 @@ return new class extends Migration
 
             $table->foreignIdFor(Spell::class, 'spell_id')->index();
 
-            $table->text('description')->nullable();
             $table->text('focus')->nullable();
             $table->unsignedSmallInteger('game_edition')->index();
-            $table->text('higher_level')->nullable();
             $table->boolean('is_default')->default(false);
             $table->string('magic_school_id')->nullable()->index();
             $table->unsignedSmallInteger('material_component_mode')->nullable();
@@ -34,10 +32,6 @@ return new class extends Migration
             // Range / area
             $table->foreignIdFor(Range::class, 'range_id')->nullable();
             $table->foreignIdFor(Area::class, 'area_id')->nullable();
-
-            // Casting time + duration
-            $table->unsignedSmallInteger('casting_time_number');
-            $table->unsignedSmallInteger('casting_time_unit');
 
             // Components
             $table->string('spell_components')->nullable();

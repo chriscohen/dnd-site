@@ -12,7 +12,6 @@ use App\Models\Text\TextEntry;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Ramsey\Uuid\Uuid;
 
@@ -22,7 +21,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property ?string $alternate_name
  * @property GameEdition $game_edition
- * @property ?AbilityScoreType $related_attribute
+ * @property ?AbilityScoreType $related_ability
  * @property Skill $skill
  * @property Collection<TextEntry> $entries
  */
@@ -34,7 +33,7 @@ class SkillEdition extends AbstractModel
 
     public $casts = [
         'game_edition' => GameEdition::class,
-        'related_attribute' => AbilityScoreType::class,
+        'related_ability' => AbilityScoreType::class,
     ];
 
     public function skill(): BelongsTo
@@ -58,7 +57,7 @@ class SkillEdition extends AbstractModel
             'id' => $this->id,
             'alternateName' => $this->alternate_name,
             'gameEdition' => $this->game_edition->toStringShort(),
-            'relatedAttribute' => $this->related_attribute->toStringShort()
+            'relatedAbility' => $this->related_ability->toStringShort()
         ];
     }
 
@@ -75,8 +74,8 @@ class SkillEdition extends AbstractModel
         $item->alternate_name = $value['alternateName'] ?? null;
         $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
 
-        if (!empty($value['relatedAttribute'])) {
-            $item->related_attribute = AbilityScoreType::tryFromString($value['relatedAttribute']);
+        if (!empty($value['relatedAbility'])) {
+            $item->related_ability = AbilityScoreType::tryFromString($value['relatedAbility']);
         }
 
         $i = 0;

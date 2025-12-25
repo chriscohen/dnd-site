@@ -6,26 +6,29 @@ namespace App\Models\MovementSpeeds;
 
 use App\Enums\Movement\MovementType;
 use App\Models\AbstractModel;
+use App\Models\Actors\ActorType;
+use App\Models\Creatures\CreatureEdition;
 use App\Models\ModelInterface;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * @property bool $can_hover
- * @property MovementSpeedGroup $group
- * @property int $speed
+ * @property ActorType|CreatureEdition $parent
  * @property MovementType $type
+ * @property int $value
  */
 class MovementSpeed extends AbstractModel
 {
     public $timestamps = false;
 
     public $casts = [
+        'can_hover' => 'boolean',
         'type' => MovementType::class,
     ];
 
-    public function group(): BelongsTo
+    public function parent(): MorphTo
     {
-        return $this->belongsTo(MovementSpeedGroup::class, 'movement_speed_group_id');
+        return $this->morphTo();
     }
 
     public function toArrayFull(): array
@@ -49,16 +52,23 @@ class MovementSpeed extends AbstractModel
 
     /**
      * @param array{
+     *     canHover: ?bool,
      *     type: string,
-     *     speed: int
+     *     value: int
      * } $value
      */
     public static function fromInternalJson(array|int|string $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
-        $item->group()->associate($parent);
-        $item->type = MovementType::tryFromString($value['type']);
-        $item->speed = $value['speed'];
+        $item->parent()->associate($parent);
+        $item->type = MovementType::tryFromString($value['type'])
+            ?? throw new \InvalidArgumentException('Invalid movement type: ' . $value['type']);
+        $item->value = $value['value'];
+
+        if (!empty($value['canHover'])) {
+            $item->can_hover = $value['canHover'];
+        }
+
         $item->save();
         return $item;
     }

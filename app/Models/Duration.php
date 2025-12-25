@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\PerLevelMode;
-use App\Enums\TimeUnit;
+use App\Enums\Units\TimeUnit;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Ramsey\Uuid\Uuid;
@@ -13,6 +13,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
+ * @property bool $concentration
  * @property ?int $per_level
  * @property ?PerLevelMode $per_level_mode
  * @property TimeUnit $unit
@@ -25,6 +26,7 @@ class Duration extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
+        'concentration' => 'boolean',
         'per_level_mode' => PerLevelMode::class,
         'unit' => TimeUnit::class,
     ];
@@ -104,6 +106,10 @@ class Duration extends AbstractModel
         } else {
             $item->unit = TimeUnit::tryFromString($value['duration']['type']);
             $item->value = $value['duration']['amount'];
+        }
+
+        if (!empty($value['concentration']) && $value['concentration'] === true) {
+            $item->concentration = true;
         }
 
         $item->save();

@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Enums\Binding;
 use App\Enums\GameEdition;
-use App\Enums\SourceType;
+use App\Enums\Sources\SourceType;
 use App\Models\CharacterClasses\CharacterClass;
 use App\Models\CharacterClasses\CharacterClassEdition;
 use App\Models\Creatures\Creature;

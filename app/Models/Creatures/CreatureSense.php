@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Creatures;
 
-use App\Enums\DistanceUnit;
 use App\Enums\SenseType;
+use App\Enums\Units\DistanceUnit;
 use App\Models\AbstractModel;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;

@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->string('alternate_name')->nullable();
             $table->unsignedSmallInteger('game_edition')->index();
-            $table->unsignedSmallInteger('related_attribute')->nullable()->index();
+            $table->unsignedSmallInteger('related_ability')->nullable()->index();
         });
     }
 

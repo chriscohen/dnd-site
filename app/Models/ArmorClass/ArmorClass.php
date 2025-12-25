@@ -69,7 +69,9 @@ class ArmorClass extends AbstractModel
 
     public function value(): Attribute
     {
-        return Attribute::make(get: fn () => $this->items->sum(fn (ArmorClassItem $item) => $item->value));
+        return Attribute::make(
+            get: fn () => 10 + $this->items->sum(fn (ArmorClassItem $item) => $item->value)
+        );
     }
 
     public static function fromInternalJson(int|array|string $value, ?ModelInterface $parent = null): static

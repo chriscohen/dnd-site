@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('spell_material_components', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(ItemTypeEdition::class, 'item_edition_id');
+            $table->foreignIdFor(ItemTypeEdition::class, 'item_edition_id')->nullable();
             $table->foreignIdFor(SpellEdition::class, 'spell_edition_id');
 
             $table->unsignedSmallInteger('quantity')->default(1);
@@ -24,8 +24,6 @@ return new class extends Migration
             $table->boolean('is_focus')->default(false);
             $table->boolean('is_plural')->default(false);
             $table->unsignedInteger('minimum_value')->nullable();
-
-            $table->unique(['item_edition_id', 'spell_edition_id'], 'spell_edition_item_edition');
         });
     }
 

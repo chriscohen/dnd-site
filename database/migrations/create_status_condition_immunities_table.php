@@ -6,13 +6,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use App\Models\Creatures\CreatureEdition;
-use App\Models\StatusConditions\StatusConditionEdition;
+use App\Models\Conditions\ConditionEdition;
 
 return new class extends Migration {
     public function up(): void
     {
         Schema::create('status_condition_immunities', function (Blueprint $table) {
-            $table->foreignIdFor(StatusConditionEdition::class, 'status_condition_edition_id');
+            $table->foreignIdFor(ConditionEdition::class, 'status_condition_edition_id');
             $table->foreignIdFor(CreatureEdition::class, 'creature_edition_id');
             $table->primary(['status_condition_edition_id', 'creature_edition_id'], 'status_condition_creature');
         });

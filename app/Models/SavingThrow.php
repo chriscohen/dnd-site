@@ -7,8 +7,8 @@ namespace App\Models;
 use App\Enums\SavingThrows\SavingThrowMultiplier;
 use App\Enums\SavingThrows\SavingThrowType;
 use App\Models\Spells\SpellEdition;
-use App\Models\StatusConditions\StatusCondition;
-use App\Models\StatusConditions\StatusConditionEdition;
+use App\Models\Conditions\Condition;
+use App\Models\Conditions\ConditionEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
@@ -16,11 +16,11 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property ?StatusConditionEdition $failStatus
+ * @property ?ConditionEdition $failStatus
  * @property ?Uuid $fail_status_id
  * @property ?SavingThrowMultiplier $multiplier
  * @property SpellEdition $spellEdition
- * @property ?StatusConditionEdition $succeedStatus
+ * @property ?ConditionEdition $succeedStatus
  * @property SavingThrowType $type
  */
 class SavingThrow extends AbstractModel
@@ -36,7 +36,7 @@ class SavingThrow extends AbstractModel
 
     public function failStatus(): BelongsTo
     {
-        return $this->belongsTo(StatusConditionEdition::class, 'fail_status_id');
+        return $this->belongsTo(ConditionEdition::class, 'fail_status_id');
     }
 
     public function spellEdition(): BelongsTo
@@ -46,7 +46,7 @@ class SavingThrow extends AbstractModel
 
     public function succeedStatus(): BelongsTo
     {
-        return $this->belongsTo(StatusConditionEdition::class, 'succeed_status_id');
+        return $this->belongsTo(ConditionEdition::class, 'succeed_status_id');
     }
 
     public function toArrayFull(): array

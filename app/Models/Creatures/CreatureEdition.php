@@ -4,48 +4,64 @@ declare(strict_types=1);
 
 namespace App\Models\Creatures;
 
+use App\Castables\AsAlignment;
+use App\Enums\AbilityScoreType;
+use App\Enums\Alignment\AlignmentGoodEvil;
+use App\Enums\Alignment\AlignmentLawChaos;
+use App\Enums\Conditions\ConditionInstanceType;
 use App\Enums\Creatures\CreatureSizeUnit;
-use App\Enums\DamageType;
+use App\Enums\Damage\DamageType;
 use App\Enums\GameEdition;
+use App\Enums\Movement\MovementType;
 use App\Enums\SenseType;
+use App\Enums\SkillMasteryLevel;
 use App\Exceptions\RecordNotFoundException;
 use App\Models\AbilityScores\AbilityScore;
 use App\Models\AbilityScores\AbilityScoreModifierGroup;
 use App\Models\AbstractModel;
+use App\Models\Alignment\Alignment;
 use App\Models\ArmorClass\ArmorClass;
+use App\Models\Conditions\ConditionInstance;
 use App\Models\Dice\DiceFormula;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
-use App\Models\MovementSpeeds\MovementSpeedGroup;
+use App\Models\MovementSpeeds\MovementSpeed;
 use App\Models\Reference;
+use App\Models\Skills\Skill;
+use App\Models\Skills\SkillInstance;
 use App\Models\Sources\Source;
-use App\Models\StatusConditions\StatusCondition;
-use App\Models\StatusConditions\StatusConditionEdition;
+use App\Models\Conditions\Condition;
+use App\Models\Conditions\ConditionEdition;
 use App\Models\Tag;
+use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\UniqueConstraintViolationException;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\ItemNotFoundException;
 
 /**
  * @property string $id
  *
  * @property ?AbilityScoreModifierGroup $abilityScoreModifiers
+ * @property Collection<AbilityScore> $abilities
  * @property Collection<CreatureAge> $ages
+ * @property ?Alignment $alignment
  * @property Collection<ArmorClass> $armorClass
  * @property ?int $challenge_rating
- * @property Collection<StatusConditionEdition> $conditionImmunities
+ * @property Collection<ConditionInstance> $conditionImmunities
+ * @property Collection<ConditionInstance> $conditionInstances
  * @property Creature $creature
- * @property Collection<DamageType> $damage_immunities
- * @property Collection<DamageType> $damage_resistances
+ * @property Collection<ConditionInstance> $damageImmunities
+ * @property Collection<ConditionInstance> $damageResistances
+ * @property Collection<ConditionInstance> $damageVulnerabilities
  * @property ?CreatureSense $darkvision
  * @property GameEdition $game_edition
  * @property bool $has_fixed_proficiency_bonus
@@ -53,13 +69,17 @@ use Illuminate\Support\ItemNotFoundException;
  * @property ?DiceFormula $height_modifier
  * @property ?CreatureHitPoints $hitPoints
  * @property bool $is_playable
- * @property MovementSpeedGroup $movementSpeeds
+ * @property Collection<MovementSpeed> $movementSpeeds
+ * @property int $passivePerception
  * @property ?int $proficiency_bonus
+ * @property int $proficiencyBonus
  * @property Collection<Reference> $references
  * @property Collection<CreatureSense> $senses
  * @property ?Collection<CreatureSizeUnit> $sizes
+ * @property Collection<SkillInstance> $skills
  * @property ?Collection<Tag> $tags
- * @property CreatureType $type
+ * @property ?CreatureSense $truesight
+ * @property ?CreatureType $type
  * @property ?int $weight
  * @property ?DiceFormula $weight_modifier
  *
@@ -79,15 +99,12 @@ class CreatureEdition extends AbstractModel
     public function __construct()
     {
         parent::__construct();
-
-        $this->damage_immunities = new Collection();
-        $this->damage_resistances = new Collection();
-        $this->sizes = new Collection();
     }
 
     protected function casts(): array
     {
         return [
+            'alignment' => AsAlignment::class,
             'condition_immunities' => 'collection',
             'damage_immunities' => 'collection',
             'damage_resistances' => 'collection',
@@ -95,9 +112,14 @@ class CreatureEdition extends AbstractModel
             'has_fixed_proficiency_bonus' => 'boolean',
             'height_modifier' => DiceFormula::class,
             'is_playable' => 'boolean',
-            'sizes' => 'collection',
+            'sizes' => AsEnumCollection::of(CreatureSizeUnit::class),
             'weight_modifier' => DiceFormula::class,
         ];
+    }
+
+    public function abilities(): MorphMany
+    {
+        return $this->morphMany(AbilityScore::class, 'parent');
     }
 
     public function abilityScoreModifiers(): MorphOne
@@ -115,19 +137,35 @@ class CreatureEdition extends AbstractModel
         return $this->hasMany(ArmorClass::class, 'creature_edition_id');
     }
 
-    public function cha(): BelongsTo
+    public function canHover(): bool
     {
-        return $this->belongsTo(AbilityScore::class, 'cha_id');
+        return $this->movementSpeeds->firstWhere('type', MovementType::FLY)?->can_hover ?? false;
     }
 
-    public function con(): BelongsTo
+    public function cha(): Attribute
     {
-        return $this->belongsTo(AbilityScore::class, 'con_id');
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::CHA)
+        );
     }
 
-    public function conditionImmunities(): BelongsToMany
+    public function con(): Attribute
     {
-        return $this->belongsToMany(StatusConditionEdition::class, 'status_condition_immunities');
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::CON)
+        );
+    }
+
+    public function conditionImmunities(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->conditionInstances->where('type', ConditionInstanceType::STATUS_IMMUNITY)
+        );
+    }
+
+    public function conditionInstances(): MorphMany
+    {
+        return $this->morphMany(ConditionInstance::class, 'entity');
     }
 
     public function creature(): BelongsTo
@@ -142,9 +180,69 @@ class CreatureEdition extends AbstractModel
         );
     }
 
-    public function dex(): BelongsTo
+    public function damageImmunities(): Attribute
     {
-        return $this->belongsTo(AbilityScore::class, 'dex_id');
+        return Attribute::make(
+            get: fn () => $this->conditionInstances->where('type', ConditionInstanceType::DAMAGE_IMMUNITY)
+        );
+    }
+
+    public function damageResistances(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->conditionInstances->where('type', ConditionInstanceType::DAMAGE_RESISTANCE)
+        );
+    }
+
+    public function damageVulnerabilities(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->conditionInstances->where('type', ConditionInstanceType::DAMAGE_VULNERABILITY)
+        );
+    }
+
+    public function dex(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::DEX)
+        );
+    }
+
+    public function getSkill(string|Skill $skill): ?SkillInstance
+    {
+        if (is_string($skill)) {
+            $skill = Skill::query()->where('name', $skill)->first();
+        }
+
+        $skillEdition = $skill->editions->firstWhere('game_edition', $this->game_edition);
+        /** @var SkillInstance $instance */
+        $instance = $this->skills->firstWhere('skill_edition_id', $skillEdition->id);
+        return $instance;
+    }
+
+    public function getSkillModifier(string|Skill $skill): int
+    {
+        if (is_string($skill)) {
+            $skill = Skill::query()->where('name', $skill)->firstOrFail();
+        }
+        $skillEdition = $skill->editions->firstWhere('game_edition', $this->game_edition);
+        $ability = $skillEdition->related_ability;
+        $modifier = $this->abilities->firstWhere('type', $ability)->modifier;
+
+        if ($this->hasSkillExpertise($skill)) {
+            return $modifier + (2 * $this->proficiencyBonus);
+        } elseif ($this->hasSkillProficiency($skill)) {
+            return $modifier + $this->proficiencyBonus;
+        } else {
+            return $modifier;
+        }
+    }
+
+    public function getSpeed(MovementType $type): ?MovementSpeed
+    {
+        /** @var MovementSpeed|null $output */
+        $output = $this->movementSpeeds->firstWhere('type', $type->value);
+        return $output;
     }
 
     public function hasResistance(DamageType $type): bool
@@ -152,24 +250,72 @@ class CreatureEdition extends AbstractModel
         return $this->damage_resistances->contains($type->value);
     }
 
+    public function hasSkillExpertise(string|Skill $skill): bool
+    {
+        $skillInstance = $this->getSkill($skill);
+        return !empty($skillInstance) && $skillInstance->mastery === SkillMasteryLevel::EXPERTISE;
+    }
+
+    public function hasSkillProficiency(string|Skill $skill): bool
+    {
+        $skillInstance = $this->getSkill($skill);
+
+        return !empty($skillInstance) &&
+            (
+                $skillInstance->mastery === SkillMasteryLevel::PROFICIENT ||
+                $skillInstance->mastery === SkillMasteryLevel::EXPERTISE
+            );
+    }
+
     public function hitPoints(): BelongsTo
     {
         return $this->belongsTo(CreatureHitPoints::class, 'creature_hit_points_id');
     }
 
-    public function int(): BelongsTo
+    public function int(): Attribute
     {
-        return $this->belongsTo(AbilityScore::class, 'int_id');
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::INT)
+        );
     }
 
-    public function isImmuneTo(StatusConditionEdition | DamageType $type): bool
+    public function isImmuneTo(ConditionEdition | DamageType $type): bool
     {
-        return $this->condition_immunities?->contains($type) || $this->damage_immunities?->contains($type);
+        /** @var Collection<ConditionInstance> $immunities */
+        $immunities = $type instanceof ConditionEdition ?
+            $this->conditionImmunities :
+            $this->damageImmunities;
+
+        if ($type instanceof ConditionEdition) {
+            return $immunities->contains('condition_edition_id', $type->id);
+        } else {
+            return $immunities->contains('damage_type', $type->value);
+        }
     }
 
-    public function movementSpeeds(): MorphOne
+    public function movementSpeeds(): MorphMany
     {
-        return $this->morphOne(MovementSpeedGroup::class, 'parent');
+        return $this->morphMany(MovementSpeed::class, 'parent');
+    }
+
+    public function passivePerception(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => 10 + $this->getSkillModifier('perception')
+        );
+    }
+
+    public function proficiencyBonus(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if ($this->has_fixed_proficiency_bonus && !empty($this->proficiency_bonus)) {
+                    return $this->proficiency_bonus;
+                } else {
+                    return (int) (2 + floor(($this->challenge_rating ?? 0) / 4));
+                }
+            }
+        );
     }
 
     public function references(): MorphMany
@@ -182,9 +328,16 @@ class CreatureEdition extends AbstractModel
         return $this->hasMany(CreatureSense::class);
     }
 
-    public function str(): BelongsTo
+    public function skills(): MorphMany
     {
-        return $this->belongsTo(AbilityScore::class, 'str_id');
+        return $this->morphMany(SkillInstance::class, 'entity');
+    }
+
+    public function str(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::STR)
+        );
     }
 
     public function tags(): MorphToMany
@@ -192,14 +345,23 @@ class CreatureEdition extends AbstractModel
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
+    public function truesight(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->senses->firstWhere('type', SenseType::TRUESIGHT)
+        );
+    }
+
     public function type(): BelongsTo
     {
         return $this->belongsTo(CreatureType::class, 'creature_type_id');
     }
 
-    public function wis(): BelongsTo
+    public function wis(): Attribute
     {
-        return $this->belongsTo(AbilityScore::class, 'wis_id');
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::WIS)
+        );
     }
 
     public function toArrayFull(): array
@@ -339,6 +501,26 @@ class CreatureEdition extends AbstractModel
         $item = $parent->editions->where('game_edition', $edition)->first() ?? new static();
 
         /**
+         * Alignment.
+         */
+        if (!empty($value['alignment'])) {
+            if ($value['alignment'][0] === 'U') {
+                // This creature is unaligned.
+                $item->alignment = new Alignment();
+            } elseif (count($value['alignment']) === 1 && $value['alignment'][0] === 'N') {
+                // Neutral.
+                $item->alignment = new Alignment(AlignmentLawChaos::NEUTRAL, AlignmentGoodEvil::NEUTRAL);
+            } else {
+                // Otherwise we're expecting two single-letter strings in the 'alignment' key.
+                $lawChaos = AlignmentLawChaos::tryFromString($value['alignment'][0]) ??
+                    throw new \InvalidArgumentException("Could not parse alignment.");
+                $goodEvil = AlignmentGoodEvil::tryFromString($value['alignment'][1]) ??
+                    throw new \InvalidArgumentException("Could not parse alignment.");
+                $item->alignment = new Alignment($lawChaos, $goodEvil);
+            }
+        }
+
+        /**
          * Creature type.
          */
         if (!empty($value['type']) && empty($item->type)) {
@@ -348,8 +530,6 @@ class CreatureEdition extends AbstractModel
             } catch (ModelNotFoundException $e) {
                 die("Could not find CreatureType.\n");
             }
-        } else {
-            throw new \InvalidArgumentException("Creature type not found: {$value['type']}");
         }
 
         // In case we couldn't set an edition, assume 5th edition.
@@ -381,15 +561,17 @@ class CreatureEdition extends AbstractModel
          * Sizes.
          */
         // In case "size" is not an array, turn it into one.
+        if (is_null($item->sizes)) {
+            $item->sizes = new SupportCollection();
+        }
+
         if (!empty($value['size']) && !is_array($value['size'])) {
             $value['size'] = [$value['size']];
         }
 
         foreach ($value['size'] ?? [] as $size) {
             $sizeUnit = CreatureSizeUnit::tryFromString($size);
-            if (!$item->sizes->contains($sizeUnit)) {
-                $item->sizes->add($sizeUnit);
-            }
+            $item->sizes->push($sizeUnit);
         }
 
         /**
@@ -397,8 +579,15 @@ class CreatureEdition extends AbstractModel
          */
         foreach (['str', 'dex', 'con', 'int', 'wis', 'cha'] as $ability) {
             if (!empty($value[$ability]) && empty($item->{$ability})) {
-                $abilityScore = AbilityScore::fromNumber((int) $value[$ability], $ability, $item);
-                $item->{$ability}()->associate($abilityScore);
+                $abilityScore = AbilityScore::fromNumber(
+                    (int) $value[$ability],
+                    $ability,
+                    $item,
+                    // If the ability is listed in the "save" array, we will treat the creature as being proficient in
+                    // that ability. We will ignore the actual modifiers ("+9", etc) because these are derived values.
+                    !empty($value['save'][$ability])
+                );
+                $item->abilities()->save($abilityScore);
             }
         }
 
@@ -433,6 +622,70 @@ class CreatureEdition extends AbstractModel
         }
 
         /**
+         * Movement speeds.
+         */
+        if (!empty($value['speed'])) {
+            if (is_array($value['speed'])) {
+                // Speed is an array of speeds, plus maybe the "canHover" key.
+                $canHover = !empty($value['speed']['canHover']) && $value['speed']['canHover'] === true;
+
+                foreach ($value['speed'] as $speedType => $speedItem) {
+                    // Make sure speed type is valid, because sometimes we have a "canHover" key.
+                    $movementSpeedType = MovementType::tryFromString($speedType);
+                    if (empty($movementSpeedType)) {
+                        continue;
+                    }
+
+                    // Do we already have a speed of this type?
+                    if ($item->movementSpeeds->contains('type', $movementSpeedType)) {
+                        continue;
+                    }
+
+                    // Sometimes $speedItem is not a number, it's another array.
+                    $speedValue = is_array($speedItem) ? $speedItem['number'] : $speedItem;
+
+                    if (mb_strtolower($speedType) === 'fly') {
+                        // Special case for fly speeds - add canHover flag.
+                        $movementSpeed = MovementSpeed::from5eJson([
+                            'type' => 'fly',
+                            'value' => $speedValue,
+                            'canHover' => $canHover,
+                        ], $item);
+                    } else {
+                        // A movement speed other than fly.
+                        $movementSpeed = MovementSpeed::from5eJson([
+                            'type' => $speedType,
+                            'value' => $speedValue,
+                        ], $item);
+                    }
+
+                    $item->movementSpeeds()->save($movementSpeed);
+                }
+            } elseif (!$item->movementSpeeds->contains('type', MovementType::WALK)) {
+                // Speed is just a single number. Assume it's walking.
+                $movementSpeed = MovementSpeed::from5eJson([
+                    'type' => 'walk',
+                    'value' => $value['speed']
+                ], $item);
+                $item->movementSpeeds()->save($movementSpeed);
+            }
+        }
+
+        /**
+         * Skills.
+         */
+        $item->save();
+        $item->refresh();
+        foreach ($value['skill'] ?? [] as $skillName => $bonus) {
+            $skillInstance = SkillInstance::from5eJson([
+                'skill' => $skillName,
+                'bonus' => $bonus
+            ], $item);
+            $item->skills()->save($skillInstance);
+        }
+        $item->save();
+
+        /**
          * Immunities and resistances.
          */
         foreach ($value['conditionImmune'] ?? [] as $conditionItem) {
@@ -443,40 +696,41 @@ class CreatureEdition extends AbstractModel
                     $conditionItem = 'diseased';
                 }
 
-                $condition = StatusCondition::query()->where('slug', $conditionItem)->firstOrFail();
-                $conditionEdition = $condition->editions->where('game_edition', $item->game_edition)->firstOrFail();
-
-                // Check if already immune.
-                if (!$item->isImmuneTo($conditionEdition)) {
-                    $item->conditionImmunities()->save($conditionEdition);
-                }
+                $instance = ConditionInstance::from5eJson([
+                    'name' => $conditionItem,
+                    'type' => ConditionInstanceType::STATUS_IMMUNITY
+                ], $item);
+                $item->conditionInstances()->save($instance);
             } catch (ModelNotFoundException $e) {
                 print("[WARNING] Could not find StatusCondition: {$conditionItem}\n");
-            } catch (ItemNotFoundException $e) {
-                print sprintf(
-                    "[WARNING] Could not find %s StatusConditionEdition for %s\n",
-                    $item->game_edition?->toString() ?? 'unknown edition',
-                    $conditionItem
-                );
             }
         }
-        // TODO: come back to this.
-//        foreach ($value['immune'] ?? [] as $damageTypeItem) {
-//            $damageType = DamageType::tryFromString($damageTypeItem);
-//
-//            // Check if already immune.
-//            if (!$item->isImmuneTo($damageTypeItem)) {
-//                $item->damage_immunities->add($damageType);
-//            }
-//        }
-//        foreach ($value['resist'] ?? [] as $damageTypeItem) {
-//            $damageType = DamageType::tryFromString($damageTypeItem);
-//
-//            // Check if we already have this resistance.
-//            if (!$item->hasResistance($damageType)) {
-//                $item->damage_resistances->add($damageType);
-//            }
-//        }
+
+        foreach (['immune', 'resist', 'vulnerable'] as $damageType) {
+            foreach ($value[$damageType] ?? [] as $damageTypeItem) {
+                if (is_string($damageTypeItem)) {
+                    // The condition is just a single string.
+                    $instance = ConditionInstance::from5eJson([
+                        'name' => $damageTypeItem,
+                        'type' => ConditionInstanceType::tryFromString($damageType)
+                    ], $item);
+                } else {
+                    // The condition is an object eg
+                    // array{
+                    //   resist: string[] <-- condition names here
+                    //   note: ?string
+                    //   cond: ?bool
+                    foreach ($damageTypeItem[$damageType] ?? [] as $innerItem) {
+                        $instance = ConditionInstance::from5eJson([
+                            'name' => $innerItem,
+                            'type' => ConditionInstanceType::tryFromString($damageType),
+                            'note' => $damageTypeItem['note'] ?? null,
+                            'nonmagical' => str_contains($damageTypeItem['note'], 'nonmagical')
+                        ], $item);
+                    }
+                }
+            }
+        }
 
         /**
          * Senses.
@@ -494,7 +748,7 @@ class CreatureEdition extends AbstractModel
         if (!empty($value['darkvision']) && empty($item->darkvision)) {
             $darkvision = CreatureSense::from5eJson([
                 'type' => 'darkvision',
-                'value' => (int) $value['darkvision']
+                'value' => (int) $value['darkvision'],
             ], $item);
             $item->senses()->save($darkvision);
         }
@@ -520,7 +774,7 @@ class CreatureEdition extends AbstractModel
             try {
                 $age = CreatureAge::from5eJson([
                     'type' => $ageType,
-                    'value' => $ageItem
+                    'value' => $ageItem,
                 ], $item);
 
                 $item->ages()->save($age);

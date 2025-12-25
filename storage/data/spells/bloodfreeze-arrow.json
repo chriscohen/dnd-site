@@ -9,8 +9,8 @@
             "damage": [
                 {
                     "damage_type": "cold",
-                    "die_faces": 6,
-                    "die_quantity": 2,
+                    "dice_faces": 6,
+                    "dice_count": 2,
                     "status_condition": "paralyzed"
                 }
             ],

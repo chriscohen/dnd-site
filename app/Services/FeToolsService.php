@@ -13,11 +13,16 @@ use App\Models\Sources\Source;
 use App\Models\Spells\Spell;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\Storage;
+use InvalidArgumentException;
 
 class FeToolsService
 {
     protected static ?array $spellSources;
 
+    /**
+     * @throws InvalidArgumentException
+     * @throws FileNotFoundException
+     */
     public static function loadSpellSources(): bool
     {
         if (!empty(static::$spellSources)) {

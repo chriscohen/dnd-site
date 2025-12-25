@@ -16,8 +16,8 @@
             "damage": [
                 {
                     "damage_type": "cold",
-                    "die_faces": 8,
-                    "die_quantity": 2,
+                    "dice_faces": 8,
+                    "dice_count": 2,
                     "attribute_modifier": "int",
                     "status_condition": "immobilized"
                 }

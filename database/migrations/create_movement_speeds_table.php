@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('movement_speeds', function (Blueprint $table) {
             $table->boolean('can_hover')->default(false);
+            $table->uuid('parent_id');
+            $table->string('parent_type');
             $table->unsignedSmallInteger('type');
-            $table->foreignIdFor(MovementSpeedGroup::class, 'movement_speed_group_id');
-            $table->unsignedSmallInteger('speed');
+            $table->unsignedSmallInteger('value');
 
-            $table->unique(['type', 'movement_speed_group_id']);
+            $table->unique(['type', 'parent_id', 'parent_type']);
         });
     }
 

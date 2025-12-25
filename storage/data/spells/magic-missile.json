@@ -12,8 +12,8 @@
             "castingTimeUnit": "standard action",
             "damage": [
                 {
-                    "die_faces": 4,
-                    "die_quantity": 1
+                    "dice_faces": 4,
+                    "dice_count": 1
                 }
             ],
             "description": "Creates up to five missiles of magical energy that dart forth from the wizard's fingertip and unerringly strike their target. This includes enemy creatures in a melee. The target creature must be seen or otherwise detected to be hit, however, so near-total concealment, such as that offered by arrow slits, can render the spell ineffective.\n\nLikewise, the caster must be able to identify the target. The caster cannot direct a magic missile to \"Strike the commander of the legion,\" unless they can single out the commander from the rest of the soldiers. Specific parts of a creature cannot be singled out. Inanimate objects (locks, etc.) cannot be damaged by the spell, and any attempt to do so wastes the missiles to no effect.\n\nAgainst creatures, each missile inflicts 1d4 + 1 points of damage. For every two extra levels of experience, the wizard gains an additional missile—two at 3rd level, three at 5th level, four at 7th level, etc., up to a total of five missiles at 9th level. If the wizard has multiple missile capability, they can have them strike a single target creature or several creatures, as desired.",
@@ -45,8 +45,8 @@
             "damage": [
                 {
                     "damage_type": "force",
-                    "die_faces": 4,
-                    "die_quantity": 1
+                    "dice_faces": 4,
+                    "dice_count": 1
                 }
             ],
             "description": "A missile of magical energy darts forth from your fingertip and strikes its target, dealing 1d4 + 1 points of force damage.\n\nThe missile strikes unerringly, even if the target is in melee combat or has less than total cover or total concealment. Specific parts of a creature can't be singled out. Inanimate objects are not damaged by the spell.\n\nFor every two caster levels beyond 1st, you gain an additional missile—two at 3rd level, three at 5th, four at 7th, and the maximum of five missiles at 9th level or higher. If you shoot multiple missiles, you can have them strike a single creature or several creatures. A single missile can strike only one creature. You must designate targets before you check for spell resistance or roll damage.",
@@ -80,8 +80,8 @@
                 {
                     "damage_type": "force",
                     "quantity": 3,
-                    "die_faces": 4,
-                    "die_quantity": 1
+                    "dice_faces": 4,
+                    "dice_count": 1
                 }
             ],
             "description": "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several",
@@ -114,8 +114,8 @@
                 {
                     "damage_type": "force",
                     "quantity": 3,
-                    "die_faces": 4,
-                    "die_quantity": 1
+                    "dice_faces": 4,
+                    "dice_count": 1
                 }
             ],
             "description": "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several",

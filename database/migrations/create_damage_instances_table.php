@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
+use App\Models\Effects\Effect;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\StatusConditions\StatusConditionEdition;
+use Illuminate\Support\Facades\Schema;
+use App\Models\Conditions\ConditionEdition;
 
 return new class extends Migration
 {
@@ -14,42 +15,16 @@ return new class extends Migration
         Schema::create('damage_instances', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            // The thing that is applying the damage, eg spell edition, item edition.
-            $table->uuid('entity_id');
-            $table->string('entity_type');
+            $table->foreignIdFor(Effect::class, 'effect_id');
 
-            // # of instances.
+            // # of instances of damage.
             $table->unsignedSmallInteger('quantity')->default(1);
 
-            // Damage numbers.
-            $table->unsignedSmallInteger('fixed_damage')->nullable();
-            $table->unsignedSmallInteger('die_quantity')->nullable();
-            $table->unsignedSmallInteger('die_faces')->nullable();
+            // Dice.
+            $table->string('formula')->nullable(); // @see DiceFormula::class
 
-            // Maximums
-            $table->unsignedSmallInteger('die_quantity_maximum')->nullable();
-            $table->unsignedSmallInteger('fixed_damage_maximum')->nullable();
-
-            // Type.
             $table->unsignedSmallInteger('damage_type')->nullable();
-
-            // Modifier.
-            $table->smallInteger('modifier')->default(0);
-
-            // Ability modifier.
-            $table->unsignedSmallInteger('attribute_modifier')->nullable();
-            $table->unsignedSmallInteger('attribute_modifier_quantity')->nullable();
-
-            // Status condition.
-            $table->foreignIdFor(StatusConditionEdition::class, 'status_condition_edition_id')->nullable();
-
-            // Per level damage numbers.
-            $table->unsignedSmallInteger('per_level_die_quantity')->nullable();
-            $table->unsignedSmallInteger('per_level_die_faces')->nullable();
-            $table->unsignedSmallInteger('per_level_fixed_damage')->nullable();
-            $table->unsignedSmallInteger('per_level_mode')->nullable();
-
-            $table->index(['entity_id', 'entity_type']);
+            $table->foreignIdFor(ConditionEdition::class, 'condition_edition_id')->nullable();
         });
     }
 

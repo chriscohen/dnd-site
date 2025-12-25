@@ -11,9 +11,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ability_scores', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('parent_id');
+            $table->string('parent_type');
+            $table->boolean('is_proficient')->default(false);
             $table->unsignedSmallInteger('type');
             $table->unsignedSmallInteger('value');
+
+            $table->primary(['parent_id', 'parent_type', 'type']);
         });
     }
 

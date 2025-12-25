@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('entity_id');
             $table->string('entity_type');
 
+            $table->boolean('concentration')->default(false);
             $table->unsignedSmallInteger('value')->nullable();
             $table->unsignedSmallInteger('unit');
             $table->unsignedSmallInteger('per_level')->nullable();

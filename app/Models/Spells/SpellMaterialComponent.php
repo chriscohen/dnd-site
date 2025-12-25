@@ -20,7 +20,7 @@ use Ramsey\Uuid\Uuid;
  * @property bool $is_focus
  * @property bool $is_plural
  * @property Uuid $item_edition_id
- * @property ItemTypeEdition $itemEdition
+ * @property ?ItemTypeEdition $itemEdition
  * @property ?int $minimum_value
  * @property ?int $quantity
  * @property ?string $quantity_text

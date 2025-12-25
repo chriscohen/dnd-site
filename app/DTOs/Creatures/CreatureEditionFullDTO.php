@@ -9,7 +9,7 @@ use App\DTOs\ArmorClass\ArmorClassDTO;
 use App\Models\Creatures\CreatureAge;
 use App\Models\Creatures\CreatureEdition;
 use App\Models\ModelInterface;
-use App\Models\StatusConditions\StatusConditionEdition;
+use App\Models\Conditions\ConditionEdition;
 use Illuminate\Support\Collection;
 
 readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
@@ -47,7 +47,7 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
             challengeRating: $model->challenge_rating,
             conditionImmune: $model->relationLoaded('conditionImmunities') ?
                 $model->conditionImmunities->map(
-                    fn (StatusConditionEdition $item) => $item->statusCondition->slug
+                    fn (ConditionEdition $item) => $item->statusCondition->slug
                 ) :
                 [],
             immune: $model->damage_immunities->toArray(),

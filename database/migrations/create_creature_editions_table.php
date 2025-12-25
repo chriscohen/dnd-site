@@ -6,7 +6,6 @@ use App\Models\Creatures\Creature;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\AbilityScores\AbilityScore;
 use App\Models\ArmorClass\ArmorClass;
 use App\Models\Creatures\CreatureHitPoints;
 use App\Enums\GameEdition;
@@ -20,17 +19,11 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignIdFor(Creature::class, 'creature_id');
 
-            $table->foreignIdFor(AbilityScore::class, 'str_id')->nullable();
-            $table->foreignIdFor(AbilityScore::class, 'dex_id')->nullable();
-            $table->foreignIdFor(AbilityScore::class, 'con_id')->nullable();
-            $table->foreignIdFor(AbilityScore::class, 'int_id')->nullable();
-            $table->foreignIdFor(AbilityScore::class, 'wis_id')->nullable();
-            $table->foreignIdFor(AbilityScore::class, 'cha_id')->nullable();
-
+            $table->string('alignment', 2)->nullable();
             $table->foreignIdFor(ArmorClass::class, 'armor_class_id')->nullable();
             $table->unsignedSmallInteger('challenge_rating')->nullable()->index();
             $table->foreignIdFor(CreatureHitPoints::class, 'creature_hit_points_id')->nullable();
-            $table->foreignIdFor(CreatureType::class, 'creature_type_id');
+            $table->foreignIdFor(CreatureType::class, 'creature_type_id')->nullable();
             $table->json('damage_immunities')->nullable();
             $table->json('damage_resistances')->nullable();
             $table->unsignedSmallInteger('game_edition')->default(GameEdition::FIFTH);

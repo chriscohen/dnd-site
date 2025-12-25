@@ -125,4 +125,9 @@ class TextEntry extends AbstractModel
         $item->save();
         return $item;
     }
+
+    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
+    {
+        return static::fromInternalJson($value, $parent);
+    }
 }

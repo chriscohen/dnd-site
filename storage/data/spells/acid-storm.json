@@ -14,9 +14,9 @@
             "damage": [
                 {
                     "damage_type": "acid",
-                    "die_quantity": 1,
-                    "die_quantity_maximum": 15,
-                    "die_faces": 8,
+                    "dice_count": 1,
+                    "dice_count_maximum": 15,
+                    "dice_faces": 8,
                     "perLevelMode": "caster"
                 }
             ],

@@ -4,18 +4,12 @@ declare(strict_types=1);
 
 namespace App\Models\Spells;
 
-use App\Enums\DistanceUnit;
 use App\Enums\GameEdition;
-use App\Enums\TimeUnit;
+use App\Exceptions\DuplicateRecordException;
 use App\Models\AbstractModel;
-use App\Models\Duration;
-use App\Models\Magic\MagicSchool;
 use App\Models\Media;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
-use App\Models\Range;
-use App\Models\Reference;
-use App\Models\Sources\Source;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -105,15 +99,28 @@ class Spell extends AbstractModel
         return $item;
     }
 
+    /**
+     * @throws DuplicateRecordException
+     */
     public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
-        $item = new static();
+        $gameEdition = !empty($value['srd52']) ? GameEdition::FIFTH_REVISED : GameEdition::FIFTH;
+
+        $item = Spell::query()->where('name', $value['name'])->first() ?? new static();
         $item->name = $value['name'];
         $item->slug = static::makeSlug($value['name']);
         $item->save();
 
-        $edition = SpellEdition::from5eJson($value, $item);
-        $item->editions()->save($edition);
+        $existingEdition = $item->editions->firstWhere('game_edition', $gameEdition);
+
+        if (empty($existingEdition)) {
+            $edition = SpellEdition::from5eJson($value, $item);
+            $item->editions()->save($edition);
+        } else {
+            throw new DuplicateRecordException(
+                "Spell edition for Fifth Edition already exists for spell '{$item->name}'\n"
+            );
+        }
 
         $item->save();
         return $item;

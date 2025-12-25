@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid;
 
 class Spell5eToolsSeeder extends AbstractYmlSeeder
 {
-    protected string $dir = 'spells-5etools';
+    protected string $dir = '5etools/data/spells';
     protected string $model = Spell::class;
 
     public function run(): void

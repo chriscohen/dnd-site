@@ -14,10 +14,10 @@
             "damage": [
                 {
                     "damage_type": "acid",
-                    "die_faces": 6,
+                    "dice_faces": 6,
                     "perLevel": 1,
                     "perLevelMode": "caster level",
-                    "die_quantity_maximum": "10"
+                    "dice_count_maximum": "10"
                 }
             ],
             "description": "You pop the fire ants into your mouth and exhale quickly. The ants distill into drops of pure acid in mid air, spattering against your foes and leaving smoking holes.\n\nYou breathe forth a cone of acidic droplets. The cone deals 1d6 points of acid damage per caster level (maximum 10d6).",

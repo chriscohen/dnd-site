@@ -8,7 +8,6 @@ use App\Models\AbstractModel;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\Reference;
-use Faker\Factory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -33,19 +32,19 @@ class Creature extends AbstractModel
     public $timestamps = false;
     public $incrementing = false;
 
+    public function children(): HasMany
+    {
+        return $this->hasMany(Creature::class, 'parent_id');
+    }
+
     public function editions(): HasMany
     {
-        return $this->hasMany(CreatureEdition::class);
+        return $this->hasMany(CreatureEdition::class, 'creature_id');
     }
 
     public function parent(): BelongsTo
     {
         return $this->belongsTo(Creature::class, 'parent_id');
-    }
-
-    public function children(): HasMany
-    {
-        return $this->hasMany(Creature::class, 'parent_id');
     }
 
     public function toArrayFull(): array
