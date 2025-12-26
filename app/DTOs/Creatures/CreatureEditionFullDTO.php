@@ -68,7 +68,7 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
             ages: $model->relationLoaded('ages') ?
                 $model->ages->map(fn (CreatureAge $item) => CreatureAgeDTO::fromModel($item)) :
                 collect(),
-            alignment: $model->alignment->toString(),
+            alignment: $model->alignment?->toString(),
             armorClass: $model->relationLoaded('armorClass') ?
                 $model->armorClass->map(fn (ArmorClass $item) => ArmorClassDTO::fromModel($item)) :
                 collect(),
@@ -89,7 +89,9 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
                 collect(),
             resist: $model->damage_resistances->toArray(),
             sizes: $model->sizes->map(fn (CreatureSizeUnit $item) => $item->toString())->toArray(),
-            type: $model->relationLoaded('type') ? CreatureTypeDTO::fromModel($model->type) : null
+            type: $model->relationLoaded('type') && !empty($model->type) ?
+                CreatureTypeDTO::fromModel($model->type) :
+                null
         );
     }
 }
