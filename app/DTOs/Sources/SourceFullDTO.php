@@ -6,7 +6,6 @@ namespace App\DTOs\Sources;
 
 use App\DTOs\CampaignSettingFullDTO;
 use App\DTOs\Media\MediaSummaryDTO;
-use App\Models\CampaignSetting;
 use App\Models\ModelInterface;
 use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
@@ -22,10 +21,10 @@ readonly class SourceFullDTO extends SourceSummaryDTO
         ?string $shortName = null,
         ?MediaSummaryDTO $coverImage = null,
         $parentId = null,
-        public readonly ?CampaignSetting $campaignSetting = null,
-        public readonly ?string $description = null,
+        public ?CampaignSettingFullDTO $campaignSetting = null,
+        public ?string $description = null,
         /** @var Collection<SourceEditionFullDTO> */
-        public readonly Collection $editions
+        public Collection $editions
     ) {
         parent::__construct($id, $name, $slug, $gameEdition, $shortName, $coverImage, $parentId);
     }
