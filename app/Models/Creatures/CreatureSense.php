@@ -92,10 +92,6 @@ class CreatureSense extends AbstractModel
     }
 
     /**
-     * @param  array{
-     *     'type': string,
-     *     'value': int,
-     * }|string  $value
      */
     public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
     {
@@ -107,7 +103,14 @@ class CreatureSense extends AbstractModel
         $senseItem = SenseType::tryFromString(mb_strtolower($senseType));
         $item->type = $senseItem;
 
-        list($number, $unit) = explode(' ', trim($range), 2);
+        $range = trim($range);
+
+        // Correct for a situation where there is no unit.
+        if (!str_contains($range, ' ')) {
+            $range .= ' ft.';
+        }
+
+        list($number, $unit) = explode(' ', $range, 2);
         $item->range = (int) $number;
         $item->distance_unit = DistanceUnit::tryFromString($unit);
 

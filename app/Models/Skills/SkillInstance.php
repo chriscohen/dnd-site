@@ -65,7 +65,8 @@ class SkillInstance extends AbstractModel
      */
     public static function fromInternalJson(int|array|string $value, ?ModelInterface $parent = null): static
     {
-        $skill = Skill::query()->where('slug', $value['skill'])->firstOrFail();
+        $skillName = str_replace(' ', '-', $value['skill']);
+        $skill = Skill::query()->where('slug', $skillName)->firstOrFail();
         $skillEdition = $skill->editions->firstWhere('game_edition', $parent->game_edition);
         $ability = $skillEdition->related_ability;
 
