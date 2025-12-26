@@ -63,8 +63,4 @@ interface ModelInterface
      * @return array
      */
     public function toArray(JsonRenderMode $mode = JsonRenderMode::SHORT): array;
-
-    public function toArrayFull(): array;
-    public function toArrayShort(): array;
-    public function toArrayTeaser(): array;
 }
