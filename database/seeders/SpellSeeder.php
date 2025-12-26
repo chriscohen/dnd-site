@@ -14,7 +14,7 @@ class SpellSeeder extends AbstractYmlSeeder
     public function run(): void
     {
         foreach ($this->getDataFromDirectory() as $datum) {
-            print "Creating Spell " . $datum['name'] . "...\n";
+            print "[Internal] Creating Spell " . $datum['name'] . "...\n";
             Spell::fromInternalJson($datum);
         }
     }

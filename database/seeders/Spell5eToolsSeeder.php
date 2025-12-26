@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\Spells\Spell;
-use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Facades\Storage;
 
 class Spell5eToolsSeeder extends AbstractYmlSeeder
 {
@@ -14,11 +14,17 @@ class Spell5eToolsSeeder extends AbstractYmlSeeder
 
     public function run(): void
     {
-        foreach ($this->getDataFromDirectory() as $datum) {
-            $item = new Spell();
-            $item->id = Uuid::uuid4();
-            $item->name = $datum['name'];
-            $item->slug = $this->makeSlug($datum['name']);
-        }
+        foreach (Storage::disk('data')->files($this->dir) as $file) {
+            if (!str_contains($file, 'spells-') || str_contains($file, 'fluff')) {
+                continue;
+            }
+
+            $json = json_decode(Storage::disk('data')->get($file), true);
+
+            foreach ($json['spell'] as $datum) {
+                print "[5e.tools] Creating Spell " . $datum['name'] . "...\n";
+                Spell::from5eJson($datum);
+            }
+        };
     }
 }

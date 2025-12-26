@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             CharacterClassSeeder::class,
             ItemSeeder::class,
             SpellSeeder::class,
+            Spell5eToolsSeeder::class,
         ]);
     }
 }
