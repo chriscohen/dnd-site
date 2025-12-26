@@ -27,6 +27,7 @@ class CreatureController extends AbstractController
             ->with([
                 'editions',
                 'editions.abilities',
+                'editions.alignment',
                 'editions.armorClass',
                 'editions.armorClass.items',
                 'editions.hitPoints',
@@ -51,7 +52,7 @@ class CreatureController extends AbstractController
 
         $this->query->orderBy($this->orderKey);
 
-        $items = $this->query->paginate(20)->through(fn(Creature $item) => CreatureSummaryDTO::fromModel($item));
+        $items = $this->query->paginate(50)->through(fn(Creature $item) => CreatureSummaryDTO::fromModel($item));
 
         return response()->json($items);
     }

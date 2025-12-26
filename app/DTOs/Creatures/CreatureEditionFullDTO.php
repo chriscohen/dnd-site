@@ -9,10 +9,10 @@ use App\DTOs\AbilityScores\AbilityScoreModifierGroupDTO;
 use App\DTOs\ArmorClass\ArmorClassDTO;
 use App\DTOs\MovementSpeeds\MovementSpeedDTO;
 use App\Enums\Creatures\CreatureSizeUnit;
-use App\Enums\GameEdition;
 use App\Models\AbilityScores\AbilityScore;
 use App\Models\ArmorClass\ArmorClass;
 use App\Models\Creatures\CreatureAge;
+use App\Models\Creatures\CreatureAlignment;
 use App\Models\Creatures\CreatureEdition;
 use App\Models\ModelInterface;
 use App\Models\Conditions\ConditionEdition;
@@ -28,22 +28,19 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
         public ?AbilityScoreModifierGroupDTO $abilityScoreModifiers = null,
         /** @var Collection<CreatureAgeDTO> $ages */
         public ?Collection $ages = null,
-
-        public ?string $alignment = '',
-
+        /** @var Collection<CreatureAlignmentDTO> $alignment */
+        public Collection $alignment,
         /** @var Collection<ArmorClassDTO> $armorClass */
         public ?Collection $armorClass = null,
-
-        public ?int $challengeRating = null,
-
+        public ?float $challengeRating = null,
         /** @var string[] $conditionImmune */
         public array $conditionImmune,
-
         public string $gameEdition,
         public ?CreatureHitPointsDTO $hitPoints = null,
         /** @var string[] $immune */
         public array $immune,
         public bool $isPlayable,
+        public ?int $lairXp,
         /** @var Collection<MovementSpeedDTO> $movementSpeeds */
         public Collection $movementSpeeds,
         public array $resist,
@@ -58,6 +55,7 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
      */
     public static function fromModel(ModelInterface $model): static
     {
+        $x = $model->alignment;
         return new static(
             id: $model->id,
             abilities: $model->relationLoaded('abilities') ?
@@ -68,7 +66,9 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
             ages: $model->relationLoaded('ages') ?
                 $model->ages->map(fn (CreatureAge $item) => CreatureAgeDTO::fromModel($item)) :
                 collect(),
-            alignment: $model->alignment?->toString(),
+            alignment: $model->alignment?->map(
+                fn (CreatureAlignment $item) => CreatureAlignmentDTO::fromModel($item)
+            ) ?? collect(),
             armorClass: $model->relationLoaded('armorClass') ?
                 $model->armorClass->map(fn (ArmorClass $item) => ArmorClassDTO::fromModel($item)) :
                 collect(),
@@ -84,6 +84,7 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
                 null,
             immune: $model->damage_immunities->toArray(),
             isPlayable: $model->is_playable,
+            lairXp: $model->lair_xp,
             movementSpeeds: $model->relationLoaded('movementSpeeds') ?
                 $model->movementSpeeds->map(fn (MovementSpeed $item) => MovementSpeedDTO::fromModel($item)) :
                 collect(),

@@ -19,6 +19,8 @@ class AsAlignment implements CastsAttributes
             return new Alignment(AlignmentLawChaos::NEUTRAL, AlignmentGoodEvil::NEUTRAL);
         } elseif (mb_strtolower($value) === 'u') {
             return new Alignment();
+        } elseif (mb_strtolower($value) === 'a') {
+            return new Alignment(AlignmentLawChaos::ANY, AlignmentGoodEvil::ANY);
         } else {
             $letters = str_split($value);
             return new Alignment(

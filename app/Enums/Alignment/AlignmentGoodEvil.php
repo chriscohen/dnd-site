@@ -9,6 +9,7 @@ enum AlignmentGoodEvil: int
     case GOOD = 1;
     case NEUTRAL = 2;
     case EVIL = 3;
+    case ANY = 4;
 
     public function toString(): string
     {
@@ -16,6 +17,7 @@ enum AlignmentGoodEvil: int
             self::GOOD => 'good',
             self::NEUTRAL => 'neutral',
             self::EVIL => 'evil',
+            self::ANY => 'any',
         };
     }
 
@@ -30,6 +32,7 @@ enum AlignmentGoodEvil: int
             'g', 'good' => self::GOOD,
             'n', 'neutral' => self::NEUTRAL,
             'e', 'evil' => self::EVIL,
+            'a', 'any' => self::ANY,
             default => null,
         };
     }

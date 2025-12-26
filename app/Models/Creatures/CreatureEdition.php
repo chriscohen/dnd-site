@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Creatures;
 
-use App\Castables\AsAlignment;
 use App\Enums\AbilityScoreType;
-use App\Enums\Alignment\AlignmentGoodEvil;
-use App\Enums\Alignment\AlignmentLawChaos;
 use App\Enums\Conditions\ConditionInstanceType;
 use App\Enums\Creatures\CreatureSizeUnit;
 use App\Enums\Damage\DamageType;
@@ -19,7 +16,6 @@ use App\Exceptions\RecordNotFoundException;
 use App\Models\AbilityScores\AbilityScore;
 use App\Models\AbilityScores\AbilityScoreModifierGroup;
 use App\Models\AbstractModel;
-use App\Models\Alignment\Alignment;
 use App\Models\ArmorClass\ArmorClass;
 use App\Models\Conditions\ConditionInstance;
 use App\Models\Dice\DiceFormula;
@@ -30,7 +26,6 @@ use App\Models\Reference;
 use App\Models\Skills\Skill;
 use App\Models\Skills\SkillInstance;
 use App\Models\Sources\Source;
-use App\Models\Conditions\Condition;
 use App\Models\Conditions\ConditionEdition;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
@@ -45,7 +40,6 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Collection as SupportCollection;
-use Illuminate\Support\ItemNotFoundException;
 
 /**
  * @property string $id
@@ -53,9 +47,9 @@ use Illuminate\Support\ItemNotFoundException;
  * @property ?AbilityScoreModifierGroup $abilityScoreModifiers
  * @property Collection<AbilityScore> $abilities
  * @property Collection<CreatureAge> $ages
- * @property ?Alignment $alignment
+ * @property Collection<CreatureAlignment> $alignment
  * @property Collection<ArmorClass> $armorClass
- * @property ?int $challenge_rating
+ * @property ?float $challenge_rating
  * @property Collection<ConditionInstance> $conditionImmunities
  * @property Collection<ConditionInstance> $conditionInstances
  * @property Creature $creature
@@ -69,6 +63,7 @@ use Illuminate\Support\ItemNotFoundException;
  * @property ?DiceFormula $height_modifier
  * @property ?CreatureHitPoints $hitPoints
  * @property bool $is_playable
+ * @property ?int $lair_xp
  * @property Collection<MovementSpeed> $movementSpeeds
  * @property int $passivePerception
  * @property ?int $proficiency_bonus
@@ -104,7 +99,6 @@ class CreatureEdition extends AbstractModel
     protected function casts(): array
     {
         return [
-            'alignment' => AsAlignment::class,
             'condition_immunities' => 'collection',
             'damage_immunities' => 'collection',
             'damage_resistances' => 'collection',
@@ -125,6 +119,11 @@ class CreatureEdition extends AbstractModel
     public function abilityScoreModifiers(): MorphOne
     {
         return $this->morphOne(AbilityScoreModifierGroup::class, 'parent');
+    }
+
+    public function alignment(): HasMany
+    {
+        return $this->hasMany(CreatureAlignment::class);
     }
 
     public function ages(): HasMany
@@ -502,23 +501,30 @@ class CreatureEdition extends AbstractModel
         $item = $parent->editions->firstWhere('game_edition', $edition) ?? new static();
         $item->game_edition = $edition;
 
+        // In case we couldn't set an edition, assume 5th edition.
+        if (empty($item->game_edition)) {
+            $item->game_edition = GameEdition::FIFTH_REVISED;
+        }
+        if (empty($item->creature)) {
+            $item->creature()->associate($parent);
+        }
+        $item->save();
+
         /**
          * Alignment.
          */
+        $item->save();
         if (!empty($value['alignment'])) {
-            if ($value['alignment'][0] === 'U') {
-                // This creature is unaligned.
-                $item->alignment = new Alignment();
-            } elseif (count($value['alignment']) === 1 && $value['alignment'][0] === 'N') {
-                // Neutral.
-                $item->alignment = new Alignment(AlignmentLawChaos::NEUTRAL, AlignmentGoodEvil::NEUTRAL);
-            } else {
-                // Otherwise we're expecting two single-letter strings in the 'alignment' key.
-                $lawChaos = AlignmentLawChaos::tryFromString($value['alignment'][0]) ??
-                    throw new \InvalidArgumentException("Could not parse alignment.");
-                $goodEvil = AlignmentGoodEvil::tryFromString($value['alignment'][1]) ??
-                    throw new \InvalidArgumentException("Could not parse alignment.");
-                $item->alignment = new Alignment($lawChaos, $goodEvil);
+            if (empty($value['alignment'][0]['alignment'])) {
+                // Sometimes we have just one alignment in an array, but sometimes there are multiple and each alignment
+                // is its own array. If it's just one alignment, shift it to multiple-style with a single element.
+                $old = $value['alignment'];
+                $value['alignment'] = [];
+                $value['alignment'][]['alignment'] = $old;
+            }
+            foreach ($value['alignment'] as $alignmentItem) {
+                $alignment = CreatureAlignment::fromInternalJson($alignmentItem['alignment'], $item);
+                $item->alignment()->save($alignment);
             }
         }
 
@@ -534,15 +540,6 @@ class CreatureEdition extends AbstractModel
             }
         }
 
-        // In case we couldn't set an edition, assume 5th edition.
-        if (empty($item->game_edition)) {
-            $item->game_edition = GameEdition::FIFTH_REVISED;
-        }
-        if (empty($item->creature)) {
-            $item->creature()->associate($parent);
-        }
-        $item->save();
-
         // Check we don't already have this reference.
         if (!$item->references->contains('source.slug', $value['source'])) {
             $reference = Reference::from5eJson([
@@ -556,7 +553,19 @@ class CreatureEdition extends AbstractModel
          * Challenge Rating.
          */
         if (!empty($value['cr'])) {
-            $item->challenge_rating = $value['cr'];
+            if (is_array($value['cr'])) {
+                $field = $value['cr']['cr'];
+                $item->lair_xp = $value['cr']['xpLair'] ?? null;
+            } else {
+                $field = $value['cr'];
+            }
+
+            $item->challenge_rating = match ($field) {
+                '1/8' => 0.125,
+                '1/4' => 0.25,
+                '1/2' => 0.5,
+                default => $field
+            };
         }
 
         /**
@@ -573,7 +582,10 @@ class CreatureEdition extends AbstractModel
 
         foreach ($value['size'] ?? [] as $size) {
             $sizeUnit = CreatureSizeUnit::tryFromString($size);
-            $item->sizes->push($sizeUnit);
+
+            if (!$item->sizes->contains($sizeUnit)) {
+                $item->sizes->push($sizeUnit);
+            }
         }
 
         /**

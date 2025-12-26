@@ -9,6 +9,7 @@ enum AlignmentLawChaos: int
     case LAWFUL = 1;
     case NEUTRAL = 2;
     case CHAOTIC = 3;
+    case ANY = 4;
 
     public function toString(): string
     {
@@ -16,6 +17,7 @@ enum AlignmentLawChaos: int
             self::LAWFUL => 'lawful',
             self::NEUTRAL => 'neutral',
             self::CHAOTIC => 'chaotic',
+            self::ANY => 'any',
         };
     }
 
@@ -30,6 +32,7 @@ enum AlignmentLawChaos: int
             'l', 'lawful' => self::LAWFUL,
             'n', 'neutral' => self::NEUTRAL,
             'c', 'chaotic' => self::CHAOTIC,
+            'a', 'any' => self::ANY,
             default => null,
         };
     }

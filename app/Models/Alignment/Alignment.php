@@ -35,10 +35,11 @@ class Alignment
     {
         if ($this->isUnaligned()) {
             return 'U';
+        } elseif ($this->lawChaos === AlignmentLawChaos::NEUTRAL && $this->goodEvil === AlignmentGoodEvil::NEUTRAL) {
+            return 'N';
+        } elseif ($this->lawChaos === AlignmentLawChaos::ANY && $this->goodEvil === AlignmentGoodEvil::ANY) {
+            return 'A';
         }
-
-        return $this->lawChaos === AlignmentLawChaos::NEUTRAL && $this->goodEvil === AlignmentGoodEvil::NEUTRAL ?
-            'N' :
-            mb_strtoupper($this->lawChaos->toStringShort() . $this->goodEvil->toStringShort());
+        return mb_strtoupper($this->lawChaos->toStringShort() . $this->goodEvil->toStringShort());
     }
 }
