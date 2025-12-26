@@ -71,9 +71,9 @@ class SourceContents extends AbstractModel
     }
 
     /**
-     * @param  array|string  $value
+     * @param  array|string|int  $value
      */
-    public static function from5eJson(array|string $value, ModelInterface $parent = null): static
+    public static function from5eJson(array|string|int $value, ModelInterface $parent = null): static
     {
         return static::fromInternalJson($value, $parent);
     }

@@ -99,7 +99,7 @@ class Creature extends AbstractModel
         return $item;
     }
 
-    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
+    public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
         // Keys are the names of creatures. Values are slugs for their parent type.
         $map = [

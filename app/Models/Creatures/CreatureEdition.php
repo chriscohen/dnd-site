@@ -477,7 +477,7 @@ class CreatureEdition extends AbstractModel
      * @param Creature $parent
      * @throws RecordNotFoundException
      */
-    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
+    public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
         /**
          * Game Edition.

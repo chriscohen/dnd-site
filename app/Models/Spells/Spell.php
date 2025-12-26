@@ -102,7 +102,7 @@ class Spell extends AbstractModel
     /**
      * @throws DuplicateRecordException
      */
-    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
+    public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
         $gameEdition = !empty($value['srd52']) ? GameEdition::FIFTH_REVISED : GameEdition::FIFTH;
 

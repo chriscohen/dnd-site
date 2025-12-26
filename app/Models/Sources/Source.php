@@ -284,7 +284,7 @@ class Source extends AbstractModel
     /**
      * @throws DuplicateRecordException
      */
-    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
+    public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
         $existing = static::query()->where('name', $value['name'])->first();
 

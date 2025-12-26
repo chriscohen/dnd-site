@@ -387,7 +387,7 @@ class SpellEdition extends AbstractModel
         return $item;
     }
 
-    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
+    public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
         $item->game_edition = GameEdition::FIFTH_REVISED;

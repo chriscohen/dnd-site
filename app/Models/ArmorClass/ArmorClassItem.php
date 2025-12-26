@@ -61,7 +61,7 @@ class ArmorClassItem extends AbstractModel
      *     from: string
      * } $value
      */
-    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
+    public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
         $item->armorClass()->associate($parent);

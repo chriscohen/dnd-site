@@ -51,12 +51,9 @@ class CreatureAge extends AbstractModel
     }
 
     /**
-     * @param array{
-     *     'type': string,
-     *     'value': int,
-     * }|string  $value
+     * @param  array|string|int  $value
      */
-    public static function from5eJson(array|string $value, ?ModelInterface $parent = null): static
+    public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
         $item->creatureEdition()->associate($parent);

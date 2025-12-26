@@ -20,10 +20,10 @@ interface ModelInterface
 
     /**
      * Import from the 5e.tools JSON format.
-     * @param  array|string  $value  The JSON from 5e.tools, as an array.
+     * @param  array|string|int  $value  The JSON from 5e.tools, as an array.
      * @param ModelInterface|null $parent  The parent model, if any.
      */
-    public static function from5eJson(array|string $value, ModelInterface $parent = null): static;
+    public static function from5eJson(array|string|int $value, ModelInterface $parent = null): static;
 
     /**
      * Create a new instance, with random values.
