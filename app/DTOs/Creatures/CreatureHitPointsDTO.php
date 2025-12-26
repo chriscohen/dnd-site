@@ -13,6 +13,7 @@ readonly class CreatureHitPointsDTO extends AbstractDTO
     public function __construct(
         public string $id,
         public ?int $average = null,
+        public ?string $description = null,
         public ?string $formula = null
     ) {
     }
@@ -25,6 +26,7 @@ readonly class CreatureHitPointsDTO extends AbstractDTO
         return new static(
             id: $model->id,
             average: $model->average,
+            description: $model->description,
             formula: $model->formula?->toString()
         );
     }

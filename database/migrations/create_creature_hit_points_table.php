@@ -14,6 +14,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->unsignedSmallInteger('average')->nullable();
             $table->string('formula')->nullable();
+            $table->string('description')->nullable();
         });
     }
 
