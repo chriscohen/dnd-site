@@ -15,6 +15,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property string $id
  *
+ * @property ?string $alternate_name  Used if this edition had a different name than 5e.
  * @property Uuid $creature_major_type_id
  * @property CreatureMajorType $creatureMajorType
  * @property string $description
@@ -43,32 +44,11 @@ class CreatureMajorTypeEdition extends AbstractModel
         );
     }
 
-    public function toArrayFull(): array
-    {
-        return [
-            'creature_major_type' => $this->creatureMajorType->toArray($this->renderMode, $this->excluded),
-            'description' => $this->description,
-            'game_edition' => $this->game_edition,
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'creature_major_type_id' => $this->creature_major_type_id,
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
-    }
-
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
         $item->creatureMajorType()->associate($parent);
+        $item->alternate_name = $value['alternateName'] ?? null;
         $item->description = $value['description'];
         $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
         $item->save();

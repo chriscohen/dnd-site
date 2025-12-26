@@ -11,9 +11,10 @@ use App\Models\ModelInterface;
 readonly class CreatureMajorTypeEditionDTO extends AbstractDTO
 {
     public function __construct(
-        public readonly string $id,
-        public readonly string $description,
-        public readonly string $gameEdition
+        public string $id,
+        public ?string $alternateName = null,
+        public string $description,
+        public string $gameEdition
     ) {
     }
 
@@ -24,6 +25,7 @@ readonly class CreatureMajorTypeEditionDTO extends AbstractDTO
     {
         return new static(
             id: $model->id,
+            alternateName: $model->alternate_name,
             description: $model->description,
             gameEdition: $model->game_edition,
         );

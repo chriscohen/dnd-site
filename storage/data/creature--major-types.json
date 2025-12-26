@@ -69,6 +69,22 @@
         ]
     },
     {
+        "id": "f30b7cb3-9336-4910-a6f5-090f893cf965",
+        "slug": "celestial",
+        "name": "celestial",
+        "plural": "celestials",
+        "editions": [
+            {
+                "description": "Celestials are good outsiders from one of the Celestial Planes, also called the Upper Planes in some cosmological models, and the cosmological counterparts and antithesis to fiends.",
+                "gameEdition": "5e"
+            },
+            {
+                "description": "Celestials are good outsiders from one of the Celestial Planes, also called the Upper Planes in some cosmological models, and the cosmological counterparts and antithesis to fiends.",
+                "gameEdition": "5.5"
+            }
+        ]
+    },
+    {
         "id": "d07725f6-5a2a-49ff-938e-c2b976f69c86",
         "slug": "conjuration",
         "name": "conjuration",
@@ -154,6 +170,22 @@
         ]
     },
     {
+        "id": "9c199e30-5a46-40bd-a675-3c99e49766f0",
+        "slug": "fiend",
+        "name": "fiend",
+        "plural": "fiends",
+        "editions": [
+            {
+                "description": "Fiends are creatures of wickedness that are native to the Lower Planes. A few are the servants of deities, but many more labor under the leadership of archdevils and demon princes. Evil priests and mages sometimes summon fiends to the material world to do their bidding. If an evil celestial is a rarity, a good fiend is almost inconceivable. Fiends include demons, devils, hell hounds, rakshasas, and yugoloths.",
+                "gameEdition": "5e"
+            },
+            {
+                "description": "Fiends are creatures of wickedness that are native to the Lower Planes. A few are the servants of deities, but many more labor under the leadership of archdevils and demon princes. Evil priests and mages sometimes summon fiends to the material world to do their bidding. If an evil celestial is a rarity, a good fiend is almost inconceivable. Fiends include demons, devils, hell hounds, rakshasas, and yugoloths.",
+                "gameEdition": "5.5"
+            }
+        ]
+    },
+    {
         "id": "c174b3eb-28b1-4757-9b01-e362b36ca5c2",
         "slug": "giant",
         "name": "giant",
@@ -235,15 +267,17 @@
     },
     {
         "id": "afebe7f6-811b-48e7-b718-9ee3393ed78e",
-        "slug": "monster",
-        "name": "monster",
-        "plural": "monsters",
+        "slug": "monstrosity",
+        "name": "monstrosity",
+        "plural": "monstrosities",
         "editions": [
             {
+                "alternateName": "monster",
                 "description": "Includes \"other fantastical creatures\" with strange appearances or unnatural powers. Examples are beholders, cockatrices, dragons, hook horrors, minotaurs, rust monsters, and werewolves.",
                 "gameEdition": "1e"
             },
             {
+                "alternateName": "monster",
                 "description": "Monsters are creatures that do not fit into the other types, often \"legendary\" or \"fabulous\" creatures. This type may include creatures that resemble those of other types, but are differentiated by their unusual abilities. Examples include beholders, displacer beasts, minotaurs,, sphinxes, and werewolves.",
                 "gameEdition": "2e"
             }
@@ -350,6 +384,22 @@
             {
                 "description": "A shapechanger has a stable form but can transform into other shapes. They usually have darkvision. Examples include doppelgangers and lycanthropes.",
                 "gameEdition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "391713f6-5d56-4204-b74b-5a0e8ffa09c2",
+        "slug": "swarm",
+        "name": "swarm",
+        "plural": "swarms",
+        "editions": [
+            {
+                "description": "A swarm is a group of small or tiny creatures that are all of the same type.",
+                "gameEdition": "5e"
+            },
+            {
+                "description": "A swarm is a group of small or tiny creatures that are all of the same type.",
+                "gameEdition": "5.5"
             }
         ]
     },
