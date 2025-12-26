@@ -17,8 +17,6 @@ class CreatureMajorTypeController extends AbstractController
 
     public function get(Request $request, string $slug): JsonResponse
     {
-        $this->preValidate($request);
-
         /** @var CreatureMajorType|null $item */
         $item = $this->query
             ->where('slug', $slug)
@@ -33,8 +31,6 @@ class CreatureMajorTypeController extends AbstractController
 
     public function list(Request $request): JsonResponse
     {
-        $this->preValidate($request);
-
         $items = $this->query
             ->orderBy($this->orderKey)
             ->paginate()

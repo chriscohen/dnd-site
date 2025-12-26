@@ -41,7 +41,7 @@ use Ramsey\Uuid\Uuid;
 use Spatie\LaravelMarkdown\MarkdownRenderer;
 
 /**
- * @property Uuid $id
+ * @property string $id
  *
  * @property ?Area $area
  * @property ?SpellCastingTime $castingTime

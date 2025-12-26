@@ -30,7 +30,7 @@ readonly class CompanySummaryDTO extends AbstractDTO
             id: $model->id,
             name: $model->name,
             slug: $model->slug,
-            logo: $model->logo,
+            logo: !empty($model->logo) ? MediaSummaryDTO::fromModel($model->logo) : null,
             productUrl: $model->product_url,
             shortName: $model->short_name,
         );

@@ -20,7 +20,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * Maps a spell to a class, such as Wizard 5 (5th level wizard spell) etc.
  *
- * @property Uuid $id
+ * @property string $id
  *
  * @property CharacterClass|FeatureEdition $entity
  * @property Uuid $entity_id

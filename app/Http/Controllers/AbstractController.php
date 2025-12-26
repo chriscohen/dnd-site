@@ -79,8 +79,6 @@ abstract class AbstractController extends Controller implements ControllerInterf
 
     public function get(Request $request, string $slug): JsonResponse
     {
-        $this->preValidate($request);
-
         if (!empty($request->get('editions'))) {
             $this->editionQuery($request->get('editions'));
         }
@@ -106,8 +104,6 @@ abstract class AbstractController extends Controller implements ControllerInterf
 
     public function index(Request $request): JsonResponse
     {
-        $this->preValidate($request);
-
         if (!empty($request->get('editions'))) {
             $this->editionQuery($request->get('editions'));
         }
@@ -120,13 +116,5 @@ abstract class AbstractController extends Controller implements ControllerInterf
         }
 
         return response()->json($output);
-    }
-
-    public function preValidate(Request|array $request): void
-    {
-        $request->validate([
-            'editions' => ['string', new ValidGameEdition()],
-            'mode' => ['string', new ValidMode()],
-        ]);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Spells;
 
+use App\DTOs\Spells\SpellSummaryDTO;
 use App\Http\Controllers\AbstractController;
 use App\Models\Spells\Spell;
 use Illuminate\Http\JsonResponse;
@@ -28,19 +29,11 @@ class SpellController extends AbstractController
 
     public function index(Request $request): JsonResponse
     {
-        $this->preValidate($request);
+        $items = $this->query
+            ->orderBy($this->orderKey)
+            ->paginate(50)
+            ->through(fn (Spell $item) => SpellSummaryDTO::fromModel($item));
 
-        if (!empty($request->get('editions'))) {
-            $this->editionQuery($request->get('editions'));
-        }
-
-        $result = $this->query->get();
-        $output = [];
-
-        foreach ($result as $item) {
-            $output[] = $item->toArray($this->getMode($request));
-        }
-
-        return response()->json($output);
+        return response()->json($items->withQueryString());
     }
 }

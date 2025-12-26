@@ -16,8 +16,6 @@ class LanguageController extends AbstractController
 
     public function index(Request $request): JsonResponse
     {
-        $this->preValidate($request);
-
         $this->query->orderBy($this->orderKey);
 
         $items = $this->query->get();

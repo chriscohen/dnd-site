@@ -43,14 +43,22 @@ class SourceController extends AbstractController
 
     public function index(Request $request): JsonResponse
     {
-        $this->preValidate($request);
+        $request->validate([
+            'campaign-setting' => 'string|nullable',
+            'editions' => 'string|nullable',
+            'publisher' => 'string|nullable',
+        ]);
 
         if (!empty($request->input('editions'))) {
             $this->editionQuery($request->input('editions'));
         }
 
-        if (!empty($request->input('campaignSetting'))) {
-            $this->query->whereRelation('campaignSetting', 'slug', $request->input('campaignSetting'));
+        if (!empty($request->input('campaign-setting'))) {
+            $this->query->whereRelation('campaignSetting', 'slug', $request->input('campaign-setting'));
+        }
+
+        if (!empty($request->input('publisher'))) {
+            $this->query->whereRelation('publisher', 'slug', $request->input('publisher'));
         }
 
         $this->query->orderBy($this->orderKey);
@@ -61,6 +69,6 @@ class SourceController extends AbstractController
 
         $items = $items->through(fn (Source $item) => SourceSummaryDTO::fromModel($item));
 
-        return response()->json($items);
+        return response()->json($items->withQueryString());
     }
 }

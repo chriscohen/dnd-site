@@ -19,8 +19,6 @@ class CreatureController extends AbstractController
 
     public function get(Request $request, string $slug): JsonResponse
     {
-        $this->preValidate($request);
-
         /** @var Creature|null $item */
         $item = $this->query
             ->where('slug', $slug)

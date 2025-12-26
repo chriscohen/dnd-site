@@ -16,8 +16,6 @@ class CampaignSettingController extends AbstractController
 
     public function index(Request $request): JsonResponse
     {
-        $this->preValidate($request);
-
         if (!empty($request->input('editions'))) {
             $this->editionQuery($request->input('editions'));
         }

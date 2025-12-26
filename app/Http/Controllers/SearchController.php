@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\CampaignSetting;
+use App\Models\Company;
 use App\Models\Creatures\Creature;
 use App\Models\ModelCollection;
 use App\Models\Sources\Source;
+use App\Models\Spells\Spell;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
@@ -25,8 +27,10 @@ class SearchController extends Controller
 
         // Define the models, and the order, in which we want to search things.
         $models = [
-            Source::class,
             Creature::class,
+            Spell::class,
+            Source::class,
+            Company::class,
             CampaignSetting::class,
         ];
 

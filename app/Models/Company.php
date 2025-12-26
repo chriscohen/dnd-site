@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Scout\Searchable;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -26,6 +27,7 @@ use Ramsey\Uuid\Uuid;
 class Company extends AbstractModel
 {
     use HasUuids;
+    use Searchable;
 
     public $timestamps = false;
 
@@ -46,31 +48,13 @@ class Company extends AbstractModel
         return $this->hasMany(Source::class, 'publisher_id');
     }
 
-    public function toArrayFull(): array
+    public function toSearchableArray(): array
     {
         return [
-            'logo' => $this->logo?->toArray($this->renderMode),
-            'products' => ModelCollection::make(
-                $this->products->sortByDesc('release_date')->sortByDesc('game_edition')
-            )->toArray(JsonRenderMode::TEASER),
-            'productUrl' => $this->product_url,
-            'website' => $this->website,
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'slug' => $this->slug,
             'name' => $this->name,
-            'shortName' => $this->short_name,
+            'slug' => $this->slug,
+            'short_name' => $this->short_name
         ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
     }
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
@@ -79,8 +63,8 @@ class Company extends AbstractModel
         $item->id = $value['id'] ?? Uuid::uuid4();
         $item->name = $value['name'] ?? null;
         $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
-        $item->productUrl = $value['productUrl'] ?? null;
-        $item->shortName = $value['shortName'] ?? null;
+        $item->product_url = $value['productUrl'] ?? null;
+        $item->short_name = $value['shortName'] ?? null;
         $item->website = $value['website'] ?? null;
 
         if (!empty($value['logo'])) {

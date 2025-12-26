@@ -8,16 +8,16 @@ use App\Enums\GameEdition;
 use App\Exceptions\DuplicateRecordException;
 use App\Models\AbstractModel;
 use App\Models\Media;
-use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Scout\Searchable;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @property Uuid $id
+ * @property string $id
  *
  * @property Collection<SpellEdition> $editions
  * @property ?Media $image
@@ -27,6 +27,7 @@ use Ramsey\Uuid\Uuid;
 class Spell extends AbstractModel
 {
     use HasUuids;
+    use Searchable;
 
     public $timestamps = false;
 
@@ -46,31 +47,11 @@ class Spell extends AbstractModel
         return $this->belongsTo(Media::class);
     }
 
-    public function toArrayFull(): array
-    {
-        return [];
-    }
-
-    public function toArrayShort(): array
+    public function toSearchableArray(): array
     {
         return [
-            'id' => $this->id,
-            'slug' => $this->slug,
             'name' => $this->name,
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        /** @var SpellEdition $edition */
-        $edition = $this->editions()->where('is_default', true)->first() ?? $this->editions()->first();
-
-        return [
-            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
-            'image' => $this->image?->toArray($this->renderMode),
-            'lowestLevel' => $edition->getLowestLevel(),
-            'rarity' => $edition->rarity?->toString() ?? null,
-            'school' => $edition->school?->name,
+            'slug' => $this->slug,
         ];
     }
 
