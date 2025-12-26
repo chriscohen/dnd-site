@@ -57,7 +57,7 @@ class SourceController extends AbstractController
 
         $items = empty($request->get('includeChildren')) ?
             $this->query->whereNull('parent_id')->paginate(50) :
-            $this->query->paginate(50);
+            $this->query->paginate(20);
 
         $items = $items->through(fn (Source $item) => SourceSummaryDTO::fromModel($item));
 

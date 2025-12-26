@@ -7,22 +7,22 @@ namespace App\DTOs;
 use App\DTOs\Media\MediaSummaryDTO;
 use App\DTOs\Sources\SourceSummaryDTO;
 use App\Models\Company;
-use App\Models\Media;
 use App\Models\ModelInterface;
 use App\Models\Sources\Source;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 readonly class CompanyFullDTO extends CompanySummaryDTO
 {
     public function __construct(
-        public readonly string $id,
-        public readonly string $name,
-        public readonly string $slug,
-        public readonly ?Media $logo = null,
-        public readonly ?string $productUrl = null,
-        public readonly ?string $shortName = null,
-        public readonly ?string $website = null,
-        public readonly ?Collection $products = null
+        string $id,
+        string $name,
+        string $slug,
+        ?MediaSummaryDTO $logo = null,
+        ?string $productUrl = null,
+        ?string $shortName = null,
+        ?string $website = null,
+        // Summary.
+        public ?Collection $products = null
     ) {
         parent::__construct($id, $name, $slug, $logo, $productUrl, $shortName);
     }

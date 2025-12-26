@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace App\DTOs;
 
+use App\DTOs\Media\MediaSummaryDTO;
 use App\Models\Company;
-use App\Models\Media;
 use App\Models\ModelInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 readonly class CompanySummaryDTO extends AbstractDTO
 {
     public function __construct(
-        public readonly string $id,
-        public readonly string $name,
-        public readonly string $slug,
-        public readonly ?Media $logo = null,
-        public readonly ?string $productUrl = null,
-        public readonly ?string $shortName = null,
-        public readonly ?string $website = null
+        public string $id,
+        public string $name,
+        public string $slug,
+        public ?MediaSummaryDTO $logo = null,
+        public ?string $productUrl = null,
+        public ?string $shortName = null,
+        public ?string $website = null
     ) {
     }
 
