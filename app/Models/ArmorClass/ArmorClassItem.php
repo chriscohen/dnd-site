@@ -9,10 +9,9 @@ use App\Models\AbstractModel;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Ramsey\Uuid\Uuid;
 
 /**
- * @property Uuid $id
+ * @property string $id
  *
  * @property ArmorClass $armorClass
  * @property ArmorClassSource $source_type

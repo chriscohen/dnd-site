@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignIdFor(Creature::class, 'creature_id');
 
             $table->string('alignment', 2)->nullable();
-            $table->foreignIdFor(ArmorClass::class, 'armor_class_id')->nullable();
             $table->unsignedSmallInteger('challenge_rating')->nullable()->index();
             $table->foreignIdFor(CreatureHitPoints::class, 'creature_hit_points_id')->nullable();
             $table->foreignIdFor(CreatureType::class, 'creature_type_id')->nullable();
@@ -35,6 +34,8 @@ return new class extends Migration
             $table->json('sizes')->nullable();
             $table->unsignedSmallInteger('weight')->nullable();
             $table->string('weight_modifier')->nullable();
+
+            $table->unique(['creature_id', 'game_edition']);
         });
     }
 

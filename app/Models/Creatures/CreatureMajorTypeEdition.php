@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @property Uuid $id
+ * @property string $id
  *
  * @property Uuid $creature_major_type_id
  * @property CreatureMajorType $creatureMajorType

@@ -498,7 +498,9 @@ class CreatureEdition extends AbstractModel
             throw new \InvalidArgumentException("Could not infer game edition from sourcebook: {$source->name}");
 
         // Do we already have a CreatureEdition for this GameEdition? Use it, otherwise create a new one.
-        $item = $parent->editions->where('game_edition', $edition)->first() ?? new static();
+        $parent->refresh();
+        $item = $parent->editions->firstWhere('game_edition', $edition) ?? new static();
+        $item->game_edition = $edition;
 
         /**
          * Alignment.

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @property Uuid $id
+ * @property string $id
  * @property ?int $average
  * @property CreatureEdition $creatureEdition
  * @property DiceFormula $formula

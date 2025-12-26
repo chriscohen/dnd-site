@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CharacterClassController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Creatures\CreatureController;
+use App\Http\Controllers\Creatures\CreatureMajorTypeController;
 use App\Http\Controllers\Items\ItemController;
 use App\Http\Controllers\Languages\LanguageController;
 use App\Http\Controllers\Magic\MagicDomainController;
@@ -38,6 +39,9 @@ Route::get('/companies', [CompanyController::class, 'index']);
 
 Route::get('/creature/{slug}', [CreatureController::class, 'get']);
 Route::get('/creatures', [CreatureController::class, 'list']);
+
+Route::get('/creature-type/{slug}', [CreatureMajorTypeController::class, 'get']);
+Route::get('/creature-types', [CreatureMajorTypeController::class, 'list']);
 
 Route::get('/domains', [MagicDomainController::class, 'index']);
 

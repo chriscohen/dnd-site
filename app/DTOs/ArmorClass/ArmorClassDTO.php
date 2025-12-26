@@ -5,19 +5,24 @@ declare(strict_types=1);
 namespace App\DTOs\ArmorClass;
 
 use App\DTOs\AbstractDTO;
+use App\Models\ArmorClass\ArmorClass;
 use App\Models\ArmorClass\ArmorClassItem;
+use App\Models\ModelInterface;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 
 readonly class ArmorClassDTO extends AbstractDTO
 {
     public function __construct(
-        public readonly Uuid $id,
+        public readonly string $id,
         public readonly Collection $items
     ) {
     }
 
-    public static function fromModel(object $model): static
+    /**
+     * @param ArmorClass $model
+     */
+    public static function fromModel(ModelInterface $model): static
     {
         return new static(
             id: $model->id,

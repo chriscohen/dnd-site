@@ -25,12 +25,20 @@ class CreatureController extends AbstractController
         $item = $this->query
             ->where('slug', $slug)
             ->with([
-                'editions'
+                'editions',
+                'editions.abilities',
+                'editions.armorClass',
+                'editions.armorClass.items',
+                'editions.hitPoints',
+                'editions.movementSpeeds',
+                'editions.type',
+                'editions.type.majorType',
+                'editions.type.origin'
             ])
             ->first();
         $item = CreatureFullDTO::fromModel($item);
 
-        return response()->json($item ?? []);
+        return response()->json($item);
     }
 
     public function list(CreatureListRequest $request): JsonResponse

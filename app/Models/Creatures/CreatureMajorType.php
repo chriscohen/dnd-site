@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @property Uuid $id
+ * @property string $id
  * @property string $slug
  * @property string $name
  *

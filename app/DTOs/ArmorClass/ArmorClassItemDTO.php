@@ -6,22 +6,26 @@ namespace App\DTOs\ArmorClass;
 
 use App\DTOs\AbstractDTO;
 use App\Enums\ArmorClass\ArmorClassSource;
-use Ramsey\Uuid\Uuid;
+use App\Models\ArmorClass\ArmorClassItem;
+use App\Models\ModelInterface;
 
 readonly class ArmorClassItemDTO extends AbstractDTO
 {
     public function __construct(
-        public readonly Uuid $id,
-        public readonly ArmorClassSource $sourceType,
+        public readonly string $id,
+        public readonly string $sourceType,
         public readonly int $value
     ) {
     }
 
-    public static function fromModel(object $model): static
+    /**
+     * @param ArmorClassItem $model
+     */
+    public static function fromModel(ModelInterface $model): static
     {
         return new static(
             id: $model->id,
-            sourceType: $model->source_type,
+            sourceType: $model->source_type->toString(),
             value: $model->value
         );
     }

@@ -19,7 +19,7 @@ use Ramsey\Uuid\Uuid;
  *
  * Each edition did this slightly differently.
  *
- * @property Uuid $id
+ * @property string $id
  *
  * @property Collection<CreatureEdition> $creatures
  * @property GameEdition $game_edition
