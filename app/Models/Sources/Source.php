@@ -42,7 +42,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property Uuid $parent_id
  * @property ?SourceEdition $primaryEdition
  * @property ?string $product_code
- * @property Collection $productIds
+ * @property Collection<ProductId> $productIds
  * @property PublicationType $publication_type
  * @property Company $publisher
  * @property string $publisher_id

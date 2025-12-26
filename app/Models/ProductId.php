@@ -36,28 +36,6 @@ class ProductId extends AbstractModel
         return $this->belongsTo(Source::class, 'source_id');
     }
 
-    public function toArrayFull(): array
-    {
-        return [
-            'sourceId' => $this->source_id,
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'origin' => $this->origin->toArray(JsonRenderMode::TEASER),
-            'productId' => $this->product_id,
-            'url' => $this->url(),
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
-    }
-
     public function url(): ?string
     {
         return empty($this->origin->product_url) ?
