@@ -320,12 +320,6 @@ class Source extends AbstractModel
             $item->game_edition = GameEdition::FIFTH_REVISED;
         }
 
-        // Cover image.
-        $coverImage = Media::fromInternalJson([
-            'filename' => '/books/' . $item->slug . '.webp',
-        ]);
-        $item->coverImage()->associate($coverImage);
-
         $edition = SourceEdition::from5eJson($value, $item);
         $item->editions()->save($edition);
         $item->save();
@@ -364,6 +358,14 @@ class Source extends AbstractModel
         // Sourcebook types.
         foreach ($value['sourcebookTypes'] ?? [] as $sourcebookType) {
             SourceSourcebookType::fromInternalJson($sourcebookType, $item);
+        }
+
+        // Cover image.
+        if (!empty($value['coverImage'])) {
+            $coverImage = Media::fromInternalJson([
+                'filename' => '/books/' . $value['coverImage'],
+            ]);
+            $item->coverImage()->associate($coverImage);
         }
 
         $item->save();

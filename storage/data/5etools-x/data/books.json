@@ -73,6 +73,7 @@
         {
             "name": "Acquisitions Incorporated",
             "description": "There are always openings available… just try not to think about why.\nWhen you're just starting out in the adventuring business, it might be nice to have a leg up. It can be a big help to have access to the powerful artifacts, expertise, and jobs that Acquisitions Incorporated (Acq. Inc.) has to offer a new franchise. Join Omin Dran, Jim Darkmagic and Viari like never before with the new Acquisitions Incorporated campaign book for Dungeons & Dragons!\n\nSet yourself up for success when pursuing your own fantasy-business endeavors, using all the ingredients you need to include Acquisitions Incorporated in your D&D campaign, to establish your own franchise and take on specialized roles therein. Plus, there are always openings coming available… just try not to think about why.",
+            "coverImage": "acquisitions-incorporated.webp",
             "editions": [
                 {
                     "name": "original",
@@ -97,8 +98,17 @@
             ]
         },
         {
+            "name": "Adventure Atlas: The Mortuary",
+            "coverImage": "adventure-atlas-the-mortuary.webp"
+        },
+        {
+            "name": "Adventures With Muk",
+            "coverImage": "adventures-with-muk.webp"
+        },
+        {
             "name": "Astarion's Book of Hungers",
             "description": "Embrace the seductive darkness of Baldur's Gate with a shadow-kissed expansion full of blood, danger, and intrigue.\n\nThis 32-page digital supplement includes:\n\n3 vampire-themed backgrounds to shape your character's origin in shadow.\n16 vampiric feats and an updated Dhampir species, so you can embrace your inner darkness.\nPlay with Astarion in your adventuring group—two play-ready adventures allow you to team up with your favorite vampire spawn at either character level 3 or character level 12.\n5 villainous stat blocks, including infernalist vampires and servants of Mephistopheles, that bring gothic horror into your campaign.\nRat's Run tavern setting, a fully mapped adventure setting full of secrets, smuggling, and seduction that can be tied into Baldur's Gate 3 canon.",
+            "coverImage": "astarions-book-of-hungers.webp",
             "editions": [
                 {
                     "name": "original",
@@ -114,20 +124,80 @@
             ]
         },
         {
-            "name": "Player's Handbook (2014)",
+            "name": "Astral Adventurer's Guide",
+            "coverImage": "astral-adventurers-guide.webp"
+        },
+        {
+            "name": "Bigby Presents: Glory of the Giants",
+            "coverImage": "bigby-presents-glory-of-the-giants.webp"
+        },
+        {
+            "name": "Boo's Astral Menagerie",
+            "coverImage": "bos-astral-menagerie.webp"
+        },
+        {
+            "name": "Chains of Asmodeus",
+            "coverImage": "chains-of-asmodeus.webp"
+        },
+        {
+            "name": "Domains of Delight",
+            "coverImage": "domains-of-delight.webp"
+        },
+        {
+            "name": "Dungeon Master's Guide (2014)",
             "editions": [
                 {
                     "name": "original",
                     "binding": "hardcover",
-                    "formats": ["print", "pdf", "roll20"],
-                    "isbn10": "0786965606",
-                    "isbn13": "9780786965606",
+                    "formats": [
+                        "print",
+                        "pdf",
+                        "roll20"
+                    ],
+                    "isbn10": "0786965622",
+                    "isbn13": "9780786965622",
                     "pages": 320
                 }
             ],
             "productIds": {
-                "dungeon-masters-guild": "442461",
-                "drivethru-rpg": "442461"
+                "dungeon-masters-guild": "442458",
+                "drivethru-rpg": "442458"
+            }
+        },
+        {
+            "name": "Fizban's Treasury of Dragons",
+            "coverImage": "fizbans-treasury-of-dragons.webp"
+        },
+        {
+            "name": "Guildmaster's Guide to Ravnica",
+            "coverImage": "guildmasters-guide-to-ravnica.webp"
+        },
+        {
+            "name": "Heroes' Feast",
+            "coverImage": "heroes-feast.webp"
+        },
+        {
+            "name": "Heroes' Feast Flavors of the Multiverse",
+            "coverImage": "heroes-feast-flavors-of-the-multiverse.webp"
+        },
+        {
+            "name": "Light of Xaryxis",
+            "campaignSetting": "planescape",
+            "editions": [
+                {
+                    "name": "original",
+                    "binding": "paperback",
+                    "formats": [
+                        "print",
+                        "dndbeyond",
+                        "roll20"
+                    ],
+                    "pages": 64
+                }
+            ],
+            "productIds": {
+                "dungeon-masters-guild": "442488",
+                "drivethru-rpg": "442488"
             }
         },
         {
@@ -152,45 +222,42 @@
             ]
         },
         {
-            "name": "Dungeon Master's Guide (2014)",
+            "name": "Mythic Odysseys of Theros",
+            "coverImage": "mythic-odysseys-of-theros.webp",
+            "campaignSetting": "magic-the-gathering-planes"
+        },
+        {
+            "name": "Player's Handbook (2014)",
             "editions": [
                 {
                     "name": "original",
                     "binding": "hardcover",
-                    "formats": [
-                        "print",
-                        "pdf",
-                        "roll20"
-                    ],
-                    "isbn10": "0786965622",
-                    "isbn13": "9780786965622",
+                    "formats": ["print", "pdf", "roll20"],
+                    "isbn10": "0786965606",
+                    "isbn13": "9780786965606",
                     "pages": 320
                 }
             ],
             "productIds": {
-                "dungeon-masters-guild": "442458",
-                "drivethru-rpg": "442458"
+                "dungeon-masters-guild": "442461",
+                "drivethru-rpg": "442461"
             }
         },
         {
-            "name": "Light of Xaryxis",
-            "campaignSetting": "planescape",
-            "editions": [
-                {
-                    "name": "original",
-                    "binding": "paperback",
-                    "formats": [
-                        "print",
-                        "dndbeyond",
-                        "roll20"
-                    ],
-                    "pages": 64
-                }
-            ],
-            "productIds": {
-                "dungeon-masters-guild": "442488",
-                "drivethru-rpg": "442488"
-            }
+            "name": "Player's Handbook (2024)",
+            "coverImage": "players-handbook-2024.webp"
+        },
+        {
+            "name": "Spelljammer: Adventures in Space",
+            "coverImage": "spelljammer-adventures-in-space.webp"
+        },
+        {
+            "name": "Sword Coast Adventurer's Guide",
+            "coverImage": "sword-coast-adventurers-guide.webp"
+        },
+        {
+            "name": "Tasha's Cauldron of Everything",
+            "coverImage": "tashas-cauldron-of-everything.webp"
         }
     ]
 }
