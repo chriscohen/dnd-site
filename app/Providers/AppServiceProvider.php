@@ -24,6 +24,7 @@ use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
 use App\Models\Spells\SpellEdition4e;
 use App\Models\Spells\SpellEditionLevel;
+use App\Models\Text\TextEntry;
 use GraphQL\Type\Definition\PhpEnumType;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
@@ -80,6 +81,7 @@ class AppServiceProvider extends ServiceProvider
             'spell_edition' => SpellEdition::class,
             'spell_edition_4e' => SpellEdition4e::class,
             'spell_edition_level' => SpellEditionLevel::class,
+            'text_entry' => TextEntry::class,
         ]);
     }
 }
