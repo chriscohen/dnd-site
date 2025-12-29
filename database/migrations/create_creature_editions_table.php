@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\Creatures\CreatureHitPoints;
 use App\Enums\GameEdition;
 use App\Models\Creatures\CreatureType;
+use App\Models\Sources\Source;
 
 return new class extends Migration
 {
@@ -17,6 +18,7 @@ return new class extends Migration
         Schema::create('creature_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignIdFor(Creature::class, 'creature_id');
+            $table->foreignIdFor(Source::class, 'source_id')->nullable();
 
             $table->float('challenge_rating')->nullable()->index();
             $table->foreignIdFor(CreatureHitPoints::class, 'creature_hit_points_id')->nullable();
@@ -34,7 +36,9 @@ return new class extends Migration
             $table->unsignedSmallInteger('weight')->nullable();
             $table->string('weight_modifier')->nullable();
 
-            $table->unique(['creature_id', 'game_edition']);
+            // We can have multiple editions of the same creature, in the same game edition, as long as they come from
+            // different sources.
+            $table->unique(['creature_id', 'game_edition', 'source_id'], 'creature_edition_source');
         });
     }
 

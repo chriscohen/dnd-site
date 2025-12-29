@@ -81,7 +81,7 @@ class SkillInstance extends AbstractModel
         // use the ->int->modifier property.
         $methodName = mb_strtolower($ability->toStringShort());
         /** @var AbilityScore $abilityScore */
-        $abilityScore = $parent->{$methodName}->where('type', $ability)->first();
+        $abilityScore = $parent->{$methodName};
         $abilityModifier = $abilityScore->modifier;
         $prof = $parent->proficiencyBonus;
 

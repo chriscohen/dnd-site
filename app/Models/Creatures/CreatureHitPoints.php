@@ -78,12 +78,13 @@ class CreatureHitPoints extends AbstractModel
         // Sometimes there is just a "special" key, so we will treat that as "average".
         if (!empty($value['special'])) {
             if (is_string($value['special'])) {
+                $item->description = $value['special'];
+
                 // Sometimes the special field contains a description after the number of hit points.
                 $pieces = explode(' ', $value['special'], 2);
-                $item->average = $pieces[0];
 
-                if (!empty($pieces[1])) {
-                    $item->description = $pieces[1];
+                if (is_numeric($pieces[0])) {
+                    $item->average = $pieces[0];
                 }
             } else {
                 $item->special = $value['special'];

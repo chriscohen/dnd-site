@@ -62,6 +62,8 @@ Route::get('/schools', [MagicSchoolController::class, 'index']);
 Route::get('/source/{slug}', [SourceController::class, 'get']);
 Route::get('/sources', [SourceController::class, 'index']);
 
+Route::get('/source/{slug}/contents', [SourceController::class, 'contents']);
+
 Route::get('/spell/{slug}', [SpellController::class, 'get']);
 Route::get('/spells', [SpellController::class, 'index']);
 

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Sources;
 
+use App\DTOs\Sources\SourceContentsDTO;
 use App\DTOs\Sources\SourceFullDTO;
 use App\DTOs\Sources\SourceSummaryDTO;
 use App\Http\Controllers\AbstractController;
 use App\Models\Sources\Source;
+use App\Models\Sources\SourceContents;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -32,7 +34,7 @@ class SourceController extends AbstractController
             ->with([
                 'editions',
                 'editions.contents',
-                'editions.credits'
+                'editions.credits',
             ])
             ->first();
 
@@ -70,5 +72,18 @@ class SourceController extends AbstractController
         $items = $items->through(fn (Source $item) => SourceSummaryDTO::fromModel($item));
 
         return response()->json($items->withQueryString());
+    }
+
+    public function contents(Request $request, string $slug): JsonResponse
+    {
+        /** @var Source|null $item */
+        $item = $this->query->where('slug', $slug)
+            ->first();
+
+        return empty($item->primaryEdition()) ?
+            response()->json([], 404) :
+            response()->json($item->primaryEdition()->contents->map(
+                fn (SourceContents $contents) => SourceContentsDTO::fromModel($contents)
+            ));
     }
 }

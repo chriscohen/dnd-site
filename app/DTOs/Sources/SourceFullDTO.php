@@ -33,7 +33,7 @@ readonly class SourceFullDTO extends SourceSummaryDTO
         /** @var Collection<ProductIdDTO> */
         public Collection $productIds,
         public string $publicationType,
-        public CompanySummaryDTO $publisher,
+        public ?CompanySummaryDTO $publisher = null,
         public string $sourceType
     ) {
         parent::__construct($id, $coverImage, $gameEdition, $name, $parentId, $shortName, $slug);
@@ -65,7 +65,7 @@ readonly class SourceFullDTO extends SourceSummaryDTO
                 $model->productIds->map(fn (ProductId $item) => $item) :
                 collect(),
             publicationType: $model->publication_type,
-            publisher: CompanySummaryDTO::fromModel($model->publisher),
+            publisher: !empty($model->publisher) ? CompanySummaryDTO::fromModel($model->publisher) : null,
             sourceType: $model->source_type
         );
     }

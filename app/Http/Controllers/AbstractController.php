@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOs\CharacterClasses\CharacterClassSummaryDTO;
 use App\Enums\GameEdition;
 use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
+use App\Models\CharacterClasses\CharacterClass;
 use App\Models\ModelInterface;
 use App\Rules\ValidGameEdition;
 use App\Rules\ValidMode;
@@ -104,17 +106,11 @@ abstract class AbstractController extends Controller implements ControllerInterf
 
     public function index(Request $request): JsonResponse
     {
-        if (!empty($request->get('editions'))) {
-            $this->editionQuery($request->get('editions'));
-        }
+        $items = $this->query
+            ->orderBy($this->orderKey)
+            ->paginate(50)
+            ->through(fn (CharacterClass $item) => CharacterClassSummaryDTO::fromModel($item));
 
-        $items = $this->query->get();
-        $output = [];
-
-        foreach ($items as $item) {
-            $output[] = $item->toArray($this->getMode($request));
-        }
-
-        return response()->json($output);
+        return response()->json($items->withQueryString());
     }
 }

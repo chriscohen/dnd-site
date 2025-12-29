@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(Media::class, 'image_id')->nullable();
             $table->string('parent_id')->nullable();
             $table->text('description')->nullable();
-            $table->string('shortName', 8)->nullable()->index();
+            $table->string('short_name', 8)->nullable()->index();
         });
     }
 

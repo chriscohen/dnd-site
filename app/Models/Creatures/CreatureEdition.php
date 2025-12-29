@@ -16,6 +16,7 @@ use App\Exceptions\RecordNotFoundException;
 use App\Models\AbilityScores\AbilityScore;
 use App\Models\AbilityScores\AbilityScoreModifierGroup;
 use App\Models\AbstractModel;
+use App\Models\Alignment\Alignment;
 use App\Models\ArmorClass\ArmorClass;
 use App\Models\Conditions\ConditionInstance;
 use App\Models\Dice\DiceFormula;
@@ -72,6 +73,7 @@ use Illuminate\Support\Collection as SupportCollection;
  * @property Collection<CreatureSense> $senses
  * @property ?Collection<CreatureSizeUnit> $sizes
  * @property Collection<SkillInstance> $skills
+ * @property Source $source
  * @property ?Collection<Tag> $tags
  * @property ?CreatureSense $truesight
  * @property ?CreatureType $type
@@ -244,6 +246,20 @@ class CreatureEdition extends AbstractModel
         return $output;
     }
 
+    public function hasAlignment(string $alignment): bool
+    {
+        $alignmentItem = Alignment::fromString($alignment);
+
+        /** @var CreatureAlignment $myAlignment */
+        foreach ($this->alignment as $myAlignment) {
+            if ($alignmentItem->toString() === $myAlignment->alignment?->toString()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function hasResistance(DamageType $type): bool
     {
         return $this->damage_resistances->contains($type->value);
@@ -332,6 +348,11 @@ class CreatureEdition extends AbstractModel
         return $this->morphMany(SkillInstance::class, 'entity');
     }
 
+    public function source(): BelongsTo
+    {
+        return $this->belongsTo(Source::class, 'source_id');
+    }
+
     public function str(): Attribute
     {
         return Attribute::make(
@@ -361,61 +382,6 @@ class CreatureEdition extends AbstractModel
         return Attribute::make(
             get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::WIS)
         );
-    }
-
-    public function toArrayFull(): array
-    {
-        $output = [];
-
-        if (!empty($this->abilityScoreModifiers)) {
-            $output['abilityModifier'][] = $this->abilityScoreModifiers->toArray();
-        }
-
-        foreach (['str', 'dex', 'con', 'int', 'wis', 'cha'] as $ability) {
-            if (!empty($this->{$ability})) {
-                $output['ability'][$ability] = $this->{$ability}->toArray();
-            }
-        }
-
-        foreach ($this->ages as $age) {
-            $output['age'][$age->type->toString()] = $age->value;
-        }
-        $output['challengeRating'] = $this->challenge_rating;
-        $output['conditionImmune'] = $this->condition_immunities;
-        $output['hp'] = $this->hitPoints?->toArray($this->renderMode);
-        $output['immune'] = $this->damage_immunities;
-        $output['isPlayable'] = $this->is_playable;
-        $output['proficiencyBonus'] = $this->proficiency_bonus;
-        $output['resist'] = $this->damage_resistances;
-
-        foreach ($this->senses as $sense) {
-            $output['senses'][] = $sense->toArray();
-        }
-
-        $output['speed'] = $this->movementSpeeds?->toArray() ?? [];
-        // TODO: come back to this.
-        //$output['tags'] = ModelCollection::make($this->tags)->toArray();
-
-        if (!empty($this->references)) {
-            $output['references'] = ModelCollection::make($this->references)->toArray();
-        }
-
-        return $output;
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'size' => $this->sizes->toArray(),
-            'creatureId' => $this->creature->id,
-            'gameEdition' => $this->game_edition->toStringShort(),
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
     }
 
     public static function fromInternalJson(array|string|int $value, ?ModelInterface $parent = null): static
@@ -479,8 +445,11 @@ class CreatureEdition extends AbstractModel
      */
     public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
+        $item = new static();
+        $parent->refresh();
+
         /**
-         * Game Edition.
+         * Game Edition and source.
          */
         if (empty($value['source'])) {
             throw new \InvalidArgumentException('Creature edition must have a source.');
@@ -488,26 +457,20 @@ class CreatureEdition extends AbstractModel
         try {
             /** @var Source $source */
             $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
+
+            // Try to infer the game edition from the sourcebook.
+            $edition = GameEdition::tryFromString($source->game_edition) ??
+                throw new \InvalidArgumentException("Could not infer game edition from sourcebook: {$source->name}");
         } catch (ModelNotFoundException $e) {
-            throw new \InvalidArgumentException('Creature edition source not found: ' . $value['source']);
+            // We can't find any source with this name so assume fifth edition.
+            print "[WARNING] Creature edition source not found: " . $value['source'] . "\n";
+            $edition = GameEdition::FIFTH;
         }
 
-        // Try to infer the game edition from the sourcebook.
-        $edition = GameEdition::tryFromString($source->game_edition) ??
-            throw new \InvalidArgumentException("Could not infer game edition from sourcebook: {$source->name}");
-
-        // Do we already have a CreatureEdition for this GameEdition? Use it, otherwise create a new one.
-        $parent->refresh();
-        $item = $parent->editions->firstWhere('game_edition', $edition) ?? new static();
+        // Attach the source, parent creature, and game edition.
+        $item->source()->associate($source);
+        $item->creature()->associate($parent);
         $item->game_edition = $edition;
-
-        // In case we couldn't set an edition, assume 5th edition.
-        if (empty($item->game_edition)) {
-            $item->game_edition = GameEdition::FIFTH_REVISED;
-        }
-        if (empty($item->creature)) {
-            $item->creature()->associate($parent);
-        }
         $item->save();
 
         /**
@@ -523,8 +486,35 @@ class CreatureEdition extends AbstractModel
                 $value['alignment'][]['alignment'] = $old;
             }
             foreach ($value['alignment'] as $alignmentItem) {
-                $alignment = CreatureAlignment::fromInternalJson($alignmentItem['alignment'], $item);
-                $item->alignment()->save($alignment);
+                $skipParsing = false;
+
+                // If NX is in the alignment array it means everything on the alignment X axis.
+                if (in_array('NX', $alignmentItem['alignment'])) {
+                    $skipParsing = true;
+
+                    foreach (['LN', 'N', 'CN'] as $alignmentText) {
+                        if (!$item->hasAlignment($alignmentText)) {
+                            $alignment = CreatureAlignment::fromText($alignmentText, $item);
+                            $item->alignment()->save($alignment);
+                        }
+                    }
+                }
+                // If NY is in the alignment array it means everything on the alignment Y axis.
+                if (in_array('NY', $alignmentItem['alignment'])) {
+                    $skipParsing = true;
+
+                    foreach (['NG', 'N', 'NE'] as $alignmentText) {
+                        if (!$item->hasAlignment($alignmentText)) {
+                            $alignment = CreatureAlignment::fromText($alignmentText, $item);
+                            $item->alignment()->save($alignment);
+                        }
+                    }
+                }
+
+                if (!$skipParsing) {
+                    $alignment = CreatureAlignment::fromInternalJson($alignmentItem['alignment'], $item);
+                    $item->alignment()->save($alignment);
+                }
             }
         }
 
@@ -566,6 +556,7 @@ class CreatureEdition extends AbstractModel
                 '1/2' => 0.5,
                 default => $field
             };
+            $item->proficiency_bonus = (int) (2 + floor($item->challenge_rating / 4));
         }
 
         /**
@@ -679,7 +670,7 @@ class CreatureEdition extends AbstractModel
                 // Speed is just a single number. Assume it's walking.
                 $movementSpeed = MovementSpeed::from5eJson([
                     'type' => 'walk',
-                    'value' => $value['speed']
+                    'value' => $value['speed'],
                 ], $item);
                 $item->movementSpeeds()->save($movementSpeed);
             }
@@ -690,14 +681,20 @@ class CreatureEdition extends AbstractModel
          */
         $item->save();
         $item->refresh();
-        foreach ($value['skill'] ?? [] as $skillName => $bonus) {
-            $skillInstance = SkillInstance::from5eJson([
-                'skill' => $skillName,
-                'bonus' => $bonus
-            ], $item);
-            $item->skills()->save($skillInstance);
+        try {
+            foreach ($value['skill'] ?? [] as $skillName => $bonus) {
+                if (!$item->hasSkillProficiency($skillName)) {
+                    $skillInstance = SkillInstance::from5eJson([
+                        'skill' => $skillName,
+                        'bonus' => $bonus,
+                    ], $item);
+                    $item->skills()->save($skillInstance);
+                }
+            }
+            $item->save();
+        } catch (UniqueConstraintViolationException $e) {
+            $x = 5;
         }
-        $item->save();
 
         /**
          * Immunities and resistances.
@@ -712,7 +709,7 @@ class CreatureEdition extends AbstractModel
 
                 $instance = ConditionInstance::from5eJson([
                     'name' => $conditionItem,
-                    'type' => ConditionInstanceType::STATUS_IMMUNITY
+                    'type' => ConditionInstanceType::STATUS_IMMUNITY,
                 ], $item);
                 $item->conditionInstances()->save($instance);
             } catch (ModelNotFoundException $e) {
@@ -726,7 +723,7 @@ class CreatureEdition extends AbstractModel
                     // The condition is just a single string.
                     $instance = ConditionInstance::from5eJson([
                         'name' => $damageTypeItem,
-                        'type' => ConditionInstanceType::tryFromString($damageType)
+                        'type' => ConditionInstanceType::tryFromString($damageType),
                     ], $item);
                 } else {
                     // The condition is an object eg
@@ -739,7 +736,7 @@ class CreatureEdition extends AbstractModel
                             'name' => $innerItem,
                             'type' => ConditionInstanceType::tryFromString($damageType),
                             'note' => $damageTypeItem['note'] ?? null,
-                            'nonmagical' => str_contains($damageTypeItem['note'], 'nonmagical')
+                            'nonmagical' => str_contains($damageTypeItem['note'], 'nonmagical'),
                         ], $item);
                     }
                 }
@@ -750,9 +747,8 @@ class CreatureEdition extends AbstractModel
          * Senses.
          */
         foreach ($value['senses'] ?? [] as $senseItem) {
-            $sense = CreatureSense::from5eJson($senseItem, $item);
-
             try {
+                $sense = CreatureSense::from5eJson($senseItem, $item);
                 $item->senses()->save($sense);
             } catch (UniqueConstraintViolationException $e) {
                 print "[WARNING] Multiple entries for sense {$senseItem}\n";

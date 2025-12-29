@@ -42,9 +42,16 @@ class CreatureSeeder extends AbstractYmlSeeder
             }
 
             $json = json_decode(Storage::disk('data')->get($file), true);
+            $pieces = explode('/', $file);
+            $filename = end($pieces);
 
             foreach ($json['monster'] as $datum) {
-                print "[5e.tools] Creating Creature (Bestiary) " . $datum['name'] . "...\n";
+                if (!empty($datum['_copy'])) {
+                    print "[5e.tools] Skipping copy: " . $datum['name'] . "\n";
+                    continue;
+                }
+
+                print "[5e.tools] Creating Creature (" . $filename .  ") " . $datum['name'] . "...\n";
                 Creature::from5eJson($datum);
             }
         }

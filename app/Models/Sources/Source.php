@@ -78,13 +78,6 @@ class Source extends AbstractModel
         return $this->belongsTo(Media::class, 'cover_image_id');
     }
 
-    protected function description(): Attribute
-    {
-        return Attribute::make(
-            get: fn (?string $value = '') => app(MarkdownRenderer::class)->toHtml($value ?? ''),
-        );
-    }
-
     public function editions(): HasMany
     {
         return $this->hasMany(SourceEdition::class);
@@ -299,10 +292,15 @@ class Source extends AbstractModel
         $item->shortName = !empty($value['isAdventure']) ? $value['id'] : $value['source'];
         // Not a great way to determine official-ness. If the author field is missing, or if it contains "wizards", we
         // will assume it's official.
-        $item->publication_type = str_contains(mb_strtolower($value['author'] ?? 'wizards'), 'wizards') ?
-            PublicationType::OFFICIAL :
-            PublicationType::THIRD_PARTY;
+        $isWizards = str_contains(mb_strtolower($value['author'] ?? 'wizards'), 'wizards');
+
+        $item->publication_type = $isWizards ? PublicationType::OFFICIAL : PublicationType::THIRD_PARTY;
         $item->source_type = SourceType::SOURCEBOOK;
+
+        if ($isWizards) {
+            $company = Company::query()->where('slug', 'wizards-of-the-coast')->firstOrFail();
+            $item->publisher()->associate($company);
+        }
 
         // Is it an adventure?
         if (!empty($value['isAdventure'])) {

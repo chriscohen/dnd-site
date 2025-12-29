@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('creature_alignments', function (Blueprint $table) {
             $table->foreignIdFor(CreatureEdition::class, 'creature_edition_id');
-            $table->string('alignment', 2);
+            $table->string('alignment', 2)->nullable();
+            $table->string('description')->nullable();
         });
     }
 

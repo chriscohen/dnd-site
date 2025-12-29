@@ -4,26 +4,33 @@ declare(strict_types=1);
 
 namespace App\Models\Magic;
 
-use App\Enums\JsonRenderMode;
 use App\Models\AbstractModel;
 use App\Models\Media;
 use App\Models\ModelInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $id
  * @property string $name
  *
+ * @property Collection<MagicSchool> $children
  * @property ?string $description
  * @property Media $image
  * @property ?MagicSchool $parent
  * @property string $parent_id
- * @property ?string $shortName
+ * @property ?string $short_name
  */
 class MagicSchool extends AbstractModel
 {
     public $timestamps = false;
     public $incrementing = false;
+
+    public function children(): HasMany
+    {
+        return $this->hasMany(MagicSchool::class, 'parent_id');
+    }
 
     public function image(): BelongsTo
     {
@@ -35,35 +42,12 @@ class MagicSchool extends AbstractModel
         return $this->belongsTo(MagicSchool::class, 'parent_id');
     }
 
-    public function toArrayFull(): array
-    {
-        return [
-            'description' => $this->description,
-            'image' => $this->image?->toArray($this->renderMode),
-            'parent' => $this->parent?->toArray($this->renderMode),
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'shortName' => $this->shortName,
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
-    }
-
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
         $item->id = $value['id'];
         $item->name = $value['name'];
-        $item->shortName = $value['shortName'] ?? null;
+        $item->short_name = $value['short_name'] ?? null;
         $item->description = $value['description'] ?? null;
 
         if (empty($value['parent'])) {

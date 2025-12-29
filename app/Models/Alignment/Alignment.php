@@ -42,4 +42,19 @@ class Alignment
         }
         return mb_strtoupper($this->lawChaos->toStringShort() . $this->goodEvil->toStringShort());
     }
+
+    public static function fromString(string $value): static
+    {
+        if ($value === 'U') {
+            return new static();
+        }
+        if ($value === 'N') {
+            return new static(AlignmentLawChaos::NEUTRAL, AlignmentGoodEvil::NEUTRAL);
+        }
+
+        return new static(
+            AlignmentLawChaos::tryFromString(mb_substr($value, 0, 1)),
+            AlignmentGoodEvil::tryFromString(mb_substr($value, 1, 1))
+        );
+    }
 }
