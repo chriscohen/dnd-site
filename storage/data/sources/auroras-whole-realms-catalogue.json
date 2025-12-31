@@ -15,7 +15,65 @@
             "isbn13": "9781560763277",
             "pages": 160,
             "releaseDate": "1992-06-01",
-            "releaseDateMonthOnly": true
+            "releaseDateMonthOnly": true,
+            "credits": {
+                "Design Concept": ["anne-brown"],
+                "Design": ["j-robert-king"],
+                "Company": [
+                    "tim-beach",
+                    "karen-s-boomgarden",
+                    "anne-brown",
+                    "david-zeb-cook",
+                    "jeff-grubb",
+                    "julia-martin",
+                    "colin-mccomb",
+                    "thomas-reid",
+                    "steven-schend"
+                ],
+                "Editing": ["karen-s-boomgarden"],
+                "Interior Art": [
+                    "ned-dameron",
+                    "marco-aidala"
+                ],
+                "Typography": ["angelika-lokotz"],
+                "Graphic Design": [
+                    "stephanie-tabat",
+                    "angelika-lokotz",
+                    "j-robert-king"
+                ],
+                "Production": ["stephanie-tabat"],
+                "Special Thanks": ["richard-w-brown"]
+            },
+            "contents": [
+                { "name": "Designer's Notes" },
+                { "name": "A Word from Our Founder" },
+                { "name": "Rangers' Field" },
+                { "name": "Thieves' Corner" },
+                { "name": "Bards' Emporium" },
+                { "name": "Priests' Alcove" },
+                { "name": "Wizards' Laboratory" },
+                { "name": "Laborers' List" },
+                { "name": "Inn and Tavern"},
+                { "name": "Scribes' Desk"},
+                { "name": "Storage Items" },
+                { "name": "General Hardware" },
+                { "name": "Tailors' Corner" },
+                { "name": "Clothes and Shoes" },
+                { "name": "Boom's Garden" },
+                { "name": "Jewelry" },
+                { "name": "Household Accoutrements" },
+                { "name": "Personal Supplies" },
+                { "name": "Illuminations" },
+                { "name": "Diversions" },
+                { "name": "Aurora's Larder" },
+                { "name": "Breads" },
+                { "name": "Cheese Shop"},
+                { "name": "Wines and Ales" },
+                { "name": "Exotics" },
+                { "name": "Wilderness Gear" },
+                { "name": "Priest in a Poke" },
+                { "name": "DaRoni's Workshop" }
+            ]
         }
     ],
     "gameEdition": "2e",
