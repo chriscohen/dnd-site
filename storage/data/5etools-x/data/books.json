@@ -72,7 +72,7 @@
         },
         {
             "name": "Acquisitions Incorporated",
-            "description": "There are always openings available… just try not to think about why.\nWhen you're just starting out in the adventuring business, it might be nice to have a leg up. It can be a big help to have access to the powerful artifacts, expertise, and jobs that Acquisitions Incorporated (Acq. Inc.) has to offer a new franchise. Join Omin Dran, Jim Darkmagic and Viari like never before with the new Acquisitions Incorporated campaign book for Dungeons & Dragons!\n\nSet yourself up for success when pursuing your own fantasy-business endeavors, using all the ingredients you need to include Acquisitions Incorporated in your D&D campaign, to establish your own franchise and take on specialized roles therein. Plus, there are always openings coming available… just try not to think about why.",
+            "description": "There are always openings available… just try not to think about why.\n\nWhen you're just starting out in the adventuring business, it might be nice to have a leg up. It can be a big help to have access to the powerful artifacts, expertise, and jobs that Acquisitions Incorporated (Acq. Inc.) has to offer a new franchise. Join Omin Dran, Jim Darkmagic and Viari like never before with the new Acquisitions Incorporated campaign book for Dungeons & Dragons!\n\nSet yourself up for success when pursuing your own fantasy-business endeavors, using all the ingredients you need to include Acquisitions Incorporated in your D&D campaign, to establish your own franchise and take on specialized roles therein. Plus, there are always openings coming available… just try not to think about why.",
             "coverImage": "acquisitions-incorporated.webp",
             "editions": [
                 {
@@ -201,7 +201,149 @@
             }
         },
         {
+            "name": "Minsc and Boo's Journal of Villainy",
+            "campaignSetting": "forgotten-realms",
+            "coverImage": "minsc-and-bos-journal-of-villainy.webp",
+            "description": "From the Journal of the Legendary Ranger and his Pet Hamster\n\nA century has passed since the Bhaalspawn fought over the legacy of their father — Bhaal, the Lord of Murder. Two heroes witnessed the epic struggle firsthand — the ranger Minsc and his faithful companion, Boo.\n\nMinsc and Boo were able to track down old friends and hated enemies and find out what they’ve been up to over the past century. They’ve compiled everything into this journal, edited by the traveler extraordinaire, Volo Geddarm.\n\nIncluded in this journal are four cities, including Athkatla and Baldur’s Gate; ten group patrons led by some of Minsc and Boo’s old friends; a dozen new monsters; six arch villains and eleven dastardly henchmen.",
+            "editions": [
+                {
+                    "name": "original",
+                    "formats": ["pdf"],
+                    "pages": 160,
+                    "releaseDate": "2021-10-05",
+                    "credits": {
+                        "Writing and Design": ["james-ohlen"],
+                        "Additional Design": ["brent-knowles"],
+                        "Editing": ["drew-karpyshyn"],
+                        "Graphic Design and Layout": ["michal-e-cross"],
+                        "Additional Writing": [
+                            "patricia-barnable",
+                            "drew-karpyshyn",
+                            "jesse-sky"
+                        ],
+                        "Monster Illustrations": ["sebastian-kowoll"],
+                        "Character Illustrations": ["lius-lasahido"],
+                        "Environment Illustrations": [
+                            "julian-calle",
+                            "wadim-kashin",
+                            "erikas-perl"
+                        ],
+                        "Cover Art": ["lius-lasahido"],
+                        "Maps": ["john-stevenson"]
+                    },
+                    "contents": [
+                        {
+                            "name": "Preface",
+                            "headers": ["Hometowns"]
+                        },
+                        {
+                            "name": "Introduction: Heroic Stories",
+                            "headers": [
+                                "Group Patrons",
+                                "Campaign Villains"
+                            ]
+                        },
+                        {
+                            "name": "Ch. 1: Hometowns",
+                            "headers": [
+                                "Athkatla",
+                                "Baldur's Gate",
+                                "Suldanessellar",
+                                "Ust Natha"
+                            ],
+                            "ordinal": {
+                                "type": "chapter",
+                                "identifier": 1
+                            }
+                        },
+                        {
+                            "name": "Ch. 2: Group Patrons",
+                            "headers": [
+                                "Adventurer's Guid",
+                                "Candlekeep",
+                                "Church of Sune",
+                                "Emerald Enclave",
+                                "Flaming Fist",
+                                "Harpers",
+                                "Knights of Bahamut",
+                                "Order of Icarus",
+                                "Raven Circle",
+                                "Shadow Thieves"
+                            ],
+                            "ordinal": {
+                                "type": "chapter",
+                                "identifier": 2
+                            }
+                        },
+                        {
+                            "name": "Ch. 3: Campaign Villains",
+                            "headers": [
+                                "Baalzebul",
+                                "Bhaal",
+                                "Cryonax",
+                                "Mephistopheles",
+                                "Pazuzu",
+                                "Ssendam"
+                            ],
+                            "ordinal": {
+                                "type": "chapter",
+                                "identifier": 3
+                            }
+                        },
+                        {
+                            "name": "Ch. 4: Henchmen",
+                            "headers": [
+                                "Aribeth de Tylmarande",
+                                "Dagryn the Lost",
+                                "Darien the Ice Witch",
+                                "Edwim Odesseiron",
+                                "Eo Ashmajiir",
+                                "Kagain the Scream Hunter",
+                                "Pelyious Avhoste",
+                                "Saemon Havarian",
+                                "Sarevok Anchev",
+                                "Viconia DeVir",
+                                "Xzar the Chaos Clone",
+                                "Artwork"
+                            ],
+                            "ordinal": {
+                                "type": "chapter",
+                                "identifier": 4
+                            }
+                        },
+                        {
+                            "name": "Ch. 5: Monsters",
+                            "headers": [
+                                "Achaierai",
+                                "Bebilith",
+                                "Demodand",
+                                "Dread Doppleganger",
+                                "Gibberling",
+                                "Hamadryad",
+                                "Sirene",
+                                "Phaerimm",
+                                "Skeleton Warrior",
+                                "Sword Spider",
+                                "Tasloi",
+                                "Wolfwere"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "productIds": {
+                "dungeon-masters-guild": "365114",
+                "drivethru-rpg": "365114"
+            },
+            "sourcebookTypes": [
+                "characteroptions",
+                "lore",
+                "monsters"
+            ]
+        },
+        {
             "name": "Monster Manual (2014)",
+            "coverImage": "monster-manual-2014.webp",
             "description": "The A to Z Fantasy Bestiary\n\nThe Monster Manual presents a horde of classic Dungeons & Dragons creatures, including dragons, giants, mind flayers, and beholders—a monstrous feast for Dungeon Masters ready to challenge their players and populate their adventures.\n\nThe monsters contained herein are culled from the D&D game's illustrious history, with easy-to-use game statistics and thrilling stories to feed your imagination.",
             "editions": [
                 {
@@ -220,6 +362,10 @@
             "sourcebookTypes": [
                 "monsters"
             ]
+        },
+        {
+            "name": "Monster Manual (2025)",
+            "coverImage": "monster-manual-2024.webp"
         },
         {
             "name": "Mythic Odysseys of Theros",
@@ -242,6 +388,110 @@
                 "dungeon-masters-guild": "442461",
                 "drivethru-rpg": "442461"
             }
+        },
+        {
+            "name": "Morte's Planar Parade",
+            "campaignSetting": "planescape",
+            "coverImage": "mortes-planar-parade.webp",
+            "description": "Morte's Planar Parade is a sourcebook included in the boxed set Planescape: Adventures in the Multiverse.",
+            "editions": [
+                {
+                    "name": "original",
+                    "formats": ["dndbeyond"],
+                    "pages": 64,
+                    "releaseDate": "2023-10-17",
+                    "credits": {
+                        "Project Lead": [
+                            "justice-ramin-arman",
+                            "f-wesley-schneider"
+                        ],
+                        "Art Director": ["emi-tanji"],
+                        "Writer": [
+                            "dan-dillon",
+                            "ben-petrisor",
+                            "f-wesley-schneider"
+                        ],
+                        "Rules Developer": [
+                            "jeremy-crawford",
+                            "ron-lundeen",
+                            "christopher-perkins"
+                        ],
+                        "Lead Editor": ["adrian-ng"],
+                        "Editor": [
+                            "judy-bauer",
+                            "janica-carter",
+                            "christopher-perkins"
+                        ],
+                        "Graphic Designer": ["matt-cole"],
+                        "Cover Illustrator": [
+                            "dmitry-burmak",
+                            "tony-diterlizzi"
+                        ],
+                        "Interior Illustrator": [
+                            "mark-behm",
+                            "eric-belisle",
+                            "olivier-bernard",
+                            "zoltan-boros",
+                            "christopher-burdett",
+                            "ekaterina-burmak",
+                            "kent-davis",
+                            "julie-dillon",
+                            "jessica-fong",
+                            "isabel-gibney",
+                            "quintin-gleim",
+                            "katerina-ladon",
+                            "adrian-ibarra-lugo",
+                            "warren-mahy",
+                            "dave-melvin",
+                            "david-auden-nash",
+                            "irina-nordsol",
+                            "claudio-pozas",
+                            "chris-seaman",
+                            "taras-susak",
+                            "matias-tapia",
+                            "john-tedrick",
+                            "brian-valeza",
+                            "kieran-yanner"
+                        ],
+                        "Concept Art Director": [
+                            "josh-herman",
+                            "emi-tanji"
+                        ],
+                        "Concept Artist": [
+                            "eric-belisle",
+                            "dmitry-burmak",
+                            "ekaterina-burmak",
+                            "max-dunbar",
+                            "alex-konstad",
+                            "juho-laitila",
+                            "izzy-medrano",
+                            "noor-rahman",
+                            "john-tedrick",
+                            "shawn-wood"
+                        ],
+                        "Consultant": [
+                            "michele-carter",
+                            "rico-corazon",
+                            "basheer-ghouse",
+                            "jonathan-s-tomhave"
+                        ],
+                        "Project Engineer": ["cynda-callaway"],
+                        "Imaging Technician": [
+                            "daniel-corona",
+                            "kevin-yee"
+                        ],
+                        "Prepress Specialist": ["jefferson-dunlap"]
+                    }
+                }
+            ],
+            "productIds": {
+                "dungeon-masters-guild": "453930",
+                "drivethru-rpg": "453930"
+            },
+            "sourcebookTypes": [
+                "encounters",
+                "monsters"
+            ]
         },
         {
             "name": "Player's Handbook (2024)",

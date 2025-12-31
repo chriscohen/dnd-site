@@ -10,11 +10,26 @@
         "slug": "adam-paquette"
     },
     {
+        "firstName": "Adrián",
+        "lastName": "Ibarra Lugo",
+        "slug": "adrian-ibarra-lugo"
+    },
+    {
+        "firstName": "Adrian",
+        "lastName": "Ng",
+        "slug": "adrian-ng"
+    },
+    {
         "firstName": "A.J.",
         "lastName": "Bondio",
         "slug": "a-j-bondio",
         "nickName": "The Salamander King",
         "twitter": "ayejay_make_art"
+    },
+    {
+        "firstName": "Alex",
+        "lastName": "Konstad",
+        "slug": "alex-konstad"
     },
     {
         "firstName": "Alexander",
@@ -59,10 +74,20 @@
         "slug": "ashley-brock"
     },
     {
+        "firstName": "Basheer",
+        "lastName": "Ghouse",
+        "slug": "basheer-ghouse"
+    },
+    {
         "firstName": "Bastien",
         "initials": ["L"],
         "lastName": "Deharme",
         "slug": "bastien-l-deharme"
+    },
+    {
+        "firstName": "Ben",
+        "lastName": "Petrisor",
+        "slug": "ben-petrisor"
     },
     {
         "firstName": "Bill",
@@ -80,6 +105,16 @@
         "slug": "bram-sels"
     },
     {
+        "firstName": "Brent",
+        "lastName": "Knowles",
+        "slug": "brent-knowles"
+    },
+    {
+        "firstName": "Brian",
+        "lastName": "Valeza",
+        "slug": "brian-valeza"
+    },
+    {
         "firstName": "Chris",
         "lastName": "L'etoile",
         "slug": "chris-letoile"
@@ -91,6 +126,11 @@
     },
     {
         "firstName": "Chris",
+        "lastName": "Seaman",
+        "slug": "chris-seaman"
+    },
+    {
+        "firstName": "Chris",
         "lastName": "Sims",
         "slug": "chris-sims"
     },
@@ -98,6 +138,11 @@
         "firstName": "Chris",
         "lastName": "Tulach",
         "slug": "chris-tulach"
+    },
+    {
+        "firstName": "Christopher",
+        "lastName": "Burdett",
+        "slug": "christopher-burdett"
     },
     {
         "firstName": "Christopher",
@@ -132,6 +177,11 @@
     },
     {
         "firstName": "Dan",
+        "lastName": "Dillon",
+        "slug": "dan-dillon"
+    },
+    {
+        "firstName": "Dan",
         "lastName": "Scott",
         "slug": "dan-scott"
     },
@@ -141,9 +191,24 @@
         "slug": "dan-tovar"
     },
     {
+        "firstName": "Daniel",
+        "lastName": "Corona",
+        "slug": "daniel-corona"
+    },
+    {
         "firstName": "Dave",
         "lastName": "Allsop",
         "slug": "dave-allsop"
+    },
+    {
+        "firstName": "Dave",
+        "lastName": "Melvin",
+        "slug": "dave-melvin"
+    },
+    {
+        "firstName": "David",
+        "lastName": "Auden Nash",
+        "slug": "david-auden-nash"
     },
     {
         "firstName": "David",
@@ -166,14 +231,29 @@
         "slug": "dawn-murin"
     },
     {
+        "firstName": "Dmitry",
+        "lastName": "Burmak",
+        "slug": "dmitry-bumnak"
+    },
+    {
         "firstName": "Doug",
         "lastName": "Beyer",
         "slug": "doug-beyer"
     },
     {
+        "firstName": "Drew",
+        "lastName": "Karpyshyn",
+        "slug": "drew-karpyshyn"
+    },
+    {
         "firstName": "Dyson",
         "lastName": "Logos",
         "slug": "dyson-logos"
+    },
+    {
+        "firstName": "Ekaterina",
+        "lastName": "Burmak",
+        "slug": "ekaterina-burmak"
     },
     {
         "firstName": "Emi",
@@ -196,6 +276,16 @@
         "slug": "eric-belisle"
     },
     {
+        "firstName": "Erikas",
+        "lastName": "Perl",
+        "slug": "erikas-perl"
+    },
+    {
+        "firstName": "F. Wesley",
+        "lastName": "Schneider",
+        "slug": "f-wesley-schneider"
+    },
+    {
         "firstName": "Gabriele",
         "lastName": "Giganti",
         "slug": "gabriele-giganti"
@@ -216,6 +306,21 @@
         "slug": "hilary-ross"
     },
     {
+        "firstName": "Irina",
+        "lastName": "Nordsol",
+        "slug": "irina-nordsol"
+    },
+    {
+        "firstName": "Isabel",
+        "lastName": "Gibney",
+        "slug": "isabel-gibney"
+    },
+    {
+        "firstName": "Izzy",
+        "lastName": "Medrano",
+        "slug": "izzy-medrano"
+    },
+    {
         "firstName": "Jake",
         "lastName": "Morrison",
         "slug": "jake-morrison",
@@ -223,8 +328,18 @@
     },
     {
         "firstName": "James",
+        "lastName": "Ohlen",
+        "slug": "james-ohlen"
+    },
+    {
+        "firstName": "James",
         "lastName": "Wyatt",
         "slug": "james-wyatt"
+    },
+    {
+        "firstName": "Janica",
+        "lastName": "Carter",
+        "slug": "janica-carter"
     },
     {
         "firstName": "Jason",
@@ -273,6 +388,16 @@
         "slug": "jeremy-jarvis"
     },
     {
+        "firstName": "Jesse",
+        "lastName": "Sky",
+        "slug": "jesse-sky"
+    },
+    {
+        "firstName": "Jessica",
+        "lastName": "Fong",
+        "slug": "jessica-fong"
+    },
+    {
         "firstName": "John",
         "lastName": "Feil",
         "slug": "john-feil"
@@ -283,9 +408,54 @@
         "slug": "john-hay"
     },
     {
+        "firstName": "John",
+        "lastName": "Stevenson",
+        "slug": "john-stevenson"
+    },
+    {
+        "firstName": "John",
+        "lastName": "Tedrick",
+        "slug": "john-tedrick"
+    },
+    {
         "firstName": "Jon",
         "lastName": "Schindehette",
         "slug": "jon-schindehette"
+    },
+    {
+        "firstName": "Jonathan",
+        "initials": ["S"],
+        "lastName": "Tomhave"
+    },
+    {
+        "firstName": "Josh",
+        "lastName": "Herman",
+        "slug": "josh-herman"
+    },
+    {
+        "firstName": "Judy",
+        "lastName": "Bauer",
+        "slug": "judy-bauer"
+    },
+    {
+        "firstName": "Juho",
+        "lastName": "Laitila",
+        "slug": "juho-laitila"
+    },
+    {
+        "firstName": "Julian",
+        "lastName": "Calle",
+        "slug": "julian-calle"
+    },
+    {
+        "firstName": "Julie",
+        "lastName": "Dillon",
+        "slug": "julie-dillon"
+    },
+    {
+        "firstName": "Justice",
+        "lastName": "Ramin Arman",
+        "slug": "justice-ramin-arman"
     },
     {
         "firstName": "Kate",
@@ -299,6 +469,11 @@
         "slug": "kate-z-stone"
     },
     {
+        "firstName": "Katerina",
+        "lastName": "Ladon",
+        "slug": "katerina-ladon"
+    },
+    {
         "firstName": "Kellie-Ann",
         "lastName": "Maxwell",
         "slug": "kellie-ann-maxwell"
@@ -309,9 +484,19 @@
         "slug": "kelly-digges"
     },
     {
+        "firstName": "Kent",
+        "lastName": "Davis",
+        "slug": "kent-davis"
+    },
+    {
         "firstName": "Kevin",
         "lastName": "Yee",
         "slug": "kevin-yee"
+    },
+    {
+        "firstName": "Kieran",
+        "lastName": "Yanner",
+        "slug": "kieran-yanner"
     },
     {
         "firstName": "Kim",
@@ -342,6 +527,14 @@
         "firstName": "Lee",
         "lastName": "Smith",
         "slug": "lee-smith"
+    },
+    {
+        "firstName": "Lius",
+        "lastName": "Lasahido",
+        "slug": "lius-lasahido",
+        "artstation": "lasahido",
+        "instagram": "lasahidoart",
+        "twitter": "lasahidoart"
     },
     {
         "firstName": "Liz",
@@ -392,6 +585,16 @@
         "slug": "mathias-kollros"
     },
     {
+        "firstName": "Matias",
+        "lastName": "Tapia",
+        "slug": "matias-tapia"
+    },
+    {
+        "firstName": "Matt",
+        "lastName": "Cole",
+        "slug": "matt-cole"
+    },
+    {
         "firstName": "Matt",
         "lastName": "Owen",
         "slug": "matt-owen",
@@ -406,6 +609,22 @@
         "firstName": "Matthew",
         "lastName": "Stevens",
         "slug": "matthew-stevens"
+    },
+    {
+        "firstName": "Max",
+        "lastName": "Dunbar",
+        "slug": "max-dunbar"
+    },
+    {
+        "firstName": "Michal",
+        "initials": ["E"],
+        "lastName": "Cross",
+        "slug": "michal-e-cross"
+    },
+    {
+        "firstName": "Michele",
+        "lastName": "Carter",
+        "slug": "michele-carter"
     },
     {
         "firstName": "Mike",
@@ -433,15 +652,35 @@
         "slug": "noah-bradley"
     },
     {
+        "firstName": "Noor",
+        "lastName": "Rahman",
+        "slug": "noor-rahman"
+    },
+    {
+        "firstName": "Olivier",
+        "lastName": "Bernard",
+        "slug": "olivier-bernard"
+    },
+    {
         "firstName": "Otis",
         "lastName": "Nyiti",
         "slug": "otis-nyiti",
         "twitter": "otis_draws"
     },
     {
+        "firstName": "Patricia",
+        "lastName": "Barnable",
+        "slug": "patricia-barnable"
+    },
+    {
         "firstName": "Peter",
         "lastName": "Lee",
         "slug": "peter-lee"
+    },
+    {
+        "firstName": "Quintin",
+        "lastName": "Gleim",
+        "slug": "quintin-gleim"
     },
     {
         "firstName": "Raymond",
@@ -459,6 +698,11 @@
         "slug": "richard-whitters"
     },
     {
+        "firstName": "Rico",
+        "lastName": "Corazón",
+        "slug": "rico-corazon"
+    },
+    {
         "firstName": "Robert",
         "initials": ["J"],
         "lastName": "Schwalb",
@@ -468,6 +712,11 @@
         "firstName": "Rodney",
         "lastName": "Thompson",
         "slug": "rodney-thompson"
+    },
+    {
+        "firstName": "Ron",
+        "lastName": "Lundeen",
+        "slug": "ron-lundeen"
     },
     {
         "firstName": "Sam",
@@ -491,6 +740,11 @@
         "twitter": "Panelperday"
     },
     {
+        "firstName": "Sebastian",
+        "lastName": "Kowoll",
+        "slug": "sebastian-kowoll"
+    },
+    {
         "firstName": "Shauna",
         "lastName": "Narciso",
         "slug": "shauna-narciso"
@@ -504,6 +758,11 @@
         "firstName": "Shawn",
         "lastName": "Main",
         "slug": "shawn-main"
+    },
+    {
+        "firstName": "Shawn",
+        "lastName": "Wood",
+        "slug": "shawn-wood"
     },
     {
         "firstName": "Shelly",
@@ -536,9 +795,19 @@
         "slug": "steve-argyle"
     },
     {
+        "firstName": "Taras",
+        "lastName": "Susak",
+        "slug": "taras-susak"
+    },
+    {
         "firstName": "Tony",
         "lastName": "Casper",
         "slug": "tony-casper"
+    },
+    {
+        "firstName": "Tony",
+        "lastName": "DiTerlizzi",
+        "slug": "tony-diterlizzi"
     },
     {
         "firstName": "Trevor",
@@ -557,8 +826,22 @@
         "twitter": "saltandfog"
     },
     {
+        "firstName": "Wadim",
+        "lastName": "Kashin",
+        "slug": "wadim-kashin"
+    },
+    {
+        "firstName": "Warren",
+        "lastName": "Mahy",
+        "slug": "warren-mahy"
+    },
+    {
         "firstName": "Wayne",
         "lastName": "Reynolds",
         "slug": "wayne-reynolds"
+    },
+    {
+        "firstName": "Zoltan",
+        "lastName": "Boros"
     }
 ]
