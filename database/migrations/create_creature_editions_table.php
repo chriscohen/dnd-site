@@ -26,9 +26,10 @@ return new class extends Migration
             $table->json('damage_immunities')->nullable();
             $table->json('damage_resistances')->nullable();
             $table->unsignedSmallInteger('game_edition')->default(GameEdition::FIFTH);
+            $table->boolean('has_fixed_proficiency_bonus')->default(false);
             $table->unsignedSmallInteger('height')->nullable();
             $table->string('height_modifier')->nullable();
-            $table->boolean('has_fixed_proficiency_bonus')->default(false);
+            $table->unsignedSmallInteger('hit_die_faces')->nullable();
             $table->boolean('is_playable')->default(false);
             $table->unsignedSmallInteger('lair_xp')->nullable();
             $table->unsignedSmallInteger('proficiency_bonus')->nullable();

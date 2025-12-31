@@ -62,6 +62,7 @@ use Illuminate\Support\Collection as SupportCollection;
  * @property bool $has_fixed_proficiency_bonus
  * @property ?int $height
  * @property ?DiceFormula $height_modifier
+ * @property ?int $hit_die_faces
  * @property ?CreatureHitPoints $hitPoints
  * @property bool $is_playable
  * @property ?int $lair_xp
@@ -619,11 +620,22 @@ class CreatureEdition extends AbstractModel
         }
 
         /**
-         * Hit points.
+         * Hit points & hit dice.
          */
         if (!empty($value['hp']) && empty($item->hitPoints)) {
-            $hpItem = CreatureHitPoints::from5eJson($value['hp'], $item);
-            $item->hitPoints()->associate($hpItem);
+            if (empty($item->hitPoints)) {
+                $hpItem = CreatureHitPoints::from5eJson($value['hp'], $item);
+                $item->hitPoints()->associate($hpItem);
+            }
+
+            // Try to grab the "dX" part of the formula and set it as the creature's hit die.
+            if (!empty($value['hp']['formula'])) {
+                preg_match('/d(\d+)/', $value['hp']['formula'], $matches);
+
+                if (!empty($matches[1])) {
+                    $item->hit_die_faces = (int) $matches[1];
+                }
+            }
         }
 
         /**
