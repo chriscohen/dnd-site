@@ -10,10 +10,9 @@ use App\Models\Sources\SourceEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Ramsey\Uuid\Uuid;
 
 /**
- * @property Uuid $id
+ * @property string $id
  * @property SourceEdition $edition
  * @property Person $person
  * @property string $role

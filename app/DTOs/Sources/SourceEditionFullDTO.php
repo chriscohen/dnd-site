@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\DTOs\Sources;
 
-use App\DTOs\People\BookCreditDTO;
-use App\Enums\Sources\SourceFormat;
+use App\DTOs\Credits\BookCreditDTO;
 use App\Models\ModelInterface;
 use App\Models\People\BookCredit;
 use App\Models\Sources\SourceContents;

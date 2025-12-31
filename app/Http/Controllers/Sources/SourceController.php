@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Sources;
 
-use App\DTOs\People\BookCreditDTO;
+use App\DTOs\Credits\BookCreditDTO;
 use App\DTOs\Sources\SourceContentsDTO;
 use App\DTOs\Sources\SourceFullDTO;
 use App\DTOs\Sources\SourceSummaryDTO;

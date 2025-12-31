@@ -57,6 +57,7 @@ Route::get('/languages', [LanguageController::class, 'index']);
 
 Route::get('/person/{slug}', [PersonController::class, 'get']);
 Route::get('/people', [PersonController::class, 'index']);
+Route::get('/person/{slug}/credits', [PersonController::class, 'credits']);
 
 Route::get('/references', [ReferenceController::class, 'index']);
 
