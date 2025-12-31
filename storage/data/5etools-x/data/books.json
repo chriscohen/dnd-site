@@ -67,8 +67,7 @@
                 "drivethru-rpg": "265835"
             },
             "publisher": "wizards-of-the-coast",
-            "publicationType": "official",
-            "sourcebookTypes": ["adventure"]
+            "publicationType": "official"
         },
         {
             "name": "Acquisitions Incorporated",
