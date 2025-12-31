@@ -22,6 +22,7 @@ use Ramsey\Uuid\Uuid;
  * @property ?string $initials
  * @property ?string $instagram
  * @property string $last_name
+ * @property ?string $middle_names
  * @property ?string $twitter
  * @property ?string $youtube
  */
@@ -68,6 +69,7 @@ class Person extends AbstractModel
         $item->id = $value['id'] ?? Uuid::uuid4();
         $item->first_name = $value['firstName'];
         $item->last_name = $value['lastName'];
+        $item->middle_names = $value['middleNames'] ?? null;
         $item->slug = $value['slug'] ?? (
         empty($value['initials']) ?
             Str::slug(implode(' ', [$item->first_name, $item->last_name])) :

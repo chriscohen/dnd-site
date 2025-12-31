@@ -16,6 +16,7 @@ readonly class PersonDTO extends AbstractDTO
         public ?array $initials = null,
         public ?string $instagram = null,
         public ?string $lastName = null,
+        public ?string $middleNames = null,
         public ?string $twitter = null,
         public ?string $youtube = null
     ) {
@@ -31,6 +32,7 @@ readonly class PersonDTO extends AbstractDTO
             initials: $model->initials ? str_split($model->initials) : null,
             instagram: $model->instagram,
             lastName: $model->last_name,
+            middleNames: $model->middle_names,
             twitter: $model->twitter,
             youtube: $model->youtube
         );
