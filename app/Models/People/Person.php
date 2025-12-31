@@ -16,6 +16,7 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  * @property string $slug
  *
+ * @property ?string $artstation
  * @property Collection<BookCredit> $credits
  * @property string $first_name
  * @property ?string $initials
@@ -77,7 +78,7 @@ class Person extends AbstractModel
             $item->initials = implode('', $value['initials']);
         }
 
-        foreach (['instagram', 'twitter', 'youtube'] as $fieldName) {
+        foreach (['artstation', 'instagram', 'twitter', 'youtube'] as $fieldName) {
             if (!empty($value[$fieldName])) {
                 $item->{$fieldName} = $value[$fieldName];
             }

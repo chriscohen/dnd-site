@@ -9,14 +9,15 @@ use App\DTOs\AbstractDTO;
 readonly class PersonDTO extends AbstractDTO
 {
     public function __construct(
-        public readonly string $id,
-        public readonly string $slug,
-        public readonly ?string $firstName = null,
-        public readonly ?array $initials = null,
-        public readonly ?string $instagram = null,
-        public readonly ?string $lastName = null,
-        public readonly ?string $twitter = null,
-        public readonly ?string $youtube = null
+        public string $id,
+        public string $slug,
+        public ?string $artstation = null,
+        public ?string $firstName = null,
+        public ?array $initials = null,
+        public ?string $instagram = null,
+        public ?string $lastName = null,
+        public ?string $twitter = null,
+        public ?string $youtube = null
     ) {
     }
 
@@ -25,6 +26,7 @@ readonly class PersonDTO extends AbstractDTO
         return new static(
             id: $model->id,
             slug: $model->slug,
+            artstation: $model->artstation,
             firstName: $model->first_name,
             initials: $model->initials ? str_split($model->initials) : null,
             instagram: $model->instagram,
