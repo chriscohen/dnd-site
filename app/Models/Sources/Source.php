@@ -346,10 +346,10 @@ class Source extends AbstractModel
         }
 
         // Product IDs.
-        foreach ($value['productIds'] ?? [] as $key => $value) {
+        foreach ($value['productIds'] ?? [] as $key => $id) {
             ProductId::fromInternalJson([
                 'company' => $key,
-                'productId' => $value,
+                'productId' => $id,
             ], $item);
         }
 
