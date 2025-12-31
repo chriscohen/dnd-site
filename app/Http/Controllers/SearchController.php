@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\DTOs\SearchResultDTO;
 use App\Models\CampaignSetting;
 use App\Models\Company;
 use App\Models\Creatures\Creature;
 use App\Models\ModelCollection;
+use App\Models\People\Person;
 use App\Models\Sources\Source;
 use App\Models\Spells\Spell;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -32,6 +34,7 @@ class SearchController extends Controller
             Source::class,
             Company::class,
             CampaignSetting::class,
+            Person::class
         ];
 
         foreach ($models as $model) {
@@ -50,6 +53,6 @@ class SearchController extends Controller
             }
         }
 
-        return response()->json(ModelCollection::make($output)->toSearchResult());
+        return response()->json($output->map(fn ($item) => SearchResultDTO::fromModel($item)));
     }
 }

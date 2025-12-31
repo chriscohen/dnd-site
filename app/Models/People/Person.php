@@ -6,10 +6,12 @@ namespace App\Models\People;
 
 use App\Models\AbstractModel;
 use App\Models\ModelInterface;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -20,6 +22,7 @@ use Ramsey\Uuid\Uuid;
  * @property Collection<BookCredit> $credits
  * @property string $first_name
  * @property ?string $initials
+ * @property Collection<string> $initialsAsCollection
  * @property ?string $instagram
  * @property string $last_name
  * @property ?string $middle_names
@@ -29,6 +32,7 @@ use Ramsey\Uuid\Uuid;
 class Person extends AbstractModel
 {
     use HasUuids;
+    use Searchable;
 
     public $timestamps = false;
     public $table = 'people';
@@ -38,29 +42,42 @@ class Person extends AbstractModel
         return $this->hasMany(BookCredit::class);
     }
 
-    public function toArrayFull(): array
+    public function initialsAsCollection(): Attribute
     {
-        return [
-            'id' => $this->id,
-            'instagram' => $this->instagram,
-            'twitter' => $this->twitter,
-            'youtube' => $this->youtube,
-        ];
+        return Attribute::make(
+            get: fn () => collect(mb_str_split($this->initials))
+        );
     }
 
-    public function toArrayShort(): array
+
+    public function name(): Attribute
     {
-        return [
-            'slug' => $this->slug,
-            'firstName' => $this->first_name,
-            'initials' => empty($this->initials) ? null : str_split($this->initials),
-            'lastName' => $this->last_name,
-        ];
+        return Attribute::make(
+            get: function () {
+                // Either middle names, or initials, not both.
+                if (!empty($this->initials)) {
+                    $middle = implode(' ', $this->initialsAsCollection
+                        ->map(fn ($initial) => $initial . '.')
+                        ->toArray());
+                } else {
+                    $middle = $this->middle_names;
+                }
+
+                return implode(
+                    ' ',
+                    array_filter([$this->first_name, $middle, $this->last_name])
+                );
+            }
+        );
     }
 
-    public function toArrayTeaser(): array
+    public function toSearchableArray(): array
     {
-        return [];
+        return [
+            'first_name' => $this->first_name,
+            'middle_names' => $this->middle_names,
+            'last_name' => $this->last_name,
+        ];
     }
 
     public static function fromInternalJson(int|array|string $value, ModelInterface $parent = null): static
