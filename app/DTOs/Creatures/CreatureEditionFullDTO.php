@@ -36,6 +36,7 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
         /** @var string[] $conditionImmune */
         public array $conditionImmune,
         public string $gameEdition,
+        public ?int $hitDieFaces = null,
         public ?CreatureHitPointsDTO $hitPoints = null,
         /** @var string[] $immune */
         public array $immune,
@@ -79,6 +80,7 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
                 ) :
                 [],
             gameEdition: $model->game_edition->toStringShort(),
+            hitDieFaces: $model->hit_die_faces,
             hitPoints: $model->relationLoaded('hitPoints') && !empty($model->hitPoints) ?
                 CreatureHitPointsDTO::fromModel($model->hitPoints) :
                 null,
