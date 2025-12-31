@@ -15,6 +15,7 @@ use App\Http\Controllers\Items\ItemController;
 use App\Http\Controllers\Languages\LanguageController;
 use App\Http\Controllers\Magic\MagicDomainController;
 use App\Http\Controllers\Magic\MagicSchoolController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Sources\SourceController;
@@ -54,6 +55,9 @@ Route::get('/items', [ItemController::class, 'index']);
 Route::get('/language/{slug}', [LanguageController::class, 'get']);
 Route::get('/languages', [LanguageController::class, 'index']);
 
+Route::get('/person/{slug}', [PersonController::class, 'get']);
+Route::get('/people', [PersonController::class, 'index']);
+
 Route::get('/references', [ReferenceController::class, 'index']);
 
 Route::get('/school/{slug}', [MagicSchoolController::class, 'get']);
@@ -63,6 +67,7 @@ Route::get('/source/{slug}', [SourceController::class, 'get']);
 Route::get('/sources', [SourceController::class, 'index']);
 
 Route::get('/source/{slug}/contents', [SourceController::class, 'contents']);
+Route::get('/source/{slug}/credits', [SourceController::class, 'credits']);
 
 Route::get('/spell/{slug}', [SpellController::class, 'get']);
 Route::get('/spells', [SpellController::class, 'index']);

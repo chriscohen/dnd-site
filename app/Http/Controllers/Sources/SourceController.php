@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Sources;
 
+use App\DTOs\People\BookCreditDTO;
 use App\DTOs\Sources\SourceContentsDTO;
 use App\DTOs\Sources\SourceFullDTO;
 use App\DTOs\Sources\SourceSummaryDTO;
 use App\Http\Controllers\AbstractController;
+use App\Models\People\BookCredit;
 use App\Models\Sources\Source;
 use App\Models\Sources\SourceContents;
 use Illuminate\Http\JsonResponse;
@@ -85,5 +87,15 @@ class SourceController extends AbstractController
             response()->json($item->primaryEdition()->contents->map(
                 fn (SourceContents $contents) => SourceContentsDTO::fromModel($contents)
             ));
+    }
+
+    public function credits(Request $request, string $slug): JsonResponse
+    {
+        /** @var Source $item */
+        $item = $this->query->where('slug', $slug)->first();
+
+        $people = $item->primaryEdition()?->credits
+            ->map(fn (BookCredit $credit) => BookCreditDTO::fromModel($credit)) ?? [];
+        return response()->json($people);
     }
 }
