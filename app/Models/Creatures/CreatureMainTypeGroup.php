@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
-use Ramsey\Uuid\Uuid;
 
 /**
  * Groups a collection of fields used to describe the type of creature.
@@ -26,7 +25,7 @@ use Ramsey\Uuid\Uuid;
  * @property CreatureMainType $mainType
  * @property ?CreatureOrigin $origin
  */
-class CreatureType extends AbstractModel
+class CreatureMainTypeGroup extends AbstractModel
 {
     use HasUuids;
 

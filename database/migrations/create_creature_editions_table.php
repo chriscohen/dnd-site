@@ -8,7 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Creatures\CreatureHitPoints;
 use App\Enums\GameEdition;
-use App\Models\Creatures\CreatureType;
+use App\Models\Creatures\CreatureMainTypeGroup;
 use App\Models\Sources\Source;
 
 return new class extends Migration
@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->float('challenge_rating')->nullable()->index();
             $table->foreignIdFor(CreatureHitPoints::class, 'creature_hit_points_id')->nullable();
-            $table->foreignIdFor(CreatureType::class, 'creature_type_id')->nullable();
+            $table->foreignIdFor(CreatureMainTypeGroup::class, 'creature_main_type_group_id')->nullable();
             $table->json('damage_immunities')->nullable();
             $table->json('damage_resistances')->nullable();
             $table->unsignedSmallInteger('game_edition')->default(GameEdition::FIFTH);

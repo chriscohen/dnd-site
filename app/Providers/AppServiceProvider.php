@@ -9,8 +9,9 @@ use App\Models\CharacterClasses\CharacterClass;
 use App\Models\CharacterClasses\CharacterClassEdition;
 use App\Models\Creatures\Creature;
 use App\Models\Creatures\CreatureEdition;
-use App\Models\Creatures\CreatureType;
-use App\Models\Creatures\CreatureTypeEdition;
+use App\Models\Creatures\CreatureMainType;
+use App\Models\Creatures\CreatureMainTypeEdition;
+use App\Models\Creatures\CreatureMainTypeGroup;
 use App\Models\Feats\Feature;
 use App\Models\Feats\FeatureEdition;
 use App\Models\Items\ItemType;
@@ -66,8 +67,9 @@ class AppServiceProvider extends ServiceProvider
             'character_class_edition' => CharacterClassEdition::class,
             'creature' => Creature::class,
             'creature_edition' => CreatureEdition::class,
-            'creature_type' => CreatureType::class,
-            'creature_type_edition' => CreatureTypeEdition::class,
+            'creature_main_type' => CreatureMainType::class,
+            'creature_main_type_edition' => CreatureMainTypeEdition::class,
+            'creature_main_type_group' => CreatureMainTypeGroup::class,
             'feat' => Feature::class,
             'feat_edition' => FeatureEdition::class,
             'item' => ItemType::class,

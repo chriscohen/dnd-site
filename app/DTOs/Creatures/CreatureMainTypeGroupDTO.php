@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\DTOs\Creatures;
 
 use App\DTOs\AbstractDTO;
-use App\Models\Creatures\CreatureType;
+use App\Models\Creatures\CreatureMainTypeGroup;
 use App\Models\ModelInterface;
 
-readonly class CreatureTypeDTO extends AbstractDTO
+readonly class CreatureMainTypeGroupDTO extends AbstractDTO
 {
     public function __construct(
         public string $id,
@@ -19,7 +19,7 @@ readonly class CreatureTypeDTO extends AbstractDTO
     }
 
     /**
-     * @param CreatureType $model
+     * @param CreatureMainTypeGroup $model
      */
     public static function fromModel(ModelInterface $model): static
     {

@@ -80,7 +80,7 @@ use Illuminate\Support\Collection as SupportCollection;
  * @property ?Collection<Tag> $tags
  * @property Collection<Media> $tokens
  * @property ?CreatureSense $truesight
- * @property ?CreatureType $type
+ * @property ?CreatureMainTypeGroup $type
  * @property ?int $weight
  * @property ?DiceFormula $weight_modifier
  *
@@ -390,7 +390,7 @@ class CreatureEdition extends AbstractModel
 
     public function type(): BelongsTo
     {
-        return $this->belongsTo(CreatureType::class, 'creature_type_id');
+        return $this->belongsTo(CreatureMainTypeGroup::class, 'creature_main_type_group_id');
     }
 
     public function wis(): Attribute
@@ -539,10 +539,10 @@ class CreatureEdition extends AbstractModel
          */
         if (!empty($value['type']) && empty($item->type)) {
             try {
-                $type = CreatureType::from5eJson($value['type'], $item);
+                $type = CreatureMainTypeGroup::from5eJson($value['type'], $item);
                 $item->type()->associate($type);
             } catch (ModelNotFoundException $e) {
-                die("Could not find CreatureType.\n");
+                die("Could not find CreatureMainTypeGroup.\n");
             }
         }
 
@@ -845,7 +845,7 @@ class CreatureEdition extends AbstractModel
         /**
          * Type.
          */
-        $type = CreatureType::generate($item);
+        $type = CreatureMainTypeGroup::generate($item);
         $item->type()->associate($type);
 
         $item->save();

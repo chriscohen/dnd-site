@@ -50,7 +50,7 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
         public array $sizes,
         /** @var Collection<Media> $tokens */
         public Collection $tokens,
-        public ?CreatureTypeDTO $type = null
+        public ?CreatureMainTypeGroupDTO $type = null
     ) {
         parent::__construct($id);
     }
@@ -100,7 +100,7 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
                 $model->tokens->map(fn (Media $item) => MediaFullDTO::fromModel($item)) :
                 collect(),
             type: $model->relationLoaded('type') && !empty($model->type) ?
-                CreatureTypeDTO::fromModel($model->type) :
+                CreatureMainTypeGroupDTO::fromModel($model->type) :
                 null
         );
     }

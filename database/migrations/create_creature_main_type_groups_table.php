@@ -12,7 +12,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('creature_types', function (Blueprint $table) {
+        Schema::create('creature_main_type_groups', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
             $table->unsignedSmallInteger('game_edition');
@@ -23,6 +23,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('creature_types');
+        Schema::dropIfExists('creature_main_type_groups');
     }
 };

@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $id
  * @property string $name
  *
- * @property Collection<CreatureType> $creatureTypes
+ * @property Collection<CreatureMainTypeGroup> $creatureMainTypeGroups
  * @property string $origin
  * @property string $plural
  */
@@ -24,29 +24,9 @@ class CreatureOrigin extends AbstractModel
     public $timestamps = false;
     public $incrementing = false;
 
-    public function creatureTypes(): HasMany
+    public function creatureMainTypeGroups(): HasMany
     {
-        return $this->hasMany(CreatureType::class, 'creature_origin_id');
-    }
-
-    public function toArrayFull(): array
-    {
-        return [];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'origin' => $this->origin,
-            'plural' => $this->plural,
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
+        return $this->hasMany(CreatureMainTypeGroup::class, 'creature_origin_id');
     }
 
     public static function fromInternalJson(int|array|string $value, ?ModelInterface $parent = null): static
