@@ -7,9 +7,9 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Creatures\CreatureMainType;
 
-class CreatureMajorTypeSeeder extends AbstractYmlSeeder
+class CreatureMainTypeSeeder extends AbstractYmlSeeder
 {
-    protected string $path = 'creature--major-types.json';
+    protected string $path = 'creature--main-types.json';
     protected string $model = Category::class;
 
     public function run(): void

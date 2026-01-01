@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
 
             $table->unsignedSmallInteger('game_edition');
-            $table->foreignIdFor(CreatureMainType::class, 'creature_major_type_id');
+            $table->foreignIdFor(CreatureMainType::class, 'creature_main_type_id');
             $table->foreignIdFor(CreatureOrigin::class, 'creature_origin_id')->nullable();
         });
     }
