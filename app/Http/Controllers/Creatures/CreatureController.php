@@ -31,7 +31,7 @@ class CreatureController extends AbstractController
                 'editions.hitPoints',
                 'editions.movementSpeeds',
                 'editions.type',
-                'editions.type.majorType',
+                'editions.type.mainType',
                 'editions.type.origin'
             ])
             ->first();

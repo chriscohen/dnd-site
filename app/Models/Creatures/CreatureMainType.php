@@ -17,10 +17,10 @@ use Ramsey\Uuid\Uuid;
  * @property string $slug
  * @property string $name
  *
- * @property Collection<CreatureMajorTypeEdition> $editions
+ * @property Collection<CreatureMainTypeEdition> $editions
  * @property string $plural
  */
-class CreatureMajorType extends AbstractModel
+class CreatureMainType extends AbstractModel
 {
     use HasUuids;
 
@@ -34,7 +34,7 @@ class CreatureMajorType extends AbstractModel
 
     public function editions(): HasMany
     {
-        return $this->hasMany(CreatureMajorTypeEdition::class, 'creature_major_type_id');
+        return $this->hasMany(CreatureMainTypeEdition::class, 'creature_main_type_id');
     }
 
     public function toArrayFull(): array
@@ -68,7 +68,7 @@ class CreatureMajorType extends AbstractModel
         $item->plural = $value['plural'] ?? null;
 
         foreach ($value['editions'] ?? [] as $editionData) {
-            $edition = CreatureMajorTypeEdition::fromInternalJson($editionData, $item);
+            $edition = CreatureMainTypeEdition::fromInternalJson($editionData, $item);
             $item->editions()->save($edition);
         }
 
@@ -85,7 +85,7 @@ class CreatureMajorType extends AbstractModel
         $item->plural = $item->name . 's';
         $item->save();
 
-        $edition = CreatureMajorTypeEdition::generate($item);
+        $edition = CreatureMainTypeEdition::generate($item);
         $item->editions()->save($edition);
 
         $item->save();

@@ -16,13 +16,13 @@ use Ramsey\Uuid\Uuid;
  * @property string $id
  *
  * @property ?string $alternate_name  Used if this edition had a different name than 5e.
- * @property Uuid $creature_major_type_id
- * @property CreatureMajorType $creatureMajorType
+ * @property Uuid $creature_main_type_id
+ * @property CreatureMainType $creatureMainType
  * @property string $description
  * @property int $game_edition
  * @property string $gameEdition
  */
-class CreatureMajorTypeEdition extends AbstractModel
+class CreatureMainTypeEdition extends AbstractModel
 {
     use HasUuids;
 
@@ -32,9 +32,9 @@ class CreatureMajorTypeEdition extends AbstractModel
         'game_edition' => GameEdition::class,
     ];
 
-    public function creatureMajorType(): BelongsTo
+    public function creatureMainType(): BelongsTo
     {
-        return $this->belongsTo(CreatureMajorType::class, 'creature_major_type_id');
+        return $this->belongsTo(CreatureMainType::class, 'creature_main_type_id');
     }
 
     protected function gameEdition(): Attribute
@@ -47,7 +47,7 @@ class CreatureMajorTypeEdition extends AbstractModel
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
-        $item->creatureMajorType()->associate($parent);
+        $item->creatureMainType()->associate($parent);
         $item->alternate_name = $value['alternateName'] ?? null;
         $item->description = $value['description'];
         $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
@@ -59,7 +59,7 @@ class CreatureMajorTypeEdition extends AbstractModel
     {
         $faker = static::getFaker();
         $item = new static();
-        $item->creatureMajorType()->associate($parent);
+        $item->creatureMainType()->associate($parent);
         $item->description = $faker->sentence();
         $item->game_edition = GameEdition::FIFTH;
         $item->save();

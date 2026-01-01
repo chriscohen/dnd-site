@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Creatures;
 
-use App\Models\Creatures\CreatureMajorType;
+use App\Models\Creatures\CreatureMainType;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\FeatureTestCase;
 
@@ -31,7 +31,7 @@ final class CreatureMajorTypeFeatureTest extends FeatureTestCase
         string $expectedSlug,
         int $expectedEditionsCount
     ): void {
-        $creatureMajorType = CreatureMajorType::fromInternalJson($value);
+        $creatureMajorType = CreatureMainType::fromInternalJson($value);
         $this->assertEquals($expectedSlug, $creatureMajorType->slug);
         $this->assertEquals($expectedEditionsCount, $creatureMajorType->editions->count());
     }

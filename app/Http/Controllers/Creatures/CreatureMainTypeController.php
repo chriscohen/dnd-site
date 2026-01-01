@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Creatures;
 
-use App\DTOs\Creatures\CreatureMajorTypeFullDTO;
+use App\DTOs\Creatures\CreatureMainTypeFullDTO;
 use App\Http\Controllers\AbstractController;
-use App\Models\Creatures\CreatureMajorType;
+use App\Models\Creatures\CreatureMainType;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class CreatureMajorTypeController extends AbstractController
+class CreatureMainTypeController extends AbstractController
 {
-    protected string $entityType = CreatureMajorType::class;
+    protected string $entityType = CreatureMainType::class;
     protected string $orderKey = 'name';
 
     public function get(Request $request, string $slug): JsonResponse
     {
-        /** @var CreatureMajorType|null $item */
+        /** @var CreatureMainType|null $item */
         $item = $this->query
             ->where('slug', $slug)
             ->with([
                 'editions'
             ])
             ->first();
-        $item = CreatureMajorTypeFullDTO::fromModel($item);
+        $item = CreatureMainTypeFullDTO::fromModel($item);
 
         return response()->json($item);
     }
@@ -34,7 +34,7 @@ class CreatureMajorTypeController extends AbstractController
         $items = $this->query
             ->orderBy($this->orderKey)
             ->paginate()
-            ->through(fn(CreatureMajorType $item) => CreatureMajorTypeFullDTO::fromModel($item));
+            ->through(fn(CreatureMainType $item) => CreatureMainTypeFullDTO::fromModel($item));
 
         return response()->json($items);
     }

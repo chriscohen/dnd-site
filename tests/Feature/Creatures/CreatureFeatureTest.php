@@ -14,7 +14,7 @@ use App\Enums\Units\DistanceUnit;
 use App\Models\ArmorClass\ArmorClass;
 use App\Models\Creatures\Creature;
 use App\Models\Creatures\CreatureEdition;
-use App\Models\Creatures\CreatureMajorType;
+use App\Models\Creatures\CreatureMainType;
 use App\Models\Reference;
 use App\Models\Skills\Skill;
 use App\Models\Skills\SkillEdition;
@@ -28,7 +28,7 @@ final class CreatureFeatureTest extends FeatureTestCase
     public function testImportFactolSkull(): void
     {
         // Create the "undead" creature type.
-        CreatureMajorType::create([
+        CreatureMainType::create([
             'slug' => 'undead',
             'name' => 'Undead',
             'plural' => 'Undead',

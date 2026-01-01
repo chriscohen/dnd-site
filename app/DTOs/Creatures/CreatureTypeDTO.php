@@ -13,7 +13,7 @@ readonly class CreatureTypeDTO extends AbstractDTO
     public function __construct(
         public string $id,
         public string $gameEdition,
-        public ?CreatureMajorTypeSummaryDTO $majorType = null,
+        public ?CreatureMainTypeSummaryDTO $mainType = null,
         public ?CreatureOriginDTO $origin = null
     ) {
     }
@@ -26,8 +26,8 @@ readonly class CreatureTypeDTO extends AbstractDTO
         return new static(
             id: $model->id,
             gameEdition: $model->game_edition->toStringShort(),
-            majorType: $model->relationLoaded('majorType') ?
-                CreatureMajorTypeSummaryDTO::fromModel($model->majorType) :
+            mainType: $model->relationLoaded('mainType') ?
+                CreatureMainTypeSummaryDTO::fromModel($model->mainType) :
                 null,
             origin: $model->relationLoaded('origin') && !empty($model->origin) ?
                 CreatureOriginDTO::fromModel($model->origin) :

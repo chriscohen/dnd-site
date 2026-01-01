@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\Creatures\CreatureMajorType;
+use App\Models\Creatures\CreatureMainType;
 
 return new class extends Migration
 {
@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('creature_major_type_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('alternate_name')->nullable();
-            $table->foreignIdFor(CreatureMajorType::class, 'creature_major_type_id');
+            $table->foreignIdFor(CreatureMainType::class, 'creature_major_type_id');
             $table->unsignedSmallInteger('game_edition')->index();
             $table->text('description')->nullable();
 

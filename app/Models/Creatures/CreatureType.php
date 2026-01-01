@@ -23,7 +23,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property Collection<CreatureEdition> $creatures
  * @property GameEdition $game_edition
- * @property CreatureMajorType $majorType
+ * @property CreatureMainType $mainType
  * @property ?CreatureOrigin $origin
  */
 class CreatureType extends AbstractModel
@@ -44,9 +44,9 @@ class CreatureType extends AbstractModel
         return $this->hasMany(CreatureEdition::class, 'creature_edition_id');
     }
 
-    public function majorType(): BelongsTo
+    public function mainType(): BelongsTo
     {
-        return $this->belongsTo(CreatureMajorType::class, 'creature_major_type_id');
+        return $this->belongsTo(CreatureMainType::class, 'creature_main_type_id');
     }
 
     public function origin(): BelongsTo
@@ -95,8 +95,8 @@ class CreatureType extends AbstractModel
             $typeName = $value;
         }
 
-        $type = CreatureMajorType::query()->where('slug', $typeName)->firstOrFail();
-        $item->majorType()->associate($type);
+        $type = CreatureMainType::query()->where('slug', $typeName)->firstOrFail();
+        $item->mainType()->associate($type);
 
         $item->save();
         return $item;
@@ -110,8 +110,8 @@ class CreatureType extends AbstractModel
         $origin = CreatureOrigin::generate($item);
         $item->origin()->associate($origin);
 
-        $majorType = CreatureMajorType::generate($item);
-        $item->majorType()->associate($majorType);
+        $mainType = CreatureMainType::generate($item);
+        $item->mainType()->associate($mainType);
 
         $item->save();
         return $item;

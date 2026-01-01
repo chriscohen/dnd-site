@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\Category;
-use App\Models\Creatures\CreatureMajorType;
+use App\Models\Creatures\CreatureMainType;
 
 class CreatureMajorTypeSeeder extends AbstractYmlSeeder
 {
@@ -18,7 +18,7 @@ class CreatureMajorTypeSeeder extends AbstractYmlSeeder
 
         foreach ($data as $datum) {
             print "Creating Creature Type " . $datum['name'] . "...\n";
-            CreatureMajorType::fromInternalJson($datum);
+            CreatureMainType::fromInternalJson($datum);
         }
     }
 }
