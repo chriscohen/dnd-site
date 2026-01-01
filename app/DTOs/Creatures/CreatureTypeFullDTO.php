@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\DTOs\Creatures;
 
-use App\Models\Creatures\Creature;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureType;
+use App\Models\Creatures\CreatureTypeEdition;
 use Illuminate\Support\Collection;
 
-readonly class CreatureFullDTO extends CreatureSummaryDTO
+readonly class CreatureTypeFullDTO extends CreatureSummaryDTO
 {
     public function __construct(
         string $id,
         string $name,
         string $slug,
-        /** @var Collection<CreatureEditionFullDTO> $editions */
+        /** @var Collection<CreatureTypeTypeEditionFullDTO> $editions */
         public readonly ?Collection $editions = null,
         public readonly ?CreatureSummaryDTO $parent = null,
         /** @var Collection<CreatureSummaryDTO> $children */
@@ -30,11 +30,13 @@ readonly class CreatureFullDTO extends CreatureSummaryDTO
             name: $model->name,
             slug: $model->slug,
             editions: $model->relationLoaded('editions') ?
-                $model->editions->map(fn (CreatureEdition $item) => CreatureEditionFullDTO::fromModel($item)) :
+                $model->editions->map(
+                    fn (CreatureTypeEdition $item) => CreatureTypeTypeEditionFullDTO::fromModel($item)
+                ) :
                 null,
             parent: $model->parent ? CreatureSummaryDTO::fromModel($model->parent) : null,
             children: $model->relationLoaded('children') ?
-                $model->children->map(fn (Creature $item) => CreatureSummaryDTO::fromModel($item)) :
+                $model->children->map(fn (CreatureType $item) => CreatureSummaryDTO::fromModel($item)) :
                 null
         );
     }

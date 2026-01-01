@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\CharacterClasses\CharacterClass;
-use App\Models\Creatures\Creature;
+use App\Models\Creatures\CreatureType;
 use App\Models\Feats\Feature;
 use App\Models\Items\ItemType;
 use App\Models\Language;
@@ -86,10 +86,10 @@ class FeToolsService
             'class' => CharacterClass::class,
             'item' => ItemType::class,
             'language' => Language::class,
-            'monster' => Creature::class,
+            'monster' => CreatureType::class,
             'monsterfeatures' => Feature::class,
             'object' => ItemType::class,
-            'race' => Creature::class,
+            'race' => CreatureType::class,
             'spell' => Spell::class,
         ];
     }

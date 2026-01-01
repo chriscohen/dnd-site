@@ -20,7 +20,7 @@ use Illuminate\Support\Collection;
  *
  * @property string $id
  *
- * @property Collection<CreatureEdition> $creatures
+ * @property Collection<CreatureTypeEdition> $creatures
  * @property GameEdition $game_edition
  * @property CreatureMainType $mainType
  * @property ?CreatureOrigin $origin
@@ -38,9 +38,9 @@ class CreatureMainTypeGroup extends AbstractModel
         ];
     }
 
-    public function creatures(): HasMany
+    public function creatureTypes(): HasMany
     {
-        return $this->hasMany(CreatureEdition::class, 'creature_edition_id');
+        return $this->hasMany(CreatureTypeEdition::class, 'creature_type_edition_id');
     }
 
     public function mainType(): BelongsTo
@@ -86,7 +86,7 @@ class CreatureMainTypeGroup extends AbstractModel
 
         if (is_array($value)) {
             if (empty($value['type'])) {
-                throw new \InvalidArgumentException('Creature type is required.');
+                throw new \InvalidArgumentException('CreatureType type is required.');
             }
 
             $typeName = $value['type'];

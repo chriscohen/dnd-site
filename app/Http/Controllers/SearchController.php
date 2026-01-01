@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use App\DTOs\SearchResultDTO;
 use App\Models\CampaignSetting;
 use App\Models\Company;
-use App\Models\Creatures\Creature;
+use App\Models\Creatures\CreatureType;
 use App\Models\ModelCollection;
 use App\Models\People\Person;
 use App\Models\Sources\Source;
@@ -29,7 +29,7 @@ class SearchController extends Controller
 
         // Define the models, and the order, in which we want to search things.
         $models = [
-            Creature::class,
+            CreatureType::class,
             Spell::class,
             Source::class,
             Company::class,

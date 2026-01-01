@@ -7,13 +7,13 @@ namespace App\Models\MovementSpeeds;
 use App\Enums\Movement\MovementType;
 use App\Models\AbstractModel;
 use App\Models\Actors\ActorType;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * @property bool $can_hover
- * @property ActorType|CreatureEdition $parent
+ * @property ActorType|CreatureTypeEdition $parent
  * @property MovementType $type
  * @property int $value
  */

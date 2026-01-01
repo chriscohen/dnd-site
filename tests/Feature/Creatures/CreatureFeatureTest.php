@@ -12,8 +12,8 @@ use App\Enums\GameEdition;
 use App\Enums\Movement\MovementType;
 use App\Enums\Units\DistanceUnit;
 use App\Models\ArmorClass\ArmorClass;
-use App\Models\Creatures\Creature;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureType;
+use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\Creatures\CreatureMainType;
 use App\Models\Reference;
 use App\Models\Skills\Skill;
@@ -83,14 +83,14 @@ final class CreatureFeatureTest extends FeatureTestCase
         }
 
         $this->seed5eData(realpath(__DIR__) . '/../../Data/sources/adventure-atlas-the-mortuary.json', Source::class);
-        $creature = Creature::from5eJson(self::dataFactolSkull());
+        $creature = CreatureType::from5eJson(self::dataFactolSkull());
         $creature->refresh();
 
         $this->assertEquals('Factol Skall', $creature->name);
         $this->assertEquals('factol-skall', $creature->slug);
 
         $this->assertEquals(1, $creature->editions->count());
-        /** @var CreatureEdition | null $edition */
+        /** @var CreatureTypeEdition | null $edition */
         $edition = $creature->editions->first();
 
         /**

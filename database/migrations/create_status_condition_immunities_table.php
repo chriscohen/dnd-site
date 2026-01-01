@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\Conditions\ConditionEdition;
 
 return new class extends Migration {
@@ -13,8 +13,8 @@ return new class extends Migration {
     {
         Schema::create('status_condition_immunities', function (Blueprint $table) {
             $table->foreignIdFor(ConditionEdition::class, 'status_condition_edition_id');
-            $table->foreignIdFor(CreatureEdition::class, 'creature_edition_id');
-            $table->primary(['status_condition_edition_id', 'creature_edition_id'], 'status_condition_creature');
+            $table->foreignIdFor(CreatureTypeEdition::class, 'creature_type_edition_id');
+            $table->primary(['status_condition_edition_id', 'creature_type_edition_id'], 'status_condition_creature');
         });
     }
 

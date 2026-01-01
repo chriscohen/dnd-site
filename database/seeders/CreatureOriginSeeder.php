@@ -16,7 +16,7 @@ class CreatureOriginSeeder extends AbstractYmlSeeder
         $data = $this->getDataFromFile();
 
         foreach ($data as $datum) {
-            print "[Internal] Creating Creature Origin " . $datum['name'] . "...\n";
+            print "[Internal] Creating CreatureType Origin " . $datum['name'] . "...\n";
             CreatureOrigin::fromInternalJson($datum);
         }
     }

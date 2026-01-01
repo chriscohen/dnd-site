@@ -15,7 +15,7 @@ use InvalidArgumentException;
 
 /**
  * @param ?Alignment $alignment
- * @param CreatureEdition $creatureEdition
+ * @param CreatureTypeEdition $creatureTypeEdition
  * @param ?string $description
  */
 class CreatureAlignment extends AbstractModel
@@ -29,9 +29,9 @@ class CreatureAlignment extends AbstractModel
         ];
     }
 
-    public function creatureEdition(): BelongsTo
+    public function creatureTypeEdition(): BelongsTo
     {
-        return $this->belongsTo(CreatureEdition::class, 'creature_edition_id');
+        return $this->belongsTo(CreatureTypeEdition::class, 'creature_type_edition_id');
     }
 
     /**
@@ -40,7 +40,7 @@ class CreatureAlignment extends AbstractModel
     public static function fromInternalJson(array|int|string $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
-        $item->creatureEdition()->associate($parent);
+        $item->creatureTypeEdition()->associate($parent);
 
         if (!empty($value['special'])) {
             // Sometimes there's some special alignment description.
@@ -73,10 +73,10 @@ class CreatureAlignment extends AbstractModel
         return $item;
     }
 
-    public static function fromText(string $value, ?CreatureEdition $parent = null): static
+    public static function fromText(string $value, ?CreatureTypeEdition $parent = null): static
     {
         $item = new static();
-        $item->creatureEdition()->associate($parent);
+        $item->creatureTypeEdition()->associate($parent);
 
         $item->alignment = Alignment::fromString($value);
 

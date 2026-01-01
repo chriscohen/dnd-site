@@ -6,7 +6,7 @@ namespace App\Models\Media;
 
 use App\Enums\MediaType;
 use App\Models\AbstractModel;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\ModelInterface;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Collection;
@@ -26,7 +26,7 @@ use Ramsey\Uuid\Uuid;
  * @property ?string $name
  * @property ?int $size
  *
- * @property Collection<CreatureEdition> $creatureEditions
+ * @property Collection<CreatureTypeEdition> $creatureTypeEditions
  */
 class Media extends AbstractModel
 {
@@ -39,9 +39,9 @@ class Media extends AbstractModel
         ];
     }
 
-    public function creatureEditions(): MorphToMany
+    public function creatureTypeEditions(): MorphToMany
     {
-        return $this->morphedByMany(CreatureEdition::class, 'entity', 'media_entity');
+        return $this->morphedByMany(CreatureTypeEdition::class, 'entity', 'media_entity');
     }
 
     /**

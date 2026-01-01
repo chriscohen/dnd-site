@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Prerequisites;
 
-use App\Models\Creatures\Creature;
+use App\Models\Creatures\CreatureType;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property ?Creature $creature
+ * @property ?CreatureType $creature
  * @property PrerequisiteCreatureGroup $group
  * @property ?string $name
  */
@@ -28,9 +28,9 @@ class PrerequisiteCreature extends AbstractPrerequisite
         return $this->belongsTo(PrerequisiteCreatureGroup::class);
     }
 
-    public function creature(): BelongsTo
+    public function creatureType(): BelongsTo
     {
-        return $this->belongsTo(Creature::class);
+        return $this->belongsTo(CreatureType::class);
     }
 
     public function toArrayFull(): array
@@ -42,7 +42,7 @@ class PrerequisiteCreature extends AbstractPrerequisite
     {
         return [
             'id' => $this->id,
-            // Creature could be a reference to a Creature entity, or just a string.
+            // CreatureType could be a reference to a CreatureType entity, or just a string.
             'creature' => $this->name ?? $this->creature->toArrayShort(),
         ];
     }
@@ -58,9 +58,9 @@ class PrerequisiteCreature extends AbstractPrerequisite
         $item->group()->associate($parent);
 
         if (empty($value['displayEntry'])) {
-            // If there's no "displayEntry" property, we are referencing a Creature entity.
-            $creature = Creature::query()->where('id', $value)->firstOrFail();
-            $item->creature()->associate($creature);
+            // If there's no "displayEntry" property, we are referencing a CreatureType entity.
+            $creature = CreatureType::query()->where('id', $value)->firstOrFail();
+            $item->creatureType()->associate($creature);
         } else {
             // We are describing a creature or group by string.
             $item->name = $value['displayEntry'];

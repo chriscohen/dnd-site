@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Creatures;
 
-use App\DTOs\Creatures\CreatureFullDTO;
+use App\DTOs\Creatures\CreatureTypeFullDTO;
 use App\DTOs\Creatures\CreatureSummaryDTO;
 use App\Http\Controllers\AbstractController;
 use App\Http\Requests\CreatureListRequest;
-use App\Models\Creatures\Creature;
+use App\Models\Creatures\CreatureType;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CreatureController extends AbstractController
 {
-    protected string $entityType = Creature::class;
+    protected string $entityType = CreatureType::class;
     protected string $orderKey = 'name';
 
     public function get(Request $request, string $slug): JsonResponse
     {
-        /** @var Creature|null $item */
+        /** @var CreatureType|null $item */
         $item = $this->query
             ->where('slug', $slug)
             ->with([
@@ -36,7 +36,7 @@ class CreatureController extends AbstractController
                 'editions.type.origin'
             ])
             ->first();
-        $item = CreatureFullDTO::fromModel($item);
+        $item = CreatureTypeFullDTO::fromModel($item);
 
         return response()->json($item);
     }
@@ -51,7 +51,7 @@ class CreatureController extends AbstractController
 
         $this->query->orderBy($this->orderKey);
 
-        $items = $this->query->paginate(50)->through(fn(Creature $item) => CreatureSummaryDTO::fromModel($item));
+        $items = $this->query->paginate(50)->through(fn(CreatureType $item) => CreatureSummaryDTO::fromModel($item));
 
         return response()->json($items);
     }

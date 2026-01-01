@@ -8,7 +8,7 @@ use App\Enums\SkillMasteryLevel;
 use App\Models\AbilityScores\AbilityScore;
 use App\Models\AbstractModel;
 use App\Models\Actors\ActorType;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 /**
  * Represents a skill possessed by a creature.
  *
- * @property ActorType|CreatureEdition $entity
+ * @property ActorType|CreatureTypeEdition $entity
  * @property SkillMasteryLevel $mastery
  * @property SkillEdition $skillEdition
  */
@@ -61,7 +61,7 @@ class SkillInstance extends AbstractModel
      *     skill: string,
      *     bonus: int,
      * } $value
-     * @param CreatureEdition|null $parent
+     * @param CreatureTypeEdition|null $parent
      */
     public static function fromInternalJson(int|array|string $value, ?ModelInterface $parent = null): static
     {

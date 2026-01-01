@@ -21,11 +21,11 @@ use Ramsey\Uuid\Uuid;
  * @property string $slug
  * @property string $name
  *
- * @property Collection<CreatureEdition> $editions
- * @property ?Creature $parent
- * @property Collection<Creature> $children
+ * @property Collection<CreatureTypeEdition> $editions
+ * @property ?CreatureType $parent
+ * @property Collection<CreatureType> $children
  */
-class Creature extends AbstractModel
+class CreatureType extends AbstractModel
 {
     use HasUuids;
     use Searchable;
@@ -35,17 +35,17 @@ class Creature extends AbstractModel
 
     public function children(): HasMany
     {
-        return $this->hasMany(Creature::class, 'parent_id');
+        return $this->hasMany(CreatureType::class, 'parent_id');
     }
 
     public function editions(): HasMany
     {
-        return $this->hasMany(CreatureEdition::class, 'creature_id');
+        return $this->hasMany(CreatureTypeEdition::class, 'creature_type_id');
     }
 
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(Creature::class, 'parent_id');
+        return $this->belongsTo(CreatureType::class, 'parent_id');
     }
 
     public function toArrayFull(): array
@@ -88,7 +88,7 @@ class Creature extends AbstractModel
 
         $item->save();
 
-        $edition = CreatureEdition::fromInternalJson($value, $item);
+        $edition = CreatureTypeEdition::fromInternalJson($value, $item);
         $item->editions()->save($edition);
 
         Reference::from5eJson([
@@ -123,7 +123,7 @@ class Creature extends AbstractModel
         // Do we need to look for a parent type?
         foreach ($map as $prefix => $slug) {
             if (str_starts_with($value['name'], $prefix)) {
-                $parentEntity = Creature::query()->where('slug', $slug)->firstOrFail();
+                $parentEntity = CreatureType::query()->where('slug', $slug)->firstOrFail();
                 $item->parent()->associate($parentEntity);
             }
         }
@@ -131,7 +131,7 @@ class Creature extends AbstractModel
         $item->save();
 
         // Edition.
-        $edition = CreatureEdition::from5eJson($value, $item);
+        $edition = CreatureTypeEdition::from5eJson($value, $item);
         $item->editions()->save($edition);
 
         $item->save();
@@ -147,7 +147,7 @@ class Creature extends AbstractModel
 
         $item->save();
 
-        $edition = CreatureEdition::generate($item);
+        $edition = CreatureTypeEdition::generate($item);
         $item->editions()->save($edition);
 
         return $item;

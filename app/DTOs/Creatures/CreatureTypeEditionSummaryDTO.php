@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\DTOs\Creatures;
 
 use App\DTOs\AbstractDTO;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\ModelInterface;
-use Ramsey\Uuid\Uuid;
 
-readonly class CreatureEditionSummaryDTO extends AbstractDTO
+readonly class CreatureTypeEditionSummaryDTO extends AbstractDTO
 {
     public function __construct(
         public readonly string $id
@@ -17,7 +16,7 @@ readonly class CreatureEditionSummaryDTO extends AbstractDTO
     }
 
     /**
-     * @param CreatureEdition $model
+     * @param CreatureTypeEdition $model
      */
     public static function fromModel(ModelInterface $model): static
     {

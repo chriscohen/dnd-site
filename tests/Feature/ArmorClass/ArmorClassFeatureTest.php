@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Tests\Feature\ArmorClass;
 
 use App\Models\ArmorClass\ArmorClass;
-use App\Models\Creatures\Creature;
+use App\Models\Creatures\CreatureType;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\FeatureTestCase;
 
 final class ArmorClassFeatureTest extends FeatureTestCase
 {
-    protected Creature $creature;
+    protected CreatureType $creature;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->creature = Creature::generate();
+        $this->creature = CreatureType::generate();
     }
 
     #[DataProvider('data')]

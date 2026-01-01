@@ -54,7 +54,7 @@ use Illuminate\Support\Collection as SupportCollection;
  * @property ?float $challenge_rating
  * @property Collection<ConditionInstance> $conditionImmunities
  * @property Collection<ConditionInstance> $conditionInstances
- * @property Creature $creature
+ * @property CreatureType $creature
  * @property Collection<ConditionInstance> $damageImmunities
  * @property Collection<ConditionInstance> $damageResistances
  * @property Collection<ConditionInstance> $damageVulnerabilities
@@ -91,7 +91,7 @@ use Illuminate\Support\Collection as SupportCollection;
  * @property AbilityScore $wis
  * @property AbilityScore $cha
  */
-class CreatureEdition extends AbstractModel
+class CreatureTypeEdition extends AbstractModel
 {
     use HasUuids;
 
@@ -139,7 +139,7 @@ class CreatureEdition extends AbstractModel
 
     public function armorClass(): HasMany
     {
-        return $this->hasMany(ArmorClass::class, 'creature_edition_id');
+        return $this->hasMany(ArmorClass::class, 'creature_type_edition_id');
     }
 
     public function canHover(): bool
@@ -173,9 +173,9 @@ class CreatureEdition extends AbstractModel
         return $this->morphMany(ConditionInstance::class, 'entity');
     }
 
-    public function creature(): BelongsTo
+    public function creatureType(): BelongsTo
     {
-        return $this->belongsTo(Creature::class);
+        return $this->belongsTo(CreatureType::class);
     }
 
     public function darkvision(): Attribute
@@ -406,11 +406,11 @@ class CreatureEdition extends AbstractModel
         // Assume it's the most recent edition, and if the reference given below is a source from 5e (2014) we'll
         // change the edition.
         $item->game_edition = GameEdition::FIFTH_REVISED;
-        $item->creature()->associate($parent);
+        $item->creatureType()->associate($parent);
 
         $item->save();
 
-        // Creature size.
+        // CreatureType size.
         if (!empty($value['size'])) {
             // There's a weird case in the 5e.tools data for the "Verdan" in Acquisitions Incorporated where the size
             // is listed as "V". Verdan can be S or M size.
@@ -456,7 +456,7 @@ class CreatureEdition extends AbstractModel
     }
 
     /**
-     * @param Creature $parent
+     * @param CreatureType $parent
      * @throws RecordNotFoundException
      */
     public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
@@ -468,7 +468,7 @@ class CreatureEdition extends AbstractModel
          * Game Edition and source.
          */
         if (empty($value['source'])) {
-            throw new \InvalidArgumentException('Creature edition must have a source.');
+            throw new \InvalidArgumentException('CreatureType edition must have a source.');
         }
         try {
             /** @var Source $source */
@@ -479,13 +479,13 @@ class CreatureEdition extends AbstractModel
                 throw new \InvalidArgumentException("Could not infer game edition from sourcebook: {$source->name}");
         } catch (ModelNotFoundException $e) {
             // We can't find any source with this name so assume fifth edition.
-            print "[WARNING] Creature edition source not found: " . $value['source'] . "\n";
+            print "[WARNING] CreatureType edition source not found: " . $value['source'] . "\n";
             $edition = GameEdition::FIFTH;
         }
 
         // Attach the source, parent creature, and game edition.
         $item->source()->associate($source);
-        $item->creature()->associate($parent);
+        $item->creatureType()->associate($parent);
         $item->game_edition = $edition;
         $item->save();
 
@@ -535,7 +535,7 @@ class CreatureEdition extends AbstractModel
         }
 
         /**
-         * Creature type.
+         * CreatureType type.
          */
         if (!empty($value['type']) && empty($item->type)) {
             try {
@@ -840,7 +840,7 @@ class CreatureEdition extends AbstractModel
     public static function generate(ModelInterface $parent = null): static
     {
         $item = new static();
-        $item->creature()->associate($parent);
+        $item->creatureType()->associate($parent);
 
         /**
          * Type.

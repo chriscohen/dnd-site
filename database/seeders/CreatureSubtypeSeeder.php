@@ -16,7 +16,7 @@ class CreatureSubtypeSeeder extends AbstractYmlSeeder
         $data = $this->getDataFromFile();
 
         foreach ($data as $datum) {
-            print "[Internal] Creating Creature Subtype " . $datum['name'] . "...\n";
+            print "[Internal] Creating CreatureType Subtype " . $datum['name'] . "...\n";
             CreatureSubtype::fromInternalJson($datum);
         }
     }

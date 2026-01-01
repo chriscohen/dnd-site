@@ -7,21 +7,20 @@ namespace App\Models\ArmorClass;
 use App\Enums\ArmorClass\ArmorClassSource;
 use App\Models\AbilityScores\AbilityScore;
 use App\Models\AbstractModel;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Ramsey\Uuid\Uuid;
 
 /**
  * @property string $id
  *
  * @property ?bool $braces
  * @property ?string $condition
- * @property CreatureEdition $creatureEdition
+ * @property CreatureTypeEdition $creatureTypeEdition
  * @property Collection<ArmorClassItem> $items
  * @property ?int $value
  */
@@ -37,14 +36,14 @@ class ArmorClass extends AbstractModel
         return Attribute::make(
             // Add 10 (base) plus the dex modifier if we can access it, plus any items (natural or equipment).
             get: fn () => 10 + $this->items->sum(fn (ArmorClassItem $item) => $item->value) + (
-                $dex?->modifier ?? $this->creatureEdition?->dex?->modifier ?? 0
+                $dex?->modifier ?? $this->creatureTypeEdition?->dex?->modifier ?? 0
             )
         );
     }
 
-    public function creatureEdition(): BelongsTo
+    public function creatureTypeEdition(): BelongsTo
     {
-        return $this->belongsTo(CreatureEdition::class, 'creature_edition_id');
+        return $this->belongsTo(CreatureTypeEdition::class, 'creature_type_edition_id');
     }
 
     public function items(): HasMany
@@ -90,7 +89,7 @@ class ArmorClass extends AbstractModel
     public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
-        $item->creatureEdition()->associate($parent);
+        $item->creatureTypeEdition()->associate($parent);
         $item->save();
 
         // Sometimes we have a number, and sometimes a data structure.
@@ -123,7 +122,7 @@ class ArmorClass extends AbstractModel
     public static function generate(ModelInterface $parent = null): static
     {
         $item = new static();
-        $item->creatureEdition()->associate($parent);
+        $item->creatureTypeEdition()->associate($parent);
         $item->save();
         $item->items()->saveMany([
             ArmorClassItem::generate($item),

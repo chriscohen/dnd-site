@@ -15,7 +15,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
- * @property CreatureEdition $creatureEdition
+ * @property CreatureTypeEdition $creatureTypeEdition
  * @property ?string $description
  * @property SenseType $type
  * @property ?int $range
@@ -35,9 +35,9 @@ class CreatureSense extends AbstractModel
         ];
     }
 
-    public function creatureEdition(): BelongsTo
+    public function creatureTypeEdition(): BelongsTo
     {
-        return $this->belongsTo(CreatureEdition::class, 'creature_edition_id');
+        return $this->belongsTo(CreatureTypeEdition::class, 'creature_type_edition_id');
     }
 
     public function toArrayFull(): array
@@ -97,7 +97,7 @@ class CreatureSense extends AbstractModel
     public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
-        $item->creatureEdition()->associate($parent);
+        $item->creatureTypeEdition()->associate($parent);
 
         list($senseType, $range) = explode(' ', trim($value), 2);
 

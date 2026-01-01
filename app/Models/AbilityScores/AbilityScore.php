@@ -7,7 +7,7 @@ namespace App\Models\AbilityScores;
 use App\Enums\AbilityScoreType;
 use App\Models\AbstractModel;
 use App\Models\Actors\ActorType;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 /**
  * @property bool $is_proficient
  * @property int $modifier
- * @property ActorType|CreatureEdition $parent
+ * @property ActorType|CreatureTypeEdition $parent
  * @property AbilityScoreType $type
  * @property int $value
  */

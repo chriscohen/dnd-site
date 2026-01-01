@@ -9,7 +9,7 @@ use App\Enums\Damage\DamageSourceType;
 use App\Enums\Damage\DamageType;
 use App\Models\AbstractModel;
 use App\Models\Actors\ActorType;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property ?ConditionEdition $conditionEdition
  * @property ?DamageType $damage_type
  * @property ?DamageSourceType $damage_source_types
- * @property ActorType|CreatureEdition $entity
+ * @property ActorType|CreatureTypeEdition $entity
  * @property ?string $note
  * @property ConditionInstanceType $type
  */
@@ -69,7 +69,7 @@ class ConditionInstance extends AbstractModel
      *     type: ConditionInstanceType
      *     nonmagical: ?bool
      * }  $value
-     * @param  CreatureEdition|null  $parent
+     * @param  CreatureTypeEdition|null  $parent
      */
     public static function fromInternalJson(int|array|string $value, ?ModelInterface $parent = null): static
     {

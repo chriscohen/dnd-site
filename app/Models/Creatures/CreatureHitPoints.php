@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * @property string $id
  * @property ?int $average
- * @property CreatureEdition $creatureEdition
+ * @property CreatureTypeEdition $creatureTypeEdition
  * @property ?string $description
  * @property DiceFormula $formula
  */
@@ -31,9 +31,9 @@ class CreatureHitPoints extends AbstractModel
         ];
     }
 
-    public function creatureEdition(): HasOne
+    public function creatureTypeEdition(): HasOne
     {
-        return $this->hasOne(CreatureEdition::class, 'creature_hit_points_id');
+        return $this->hasOne(CreatureTypeEdition::class, 'creature_hit_points_id');
     }
 
     public function toArrayFull(): array
@@ -63,9 +63,9 @@ class CreatureHitPoints extends AbstractModel
     public static function fromInternalJson(int|array|string $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
-        /** @var CreatureEdition $parent */
+        /** @var CreatureTypeEdition $parent */
         if (!empty($parent)) {
-            $item->creatureEdition()->save($parent);
+            $item->creatureTypeEdition()->save($parent);
         }
 
         if (!empty($value['average'])) {

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * Creature origin is always 4th edition only.
+ * CreatureType origin is always 4th edition only.
  *
  * @property string $id
  * @property string $name

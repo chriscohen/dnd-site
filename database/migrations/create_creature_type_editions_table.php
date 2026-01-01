@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\Creatures\Creature;
+use App\Models\Creatures\CreatureType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,9 +15,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('creature_editions', function (Blueprint $table) {
+        Schema::create('creature_type_editions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignIdFor(Creature::class, 'creature_id');
+            $table->foreignIdFor(CreatureType::class, 'creature_type_id');
             $table->foreignIdFor(Source::class, 'source_id')->nullable();
 
             $table->float('challenge_rating')->nullable()->index();
@@ -39,12 +39,12 @@ return new class extends Migration
 
             // We can have multiple editions of the same creature, in the same game edition, as long as they come from
             // different sources.
-            $table->unique(['creature_id', 'game_edition', 'source_id'], 'creature_edition_source');
+            $table->unique(['creature_type_id', 'game_edition', 'source_id'], 'creature_edition_source');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('creature_editions');
+        Schema::dropIfExists('creature_type_editions');
     }
 };

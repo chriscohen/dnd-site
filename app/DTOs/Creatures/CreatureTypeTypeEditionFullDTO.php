@@ -14,14 +14,14 @@ use App\Models\AbilityScores\AbilityScore;
 use App\Models\ArmorClass\ArmorClass;
 use App\Models\Creatures\CreatureAge;
 use App\Models\Creatures\CreatureAlignment;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureTypeEdition;
 use App\Models\Media\Media;
 use App\Models\ModelInterface;
 use App\Models\Conditions\ConditionEdition;
 use App\Models\MovementSpeeds\MovementSpeed;
 use Illuminate\Support\Collection;
 
-readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
+readonly class CreatureTypeTypeEditionFullDTO extends CreatureTypeEditionSummaryDTO
 {
     public function __construct(
         string $id,
@@ -56,7 +56,7 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
     }
 
     /**
-     * @param CreatureEdition $model
+     * @param CreatureTypeEdition $model
      */
     public static function fromModel(ModelInterface $model): static
     {

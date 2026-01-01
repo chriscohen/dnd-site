@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\Creatures\Creature;
+use App\Models\Creatures\CreatureType;
 use App\Models\Prerequisites\PrerequisiteGroup;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('prerequisite_creatures', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignIdFor(PrerequisiteGroup::class, 'prerequisite_creature_group_id');
-            $table->foreignIdFor(Creature::class, 'creature_id')->nullable();
+            $table->foreignIdFor(CreatureType::class, 'creature_type_id')->nullable();
             $table->string('name')->nullable();
 
-            $table->unique(['prerequisite_creature_group_id', 'creature_id'], 'creature_unique');
+            $table->unique(['prerequisite_creature_group_id', 'creature_type_id'], 'creature_unique');
         });
     }
 

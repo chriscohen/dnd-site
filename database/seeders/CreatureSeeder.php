@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Creatures\Creature;
-use App\Models\Creatures\CreatureEdition;
+use App\Models\Creatures\CreatureType;
+use App\Models\Creatures\CreatureTypeEdition;
 use Illuminate\Support\Facades\Storage;
 
 class CreatureSeeder extends AbstractYmlSeeder
 {
-    protected string $model = Creature::class;
+    protected string $model = CreatureType::class;
     protected array $dependsOn = [
         SourceSeeder::class,
     ];
@@ -23,13 +23,13 @@ class CreatureSeeder extends AbstractYmlSeeder
         $json = $this->getDataFromFile('5etools/data/races.json');
 
         foreach ($json['race'] as $datum) {
-            print "[5e.tools] Creating Creature (Race) " . $datum['name'] . "...\n";
-            $creature = Creature::from5eJson($datum);
+            print "[5e.tools] Creating CreatureType (Race) " . $datum['name'] . "...\n";
+            $creature = CreatureType::from5eJson($datum);
             // We need to load from the db to get the edition data.
-            $creature = Creature::query()->find($creature->id);
+            $creature = CreatureType::query()->find($creature->id);
 
             // This is a "race" in 5e.tools so set the is_playable flag to true.
-            /** @var CreatureEdition $edition */
+            /** @var CreatureTypeEdition $edition */
             $edition = $creature->editions->first();
             $edition->is_playable = true;
             $edition->save();
@@ -57,15 +57,15 @@ class CreatureSeeder extends AbstractYmlSeeder
                     continue;
                 }
 
-                print "[5e.tools] Creating Creature (" . $filename . ") " . $datum['name'] . "...\n";
-                $creatureType = Creature::from5eJson($datum);
-                /** @var CreatureEdition $edition */
+                print "[5e.tools] Creating CreatureType (" . $filename . ") " . $datum['name'] . "...\n";
+                $creatureType = CreatureType::from5eJson($datum);
+                /** @var CreatureTypeEdition $edition */
                 $edition = $creatureType->editions->firstOrFail();
 
                 // Look for extra data.
                 $extraPath = '/5etools-x/data/creature-types/' . $creatureType->slug . '.json';
                 if (Storage::disk('data')->exists($extraPath)) {
-                    print "[Extra] Adding extra data for 5e.tools Creature " . $creatureType->name . "...\n";
+                    print "[Extra] Adding extra data for 5e.tools CreatureType " . $creatureType->name . "...\n";
                     $json = json_decode(Storage::disk('data')->get($extraPath), true);
 
                     $edition->fromExtraData($json, $creatureType);
