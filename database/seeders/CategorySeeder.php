@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\Category;
-use App\Models\Media;
+use App\Models\Media\Media;
 use Illuminate\Database\Eloquent\Model;
 
 class CategorySeeder extends AbstractYmlSeeder

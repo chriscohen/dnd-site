@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Magic;
 
 use App\Models\AbstractModel;
-use App\Models\Media;
+use App\Models\Media\Media;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

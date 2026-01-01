@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\DTOs\Media;
 
 use App\DTOs\AbstractDTO;
-use App\Models\Media;
+use App\Models\Media\Media;
 use App\Models\ModelInterface;
 
 readonly class MediaSummaryDTO extends AbstractDTO

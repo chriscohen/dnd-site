@@ -37,7 +37,15 @@ interface ModelInterface
      * @return ModelInterface|null
      */
 
+    /**
+     * Static method for importing data that is additional to 5e.tools JSON.
+     */
     public static function fromFeJsonExtra(array|string $value, ModelInterface $parent = null): ?static;
+
+    /**
+     * Non-static method for importing extra data from JSON.
+     */
+    public function fromExtraData(array|string $value, ?ModelInterface $parent = null): ?static;
 
     /**
      * Get a faker instance for this model.

@@ -29,6 +29,7 @@ class CreatureController extends AbstractController
                 'editions.armorClass',
                 'editions.armorClass.items',
                 'editions.hitPoints',
+                'editions.media',
                 'editions.movementSpeeds',
                 'editions.type',
                 'editions.type.mainType',

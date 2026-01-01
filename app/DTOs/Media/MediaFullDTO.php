@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\DTOs\Media;
 
-use App\Models\Media;
+use App\Models\Media\Media;
 use App\Models\ModelInterface;
+use Illuminate\Support\Collection;
 
 readonly class MediaFullDTO extends MediaSummaryDTO
 {
@@ -30,7 +31,7 @@ readonly class MediaFullDTO extends MediaSummaryDTO
             url: $model->getUrl(),
             name: $model->name,
             filename: $model->filename,
-            mediaType: $model->media_type,
+            mediaType: $model->media_type->toString(),
             mimeType: $model->mime_type,
             collection: $model->collection_name,
             size: $model->size

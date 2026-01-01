@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Models\Media\Media;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use App\Models\Media;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {

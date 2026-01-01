@@ -7,6 +7,7 @@ namespace App\DTOs\Creatures;
 use App\DTOs\AbilityScores\AbilityScoreDTO;
 use App\DTOs\AbilityScores\AbilityScoreModifierGroupDTO;
 use App\DTOs\ArmorClass\ArmorClassDTO;
+use App\DTOs\Media\MediaFullDTO;
 use App\DTOs\MovementSpeeds\MovementSpeedDTO;
 use App\Enums\Creatures\CreatureSizeUnit;
 use App\Models\AbilityScores\AbilityScore;
@@ -14,6 +15,7 @@ use App\Models\ArmorClass\ArmorClass;
 use App\Models\Creatures\CreatureAge;
 use App\Models\Creatures\CreatureAlignment;
 use App\Models\Creatures\CreatureEdition;
+use App\Models\Media\Media;
 use App\Models\ModelInterface;
 use App\Models\Conditions\ConditionEdition;
 use App\Models\MovementSpeeds\MovementSpeed;
@@ -46,6 +48,8 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
         public Collection $movementSpeeds,
         public array $resist,
         public array $sizes,
+        /** @var Collection<Media> $tokens */
+        public Collection $tokens,
         public ?CreatureTypeDTO $type = null
     ) {
         parent::__construct($id);
@@ -92,6 +96,9 @@ readonly class CreatureEditionFullDTO extends CreatureEditionSummaryDTO
                 collect(),
             resist: $model->damage_resistances->toArray(),
             sizes: $model->sizes->map(fn (CreatureSizeUnit $item) => $item->toString())->toArray(),
+            tokens: $model->relationLoaded('media') ?
+                $model->tokens->map(fn (Media $item) => MediaFullDTO::fromModel($item)) :
+                collect(),
             type: $model->relationLoaded('type') && !empty($model->type) ?
                 CreatureTypeDTO::fromModel($model->type) :
                 null

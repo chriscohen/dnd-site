@@ -126,6 +126,11 @@ abstract class AbstractModel extends Model implements Arrayable, ModelInterface
         throw new \InvalidArgumentException('Not implemented');
     }
 
+    public function fromExtraData(array|string $value, ?ModelInterface $parent = null): ?static
+    {
+        throw new \InvalidArgumentException('Not implemented');
+    }
+
     /**
      * @param array{
      *     'source': string,

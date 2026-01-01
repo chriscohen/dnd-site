@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Enums\JsonRenderMode;
 use App\Enums\PublicationType;
+use App\Models\Media\Media;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

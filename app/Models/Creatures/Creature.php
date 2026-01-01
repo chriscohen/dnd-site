@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Creatures;
 
 use App\Models\AbstractModel;
+use App\Models\Media\Media;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\Reference;

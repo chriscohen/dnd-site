@@ -6,7 +6,7 @@ namespace App\Models\Items;
 
 use App\Models\AbstractModel;
 use App\Models\Category;
-use App\Models\Media;
+use App\Models\Media\Media;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;

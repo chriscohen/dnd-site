@@ -18,7 +18,7 @@ class CreatureSeeder extends AbstractYmlSeeder
     public function run(): void
     {
         /**
-         * Import races from JSON.
+         * Import 5e.tools races from JSON.
          */
         $json = $this->getDataFromFile('5etools/data/races.json');
 
@@ -35,6 +35,9 @@ class CreatureSeeder extends AbstractYmlSeeder
             $edition->save();
         }
 
+        /**
+         * Import from 5e.tools bestiary files.
+         */
         foreach (Storage::disk('data')->files('/5etools/data/bestiary') as $file) {
             if (str_contains('fluff', $file)) {
                 print "[5e.tools] Skipping fluff file: " . $file . "\n";
@@ -45,14 +48,28 @@ class CreatureSeeder extends AbstractYmlSeeder
             $pieces = explode('/', $file);
             $filename = end($pieces);
 
+            /**
+             * Import each monster in the file.
+             */
             foreach ($json['monster'] as $datum) {
                 if (!empty($datum['_copy'])) {
                     print "[5e.tools] Skipping copy: " . $datum['name'] . "\n";
                     continue;
                 }
 
-                print "[5e.tools] Creating Creature (" . $filename .  ") " . $datum['name'] . "...\n";
-                Creature::from5eJson($datum);
+                print "[5e.tools] Creating Creature (" . $filename . ") " . $datum['name'] . "...\n";
+                $creatureType = Creature::from5eJson($datum);
+                /** @var CreatureEdition $edition */
+                $edition = $creatureType->editions->firstOrFail();
+
+                // Look for extra data.
+                $extraPath = '/5etools-x/data/creature-types/' . $creatureType->slug . '.json';
+                if (Storage::disk('data')->exists($extraPath)) {
+                    print "[Extra] Adding extra data for 5e.tools Creature " . $creatureType->name . "...\n";
+                    $json = json_decode(Storage::disk('data')->get($extraPath), true);
+
+                    $edition->fromExtraData($json, $creatureType);
+                }
             }
         }
     }

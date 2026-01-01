@@ -10,7 +10,7 @@ use App\Exceptions\DuplicateRecordException;
 use App\Models\AbstractModel;
 use App\Models\CampaignSetting;
 use App\Models\Company;
-use App\Models\Media;
+use App\Models\Media\Media;
 use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\ProductId;
@@ -24,7 +24,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Laravel\Scout\Searchable;
 use Ramsey\Uuid\Uuid;
-use Spatie\LaravelMarkdown\MarkdownRenderer;
 
 /**
  * @property Uuid $id

@@ -9,6 +9,7 @@ use App\Enums\Conditions\ConditionInstanceType;
 use App\Enums\Creatures\CreatureSizeUnit;
 use App\Enums\Damage\DamageType;
 use App\Enums\GameEdition;
+use App\Enums\MediaType;
 use App\Enums\Movement\MovementType;
 use App\Enums\SenseType;
 use App\Enums\SkillMasteryLevel;
@@ -20,7 +21,7 @@ use App\Models\Alignment\Alignment;
 use App\Models\ArmorClass\ArmorClass;
 use App\Models\Conditions\ConditionInstance;
 use App\Models\Dice\DiceFormula;
-use App\Models\ModelCollection;
+use App\Models\Media\Media;
 use App\Models\ModelInterface;
 use App\Models\MovementSpeeds\MovementSpeed;
 use App\Models\Reference;
@@ -66,6 +67,7 @@ use Illuminate\Support\Collection as SupportCollection;
  * @property ?CreatureHitPoints $hitPoints
  * @property bool $is_playable
  * @property ?int $lair_xp
+ * @property Collection<Media> $media
  * @property Collection<MovementSpeed> $movementSpeeds
  * @property int $passivePerception
  * @property ?int $proficiency_bonus
@@ -76,6 +78,7 @@ use Illuminate\Support\Collection as SupportCollection;
  * @property Collection<SkillInstance> $skills
  * @property Source $source
  * @property ?Collection<Tag> $tags
+ * @property Collection<Media> $tokens
  * @property ?CreatureSense $truesight
  * @property ?CreatureType $type
  * @property ?int $weight
@@ -309,6 +312,11 @@ class CreatureEdition extends AbstractModel
         }
     }
 
+    public function media(): MorphToMany
+    {
+        return $this->morphToMany(Media::class, 'entity', 'media_entity');
+    }
+
     public function movementSpeeds(): MorphMany
     {
         return $this->morphMany(MovementSpeed::class, 'parent');
@@ -364,6 +372,13 @@ class CreatureEdition extends AbstractModel
     public function tags(): MorphToMany
     {
         return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    public function tokens(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->media()->where('media_type', MediaType::TOKEN)->get()
+        );
     }
 
     public function truesight(): Attribute
@@ -807,6 +822,19 @@ class CreatureEdition extends AbstractModel
 
         $item->save();
         return $item;
+    }
+
+    public function fromExtraData(array|string $value, ?ModelInterface $parent = null): ?static
+    {
+        if (!empty($value['token'])) {
+            $media = Media::fromInternalJson([
+                'filename' => '/tokens/' . $value['token'],
+            ], $parent);
+            $this->media()->save($media);
+        }
+
+        $this->save();
+        return $this;
     }
 
     public static function generate(ModelInterface $parent = null): static

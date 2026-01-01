@@ -2,11 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Media;
 
 use App\Enums\MediaType;
+use App\Models\AbstractModel;
+use App\Models\Creatures\CreatureEdition;
+use App\Models\ModelInterface;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
 
@@ -20,6 +25,8 @@ use Ramsey\Uuid\Uuid;
  * @property ?string $mime_type
  * @property ?string $name
  * @property ?int $size
+ *
+ * @property Collection<CreatureEdition> $creatureEditions
  */
 class Media extends AbstractModel
 {
@@ -32,13 +39,19 @@ class Media extends AbstractModel
         ];
     }
 
+    public function creatureEditions(): MorphToMany
+    {
+        return $this->morphedByMany(CreatureEdition::class, 'entity', 'media_entity');
+    }
+
     /**
      * @param  array{
      *     filename: string,
      *     disk?: string,
      *     name?: string,
      *     collection_name?: string,
-     *     mime_type?: string
+     *     mime_type?: string,
+     *     media_type?: string
      * } $data
      * @return self
      */
@@ -57,34 +70,16 @@ class Media extends AbstractModel
         $data['size'] = $disk->size($data['filename']);
         $data['mime_type'] = $disk->mimeType($data['filename']);
 
+        if (empty($data['media_type'])) {
+            $data['media_type'] = MediaType::IMAGE;
+        }
+
         return Media::create($data);
     }
 
     public function getUrl(): string
     {
         return Storage::disk($this->disk)->url($this->filename);
-    }
-
-    public function toArrayFull(): array
-    {
-        return [
-            'filename' => $this->filename,
-            'mime_type' => $this->mime_type,
-            'size' => $this->size,
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'url' => $this->getUrl(),
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
     }
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static

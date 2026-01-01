@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Company;
-use App\Models\Media;
+use App\Models\Media\Media;
 
 class CompanySeeder extends AbstractYmlSeeder
 {
