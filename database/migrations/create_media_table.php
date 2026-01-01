@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('name')->nullable()->index();
             $table->string('filename');
             $table->string('mime_type')->nullable();
+            $table->unsignedSmallInteger('media_type')->index();
             $table->string('disk', 16);
             $table->unsignedBigInteger('size')->nullable();
 

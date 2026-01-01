@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\DTOs\Media;
 
-use App\DTOs\AbstractDTO;
 use App\Models\Media;
 use App\Models\ModelInterface;
 
@@ -12,11 +11,12 @@ readonly class MediaFullDTO extends MediaSummaryDTO
 {
     public function __construct(
         string $url,
-        public readonly ?string $name = null,
-        public readonly ?string $filename = null,
-        public readonly ?string $mimeType = null,
-        public readonly ?string $collection = null,
-        public readonly ?int $size = null
+        public ?string $name = null,
+        public ?string $filename = null,
+        public string $mediaType,
+        public ?string $mimeType = null,
+        public ?string $collection = null,
+        public ?int $size = null
     ) {
         parent::__construct($url);
     }
@@ -30,6 +30,7 @@ readonly class MediaFullDTO extends MediaSummaryDTO
             url: $model->getUrl(),
             name: $model->name,
             filename: $model->filename,
+            mediaType: $model->media_type,
             mimeType: $model->mime_type,
             collection: $model->collection_name,
             size: $model->size
