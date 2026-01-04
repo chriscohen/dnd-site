@@ -79,7 +79,7 @@ class Media extends AbstractModel
 
     public function getUrl(): string
     {
-        return Storage::disk($this->disk)->url($this->filename);
+        return $this->filename;
     }
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
