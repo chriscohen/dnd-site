@@ -9,7 +9,7 @@ use App\Http\Controllers\CampaignSettingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CharacterClassController;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\Creatures\CreatureController;
+use App\Http\Controllers\Creatures\CreatureTypeController;
 use App\Http\Controllers\Creatures\CreatureMainTypeController;
 use App\Http\Controllers\Items\ItemController;
 use App\Http\Controllers\Languages\LanguageController;
@@ -38,11 +38,11 @@ Route::get('/classes', [CharacterClassController::class, 'index']);
 Route::get('/company/{slug}', [CompanyController::class, 'get']);
 Route::get('/companies', [CompanyController::class, 'index']);
 
-Route::get('/creature/{slug}', [CreatureController::class, 'get']);
-Route::get('/creatures', [CreatureController::class, 'list']);
+Route::get('/creature-type/{slug}', [CreatureTypeController::class, 'get']);
+Route::get('/creature-types', [CreatureTypeController::class, 'list']);
 
-Route::get('/creature-type/{slug}', [CreatureMainTypeController::class, 'get']);
-Route::get('/creature-types', [CreatureMainTypeController::class, 'list']);
+Route::get('/creature-main-type/{slug}', [CreatureMainTypeController::class, 'get']);
+Route::get('/creature-main-types', [CreatureMainTypeController::class, 'list']);
 
 Route::get('/domains', [MagicDomainController::class, 'index']);
 

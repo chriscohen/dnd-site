@@ -23,6 +23,8 @@ use Ramsey\Uuid\Uuid;
  * @property Collection<SourceContents> $contents
  * @property Collection<BookCredit> $credits
  * @property Collection<SourceEditionFormat> $formats
+ * @property bool $hasContents
+ * @property bool $hasCredits
  * @property bool $is_primary
  * @property ?string $isbn10
  * @property ?string $isbn13
@@ -81,18 +83,18 @@ class SourceEdition extends AbstractModel
         return $this->hasMany(SourceEditionFormat::class, 'source_edition_id');
     }
 
-    /**
-     * @return string[]
-     */
-    public function getFormatsAsArray(): array
+    public function hasContents(): Attribute
     {
-        $output = [];
+        return Attribute::make(
+            get: fn () => $this->contents->count() > 0,
+        );
+    }
 
-        foreach ($this->formats as $format) {
-            $output[] = $format->format;
-        }
-
-        return $output;
+    public function hasCredits(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->credits->count() > 0,
+        );
     }
 
     public function source(): BelongsTo

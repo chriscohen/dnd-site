@@ -829,6 +829,7 @@ class CreatureTypeEdition extends AbstractModel
         if (!empty($value['token'])) {
             $media = Media::fromInternalJson([
                 'filename' => '/tokens/' . $value['token'],
+                'mediaType' => 'token',
             ], $parent);
             $this->media()->save($media);
         }

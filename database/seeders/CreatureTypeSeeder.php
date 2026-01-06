@@ -8,7 +8,7 @@ use App\Models\Creatures\CreatureType;
 use App\Models\Creatures\CreatureTypeEdition;
 use Illuminate\Support\Facades\Storage;
 
-class CreatureSeeder extends AbstractYmlSeeder
+class CreatureTypeSeeder extends AbstractYmlSeeder
 {
     protected string $model = CreatureType::class;
     protected array $dependsOn = [

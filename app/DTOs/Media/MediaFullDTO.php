@@ -6,7 +6,6 @@ namespace App\DTOs\Media;
 
 use App\Models\Media\Media;
 use App\Models\ModelInterface;
-use Illuminate\Support\Collection;
 
 readonly class MediaFullDTO extends MediaSummaryDTO
 {

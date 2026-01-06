@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             CampaignSettingSeeder::class,
             SourceSeeder::class,
             LanguageSeeder::class,
-            CreatureSeeder::class,
+            CreatureTypeSeeder::class,
 
             FeatureSeeder::class,
             CharacterClassSeeder::class,

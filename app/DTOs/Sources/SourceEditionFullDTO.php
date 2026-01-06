@@ -24,6 +24,8 @@ readonly class SourceEditionFullDTO extends SourceEditionSummaryDTO
         /** @var Collection<BookCredit> $credits */
         public ?Collection $credits = null,
         public ?array $formats = null,
+        public bool $hasContents = false,
+        public bool $hasCredits = false,
         public bool $isPrimary = false,
         public ?string $isbn10 = null,
         public ?string $isbn13 = null,
@@ -49,6 +51,8 @@ readonly class SourceEditionFullDTO extends SourceEditionSummaryDTO
                 $model->credits->map(fn (BookCredit $item) => BookCreditDTO::fromModel($item)) :
                 null,
             formats: $model->formats->map(fn (SourceEditionFormat $item) => $item->format)->toArray(),
+            hasContents: $model->relationLoaded('contents') && $model->hasContents,
+            hasCredits: $model->relationLoaded('credits') && $model->hasCredits,
             isPrimary: $model->is_primary,
             isbn10: $model->isbn10,
             isbn13: $model->isbn13,

@@ -12,7 +12,7 @@ use App\Models\Creatures\CreatureType;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class CreatureController extends AbstractController
+class CreatureTypeController extends AbstractController
 {
     protected string $entityType = CreatureType::class;
     protected string $orderKey = 'name';
