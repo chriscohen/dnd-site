@@ -2,6 +2,7 @@
     {
         "id": "2c39d46d-f6ff-4769-8803-d93015df5c81",
         "name": "Birthright",
+        "logo": "birthright.webp",
         "shortName": "BR",
         "publisher": "wizards-of-the-coast",
         "publicationType": "official"
@@ -16,6 +17,7 @@
     {
         "id": "c2dc6552-7a37-4fa9-aa64-f672589b9092",
         "name": "Conan and Red Sonja",
+        "logo": "conan-red-sonja.webp",
         "shortName": "C&RS",
         "publisher": "wizards-of-the-coast",
         "publicationType": "official"
@@ -30,6 +32,7 @@
     {
         "id": "e15219b6-bdfd-496a-b6b8-96120ec08b88",
         "name": "Dark Sun",
+        "logo": "dark-sun.webp",
         "shortName": "DS",
         "publisher": "wizards-of-the-coast",
         "publicationType": "official"
@@ -37,6 +40,7 @@
     {
         "id": "9bfe277c-d37a-45f7-9d1d-4f828ba3257c",
         "name": "Diablo II",
+        "logo": "diablo-ii.webp",
         "shortName": "D2",
         "publisher": "wizards-of-the-coast",
         "publicationType": "official"
@@ -44,6 +48,7 @@
     {
         "id": "4b84c93c-17dc-4c37-ac0f-fb04c2651f6d",
         "name": "Dragon Fist",
+        "logo": "dragon-fist.webp",
         "shortName": "DF",
         "publisher": "wizards-of-the-coast",
         "publicationType": "official"
@@ -51,6 +56,7 @@
     {
         "id": "2fa8dddd-96ef-4df3-8b60-ca550ea3aeab",
         "name": "Dragonlance",
+        "logo": "dragonlance.webp",
         "shortName": "DL",
         "publisher": "wizards-of-the-coast",
         "publicationType": "official"
@@ -62,13 +68,6 @@
         "publisher": "wizards-of-the-coast",
         "publicationType": "official",
         "logo": "eberron-logo.webp"
-    },
-    {
-        "id": "26a1861f-c5f5-4e83-b672-48dda7192d4c",
-        "name": "Exandria",
-        "shortName": "EX",
-        "publisher": "wizards-of-the-coast",
-        "publicationType": "official"
     },
     {
         "id": "d391eda0-80f8-4c6d-9d10-34a0148a60c4",
@@ -90,6 +89,7 @@
     {
         "id": "98d1ad61-5fbc-441d-926e-c76ba8699595",
         "name": "Greyhawk",
+        "logo": "greyhawk.webp",
         "shortName": "GH",
         "publisher": "wizards-of-the-coast",
         "publicationType": "official"
@@ -153,6 +153,7 @@
     {
         "id": "b0c5d219-006d-4dce-a740-46d938111098",
         "name": "Planescape",
+        "logo": "planescape.webp",
         "shortName": "PS",
         "publisher": "wizards-of-the-coast",
         "publicationType": "official"
@@ -189,6 +190,7 @@
     {
         "id": "52d76add-ad89-4360-824c-8555c0a7c687",
         "name": "Spelljammer",
+        "logo": "spelljammer.webp",
         "shortName": "SJ",
         "publisher": "wizards-of-the-coast",
         "publicationType": "official"
@@ -203,6 +205,7 @@
     {
         "id": "43dbb66b-837f-4023-a385-60bab116800e",
         "name": "Tal'Dorei",
+        "logo": "tal-dorei.webp",
         "shortName": "TD",
         "publisher": "green-ronin-publishing",
         "publicationType": "third party"
