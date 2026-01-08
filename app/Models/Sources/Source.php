@@ -3,19 +3,15 @@
 namespace App\Models\Sources;
 
 use App\Enums\GameEdition;
-use App\Enums\JsonRenderMode;
 use App\Enums\PublicationType;
 use App\Enums\Sources\SourceType;
 use App\Exceptions\DuplicateRecordException;
 use App\Models\AbstractModel;
 use App\Models\CampaignSetting;
-use App\Models\Company;
 use App\Models\Media\Media;
-use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\ProductId;
 use App\Models\Spells\Spell;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -68,7 +64,7 @@ class Source extends AbstractModel
     public function coverImage(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->primaryEdition->coverImage
+            get: fn () => $this->primaryEdition()?->coverImage
         );
     }
 
@@ -89,14 +85,18 @@ class Source extends AbstractModel
         return $this->belongsTo(Source::class, 'parent_id');
     }
 
-    public function primaryEdition(): ?SourceEdition
+    public function primaryEdition(): Attribute
     {
-        // If we can't find a primary edition, return the first edition. Fail only if there are no editions.
-        /** @var ?SourceEdition $primary */
-        $primary = $this->editions->where('is_primary', '=', true)->first();
-        /** @var ?SourceEdition $first */
-        $first = $this->editions->first();
-        return $primary ?? $first ?? null;
+        return Attribute::make(
+            get: function () {
+                // If we can't find a primary edition, return the first edition. Fail only if there are no editions.
+                /** @var ?SourceEdition $primary */
+                $primary = $this->editions->where('is_primary', '=', true)->first();
+                /** @var ?SourceEdition $first */
+                $first = $this->editions->first();
+                return $primary ?? $first ?? null;
+            }
+        );
     }
 
     protected function publicationType(): Attribute

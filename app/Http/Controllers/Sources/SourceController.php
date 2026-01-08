@@ -53,6 +53,10 @@ class SourceController extends AbstractController
             'publisher' => 'string|nullable',
         ]);
 
+        $this->query->with([
+            'editions'
+        ]);
+
         if (!empty($request->input('editions'))) {
             $this->editionQuery($request->input('editions'));
         }
