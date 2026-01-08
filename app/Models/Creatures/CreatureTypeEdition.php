@@ -442,7 +442,7 @@ class CreatureTypeEdition extends AbstractModel
                 'page' => $value['page'] ?? null,
             ], $item);
             // Use the game edition of the sourcebook.
-            $item->game_edition = GameEdition::tryFromString($reference->edition->source->game_edition);
+            $item->game_edition = GameEdition::tryFromString($reference->edition->source->gameEdition);
         }
 
         // Movement speeds.
@@ -475,7 +475,7 @@ class CreatureTypeEdition extends AbstractModel
             $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
 
             // Try to infer the game edition from the sourcebook.
-            $edition = GameEdition::tryFromString($source->game_edition) ??
+            $edition = GameEdition::tryFromString($source->gameEdition) ??
                 throw new \InvalidArgumentException("Could not infer game edition from sourcebook: {$source->name}");
         } catch (ModelNotFoundException $e) {
             // We can't find any source with this name so assume fifth edition.

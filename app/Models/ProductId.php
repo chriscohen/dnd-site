@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\JsonRenderMode;
-use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @property Uuid $id
+ * @property string $id
  *
- * @property SourceEdition $edition
  * @property Company $origin
  * @property string $product_id
- * @property Source $source
+ * @property SourceEdition $sourceEdition
  * @property Uuid $source_id
  */
 class ProductId extends AbstractModel
@@ -31,9 +28,9 @@ class ProductId extends AbstractModel
         return $this->belongsTo(Company::class, 'origin_id');
     }
 
-    public function source(): BelongsTo
+    public function sourceEdition(): BelongsTo
     {
-        return $this->belongsTo(Source::class, 'source_id');
+        return $this->belongsTo(SourceEdition::class, 'source_edition_id');
     }
 
     public function url(): ?string
@@ -52,7 +49,7 @@ class ProductId extends AbstractModel
         $company = Company::query()->where('slug', $value['company'])->firstOrFail();
         $item->origin()->associate($company);
 
-        $item->source()->associate($parent);
+        $item->sourceEdition()->associate($parent);
 
         $item->save();
         return $item;

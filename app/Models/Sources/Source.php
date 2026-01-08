@@ -31,20 +31,13 @@ use Ramsey\Uuid\Uuid;
  * @property string $name
  *
  * @property ?CampaignSetting $campaign_setting
- * @property ?Uuid $campaign_setting_id
- * @property ?Uuid $cover_image_id
  * @property ?Media $coverImage
  * @property ?string $description
  * @property Collection<SourceEdition> $editions
- * @property ?GameEdition $game_edition
  * @property ?Source $parent
  * @property Uuid $parent_id
  * @property ?SourceEdition $primaryEdition
- * @property ?string $product_code
- * @property Collection<ProductId> $productIds
  * @property PublicationType $publication_type
- * @property Company $publisher
- * @property string $publisher_id
  * @property ?string $shortName
  * @property SourceType $source_type
  * @property SourceSourcebookType[] $sourcebookTypes
@@ -57,7 +50,7 @@ class Source extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'game_edition' => GameEdition::class,
+        'gameEdition' => GameEdition::class,
         'publication_type' => PublicationType::class,
         'source_type' => SourceType::class,
     ];
@@ -72,9 +65,11 @@ class Source extends AbstractModel
         return $this->hasMany(Source::class, 'parent_id');
     }
 
-    public function coverImage(): BelongsTo
+    public function coverImage(): Attribute
     {
-        return $this->belongsTo(Media::class, 'cover_image_id');
+        return Attribute::make(
+            get: fn () => $this->primaryEdition->coverImage
+        );
     }
 
     public function editions(): HasMany
@@ -85,7 +80,7 @@ class Source extends AbstractModel
     protected function gameEdition(): Attribute
     {
         return Attribute::make(
-            get: fn (int $value) => GameEdition::tryFrom($value)?->toString(true),
+            get: fn () => $this->primaryEdition->game_edition,
         );
     }
 
@@ -104,21 +99,11 @@ class Source extends AbstractModel
         return $primary ?? $first ?? null;
     }
 
-    public function productIds(): HasMany
-    {
-        return $this->hasMany(ProductId::class);
-    }
-
     protected function publicationType(): Attribute
     {
         return Attribute::make(
             get: fn (?int $value) => PublicationType::tryFrom($value)?->toString() ?? null,
         );
-    }
-
-    public function publisher(): BelongsTo
-    {
-        return $this->belongsTo(Company::class, 'publisher_id');
     }
 
     public function sourcebookTypes(): HasMany
@@ -136,57 +121,6 @@ class Source extends AbstractModel
     public function spells(): MorphToMany
     {
         return $this->morphedByMany(Spell::class, 'entity');
-    }
-
-    public function toArrayFull(): array
-    {
-        $output = [
-            'campaignSetting' => $this->campaign_setting?->toArray($this->renderMode) ?? null,
-            'description' => $this->description,
-            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
-            'productCode' => $this->product_code,
-            'productIds' => $this->productIds->collect()->toArray(),
-            'publicationType' => $this->publication_type,
-            'publisher' => $this->publisher?->toArray(JsonRenderMode::TEASER),
-            'sourceType' => $this->source_type,
-        ];
-
-        if ($this->sourcebookTypes()->count() > 0) {
-            $output['sourcebookTypes'] = [];
-
-            foreach ($this->sourcebookTypes as $sourcebookType) {
-                $output['sourcebookTypes'][] = $sourcebookType->sourcebook_type;
-            }
-        }
-
-        return $output;
-    }
-
-    public function toArrayShort(): array
-    {
-        $output = [
-            'id' => $this->id,
-            'slug' => $this->slug,
-            'name' => $this->name,
-            'shortName' => $this->shortName,
-        ];
-
-        if ($this->children->count() > 0) {
-            foreach ($this->children as $child) {
-                $output['children'][] = $child->toArrayShort();
-            }
-        }
-
-        return $output;
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [
-            'coverImage' => $this->coverImage?->toArray($this->renderMode),
-            'gameEdition' => $this->game_edition,
-            'parentId' => $this->parent_id,
-        ];
     }
 
     public function toSearchableArray(): array
@@ -212,35 +146,10 @@ class Source extends AbstractModel
 
         $item->description = $value['description'] ?? null;
         $item->shortName = $value['shortName'] ?? null;
-        $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
-        $item->product_code = $value['productCode'] ?? null;
 
         if (!empty($value['campaignSetting'])) {
             $campaignSetting = CampaignSetting::query()->where('slug', $value['campaignSetting'])->firstOrFail();
             $item->campaignSetting()->associate($campaignSetting);
-        }
-        if (!empty($value['coverImage'])) {
-            $coverImage = Media::fromInternalJson([
-                'filename' => '/books/' . $value['coverImage'],
-            ]);
-            $item->coverImage()->associate($coverImage);
-        }
-
-        foreach ($value['productIds'] ?? [] as $vendor => $productIdData) {
-            $productId = ProductId::fromInternalJson([
-                'company' => $vendor,
-                'productId' => $productIdData
-            ], $item);
-            $item->productIds()->save($productId);
-        }
-
-        // Allow for both publisherId (uuid) or publisher (slug).
-        if (!empty($value['publisherId'])) {
-            $company = Company::query()->where('id', $value['publisherId'])->firstOrFail();
-            $item->publisher()->associate($company);
-        } elseif (!empty($value['publisher'])) {
-            $company = Company::query()->where('slug', $value['publisher'])->firstOrFail();
-            $item->publisher()->associate($company);
         }
 
         $item->publication_type = PublicationType::tryFromString($value['publicationType']);
@@ -296,25 +205,10 @@ class Source extends AbstractModel
         $item->publication_type = $isWizards ? PublicationType::OFFICIAL : PublicationType::THIRD_PARTY;
         $item->source_type = SourceType::SOURCEBOOK;
 
-        if ($isWizards) {
-            $company = Company::query()->where('slug', 'wizards-of-the-coast')->firstOrFail();
-            $item->publisher()->associate($company);
-        }
-
         // Is it an adventure?
         if (!empty($value['isAdventure'])) {
             $sourceSourcebookType = SourceSourcebookType::fromInternalJson('adventure', $item);
             $item->sourcebookTypes()->save($sourceSourcebookType);
-        }
-
-        // Work out if it's 5e 2014 or 5e 2024.
-        $fifthDate = Carbon::parse('2024-09-17');
-        $myDate = Carbon::parse($value['published']);
-
-        if (str_contains($item->name, '2014') || $myDate < $fifthDate) {
-            $item->game_edition = GameEdition::FIFTH;
-        } else {
-            $item->game_edition = GameEdition::FIFTH_REVISED;
         }
 
         $edition = SourceEdition::from5eJson($value, $item);

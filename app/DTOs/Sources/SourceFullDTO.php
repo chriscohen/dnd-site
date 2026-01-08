@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace App\DTOs\Sources;
 
 use App\DTOs\CampaignSettingFullDTO;
-use App\DTOs\CompanySummaryDTO;
 use App\DTOs\Media\MediaSummaryDTO;
-use App\DTOs\ProductIdDTO;
 use App\Models\ModelInterface;
-use App\Models\ProductId;
 use App\Models\Sources\Source;
 use App\Models\Sources\SourceEdition;
 use Illuminate\Support\Collection;
@@ -29,11 +26,7 @@ readonly class SourceFullDTO extends SourceSummaryDTO
         public ?string $description = null,
         /** @var Collection<SourceEditionFullDTO> */
         public Collection $editions,
-        public ?string $productCode = null,
-        /** @var Collection<ProductIdDTO> */
-        public Collection $productIds,
         public string $publicationType,
-        public ?CompanySummaryDTO $publisher = null,
         public string $sourceType
     ) {
         parent::__construct($id, $coverImage, $gameEdition, $name, $parentId, $shortName, $slug);
@@ -47,7 +40,7 @@ readonly class SourceFullDTO extends SourceSummaryDTO
         return new static(
             id: $model->id,
             coverImage: $model->coverImage ? MediaSummaryDTO::fromModel($model->coverImage) : null,
-            gameEdition: $model->game_edition,
+            gameEdition: $model->primaryEdition->gameEdition,
             name: $model->name,
             parentId: $model->parent_id,
             shortName: $model->shortName,
@@ -60,12 +53,7 @@ readonly class SourceFullDTO extends SourceSummaryDTO
             editions: $model->relationLoaded('editions') ?
                 $model->editions->map(fn (SourceEdition $item) => SourceEditionFullDTO::fromModel($item)) :
                 [],
-            productCode: $model->product_code,
-            productIds: $model->relationLoaded('productIds') ?
-                $model->productIds->map(fn (ProductId $item) => $item) :
-                collect(),
             publicationType: $model->publication_type,
-            publisher: !empty($model->publisher) ? CompanySummaryDTO::fromModel($model->publisher) : null,
             sourceType: $model->source_type
         );
     }

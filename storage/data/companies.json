@@ -24,6 +24,13 @@
         "website": "https://www.amazon.com"
     },
     {
+        "id": "6b562d5a-1fb1-4b88-b99d-84648039af7d",
+        "slug": "darrington-press",
+        "name": "Darrington Press",
+        "logo": "darrington-press.webp",
+        "website": "https://darringtonpress.com"
+    },
+    {
         "id": "0f063d69-07ea-49ac-8bae-b26dd3a2bdf9",
         "slug": "dungeon-masters-guild",
         "name": "Dungeon Masters Guild",

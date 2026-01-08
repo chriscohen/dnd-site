@@ -3,17 +3,24 @@
     "name": "Aurora's Whole Realms Catalogue",
     "slug": "auroras-whole-realms-catalogue",
     "campaignSetting": "forgotten-realms",
-    "coverImage": "auroras-whole-realms-catalogue.webp",
     "description": "At last! Complete in one catalog, all the finest merchandise Faerûn has to offer is presented by the enterprising entrepreneur, Aurora the Eclectic.\nUseful for players in any AD&D fantasy campaign (and other role-playing games, too!), this is a handy listing of items and goods of all kinds, from farming tools to scribes' pens, from imported Shou Lung silks to Maztican cotton, from wines and ales to breads and cheeses. Prices are given in the gold piece standard, for simple conversion. Players' \"shopping trips\" will never be the same!\n\nIt is our hope that players and DMs will find this Catalogue both useful and enjoyable. Aurora is not above editorializing about her wares, but we think her opinions will be informative as well as entertaining.",
     "editions": [
         {
             "id": "73a8172c-70b6-4ce1-a52d-85a54ab603e7",
             "name": "original",
             "binding": "paperback",
+            "coverImage": "auroras-whole-realms-catalogue.webp",
             "formats": ["print", "pdf"],
+            "gameEdition": "2e",
             "isbn10": "1560763272",
             "isbn13": "9781560763277",
             "pages": 160,
+            "productCode": "TSR9358",
+            "productIds": {
+                "drivethru-rpg": "16384",
+                "dungeon-masters-guild": "16834"
+            },
+            "publisherId": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
             "releaseDate": "1992-06-01",
             "releaseDateMonthOnly": true,
             "credits": {
@@ -76,14 +83,7 @@
             ]
         }
     ],
-    "gameEdition": "2e",
-    "productCode": "TSR9358",
-    "productIds": {
-        "drivethru-rpg": "16384",
-        "dungeon-masters-guild": "16834"
-    },
     "publicationType": "official",
-    "publisherId": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
     "sourcebookTypes": [
         "gear_magic_items"
     ],

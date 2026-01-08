@@ -3,29 +3,29 @@
     "slug": "players-handbook-4th-edition",
     "name": "Player's Handbook 4th Edition",
     "shortName": "PHB4",
-    "coverImage": "players-handbook-4th-edition.webp",
     "description": "**The world needs heroes.**\nIn a fantastic world of magic and monsters, a new age of adventure unfolds. This core rulebook for the Dungeons & Dragons Roleplaying Game provides everything players need to create and run heroic characters through legendary dungeons of dread.\n\nThe Player's Handbook features the 4th Edition game rules, including character creation, combat and adventuring, classes and races, equipment and magic items, skills, feats, powers, and more.",
     "editions": [
         {
             "id": "367e4a13-67e2-4aac-8072-47758bc36910",
             "name": "original",
             "binding": "hardcover",
+            "coverImage": "players-handbook-4th-edition.webp",
             "formats": ["print", "pdf"],
+            "gameEdition": "4e",
             "isPrimary": true,
             "isbn10": "0786948671",
             "isbn13": "9780786948673",
             "pages": 320,
+            "productCode": "217367200",
+            "productIds": {
+                "dungeon-masters-guild": "161671",
+                "drivethru-rpg": "161671"
+            },
+            "publisherId": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
             "releaseDate": "2008-06-06"
         }
     ],
-    "gameEdition": "4e",
-    "productCode": "217367200",
-    "productIds": {
-        "dungeon-masters-guild": "161671",
-        "drivethru-rpg": "161671"
-    },
     "publicationType": "official",
-    "publisherId": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
     "sourcebookTypes": ["core"],
     "sourceType": "sourcebook"
 }

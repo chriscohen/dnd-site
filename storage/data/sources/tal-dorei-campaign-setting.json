@@ -1,0 +1,37 @@
+{
+    "id": "327a040f-b040-4c73-a6e3-a17458b95d3b",
+    "name": "Tal'Dorei Campaign Setting",
+    "slug": "tal-dorei-campaign-setting",
+    "coverImage": "tal-dorei-campaign-setting.webp",
+    "description": "Critical Role has taken the roleplaying world by storm. Now, you can join the adventure! Until now, the wondrous and dangerous lands of Tal’Dorei have been the sole stomping grounds of the show’s adventuring company, Vox Machina. But now, you can explore these realms in a tome from the pen of Game Master Matt Mercer himself!\n\nWill you find one of the revered Vestiges of Divergence or perhaps discover part of the Chroma Conclave's legacy? Can you help the Ashari in their sacred charge to prevent the elemental vortices from overwhelming the world, or will you find yourself embroiled in the machinations of the Clasp? This setting book takes an in-depth look at the history, people, and places of Tal’Dorei, and includes new backgrounds, magic items, and monsters for the Fifth Edition rules.\n\nThis is not a standalone game and will require the base set Dungeons and Dragons 5th Edition.",
+    "editions": [
+        {
+            "id": "84754ad3-2be7-48d2-8cb0-f1719d4c9766",
+            "name": "original",
+            "binding": "hardcover",
+            "formats": ["print", "pdf"],
+            "gameEdition": "5e",
+            "isbn10": "1934547840",
+            "isbn13": "9781934547847",
+            "pages": 144,
+            "publisher": "green-ronin-publishing",
+            "releaseDate": "2017-10-17"
+        },
+        {
+            "id": "6050d585-8717-4d8f-9d04-07addc6fb9e7",
+            "name": "reborn",
+            "binding": "hardcover",
+            "formats": ["print", "pdf"],
+            "gameEdition": "5.5",
+            "isbn10": "1737372509",
+            "pages": 280,
+            "publisher": "darrington-press",
+            "releaseDate": "2025-04-01"
+        }
+    ],
+    "publicationType": "3rd party",
+    "sourcebookTypes": [
+        "campaign_setting"
+    ],
+    "sourceType": "sourcebook"
+}

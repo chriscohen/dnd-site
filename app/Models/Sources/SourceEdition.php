@@ -3,10 +3,13 @@
 namespace App\Models\Sources;
 
 use App\Enums\Binding;
+use App\Enums\GameEdition;
 use App\Models\AbstractModel;
-use App\Models\ModelCollection;
+use App\Models\Company;
+use App\Models\Media\Media;
 use App\Models\ModelInterface;
 use App\Models\People\BookCredit;
+use App\Models\ProductId;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,8 +24,10 @@ use Ramsey\Uuid\Uuid;
  * @property ?Binding $binding
  * @property Collection<BoxedSetItem> $boxedSetItems
  * @property Collection<SourceContents> $contents
+ * @property ?Media $coverImage
  * @property Collection<BookCredit> $credits
  * @property Collection<SourceEditionFormat> $formats
+ * @property GameEdition $game_edition
  * @property bool $hasContents
  * @property bool $hasCredits
  * @property bool $is_primary
@@ -32,6 +37,9 @@ use Ramsey\Uuid\Uuid;
  * @property ?int $level_start
  * @property string $name
  * @property ?int $pages
+ * @property ?string $product_code
+ * @property Collection<ProductId> $productIds
+ * @property ?Company $publisher
  * @property ?Carbon $release_date
  * @property bool $release_date_month_only
  * @property Source $source
@@ -45,6 +53,7 @@ class SourceEdition extends AbstractModel
 
     public $casts = [
         'binding' => Binding::class,
+        'game_edition' => GameEdition::class,
         'is_primary' => 'boolean',
         'release_date' => 'date',
         'release_date_month_only' => 'boolean',
@@ -65,6 +74,11 @@ class SourceEdition extends AbstractModel
     public function contents(): HasMany
     {
         return $this->hasMany(SourceContents::class, 'source_edition_id');
+    }
+
+    public function coverImage(): BelongsTo
+    {
+        return $this->belongsTo(Media::class);
     }
 
     public function credits(): HasMany
@@ -97,49 +111,19 @@ class SourceEdition extends AbstractModel
         );
     }
 
+    public function productIds(): HasMany
+    {
+        return $this->hasMany(ProductId::class);
+    }
+
+    public function publisher(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'publisher_id');
+    }
+
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class);
-    }
-
-    public function toArrayFull(): array
-    {
-        // Rearrange into an array of people who are grouped by their role.
-        $grouped = $this->credits->groupBy('role');
-        $credits = [];
-
-        foreach ($grouped as $roleName => $people) {
-            $credits[$roleName] = $people->map(
-                fn (BookCredit $credit) => $credit->person->toArray($this->renderMode)
-            )->toArray();
-        }
-
-        return [
-            'binding' => $this->binding,
-            'boxedSetItems' => ModelCollection::make($this->boxedSetItems)
-                ->toArray($this->renderMode),
-            'formats' => ModelCollection::make($this->formats)->toString(),
-            'isPrimary' => $this->is_primary,
-            'isbn10' => $this->isbn10,
-            'isbn13' => $this->isbn13,
-            'pages' => $this->pages,
-            'releaseDate' => $this->formatReleaseDate(),
-            'contents' => ModelCollection::make($this->contents)->toArray($this->renderMode),
-            'credits' => $credits,
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
     }
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
@@ -148,6 +132,9 @@ class SourceEdition extends AbstractModel
         $item->source()->associate($parent);
         $item->id = $value['id'] ?? Uuid::uuid4();
         $item->name = $value['name'] ?? 'original';
+        $item->product_code = $value['productCode'] ?? null;
+        $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
+        $item->save();
 
         if (!empty($value['binding'])) {
             $item->binding = Binding::tryFromString($value['binding']);
@@ -157,6 +144,28 @@ class SourceEdition extends AbstractModel
                 $format = SourceEditionFormat::fromInternalJson($formatData, $item);
                 $item->formats()->save($format);
             }
+        }
+        if (!empty($value['coverImage'])) {
+            $coverImage = Media::fromInternalJson([
+                'filename' => '/books/' . $value['coverImage'],
+            ]);
+            $item->coverImage()->associate($coverImage);
+        }
+        foreach ($value['productIds'] ?? [] as $vendor => $productIdData) {
+            $productId = ProductId::fromInternalJson([
+                'company' => $vendor,
+                'productId' => $productIdData
+            ], $item);
+            $item->productIds()->save($productId);
+        }
+
+        // Allow for both publisherId (uuid) or publisher (slug).
+        if (!empty($value['publisherId'])) {
+            $company = Company::query()->where('id', $value['publisherId'])->firstOrFail();
+            $item->publisher()->associate($company);
+        } elseif (!empty($value['publisher'])) {
+            $company = Company::query()->where('slug', $value['publisher'])->firstOrFail();
+            $item->publisher()->associate($company);
         }
 
         $item->is_primary = $value['isPrimary'] ?? false;
@@ -204,6 +213,23 @@ class SourceEdition extends AbstractModel
         if (!empty($value['level'])) {
             $item->level_start = $value['level']['start'];
             $item->level_end = $value['level']['end'] ?? null;
+        }
+
+        $isWizards = str_contains(mb_strtolower($value['author'] ?? 'wizards'), 'wizards');
+
+        if ($isWizards) {
+            $company = Company::query()->where('slug', 'wizards-of-the-coast')->firstOrFail();
+            $item->publisher()->associate($company);
+        }
+
+        // Work out if it's 5e 2014 or 5e 2024.
+        $fifthDate = Carbon::parse('2024-09-17');
+        $myDate = Carbon::parse($value['published']);
+
+        if (str_contains($item->name, '2014') || $myDate < $fifthDate) {
+            $item->game_edition = GameEdition::FIFTH;
+        } else {
+            $item->game_edition = GameEdition::FIFTH_REVISED;
         }
 
         $item->save();

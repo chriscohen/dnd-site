@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Sources\Source;
+use App\Models\Media\Media;
+use App\Models\Company;
 
 return new class extends Migration
 {
@@ -23,9 +25,14 @@ return new class extends Migration
             $table->unsignedSmallInteger('level_start')->nullable();
             $table->unsignedSmallInteger('level_end')->nullable();
 
+            $table->smallInteger('game_edition')->nullable()->index();
             $table->smallInteger('pages')->nullable();
+            $table->string('product_code')->nullable();
+            $table->foreignIdFor(Company::class, 'publisher_id')->nullable()->index();
             $table->date('release_date')->nullable();
             $table->boolean('release_date_month_only')->default(false);
+
+            $table->foreignIdFor(Media::class, 'cover_image_id')->nullable();
         });
     }
 

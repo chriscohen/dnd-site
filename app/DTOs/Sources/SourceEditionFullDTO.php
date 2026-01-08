@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\DTOs\Sources;
 
+use App\DTOs\CompanySummaryDTO;
 use App\DTOs\Credits\BookCreditDTO;
+use App\DTOs\ProductIdDTO;
 use App\Models\ModelInterface;
 use App\Models\People\BookCredit;
+use App\Models\ProductId;
 use App\Models\Sources\SourceContents;
 use App\Models\Sources\SourceEdition;
 use App\Models\Sources\SourceEditionFormat;
@@ -30,6 +33,10 @@ readonly class SourceEditionFullDTO extends SourceEditionSummaryDTO
         public ?string $isbn10 = null,
         public ?string $isbn13 = null,
         public ?int $pages = null,
+        public ?string $productCode = null,
+        /** @var Collection<ProductIdDTO> */
+        public Collection $productIds,
+        public ?CompanySummaryDTO $publisher = null,
         public ?Carbon $releaseDate = null
     ) {
         parent::__construct($id, $name);
@@ -57,6 +64,11 @@ readonly class SourceEditionFullDTO extends SourceEditionSummaryDTO
             isbn10: $model->isbn10,
             isbn13: $model->isbn13,
             pages: $model->pages,
+            productCode: $model->product_code,
+            productIds: $model->relationLoaded('productIds') ?
+                $model->productIds->map(fn (ProductId $item) => $item) :
+                collect(),
+            publisher: !empty($model->publisher) ? CompanySummaryDTO::fromModel($model->publisher) : null,
             releaseDate: $model->release_date
         );
     }
