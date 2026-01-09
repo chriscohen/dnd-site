@@ -34,7 +34,7 @@ readonly class MagicSchoolFullDTO extends MagicSchoolSummaryDTO
             id: $model->id,
             name: $model->name,
             // Summary.
-            children: $withChildren ? $model->children->map(
+            children: $withChildren && $model->relationLoaded('children') ? $model->children->map(
                 fn (MagicSchool $item) => MagicSchoolFullDTO::fromModel($item)
             ) : null,
             description: $model->description,

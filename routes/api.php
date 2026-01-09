@@ -55,14 +55,14 @@ Route::get('/items', [ItemController::class, 'index']);
 Route::get('/language/{slug}', [LanguageController::class, 'get']);
 Route::get('/languages', [LanguageController::class, 'index']);
 
+Route::get('/magic-school/{slug}', [MagicSchoolController::class, 'get']);
+Route::get('/magic-schools', [MagicSchoolController::class, 'index']);
+
 Route::get('/person/{slug}', [PersonController::class, 'get']);
 Route::get('/people', [PersonController::class, 'index']);
 Route::get('/person/{slug}/credits', [PersonController::class, 'credits']);
 
 Route::get('/references', [ReferenceController::class, 'index']);
-
-Route::get('/school/{slug}', [MagicSchoolController::class, 'get']);
-Route::get('/schools', [MagicSchoolController::class, 'index']);
 
 Route::get('/source/{slug}', [SourceController::class, 'get']);
 Route::get('/sources', [SourceController::class, 'index']);

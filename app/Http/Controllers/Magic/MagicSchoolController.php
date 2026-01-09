@@ -20,12 +20,15 @@ class MagicSchoolController extends AbstractController
     public function get(Request $request, string $slug): JsonResponse
     {
         $item = $this->query
-            ->where('slug', $slug)
+            ->where('id', $slug)
+            ->with([
+                'children'
+            ])
             ->first();
 
         return empty($item) ?
             response()->json([], 404) :
-            response()->json(MagicSchoolFullDTO::fromModel($item));
+            response()->json(MagicSchoolFullDTO::fromModel($item, withChildren: true));
     }
 
     public function index(Request $request): JsonResponse
@@ -39,6 +42,9 @@ class MagicSchoolController extends AbstractController
         }
 
         $items = $this->query
+            ->with([
+                'children',
+            ])
             ->orderBy($this->orderKey)
             ->paginate(50)
             ->through(fn (MagicSchool $item) => MagicSchoolFullDTO::fromModel($item, withChildren: true));
