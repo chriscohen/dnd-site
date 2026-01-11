@@ -8,7 +8,7 @@ use App\DTOs\SearchResultDTO;
 use App\Models\CampaignSetting;
 use App\Models\Company;
 use App\Models\Creatures\CreatureType;
-use App\Models\ModelCollection;
+use App\Models\Magic\MagicSchool;
 use App\Models\People\Person;
 use App\Models\Sources\Source;
 use App\Models\Spells\Spell;
@@ -32,6 +32,7 @@ class SearchController extends Controller
             CreatureType::class,
             Spell::class,
             Source::class,
+            MagicSchool::class,
             Company::class,
             CampaignSetting::class,
             Person::class

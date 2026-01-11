@@ -10,6 +10,7 @@ use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Scout\Searchable;
 
 /**
  * @property string $id
@@ -25,6 +26,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class MagicSchool extends AbstractModel
 {
+    use Searchable;
+
     public $timestamps = false;
     public $incrementing = false;
 
@@ -41,6 +44,13 @@ class MagicSchool extends AbstractModel
     public function parent(): BelongsTo
     {
         return $this->belongsTo(MagicSchool::class, 'parent_id');
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+        ];
     }
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
