@@ -475,7 +475,7 @@ class CreatureTypeEdition extends AbstractModel
             $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
 
             // Try to infer the game edition from the sourcebook.
-            $edition = GameEdition::tryFromString($source->gameEdition) ??
+            $edition = $source->primaryEdition->game_edition ??
                 throw new \InvalidArgumentException("Could not infer game edition from sourcebook: {$source->name}");
         } catch (ModelNotFoundException $e) {
             // We can't find any source with this name so assume fifth edition.

@@ -40,7 +40,7 @@ readonly class SourceFullDTO extends SourceSummaryDTO
         return new static(
             id: $model->id,
             coverImage: $model->coverImage ? MediaSummaryDTO::fromModel($model->coverImage) : null,
-            gameEdition: $model->primaryEdition->gameEdition,
+            gameEdition: $model->primaryEdition->game_edition->toStringShort(),
             name: $model->name,
             parentId: $model->parent_id,
             shortName: $model->shortName,

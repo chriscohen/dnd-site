@@ -54,7 +54,8 @@ class SourceController extends AbstractController
         ]);
 
         $this->query->with([
-            'editions'
+            'editions',
+            'editions.coverImage'
         ]);
 
         if (!empty($request->input('editions'))) {

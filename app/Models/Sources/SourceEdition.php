@@ -268,7 +268,22 @@ class SourceEdition extends AbstractModel
         $item->isbn13 = $value['isbn13'] ?? null;
         $item->pages = $value['pages'] ?? null;
 
-        // Credits.
+        // Product IDs.
+        foreach ($value['productIds'] ?? [] as $key => $id) {
+            ProductId::fromInternalJson([
+                'company' => $key,
+                'productId' => $id,
+            ], $item);
+        }
+
+        // Cover image.
+        if (!empty($value['coverImage'])) {
+            $coverImage = Media::fromInternalJson([
+                'filename' => '/books/' . $value['coverImage'],
+            ]);
+            $item->coverImage()->associate($coverImage);
+        }
+
         // Credits.
         foreach ($value['credits'] ?? [] as $key => $creditData) {
             foreach ($creditData as $creditPerson) {

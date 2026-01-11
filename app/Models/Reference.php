@@ -127,7 +127,7 @@ class Reference extends AbstractModel
             throw new RecordNotFoundException("[WARNING] Could not find source with shortName: {$value['source']}");
         }
 
-        $item->edition()->associate($source->primaryEdition());
+        $item->edition()->associate($source->primaryEdition);
 
         if (!empty($value['page'])) {
             $item->page_from = $value['page'];

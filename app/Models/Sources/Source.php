@@ -64,7 +64,7 @@ class Source extends AbstractModel
     public function coverImage(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->primaryEdition()?->coverImage
+            get: fn () => $this->primaryEdition?->coverImage
         );
     }
 
@@ -238,25 +238,9 @@ class Source extends AbstractModel
             SourceEdition::fromFeJsonExtra($edition, $item);
         }
 
-        // Product IDs.
-        foreach ($value['productIds'] ?? [] as $key => $id) {
-            ProductId::fromInternalJson([
-                'company' => $key,
-                'productId' => $id,
-            ], $item);
-        }
-
         // Sourcebook types.
         foreach ($value['sourcebookTypes'] ?? [] as $sourcebookType) {
             SourceSourcebookType::fromInternalJson($sourcebookType, $item);
-        }
-
-        // Cover image.
-        if (!empty($value['coverImage'])) {
-            $coverImage = Media::fromInternalJson([
-                'filename' => '/books/' . $value['coverImage'],
-            ]);
-            $item->coverImage()->associate($coverImage);
         }
 
         $item->save();
