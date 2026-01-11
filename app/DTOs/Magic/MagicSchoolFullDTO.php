@@ -17,6 +17,7 @@ readonly class MagicSchoolFullDTO extends MagicSchoolSummaryDTO
         // Summary.
         /** @var Collection<MagicSchoolFullDTO> $children */
         public ?Collection $children = null,
+        public ?string $color = null,
         public ?string $description = null,
         public ?MediaSummaryDTO $image = null,
         public ?MagicSchoolSummaryDTO $parent = null,
@@ -37,6 +38,7 @@ readonly class MagicSchoolFullDTO extends MagicSchoolSummaryDTO
             children: $withChildren && $model->relationLoaded('children') ? $model->children->map(
                 fn (MagicSchool $item) => MagicSchoolFullDTO::fromModel($item)
             ) : null,
+            color: $model->color,
             description: $model->description,
             image: !empty($model->image) ? MediaSummaryDTO::fromModel($model->image) : null,
             parent: $model->parent ? MagicSchoolSummaryDTO::fromModel($model->parent) : null,

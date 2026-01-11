@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('parent_id')->nullable();
             $table->text('description')->nullable();
             $table->string('short_name', 8)->nullable()->index();
+            $table->string('color', 16)->nullable();
         });
     }
 

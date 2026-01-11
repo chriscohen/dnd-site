@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $name
  *
  * @property Collection<MagicSchool> $children
+ * @property string $color
  * @property ?string $description
  * @property Media $image
  * @property ?MagicSchool $parent
@@ -49,6 +50,7 @@ class MagicSchool extends AbstractModel
         $item->name = $value['name'];
         $item->short_name = $value['short_name'] ?? null;
         $item->description = $value['description'] ?? null;
+        $item->color = $value['color'] ?? null;
 
         if (empty($value['parent'])) {
             // If there's no parent, it's a base school, which means there's an image.
