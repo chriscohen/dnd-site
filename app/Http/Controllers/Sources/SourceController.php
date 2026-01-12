@@ -89,7 +89,7 @@ class SourceController extends AbstractController
 
         return empty($item->primaryEdition()) ?
             response()->json([], 404) :
-            response()->json($item->primaryEdition()->contents->map(
+            response()->json($item->primaryEdition->contents->map(
                 fn (SourceContents $contents) => SourceContentsDTO::fromModel($contents)
             ));
     }
@@ -99,7 +99,7 @@ class SourceController extends AbstractController
         /** @var Source $item */
         $item = $this->query->where('slug', $slug)->first();
 
-        $people = $item->primaryEdition()?->credits
+        $people = $item->primaryEdition?->credits
             ->map(fn (BookCredit $credit) => BookCreditDTO::fromModel($credit)) ?? [];
         return response()->json($people);
     }
