@@ -11,7 +11,7 @@ use App\Models\ModelInterface;
 readonly class CreatureAlignmentDTO extends AbstractDTO
 {
     public function __construct(
-        public string $alignment
+        public ?string $alignment
     ) {
     }
 
@@ -21,7 +21,7 @@ readonly class CreatureAlignmentDTO extends AbstractDTO
     public static function fromModel(ModelInterface $model): static
     {
         return new static(
-            alignment: $model->alignment->toString()
+            alignment: $model->alignment?->toString()
         );
     }
 }
