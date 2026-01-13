@@ -6,7 +6,7 @@ namespace App\DTOs\Creatures;
 
 use App\DTOs\AbstractDTO;
 
-readonly class CreatureSummaryDTO extends AbstractDTO
+readonly class CreatureTypeSummaryDTO extends AbstractDTO
 {
     public function __construct(
         public readonly string $id,

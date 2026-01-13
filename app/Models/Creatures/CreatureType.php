@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Models\Creatures;
 
 use App\Models\AbstractModel;
-use App\Models\Media\Media;
-use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\Reference;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -48,25 +46,11 @@ class CreatureType extends AbstractModel
         return $this->belongsTo(CreatureType::class, 'parent_id');
     }
 
-    public function toArrayFull(): array
+    public function toSearchableArray(): array
     {
         return [
-            'editions' => ModelCollection::make($this->editions)->toArray($this->renderMode),
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'slug' => $this->slug,
             'name' => $this->name,
         ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
     }
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static

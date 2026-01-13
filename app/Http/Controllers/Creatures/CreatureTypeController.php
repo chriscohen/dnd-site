@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Creatures;
 
 use App\DTOs\Creatures\CreatureTypeFullDTO;
-use App\DTOs\Creatures\CreatureSummaryDTO;
 use App\Http\Controllers\AbstractController;
 use App\Http\Requests\CreatureListRequest;
 use App\Models\Creatures\CreatureType;
@@ -51,7 +50,22 @@ class CreatureTypeController extends AbstractController
 
         $this->query->orderBy($this->orderKey);
 
-        $items = $this->query->paginate(50)->through(fn(CreatureType $item) => CreatureSummaryDTO::fromModel($item));
+        $items = $this->query
+            ->with([
+                'editions',
+                'editions.abilities',
+                'editions.alignment',
+                'editions.armorClass',
+                'editions.armorClass.items',
+                'editions.hitPoints',
+                'editions.media',
+                'editions.movementSpeeds',
+                'editions.type',
+                'editions.type.mainType',
+                'editions.type.origin'
+            ])
+            ->paginate(50)
+            ->through(fn(CreatureType $item) => CreatureTypeFullDTO::fromModel($item));
 
         return response()->json($items);
     }
