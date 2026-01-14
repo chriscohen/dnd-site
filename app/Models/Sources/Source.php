@@ -131,9 +131,6 @@ class Source extends AbstractModel
             'name' => $this->name,
             'shortName' => $this->shortName,
             'description' => $this->description,
-            'product_code' => $this->product_code,
-            'publication_type' => $this->publication_type,
-            'source_type' => $this->source_type,
         ];
     }
 
