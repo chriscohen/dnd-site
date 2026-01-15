@@ -15,7 +15,7 @@ readonly class SpellEditionLevelDTO extends AbstractDTO
     public function __construct(
         public string $id,
         public ?CharacterClassSummaryDTO $characterClass = null,
-        public int $item,
+        public ?int $item,
         public int $level,
     ) {
     }
@@ -27,7 +27,7 @@ readonly class SpellEditionLevelDTO extends AbstractDTO
     {
         return new static(
             id: $model->id,
-            characterClass: $model->entity instanceof CharacterClass::class ?
+            characterClass: $model->entity::class === CharacterClass::class ?
                 CharacterClassSummaryDTO::fromModel($model->entity) :
                 null,
             item: $model->item,

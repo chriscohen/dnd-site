@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Spells;
 
+use App\DTOs\Spells\SpellFullDTO;
 use App\DTOs\Spells\SpellSummaryDTO;
 use App\Http\Controllers\AbstractController;
 use App\Models\Spells\Spell;
@@ -25,6 +26,17 @@ class SpellController extends AbstractController
         });
 
         return $this;
+    }
+
+    public function get(Request $request, string $slug): JsonResponse
+    {
+        $item = $this->query->where('slug', $slug)->first();
+
+        if (empty($item)) {
+            return response()->json([], 404);
+        }
+
+        return response()->json(SpellFullDTO::fromModel($item));
     }
 
     public function index(Request $request): JsonResponse

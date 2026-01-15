@@ -32,7 +32,7 @@ readonly class SpellEditionFullDTO extends SpellEditionSummaryDTO
     {
         return new static(
             id: $model->id,
-            gameEdition: $model->game_edition,
+            gameEdition: $model->game_edition->toStringShort(),
             hasSpellResistance: $model->has_spell_resistance,
             isDefault: $model->is_default,
             levels: $model->levels->map(fn (SpellEditionLevel $item) => SpellEditionLevelDTO::fromModel($item)),
