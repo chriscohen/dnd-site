@@ -9,13 +9,13 @@ use App\Enums\Units\DistanceUnit;
 use App\Models\AbstractModel;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Ramsey\Uuid\Uuid;
 
 /**
  * @property Uuid $id
  *
- * @property CreatureTypeEdition $creatureTypeEdition
+ * @property CreatureTypeEdition|CreatureSpeciesEdition $parent
  * @property ?string $description
  * @property SenseType $type
  * @property ?int $range
@@ -35,24 +35,9 @@ class CreatureSense extends AbstractModel
         ];
     }
 
-    public function creatureTypeEdition(): BelongsTo
+    public function parent(): MorphTo
     {
-        return $this->belongsTo(CreatureTypeEdition::class, 'creature_type_edition_id');
-    }
-
-    public function toArrayFull(): array
-    {
-        return [];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
+        return $this->morphTo();
     }
 
     public static function fromInternalJson(array|int|string $value, ?ModelInterface $parent = null): static
@@ -97,7 +82,7 @@ class CreatureSense extends AbstractModel
     public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
-        $item->creatureTypeEdition()->associate($parent);
+        $item->parent()->associate($parent);
 
         list($senseType, $range) = explode(' ', trim($value), 2);
 

@@ -10,7 +10,6 @@ use App\Models\AbstractModel;
 use App\Models\CampaignSetting;
 use App\Models\Media\Media;
 use App\Models\ModelInterface;
-use App\Models\ProductId;
 use App\Models\Spells\Spell;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -34,7 +33,7 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $parent_id
  * @property ?SourceEdition $primaryEdition
  * @property PublicationType $publication_type
- * @property ?string $shortName
+ * @property ?string $short_name
  * @property SourceType $source_type
  * @property SourceSourcebookType[] $sourcebookTypes
  */
@@ -46,7 +45,6 @@ class Source extends AbstractModel
     public $timestamps = false;
 
     public $casts = [
-        'gameEdition' => GameEdition::class,
         'publication_type' => PublicationType::class,
         'source_type' => SourceType::class,
     ];
@@ -129,7 +127,7 @@ class Source extends AbstractModel
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
-            'shortName' => $this->shortName,
+            'short_name' => $this->short_name,
             'description' => $this->description,
         ];
     }
@@ -142,7 +140,7 @@ class Source extends AbstractModel
         $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
 
         $item->description = $value['description'] ?? null;
-        $item->shortName = $value['shortName'] ?? null;
+        $item->short_name = $value['shortName'] ?? null;
 
         if (!empty($value['campaignSetting'])) {
             $campaignSetting = CampaignSetting::query()->where('slug', $value['campaignSetting'])->firstOrFail();
@@ -194,7 +192,7 @@ class Source extends AbstractModel
         $item->id = Uuid::uuid4();
         $item->name = $value['name'];
         $item->slug = static::makeSlug($value['name']);
-        $item->shortName = !empty($value['isAdventure']) ? $value['id'] : $value['source'];
+        $item->short_name = !empty($value['isAdventure']) ? $value['id'] : $value['source'];
         // Not a great way to determine official-ness. If the author field is missing, or if it contains "wizards", we
         // will assume it's official.
         $isWizards = str_contains(mb_strtolower($value['author'] ?? 'wizards'), 'wizards');

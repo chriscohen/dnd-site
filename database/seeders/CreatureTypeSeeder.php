@@ -18,24 +18,6 @@ class CreatureTypeSeeder extends AbstractYmlSeeder
     public function run(): void
     {
         /**
-         * Import 5e.tools races from JSON.
-         */
-        $json = $this->getDataFromFile('5etools/data/races.json');
-
-        foreach ($json['race'] as $datum) {
-            print "[5e.tools] Creating CreatureType (Race) " . $datum['name'] . "...\n";
-            $creature = CreatureType::from5eJson($datum);
-            // We need to load from the db to get the edition data.
-            $creature = CreatureType::query()->find($creature->id);
-
-            // This is a "race" in 5e.tools so set the is_playable flag to true.
-            /** @var CreatureTypeEdition $edition */
-            $edition = $creature->editions->first();
-            $edition->is_playable = true;
-            $edition->save();
-        }
-
-        /**
          * Import from 5e.tools bestiary files.
          */
         foreach (Storage::disk('data')->files('/5etools/data/bestiary') as $file) {
@@ -57,8 +39,15 @@ class CreatureTypeSeeder extends AbstractYmlSeeder
                     continue;
                 }
 
-                print "[5e.tools] Creating CreatureType (" . $filename . ") " . $datum['name'] . "...\n";
-                $creatureType = CreatureType::from5eJson($datum);
+                $creatureType = CreatureType::query()->where('name', $datum['name'])->first();
+
+                if (empty($creatureType)) {
+                    print "[5e.tools] Creating CreatureType (" . $filename . ") " . $datum['name'] . "...\n";
+                    $creatureType = CreatureType::from5eJson($datum);
+                } else {
+                    print "[5e.tools] Using existing CreatureType for " . $datum['name'] . "...\n";
+                }
+
                 /** @var CreatureTypeEdition $edition */
                 $edition = $creatureType->editions->firstOrFail();
 

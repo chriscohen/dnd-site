@@ -14,8 +14,8 @@ use Ramsey\Uuid\Uuid;
  * @property bool $is_from_caster
  * @property bool $is_self
  * @property bool $is_touch
- * @property int $number
- * @property int $per_level
+ * @property ?int $number
+ * @property ?int $per_level
  * @property int $per_level_increment
  *   How many levels to go up by. For example, a value of 2 would be "per 2 levels".
  * @property DistanceUnit $unit
@@ -46,31 +46,6 @@ class Range extends AbstractModel
     public function isUnlimited(): bool
     {
         return $this->number !== null && $this->number < 0;
-    }
-
-    public function toArrayFull(): array
-    {
-        return [
-            'is_from_caster' => $this->is_from_caster,
-            'is_self' => $this->is_self,
-            'is_touch' => $this->is_touch,
-            'number' => $this?->number ?? null,
-            'per_level' => $this?->per_level ?? null,
-            'unit' => $this?->unit?->toString() ?? null,
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'string' => $this->toString(),
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
     }
 
     public function toString(): string
@@ -118,11 +93,14 @@ class Range extends AbstractModel
     {
         $item = new static();
 
-        if ($value['distance']['type'] === 'touch') {
+        if ($value['type'] === 'special') {
+            $item->unit = DistanceUnit::SPECIAL;
+        }
+        elseif (!empty($value['distance']['type']) && $value['distance']['type'] === 'touch') {
             $item->is_touch = true;
         } else {
             $item->unit = DistanceUnit::tryFromString($value['distance']['type']);
-            $item->number = $value['distance']['amount'];
+            $item->number = $value['distance']['amount'] ?? null;
         }
 
         $item->save();

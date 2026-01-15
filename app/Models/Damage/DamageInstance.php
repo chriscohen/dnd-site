@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models\Damage;
 
 use App\Enums\Damage\DamageType;
-use App\Enums\PerLevelMode;
 use App\Models\AbstractModel;
 use App\Models\Conditions\ConditionEdition;
 use App\Models\Conditions\StatusConditionEdition;
@@ -52,31 +51,6 @@ class DamageInstance extends AbstractModel
         return $this->belongsTo(ConditionEdition::class);
     }
 
-    public function toArrayFull(): array
-    {
-        return [
-            'id' => $this->id,
-            'damage_type' => $this->damage_type,
-            'dice_count' => $this->die_quantity,
-            'dice_faces' => $this->die_faces,
-            'effect_id' => $this->effect->id,
-            'modifier' => $this->modifier,
-            'quantity' => $this->quantity,
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'string' => $this->toString(),
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [];
-    }
-
     /**
      * For example, 1d8 + 5 acid damage/caster level (maximum 15d8).
      *
@@ -96,11 +70,13 @@ class DamageInstance extends AbstractModel
         $item = new static();
         $item->effect()->associate($parent);
 
-        $formula = new DiceFormula();
-        $formula->diceCount = $value['dice_count'];
-        $formula->diceFaces = $value['dice_faces'];
-        $formula->modifier = $value['modifier'] ?? 0;
-        $item->formula = $formula;
+        if (!empty($value['dice_count']) && !empty($value['dice_faces'])) {
+            $formula = new DiceFormula();
+            $formula->diceCount = $value['dice_count'];
+            $formula->diceFaces = $value['dice_faces'];
+            $formula->modifier = $value['modifier'] ?? 0;
+            $item->formula = $formula;
+        }
 
         if (!empty($value['damage_type'])) {
             $item->damage_type = DamageType::tryFromString($value['damage_type']);

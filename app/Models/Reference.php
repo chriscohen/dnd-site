@@ -67,8 +67,8 @@ class Reference extends AbstractModel
         if (!empty($this->page_to)) {
             $output['pageTo'] = $this->page_to;
         }
-        if (!empty($this->edition->source->shortName)) {
-            $output['shortName'] = $this->edition->source->shortName;
+        if (!empty($this->edition->source->short_name)) {
+            $output['shortName'] = $this->edition->source->short_name;
         }
 
         return $output;
@@ -96,7 +96,7 @@ class Reference extends AbstractModel
             $item->edition()->associate($sourceEdition);
         } else {
             $source = Source::query()->where('slug', $value['source'])->firstOrFail();
-            $sourceEdition = $source->primaryEdition();
+            $sourceEdition = $source->primaryEdition;
             $item->edition()->associate($sourceEdition);
         }
 
@@ -122,7 +122,7 @@ class Reference extends AbstractModel
         $item->entity()->associate($parent);
 
         try {
-            $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
+            $source = Source::query()->where('short_name', $value['source'])->firstOrFail();
         } catch (ModelNotFoundException) {
             throw new RecordNotFoundException("[WARNING] Could not find source with shortName: {$value['source']}");
         }

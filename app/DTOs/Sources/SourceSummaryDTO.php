@@ -35,7 +35,7 @@ readonly class SourceSummaryDTO extends AbstractDTO
             gameEdition: $model->primaryEdition->game_edition->toStringShort(),
             name: $model->name,
             parentId: $model->parent_id,
-            shortName: $model->shortName,
+            shortName: $model->short_name,
             slug: $model->slug,
         );
     }

@@ -176,6 +176,7 @@
     {
         "id": "072455fa-e375-4a64-8c54-a8f5383a14fa",
         "name": "Ravnica: City of Legends",
+        "slug": "ravnica",
         "shortName": "RCL",
         "publisher": "wizards-of-the-coast",
         "publicationType": "official"

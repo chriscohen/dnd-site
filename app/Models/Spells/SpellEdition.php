@@ -3,22 +3,19 @@
 namespace App\Models\Spells;
 
 use App\Enums\GameEdition;
-use App\Enums\JsonRenderMode;
 use App\Enums\Rarity;
 use App\Enums\Spells\MaterialComponentMode;
 use App\Enums\Spells\SpellComponentType;
 use App\Enums\Spells\SpellFrequency;
 use App\Enums\Units\DistanceUnit;
-use App\Enums\Units\TimeUnit;
 use App\Models\AbstractModel;
 use App\Models\Area;
 use App\Models\CharacterClasses\CharacterClass;
-use App\Models\Damage\DamageInstance;
 use App\Models\Duration;
+use App\Models\Effects\Effect;
 use App\Models\Feats\Feature;
 use App\Models\Magic\MagicDomain;
 use App\Models\Magic\MagicSchool;
-use App\Models\ModelCollection;
 use App\Models\ModelInterface;
 use App\Models\Range;
 use App\Models\Reference;
@@ -27,6 +24,8 @@ use App\Models\Sources\Source;
 use App\Models\Target;
 use App\Models\Text\TextEntry;
 use App\Services\FeToolsService;
+use App\Traits\WithTextEntries;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -38,7 +37,6 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
-use Spatie\LaravelMarkdown\MarkdownRenderer;
 
 /**
  * @property string $id
@@ -46,14 +44,13 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property ?Area $area
  * @property ?SpellCastingTime $castingTime
  * @property Collection<SpellCastingTime> $castingTimes
- * @property Collection<DamageInstance> $damageInstances
  * @property Collection<MagicDomain> $domains
  * @property Duration $duration
+ * @property Collection<Effect> $effects
  * @property Collection<TextEntry> $entries
  * @property ?Feature $feat
  * @property ?string $focus
  * @property string $game_edition
- * @property GameEdition $gameEdition
  * @property ?bool $has_spell_resistance
  * @property bool $is_default
  * @property Collection<SpellEditionLevel> $levels
@@ -74,6 +71,7 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
 class SpellEdition extends AbstractModel
 {
     use HasUuids;
+    use WithTextEntries;
 
     public $timestamps = false;
 
@@ -102,18 +100,6 @@ class SpellEdition extends AbstractModel
         return $this->hasMany(SpellCastingTime::class, 'spell_edition_id');
     }
 
-    public function damageInstances(): MorphMany
-    {
-        return $this->morphMany(DamageInstance::class, 'entity');
-    }
-
-    protected function description(): Attribute
-    {
-        return Attribute::make(
-            get: fn (?string $value = '') => app(MarkdownRenderer::class)->toHtml($value ?? ''),
-        );
-    }
-
     public function domains(): BelongsToMany
     {
         return $this->belongsToMany(MagicDomain::class, 'spell_editions_magic_domains');
@@ -124,21 +110,14 @@ class SpellEdition extends AbstractModel
         return $this->morphOne(Duration::class, 'entity');
     }
 
-    public function entries(): MorphMany
+    public function effects(): MorphMany
     {
-        return $this->morphMany(TextEntry::class, 'parent');
+        return $this->morphMany(Effect::class, 'owner');
     }
 
     public function feat(): BelongsTo
     {
         return $this->belongsTo(Feature::class, 'featId');
-    }
-
-    protected function gameEdition(): ?Attribute
-    {
-        return Attribute::make(
-            get: fn (?int $value) => GameEdition::tryFrom($value)?->toStringShort(),
-        );
     }
 
     /**
@@ -178,13 +157,6 @@ class SpellEdition extends AbstractModel
         return $this->hasMany(SpellEditionLevel::class, 'spell_edition_id');
     }
 
-    protected function materialComponentMode(): Attribute
-    {
-        return Attribute::make(
-            get: fn (?int $value) => $value === null ? null : MaterialComponentMode::tryFrom($value)->toString(),
-        );
-    }
-
     public function materialComponents(): HasMany
     {
         return $this->hasMany(SpellMaterialComponent::class);
@@ -198,13 +170,6 @@ class SpellEdition extends AbstractModel
     public function rangeAsString(): string
     {
         return $this->range->toString();
-    }
-
-    protected function rangeUnit(): Attribute
-    {
-        return Attribute::make(
-            get: fn (?int $value) => $value === null ? '' : DistanceUnit::tryFrom($value)->toString(),
-        );
     }
 
     public function references(): MorphMany
@@ -242,59 +207,14 @@ class SpellEdition extends AbstractModel
         return $this->hasMany(Target::class, 'spell_edition_id');
     }
 
-    public function toArrayFull(): array
-    {
-        return [
-            'area' => $this->area?->toArray($this->renderMode) ?? null,
-            'castingTime' => $this->casting_time_unit->format($this->casting_time_number),
-            'damageInstances' => ModelCollection::make($this->damageInstances)
-                ->toArray(),
-            'description' => $this->description,
-            'domains' => ModelCollection::make($this->domains)->toArray($this->renderMode),
-            'duration' => $this->duration->toArray($this->renderMode),
-            'focus' => $this->focus,
-            'hasSavingThrow' => $this->has_saving_throw,
-            'hasSpellResistance' => $this->has_spell_resistance,
-            'higherLevel' => $this->higherLevel,
-            'isDefault' => $this->is_default,
-            'levels' => ModelCollection::make($this->levels)->toArray(),
-            'lowestLevel' => $this->getLowestLevel(),
-            'materialComponentMode' => $this->materialComponentMode,
-            'materialComponents' => ModelCollection::make($this->materialComponents)->toArray($this->renderMode),
-            'range' => $this->range?->toArray($this->renderMode),
-            'rarity' => $this->rarity?->toString() ?? null,
-            'references' => ModelCollection::make($this->references)->toArray(JsonRenderMode::TEASER),
-            'savingThrow' => $this->savingThrow?->toArray($this->renderMode),
-            'school' => $this->school?->toArray($this->renderMode) ?? null,
-            'spellComponents' => $this->spell_components,
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'spellId' => $this->spell_id,
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [
-            'gameEdition' => $this->game_edition,
-        ];
-    }
-
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
     {
         $item = new static();
         $item->spell()->associate($parent);
         $item->id = $value['id'] ?? Uuid::uuid4();
-        $item->description = $value['description'] ?? null;
         $item->focus = $value['focus'] ?? null;
         $item->game_edition = GameEdition::tryFromString($value['gameEdition']);
-        $item->higher_level = $value['higherLevel'] ?? null;
         $item->is_default = $value['isDefault'] ?? false;
         $item->material_component_mode = !empty($value['materialComponentMode']) ?
             MaterialComponentMode::tryFromString($value['materialComponentMode']) : null;
@@ -306,6 +226,19 @@ class SpellEdition extends AbstractModel
         if (!empty($value['range'])) {
             $range = Range::fromInternalJson($value['range'], $item);
             $item->range()->associate($range);
+        }
+
+        if (!empty($value['description'])) {
+            $entry = TextEntry::fromInternalJson($value['description'], $item);
+            $item->entries()->save($entry);
+        }
+        if (!empty($value['higherLevel'])) {
+            $entry = TextEntry::fromInternalJson([
+                'type' => 'entries',
+                'name' => 'At Higher Levels',
+                'entries' => [$value['higherLevel']]
+            ], $item);
+            $item->entries()->save($entry);
         }
 
         // Area
@@ -329,8 +262,8 @@ class SpellEdition extends AbstractModel
         }
 
         // Casting time.
-        $item->casting_time_number = $value['castingTimeNumber'] ?? 1;
-        $item->casting_time_unit = TimeUnit::tryFromString($value['castingTimeUnit']);
+        //$item->casting_time_number = $value['castingTimeNumber'] ?? 1;
+        //$item->casting_time_unit = TimeUnit::tryFromString($value['castingTimeUnit']);
 
         $item->save();
 
@@ -345,15 +278,15 @@ class SpellEdition extends AbstractModel
         $item->duration()->save($duration);
 
         // 4th edition stuff.
-        if ($item->gameEdition === GameEdition::FOURTH) {
+        if ($item->game_edition === GameEdition::FOURTH) {
             $spellEdition4e = SpellEdition4e::fromInternalJson($value, $item);
             $item->spellEdition4e()->save($spellEdition4e);
         }
 
         // Damage.
-        foreach ($value['damage'] ?? [] as $damageData) {
-            $damageInstance = DamageInstance::fromInternalJson($damageData, $item);
-            $item->damageInstances()->save($damageInstance);
+        if (!empty($value['damage'])) {
+            $effect = Effect::fromInternalJson($value['damage'], $item);
+            $item->effects()->save($effect);
         }
 
         // Levels.
@@ -390,11 +323,16 @@ class SpellEdition extends AbstractModel
     public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
     {
         $item = new static();
-        $item->game_edition = GameEdition::FIFTH_REVISED;
+
+        if (!empty($value['srd52'])) {
+            $item->game_edition = GameEdition::FIFTH_REVISED;
+        } else {
+            $item->game_edition = GameEdition::FIFTH;
+        }
         $item->spell()->associate($parent);
 
         // Magic school.
-        $school = MagicSchool::query()->where('shortName', mb_strtoupper($value['school']))->firstOrFail();
+        $school = MagicSchool::query()->where('short_name', mb_strtoupper($value['school']))->firstOrFail();
         $item->school()->associate($school);
 
         $item->save();
@@ -448,10 +386,10 @@ class SpellEdition extends AbstractModel
          * References.
          */
         if (!empty($value['source'])) {
-            $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
+            $source = Source::query()->where('short_name', $value['source'])->firstOrFail();
             Reference::fromInternalJson([
                 'source' => $source->slug,
-                'editionId' => $source->primaryEdition()->id,
+                'editionId' => $source->primaryEdition->id,
                 'pageFrom' => $value['page'] ?? null
             ], $item);
         }
@@ -470,8 +408,8 @@ class SpellEdition extends AbstractModel
 
         // Spell levels need special handling because the classes for each spell are stored in a separate file.
         try {
-            $spellSources = FeToolsService::getClassesForSpell('Air Bubble');
-        } catch (InvalidArgumentException $e) {
+            $spellSources = FeToolsService::getClassesForSpell($item->spell->name);
+        } catch (InvalidArgumentException | FileNotFoundException $e) {
             // We will just silently ignore this.
             $spellSources = [];
         }
@@ -488,10 +426,10 @@ class SpellEdition extends AbstractModel
 
             // Add a reference for each source if we can determine the sourcebook from the shortName.
             foreach ($sources as $source) {
-                $sourcebook = Source::query()->where('shortName', $source)->first();
+                $sourcebook = Source::query()->where('short_name', $source)->first();
                 if (!empty($sourcebook)) {
                     $reference = new Reference();
-                    $reference->edition()->associate($sourcebook->primaryEdition());
+                    $reference->edition()->associate($sourcebook->primaryEdition);
                     $reference->entity()->associate($sel);
                     $reference->save();
                 }

@@ -7,7 +7,6 @@ namespace App\Models;
 use App\Enums\SavingThrows\SavingThrowMultiplier;
 use App\Enums\SavingThrows\SavingThrowType;
 use App\Models\Spells\SpellEdition;
-use App\Models\Conditions\Condition;
 use App\Models\Conditions\ConditionEdition;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -47,29 +46,6 @@ class SavingThrow extends AbstractModel
     public function succeedStatus(): BelongsTo
     {
         return $this->belongsTo(ConditionEdition::class, 'succeed_status_id');
-    }
-
-    public function toArrayFull(): array
-    {
-        return [
-            'id' => $this->id,
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'type' => $this->type->toString()
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [
-            'fail_status' => $this->failStatus?->toArray($this->renderMode),
-            'multiplier' => $this->multiplier?->toString(),
-            'succeed_status' => $this->succeedStatus?->toArray($this->renderMode),
-        ];
     }
 
     /**

@@ -58,6 +58,7 @@
     {
         "id": "evocation",
         "name": "Evocation",
+        "shortName": "V",
         "color": "red",
         "description": "Manipulate energy or tap an unseen source of power to produce something from nothing. Often used to cause large amounts of damage."
     },

@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\PerLevelMode;
+use App\Enums\Units\DurationEndCondition;
 use App\Enums\Units\TimeUnit;
+use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Ramsey\Uuid\Uuid;
@@ -14,6 +17,7 @@ use Ramsey\Uuid\Uuid;
  * @property Uuid $id
  *
  * @property bool $concentration
+ * @property ?Collection<DurationEndCondition> $ends
  * @property ?int $per_level
  * @property ?PerLevelMode $per_level_mode
  * @property TimeUnit $unit
@@ -25,11 +29,15 @@ class Duration extends AbstractModel
 
     public $timestamps = false;
 
-    public $casts = [
-        'concentration' => 'boolean',
-        'per_level_mode' => PerLevelMode::class,
-        'unit' => TimeUnit::class,
-    ];
+    protected function casts()
+    {
+        return [
+            'concentration' => 'boolean',
+            'ends' => AsEnumCollection::of(DurationEndCondition::class),
+            'per_level_mode' => PerLevelMode::class,
+            'unit' => TimeUnit::class,
+        ];
+    }
 
     public function entity(): MorphTo
     {
@@ -101,15 +109,27 @@ class Duration extends AbstractModel
         $item = new static();
         $item->entity()->associate($parent);
 
-        if ($value['type'] === 'instant') {
-            $item->unit = TimeUnit::INSTANTANEOUS;
+        if (empty($value['type']) || $value['type'] === 'timed') {
+            $item->unit = !empty($value['duration']['type']) ?
+                TimeUnit::tryFromString($value['duration']['type']) :
+                null;
+            if ($item->unit?->hasNumber()) {
+                $item->value = $value['duration']['amount'];
+            }
         } else {
-            $item->unit = TimeUnit::tryFromString($value['duration']['type']);
-            $item->value = $value['duration']['amount'];
+            $item->unit = TimeUnit::tryFromString($value['type']);
         }
 
         if (!empty($value['concentration']) && $value['concentration'] === true) {
             $item->concentration = true;
+        }
+
+        foreach ($value['ends'] ?? [] as $end) {
+            if ($item->ends === null) {
+                $item->ends = collect();
+            }
+            $endCondition = DurationEndCondition::tryFromString($end);
+            $item->ends->add($endCondition);
         }
 
         $item->save();

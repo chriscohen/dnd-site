@@ -87,7 +87,7 @@ class SourceController extends AbstractController
         $item = $this->query->where('slug', $slug)
             ->first();
 
-        return empty($item->primaryEdition()) ?
+        return empty($item->primaryEdition) ?
             response()->json([], 404) :
             response()->json($item->primaryEdition->contents->map(
                 fn (SourceContents $contents) => SourceContentsDTO::fromModel($contents)

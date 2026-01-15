@@ -20,7 +20,6 @@ use App\Models\AbstractModel;
 use App\Models\Alignment\Alignment;
 use App\Models\ArmorClass\ArmorClass;
 use App\Models\Conditions\ConditionInstance;
-use App\Models\Dice\DiceFormula;
 use App\Models\Media\Media;
 use App\Models\ModelInterface;
 use App\Models\MovementSpeeds\MovementSpeed;
@@ -30,6 +29,7 @@ use App\Models\Skills\SkillInstance;
 use App\Models\Sources\Source;
 use App\Models\Conditions\ConditionEdition;
 use App\Models\Tag;
+use App\Traits\WithTextEntries;
 use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -61,12 +61,10 @@ use Illuminate\Support\Collection as SupportCollection;
  * @property ?CreatureSense $darkvision
  * @property GameEdition $game_edition
  * @property bool $has_fixed_proficiency_bonus
- * @property ?int $height
- * @property ?DiceFormula $height_modifier
  * @property ?int $hit_die_faces
  * @property ?CreatureHitPoints $hitPoints
- * @property bool $is_playable
  * @property ?int $lair_xp
+ * @property Collection<CreatureLanguage> $languages
  * @property Collection<Media> $media
  * @property Collection<MovementSpeed> $movementSpeeds
  * @property int $passivePerception
@@ -81,8 +79,6 @@ use Illuminate\Support\Collection as SupportCollection;
  * @property Collection<Media> $tokens
  * @property ?CreatureSense $truesight
  * @property ?CreatureMainTypeGroup $type
- * @property ?int $weight
- * @property ?DiceFormula $weight_modifier
  *
  * @property AbilityScore $str
  * @property AbilityScore $dex
@@ -94,6 +90,7 @@ use Illuminate\Support\Collection as SupportCollection;
 class CreatureTypeEdition extends AbstractModel
 {
     use HasUuids;
+    use WithTextEntries;
 
     public $timestamps = false;
 
@@ -110,10 +107,8 @@ class CreatureTypeEdition extends AbstractModel
             'damage_resistances' => 'collection',
             'game_edition' => GameEdition::class,
             'has_fixed_proficiency_bonus' => 'boolean',
-            'height_modifier' => DiceFormula::class,
             'is_playable' => 'boolean',
             'sizes' => AsEnumCollection::of(CreatureSizeUnit::class),
-            'weight_modifier' => DiceFormula::class,
         ];
     }
 
@@ -130,11 +125,6 @@ class CreatureTypeEdition extends AbstractModel
     public function alignment(): HasMany
     {
         return $this->hasMany(CreatureAlignment::class);
-    }
-
-    public function ages(): HasMany
-    {
-        return $this->hasMany(CreatureAge::class);
     }
 
     public function armorClass(): HasMany
@@ -312,6 +302,11 @@ class CreatureTypeEdition extends AbstractModel
         }
     }
 
+    public function languages(): MorphMany
+    {
+        return $this->morphMany(CreatureLanguage::class, 'entity');
+    }
+
     public function media(): MorphToMany
     {
         return $this->morphToMany(Media::class, 'entity', 'media_entity');
@@ -347,9 +342,9 @@ class CreatureTypeEdition extends AbstractModel
         return $this->morphMany(Reference::class, 'entity');
     }
 
-    public function senses(): HasMany
+    public function senses(): MorphMany
     {
-        return $this->hasMany(CreatureSense::class);
+        return $this->morphMany(CreatureSense::class, 'parent');
     }
 
     public function skills(): MorphMany
@@ -472,7 +467,7 @@ class CreatureTypeEdition extends AbstractModel
         }
         try {
             /** @var Source $source */
-            $source = Source::query()->where('shortName', $value['source'])->firstOrFail();
+            $source = Source::query()->where('short_name', $value['source'])->firstOrFail();
 
             // Try to infer the game edition from the sourcebook.
             $edition = $source->primaryEdition->game_edition ??
@@ -535,7 +530,7 @@ class CreatureTypeEdition extends AbstractModel
         }
 
         /**
-         * CreatureType type.
+         * Creature type.
          */
         if (!empty($value['type']) && empty($item->type)) {
             try {
@@ -788,36 +783,6 @@ class CreatureTypeEdition extends AbstractModel
                 'value' => (int) $value['darkvision'],
             ], $item);
             $item->senses()->save($darkvision);
-        }
-
-        /**
-         * Height and Weight.
-         */
-        if (!empty($value['heightAndWeight'])) {
-            $item->height = $value['heightAndWeight']['height'] ?? $value['heightAndWeight']['baseHeight'] ?? null;
-            if (!empty($value['heightAndWeight']['heightMod'])) {
-                $item->height_modifier = $value['heightAndWeight']['heightMod'];
-            }
-            $item->weight = $value['heightAndWeight']['weight'] ?? $value['heightAndWeight']['baseWeight'] ?? null;
-            if (!empty($value['heightAndWeight']['weightMod'])) {
-                $item->weight_modifier = $value['heightAndWeight']['weightMod'];
-            }
-        }
-
-        /**
-         * Ages.
-         */
-        foreach ($value['age'] ?? [] as $ageType => $ageItem) {
-            try {
-                $age = CreatureAge::from5eJson([
-                    'type' => $ageType,
-                    'value' => $ageItem,
-                ], $item);
-
-                $item->ages()->save($age);
-            } catch (UniqueConstraintViolationException $e) {
-                print "[WARNING] Multiple entries for age {$ageType}\n";
-            }
         }
 
         $item->save();

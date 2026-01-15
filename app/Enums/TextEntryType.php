@@ -11,6 +11,8 @@ enum TextEntryType: int
     case LIST = 3;
     case ENTRIES = 4;
     case TEXT = 5;
+    case QUOTE = 6;
+    case INSET = 7;
 
     public function toString(): string
     {
@@ -20,6 +22,8 @@ enum TextEntryType: int
             self::LIST => 'list',
             self::ENTRIES => 'entries',
             self::TEXT => 'text',
+            self::QUOTE => 'quote',
+            self::INSET => 'inset',
         };
     }
 
@@ -36,6 +40,8 @@ enum TextEntryType: int
             'section' => self::SECTION,
             'entries' => self::ENTRIES,
             'text' => self::TEXT,
+            'quote' => self::QUOTE,
+            'inset' => self::INSET,
             default => null
         };
     }

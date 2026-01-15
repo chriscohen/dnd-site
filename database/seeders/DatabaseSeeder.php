@@ -31,13 +31,14 @@ class DatabaseSeeder extends Seeder
             CampaignSettingSeeder::class,
             SourceSeeder::class,
             LanguageSeeder::class,
-            CreatureTypeSeeder::class,
-
-            FeatureSeeder::class,
             CharacterClassSeeder::class,
             ItemSeeder::class,
+            FeatureSeeder::class,
             SpellSeeder::class,
             Spell5eToolsSeeder::class,
+
+            CreatureTypeSeeder::class,
+            CreatureSpeciesEditionSeeder::class,
         ]);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Exceptions\DuplicateRecordException;
 use App\Models\Spells\Spell;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,7 +24,11 @@ class Spell5eToolsSeeder extends AbstractYmlSeeder
 
             foreach ($json['spell'] as $datum) {
                 print "[5e.tools] Creating Spell " . $datum['name'] . "...\n";
-                Spell::from5eJson($datum);
+                try {
+                    Spell::from5eJson($datum);
+                } catch (DuplicateRecordException $e) {
+                    print "[5e.tools] Skipping duplicate: " . $datum['name'] . "\n";
+                }
             }
         };
     }

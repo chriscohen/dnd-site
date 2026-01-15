@@ -14,6 +14,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->text('text')->nullable();
             $table->string('name')->nullable();
+            $table->string('quote_by')->nullable();
 
             // The order of items determines which appears first, second, third, etc.
             $table->unsignedSmallInteger('order')->index();

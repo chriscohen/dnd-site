@@ -9,6 +9,7 @@ enum DistanceUnit: int
     case YARD = 3;
     case METER = 4;
     case MILE = 5;
+    case SPECIAL = 6;
 
     public function plural(): string
     {
@@ -18,6 +19,7 @@ enum DistanceUnit: int
             self::YARD => 'yards',
             self::METER => 'meters',
             self::MILE => 'miles',
+            self::SPECIAL => 'special',
         };
     }
 
@@ -40,6 +42,7 @@ enum DistanceUnit: int
             self::YARD => 'yd',
             self::METER => 'm',
             self::MILE => 'mi',
+            self::SPECIAL => '',
         };
     }
 
@@ -51,6 +54,7 @@ enum DistanceUnit: int
             self::YARD => 'yd',
             self::METER => 'm',
             self::MILE => 'mi',
+            self::SPECIAL => 'special',
         };
     }
 
@@ -62,6 +66,7 @@ enum DistanceUnit: int
             'yd', 'yd.', 'yds', 'yard', 'yards' => self::YARD,
             'm', 'm.', 'meter', 'metre', 'meters', 'metres' => self::METER,
             'mi', 'mi.', 'mis', 'mile', 'miles' => self::MILE,
+            'special' => self::SPECIAL,
             default => null,
         };
     }

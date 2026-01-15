@@ -22,6 +22,7 @@ use Ramsey\Uuid\Uuid;
  * @property ?string $name
  * @property int $order
  * @property ModelInterface $parent
+ * @property ?string $quote_by
  * @property ?string $text
  * @property TextEntryType $type
  */
@@ -112,6 +113,8 @@ class TextEntry extends AbstractModel
                 'colStyles' => $value['colStyles'] ?? [],
                 'rows' => $value['rows'] ?? [],
             ]);
+        } elseif ($item->type == TextEntryType::QUOTE) {
+            $item->quote_by = $value['by'] ?? null;
         }
 
         $item->save();

@@ -16,6 +16,8 @@ enum TimeUnit: int
     case HOUR = 8;
     case DAY = 9;
     case PERMANENT = 10;
+    case REACTION = 11;
+    case SPECIAL = 12;
 
     public function format(?int $number): string
     {
@@ -24,6 +26,23 @@ enum TimeUnit: int
         return empty($number) ?
             $this->toString() :
             $number . ' ' . $this->toString() . $plural;
+    }
+
+    /**
+     * Whether a number is needed with this time unit.
+     *
+     * For example, "permanent" doesn't need a number - you can't have "2 permanent".
+     *
+     * @return bool
+     */
+    public function hasNumber(): bool
+    {
+        return !in_array($this, [
+            self::INSTANTANEOUS,
+            self::REACTION,
+            self::PERMANENT,
+            self::SPECIAL,
+        ]);
     }
 
     public function toString(): string
@@ -39,6 +58,8 @@ enum TimeUnit: int
             self::HOUR => 'hour',
             self::DAY => 'day',
             self::PERMANENT => 'permanent',
+            self::REACTION => 'reaction',
+            self::SPECIAL => 'special',
         };
     }
 
@@ -55,6 +76,8 @@ enum TimeUnit: int
             'hour', 'h', 'hr', 'hrs' => self::HOUR,
             'day', 'd' => self::DAY,
             'permanent', 'perm' => self::PERMANENT,
+            'reaction', 'react' => self::REACTION,
+            'special' => self::SPECIAL,
             default => null,
         };
     }

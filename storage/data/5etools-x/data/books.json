@@ -3,6 +3,7 @@
         {
             "name": "A Zib for Your Thoughts",
             "description": "One person's trash is sometimes another's treasure.\n\nIn this case, it’s also an opportunity for you to go on an excursion across the Tenth District, tracking down a client's very specific request…in thoughts.\n\nA 5th edition Dungeons & Dragons adventure for 2nd-level characters, set in Ravnica. Pre-generated characters are also included.",
+            "campaignSetting": "ravnica",
             "editions": [
                 {
                     "name": "original",
@@ -155,7 +156,7 @@
             "editions": [
                 {
                     "name": "original",
-                    "coverImage": "bos-astral-menagerie.webp"
+                    "coverImage": "boos-astral-menagerie.webp"
                 }
             ]
         },

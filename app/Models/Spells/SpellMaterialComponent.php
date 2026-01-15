@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Spells;
 
+use App\Enums\Spells\SpellMaterialComponentConsumption;
 use App\Models\AbstractModel;
 use App\Models\Items\ItemType;
 use App\Models\Items\ItemTypeEdition;
@@ -15,8 +16,8 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property Uuid $id
  *
+ * @property SpellMaterialComponentConsumption $consumption
  * @property ?string $description
- * @property bool $is_consumed
  * @property bool $is_focus
  * @property bool $is_plural
  * @property Uuid $item_edition_id
@@ -33,11 +34,14 @@ class SpellMaterialComponent extends AbstractModel
 
     public $timestamps = false;
 
-    public $casts = [
-        'is_consumed' => 'boolean',
-        'is_focus' => 'boolean',
-        'is_plural' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'consumption' => SpellMaterialComponentConsumption::class,
+            'is_focus' => 'boolean',
+            'is_plural' => 'boolean',
+        ];
+    }
 
     public function getItemData(): array
     {
@@ -58,35 +62,6 @@ class SpellMaterialComponent extends AbstractModel
     public function spellEdition(): BelongsTo
     {
         return $this->belongsTo(SpellEdition::class);
-    }
-
-    public function toArrayFull(): array
-    {
-        return [
-            'description' => $this->description,
-            'isConsumed' => $this->is_consumed,
-            'isFocus' => $this->is_focus,
-            'isPlural' => $this->is_plural,
-            'minimumValue' => empty($this->minimum_value) ? null : $this->formatPrice($this->minimum_value),
-            'quantity' => $this->quantity,
-            'quantityText' => $this->quantity_text,
-        ];
-    }
-
-    public function toArrayShort(): array
-    {
-        return [
-            'id' => $this->id,
-            'itemEditionId' => $this->itemEdition->id,
-            'spellEditionId' => $this->spellEdition->id,
-        ];
-    }
-
-    public function toArrayTeaser(): array
-    {
-        return [
-            'string' => $this->toString(),
-        ];
     }
 
     public function toString(): string
@@ -115,7 +90,9 @@ class SpellMaterialComponent extends AbstractModel
         $item->description = $value['description'] ?? null;
         $item->quantity = $value['quantity'] ?? 1;
         $item->quantity_text = $value['quantityText'] ?? null;
-        $item->is_consumed = $value['isConsumed'] ?? false;
+        $item->consumption = !empty($value['isConsumed']) ?
+            SpellMaterialComponentConsumption::CONSUMED :
+            SpellMaterialComponentConsumption::NOT_CONSUMED;
         $item->is_plural = $value['isPlural'] ?? false;
 
 
@@ -128,7 +105,14 @@ class SpellMaterialComponent extends AbstractModel
         $item = new static();
         $item->spellEdition()->associate($parent);
         $item->description = $value['text'] ?? null;
-        $item->is_consumed = $value['consume'] ?? false;
+
+        if (!empty($value['consume']) && $value['consume'] === 'optional') {
+            $item->consumption = SpellMaterialComponentConsumption::OPTIONAL;
+        } elseif (!empty($value['consume'])) {
+            $item->consumption = SpellMaterialComponentConsumption::CONSUMED;
+        } else {
+            $item->consumption = SpellMaterialComponentConsumption::NOT_CONSUMED;
+        }
 
         $item->save();
         return $item;

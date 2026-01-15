@@ -92,7 +92,7 @@ class Spell extends AbstractModel
         $item->slug = static::makeSlug($value['name']);
         $item->save();
 
-        $existingEdition = $item->editions->firstWhere('game_edition', $gameEdition);
+        $existingEdition = $item->editions->firstWhere('game_edition', $gameEdition->value);
 
         if (empty($existingEdition)) {
             $edition = SpellEdition::from5eJson($value, $item);

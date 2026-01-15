@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use App\Models\Spells\SpellEdition;
 use App\Models\Items\ItemTypeEdition;
+use App\Enums\Spells\SpellMaterialComponentConsumption;
 
 return new class extends Migration
 {
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('quantity')->default(1);
             $table->string('quantity_text')->nullable();
             $table->text('description')->nullable();
-            $table->boolean('is_consumed')->default(false);
+            $table->unsignedSmallInteger('consumption')->default(SpellMaterialComponentConsumption::NOT_CONSUMED);
             $table->boolean('is_focus')->default(false);
             $table->boolean('is_plural')->default(false);
             $table->unsignedInteger('minimum_value')->nullable();

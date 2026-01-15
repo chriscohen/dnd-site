@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name')->unique();
-            $table->string('shortName')->unique()->nullable();
+            $table->string('short_name')->unique()->nullable();
             $table->text('description')->nullable();
             $table->smallInteger('source_type')->index();
             $table->smallInteger('publication_type')->index();

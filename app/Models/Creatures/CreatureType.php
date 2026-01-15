@@ -21,6 +21,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @property Collection<CreatureTypeEdition> $editions
  * @property ?CreatureType $parent
+ * @property Collection<CreatureSpeciesEdition> $speciesEditions
  * @property Collection<CreatureType> $children
  */
 class CreatureType extends AbstractModel
@@ -44,6 +45,11 @@ class CreatureType extends AbstractModel
     public function parent(): BelongsTo
     {
         return $this->belongsTo(CreatureType::class, 'parent_id');
+    }
+
+    public function speciesEditions(): HasMany
+    {
+        return $this->hasMany(CreatureSpeciesEdition::class, 'creature_type_id');
     }
 
     public function toSearchableArray(): array

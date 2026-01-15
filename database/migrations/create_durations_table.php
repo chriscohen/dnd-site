@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('unit');
             $table->unsignedSmallInteger('per_level')->nullable();
             $table->unsignedSmallInteger('per_level_mode')->nullable();
+
+            $table->json('ends')->nullable();
         });
     }
 

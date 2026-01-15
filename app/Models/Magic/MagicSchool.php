@@ -58,7 +58,7 @@ class MagicSchool extends AbstractModel
         $item = new static();
         $item->id = $value['id'];
         $item->name = $value['name'];
-        $item->short_name = $value['short_name'] ?? null;
+        $item->short_name = $value['shortName'] ?? null;
         $item->description = $value['description'] ?? null;
         $item->color = $value['color'] ?? null;
 
