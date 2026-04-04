@@ -1,0 +1,13 @@
+﻿services:
+  nuxt:
+    build:
+      context: .
+      dockerfile: ".docker/Dockerfile"
+    ports:
+      - '81:80'
+    networks:
+      - dnd
+
+networks:
+  dnd:
+    external: true

@@ -1,0 +1,33 @@
+﻿@use 'sass:color';
+@use 'tailwindcss';
+
+/**
+ * Edition colors
+ */
+$edition-0-hover: var(--color-violet-400);
+$edition-0-active: var(--color-violet-600);
+$edition-0: var(--color-violet-900);
+
+$edition-1-hover:var(--color-sky-400);
+$edition-1-active:var(--color-sky-600);
+$edition-1:var(--color-sky-900);
+
+$edition-2-hover:var(--color-green-400);
+$edition-2-active:var(--color-green-600);
+$edition-2:var(--color-green-900);
+
+$edition-3-hover:var(--color-yellow-400);
+$edition-3-active:var(--color-yellow-600);
+$edition-3:var(--color-yellow-900);
+
+$edition-4-hover:var(--color-amber-400);
+$edition-4-active:var(--color-amber-600);
+$edition-4:var(--color-amber-900);
+
+$edition-5-hover:var(--color-orange-400);
+$edition-5-active:var(--color-orange-600);
+$edition-5:var(--color-orange-900);
+
+$edition-2024-hover:var(--color-red-400);
+$edition-2024-active:var(--color-red-600);
+$edition-2024:var(--color-red-900);

@@ -1,0 +1,20 @@
+﻿@use 'colors';
+
+$editions:
+    'edition-0' colors.$edition-0 colors.$edition-0-active colors.$edition-0-hover,
+    'edition-1' colors.$edition-1 colors.$edition-1-active colors.$edition-1-hover,
+    'edition-2' colors.$edition-2 colors.$edition-2-active colors.$edition-2-hover,
+    'edition-3' colors.$edition-3 colors.$edition-3-active colors.$edition-3-hover,
+    'edition-4' colors.$edition-4 colors.$edition-4-active colors.$edition-4-hover,
+    'edition-5' colors.$edition-5 colors.$edition-5-active colors.$edition-5-hover,
+    'edition-2024' colors.$edition-2024 colors.$edition-2024-active colors.$edition-2024-hover;
+
+$animation-duration: 500ms;
+
+$default-delay: 250ms;
+$default-lean-away: 5deg;
+$default-perspective: 75rem;
+
+$scrollbar-width: 0.5rem;
+
+$rarity-width: 0.25rem;

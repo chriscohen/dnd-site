@@ -1,0 +1,29 @@
+{
+    "abilities": {
+        "str": 18,
+        "dex": 11,
+        "con": 16,
+        "int": 7,
+        "wis": 10,
+        "cha": 11
+    },
+    "alignment": "neutral evil",
+    "armorClass": {
+        "base": 17,
+        "isNaturalArmor": true
+    },
+    "challengeRating": 12,
+    "hitPoints": {
+        "average": 104,
+        "formula": "16d8 + 32"
+    },
+    "languages": "all",
+    "name": "Mezzoloth",
+    "speed": {
+        "fly": 30,
+        "walk": 30
+    },
+    "size": "Medium",
+    "subtype": "Yugoloth",
+    "type": "Fiend"
+}

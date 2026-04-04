@@ -1,0 +1,27 @@
+﻿@use 'colors';
+@use 'variables';
+
+/**
+ * Edition colors and backgrounds.
+ */
+@each $edition, $base, $active, $hover in variables.$editions {
+    .bg-#{$edition} {
+        background-color: $base;
+        transition: background-color variables.$default-delay ease-in-out;
+
+        &:hover {
+            background-color: $hover;
+        }
+        &.active {
+            background-color: $active;
+        }
+    }
+
+    .bg-#{$edition}-active {
+        background-color: $active;
+    }
+    .bg-#{$edition}-hover {
+        background-color: $hover;
+        color: var(--color-white);
+    }
+}
