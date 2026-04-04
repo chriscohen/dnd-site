@@ -74,7 +74,7 @@ class Duration extends AbstractModel
         }
 
         if (empty($this->value) && !empty($this->per_level) && !empty($this->per_level_mode)) {
-            return $this->unit->format($this->per_level) . ' ' . $this->per_level_mode->toString();
+            return $this->unit->format($this->per_level).' Duration.php'. $this->per_level_mode->toString();
         }
 
         $output = $this->unit->format($this->value);

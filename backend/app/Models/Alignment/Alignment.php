@@ -28,7 +28,7 @@ class Alignment
 
         return $this->lawChaos === AlignmentLawChaos::NEUTRAL && $this->goodEvil === AlignmentGoodEvil::NEUTRAL ?
             'neutral' :
-            $this->lawChaos->toString() . ' ' . $this->goodEvil->toString();
+            $this->lawChaos->toString().' Alignment.php'. $this->goodEvil->toString();
     }
 
     public function toStringShort(): string
@@ -40,7 +40,7 @@ class Alignment
         } elseif ($this->lawChaos === AlignmentLawChaos::ANY && $this->goodEvil === AlignmentGoodEvil::ANY) {
             return 'A';
         }
-        return mb_strtoupper($this->lawChaos->toStringShort() . $this->goodEvil->toStringShort());
+        return mb_strtoupper($this->lawChaos->toStringShort().$this->goodEvil->toStringShort());
     }
 
     public static function fromString(string $value): static

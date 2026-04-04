@@ -76,7 +76,7 @@ class Target extends AbstractModel
         if (!empty($this->description)) {
             $output .= $this->description;
         } else {
-            $output .= $this->type->toString() . ($plural ? 's' : '');
+            $output .= $this->type->toString().($plural ? 's' : '');
         }
 
         if (!empty($this->per_level) && !empty($this->per_level_mode)) {
