@@ -25,6 +25,12 @@ jobs:
       NUXT_IMAGE: dnd-nuxt:latest
       NGINX_IMAGE: dnd-nginx:latest
 
+      APP_KEY: ${{ secrets.LARAVEL_APP_KEY }}
+      DB_HOST: ${{ secrets.LARAVEL_DB_HOST }}
+      DB_DATABASE: ${{ secrets.LARAVEL_DB_NAME }}
+      DB_USERNAME: ${{ secrets.LARAVEL_DB_USER }}
+      DB_PASSWORD: ${{ secrsts.LARAVEL_DB_PASSWORD }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
