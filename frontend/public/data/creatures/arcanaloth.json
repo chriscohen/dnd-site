@@ -1,0 +1,29 @@
+{
+    "abilities": {
+        "str": 17,
+        "dex": 12,
+        "con": 14,
+        "int": 20,
+        "wis": 16,
+        "cha": 17
+    },
+    "alignment": "neutral evil",
+    "armorClass": {
+        "base": 17,
+        "isNaturalArmor": true
+    },
+    "challengeRating": 12,
+    "hitPoints": {
+        "average": 104,
+        "formula": "16d8 + 32"
+    },
+    "languages": "all",
+    "name": "Arcanaloth",
+    "speed": {
+        "fly": 30,
+        "walk": 30
+    },
+    "size": "Medium",
+    "subtype": "Yugoloth",
+    "type": "Fiend"
+}

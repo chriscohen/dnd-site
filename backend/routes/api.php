@@ -1,0 +1,76 @@
+<?php
+
+declare(strict_types=1);
+
+use App\Http\Controllers\FeatController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CampaignSettingController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CharacterClassController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\Creatures\CreatureTypeController;
+use App\Http\Controllers\Creatures\CreatureMainTypeController;
+use App\Http\Controllers\Items\ItemController;
+use App\Http\Controllers\Languages\LanguageController;
+use App\Http\Controllers\Magic\MagicDomainController;
+use App\Http\Controllers\Magic\MagicSchoolController;
+use App\Http\Controllers\PersonController;
+use App\Http\Controllers\ReferenceController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Sources\SourceController;
+use App\Http\Controllers\Spells\SpellController;
+use App\Http\Controllers\UserController;
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::get('/user', [UserController::class, 'self']);
+
+Route::get('/campaign-setting/{slug}', [CampaignSettingController::class, 'get']);
+Route::get('/campaign-settings', [CampaignSettingController::class, 'index']);
+
+Route::get('/category/{slug}', [CategoryController::class, 'get']);
+Route::get('/categories', [CategoryController::class, 'index']);
+
+Route::get('/class/{slug}', [CharacterClassController::class, 'get']);
+Route::get('/classes', [CharacterClassController::class, 'index']);
+
+Route::get('/company/{slug}', [CompanyController::class, 'get']);
+Route::get('/companies', [CompanyController::class, 'index']);
+
+Route::get('/creature-type/{slug}', [CreatureTypeController::class, 'get']);
+Route::get('/creature-types', [CreatureTypeController::class, 'list']);
+
+Route::get('/creature-main-type/{slug}', [CreatureMainTypeController::class, 'get']);
+Route::get('/creature-main-types', [CreatureMainTypeController::class, 'list']);
+
+Route::get('/domains', [MagicDomainController::class, 'index']);
+
+Route::get('/feat/{slug}', [FeatController::class, 'get']);
+Route::get('/features', [FeatController::class, 'index']);
+
+Route::get('/item/{slug}', [ItemController::class, 'get']);
+Route::get('/items', [ItemController::class, 'index']);
+
+Route::get('/language/{slug}', [LanguageController::class, 'get']);
+Route::get('/languages', [LanguageController::class, 'index']);
+
+Route::get('/magic-school/{slug}', [MagicSchoolController::class, 'get']);
+Route::get('/magic-schools', [MagicSchoolController::class, 'index']);
+
+Route::get('/person/{slug}', [PersonController::class, 'get']);
+Route::get('/people', [PersonController::class, 'index']);
+Route::get('/person/{slug}/credits', [PersonController::class, 'credits']);
+
+Route::get('/references', [ReferenceController::class, 'index']);
+
+Route::get('/source/{slug}', [SourceController::class, 'get']);
+Route::get('/sources', [SourceController::class, 'index']);
+
+Route::get('/source/{slug}/contents', [SourceController::class, 'contents']);
+Route::get('/source/{slug}/credits', [SourceController::class, 'credits']);
+
+Route::get('/spell/{slug}', [SpellController::class, 'get']);
+Route::get('/spells', [SpellController::class, 'index']);
+
+Route::get('/search', [SearchController::class, 'search'])->where('q', '.*');

@@ -1,0 +1,228 @@
+[
+    {
+        "id": "2c39d46d-f6ff-4769-8803-d93015df5c81",
+        "name": "Birthright",
+        "logo": "birthright.webp",
+        "shortName": "BR",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "50781e64-d37c-4e9d-84fa-acdeced8281f",
+        "name": "Blackmoor",
+        "shortName": "BM",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "c2dc6552-7a37-4fa9-aa64-f672589b9092",
+        "name": "Conan and Red Sonja",
+        "logo": "conan-red-sonja.webp",
+        "shortName": "C&RS",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "60a0ac87-89e9-4ccd-85eb-a965f48e77c1",
+        "name": "Council of Wyrms",
+        "shortName": "CoW",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "e15219b6-bdfd-496a-b6b8-96120ec08b88",
+        "name": "Dark Sun",
+        "logo": "dark-sun.webp",
+        "shortName": "DS",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "9bfe277c-d37a-45f7-9d1d-4f828ba3257c",
+        "name": "Diablo II",
+        "logo": "diablo-ii.webp",
+        "shortName": "D2",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "4b84c93c-17dc-4c37-ac0f-fb04c2651f6d",
+        "name": "Dragon Fist",
+        "logo": "dragon-fist.webp",
+        "shortName": "DF",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "2fa8dddd-96ef-4df3-8b60-ca550ea3aeab",
+        "name": "Dragonlance",
+        "logo": "dragonlance.webp",
+        "shortName": "DL",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "f42692cf-dcf8-4119-b17d-6d84736642fd",
+        "name": "Eberron",
+        "shortName": "Ebr",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official",
+        "logo": "eberron-logo.webp"
+    },
+    {
+        "id": "d391eda0-80f8-4c6d-9d10-34a0148a60c4",
+        "name": "Forgotten Realms",
+        "shortName": "FR",
+        "description": "Forgotten Realms was created by Ed Greenwood around 1967 as a setting for his childhood stories.\n\nIn 1987, it became part of Dungeons & Dragons when the first Forgotten Realms products were published by TSR, Inc.\n\nRoleplaying and other products have been produced for the setting ever since, including the Baldur's Gate series of video games, hundreds of novels, comic books, a movie, and an online wiki.\n\nThe setting is roughly medieval high fantasy, and focuses on the continent of Faerûn (although other parts of the same world have been detailed in some official publications).",
+        "publicationType": "official",
+        "publisher": "wizards-of-the-coast",
+        "logo": "forgotten-realms.png",
+        "startYear": 1987
+    },
+    {
+        "id": "be045376-158f-4b0b-81a9-8fe262550da0",
+        "name": "Ghostwalk",
+        "shortName": "GW",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "98d1ad61-5fbc-441d-926e-c76ba8699595",
+        "name": "Greyhawk",
+        "logo": "greyhawk.webp",
+        "shortName": "GH",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "8fa3fa97-1757-4a39-97ba-54b274d768c3",
+        "name": "Jakandor",
+        "shortName": "Jak",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "c0cf1754-399f-474f-b116-fd59a770b343",
+        "name": "Kingdoms of Kalamar",
+        "shortName": "KoK",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "2b9cab05-56d8-4cde-94cf-d50341f5dc9c",
+        "name": "Lankhmar",
+        "shortName": "LM",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "bcfa4d10-ad5c-4452-b9ba-a5a032d2150f",
+        "name": "Magic: The Gathering Planes",
+        "shortName": "MtGP",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "945991a9-afb2-4715-af92-5cc7e3bc380d",
+        "name": "Mahasarpa",
+        "shortName": "Maha",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "256cdfd1-b6b9-458f-9173-21cfd1819e90",
+        "name": "Mystara",
+        "shortName": "Mys",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "115e8aae-8aa5-4eb0-aa64-9ac3e3a3385c",
+        "name": "Nentir Vale",
+        "shortName": "NV",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "3e05cc1a-2c1e-4551-a2cd-55ec2527c079",
+        "name": "Pelinore",
+        "shortName": "Peli",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "b0c5d219-006d-4dce-a740-46d938111098",
+        "name": "Planescape",
+        "logo": "planescape.webp",
+        "shortName": "PS",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "97cf4b3f-c639-4bce-9fda-b89e58eff0d6",
+        "name": "Radiant Citadel",
+        "shortName": "RC",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "854db455-162c-4d17-9df2-7cbbabc609ed",
+        "name": "Ravenloft",
+        "shortName": "RL",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official",
+        "logo": "ravenloft.webp"
+    },
+    {
+        "id": "072455fa-e375-4a64-8c54-a8f5383a14fa",
+        "name": "Ravnica: City of Legends",
+        "slug": "ravnica",
+        "shortName": "RCL",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "92343471-d0bb-4da6-84d9-6fd6539df24e",
+        "name": "Rokugan",
+        "shortName": "Roku",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "52d76add-ad89-4360-824c-8555c0a7c687",
+        "name": "Spelljammer",
+        "logo": "spelljammer.webp",
+        "shortName": "SJ",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "0b4bd1ee-20e9-4259-8b2f-95a07277a925",
+        "name": "Strixhaven",
+        "shortName": "SX",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "43dbb66b-837f-4023-a385-60bab116800e",
+        "name": "Tal'Dorei",
+        "logo": "tal-dorei.webp",
+        "shortName": "TD",
+        "publisher": "green-ronin-publishing",
+        "publicationType": "third party"
+    },
+    {
+        "id": "ad54cc86-cc6b-4b74-a811-19f25c908091",
+        "name": "Warcraft",
+        "shortName": "WC",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    },
+    {
+        "id": "c468008d-8d53-4903-8eb7-25de7b45d466",
+        "name": "Wildemount",
+        "shortName": "WM",
+        "publisher": "wizards-of-the-coast",
+        "publicationType": "official"
+    }
+]

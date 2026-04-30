@@ -1,0 +1,145 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models\Creatures;
+
+use App\Models\AbstractModel;
+use App\Models\ModelInterface;
+use App\Models\Reference;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
+use Laravel\Scout\Searchable;
+use Ramsey\Uuid\Uuid;
+
+/**
+ * @property Uuid $id
+ * @property string $slug
+ * @property string $name
+ *
+ * @property Collection<CreatureTypeEdition> $editions
+ * @property ?CreatureType $parent
+ * @property Collection<CreatureSpeciesEdition> $speciesEditions
+ * @property Collection<CreatureType> $children
+ */
+class CreatureType extends AbstractModel
+{
+    use HasUuids;
+    use Searchable;
+
+    public $timestamps = false;
+    public $incrementing = false;
+
+    public function children(): HasMany
+    {
+        return $this->hasMany(CreatureType::class, 'parent_id');
+    }
+
+    public function editions(): HasMany
+    {
+        return $this->hasMany(CreatureTypeEdition::class, 'creature_type_id');
+    }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(CreatureType::class, 'parent_id');
+    }
+
+    public function speciesEditions(): HasMany
+    {
+        return $this->hasMany(CreatureSpeciesEdition::class, 'creature_type_id');
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+        ];
+    }
+
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
+    {
+        $existing = static::query()->where('name', $value['name'])->first();
+
+        if (!empty($existing)) {
+            Reference::from5eJson([
+                'source' => $value['source'],
+                'page' => $value['page'] ?? null,
+            ], $existing);
+            return $existing;
+        }
+
+        $item = new static();
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->name = $value['name'];
+        $item->slug = $value['slug'] ?? static::makeSlug($value['name']);
+
+        $item->save();
+
+        $edition = CreatureTypeEdition::fromInternalJson($value, $item);
+        $item->editions()->save($edition);
+
+        Reference::from5eJson([
+            'source' => $value['source'],
+            'page' => $value['page'] ?? null,
+        ], $item);
+
+        $item->save();
+        return $item;
+    }
+
+    public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
+    {
+        // Keys are the names of creatures. Values are slugs for their parent type.
+        $map = [
+            'Dragonborn (' => 'dragonborn',
+            'Elf (' => 'elf',
+            'Gnome (' => 'gnome',
+            'Goblin (' => 'goblin',
+            'Human (' => 'human',
+            'Minotaur (' => 'minotaur',
+            'Orc (' => 'orc',
+            'Yuan-ti Pureblood' => 'yuan-ti',
+        ];
+
+        // Try to get an existing item.
+        $existing = static::query()->where('name', $value['name'])->first();
+        $item = $existing ?? new static();
+        $item->name = $value['name'];
+        $item->slug = static::makeSlug($value['name']);
+
+        // Do we need to look for a parent type?
+        foreach ($map as $prefix => $slug) {
+            if (str_starts_with($value['name'], $prefix)) {
+                $parentEntity = CreatureType::query()->where('slug', $slug)->firstOrFail();
+                $item->parent()->associate($parentEntity);
+            }
+        }
+
+        $item->save();
+
+        // Edition.
+        $edition = CreatureTypeEdition::from5eJson($value, $item);
+        $item->editions()->save($edition);
+
+        $item->save();
+        return $item;
+    }
+
+    public static function generate(ModelInterface $parent = null): static
+    {
+        $faker = static::getFaker();
+        $item = new static();
+        $item->name = $faker->words(3, asText: true);
+        $item->slug = static::makeSlug($item->name);
+
+        $item->save();
+
+        $edition = CreatureTypeEdition::generate($item);
+        $item->editions()->save($edition);
+
+        return $item;
+    }
+}

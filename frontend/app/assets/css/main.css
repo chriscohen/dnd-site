@@ -1,0 +1,122 @@
+﻿@import '@nuxt/ui';
+@import 'tailwindcss';
+@import './default/_fonts.css';
+
+@plugin 'tailwindcss-animated';
+
+@tailwind utilities;
+
+@theme {
+    --font-sans: var(--font-bookmania);
+    --font-bookmania: 'Bookmania', serif;
+    --font-eaves: 'Mrs Eaves', sans-serif;
+    --font-modesto: 'Modesto', sans-serif;
+    --font-scaly: 'Scaly Sans', sans-serif;
+
+    --color-active: var(--color-gray-50);
+    --color-dark: var(--color-gray-950);
+    --color-primary: oklch(63.7% 0.237 25.331);
+    --color-highlight: var(--color-gray-300);
+    --color-highlighted: rgba(0,0,0,1);
+
+    --color-common: oklch(87.2% 0.01 258.338);
+    --color-uncommon: oklch(64.8% 0.2 131.684);
+    --color-rare: oklch(54.6% 0.245 262.881);
+    --color-very-rare: oklch(55.8% 0.288 302.321);
+    --color-legendary: oklch(66.6% 0.179 58.318);
+}
+
+@layer base {
+    body h1 { @apply font-eaves text-6xl; }
+    body h2 { @apply font-eaves text-4xl; }
+    body h3 { @apply font-eaves text-2xl; }
+    body h4 { @apply font-eaves text-lg; }
+    body h5 { @apply font-eaves text-base; }
+    body h6 { @apply font-eaves text-sm; }
+}
+
+:root {
+    --default-font-family: 'Bookmania', serif;
+    --ui-font-sans: 'Bookmania', serif;
+    --ui-text: var(--color-gray-300);
+}
+
+html {
+    font-family: 'Bookmania', serif;
+    @apply text-gray-300;
+    font-size: 12px;
+}
+
+body {
+    background: radial-gradient(
+        var(--color-gray-800),
+        var(--color-gray-950)
+    );
+}
+
+html, body, #__nuxt {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+@media (min-width: theme('screens.lg')) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: theme('screens.xl')) {
+    html {
+        font-size: 15px;
+    }
+}
+
+p {
+    @apply mb-4 font-light;
+}
+.link {
+    @apply underline decoration-dotted hover:decoration-solid hover:decoration-3 hover:decoration-red-500
+    hover:text-white transition-all duration-300 ease-in-out;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    @apply bg-black/50 rounded-xl px-4
+}
+
+/**
+ * Scrollbar styling.
+ */
+.scrollbar {
+    overflow-y: hidden;
+    padding-right: 0.5rem;
+    scrollbar-gutter: stable both-edges;
+
+    &:hover {
+        overflow-y: auto;
+    }
+}
+::-webkit-scrollbar {
+    @apply w-2 h-2
+}
+/* Track */
+::-webkit-scrollbar-track {
+    @apply: bg-black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    @apply bg-red-800 rounded-lg;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-red-500;
+}

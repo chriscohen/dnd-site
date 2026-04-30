@@ -1,0 +1,38 @@
+[
+    {
+        "id": "aberrant",
+        "name": "Aberrant",
+        "plural": "Aberrants",
+        "origin": "Far Realm"
+    },
+    {
+        "id": "elemental",
+        "name": "Elemental",
+        "plural": "Elementals",
+        "origin": "Elemental Chaos"
+    },
+    {
+        "id": "fey",
+        "name": "Fey",
+        "plural": "Fey",
+        "origin": "Feywild"
+    },
+    {
+        "id": "immortal",
+        "name": "Immortal",
+        "plural": "Immortals",
+        "origin": "Astral Sea"
+    },
+    {
+        "id": "natural",
+        "name": "Natural",
+        "plural": "Naturals",
+        "origin": "The Material World"
+    },
+    {
+        "id": "shadow",
+        "name": "Shadow",
+        "plural": "Shadows",
+        "origin": "Shadowfell"
+    }
+]

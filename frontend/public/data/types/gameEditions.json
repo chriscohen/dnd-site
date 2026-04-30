@@ -1,0 +1,116 @@
+[
+    {
+        "fullName": "Original Edition",
+        "name": "0th",
+        "number": 0,
+        "start": 1974,
+        "end": 1977,
+        "aliases": [
+            "0",
+            "0e",
+            "0th",
+            "original",
+            "original edition"
+        ]
+    },
+    {
+        "fullName": "First Edition",
+        "name": "1st",
+        "number": 1,
+        "logo": "game-edition-1.webp",
+        "start": 1977,
+        "end": 1989,
+        "aliases": [
+            "1",
+            "1e",
+            "1st",
+            "first",
+            "first edition"
+        ]
+    },
+    {
+        "fullName": "AD&D Second Edition",
+        "name": "2nd",
+        "number": 2,
+        "logo": "game-edition-2.webp",
+        "start": 1989,
+        "end": 2000,
+        "aliases": [
+            "2",
+            "2e",
+            "2nd",
+            "second",
+            "second edition"
+        ]
+    },
+    {
+        "fullName": "Third Edition",
+        "name": "3rd",
+        "number": 3,
+        "logo": "game-edition-3.webp",
+        "start": 2000,
+        "end": 2003,
+        "aliases": [
+            "3",
+            "3e",
+            "3rd",
+            "third",
+            "third edition"
+        ]
+    },
+    {
+        "fullName": "3.5 Edition",
+        "name": "3.5",
+        "number": 3.5,
+        "logo": "game-edition-3.webp",
+        "start": 2003,
+        "end": 2008,
+        "aliases": [
+            "3.5",
+            "3.5e",
+            "3.5 edition"
+        ]
+    },
+    {
+        "fullName": "4th Edition",
+        "name": "4th",
+        "number": 4,
+        "logo": "game-edition-4.webp",
+        "start": 2008,
+        "end": 2014,
+        "aliases": [
+            "4",
+            "4e",
+            "4th",
+            "fourth",
+            "fourth edition"
+        ]
+    },
+    {
+        "fullName": "5th Edition",
+        "name": "5th",
+        "number": 5,
+        "logo": "game-edition-5.webp",
+        "aliases": [
+            "5e",
+            "5e (2014)",
+            "2014 edition",
+            "5e (2024)"
+        ],
+        "start": 2014,
+        "end": 2024
+    },
+    {
+        "fullName": "5th Edition (2024)",
+        "name": "5th (2024)",
+        "number": 5.5,
+        "logo": "game-edition-5.webp",
+        "aliases": [
+            "5e (2024)",
+            "5th (2024)",
+            "5e (2024 edition)",
+            "5th (2024 edition)"
+        ],
+        "start": 2024
+    }
+]

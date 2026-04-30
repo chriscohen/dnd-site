@@ -1,0 +1,284 @@
+{
+    "id": "327a040f-b040-4c73-a6e3-a17458b95d3b",
+    "name": "Tal'Dorei Campaign Setting",
+    "slug": "tal-dorei-campaign-setting",
+    "description": "Critical Role has taken the roleplaying world by storm. Now, you can join the adventure! Until now, the wondrous and dangerous lands of Tal’Dorei have been the sole stomping grounds of the show’s adventuring company, Vox Machina. But now, you can explore these realms in a tome from the pen of Game Master Matt Mercer himself!\n\nWill you find one of the revered Vestiges of Divergence or perhaps discover part of the Chroma Conclave's legacy? Can you help the Ashari in their sacred charge to prevent the elemental vortices from overwhelming the world, or will you find yourself embroiled in the machinations of the Clasp? This setting book takes an in-depth look at the history, people, and places of Tal’Dorei, and includes new backgrounds, magic items, and monsters for the Fifth Edition rules.\n\nThis is not a standalone game and will require the base set Dungeons and Dragons 5th Edition.",
+    "editions": [
+        {
+            "id": "84754ad3-2be7-48d2-8cb0-f1719d4c9766",
+            "name": "original",
+            "binding": "hardcover",
+            "coverImage": "tal-dorei-campaign-setting.webp",
+            "formats": ["print", "pdf"],
+            "gameEdition": "5e",
+            "isbn10": "1934547840",
+            "isbn13": "9781934547847",
+            "pages": 144,
+            "publisher": "green-ronin-publishing",
+            "releaseDate": "2017-10-17"
+        },
+        {
+            "id": "6050d585-8717-4d8f-9d04-07addc6fb9e7",
+            "name": "reborn",
+            "binding": "hardcover",
+            "coverImage": "tal-dorei-campaign-setting-reborn.webp",
+            "formats": ["print", "pdf"],
+            "gameEdition": "5.5",
+            "isbn10": "1737372509",
+            "pages": 280,
+            "publisher": "darrington-press",
+            "releaseDate": "2025-04-01",
+            "contents": [
+                {
+                    "name": "Preface"
+                },
+                {
+                    "name": "Welcome to Tal'Dorei",
+                    "headers": [
+                        "Lands of Tal'Dorei",
+                        "What's In This Book?",
+                        "Calendar, Time, and the Cosmos",
+                        "A History of Tal'Dorei",
+                        "Myth of Exandria",
+                        "Running a Tal'Dorei Campaign"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 1
+                    }
+                },
+                {
+                    "name": "Allegiances of Tal'Dorei",
+                    "headers": [
+                        "Pantheon of Exandria",
+                        "Prime Deities",
+                        "Betrayer Gods",
+                        "Lesser Idols",
+                        "Factions and Societies",
+                        "Tal'Dorei Council",
+                        "Arcana Pansophical",
+                        "The Ashari",
+                        "Brawler's League",
+                        "Chamber of Whitestone",
+                        "Claret Orders",
+                        "The Clasp",
+                        "Golden Grin",
+                        "Houses of Kraghammer",
+                        "League of Miracles",
+                        "Library of the Cobalt Soul",
+                        "The Myriad",
+                        "The Remnants",
+                        "Wardens of Syngorn"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 2
+                    }
+                },
+                {
+                    "name": "Tal'Dorei Gazetteer",
+                    "headers": [
+                        "Lucidian Coast",
+                        "Alabaster Sierras",
+                        "Mooren River Run",
+                        "Dividing Plains",
+                        "Cliffkeep Mountains",
+                        "Stormcrest Mountains",
+                        "Rifenmist Peninsula",
+                        "Verdant Expanse",
+                        "Other Lands of Exandria"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 3
+                    }
+                },
+                {
+                    "name": "Character Options",
+                    "headers": [
+                        "Playing in a Tal'Dorei Campaign",
+                        "Races and Cultures",
+                        "Dragonblood",
+                        "Dwarves",
+                        "Elemental Ancestry",
+                        "Elves",
+                        "Firbolgs",
+                        "Gnomes",
+                        "Goblinkin",
+                        "Half-Giants",
+                        "Halflings",
+                        "Humans",
+                        "Orcs",
+                        "Tieflings",
+                        "Mixed Ancestry",
+                        "Other Races",
+                        "Hemocraft",
+                        "Subclasses",
+                        "Barbarian: Path of the Juggernaut",
+                        "Bard: College of Tragedy",
+                        "Cleric: Blood Domain",
+                        "Cleric: Moon Domain",
+                        "Druid: Circle of the Blighted",
+                        "Monk: Way of the Cobalt Soul",
+                        "Paladin: Oath of the Open Sea",
+                        "Sorcerer: Runechild",
+                        "Wizard: Blood Magic",
+                        "Backgrounds",
+                        "Ashari",
+                        "Clasp Member",
+                        "Lyceum Scholar",
+                        "Reformed Cultist",
+                        "Whitestone Rifle Corps",
+                        "Supernatural Blessing: Fate-Touched",
+                        "New Feats"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 4
+                    }
+                },
+                {
+                    "name": "Game Master's Toolkit",
+                    "headers": [
+                        "Creating Adventures",
+                        "Tal'Dorei Treasures",
+                        "Magic Items",
+                        "Tools of the Ashari",
+                        "Vestiges of Divergence",
+                        "Optional Campaign Rules"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 5
+                    }
+                },
+                {
+                    "name": "Allies and Adversaries of Tal'Dorei",
+                    "headers": [
+                        "Nonplayer Creatures",
+                        "Adranach",
+                        "Ashari",
+                        "Cinderslag Elemental",
+                        "Clasp Operatives",
+                        "Cold Snap Spirit",
+                        "Cyclops Stormcaller",
+                        "Demonfeed Spider",
+                        "Ember Roc",
+                        "Golems",
+                        "Jourrael, the Caedogeist",
+                        "Kraghammer Goat-Knight",
+                        "Magma Landshark",
+                        "Plainscow",
+                        "Ravagers",
+                        "Remnants",
+                        "Rivermaw Warriors",
+                        "Skeletons",
+                        "Vos'skyriss Serpentfolk",
+                        "Wraithroot Tree",
+                        "Vox Machina"
+                    ],
+                    "ordinal": {
+                        "type": "chapter",
+                        "identifier": 6
+                    }
+                }
+            ],
+            "credits": {
+                "Exandria created by": ["matthew-mercer"],
+                "Lead Designer": [
+                    "james-j-haeck",
+                    "matthew-mercer",
+                    "hannah-rose"
+                ],
+                "Additional Design": ["john-stavropoulos"],
+                "Addtional Contributions by Critial Role Cast": [
+                    "laura-bailey",
+                    "taliesin-jaffe",
+                    "ashley-johnson",
+                    "liam-o-brien",
+                    "marisha-ray",
+                    "sam-riegel",
+                    "travis-willingham"
+                ],
+                "Additional Worldbuilding": ["aabria-iyengar"],
+                "Managing Editor": ["hannah-rose"],
+                "Editor": [
+                    "scott-fitzgerald-gray",
+                    "marcie-wood"
+                ],
+                "Proofreader": ["matt-walloch-key"],
+                "Lore Keeper": ["dani-carr"],
+                "Cultural Consultant": ["basheer-ghouse"],
+                "Safety Consultant": ["john-stavropoulos"],
+                "Accessibility Consultant": [
+                    "chris-hopper",
+                    "deven-rue"
+                ],
+                "Layout and Graphic Design": [
+                    "christopher-j-de-la-rosa",
+                    "gordon-mcalpin"
+                ],
+                "Art Director": [
+                    "james-j-haeck",
+                    "hannah-rose"
+                ],
+                "Producer": [
+                    "james-j-haeck",
+                    "hannah-rose",
+                    "ivan-van-norman"
+                ],
+                "Cover Illustrator": ["genel-jumalon"],
+                "Lead Character Illustrator": ["lauren-walsh"],
+                "Cartographer": ["andy-law"],
+                "Illustrator": [
+                    "jonah-baumann",
+                    "elliott-berggren",
+                    "lea-bichlmaier",
+                    "hunter-bonyun",
+                    "allie-briggs",
+                    "clara-daly",
+                    "kent-davis",
+                    "nikki-dawes",
+                    "biagio-dalessandro",
+                    "stanislav-dikolenko",
+                    "isabel-gibney",
+                    "anna-grinenko",
+                    "john-anthony-di-giovanni",
+                    "wesley-griffith",
+                    "ilich-henriquez",
+                    "claudia-ianniciello",
+                    "genel-jumalon",
+                    "linda-lithen",
+                    "adrian-ibarra-lugo",
+                    "nguyen-hieu",
+                    "jessica-nguyen",
+                    "ariana-orner",
+                    "svetoslav-petrov",
+                    "kennef-riggles",
+                    "aaron-j-riley",
+                    "caio-santos",
+                    "jessica-scates",
+                    "elisa-serio",
+                    "ameera-sheikh",
+                    "cyarna-trim",
+                    "andrey-vasilchenko",
+                    "lauren-walsh",
+                    "azra-wheeler",
+                    "zuzanna-wuzyk"
+                ],
+                "Digital Edition Alt Text": ["mysty-vander"],
+                "Head of Darrington Press": ["ivan-van-norman"],
+                "Creative Director": ["matthew-mercer"],
+                "Head of Business Development": ["ben-van-der-fluit"],
+                "Marketing Manager": ["darcy-l-ross"],
+                "Playtest Coordinator": ["christina-farber"],
+                "Director of Retail Partnerships": ["brittany-walloch-key"]
+            }
+        }
+    ],
+    "publicationType": "3rd party",
+    "sourcebookTypes": [
+        "campaign_setting"
+    ],
+    "sourceType": "sourcebook"
+}

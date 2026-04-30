@@ -1,0 +1,32 @@
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - laravel
+      - nuxt
+    volumes:
+      - "../../backend/public:/var/www/html/public:ro"
+      - "./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro"
+
+  laravel:
+    build:
+      context: "../.."
+      dockerfile: ".docker/production/laravel/Dockerfile"
+    restart: unless-stopped
+    env_file:
+      - "../../.env.production"
+    working_dir: "/var/www/html"
+    command: php-fpm
+
+  nuxt:
+    build:
+      context: "../.."
+      dockerfile: ".docker/production/nuxt/Dockerfile"
+    restart: unless-stopped
+    env_file:
+      - "../../.env.production"
+    expose:
+      - "3000"

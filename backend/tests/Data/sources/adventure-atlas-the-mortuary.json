@@ -1,0 +1,26 @@
+{
+    "name": "Adventure Atlas: The Mortuary",
+    "id": "AATM",
+    "source": "AATM",
+    "group": "supplement-alt",
+    "cover": {
+        "type": "internal",
+        "path": "covers/AATM.webp"
+    },
+    "published": "2023-10-17",
+    "author": "Wizards RPG Team",
+    "contents": [
+        {
+            "name": "Adventure Atlas: The Mortuary",
+            "headers": [
+                "Using This Supplement",
+                "Heralds of Dust",
+                "The Mortuary",
+                "Appendix: Mortuary Creatures"
+            ]
+        },
+        {
+            "name": "Credits"
+        }
+    ]
+}

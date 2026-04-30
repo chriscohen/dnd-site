@@ -1,0 +1,85 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use App\Enums\SavingThrows\SavingThrowMultiplier;
+use App\Enums\SavingThrows\SavingThrowType;
+use App\Models\Spells\SpellEdition;
+use App\Models\Conditions\ConditionEdition;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Ramsey\Uuid\Uuid;
+
+/**
+ * @property Uuid $id
+ *
+ * @property ?ConditionEdition $failStatus
+ * @property ?Uuid $fail_status_id
+ * @property ?SavingThrowMultiplier $multiplier
+ * @property SpellEdition $spellEdition
+ * @property ?ConditionEdition $succeedStatus
+ * @property SavingThrowType $type
+ */
+class SavingThrow extends AbstractModel
+{
+    use HasUuids;
+
+    public $timestamps = false;
+
+    public $casts = [
+        'multiplier' => SavingThrowMultiplier::class,
+        'type' => SavingThrowType::class,
+    ];
+
+    public function failStatus(): BelongsTo
+    {
+        return $this->belongsTo(ConditionEdition::class, 'fail_status_id');
+    }
+
+    public function spellEdition(): BelongsTo
+    {
+        return $this->belongsTo(SpellEdition::class, 'spell_edition_id');
+    }
+
+    public function succeedStatus(): BelongsTo
+    {
+        return $this->belongsTo(ConditionEdition::class, 'succeed_status_id');
+    }
+
+    /**
+     * @param array|string|int $value
+     * @param SpellEdition $parent
+     */
+    public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->spellEdition()->associate($parent);
+        $item->id = $value['id'] ?? Uuid::uuid4();
+        $item->type = SavingThrowType::tryFromString($value['type']);
+
+        if (!empty($data['multiplier'])) {
+            $item->multiplier = SavingThrowMultiplier::tryFromString($value['multiplier']);
+        }
+
+        // TODO: revisit this
+//        if (!empty($value['failStatus'])) {
+//            $condition = StatusCondition::query()
+//                ->where('slug', $value['failStatus'])
+//                ->first();
+//
+//            if (empty($condition)) {
+//                throw new \Exception("Invalid fail_status: " . $value['failStatus']);
+//            }
+//
+//            $x = $parent->game_edition;
+//            $item->failStatus()->associate(
+//                $condition->editions->where('game_edition', $parent->game_edition)->firstOrFail()
+//            );
+//        }
+
+        $item->save();
+        return $item;
+    }
+}

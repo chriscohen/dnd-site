@@ -1,0 +1,94 @@
+﻿ @layer base {
+    /**
+     * Bookmania
+     */
+    @font-face {
+        font-family: 'Bookmania';
+        src: url('/fonts/bookmania-300.otf') format('opentype');
+        font-weight: 300;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Bookmania';
+        src: url('/fonts/bookmania-300-italic.otf') format('opentype');
+        font-weight: 300;
+        font-style: italic;
+    }
+    @font-face {
+        font-family: 'Bookmania';
+        src: url('/fonts/bookmania.otf') format('opentype');
+        font-weight: 400;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Bookmania';
+        src: url('/fonts/bookmania-italic.otf') format('opentype');
+        font-weight: 400;
+        font-style: italic;
+    }
+    @font-face {
+        font-family: 'Bookmania';
+        src: url('/fonts/bookmania-700.otf') format('opentype');
+        font-weight: 700;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Bookmania';
+        src: url('/fonts/bookmania-700-italic.otf') format('opentype');
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    /**
+     * Modesto
+     */
+    @font-face {
+        font-family: 'Modesto Condensed';
+        src: url('/fonts/modesto-condensed.otf') format('opentype');
+        font-weight: 400;
+    }
+
+    /**
+     * Mrs Eaves.
+     */
+    @font-face {
+        font-family: 'Mrs Eaves';
+        src: url('/fonts/mrs-eaves-small-caps-400.otf') format('opentype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+        font-feature-settings: 'scmp';
+    }
+
+    /**
+     * Scaly Sans
+     */
+    @font-face {
+        font-family: 'Scaly Sans';
+        src: url('/fonts/scaly-sans-400.otf') format('opentype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Scaly Sans';
+        src: url('/fonts/scaly-sans-400-italic.otf') format('opentype');
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Scaly Sans';
+        src: url('/fonts/scaly-sans-700.otf') format('opentype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Scaly Sans';
+        src: url('/fonts/scaly-sans-700-italic.otf') format('opentype');
+        font-weight: 700;
+        font-style: italic;
+        font-display: swap;
+    }
+}

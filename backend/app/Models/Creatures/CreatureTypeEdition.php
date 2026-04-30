@@ -1,0 +1,830 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models\Creatures;
+
+use App\Enums\AbilityScoreType;
+use App\Enums\Conditions\ConditionInstanceType;
+use App\Enums\Creatures\CreatureSizeUnit;
+use App\Enums\Damage\DamageType;
+use App\Enums\GameEdition;
+use App\Enums\MediaType;
+use App\Enums\Movement\MovementType;
+use App\Enums\SenseType;
+use App\Enums\SkillMasteryLevel;
+use App\Exceptions\RecordNotFoundException;
+use App\Models\AbilityScores\AbilityScore;
+use App\Models\AbilityScores\AbilityScoreModifierGroup;
+use App\Models\AbstractModel;
+use App\Models\Alignment\Alignment;
+use App\Models\ArmorClass\ArmorClass;
+use App\Models\Conditions\ConditionInstance;
+use App\Models\Media\Media;
+use App\Models\ModelInterface;
+use App\Models\MovementSpeeds\MovementSpeed;
+use App\Models\Reference;
+use App\Models\Skills\Skill;
+use App\Models\Skills\SkillInstance;
+use App\Models\Sources\Source;
+use App\Models\Conditions\ConditionEdition;
+use App\Models\Tag;
+use App\Traits\WithTextEntries;
+use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\UniqueConstraintViolationException;
+use Illuminate\Support\Collection as SupportCollection;
+
+/**
+ * @property string $id
+ *
+ * @property ?AbilityScoreModifierGroup $abilityScoreModifiers
+ * @property Collection<AbilityScore> $abilities
+ * @property Collection<CreatureAge> $ages
+ * @property Collection<CreatureAlignment> $alignment
+ * @property Collection<ArmorClass> $armorClass
+ * @property ?float $challenge_rating
+ * @property Collection<ConditionInstance> $conditionImmunities
+ * @property Collection<ConditionInstance> $conditionInstances
+ * @property CreatureType $creature
+ * @property Collection<ConditionInstance> $damageImmunities
+ * @property Collection<ConditionInstance> $damageResistances
+ * @property Collection<ConditionInstance> $damageVulnerabilities
+ * @property ?CreatureSense $darkvision
+ * @property GameEdition $game_edition
+ * @property bool $has_fixed_proficiency_bonus
+ * @property ?int $hit_die_faces
+ * @property ?CreatureHitPoints $hitPoints
+ * @property ?int $lair_xp
+ * @property Collection<CreatureLanguage> $languages
+ * @property Collection<Media> $media
+ * @property Collection<MovementSpeed> $movementSpeeds
+ * @property int $passivePerception
+ * @property ?int $proficiency_bonus
+ * @property int $proficiencyBonus
+ * @property Collection<Reference> $references
+ * @property Collection<CreatureSense> $senses
+ * @property ?Collection<CreatureSizeUnit> $sizes
+ * @property Collection<SkillInstance> $skills
+ * @property Source $source
+ * @property ?Collection<Tag> $tags
+ * @property Collection<Media> $tokens
+ * @property ?CreatureSense $truesight
+ * @property ?CreatureMainTypeGroup $type
+ *
+ * @property AbilityScore $str
+ * @property AbilityScore $dex
+ * @property AbilityScore $con
+ * @property AbilityScore $int
+ * @property AbilityScore $wis
+ * @property AbilityScore $cha
+ */
+class CreatureTypeEdition extends AbstractModel
+{
+    use HasUuids;
+    use WithTextEntries;
+
+    public $timestamps = false;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'condition_immunities' => 'collection',
+            'damage_immunities' => 'collection',
+            'damage_resistances' => 'collection',
+            'game_edition' => GameEdition::class,
+            'has_fixed_proficiency_bonus' => 'boolean',
+            'is_playable' => 'boolean',
+            'sizes' => AsEnumCollection::of(CreatureSizeUnit::class),
+        ];
+    }
+
+    public function abilities(): MorphMany
+    {
+        return $this->morphMany(AbilityScore::class, 'parent');
+    }
+
+    public function abilityScoreModifiers(): MorphOne
+    {
+        return $this->morphOne(AbilityScoreModifierGroup::class, 'parent');
+    }
+
+    public function alignment(): HasMany
+    {
+        return $this->hasMany(CreatureAlignment::class);
+    }
+
+    public function armorClass(): HasMany
+    {
+        return $this->hasMany(ArmorClass::class, 'creature_type_edition_id');
+    }
+
+    public function canHover(): bool
+    {
+        return $this->movementSpeeds->firstWhere('type', MovementType::FLY)?->can_hover ?? false;
+    }
+
+    public function cha(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::CHA)
+        );
+    }
+
+    public function con(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::CON)
+        );
+    }
+
+    public function conditionImmunities(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->conditionInstances->where('type', ConditionInstanceType::STATUS_IMMUNITY)
+        );
+    }
+
+    public function conditionInstances(): MorphMany
+    {
+        return $this->morphMany(ConditionInstance::class, 'entity');
+    }
+
+    public function creatureType(): BelongsTo
+    {
+        return $this->belongsTo(CreatureType::class);
+    }
+
+    public function darkvision(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->senses->find('type', SenseType::DARKVISION)
+        );
+    }
+
+    public function damageImmunities(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->conditionInstances->where('type', ConditionInstanceType::DAMAGE_IMMUNITY)
+        );
+    }
+
+    public function damageResistances(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->conditionInstances->where('type', ConditionInstanceType::DAMAGE_RESISTANCE)
+        );
+    }
+
+    public function damageVulnerabilities(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->conditionInstances->where('type', ConditionInstanceType::DAMAGE_VULNERABILITY)
+        );
+    }
+
+    public function dex(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::DEX)
+        );
+    }
+
+    public function getSkill(string|Skill $skill): ?SkillInstance
+    {
+        if (is_string($skill)) {
+            $skill = Skill::query()->where('name', $skill)->first();
+        }
+
+        $skillEdition = $skill->editions->firstWhere('game_edition', $this->game_edition);
+        /** @var SkillInstance $instance */
+        $instance = $this->skills->firstWhere('skill_edition_id', $skillEdition->id);
+        return $instance;
+    }
+
+    public function getSkillModifier(string|Skill $skill): int
+    {
+        if (is_string($skill)) {
+            $skill = Skill::query()->where('name', $skill)->firstOrFail();
+        }
+        $skillEdition = $skill->editions->firstWhere('game_edition', $this->game_edition);
+        $ability = $skillEdition->related_ability;
+        $modifier = $this->abilities->firstWhere('type', $ability)->modifier;
+
+        if ($this->hasSkillExpertise($skill)) {
+            return $modifier + (2 * $this->proficiencyBonus);
+        } elseif ($this->hasSkillProficiency($skill)) {
+            return $modifier + $this->proficiencyBonus;
+        } else {
+            return $modifier;
+        }
+    }
+
+    public function getSpeed(MovementType $type): ?MovementSpeed
+    {
+        /** @var MovementSpeed|null $output */
+        $output = $this->movementSpeeds->firstWhere('type', $type->value);
+        return $output;
+    }
+
+    public function hasAlignment(string $alignment): bool
+    {
+        $alignmentItem = Alignment::fromString($alignment);
+
+        /** @var CreatureAlignment $myAlignment */
+        foreach ($this->alignment as $myAlignment) {
+            if ($alignmentItem->toString() === $myAlignment->alignment?->toString()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasResistance(DamageType $type): bool
+    {
+        return $this->damage_resistances->contains($type->value);
+    }
+
+    public function hasSkillExpertise(string|Skill $skill): bool
+    {
+        $skillInstance = $this->getSkill($skill);
+        return !empty($skillInstance) && $skillInstance->mastery === SkillMasteryLevel::EXPERTISE;
+    }
+
+    public function hasSkillProficiency(string|Skill $skill): bool
+    {
+        $skillInstance = $this->getSkill($skill);
+
+        return !empty($skillInstance) &&
+            (
+                $skillInstance->mastery === SkillMasteryLevel::PROFICIENT ||
+                $skillInstance->mastery === SkillMasteryLevel::EXPERTISE
+            );
+    }
+
+    public function hitPoints(): BelongsTo
+    {
+        return $this->belongsTo(CreatureHitPoints::class, 'creature_hit_points_id');
+    }
+
+    public function int(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::INT)
+        );
+    }
+
+    public function isImmuneTo(ConditionEdition | DamageType $type): bool
+    {
+        /** @var Collection<ConditionInstance> $immunities */
+        $immunities = $type instanceof ConditionEdition ?
+            $this->conditionImmunities :
+            $this->damageImmunities;
+
+        if ($type instanceof ConditionEdition) {
+            return $immunities->contains('condition_edition_id', $type->id);
+        } else {
+            return $immunities->contains('damage_type', $type->value);
+        }
+    }
+
+    public function languages(): MorphMany
+    {
+        return $this->morphMany(CreatureLanguage::class, 'entity');
+    }
+
+    public function media(): MorphToMany
+    {
+        return $this->morphToMany(Media::class, 'entity', 'media_entity');
+    }
+
+    public function movementSpeeds(): MorphMany
+    {
+        return $this->morphMany(MovementSpeed::class, 'parent');
+    }
+
+    public function passivePerception(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => 10 + $this->getSkillModifier('perception')
+        );
+    }
+
+    public function proficiencyBonus(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if ($this->has_fixed_proficiency_bonus && !empty($this->proficiency_bonus)) {
+                    return $this->proficiency_bonus;
+                } else {
+                    return (int) (2 + floor(($this->challenge_rating ?? 0) / 4));
+                }
+            }
+        );
+    }
+
+    public function references(): MorphMany
+    {
+        return $this->morphMany(Reference::class, 'entity');
+    }
+
+    public function senses(): MorphMany
+    {
+        return $this->morphMany(CreatureSense::class, 'parent');
+    }
+
+    public function skills(): MorphMany
+    {
+        return $this->morphMany(SkillInstance::class, 'entity');
+    }
+
+    public function source(): BelongsTo
+    {
+        return $this->belongsTo(Source::class, 'source_id');
+    }
+
+    public function str(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::STR)
+        );
+    }
+
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    public function tokens(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->media()->where('media_type', MediaType::TOKEN)->get()
+        );
+    }
+
+    public function truesight(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->senses->firstWhere('type', SenseType::TRUESIGHT)
+        );
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(CreatureMainTypeGroup::class, 'creature_main_type_group_id');
+    }
+
+    public function wis(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->abilities->firstWhere('type', AbilityScoreType::WIS)
+        );
+    }
+
+    public static function fromInternalJson(array|string|int $value, ?ModelInterface $parent = null): static
+    {
+        $item = new static();
+        // Assume it's the most recent edition, and if the reference given below is a source from 5e (2014) we'll
+        // change the edition.
+        $item->game_edition = GameEdition::FIFTH_REVISED;
+        $item->creatureType()->associate($parent);
+
+        $item->save();
+
+        // CreatureType size.
+        if (!empty($value['size'])) {
+            // There's a weird case in the 5e.tools data for the "Verdan" in Acquisitions Incorporated where the size
+            // is listed as "V". Verdan can be S or M size.
+            if ($value['size'] === 'V' || $value['size'][0] === 'V') {
+                $value['size'] = ['S', 'M'];
+            }
+
+            if (!is_array($value['size'])) {
+                $value['size'] = [$value['size']];
+            }
+            foreach ($value['size'] as $size) {
+                $sizeUnit = CreatureSizeUnit::tryFromString($size);
+                $item->sizes()->save($sizeUnit);
+            }
+        }
+
+        /**
+         * Ability modifiers.
+         */
+        if (!empty($value['ability'])) {
+            $modifierGroup = AbilityScoreModifierGroup::fromInternalJson($value['ability'], $item);
+            $item->abilityScoreModifiers()->save($modifierGroup);
+        }
+
+        // Reference.
+        if (!empty($value['source'])) {
+            $reference = Reference::from5eJson([
+                'source' => $value['source'],
+                'page' => $value['page'] ?? null,
+            ], $item);
+            // Use the game edition of the sourcebook.
+            $item->game_edition = GameEdition::tryFromString($reference->edition->source->gameEdition);
+        }
+
+        // Movement speeds.
+        if (!empty($value['speed'])) {
+            $movementSpeedGroup = MovementSpeedGroup::fromInternalJson($value['speed'], $item);
+            $item->movementSpeeds()->save($movementSpeedGroup);
+        }
+
+        $item->save();
+        return $item;
+    }
+
+    /**
+     * @param CreatureType $parent
+     * @throws RecordNotFoundException
+     */
+    public static function from5eJson(array|string|int $value, ?ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $parent->refresh();
+
+        /**
+         * Game Edition and source.
+         */
+        if (empty($value['source'])) {
+            throw new \InvalidArgumentException('CreatureType edition must have a source.');
+        }
+        try {
+            /** @var Source $source */
+            $source = Source::query()->where('short_name', $value['source'])->firstOrFail();
+
+            // Try to infer the game edition from the sourcebook.
+            $edition = $source->primaryEdition->game_edition ??
+                throw new \InvalidArgumentException("Could not infer game edition from sourcebook: {$source->name}");
+        } catch (ModelNotFoundException $e) {
+            // We can't find any source with this name so assume fifth edition.
+            print "[WARNING] CreatureType edition source not found: " . $value['source'] . "\n";
+            $edition = GameEdition::FIFTH;
+        }
+
+        // Attach the source, parent creature, and game edition.
+        $item->source()->associate($source);
+        $item->creatureType()->associate($parent);
+        $item->game_edition = $edition;
+        $item->save();
+
+        /**
+         * Alignment.
+         */
+        $item->save();
+        if (!empty($value['alignment'])) {
+            if (empty($value['alignment'][0]['alignment'])) {
+                // Sometimes we have just one alignment in an array, but sometimes there are multiple and each alignment
+                // is its own array. If it's just one alignment, shift it to multiple-style with a single element.
+                $old = $value['alignment'];
+                $value['alignment'] = [];
+                $value['alignment'][]['alignment'] = $old;
+            }
+            foreach ($value['alignment'] as $alignmentItem) {
+                $skipParsing = false;
+
+                // If NX is in the alignment array it means everything on the alignment X axis.
+                if (in_array('NX', $alignmentItem['alignment'])) {
+                    $skipParsing = true;
+
+                    foreach (['LN', 'N', 'CN'] as $alignmentText) {
+                        if (!$item->hasAlignment($alignmentText)) {
+                            $alignment = CreatureAlignment::fromText($alignmentText, $item);
+                            $item->alignment()->save($alignment);
+                        }
+                    }
+                }
+                // If NY is in the alignment array it means everything on the alignment Y axis.
+                if (in_array('NY', $alignmentItem['alignment'])) {
+                    $skipParsing = true;
+
+                    foreach (['NG', 'N', 'NE'] as $alignmentText) {
+                        if (!$item->hasAlignment($alignmentText)) {
+                            $alignment = CreatureAlignment::fromText($alignmentText, $item);
+                            $item->alignment()->save($alignment);
+                        }
+                    }
+                }
+
+                if (!$skipParsing) {
+                    $alignment = CreatureAlignment::fromInternalJson($alignmentItem['alignment'], $item);
+                    $item->alignment()->save($alignment);
+                }
+            }
+        }
+
+        /**
+         * Creature type.
+         */
+        if (!empty($value['type']) && empty($item->type)) {
+            try {
+                $type = CreatureMainTypeGroup::from5eJson($value['type'], $item);
+                $item->type()->associate($type);
+            } catch (ModelNotFoundException $e) {
+                die("Could not find CreatureMainTypeGroup.\n");
+            }
+        }
+
+        // Check we don't already have this reference.
+        if (!$item->references->contains('source.slug', $value['source'])) {
+            $reference = Reference::from5eJson([
+                'source' => $value['source'],
+                'page' => $value['page'] ?? null,
+            ], $item);
+            $item->references()->save($reference);
+        }
+
+        /**
+         * Challenge Rating.
+         */
+        if (!empty($value['cr'])) {
+            if (is_array($value['cr'])) {
+                $field = $value['cr']['cr'];
+                $item->lair_xp = $value['cr']['xpLair'] ?? null;
+            } else {
+                $field = $value['cr'];
+            }
+
+            $item->challenge_rating = match ($field) {
+                '1/8' => 0.125,
+                '1/4' => 0.25,
+                '1/2' => 0.5,
+                default => $field
+            };
+            $item->proficiency_bonus = (int) (2 + floor($item->challenge_rating / 4));
+        }
+
+        /**
+         * Sizes.
+         */
+        // In case "size" is not an array, turn it into one.
+        if (is_null($item->sizes)) {
+            $item->sizes = new SupportCollection();
+        }
+
+        if (!empty($value['size']) && !is_array($value['size'])) {
+            $value['size'] = [$value['size']];
+        }
+
+        foreach ($value['size'] ?? [] as $size) {
+            $sizeUnit = CreatureSizeUnit::tryFromString($size);
+
+            if (!$item->sizes->contains($sizeUnit)) {
+                $item->sizes->push($sizeUnit);
+            }
+        }
+
+        /**
+         * Ability scores.
+         */
+        foreach (['str', 'dex', 'con', 'int', 'wis', 'cha'] as $ability) {
+            if (!empty($value[$ability]) && empty($item->{$ability})) {
+                $abilityScore = AbilityScore::fromNumber(
+                    (int) $value[$ability],
+                    $ability,
+                    $item,
+                    // If the ability is listed in the "save" array, we will treat the creature as being proficient in
+                    // that ability. We will ignore the actual modifiers ("+9", etc) because these are derived values.
+                    !empty($value['save'][$ability])
+                );
+                $item->abilities()->save($abilityScore);
+            }
+        }
+
+        /**
+         * Armor class.
+         *
+         * 5e.tools can have multiple armor classes for a single creature.
+         */
+        if (!empty($value['ac'])) {
+            // Remove the dexterity modifier from the armor class.
+            $modifier = AbilityScore::getModifier((int) $value['dex']);
+
+            // TODO - make this work somehow.
+//            if (is_array($value['ac'])) {
+//                $value['ac']['ac'] -= $modifier;
+//            } else {
+//                $value['ac'] -= $modifier;
+//            }
+
+            foreach ($value['ac'] as $acItem) {
+                $ac = ArmorClass::from5eJson($acItem, $item);
+                $item->armorClass()->save($ac);
+            }
+        }
+
+        /**
+         * Hit points & hit dice.
+         */
+        if (!empty($value['hp']) && empty($item->hitPoints)) {
+            if (empty($item->hitPoints)) {
+                $hpItem = CreatureHitPoints::from5eJson($value['hp'], $item);
+                $item->hitPoints()->associate($hpItem);
+            }
+
+            // Try to grab the "dX" part of the formula and set it as the creature's hit die.
+            if (!empty($value['hp']['formula'])) {
+                preg_match('/d(\d+)/', $value['hp']['formula'], $matches);
+
+                if (!empty($matches[1])) {
+                    $item->hit_die_faces = (int) $matches[1];
+                }
+            }
+        }
+
+        /**
+         * Movement speeds.
+         */
+        if (!empty($value['speed'])) {
+            if (is_array($value['speed'])) {
+                // Speed is an array of speeds, plus maybe the "canHover" key.
+                $canHover = !empty($value['speed']['canHover']) && $value['speed']['canHover'] === true;
+
+                foreach ($value['speed'] as $speedType => $speedItem) {
+                    // Make sure speed type is valid, because sometimes we have a "canHover" key.
+                    $movementSpeedType = MovementType::tryFromString($speedType);
+                    if (empty($movementSpeedType)) {
+                        continue;
+                    }
+
+                    // Do we already have a speed of this type?
+                    if ($item->movementSpeeds->contains('type', $movementSpeedType)) {
+                        continue;
+                    }
+
+                    // Sometimes $speedItem is not a number, it's another array.
+                    $speedValue = is_array($speedItem) ? $speedItem['number'] : $speedItem;
+
+                    if (mb_strtolower($speedType) === 'fly') {
+                        // Special case for fly speeds - add canHover flag.
+                        $movementSpeed = MovementSpeed::from5eJson([
+                            'type' => 'fly',
+                            'value' => $speedValue,
+                            'canHover' => $canHover,
+                        ], $item);
+                    } else {
+                        // A movement speed other than fly.
+                        $movementSpeed = MovementSpeed::from5eJson([
+                            'type' => $speedType,
+                            'value' => $speedValue,
+                        ], $item);
+                    }
+
+                    $item->movementSpeeds()->save($movementSpeed);
+                }
+            } elseif (!$item->movementSpeeds->contains('type', MovementType::WALK)) {
+                // Speed is just a single number. Assume it's walking.
+                $movementSpeed = MovementSpeed::from5eJson([
+                    'type' => 'walk',
+                    'value' => $value['speed'],
+                ], $item);
+                $item->movementSpeeds()->save($movementSpeed);
+            }
+        }
+
+        /**
+         * Skills.
+         */
+        $item->save();
+        $item->refresh();
+        try {
+            foreach ($value['skill'] ?? [] as $skillName => $bonus) {
+                if (!$item->hasSkillProficiency($skillName)) {
+                    $skillInstance = SkillInstance::from5eJson([
+                        'skill' => $skillName,
+                        'bonus' => $bonus,
+                    ], $item);
+                    $item->skills()->save($skillInstance);
+                }
+            }
+            $item->save();
+        } catch (UniqueConstraintViolationException $e) {
+            $x = 5;
+        }
+
+        /**
+         * Immunities and resistances.
+         */
+        foreach ($value['conditionImmune'] ?? [] as $conditionItem) {
+            try {
+                // Correct for a weird exception where "diseased" is called "disease" in the 5e.tools data. Even though
+                // "diseased" is not a 5e condition.
+                if ($conditionItem === 'disease') {
+                    $conditionItem = 'diseased';
+                }
+
+                $instance = ConditionInstance::from5eJson([
+                    'name' => $conditionItem,
+                    'type' => ConditionInstanceType::STATUS_IMMUNITY,
+                ], $item);
+                $item->conditionInstances()->save($instance);
+            } catch (ModelNotFoundException $e) {
+                print("[WARNING] Could not find StatusCondition: {$conditionItem}\n");
+            }
+        }
+
+        foreach (['immune', 'resist', 'vulnerable'] as $damageType) {
+            foreach ($value[$damageType] ?? [] as $damageTypeItem) {
+                if (is_string($damageTypeItem)) {
+                    // The condition is just a single string.
+                    $instance = ConditionInstance::from5eJson([
+                        'name' => $damageTypeItem,
+                        'type' => ConditionInstanceType::tryFromString($damageType),
+                    ], $item);
+                } else {
+                    // The condition is an object eg
+                    // array{
+                    //   resist: string[] <-- condition names here
+                    //   note: ?string
+                    //   cond: ?bool
+                    foreach ($damageTypeItem[$damageType] ?? [] as $innerItem) {
+                        $instance = ConditionInstance::from5eJson([
+                            'name' => $innerItem,
+                            'type' => ConditionInstanceType::tryFromString($damageType),
+                            'note' => $damageTypeItem['note'] ?? null,
+                            'nonmagical' => str_contains($damageTypeItem['note'], 'nonmagical'),
+                        ], $item);
+                    }
+                }
+            }
+        }
+
+        /**
+         * Senses.
+         */
+        foreach ($value['senses'] ?? [] as $senseItem) {
+            try {
+                $sense = CreatureSense::from5eJson($senseItem, $item);
+                $item->senses()->save($sense);
+            } catch (UniqueConstraintViolationException $e) {
+                print "[WARNING] Multiple entries for sense {$senseItem}\n";
+            }
+        }
+        // Sometimes the key is just in the $value array instead of a "senses" array.
+        if (!empty($value['darkvision']) && empty($item->darkvision)) {
+            $darkvision = CreatureSense::from5eJson([
+                'type' => 'darkvision',
+                'value' => (int) $value['darkvision'],
+            ], $item);
+            $item->senses()->save($darkvision);
+        }
+
+        $item->save();
+        return $item;
+    }
+
+    public function fromExtraData(array|string $value, ?ModelInterface $parent = null): ?static
+    {
+        if (!empty($value['token'])) {
+            $media = Media::fromInternalJson([
+                'filename' => '/tokens/' . $value['token'],
+                'mediaType' => 'token',
+            ], $parent);
+            $this->media()->save($media);
+        }
+
+        $this->save();
+        return $this;
+    }
+
+    public static function generate(ModelInterface $parent = null): static
+    {
+        $item = new static();
+        $item->creatureType()->associate($parent);
+
+        /**
+         * Type.
+         */
+        $type = CreatureMainTypeGroup::generate($item);
+        $item->type()->associate($type);
+
+        $item->save();
+
+        /**
+         * Armor Class.
+         */
+        for ($i = 1; $i <= mt_rand(1, 3); $i++) {
+            $ac = ArmorClass::generate($item);
+            $item->armorClass()->save($ac);
+        }
+
+        $item->save();
+        return $item;
+    }
+}

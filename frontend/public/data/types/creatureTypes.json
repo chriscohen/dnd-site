@@ -1,0 +1,372 @@
+[
+    {
+        "id": "0acec9fa-2c8f-4470-a5de-98ea17d0bf28",
+        "slug": "aberration",
+        "name": "aberration",
+        "plural": "aberrations",
+        "description": "An aberration has a bizarre anatomy, strange abilities, alien mindset, or any combination thereof. All aberrations have darkvision. Examples include aboleths, beholders, and mind flayers.",
+        "editions": [
+            {
+                "description": "An aberration has a bizarre anatomy, strange abilities, alien mindset, or any combination thereof. All aberrations have darkvision. Examples include aboleths, beholders, and mind flayers.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "An aberration has a bizarre anatomy, strange abilities, alien mindset, or any combination thereof. All aberrations have darkvision. Examples include aboleths, beholders, and mind flayers.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "3b4a0d05-6596-44c8-bbe3-99b5145956c0",
+        "slug": "animal",
+        "name": "animal",
+        "plural": "animals",
+        "editions": [
+            {
+                "description": "Includes common animals, extinct animals, and giant versions of common animals. Examples are bears, dinosaurs, and giant lizards.",
+                "game_edition": "1e"
+            },
+            {
+                "description": "An animal is a nonhuman, usually vertebrate creature. Animals have very low intelligence and usually low-light vision. This category does not include invertebrates, which are classed as vermin. Examples include bears, crocodiles, horses, and wolves. Dire animals are also considered animals.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "An animal is a nonhuman, usually vertebrate creature. Animals have very low intelligence and usually low-light vision. This category does not include invertebrates, which are classed as vermin. Examples include bears, crocodiles, horses, and wolves. Dire animals are also considered animals.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "7493a288-07a5-405b-bcbc-2c234cd7f853",
+        "slug": "beast",
+        "name": "beast",
+        "plural": "beasts",
+        "editions": [
+            {
+                "description": "A beast is similar to an animal, but they are non-historical and usually possess darkvision. Examples include bulettes, dinosaurs, griffons, owlbears, and purple worms.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "A beast is similar to an animal, but they are non-historical and usually possess darkvision. Examples include bulettes, dinosaurs, griffons, owlbears, and purple worms.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "d07725f6-5a2a-49ff-938e-c2b976f69c86",
+        "slug": "conjuration",
+        "name": "conjuration",
+        "plural": "conjurations",
+        "editions": [
+            {
+                "description": "Includes creatures from other planes or strongly tied to other planes. Examples are elementals, golems, and salamanders.",
+                "game_edition": "1e"
+            }
+        ]
+    },
+    {
+        "id": "b8f94b58-ea03-4681-b528-3953c9cce4b2",
+        "slug": "construct",
+        "name": "construct",
+        "plural": "constructs",
+        "description": "A construct is either an animated object of some sort, or an artificially crafted creature. They are usually unintelligent, and immune to mind-influencing effects. They are immune to many effects that harm living creatures, such as poison and disease, but they cannot be magically restored to life. Constructs usually have darkvision. Examples include golems and retrievers.",
+        "editions": [
+            {
+                "description": "Constructs are created magically. As non-living creatures, they are immune to poison but do not heal naturally. They are also immune to mental effects. Constructs count as enchanted monsters; lesser constructs such as living statues were vulnerable to any weapon, while greater constructs such as gargoyles and golems could only be hit by magical weapons (but were more difficult to construct).",
+                "game_edition": "2e"
+            },
+            {
+                "description": "A construct is either an animated object of some sort, or an artificially crafted creature. They are usually unintelligent, and immune to mind-influencing effects. They are immune to many effects that harm living creatures, such as poison and disease, but they cannot be magically restored to life. Constructs usually have darkvision. Examples include golems and retrievers.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "A construct is either an animated object of some sort, or an artificially crafted creature. They are usually unintelligent, and immune to mind-influencing effects. They are immune to many effects that harm living creatures, such as poison and disease, but they cannot be magically restored to life. Constructs usually have darkvision. Examples include golems and retrievers.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "a6ad539a-4a0c-4838-b2da-a58bb6b96817",
+        "slug": "dragon",
+        "name": "dragon",
+        "plural": "dragons",
+        "editions": [
+            {
+                "description": "Dragons are winged, reptilian creatures, many of which have breath weapons. A subtype is dragon-kin, which includes creatures such as chimerae, hydrae, salamanders, and wyverns.",
+                "game_edition": "2e"
+            },
+            {
+                "description": "A dragon is a reptilian creature, usually winged, often having supernatural abilities. Dragons cannot be paralyzed or induced to sleep. Dragons usually have darkvision and low-light vision. Examples include dragons, pseudodragons, and wyverns.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "A dragon is a reptilian creature, usually winged, often having supernatural abilities. Dragons cannot be paralyzed or induced to sleep. Dragons usually have darkvision and low-light vision. Examples include dragons, pseudodragons, and wyverns.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "ae70a057-3510-4db8-8785-f4e5c989f319",
+        "slug": "elemental",
+        "name": "elemental",
+        "plural": "elementals",
+        "editions": [
+            {
+                "description": "An elemental is composed of one of the four classical elements of air, earth, fire, or water. They can resist effects such as poison and paralysis, and do not have any discernable front or back, making tactics such as flanking or attacks such as critical hits useless. Like constructs, they cannot be resurrected by magic once destroyed, save powerful spells such as wish or miracle. Elementals usually have darkvision. Examples include air, earth, fire, and water elementals, invisible stalkers, and magmin.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "An elemental is composed of one of the four classical elements of air, earth, fire, or water. They can resist effects such as poison and paralysis, and do not have any discernable front or back, making tactics such as flanking or attacks such as critical hits useless. Like constructs, they cannot be resurrected by magic once destroyed, save powerful spells such as wish or miracle. Elementals usually have darkvision. Examples include air, earth, fire, and water elementals, invisible stalkers, and magmin.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "4387dc4b-5d4c-4671-b240-f2d02389ae86",
+        "slug": "fey",
+        "name": "fey",
+        "plural": "fey",
+        "editions": [
+            {
+                "description": "A fey is a creature which usually has supernatural abilities and a human-shaped form. A fey also usually connected to nature, or some other force or place. Fey usually have low-light vision. Examples include dryads, pixies, and satyrs.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "A fey is a creature which usually has supernatural abilities and a human-shaped form. A fey also usually connected to nature, or some other force or place. Fey usually have low-light vision. Examples include dryads, pixies, and satyrs.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "c174b3eb-28b1-4757-9b01-e362b36ca5c2",
+        "slug": "giant",
+        "name": "giant",
+        "plural": "giants",
+        "editions": [
+            {
+                "description": "A giant is a humanoid-shaped creature of great strength and size. Giants usually have darkvision. Examples include giants, ettin, ogres, and trolls.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "A giant is a humanoid-shaped creature of great strength and size. Giants usually have darkvision. Examples include giants, ettin, ogres, and trolls.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "77cb3ee8-d3df-4468-baba-46f4d0cc4ae5",
+        "slug": "humanoid",
+        "name": "humanoid",
+        "plural": "humanoids",
+        "editions": [
+            {
+                "description": "Human-shaped but reasonably intelligent creatures, to include giants. Examples also include men, dwarves, goblins, and trolls.",
+                "game_edition": "1e"
+            },
+            {
+                "description": "Humanoids are bipeds up to ogre size, but not human or demihuman; goblins are examples of humanoids. However, human and demihuman are variations on this type. Giant humanoids are another variation, referring to humanoids larger than ogres, such as common giants and trolls.",
+                "game_edition": "2e"
+            },
+            {
+                "description": "Humanoids are bipeds of Small or Medium size with few or no supernatural or extraordinary abilities. Larger humanoids are usually classed as giants; humanoids with monstrous traits or supernatural abilities are usually classed as monstrous humanoids. Examples include dwarves, goblins, lizardfolk, and orcs.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "Humanoids are bipeds of Small or Medium size with few or no supernatural or extraordinary abilities. Larger humanoids are usually classed as giants; humanoids with monstrous traits or supernatural abilities are usually classed as monstrous humanoids. Examples include dwarves, goblins, lizardfolk, and orcs.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "8020a005-036e-40db-9018-1f28abf34285",
+        "slug": "lowlife",
+        "name": "lowlife",
+        "plural": "lowlifes",
+        "editions": [
+            {
+                "description": "Generally non-intelligent and simple creatures, such as plants, fungi, oozes, insects, arachnids, and other invertebrates. Examples are strangle vine, shriekers, gelatinous cubes, giant ants, spiders, and giant leeches.",
+                "game_edition": "1e"
+            },
+            {
+                "description": "Lowlife are mostly nonintelligent creatures such as plants, fungi, insects, arachnids, slimes, oozes, and other invertebrates. Huge examples of these creatures are also included in the type.",
+                "game_edition": "2e"
+            }
+        ]
+    },
+    {
+        "id": "9a0720a0-d8df-466c-b9b8-a67f4596748e",
+        "slug": "magical-beast",
+        "name": "magical beast",
+        "plural": "magical beasts",
+        "editions": [
+            {
+                "description": "A magical beast is similar to a beast, but usually has a higher intelligence, and usually possesses supernatural or extraordinary abilities. Magical beasts usually have darkvision and low-light vision. Examples include cockatrices, giant eagles, kraken, sphinxes, ropers, and the tarrasque.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "A magical beast is similar to a beast, but usually has a higher intelligence, and usually possesses supernatural or extraordinary abilities. Magical beasts usually have darkvision and low-light vision. Examples include cockatrices, giant eagles, kraken, sphinxes, ropers, and the tarrasque.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "afebe7f6-811b-48e7-b718-9ee3393ed78e",
+        "slug": "monster",
+        "name": "monster",
+        "plural": "monsters",
+        "editions": [
+            {
+                "description": "Includes \"other fantastical creatures\" with strange appearances or unnatural powers. Examples are beholders, cockatrices, dragons, hook horrors, minotaurs, rust monsters, and werewolves.",
+                "game_edition": "1e"
+            },
+            {
+                "description": "Monsters are creatures that do not fit into the other types, often \"legendary\" or \"fabulous\" creatures. This type may include creatures that resemble those of other types, but are differentiated by their unusual abilities. Examples include beholders, displacer beasts, minotaurs,, sphinxes, and werewolves.",
+                "game_edition": "2e"
+            }
+        ]
+    },
+    {
+        "id": "bc6fca7c-33cc-4902-b05e-663076bc19de",
+        "slug": "monstrous-humanoid",
+        "name": "monstrous humanoid",
+        "plural": "monstrous humanoids",
+        "editions": [
+            {
+                "description": "A monstrous humanoid is similar to a humanoid, but usually has monstrous or animalistic features. Many also have supernatural abilities. Monstrous humanoids usually have darkvision. Examples include centaurs, hags, kuo-toa, and minotaurs.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "A monstrous humanoid is similar to a humanoid, but usually has monstrous or animalistic features. Many also have supernatural abilities. Monstrous humanoids usually have darkvision. Examples include centaurs, hags, kuo-toa, and minotaurs.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "37ed56f0-0107-4e11-974b-a1ab4a270496",
+        "slug": "normal-animal",
+        "name": "normal animal",
+        "plural": "normal animals",
+        "editions": [
+            {
+                "description": "Normal animals are non-magical, naturally occurring creatures, such as tigers. Variations include giant animals, and prehistoric animals such as dinosaurs.",
+                "game_edition": "2e"
+            }
+        ]
+    },
+    {
+        "id": "c3a2cd42-8568-4b2c-84f5-fa1cfabf900d",
+        "slug": "ooze",
+        "name": "ooze",
+        "plural": "oozes",
+        "editions": [
+            {
+                "description": "An ooze is an amorphous or mutable creature. Oozes are usually mindless, and thus immune to mind-influencing effects. They possess blindsight but are otherwise blind. Like elementals, they have no clear front or back and are thus immune to flanking or critical hits. Composed mainly of protoplasm, oozes resist effects such as poison and polymorphing. Examples include gelatinous cubes and ochre jellies.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "An ooze is an amorphous or mutable creature. Oozes are usually mindless, and thus immune to mind-influencing effects. They possess blindsight but are otherwise blind. Like elementals, they have no clear front or back and are thus immune to flanking or critical hits. Composed mainly of protoplasm, oozes resist effects such as poison and polymorphing. Examples include gelatinous cubes and ochre jellies.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "9f1fe2c5-289e-448f-9e0b-096474f843cd",
+        "slug": "outsider",
+        "name": "outsider",
+        "plural": "outsiders",
+        "editions": [
+            {
+                "description": "An outsider is a creature from outside the Material Plane, but different from an elemental. Outsiders usually have darkvision. Like elementals, they cannot be magically resurrected, save through effects like wish or miracle. Examples include aasimar, celestials, demons, devils, mephits, salamanders, tieflings, and titans.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "An outsider is a creature from outside the Material Plane, but different from an elemental. Outsiders usually have darkvision. Like elementals, they cannot be magically resurrected, save through effects like wish or miracle. Examples include aasimar, celestials, demons, devils, mephits, salamanders, tieflings, and titans.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "159eb72c-f911-4a05-b18a-7b357cf50cb9",
+        "slug": "plant",
+        "name": "plant",
+        "plural": "plants",
+        "editions": [
+            {
+                "description": "A plant is a vegetable creature, and immune to effects such as poison, stunning, or polymorphing. They also ignore mind-influencing effects, and may have low-light vision (assuming they can see at all). Examples include fungi generally, shambling mounds, and treants.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "A plant is a vegetable creature, and immune to effects such as poison, stunning, or polymorphing. They also ignore mind-influencing effects, and may have low-light vision (assuming they can see at all). Examples include fungi generally, shambling mounds, and treants.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "3e4e99cd-7499-4aff-b87f-8cb07367453f",
+        "slug": "planar-monster",
+        "name": "planar monster",
+        "plural": "planar monsters",
+        "editions": [
+            {
+                "description": "Planar monsters are creatures from outside the Prime Plane. When summoned to the Prime Plane, planar monsters also become enchanted monsters. Examples include djinni and elementals. Some creatures have both Prime Plane and planar monster variations.",
+                "game_edition": "2e"
+            }
+        ]
+    },
+    {
+        "id": "c70fa7b2-b71b-4e83-a8e3-6db241a2d212",
+        "slug": "shapechanger",
+        "name": "shapechanger",
+        "plural": "shapechangers",
+        "editions": [
+            {
+                "description": "A shapechanger has a stable form but can transform into other shapes. They usually have darkvision. Examples include doppelgangers and lycanthropes.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "A shapechanger has a stable form but can transform into other shapes. They usually have darkvision. Examples include doppelgangers and lycanthropes.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "ed95e513-77e0-4e42-9098-31a03ff0197e",
+        "slug": "undead",
+        "name": "undead",
+        "plural": "undead",
+        "editions": [
+            {
+                "description": "Creatures created by \"powerful forces\" acting on the bodies and souls of the dead. Examples are ghouls, ghosts, vampires, and zombies.",
+                "game_edition": "1e"
+            },
+            {
+                "description": "Undead creatures were once alive, but have been reanimated by powerful supernatural forces. Undead are immune attacks that harm only the living, as well as mental effects. However, most can be repelled by clerics and holy symbols. Undead created by spells are enchanted monsters.",
+                "game_edition": "2e"
+            },
+            {
+                "description": "An undead is a once-living creature animated by spiritual or supernatural forces. They resist many effects which harm the living, such as poison and disease. They are healed by negative energy. Undead usually have darkvision. Examples include ghouls, ghosts, vampires, and zombies.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "An undead is a once-living creature animated by spiritual or supernatural forces. They resist many effects which harm the living, such as poison and disease. They are healed by negative energy. Undead usually have darkvision. Examples include ghouls, ghosts, vampires, and zombies.",
+                "game_edition": "3.5"
+            }
+        ]
+    },
+    {
+        "id": "409fddcc-8b0a-48a6-b24c-59d80541e148",
+        "slug": "vermin",
+        "name": "vermin",
+        "plural": "vermin",
+        "editions": [
+            {
+                "description": "A vermin is an invertebrate, such as an insect, arachnid, arthropod, or worm. Vermin are unintelligent and immune to mind-influencing effects. They usually have darkvision. Examples include beetles, giant ants, and spiders.",
+                "game_edition": "3e"
+            },
+            {
+                "description": "A vermin is an invertebrate, such as an insect, arachnid, arthropod, or worm. Vermin are unintelligent and immune to mind-influencing effects. They usually have darkvision. Examples include beetles, giant ants, and spiders.",
+                "game_edition": "3.5"
+            }
+        ]
+    }
+]

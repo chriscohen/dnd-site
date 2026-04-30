@@ -1,0 +1,78 @@
+[
+    {
+        "id": "32f833db-8acb-4bba-ac3b-1e1d1f95d1c6",
+        "slug": "1985-games",
+        "name": "1985 Games",
+        "logo": "1985-games-logo.webp",
+        "website": "https://obojima.com/1985-games/"
+    },
+    {
+        "id": "bcdd6788-ad27-4074-bd9c-f366e3106f21",
+        "slug": "alchemists-workshops",
+        "name": "Alchemists Workshops",
+        "logo": "alchemists-workshops.webp",
+        "product_url": "product/{{id}}",
+        "short_name": "Alchemists",
+        "website": "https://alchemistsworkshops.com"
+    },
+    {
+        "id": "d44f456e-f7be-42d3-ab14-ea82ed06b586",
+        "slug": "amazon",
+        "name": "Amazon",
+        "product_url": "dp/{{id}}",
+        "short_name": "Amazon",
+        "website": "https://www.amazon.com"
+    },
+    {
+        "id": "6b562d5a-1fb1-4b88-b99d-84648039af7d",
+        "slug": "darrington-press",
+        "name": "Darrington Press",
+        "logo": "darrington-press.webp",
+        "website": "https://darringtonpress.com"
+    },
+    {
+        "id": "0f063d69-07ea-49ac-8bae-b26dd3a2bdf9",
+        "slug": "dungeon-masters-guild",
+        "name": "Dungeon Masters Guild",
+        "logo": "DMsGuild-Logo.png",
+        "product_url": "product/{{id}}",
+        "short_name": "DMs Guild",
+        "website": "https://www.dmsguild.com"
+    },
+    {
+        "id": "31f5297b-9b97-4613-a2e4-097eea74557e",
+        "slug": "drivethru-rpg",
+        "name": "DriveThru RPG",
+        "logo": "dtrpg-logo-small.png",
+        "product_url": "product/{{id}}",
+        "website": "https://www.drivethrurpg.com"
+    },
+    {
+        "id": "2d6846db-882a-44c7-8b46-52d106e9adb2",
+        "slug": "green-ronin-publishing",
+        "name": "Green Ronin Publishing",
+        "logo": "green-ronin-publishing.png",
+        "website": "https://greenronin.com"
+    },
+    {
+        "id": "9bed36e0-007b-45ec-934d-e6e9589996f0",
+        "slug": "mr-rhexx-games",
+        "name": "Mr Rhexx Games",
+        "logo": "mr-rhexx-games.webp",
+        "website": "https://mrrhexx.store"
+    },
+    {
+        "id": "25d0e571-e37a-4a07-8ec5-73db0e00a502",
+        "slug": "tsr",
+        "name": "TSR, Inc.",
+        "logo": "tsr-logo.webp"
+    },
+    {
+        "id": "ec8b6c28-be21-4e67-b7a1-f7e61252459b",
+        "slug": "wizards-of-the-coast",
+        "name": "Wizards of the Coast",
+        "logo": "wotc-logo.png",
+        "short_name": "WotC",
+        "website": "https://company.wizards.com/en"
+    }
+]
