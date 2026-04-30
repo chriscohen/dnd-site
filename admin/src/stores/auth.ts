@@ -20,7 +20,7 @@ export const useAuthStore = defineStore('auth', () => {
     const isLoggingIn = ref(false);
     const isLoggingOut = ref(false);
 
-    const isAuthenticated = computed(() => user.value !== null);
+    const isAuthenticated = computed(() => user.value !== null && user.value.id > 0);
 
     async function loadUser(): Promise<User | null> {
         if (isLoadingUser.value) {

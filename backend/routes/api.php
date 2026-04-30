@@ -22,8 +22,6 @@ use App\Http\Controllers\Sources\SourceController;
 use App\Http\Controllers\Spells\SpellController;
 use App\Http\Controllers\UserController;
 
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/user', [UserController::class, 'self']);
 
 Route::get('/campaign-setting/{slug}', [CampaignSettingController::class, 'get']);
@@ -78,3 +76,5 @@ Route::get('/spell/{slug}', [SpellController::class, 'get']);
 Route::get('/spells', [SpellController::class, 'index']);
 
 Route::get('/search', [SearchController::class, 'search'])->where('q', '.*');
+
+Route::get('/user', [UserController::class, 'self']);

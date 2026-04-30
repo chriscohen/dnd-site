@@ -8,7 +8,7 @@ class EnsureUserIsAdmin
 {
     public function handle($request, \Closure $next)
     {
-        if (!$request->user()->isAdmin()) {
+        if (!$request->user()?->isAdmin()) {
             abort(403, 'Unauthorized');
         }
 
