@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/php:8.3
+FROM mcr.microsoft.com/devcontainers/php:8.4
 
 RUN apt-get update && \
     export DEBIAN_FRONTEND=noninteractive && \
