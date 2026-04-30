@@ -37,6 +37,10 @@ Route::get('/classes', [CharacterClassController::class, 'index']);
 
 Route::get('/company/{slug}', [CompanyController::class, 'get']);
 Route::get('/companies', [CompanyController::class, 'index']);
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::put('/company/{slug}', [CompanyController::class, 'update']);
+    Route::delete('/company/{slug}', [CompanyController::class, 'destroy']);
+});
 
 Route::get('/creature-type/{slug}', [CreatureTypeController::class, 'get']);
 Route::get('/creature-types', [CreatureTypeController::class, 'list']);

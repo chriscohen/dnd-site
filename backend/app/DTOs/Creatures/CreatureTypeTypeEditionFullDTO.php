@@ -42,7 +42,6 @@ readonly class CreatureTypeTypeEditionFullDTO extends CreatureTypeEditionSummary
         public ?CreatureHitPointsDTO $hitPoints = null,
         /** @var string[] $immune */
         public array $immune,
-        public bool $isPlayable,
         public ?int $lairXp,
         /** @var Collection<MovementSpeedDTO> $movementSpeeds */
         public Collection $movementSpeeds,
@@ -89,7 +88,6 @@ readonly class CreatureTypeTypeEditionFullDTO extends CreatureTypeEditionSummary
                 CreatureHitPointsDTO::fromModel($model->hitPoints) :
                 null,
             immune: $model->damage_immunities->toArray(),
-            isPlayable: $model->is_playable,
             lairXp: $model->lair_xp,
             movementSpeeds: $model->relationLoaded('movementSpeeds') ?
                 $model->movementSpeeds->map(fn (MovementSpeed $item) => MovementSpeedDTO::fromModel($item)) :
