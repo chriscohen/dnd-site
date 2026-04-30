@@ -14,7 +14,7 @@ docker buildx build \
 
 docker buildx build \
     --platform linux/amd64 \
-    -f .docker/nginx/laravel/Dockerfile \
+    -f .docker/production/nginx/Dockerfile \
     -t dnd-nginx:latest \
     --load \
     .
