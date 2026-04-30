@@ -29,7 +29,7 @@ jobs:
       DB_HOST: ${{ secrets.LARAVEL_DB_HOST }}
       DB_DATABASE: ${{ secrets.LARAVEL_DB_NAME }}
       DB_USERNAME: ${{ secrets.LARAVEL_DB_USER }}
-      DB_PASSWORD: ${{ secrsts.LARAVEL_DB_PASSWORD }}
+      DB_PASSWORD: ${{ secrets.LARAVEL_DB_PASSWORD }}
 
     steps:
       - name: Checkout repository
