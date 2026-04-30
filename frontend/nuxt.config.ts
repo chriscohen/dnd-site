@@ -86,9 +86,6 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         'pinia-plugin-persistedstate'
     ],
-    nitro: {
-        preset: 'aws-amplify'
-    },
     postcss: {
         plugins: {
             '@tailwindcss/postcss': {},

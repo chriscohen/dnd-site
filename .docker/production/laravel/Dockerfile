@@ -1,28 +1,29 @@
 FROM php:8.4-fpm
 
 # Install system dependencies
-RUN apt update && apt install -y \
-    nginx
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libzip-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    && docker-php-ext-install \
+    bcmath \
+    exif \
+    gd \
+    intl \
+    pdo_mysql \
+    zip \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
 COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 
-WORKDIR /var/www
+WORKDIR /var/www/html
 
-# Copy application code
-COPY . /var/www
+COPY backend/ /var/www/html/
 
-# Install PHP dependencies
-#RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Optimize Laravel
-#RUN php artisan optimize
-
-# Copy Nginx configuration
-COPY nginx.conf /etc/nginx/http.d/default.conf
-
-# Expose port (Cloud Run will set the PORT environment variable)
-EXPOSE 8080
-
-# Start Nginx and PHP-FPM
-CMD sh -c "php-fpm && nginx -g 'daemon off;'"
+CMD ["php-fpm"]
