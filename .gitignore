@@ -7,7 +7,7 @@
 dist
 
 # Node dependencies
-node_modules
+/frontend/node_modules
 
 # Logs
 logs
@@ -17,6 +17,7 @@ logs
 .DS_Store
 .fleet
 .idea
+.junie
 Thumbs.db
 Homestead.json
 Homestead.yaml
@@ -38,7 +39,9 @@ Homestead.yaml
 /storage/*.key
 /storage/logs
 /storage/pail
-/vendor
+
+# Composer
+/backend/vendor
 
 # PHPUnit
 .phpunit.result.cache
