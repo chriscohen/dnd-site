@@ -36,30 +36,30 @@ echo "Pushing images to Lightsail..."
 
 LARAVEL_LS_IMAGE=$(
     aws lightsail push-container-image \
-      --region ${REGION} \
-      --service-name ${SERVICE_NAME} \
+      --region "${REGION}" \
+      --service-name "${SERVICE_NAME}" \
       --label laravel \
-      --image ${LARAVEL_IMAGE} \
+      --image "${LARAVEL_IMAGE}" \
       --output json \
     | jq -r '.image'
 )
 
 NUXT_LS_IMAGE=$(
     aws lightsail push-container-image \
-      --region ${REGION} \
-      --service-name ${SERVICE_NAME} \
+      --region "${REGION}" \
+      --service-name "${SERVICE_NAME}" \
       --label nuxt \
-      --image ${NUXT_IMAGE} \
+      --image "${NUXT_IMAGE}" \
       --output json \
     | jq -r '.image'
 )
 
 NGINX_LS_IMAGE=$(
     aws lightsail push-container-image \
-      --region ${REGION} \
-      --service-name ${SERVICE_NAME} \
+      --region "${REGION}" \
+      --service-name "${SERVICE_NAME}" \
       --label nginx \
-      --image ${NGINX_IMAGE} \
+      --image "${NGINX_IMAGE}" \
       --output json \
     | jq -r '.image'
 )
