@@ -1,0 +1,239 @@
+name: Deploy to AWS Lightsail
+
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: lightsail-production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy containers
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      LIGHTSAIL_SERVICE: ${{ secrets.LIGHTSAIL_SERVICE }}
+
+      FRONTEND_DOMAIN: ${{ secrets.FRONTEND_DOMAIN }}
+      API_DOMAIN: ${{ secrets.API_DOMAIN }}
+
+      LARAVEL_IMAGE: dnd-laravel:latest
+      NUXT_IMAGE: dnd-nuxt:latest
+      NGINX_IMAGE: dnd-nginx:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_SECRET_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Install Lightsail control plugin
+        run: |
+          curl "https://s3.us-west-2.amazonaws.com/Lightsailctl/latest/linux-amd64/lightsailctl" -o "/tmp/lightsailctl"
+          sudo mv /tmp/lightsailctl /usr/local/bin/lightsailctl
+          sudo chmod +x /usr/local/bin/lightsailctl
+          lightsailctl --version || true
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Laravel image
+        run: |
+          docker buildx build \
+            --platform linux/amd64 \
+            -f .docker/production/laravel/Dockerfile \
+            -t "${LARAVEL_IMAGE}" \
+            --load \
+            .
+
+      - name: Build Nuxt image
+        run: |
+          docker buildx build \
+            --platform linux/amd64 \
+            -f .docker/production/nuxt/Dockerfile \
+            -t "${NUXT_IMAGE}" \
+            --load \
+            .
+
+      - name: Build Nginx image
+        run: |
+          docker buildx build \
+            --platform linux/amd64 \
+            -f .docker/production/nginx/Dockerfile \
+            -t "${NGINX_IMAGE}" \
+            --load \
+            .
+
+      - name: Push Laravel image to Lightsail
+        run: |
+          aws lightsail push-container-image \
+            --region "${AWS_REGION}" \
+            --service-name "${LIGHTSAIL_SERVICE}" \
+            --label laravel \
+            --image "${LARAVEL_IMAGE}"
+
+      - name: Push Nuxt image to Lightsail
+        run: |
+          aws lightsail push-container-image \
+            --region "${AWS_REGION}" \
+            --service-name "${LIGHTSAIL_SERVICE}" \
+            --label nuxt \
+            --image "${NUXT_IMAGE}"
+
+      - name: Push Nginx image to Lightsail
+        run: |
+          aws lightsail push-container-image \
+            --region "${AWS_REGION}" \
+            --service-name "${LIGHTSAIL_SERVICE}" \
+            --label nginx \
+            --image "${NGINX_IMAGE}"
+
+      - name: Resolve latest Lightsail image names
+        id: images
+        run: |
+          LARAVEL_LS_IMAGE="$(
+            aws lightsail get-container-images \
+              --region "${AWS_REGION}" \
+              --service-name "${LIGHTSAIL_SERVICE}" \
+              --output json \
+            | jq -r --arg prefix ":${LIGHTSAIL_SERVICE}.laravel." '
+              .containerImages
+              | map(select(.image | startswith($prefix)))
+              | sort_by(.createdAt)
+              | last
+              | .image
+            '
+          )"
+
+          NUXT_LS_IMAGE="$(
+            aws lightsail get-container-images \
+              --region "${AWS_REGION}" \
+              --service-name "${LIGHTSAIL_SERVICE}" \
+              --output json \
+            | jq -r --arg prefix ":${LIGHTSAIL_SERVICE}.nuxt." '
+              .containerImages
+              | map(select(.image | startswith($prefix)))
+              | sort_by(.createdAt)
+              | last
+              | .image
+            '
+          )"
+
+          NGINX_LS_IMAGE="$(
+            aws lightsail get-container-images \
+              --region "${AWS_REGION}" \
+              --service-name "${LIGHTSAIL_SERVICE}" \
+              --output json \
+            | jq -r --arg prefix ":${LIGHTSAIL_SERVICE}.nginx." '
+              .containerImages
+              | map(select(.image | startswith($prefix)))
+              | sort_by(.createdAt)
+              | last
+              | .image
+            '
+          )"
+
+          if [ -z "${LARAVEL_LS_IMAGE}" ] || [ "${LARAVEL_LS_IMAGE}" = "null" ]; then
+            echo "Failed to resolve Laravel Lightsail image name"
+            exit 1
+          fi
+
+          if [ -z "${NUXT_LS_IMAGE}" ] || [ "${NUXT_LS_IMAGE}" = "null" ]; then
+            echo "Failed to resolve Nuxt Lightsail image name"
+            exit 1
+          fi
+
+          if [ -z "${NGINX_LS_IMAGE}" ] || [ "${NGINX_LS_IMAGE}" = "null" ]; then
+            echo "Failed to resolve Nginx Lightsail image name"
+            exit 1
+          fi
+
+          echo "laravel_image=${LARAVEL_LS_IMAGE}" >> "${GITHUB_OUTPUT}"
+          echo "nuxt_image=${NUXT_LS_IMAGE}" >> "${GITHUB_OUTPUT}"
+          echo "nginx_image=${NGINX_LS_IMAGE}" >> "${GITHUB_OUTPUT}"
+
+          echo "Laravel image: ${LARAVEL_LS_IMAGE}"
+          echo "Nuxt image: ${NUXT_LS_IMAGE}"
+          echo "Nginx image: ${NGINX_LS_IMAGE}"
+
+      - name: Create Lightsail deployment file
+        run: |
+          cat > lightsail-containers.json <<EOF
+          {
+            "containers": {
+              "nginx": {
+                "image": "${{ steps.images.outputs.nginx_image }}",
+                "ports": {
+                  "80": "HTTP"
+                }
+              },
+              "laravel": {
+                "image": "${{ steps.images.outputs.laravel_image }}",
+                "environment": {
+                  "APP_NAME": "D&D Site",
+                  "APP_ENV": "production",
+                  "APP_KEY": "${{ secrets.APP_KEY }}",
+                  "APP_DEBUG": "false",
+                  "APP_URL": "https://${API_DOMAIN}",
+
+                  "DB_CONNECTION": "mysql",
+                  "DB_HOST": "${{ secrets.DB_HOST }}",
+                  "DB_PORT": "3306",
+                  "DB_DATABASE": "${{ secrets.DB_DATABASE }}",
+                  "DB_USERNAME": "${{ secrets.DB_USERNAME }}",
+                  "DB_PASSWORD": "${{ secrets.DB_PASSWORD }}",
+
+                  "CACHE_STORE": "database",
+                  "QUEUE_CONNECTION": "database",
+                  "SESSION_DRIVER": "database",
+
+                  "SESSION_DOMAIN": ".fw190a8.com",
+                  "SANCTUM_STATEFUL_DOMAINS": "${FRONTEND_DOMAIN}"
+                },
+                "ports": {
+                  "9000": "TCP"
+                }
+              },
+              "nuxt": {
+                "image": "${{ steps.images.outputs.nuxt_image }}",
+                "environment": {
+                  "NODE_ENV": "production",
+                  "HOST": "0.0.0.0",
+                  "PORT": "3000",
+                  "NUXT_PUBLIC_API_URL": "https://${API_DOMAIN}/api",
+                  "NUXT_PUBLIC_CDN_URL": "${{ secrets.NUXT_PUBLIC_CDN_URL }}",
+                  "NUXT_PUBLIC_SITE_NAME": "${{ secrets.NUXT_PUBLIC_SITE_NAME }}"
+                },
+                "ports": {
+                  "3000": "HTTP"
+                }
+              }
+            },
+            "publicEndpoint": {
+              "containerName": "nginx",
+              "containerPort": 80,
+              "healthCheck": {
+                "path": "/",
+                "successCodes": "200-399"
+              }
+            }
+          }
+          EOF
+
+          jq . lightsail-containers.json > /dev/null
+
+      - name: Deploy to Lightsail
+        run: |
+          aws lightsail create-container-service-deployment \
+            --region "${AWS_REGION}" \
+            --service-name "${LIGHTSAIL_SERVICE}" \
+            --cli-input-json file://lightsail-containers.json
