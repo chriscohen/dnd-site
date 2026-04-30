@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterLink, RouterView, useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
+
+const router = useRouter();
+const auth = useAuthStore();
 
 const navigationItems = [
     {
@@ -14,7 +18,14 @@ const navigationItems = [
         label: 'Sources',
         to: '/sources'
     }
-]
+];
+
+async function logout(): Promise<void> {
+    await auth.logout();
+    await router.push({
+        name: 'login',
+    });
+}
 </script>
 
 <template>
@@ -55,11 +66,26 @@ const navigationItems = [
                             </h2>
                         </div>
 
+                        <div class="flex items-center gap-4">
+                            <div v-if="auth.user" class="hidden text-right text-sm sm:block">
+                                <p class="font-medium text-white">
+                                    {{ auth.user.name }}
+                                </p>
+                                <p class="text-slate-400">
+                                    {{ auth.user.email }}
+                                </p>
+                            </div>
+                        </div>
+
                         <button
                             type="button"
+                            :disabled="auth.isLoggingOut"
                             class="rounded-lg border border-slate-700 px-3 py-2 text-sm front-medium text-slate-200
                                 transition hover:border-slate-500 hover:bg-slate-800"
+                            @click="logout"
                         >
+                            <span v-if="auth.isLoggingOut">Logging out…</span>
+                            <span v-else>Log out</span>
                             Logout
                         </button>
                     </div>

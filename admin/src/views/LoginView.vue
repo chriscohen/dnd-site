@@ -1,30 +1,39 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { ApiError } from '@/api/client';
+import { useAuthStore } from '@/stores/auth';
 
+const route = useRoute();
 const router = useRouter();
+const auth = useAuthStore();
 
 const email = ref<string>('');
 const password = ref<string>('');
-const isSubmitting = ref<boolean>(false);
 const errorMessage = ref<string | null>(null);
 
 async function submitLogin(): Promise<void> {
-    isSubmitting.value = true;
     errorMessage.value = null;
 
     try {
-        console.log('Login attempt', {
+        await auth.login({
             email: email.value,
-            password: password.value,
+            password: password.value
         });
 
-        await router.push('/');
-    } catch {
-        errorMessage.value = 'Could not log in. Please check your details and try again.';
-    } finally {
-        isSubmitting.value = false
+        const redirect = typeof route.query.redirect === 'string' ?
+            route.query.redirect :
+            '/';
+
+        await router.push(redirect);
+    } catch (error) {
+        if (error instanceof ApiError && error.status === 422) {
+            errorMessage.value = 'The provided credentials do not match our records.';
+            return;
+        }
     }
+
+    errorMessage.value = 'Could not log in. Please check your details and try again.';
 }
 </script>
 
@@ -89,11 +98,11 @@ async function submitLogin(): Promise<void> {
 
                 <button
                     type="submit"
-                    :disabled="isSubmitting"
+                    :disabled="auth.isLoggingIn"
                     class="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-indigo-500 px-4 py-2.5
                         text-sm font-semibold"
                 >
-                    <span v-if="isSubmitting">Signing in…</span>
+                    <span v-if="auth.isLoggingIn">Signing in…</span>
 
                     <span v-else>Sign In</span>
                 </button>
