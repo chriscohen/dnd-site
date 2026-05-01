@@ -22,8 +22,6 @@ use App\Http\Controllers\Sources\SourceController;
 use App\Http\Controllers\Spells\SpellController;
 use App\Http\Controllers\UserController;
 
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/user', [UserController::class, 'self']);
 
 Route::get('/campaign-setting/{slug}', [CampaignSettingController::class, 'get']);
@@ -37,6 +35,10 @@ Route::get('/classes', [CharacterClassController::class, 'index']);
 
 Route::get('/company/{slug}', [CompanyController::class, 'get']);
 Route::get('/companies', [CompanyController::class, 'index']);
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::put('/company/{slug}', [CompanyController::class, 'update']);
+    Route::delete('/company/{slug}', [CompanyController::class, 'destroy']);
+});
 
 Route::get('/creature-type/{slug}', [CreatureTypeController::class, 'get']);
 Route::get('/creature-types', [CreatureTypeController::class, 'list']);
@@ -74,3 +76,5 @@ Route::get('/spell/{slug}', [SpellController::class, 'get']);
 Route::get('/spells', [SpellController::class, 'index']);
 
 Route::get('/search', [SearchController::class, 'search'])->where('q', '.*');
+
+Route::get('/user', [UserController::class, 'self']);

@@ -10,12 +10,13 @@
         }
     },
 
-    "forwardPorts": [8080, 3000, 3306],
+    "forwardPorts": [3000, 3306, 5173, 8080],
 
     "portsAttributes": {
-        "8080": { "label":  "Laravel API", "onAutoForward": "notify" },
         "3000": { "label":  "Nuxt Frontend", "onAutoForward": "notify" },
-        "3306": { "label":  "MySQL", "onAutoForward": "silent" }
+        "3306": { "label":  "MySQL", "onAutoForward": "silent" },
+        "5173": { "label":  "Vue Admin", "onAutoForward": "notify" },
+        "8080": { "label":  "Laravel API", "onAutoForward": "notify" }
     },
 
     "customizations": {
@@ -28,5 +29,7 @@
         }
     },
 
-    "remoteUser": "vscode"
+    "remoteUser": "vscode",
+
+    "postStartCommand": "cd /workspace/${localWorkspaceFolderBasename}/admin && npm install && npm run dev &"
 }
