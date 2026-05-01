@@ -29,5 +29,7 @@
         }
     },
 
-    "remoteUser": "vscode"
+    "remoteUser": "vscode",
+
+    "postStartCommand": "cd /workspace/${localWorkspaceFolderBasename}/admin && npm install && npm run dev &"
 }
