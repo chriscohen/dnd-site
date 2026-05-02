@@ -46,7 +46,7 @@ onMounted(async () => {
                         v-tooltip.top="'Edit'"
                         icon="pi pi-pencil"
                         size="small"
-                        @click="router.push({ name: 'companies.edit', params: { id: data.id } })"
+                        @click="router.push({ name: 'companies.edit', params: { slug: data.slug } })"
                     />
                 </template>
             </Column>

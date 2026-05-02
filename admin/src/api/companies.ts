@@ -21,3 +21,7 @@ type PaginatedResponse<T> = {
 export async function getCompanies(): Promise<PaginatedResponse<Company>> {
     return apiRequest<PaginatedResponse<Company>>('/api/companies');
 }
+
+export async function getCompany(slug: string): Promise<Company> {
+    return apiRequest<Company>(`/api/company/${slug}`);
+}

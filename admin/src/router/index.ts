@@ -4,6 +4,7 @@ import AdminLayout from "@/layouts/AdminLayout.vue";
 import DashboardView from "@/views/DashboardView.vue";
 import {useAuthStore} from "@/stores/auth.ts";
 import CompaniesView from "@/views/CompaniesView.vue";
+import EditCompanyView from "@/views/EditCompanyView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,7 +32,12 @@ const router = createRouter({
               {
                   path: '/companies',
                   name: 'companies',
-                  component: CompaniesView
+                  component: CompaniesView,
+              },
+              {
+                  path: '/company/:slug/edit',
+                  name: 'companies.edit',
+                  component: EditCompanyView,
               }
           ]
       }
