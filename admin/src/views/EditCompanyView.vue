@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { z } from 'zod';
 import { Form, FormField } from '@primevue/forms';
 import type { FormSubmitEvent } from '@primevue/forms';
@@ -9,13 +9,15 @@ import Button from 'primevue/button';
 import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
-import { getCompany, type Company } from '@/api/companies';
+import { getCompany, updateCompany, type Company } from '@/api/companies';
 
 const route = useRoute();
+const router = useRouter();
 const slug = route.params.slug as string;
 
 const company = ref<Company | null>(null);
 const loading = ref(false);
+const saving = ref(false);
 const errorMessage = ref<string | null>(null);
 
 const schema = z.object({
@@ -41,8 +43,27 @@ onMounted(async () => {
     }
 });
 
-function submitEdit(_event: FormSubmitEvent): void {
-    // TODO: implement save
+async function submitEdit(event: FormSubmitEvent): Promise<void> {
+    if (!event.valid) return;
+
+    saving.value = true;
+    errorMessage.value = null;
+
+    try {
+        const values = event.values as z.infer<typeof schema>;
+        await updateCompany(slug, {
+            name: values.name,
+            slug: values.slug,
+            shortName: values.shortName || null,
+            website: values.website || null,
+            productUrl: values.productUrl || null,
+        });
+        await router.push({ name: 'companies' });
+    } catch {
+        errorMessage.value = 'Could not save changes. Please try again.';
+    } finally {
+        saving.value = false;
+    }
 }
 </script>
 
@@ -128,7 +149,7 @@ function submitEdit(_event: FormSubmitEvent): void {
             </FormField>
 
             <div>
-                <Button type="submit" label="Save changes" />
+                <Button type="submit" label="Save changes" :loading="saving" />
             </div>
         </Form>
         </div>
