@@ -24,7 +24,7 @@ readonly class CompanyFullDTO extends CompanySummaryDTO
         // Summary.
         public ?Collection $products = null
     ) {
-        parent::__construct($id, $name, $slug, $logo, $productUrl, $shortName);
+        parent::__construct($id, $name, $slug, $logo, $productUrl, $shortName, $website);
     }
 
     /**
@@ -39,6 +39,7 @@ readonly class CompanyFullDTO extends CompanySummaryDTO
             logo: $model->logo ? MediaSummaryDTO::fromModel($model->logo) : null,
             productUrl: $model->product_url,
             shortName: $model->short_name,
+            website: $model->website,
             products: $model->relationLoaded('products') ?
                 $model->products->map(fn (Source $item) => SourceSummaryDTO::fromModel($item)) :
                 []
