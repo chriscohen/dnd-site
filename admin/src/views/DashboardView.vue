@@ -17,20 +17,6 @@ const summaryCards = [
     }
 ];
 
-const recentActivity = [
-    {
-        title: 'Admin dashboard created',
-        description: 'The Vue admin shell is ready for API integration.'
-    },
-    {
-        title: 'Authentication pending',
-        description: 'Next step: connect this app to Laravel Sanctum.'
-    },
-    {
-        title: 'Content tools pending',
-        description: 'CRUD pages can be added once protected API routes are available.',
-    }
-]
 </script>
 
 <template>
