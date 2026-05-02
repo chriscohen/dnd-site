@@ -9,6 +9,10 @@
     --color-faint: var(--color-slate-600);
 }
 
+html {
+    font-size: 14px;
+}
+
 body {
     min-width: 320px;
     min-height: 100vh;
