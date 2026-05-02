@@ -3,6 +3,8 @@ import { useRouter } from 'vue-router';
 import type { MenuItem } from "primevue/menuitem";
 import Menu from 'primevue/menu';
 
+withDefaults(defineProps<{ mobile?: boolean }>(), { mobile: false });
+
 const router = useRouter();
 
 const items: MenuItem[] = [
@@ -17,9 +19,12 @@ const items: MenuItem[] = [
 ];
 </script>
 <template>
-    <aside class="hidden w-64 border-r border-slate-800 px-6 py-6 lg:block">
+    <aside v-if="!mobile" class="hidden w-64 border-r border-slate-800 px-6 py-6 lg:block">
         <nav class="space-y-1">
-            <Menu ref="menu" :model="items"/>
+            <Menu :model="items" />
         </nav>
     </aside>
+    <nav v-else class="px-6 py-8">
+        <Menu :model="items" />
+    </nav>
 </template>
