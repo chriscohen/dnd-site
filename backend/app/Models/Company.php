@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Media\Media;
-use App\Models\Sources\Source;
+use App\Models\Sources\SourceEdition;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,7 +20,7 @@ use Ramsey\Uuid\Uuid;
  * @property Media $logo
  * @property string $name
  * @property ?string $product_url
- * @property Collection<Source> $products
+ * @property Collection<SourceEdition> $products
  * @property ?string $short_name
  * @property ?string $website
  */
@@ -45,7 +45,7 @@ class Company extends AbstractModel
 
     public function products(): HasMany
     {
-        return $this->hasMany(Source::class, 'publisher_id');
+        return $this->hasMany(SourceEdition::class, 'publisher_id');
     }
 
     public function toSearchableArray(): array

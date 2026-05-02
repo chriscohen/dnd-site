@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\DTOs;
 
 use App\DTOs\Media\MediaSummaryDTO;
-use App\DTOs\Sources\SourceSummaryDTO;
+use App\DTOs\Sources\SourceEditionSummaryDTO;
 use App\Models\Company;
 use App\Models\ModelInterface;
-use App\Models\Sources\Source;
+use App\Models\Sources\SourceEdition;
 use Illuminate\Support\Collection;
 
 readonly class CompanyFullDTO extends CompanySummaryDTO
@@ -41,7 +41,7 @@ readonly class CompanyFullDTO extends CompanySummaryDTO
             shortName: $model->short_name,
             website: $model->website,
             products: $model->relationLoaded('products') ?
-                $model->products->map(fn (Source $item) => SourceSummaryDTO::fromModel($item)) :
+                $model->products->map(fn (SourceEdition $item) => SourceEditionSummaryDTO::fromModel($item)) :
                 []
         );
     }
