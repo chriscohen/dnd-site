@@ -6,6 +6,7 @@ import { Form, FormField } from '@primevue/forms';
 import type { FormSubmitEvent } from '@primevue/forms';
 import { zodResolver } from '@primevue/forms/resolvers/zod';
 import Button from 'primevue/button';
+import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
 import { getCompany, type Company } from '@/api/companies';
@@ -55,8 +56,21 @@ function submitEdit(_event: FormSubmitEvent): void {
 
         <div v-if="loading" class="text-muted">Loading…</div>
 
+        <div v-else-if="company" class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
+
+        <div v-if="company.logo" class="md:order-last">
+            <label class="block text-sm font-medium">Logo</label>
+            <div class="mt-1 inline-flex w-96 items-center justify-center rounded-lg border border-surface-700 bg-surface-800 p-2">
+                <Image
+                    :src="company.logo.url"
+                    :alt="company.name"
+                    class="w-full object-contain"
+                    preview
+                />
+            </div>
+        </div>
+
         <Form
-            v-else-if="company"
             :resolver
             :initial-values="{
                 name:       company.name,
@@ -65,7 +79,7 @@ function submitEdit(_event: FormSubmitEvent): void {
                 website:    company.website ?? '',
                 productUrl: company.productUrl ?? '',
             }"
-            class="flex max-w-lg flex-col gap-5"
+            class="flex flex-col gap-5 md:order-first"
             @submit="submitEdit"
         >
             <div>
@@ -117,5 +131,6 @@ function submitEdit(_event: FormSubmitEvent): void {
                 <Button type="submit" label="Save changes" />
             </div>
         </Form>
+        </div>
     </div>
 </template>
