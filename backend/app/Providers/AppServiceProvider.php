@@ -28,6 +28,8 @@ use App\Models\Spells\SpellEdition4e;
 use App\Models\Spells\SpellEditionLevel;
 use App\Models\Text\TextEntry;
 use GraphQL\Type\Definition\PhpEnumType;
+use App\Models\Company;
+use App\Observers\CompanyObserver;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use Nuwave\Lighthouse\LighthouseServiceProvider;
@@ -63,6 +65,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Company::observe(CompanyObserver::class);
+
         Relation::enforceMorphMap([
             'character_class' => CharacterClass::class,
             'character_class_edition' => CharacterClassEdition::class,
