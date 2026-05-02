@@ -77,9 +77,9 @@ class Media extends AbstractModel
         return Media::create($data);
     }
 
-    public function getUrl(): string
+    public function getUrl(bool $absolute = true): string
     {
-        return $this->filename;
+        return $absolute ? Storage::disk($this->disk)->url($this->filename) : $this->filename;
     }
 
     public static function fromInternalJson(array|string|int $value, ModelInterface $parent = null): static
