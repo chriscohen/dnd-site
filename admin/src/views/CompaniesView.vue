@@ -37,7 +37,13 @@ onMounted(async () => {
         </Message>
 
         <DataTable :value="companies" :loading="loading">
-            <Column field="name" header="Name" />
+            <Column field="name" header="Name">
+                <template #body="{ data }: { data: Company }">
+                    <RouterLink :to="{ name: 'companies.edit', params: { slug: data.slug } }">
+                        {{ data.name }}
+                    </RouterLink>
+                </template>
+            </Column>
             <Column field="slug" header="Slug" />
             <Column field="shortName" header="Short name" />
             <Column header="">
