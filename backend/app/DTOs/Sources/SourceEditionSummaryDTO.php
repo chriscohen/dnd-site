@@ -23,7 +23,7 @@ readonly class SourceEditionSummaryDTO extends AbstractDTO
     {
         return new static(
             id: $model->id,
-            name: $model->name
+            name: $model->source->name
         );
     }
 }
