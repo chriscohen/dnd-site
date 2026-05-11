@@ -1,5 +1,13 @@
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL as string;
 
+export type PaginatedResponse<T> = {
+    data: T[];
+    current_page: number;
+    last_page: number;
+    total: number;
+    per_page: number;
+};
+
 type ApiRequestOptions = RequestInit & {
     json?: unknown;
 };
