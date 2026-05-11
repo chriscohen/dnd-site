@@ -17,3 +17,12 @@ body {
     min-width: 320px;
     min-height: 100vh;
 }
+
+a {
+    color: var(--color-primary);
+
+    &:hover {
+        color: var(--color-primary-300);
+        text-decoration: underline;
+    }
+}
