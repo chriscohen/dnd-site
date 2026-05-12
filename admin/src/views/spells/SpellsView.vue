@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, watch, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
 import Message from 'primevue/message';
+import InputText from 'primevue/inputtext';
 import { getSpells } from "dnd5e-api";
 import type { SpellApiResponse } from "@dnd5e/types";
 
@@ -17,23 +18,37 @@ const errorMessage = ref<string | null>(null);
 const currentPage = ref(0);
 const lastPage = ref(1);
 const sentinel = ref<HTMLElement | null>(null);
+const searchQuery = ref('');
 
-async function loadPage(page: number): Promise<void> {
+async function loadPage(page: number, q?: string): Promise<void> {
     page === 1 ? (loading.value = true) : (loadingMore.value = true);
     errorMessage.value = null;
 
     try {
-        const response = await getSpells(page);
+        const response = await getSpells(page, q);
         spells.value = page === 1 ? response.data : [...spells.value, ...response.data];
         currentPage.value = response.current_page;
         lastPage.value = response.last_page;
     } catch {
-        errorMessage.value = 'Could not load people. Please try again.';
+        errorMessage.value = 'Could not load spells. Please try again.';
     } finally {
         loading.value = false;
         loadingMore.value = false;
     }
 }
+
+let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+watch(searchQuery, (value) => {
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+        if (value.length >= 3) {
+            loadPage(1, value);
+        } else if (value.length === 0) {
+            loadPage(1);
+        }
+    }, 300);
+});
 
 let observer: IntersectionObserver | null = null;
 
@@ -42,7 +57,8 @@ onMounted(async () => {
 
     observer = new IntersectionObserver((entries) => {
         if (entries[0]?.isIntersecting && !loadingMore.value && currentPage.value < lastPage.value) {
-            loadPage(currentPage.value + 1);
+            const q = searchQuery.value.length >= 3 ? searchQuery.value : undefined;
+            loadPage(currentPage.value + 1, q);
         }
     }, { rootMargin: '200px' });
 
@@ -52,6 +68,7 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
+    if (debounceTimer) clearTimeout(debounceTimer);
     observer?.disconnect();
 });
 </script>
@@ -64,7 +81,18 @@ onUnmounted(() => {
             {{ errorMessage }}
         </Message>
 
+        <div class="mb-4">
+            <InputText
+                v-model="searchQuery"
+                placeholder="Search spells…"
+                class="w-full"
+            />
+        </div>
+
         <DataTable :value="spells" :loading="loading">
+            <template #empty>
+                <span class="text-muted">No spells found.</span>
+            </template>
             <Column field="name" header="Name">
                 <template #body="{ data }: { data: SpellApiResponse }">
                     <RouterLink :to="{ name: 'spell.edit', params: { slug: data.slug } }">

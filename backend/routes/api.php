@@ -81,7 +81,7 @@ Route::get('/source/{slug}/contents', [SourceController::class, 'contents']);
 Route::get('/source/{slug}/credits', [SourceController::class, 'credits']);
 
 Route::get('/spell/{slug}', [SpellController::class, 'get']);
-Route::get('/spells', [SpellController::class, 'index']);
+Route::get('/spells', [SpellController::class, 'list']);
 
 Route::get('/search', [SearchController::class, 'search'])->where('q', '.*');
 

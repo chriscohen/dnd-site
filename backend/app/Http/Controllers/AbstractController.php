@@ -9,6 +9,7 @@ use App\Models\AbstractModel;
 use App\Models\CharacterClasses\CharacterClass;
 use App\Models\ModelInterface;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -96,19 +97,17 @@ abstract class AbstractController extends Controller implements ControllerInterf
 
     public function getQuery(): Builder
     {
+        // Add text search if the q parameter is present.
+        $q = request()->input('q');
+        $query = $this->entityType::query();
+
+        if (!empty($q)) {
+            $query->where('name', 'like', '%' . $q . '%');
+        }
+
         $limit = config('dnd5e-api.MAX_ITEMS_PER_REQUEST', 100);
-        return $this->entityType::query()
+        return $query
             ->orderBy($this->orderKey, $this->order)
             ->limit($limit);
-    }
-
-    public function index(Request $request): JsonResponse
-    {
-        $items = $this->query
-            ->orderBy($this->orderKey)
-            ->paginate(50)
-            ->through(fn (CharacterClass $item) => CharacterClassSummaryDTO::fromModel($item));
-
-        return response()->json($items->withQueryString());
     }
 }
