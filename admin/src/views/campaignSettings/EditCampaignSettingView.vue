@@ -88,7 +88,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
         <div v-else-if="campaignSetting" class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
 
         <div v-if="campaignSetting.logo?.url" class="md:order-last">
-            <label class="block text-sm font-medium">Logo</label>
+            <label>Logo</label>
             <div class="mt-1 inline-flex w-96 items-center justify-center rounded-lg border border-surface-700 bg-surface-800 p-2">
                 <Image
                     :src="campaignSetting.logo.url"
@@ -113,12 +113,12 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
             @submit="submitEdit"
         >
             <div>
-                <label class="block text-sm font-medium">ID</label>
+                <label>ID</label>
                 <InputText :model-value="campaignSetting.id" disabled class="mt-1 w-full" />
             </div>
 
             <FormField v-slot="$field" name="name">
-                <label class="block text-sm font-medium">Name</label>
+                <label>Name</label>
                 <InputText v-bind="$field" class="mt-1 w-full" />
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                     {{ $field.error?.message }}
@@ -126,7 +126,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
             </FormField>
 
             <FormField v-slot="$field" name="slug">
-                <label class="block text-sm font-medium">Slug</label>
+                <label>Slug</label>
                 <InputText v-bind="$field" class="mt-1 w-full" />
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                     {{ $field.error?.message }}
@@ -134,7 +134,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
             </FormField>
 
             <FormField v-slot="$field" name="shortName">
-                <label class="block text-sm font-medium">Short name</label>
+                <label>Short name</label>
                 <InputText v-bind="$field" class="mt-1 w-full" placeholder="Optional" />
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                     {{ $field.error?.message }}
@@ -142,7 +142,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
             </FormField>
 
             <FormField v-slot="$field" name="publisherId">
-                <label class="block text-sm font-medium">Publisher</label>
+                <label>Publisher</label>
                 <ApiSelect v-bind="$field" :fetch="getCompanies" />
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                     {{ $field.error?.message }}
@@ -150,7 +150,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
             </FormField>
 
             <FormField v-slot="$field" name="publicationType">
-                <label class="block text-sm font-medium">Publication Type</label>
+                <label>Publication Type</label>
                 <ApiSelect v-bind="$field" :fetch="getPublicationTypes" option-value="name"/>
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                     {{ $field.error?.message }}
@@ -158,7 +158,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
             </FormField>
 
             <FormField v-slot="$field" name="website">
-                <label class="block text-sm font-medium">Website</label>
+                <label>Website</label>
                 <InputText v-bind="$field" type="url" class="mt-1 w-full" placeholder="Optional" />
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                     {{ $field.error?.message }}
@@ -166,7 +166,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
             </FormField>
 
             <FormField v-slot="$field" name="productUrl">
-                <label class="block text-sm font-medium">Product URL template</label>
+                <label>Product URL template</label>
                 <InputText v-bind="$field" class="mt-1 w-full" placeholder="e.g. product/{{id}}" />
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                     {{ $field.error?.message }}
