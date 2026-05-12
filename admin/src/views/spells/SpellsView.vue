@@ -100,7 +100,8 @@ onUnmounted(() => {
                     </RouterLink>
                 </template>
             </Column>
-            <Column field="slug" header="Slug" />
+            <Column field="slug" header="Slug"/>
+            <Column field="lowestLevel" header="Level" class="hidden sm:block"/>
             <Column header="">
                 <template #body="{ data }: { data: SpellApiResponse }">
                     <Button
