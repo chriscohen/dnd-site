@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\DTOs;
 
 use App\DTOs\Media\MediaSummaryDTO;
-use App\Enums\PublicationType;
 use App\Models\CampaignSetting;
 use App\Models\ModelInterface;
 
@@ -19,6 +18,7 @@ readonly class CampaignSettingFullDTO extends AbstractDTO
         public readonly ?MediaSummaryDTO $logo = null,
         public readonly ?string $publicationType = null,
         public readonly CompanySummaryDTO $publisher,
+        public readonly ?string $shortName = null,
         public readonly ?int $startYear = null,
     ) {
     }
@@ -36,6 +36,7 @@ readonly class CampaignSettingFullDTO extends AbstractDTO
             logo: $model->logo ? MediaSummaryDTO::fromModel($model->logo) : null,
             publicationType: $model->publication_type,
             publisher: $model->publisher ? CompanySummaryDTO::fromModel($model->publisher) : null,
+            shortName: $model->short_name,
             startYear: $model->start_year,
         );
     }

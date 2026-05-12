@@ -26,6 +26,9 @@ Route::get('/user', [UserController::class, 'self']);
 
 Route::get('/campaign-setting/{slug}', [CampaignSettingController::class, 'get']);
 Route::get('/campaign-settings', [CampaignSettingController::class, 'index']);
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::put('/campaign-setting/{slug}', [CampaignSettingController::class, 'update']);
+});
 
 Route::get('/category/{slug}', [CategoryController::class, 'get']);
 Route::get('/categories', [CategoryController::class, 'index']);

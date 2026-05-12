@@ -8,6 +8,7 @@ import { zodResolver } from '@primevue/forms/resolvers/zod';
 import Button from 'primevue/button';
 import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
+import InputNumber from 'primevue/inputnumber';
 import Message from 'primevue/message';
 import type { CampaignSettingApiResponse } from '@dnd5e/types';
 import {
@@ -33,6 +34,7 @@ const schema = z.object({
     publicationType: z.string().nullable(),
     publisherId: z.string().nullable(),
     shortName: z.string().nullable(),
+    startYear: z.number().nullable(),
 });
 
 const resolver = zodResolver(schema);
@@ -65,6 +67,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
             publicationType: values.publicationType || null,
             publisherId: values.publisherId || null,
             shortName: values.shortName || null,
+            startYear: values.startYear || null,
         });
         await router.push({ name: 'campaign-settings' });
     } catch {
@@ -102,12 +105,13 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
         <Form
             :resolver
             :initial-values="{
-                name: campaignSetting.name,
                 slug: campaignSetting.slug,
-                shortName: campaignSetting.shortName ?? '',
                 description: campaignSetting.description,
+                name: campaignSetting.name,
                 publicationType: campaignSetting.publicationType ?? null,
                 publisherId: campaignSetting.publisher?.id ?? null,
+                shortName: campaignSetting.shortName ?? '',
+                startYear: campaignSetting.startYear ?? null,
             }"
             class="flex flex-col gap-5 md:order-first"
             @submit="submitEdit"
@@ -119,6 +123,14 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
 
             <FormField v-slot="$field" name="name">
                 <label>Name</label>
+                <InputText v-bind="$field" class="mt-1 w-full" />
+                <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                    {{ $field.error?.message }}
+                </Message>
+            </FormField>
+
+            <FormField v-slot="$field" name="description">
+                <label>Description</label>
                 <InputText v-bind="$field" class="mt-1 w-full" />
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                     {{ $field.error?.message }}
@@ -157,17 +169,9 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
                 </Message>
             </FormField>
 
-            <FormField v-slot="$field" name="website">
-                <label>Website</label>
-                <InputText v-bind="$field" type="url" class="mt-1 w-full" placeholder="Optional" />
-                <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
-                    {{ $field.error?.message }}
-                </Message>
-            </FormField>
-
-            <FormField v-slot="$field" name="productUrl">
-                <label>Product URL template</label>
-                <InputText v-bind="$field" class="mt-1 w-full" placeholder="e.g. product/{{id}}" />
+            <FormField v-slot="$field" name="startYear">
+                <label>Start Year</label>
+                <InputNumber v-bind="$field" class="mt-1 w-full" />
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                     {{ $field.error?.message }}
                 </Message>

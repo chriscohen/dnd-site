@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Enums\Binding;
 use App\Enums\GameEdition;
 use App\Enums\Sources\SourceType;
+use App\Models\CampaignSetting;
 use App\Models\CharacterClasses\CharacterClass;
 use App\Models\CharacterClasses\CharacterClassEdition;
 use App\Models\Creatures\CreatureSpeciesEdition;
@@ -28,6 +29,7 @@ use App\Models\Spells\SpellEdition;
 use App\Models\Spells\SpellEdition4e;
 use App\Models\Spells\SpellEditionLevel;
 use App\Models\Text\TextEntry;
+use App\Observers\CampaignSettingObserver;
 use App\Observers\PersonObserver;
 use GraphQL\Type\Definition\PhpEnumType;
 use App\Models\Company;
@@ -67,6 +69,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        CampaignSetting::observe(CampaignSettingObserver::class);
         Company::observe(CompanyObserver::class);
         Person::observe(PersonObserver::class);
 
