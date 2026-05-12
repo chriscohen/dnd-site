@@ -10,7 +10,11 @@ import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
 import type { CampaignSettingApiResponse } from '@dnd5e/types';
-import { getCampaignSetting, getCompanies, updateCampaignSetting } from 'dnd5e-api';
+import {
+    getCampaignSetting,
+    getCompanies,
+    getPublicationTypes,
+    updateCampaignSetting } from 'dnd5e-api';
 import ApiSelect from '@/components/ApiSelect.vue';
 
 const route = useRoute();
@@ -26,6 +30,7 @@ const schema = z.object({
     name: z.string().min(1, 'Name is required'),
     slug: z.string().min(1, 'Slug is required'),
     description: z.string().nullable(),
+    publicationType: z.string().nullable(),
     publisherId: z.string().nullable(),
     shortName: z.string().nullable(),
 });
@@ -57,6 +62,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
             slug: values.slug,
             description: values.description || null,
             name: values.name,
+            publicationType: values.publicationType || null,
             publisherId: values.publisherId || null,
             shortName: values.shortName || null,
         });
@@ -96,10 +102,11 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
         <Form
             :resolver
             :initial-values="{
-                name:        campaignSetting.name,
-                slug:        campaignSetting.slug,
-                shortName:   campaignSetting.shortName ?? '',
+                name: campaignSetting.name,
+                slug: campaignSetting.slug,
+                shortName: campaignSetting.shortName ?? '',
                 description: campaignSetting.description,
+                publicationType: campaignSetting.publicationType ?? null,
                 publisherId: campaignSetting.publisher?.id ?? null,
             }"
             class="flex flex-col gap-5 md:order-first"
@@ -137,6 +144,14 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
             <FormField v-slot="$field" name="publisherId">
                 <label class="block text-sm font-medium">Publisher</label>
                 <ApiSelect v-bind="$field" :fetch="getCompanies" />
+                <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                    {{ $field.error?.message }}
+                </Message>
+            </FormField>
+
+            <FormField v-slot="$field" name="publicationType">
+                <label class="block text-sm font-medium">Publication Type</label>
+                <ApiSelect v-bind="$field" :fetch="getPublicationTypes" option-value="name"/>
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                     {{ $field.error?.message }}
                 </Message>
