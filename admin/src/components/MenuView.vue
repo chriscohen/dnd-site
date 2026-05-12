@@ -16,6 +16,10 @@ const items: MenuItem[] = [
         label: 'Companies',
         command: () => router.push({ name: 'companies' }),
     },
+    {
+        label: 'Sources',
+        command: () => router.push({ name: 'sources' }),
+    }
 ];
 </script>
 <template>

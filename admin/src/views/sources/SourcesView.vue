@@ -5,11 +5,12 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
 import Message from 'primevue/message';
-import { getCompanies, type Company } from '@/api/company';
+import type {SourceApiResponse} from "@dnd-site/types";
+import { getSources } from "@/api/source.ts";
 
 const router = useRouter();
 
-const companies = ref<Company[]>([]);
+const sources = ref<SourceApiResponse[]>([]);
 const loading = ref(false);
 const errorMessage = ref<string | null>(null);
 
@@ -18,10 +19,10 @@ onMounted(async () => {
     errorMessage.value = null;
 
     try {
-        const response = await getCompanies();
-        companies.value = response.data;
+        const response = await getSources();
+        sources.value = response.data;
     } catch {
-        errorMessage.value = 'Could not load companies. Please try again.';
+        errorMessage.value = 'Could not load sources. Please try again.';
     } finally {
         loading.value = false;
     }
@@ -30,16 +31,16 @@ onMounted(async () => {
 
 <template>
     <div>
-        <h1 class="mb-6 text-2xl font-bold">Companies</h1>
+        <h1 class="mb-6 text-2xl font-bold">Sources</h1>
 
         <Message v-if="errorMessage" severity="error" class="mb-4">
             {{ errorMessage }}
         </Message>
 
-        <DataTable :value="companies" :loading="loading">
+        <DataTable :value="sources" :loading="loading">
             <Column field="name" header="Name">
-                <template #body="{ data }: { data: Company }">
-                    <RouterLink :to="{ name: 'company.edit', params: { slug: data.slug } }">
+                <template #body="{ data }: { data: SourceApiResponse }">
+                    <RouterLink :to="{ name: 'source.edit', params: { slug: data.slug } }">
                         {{ data.name }}
                     </RouterLink>
                 </template>
@@ -47,12 +48,12 @@ onMounted(async () => {
             <Column field="slug" header="Slug" />
             <Column field="shortName" header="Short name" />
             <Column header="">
-                <template #body="{ data }: { data: Company }">
+                <template #body="{ data }: { data: SourceApiResponse }">
                     <Button
                         v-tooltip.top="'Edit'"
                         icon="pi pi-pencil"
                         size="small"
-                        @click="router.push({ name: 'company.edit', params: { slug: data.slug } })"
+                        @click="router.push({ name: 'source.edit', params: { slug: data.slug } })"
                     />
                 </template>
             </Column>

@@ -7,6 +7,8 @@
 dist
 
 # Node dependencies
+/node_modules
+/admin/node_modules
 /frontend/node_modules
 
 # Logs

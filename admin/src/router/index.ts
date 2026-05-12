@@ -5,6 +5,8 @@ import DashboardView from "@/views/DashboardView.vue";
 import {useAuthStore} from "@/stores/auth.ts";
 import CompaniesView from "@/views/CompaniesView.vue";
 import EditCompanyView from "@/views/EditCompanyView.vue";
+import SourcesView from "@/views/sources/SourcesView.vue";
+import EditSourceView from "@/views/sources/EditSourceView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,8 +38,18 @@ const router = createRouter({
               },
               {
                   path: '/company/:slug/edit',
-                  name: 'companies.edit',
+                  name: 'company.edit',
                   component: EditCompanyView,
+              },
+              {
+                  path: '/sources',
+                  name: 'sources',
+                  component: SourcesView,
+              },
+              {
+                  path: '/source/:slug/edit',
+                  name: 'source.edit',
+                  component: EditSourceView,
               }
           ]
       }
