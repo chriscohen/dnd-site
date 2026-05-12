@@ -8,7 +8,7 @@ import { zodResolver } from '@primevue/forms/resolvers/zod';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
-import { getPerson, updateCompany } from 'dnd5e-api';
+import { getPerson, updatePerson } from 'dnd5e-api';
 import type { PersonApiResponse} from "@dnd5e/types";
 
 const route = useRoute();
@@ -21,6 +21,7 @@ const saving = ref(false);
 const errorMessage = ref<string | null>(null);
 
 const schema = z.object({
+    slug: z.string().min(1, 'Slug is required').max(255),
     firstName: z.string().min(1, 'First name is required').max(255),
     lastName: z.string().min(1, 'Last name is required').max(255),
     initials: z.string().max(255).nullable(),
@@ -54,14 +55,18 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
 
     try {
         const values = event.values as z.infer<typeof schema>;
-        await updateCompany(slug, {
-            name: values.firstName,
-            slug: values.lastName,
-            shortName: values.initials || null,
-            website: values.artstation || null,
-            productUrl: values.instagram || null,
+        await updatePerson(slug, {
+            slug: values.slug,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            initials: values.initials || null,
+            middleNames: values.middleNames || null,
+            artstation: values.artstation || null,
+            instagram: values.instagram || null,
+            twitter: values.twitter || null,
+            youtube: values.youtube || null,
         });
-        await router.push({ name: 'companies' });
+        await router.push({ name: 'people' });
     } catch {
         errorMessage.value = 'Could not save changes. Please try again.';
     } finally {
@@ -72,7 +77,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
 
 <template>
     <div>
-        <h1 class="mb-6 text-2xl font-bold">Edit Company</h1>
+        <h1 class="mb-6 text-2xl font-bold">Edit Person</h1>
 
         <Message v-if="errorMessage" severity="error" class="mb-4">
             {{ errorMessage }}

@@ -18,6 +18,7 @@ use App\Models\Feats\FeatureEdition;
 use App\Models\Items\ItemType;
 use App\Models\Items\ItemTypeEdition;
 use App\Models\Languages\Language;
+use App\Models\People\Person;
 use App\Models\Skills\Skill;
 use App\Models\Skills\SkillEdition;
 use App\Models\Sources\Source;
@@ -27,6 +28,7 @@ use App\Models\Spells\SpellEdition;
 use App\Models\Spells\SpellEdition4e;
 use App\Models\Spells\SpellEditionLevel;
 use App\Models\Text\TextEntry;
+use App\Observers\PersonObserver;
 use GraphQL\Type\Definition\PhpEnumType;
 use App\Models\Company;
 use App\Observers\CompanyObserver;
@@ -66,6 +68,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Company::observe(CompanyObserver::class);
+        Person::observe(PersonObserver::class);
 
         Relation::enforceMorphMap([
             'character_class' => CharacterClass::class,

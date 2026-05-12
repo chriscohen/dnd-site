@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Http\Controllers\FeatController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CampaignSettingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CharacterClassController;
@@ -63,6 +62,9 @@ Route::get('/magic-schools', [MagicSchoolController::class, 'index']);
 Route::get('/person/{slug}', [PersonController::class, 'get']);
 Route::get('/people', [PersonController::class, 'index']);
 Route::get('/person/{slug}/credits', [PersonController::class, 'credits']);
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::put('/person/{slug}', [PersonController::class, 'update']);
+});
 
 Route::get('/references', [ReferenceController::class, 'index']);
 

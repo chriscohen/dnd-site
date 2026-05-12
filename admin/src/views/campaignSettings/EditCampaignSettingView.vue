@@ -9,7 +9,7 @@ import Button from 'primevue/button';
 import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
-import type { CampaignSettingApiResponse } from '../../../../packages/@dnd5e';
+import type { CampaignSettingApiResponse } from '@dnd5e/types';
 import { getCampaignSetting, getCompanies, updateCampaignSetting } from 'dnd5e-api';
 import ApiSelect from '@/components/ApiSelect.vue';
 

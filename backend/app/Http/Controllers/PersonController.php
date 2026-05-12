@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\DTOs\Credits\BookCreditDTO;
 use App\DTOs\People\PersonDTO;
+use App\Http\Requests\UpdatePersonRequest;
 use App\Models\People\BookCredit;
 use App\Models\People\Person;
 use Illuminate\Http\JsonResponse;
@@ -52,5 +53,29 @@ class PersonController extends AbstractController
         return  response()->json(
             $items
         );
+    }
+
+    public function update(UpdatePersonRequest $request, string $slug): JsonResponse
+    {
+        /** @var Person|null $person */
+        $person = Person::query()->where('slug', $slug)->first();
+
+        if ($person === null) {
+            return response()->json(['message' => 'Person not found'], 404);
+        }
+
+        $validated = $request->validated();
+        $person->slug = $validated['slug'];
+        $person->first_name = $validated['firstName'];
+        $person->last_name = $validated['lastName'];
+        $person->middle_names = $validated['middleNames'];
+        $person->initials = $validated['initials'];
+        $person->artstation = $validated['artstation'];
+        $person->instagram = $validated['instagram'];
+        $person->twitter = $validated['twitter'];
+        $person->youtube = $validated['youtube'];
+        $person->save();
+
+        return response()->json(PersonDTO::fromModel($person));
     }
 }
