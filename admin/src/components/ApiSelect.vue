@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import Select from 'primevue/select';
+import { useApiOptionsStore } from '@/stores/apiOptions';
 
 defineOptions({ inheritAttrs: false });
 
@@ -17,14 +18,14 @@ const props = withDefaults(defineProps<{
     placeholder: 'Select…',
 });
 
+const apiOptions = useApiOptionsStore();
 const options = ref<unknown[]>([]);
 const loadingOptions = ref(false);
 
 onMounted(async () => {
     loadingOptions.value = true;
     try {
-        const result = await props.fetch();
-        options.value = Array.isArray(result) ? result : result.data;
+        options.value = await apiOptions.getOrFetch(props.fetch);
     } finally {
         loadingOptions.value = false;
     }
