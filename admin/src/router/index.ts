@@ -11,6 +11,8 @@ import CampaignSettingsView from "../views/campaignSettings/CampaignSettingsView
 import EditCampaignSettingView from "../views/campaignSettings/EditCampaignSettingView.vue";
 import PeopleView from "@/views/people/PeopleView.vue";
 import EditPersonView from "@/views/people/EditPersonView.vue";
+import SpellsView from "@/views/spells/SpellsView.vue";
+import EditSpellView from "@/views/spells/EditSpellView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -74,6 +76,16 @@ const router = createRouter({
                     path: '/source/:slug/edit',
                     name: 'source.edit',
                     component: EditSourceView,
+                },
+                {
+                    path: '/spells',
+                    name: 'spells',
+                    component: SpellsView
+                },
+                {
+                    path: '/spell/:slug/edit',
+                    name: 'spell.edit',
+                    component: EditSpellView
                 }
             ]
         }

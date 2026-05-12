@@ -27,6 +27,10 @@ const items: MenuItem[] = [
     {
         label: 'Sources',
         command: () => router.push({ name: 'sources' }),
+    },
+    {
+        label: 'Spells',
+        command: () => router.push({ name: 'spells' }),
     }
 ];
 </script>
