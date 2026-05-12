@@ -23,11 +23,11 @@ const saving = ref(false);
 const errorMessage = ref<string | null>(null);
 
 const schema = z.object({
-    name:        z.string().min(1, 'Name is required'),
-    slug:        z.string().min(1, 'Slug is required'),
-    shortName:   z.string().nullable(),
+    name: z.string().min(1, 'Name is required'),
+    slug: z.string().min(1, 'Slug is required'),
     description: z.string().nullable(),
     publisherId: z.string().nullable(),
+    shortName: z.string().nullable(),
 });
 
 const resolver = zodResolver(schema);
@@ -54,11 +54,11 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
     try {
         const values = event.values as z.infer<typeof schema>;
         await updateCampaignSetting(slug, {
-            name: values.name,
             slug: values.slug,
-            shortName: values.shortName || null,
             description: values.description || null,
+            name: values.name,
             publisherId: values.publisherId || null,
+            shortName: values.shortName || null,
         });
         await router.push({ name: 'campaign-settings' });
     } catch {

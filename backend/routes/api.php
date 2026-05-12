@@ -15,6 +15,7 @@ use App\Http\Controllers\Languages\LanguageController;
 use App\Http\Controllers\Magic\MagicDomainController;
 use App\Http\Controllers\Magic\MagicSchoolController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\PublicationTypeController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Sources\SourceController;
@@ -65,6 +66,8 @@ Route::get('/person/{slug}/credits', [PersonController::class, 'credits']);
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::put('/person/{slug}', [PersonController::class, 'update']);
 });
+
+Route::get('/publication-types', [PublicationTypeController::class, 'list']);
 
 Route::get('/references', [ReferenceController::class, 'index']);
 
