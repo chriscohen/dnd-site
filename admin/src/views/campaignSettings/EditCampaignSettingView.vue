@@ -10,7 +10,7 @@ import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
 import type { CampaignSettingApiResponse } from '../../../../packages/@dnd5e';
-import { getCampaignSetting, getCompanies, updateCampaignSetting } from 'dnd5e-dnd5e-api';
+import { getCampaignSetting, getCompanies, updateCampaignSetting } from 'dnd5e-api';
 import ApiSelect from '@/components/ApiSelect.vue';
 
 const route = useRoute();

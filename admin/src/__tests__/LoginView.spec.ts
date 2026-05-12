@@ -3,7 +3,7 @@ import { mount, flushPromises } from '@vue/test-utils'
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config'
 import LoginView from '../views/LoginView.vue'
-import { ApiError } from 'dnd5e-dnd5e-api';
+import { ApiError } from 'dnd5e-api';
 
 const mockPush = vi.fn()
 vi.mock('vue-router', () => ({
