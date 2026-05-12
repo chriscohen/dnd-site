@@ -4,7 +4,7 @@ import PageTitle from "~/components/labels/PageTitle.vue";
 import {useSourceCache} from "~/stores/Store";
 import {definePageMeta} from "#imports";
 import TeaserGrid from "~/components/teasers/TeaserGrid.vue";
-import {createSource} from "~/classes/sources/source";
+import {createSource} from "@dnd-site/types";
 import {useInfiniteScroll} from "@vueuse/core";
 import {useUiStore} from "~/stores/uiStore";
 

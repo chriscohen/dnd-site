@@ -1,12 +1,8 @@
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL as string;
+import { type PaginatedResponse } from '@dnd-site/types';
 
-export type PaginatedResponse<T> = {
-    data: T[];
-    current_page: number;
-    last_page: number;
-    total: number;
-    per_page: number;
-};
+export type { PaginatedResponse };
+
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL as string;
 
 type ApiRequestOptions = RequestInit & {
     json?: unknown;

@@ -1,7 +1,7 @@
 ﻿import {
   type CharacterClassEditionApiResponse, type CharacterClassEditionState, createCharacterClassEdition
 } from "~/classes/characterClasses/characterClassEdition";
-import {createMedia, type Media, type MediaApiResponse} from "~/classes/media";
+import {createMedia, type Media, type MediaApiResponse} from "@dnd-site/types";
 
 export interface CharacterClassApiResponse {
     id?: string

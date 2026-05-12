@@ -5,7 +5,7 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
 import Message from 'primevue/message';
-import { getCompanies, type Company } from '@/api/companies';
+import { getCompanies, type Company } from '@/api/company';
 
 const router = useRouter();
 

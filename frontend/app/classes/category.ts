@@ -1,4 +1,4 @@
-﻿import type {Media, MediaApiResponse} from "~/classes/media";
+﻿import type {Media, MediaApiResponse} from "@dnd-site/types";
 
 export interface CategoryApiResponse {
     id: string

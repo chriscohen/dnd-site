@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "declaration": true,
+        "moduleResolution": "bundler",
+        "module": "ESNext",
+        "target": "ESNext",
+        "noUncheckedIndexedAccess": true
+    },
+    "include": ["src/**/*"]
+}

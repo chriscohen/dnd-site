@@ -5,7 +5,7 @@ import CampaignSettingCard from "~/components/campaign-settings/CampaignSettingC
 import {type CampaignSettingApiResponse, createCampaignSetting} from "~/classes/campaignSetting";
 import BaseCard from "~/components/cards/BaseCard.vue";
 import ProductList from "~/components/lists/ProductList.vue";
-import {createSource} from "~/classes/sources/source";
+import {createSource} from "@dnd-site/types";
 import LinkList from "~/components/lists/LinkList.vue";
 import CampaignSettingListItem from "~/components/campaign-settings/CampaignSettingListItem.vue";
 

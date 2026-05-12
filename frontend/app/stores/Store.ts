@@ -1,11 +1,10 @@
 ﻿import {defineStore, skipHydrate} from "pinia";
 import {ref, type Ref} from "vue";
 import type {LanguageApiResponse} from "~/classes/language";
-import type {SourceApiResponse} from "~/classes/sources/source";
+import type {CompanyApiResponse, SourceApiResponse} from "@dnd-site/types";
 import type {SpellApiResponse} from "~/classes/spells/spell";
 import type {CreatureTypeApiResponse} from "~/classes/creatures/creatureType";
 import type {ItemApiResponse} from "~/classes/items/item";
-import type {CompanyApiResponse} from "~/classes/company";
 import type {CampaignSettingApiResponse} from "~/classes/campaignSetting";
 import type {CharacterClass} from "~/classes/characterClasses/characterClass";
 import type {CreatureMainTypeApiResponse} from "~/classes/creatures/creatureMainType";

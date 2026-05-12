@@ -1,4 +1,4 @@
-﻿import {createMedia, type Media, type MediaApiResponse} from "~/classes/media";
+﻿import {createMedia, type Media, type MediaApiResponse} from "@dnd-site/types";
 import {createSpellEdition, type SpellEdition, type SpellEditionApiResponse} from "~/classes/spells/spellEdition";
 
 export interface SpellApiResponse {

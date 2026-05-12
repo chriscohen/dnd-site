@@ -1,12 +1,13 @@
-﻿import {createMedia, type Media, type MediaApiResponse} from "~/classes/media";
-import {type Company, type CompanyApiResponse, createCompany} from "~/classes/company";
-import {createProductId, type ProductIdApiResponse, type ProductIdState} from "~/classes/productId";
-import {type CampaignSetting, type CampaignSettingApiResponse, createCampaignSetting} from "~/classes/campaignSetting";
+﻿import type {
+    Media,
+    MediaApiResponse
+} from "@dnd-site/types";
+import {type CampaignSetting, type CampaignSettingApiResponse, createCampaignSetting} from "../campaignSetting";
 import {
     createSourceEdition, type SourceEdition,
     type SourceEditionApiResponse,
     type SourceEditionState
-} from "~/classes/sources/sourceEdition";
+} from "@dnd-site/types";
 
 export interface SourceApiResponse {
     id?: string
@@ -60,8 +61,8 @@ export const createSource = (data?: SourceApiResponse) => {
     const hasEditions = () => (state.editions?.length ?? 0);
 
     const primaryEdition = (): SourceEdition | undefined => hasEditions() ?
-            state.editions?.find((edition: SourceEditionState) => edition.isPrimary) ?? state.editions?.[0] :
-            undefined;
+        state.editions?.find((edition: SourceEditionState) => edition.isPrimary) ?? state.editions?.[0] :
+        undefined;
 
     return {
         ...state,

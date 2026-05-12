@@ -1,5 +1,5 @@
 ﻿import {createPerson, type Person, type PersonApiResponse,} from "~/classes/person";
-import {createSource, type SourceApiResponse, type SourceState} from "~/classes/sources/source";
+import {createSource, type SourceApiResponse, type SourceState} from "@dnd-site/types";
 
 export interface BookCreditApiResponse {
     id?: string

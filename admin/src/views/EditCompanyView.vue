@@ -9,7 +9,7 @@ import Button from 'primevue/button';
 import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
-import { getCompany, updateCompany, type Company } from '@/api/companies';
+import { getCompany, updateCompany, type Company } from '@/api/company';
 
 const route = useRoute();
 const router = useRouter();
@@ -148,7 +148,10 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
                 </Message>
             </FormField>
 
-            <div>
+            <div class="flex gap-8 items-center">
+                <Button asChild variant="outlined">
+                    <RouterLink :to="{ name: 'companies' }">Cancel</RouterLink>
+                </Button>
                 <Button type="submit" label="Save changes" :loading="saving" />
             </div>
         </Form>

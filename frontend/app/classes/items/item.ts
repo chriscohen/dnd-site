@@ -1,6 +1,6 @@
 ﻿import {createItemEdition, type ItemEdition, type ItemEditionApiResponse} from "~/classes/items/itemEdition";
 import {type Category, type CategoryApiResponse, createCategory} from "~/classes/category";
-import {createMedia, type MediaApiResponse} from "~/classes/media";
+import {createMedia, type MediaApiResponse} from "@dnd-site/types";
 
 export interface ItemApiResponse {
     id?: string

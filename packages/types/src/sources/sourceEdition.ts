@@ -1,6 +1,12 @@
-﻿import {createProductId, type ProductIdApiResponse, type ProductIdState} from "~/classes/productId";
-import {type Company, type CompanyApiResponse, createCompany} from "~/classes/company";
-import {createMedia, type Media, type MediaApiResponse} from "~/classes/media";
+﻿import {createProductId, type ProductIdApiResponse, type ProductIdState} from "../productId";
+import {
+    createMedia,
+    type Media,
+    type MediaApiResponse,
+    type Company,
+    type CompanyApiResponse,
+    createCompany
+} from "@dnd-site/types";
 
 export interface SourceEditionApiResponse {
     id: string

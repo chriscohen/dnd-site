@@ -1,5 +1,5 @@
-﻿import type {MediaApiResponse} from "~/classes/media";
-import {createSource, type SourceApiResponse} from "~/classes/sources/source";
+import type {MediaApiResponse} from "./media";
+import {createSource, type SourceApiResponse} from "./sources/source";
 
 export interface CompanyApiResponse {
     id?: string
@@ -41,3 +41,12 @@ export const createCompany = (data?: CompanyApiResponse) => {
 }
 
 export type Company = ReturnType<typeof createCompany>;
+
+
+export type UpdateCompanyData = {
+    name: string;
+    slug: string;
+    shortName?: string | null;
+    website?: string | null;
+    productUrl?: string | null;
+};

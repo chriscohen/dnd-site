@@ -2,7 +2,7 @@
 import {useCompanyCache} from "~/stores/Store";
 import PageTitle from "~/components/labels/PageTitle.vue";
 import ProductList from "~/components/lists/ProductList.vue";
-import {createCompany, type CompanyApiResponse} from "~/classes/company";
+import {createCompany, type CompanyApiResponse} from "@dnd-site/types";
 
 const route = useRoute();
 const store = useCompanyCache();

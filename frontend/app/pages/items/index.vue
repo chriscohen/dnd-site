@@ -4,7 +4,7 @@ import GameEditionBadge from "~/components/badges/GameEditionBadge.vue";
 import BadgeContainer from "~/components/badges/BadgeContainer.vue";
 import {useItemCache} from "~/stores/Store";
 import {createItem, type Item} from "~/classes/items/item";
-import type {Media} from "~/classes/media";
+import type {Media} from "@dnd-site/types";
 import type {ItemEdition} from "~/classes/items/itemEdition";
 import type {Category} from "~/classes/category";
 

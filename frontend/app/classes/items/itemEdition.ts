@@ -1,4 +1,4 @@
-﻿import {createSource, type Source, type SourceApiResponse} from "~/classes/sources/source";
+﻿import {createSource, type Source, type SourceApiResponse} from '@dnd-site/types';
 
 export interface ItemEditionApiResponse {
     id: string

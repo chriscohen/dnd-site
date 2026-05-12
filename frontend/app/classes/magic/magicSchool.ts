@@ -1,4 +1,4 @@
-﻿import {createMedia, type Media, type MediaApiResponse} from "~/classes/media";
+﻿import {createMedia, type Media, type MediaApiResponse} from "@dnd-site/types";
 
 export interface MagicSchoolApiResponse {
     id?: string

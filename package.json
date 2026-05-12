@@ -1,0 +1,10 @@
+{
+    "name": "dnd-site",
+    "version": "",
+    "private": true,
+    "workspaces": [
+        "admin",
+        "frontend",
+        "packages/*"
+    ]
+}
