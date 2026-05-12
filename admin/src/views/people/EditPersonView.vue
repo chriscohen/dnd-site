@@ -6,27 +6,29 @@ import { Form, FormField } from '@primevue/forms';
 import type { FormSubmitEvent } from '@primevue/forms';
 import { zodResolver } from '@primevue/forms/resolvers/zod';
 import Button from 'primevue/button';
-import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
-import { getCompany, updateCompany } from 'dnd5e-api';
-import type {CompanyApiResponse} from "@dnd5e/types";
+import { getPerson, updateCompany } from 'dnd5e-api';
+import type { PersonApiResponse} from "@dnd5e/types";
 
 const route = useRoute();
 const router = useRouter();
 const slug = route.params.slug as string;
 
-const company = ref<CompanyApiResponse | null>(null);
+const person = ref<PersonApiResponse | null>(null);
 const loading = ref(false);
 const saving = ref(false);
 const errorMessage = ref<string | null>(null);
 
 const schema = z.object({
-    name:        z.string().min(1, 'Name is required'),
-    slug:        z.string().min(1, 'Slug is required'),
-    shortName:   z.string().nullable(),
-    website:     z.string().url('Enter a valid URL').or(z.literal('')).nullable(),
-    productUrl:  z.string().nullable(),
+    firstName: z.string().min(1, 'First name is required').max(255),
+    lastName: z.string().min(1, 'Last name is required').max(255),
+    initials: z.string().max(255).nullable(),
+    middleNames: z.string().max(255).nullable(),
+    artstation: z.string().max(255).nullable(),
+    instagram: z.string().max(255).nullable(),
+    twitter: z.string().max(255).nullable(),
+    youtube: z.string().max(255).nullable(),
 });
 
 const resolver = zodResolver(schema);
@@ -36,9 +38,9 @@ onMounted(async () => {
     errorMessage.value = null;
 
     try {
-        company.value = await getCompany(slug);
+        person.value = await getPerson(slug);
     } catch {
-        errorMessage.value = 'Could not load company. Please try again.';
+        errorMessage.value = 'Could not load person. Please try again.';
     } finally {
         loading.value = false;
     }
@@ -53,11 +55,11 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
     try {
         const values = event.values as z.infer<typeof schema>;
         await updateCompany(slug, {
-            name: values.name,
-            slug: values.slug,
-            shortName: values.shortName || null,
-            website: values.website || null,
-            productUrl: values.productUrl || null,
+            name: values.firstName,
+            slug: values.lastName,
+            shortName: values.initials || null,
+            website: values.artstation || null,
+            productUrl: values.instagram || null,
         });
         await router.push({ name: 'companies' });
     } catch {
@@ -78,44 +80,27 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
 
         <div v-if="loading" class="text-muted">Loading…</div>
 
-        <div v-else-if="company" class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
-
-            <div v-if="company.logo" class="md:order-last">
-                <label class="block text-sm font-medium">Logo</label>
-                <div class="mt-1 inline-flex w-96 items-center justify-center rounded-lg border border-surface-700 bg-surface-800 p-2">
-                    <Image
-                        :src="company.logo.url"
-                        :alt="company.name"
-                        class="w-full object-contain"
-                        preview
-                    />
-                </div>
-            </div>
-
+        <div v-else-if="person" class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
             <Form
                 :resolver
                 :initial-values="{
-                name:       company.name,
-                slug:       company.slug,
-                shortName:  company.shortName ?? '',
-                website:    company.website ?? '',
-                productUrl: company.productUrl ?? '',
+                slug: person.slug,
+                firstName: person.firstName,
+                lastName: person.lastName,
+                initials: person.initials,
+                middleNames: person.middleNames,
+                artstation: person.artstation,
+                instagram: person.instagram,
+                twitter: person.twitter,
+                youtube: person.youtube,
             }"
                 class="flex flex-col gap-5 md:order-first"
                 @submit="submitEdit"
             >
                 <div>
                     <label class="block text-sm font-medium">ID</label>
-                    <InputText :model-value="company.id" disabled class="mt-1 w-full" />
+                    <InputText :model-value="person.id" disabled class="mt-1 w-full" />
                 </div>
-
-                <FormField v-slot="$field" name="name">
-                    <label class="block text-sm font-medium">Name</label>
-                    <InputText v-bind="$field" class="mt-1 w-full" />
-                    <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
-                        {{ $field.error?.message }}
-                    </Message>
-                </FormField>
 
                 <FormField v-slot="$field" name="slug">
                     <label class="block text-sm font-medium">Slug</label>
@@ -125,25 +110,63 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
                     </Message>
                 </FormField>
 
-                <FormField v-slot="$field" name="shortName">
-                    <label class="block text-sm font-medium">Short name</label>
+                <FormField v-slot="$field" name="firstName">
+                    <label class="block text-sm font-medium">First Name</label>
+                    <InputText v-bind="$field" class="mt-1 w-full" />
+                    <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                        {{ $field.error?.message }}
+                    </Message>
+                </FormField>
+
+                <FormField v-slot="$field" name="middleNames">
+                    <label class="block text-sm font-medium">Middle Names</label>
+                    <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                        {{ $field.error?.message }}
+                    </Message>
+                </FormField>
+
+                <FormField v-slot="$field" name="initials">
+                    <label class="block text-sm font-medium">Initials</label>
+                    <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                        {{ $field.error?.message }}
+                    </Message>
+                </FormField>
+
+                <FormField v-slot="$field" name="lastName">
+                    <label class="block text-sm font-medium">Last Name</label>
+                    <InputText v-bind="$field" class="mt-1 w-full" />
+                    <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                        {{ $field.error?.message }}
+                    </Message>
+                </FormField>
+
+                <FormField v-slot="$field" name="artstation">
+                    <label class="block text-sm font-medium">Artstation</label>
                     <InputText v-bind="$field" class="mt-1 w-full" placeholder="Optional" />
                     <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                         {{ $field.error?.message }}
                     </Message>
                 </FormField>
 
-                <FormField v-slot="$field" name="website">
-                    <label class="block text-sm font-medium">Website</label>
+                <FormField v-slot="$field" name="instagram">
+                    <label class="block text-sm font-medium">Instagram</label>
                     <InputText v-bind="$field" type="url" class="mt-1 w-full" placeholder="Optional" />
                     <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                         {{ $field.error?.message }}
                     </Message>
                 </FormField>
 
-                <FormField v-slot="$field" name="productUrl">
-                    <label class="block text-sm font-medium">Product URL template</label>
-                    <InputText v-bind="$field" class="mt-1 w-full" placeholder="e.g. product/{{id}}" />
+                <FormField v-slot="$field" name="twitter">
+                    <label class="block text-sm font-medium">Twitter</label>
+                    <InputText v-bind="$field" class="mt-1 w-full" placeholder="Optional" />
+                    <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                        {{ $field.error?.message }}
+                    </Message>
+                </FormField>
+
+                <FormField v-slot="$field" name="youtube">
+                    <label class="block text-sm font-medium">YouTube</label>
+                    <InputText v-bind="$field" type="url" class="mt-1 w-full" placeholder="Optional" />
                     <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
                         {{ $field.error?.message }}
                     </Message>
