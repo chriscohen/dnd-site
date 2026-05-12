@@ -18,6 +18,7 @@ readonly class SpellEditionSummaryDTO extends AbstractDTO
         public string $gameEdition,
         public ?bool $hasSpellResistance = null,
         public ?bool $isDefault = null,
+        public ?int $lowestLevel,
         /** @var Collection<SpellEditionLevelDTO> $levels */
         public Collection $levels,
         public ?MagicSchoolFullDTO $school = null
@@ -34,6 +35,7 @@ readonly class SpellEditionSummaryDTO extends AbstractDTO
             gameEdition: $model->game_edition,
             hasSpellResistance: $model->has_spell_resistance,
             isDefault: $model->is_default,
+            lowestLevel: $model->getLowestLevel(),
             levels: $model->levels->map(fn (SpellEditionLevel $item) => SpellEditionLevelDTO::fromModel($item)),
             school: !empty($model->school) ? MagicSchoolFullDTO::fromModel($model->school) : null,
         );

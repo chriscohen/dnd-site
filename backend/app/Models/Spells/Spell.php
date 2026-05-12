@@ -47,6 +47,20 @@ class Spell extends AbstractModel
         return $this->belongsTo(Media::class);
     }
 
+    public function getLowestLevel(): ?int
+    {
+        $lowest = 999;
+
+        foreach ($this->editions as $edition) {
+            $editionLowest = $edition->getLowestLevel();
+            if (!empty($editionLowest) && $editionLowest < $lowest) {
+                $lowest = $editionLowest;
+            }
+        }
+
+        return $lowest === 999 ? null : $lowest;
+    }
+
     public function toSearchableArray(): array
     {
         return [

@@ -15,11 +15,11 @@ readonly class SourceFullDTO extends SourceSummaryDTO
 {
     public function __construct(
         string $id,
-        ?MediaSummaryDTO $coverImage = null,
+        ?MediaSummaryDTO $coverImage,
         string $gameEdition,
         string $name,
-        ?string $parentId = null,
-        ?string $shortName = null,
+        ?string $parentId,
+        ?string $shortName,
         string $slug,
         // Summary.
         public ?CampaignSettingFullDTO $campaignSetting = null,

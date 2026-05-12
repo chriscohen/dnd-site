@@ -134,9 +134,9 @@ class SpellEdition extends AbstractModel
         return $output;
     }
 
-    public function getLowestLevel(): int
+    public function getLowestLevel(): ?int
     {
-        $lowest = 99;
+        $lowest = 999;
 
         foreach ($this->levels as $level) {
             if ($level->level < $lowest) {
@@ -144,7 +144,7 @@ class SpellEdition extends AbstractModel
             }
         }
 
-        return $lowest;
+        return $lowest === 999 ? null : $lowest;
     }
 
     public function hasComponent(SpellComponentType $componentType): bool
