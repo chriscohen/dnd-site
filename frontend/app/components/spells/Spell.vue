@@ -3,8 +3,10 @@ import ClassesLevelsList from "~/components/lists/ClassesLevelsList.vue";
 import ReferenceList from "~/components/lists/references/ReferenceList.vue";
 import SavingThrowLabel from "~/components/labels/SavingThrowLabel.vue";
 import SpellComponentsLabel from "~/components/labels/SpellComponentsLabel.vue";
-import type {Spell} from "~/classes/spells/spell";
-import type {SpellEdition} from "~/classes/spells/spellEdition";
+import type {
+    Spell,
+    SpellEdition,
+} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     spell?: Spell

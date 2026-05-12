@@ -1,5 +1,5 @@
 ﻿<script lang="ts">
-import type {CharacterClass} from "~/classes/characterClasses/characterClass";
+import type {CharacterClass} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     data?: CharacterClass

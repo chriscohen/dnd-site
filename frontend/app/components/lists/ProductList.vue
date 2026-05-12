@@ -1,7 +1,7 @@
 ﻿<script setup lang="ts">
 import ProductListItem from "~/components/lists/ProductListItem.vue";
 import DndHeading from "~/components/headings/DndHeading.vue";
-import type {Source} from "@dnd-site/types";
+import type {Source} from "../../../../packages/@dnd5e";
 import BaseCard from "~/components/cards/BaseCard.vue";
 
 const props = defineProps<{

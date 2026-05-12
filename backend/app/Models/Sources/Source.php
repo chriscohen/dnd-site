@@ -233,7 +233,7 @@ class Source extends AbstractModel
             SourceEdition::fromFeJsonExtra($edition, $item);
         }
 
-        // Sourcebook types.
+        // Sourcebook @dnd5e.
         foreach ($value['sourcebookTypes'] ?? [] as $sourcebookType) {
             SourceSourcebookType::fromInternalJson($sourcebookType, $item);
         }

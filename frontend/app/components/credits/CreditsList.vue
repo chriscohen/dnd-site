@@ -1,8 +1,12 @@
 ﻿<script setup lang="ts">
 import DndHeading from "~/components/headings/DndHeading.vue";
-import type {Person} from "~/classes/person";
+import {
+    type BookCredit,
+    type BookCreditApiResponse,
+    createBookCredit,
+    type Person
+} from "../../../../packages/@dnd5e";
 import {useBookCreditCache} from "~/stores/Store";
-import {type BookCreditApiResponse, createBookCredit} from "~/classes/sources/bookCredit";
 import CreditsListItem from "~/components/credits/CreditsListItem.vue";
 import BaseCard from "~/components/cards/BaseCard.vue";
 

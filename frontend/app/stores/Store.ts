@@ -1,15 +1,17 @@
 ﻿import {defineStore, skipHydrate} from "pinia";
 import {ref, type Ref} from "vue";
-import type {LanguageApiResponse} from "~/classes/language";
-import type {CompanyApiResponse, SourceApiResponse} from "@dnd-site/types";
-import type {SpellApiResponse} from "~/classes/spells/spell";
-import type {CreatureTypeApiResponse} from "~/classes/creatures/creatureType";
-import type {ItemApiResponse} from "~/classes/items/item";
-import type {CampaignSettingApiResponse} from "~/classes/campaignSetting";
-import type {CharacterClass} from "~/classes/characterClasses/characterClass";
-import type {CreatureMainTypeApiResponse} from "~/classes/creatures/creatureMainType";
-import type {PersonApiResponse} from "~/classes/person";
-import type {MagicSchoolApiResponse} from "~/classes/magic/magicSchool";
+import type {
+    CampaignSettingApiResponse,
+    CharacterClass,
+    CompanyApiResponse,
+    CreatureTypeApiResponse,
+    ItemApiResponse,
+    LanguageApiResponse,
+    MagicSchoolApiResponse,
+    PersonApiResponse,
+    SourceApiResponse,
+    SpellApiResponse
+} from "../../../packages/@dnd5e";
 
 interface GetProps {
     disableSSR?: boolean
@@ -253,12 +255,12 @@ export const useCompanyCache = createCacheStore<CompanyApiResponse>(
 export const useCreatureTypeCache = createCacheStore<CreatureTypeApiResponse>(
     'creature-type',
     'creature-type/{key}',
-    'creature-types'
+    'creature-@dnd5e'
 );
 export const useCreatureMainTypeCache = createCacheStore<CreatureMainTypeApiResponse>(
     'creature-main-type',
     'creature-main-type/{key}',
-    'creature-main-types'
+    'creature-main-@dnd5e'
 );
 export const useItemCache = createCacheStore<ItemApiResponse>(
     'item',

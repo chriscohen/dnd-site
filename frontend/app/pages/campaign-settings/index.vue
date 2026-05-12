@@ -1,8 +1,7 @@
 ﻿<script setup lang="ts">
 import PageTitle from "~/components/labels/PageTitle.vue";
-import BaseCard from "~/components/cards/BaseCard.vue";
 import TeaserGrid from "~/components/teasers/TeaserGrid.vue";
-import {createCampaignSetting} from "~/classes/campaignSetting";
+import {createCampaignSetting} from "../../../../packages/@dnd5e";
 import CampaignSettingTeaser from "~/components/campaign-settings/CampaignSettingTeaser.vue";
 
 const store = useCampaignSettingCache();

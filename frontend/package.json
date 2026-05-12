@@ -10,7 +10,7 @@
         "postinstall": "nuxt prepare"
     },
     "dependencies": {
-        "@dnd-site/types": "*",
+        "@dnd5e/types": "*",
         "@iconify-json/lucide": "^1.2.68",
         "@nuxt/image": "^1.11.0",
         "@nuxt/ui": "^4.2.1",

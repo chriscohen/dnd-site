@@ -1,9 +1,13 @@
 ﻿<script setup lang="ts">
 import PersonLabel from "~/components/labels/PersonLabel.vue";
 import DndHeading from "~/components/headings/DndHeading.vue";
-import type {Person} from "~/classes/person";
 import {useBookCreditCache} from "~/stores/Store";
-import {type BookCredit, type BookCreditApiResponse, createBookCredit} from "~/classes/sources/bookCredit";
+import {
+    type BookCredit,
+    type BookCreditApiResponse,
+    createBookCredit,
+    type Person
+} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     source?: string

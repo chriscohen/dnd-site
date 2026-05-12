@@ -52,7 +52,7 @@ class CreatureTypeSeeder extends AbstractYmlSeeder
                 $edition = $creatureType->editions->firstOrFail();
 
                 // Look for extra data.
-                $extraPath = '/5etools-x/data/creature-types/' . $creatureType->slug . '.json';
+                $extraPath = '/5etools-x/data/creature-@dnd5e/' . $creatureType->slug . '.json';
                 if (Storage::disk('data')->exists($extraPath)) {
                     print "[Extra] Adding extra data for 5e.tools CreatureType " . $creatureType->name . "...\n";
                     $json = json_decode(Storage::disk('data')->get($extraPath), true);

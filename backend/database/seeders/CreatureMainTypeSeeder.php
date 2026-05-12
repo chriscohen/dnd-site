@@ -9,7 +9,7 @@ use App\Models\Creatures\CreatureMainType;
 
 class CreatureMainTypeSeeder extends AbstractYmlSeeder
 {
-    protected string $path = 'creature--main-types.json';
+    protected string $path = 'creature--main-@dnd5e.json';
     protected string $model = Category::class;
 
     public function run(): void

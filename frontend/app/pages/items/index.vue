@@ -3,10 +3,13 @@ import CategoryBadge from "~/components/badges/CategoryBadge.vue";
 import GameEditionBadge from "~/components/badges/GameEditionBadge.vue";
 import BadgeContainer from "~/components/badges/BadgeContainer.vue";
 import {useItemCache} from "~/stores/Store";
-import {createItem, type Item} from "~/classes/items/item";
-import type {Media} from "@dnd-site/types";
-import type {ItemEdition} from "~/classes/items/itemEdition";
-import type {Category} from "~/classes/category";
+import {
+    type Category,
+    createItem,
+    type Item,
+    type ItemEdition,
+    type Media
+} from "../../../../packages/@dnd5e";
 
 const store = useItemCache();
 await callOnce(() => store.loadMore());

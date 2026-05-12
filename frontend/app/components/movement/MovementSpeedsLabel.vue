@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
-import type {MovementSpeedsGroup} from "~/classes/movement/movementSpeedsGroup";
-import {MovementType} from "~/utils/enums";
+import type {MovementSpeedsGroup} from "../../../../packages/@dnd5e";
+import {MovementType} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     movementSpeeds?: MovementSpeedsGroup

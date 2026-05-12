@@ -1,5 +1,5 @@
 ﻿<script setup lang="ts">
-import type {CampaignSetting} from "~/classes/campaignSetting";
+import type {CampaignSetting} from "../../../../packages/@dnd5e";
 import BaseCard from "~/components/cards/BaseCard.vue";
 import MediaImage from "~/components/media/MediaImage.vue";
 

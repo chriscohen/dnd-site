@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import ProductLinkButton from "~/components/buttons/ProductLinkButton.vue";
-import type {Source} from "@dnd-site/types";
+import type {Source} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     source: Source

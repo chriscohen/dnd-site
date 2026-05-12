@@ -9,7 +9,7 @@ import ProseContainer from "~/components/text/ProseContainer.vue";
 import BottomNavigation from "~/components/navigation/BottomNavigation.vue";
 import SourceCredits from "~/components/sources/SourceCredits.vue";
 import MediaImage from "~/components/media/MediaImage.vue";
-import {createSource, type SourceApiResponse} from "@dnd-site/types";
+import {createSource, type SourceApiResponse} from "../../../../packages/@dnd5e";
 import BaseCard from "~/components/cards/BaseCard.vue";
 
 const route = useRoute();

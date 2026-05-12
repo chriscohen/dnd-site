@@ -41,10 +41,10 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 });
 
 Route::get('/creature-type/{slug}', [CreatureTypeController::class, 'get']);
-Route::get('/creature-types', [CreatureTypeController::class, 'list']);
+Route::get('/creature-@dnd5e', [CreatureTypeController::class, 'list']);
 
 Route::get('/creature-main-type/{slug}', [CreatureMainTypeController::class, 'get']);
-Route::get('/creature-main-types', [CreatureMainTypeController::class, 'list']);
+Route::get('/creature-main-@dnd5e', [CreatureMainTypeController::class, 'list']);
 
 Route::get('/domains', [MagicDomainController::class, 'index']);
 

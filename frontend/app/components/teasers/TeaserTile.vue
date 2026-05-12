@@ -1,5 +1,5 @@
 ﻿<script setup lang="ts">
-import type {Media} from "@dnd-site/types";
+import type {Media} from "../../../../packages/@dnd5e";
 import MediaImage from "~/components/media/MediaImage.vue";
 import {NuxtLink} from "#components";
 import TeaserTitle from "~/components/teasers/TeaserTitle.vue";

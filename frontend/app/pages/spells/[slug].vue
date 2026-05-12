@@ -6,8 +6,7 @@ import PageTitle from "~/components/labels/PageTitle.vue";
 import DndSection from "~/components/containers/DndSection.vue";
 import BottomNavigationEditions from "~/components/navigation/BottomNavigationEditions.vue";
 import type {TabsItem} from "#ui/components/Tabs.vue";
-import {createSpell, type SpellApiResponse} from "~/classes/spells/spell";
-import type {SpellEdition} from "~/classes/spells/spellEdition";
+import {createSpell, type SpellApiResponse, type SpellEdition} from "../../../../packages/@dnd5e";
 
 const route = useRoute();
 const store = useSpellCache();

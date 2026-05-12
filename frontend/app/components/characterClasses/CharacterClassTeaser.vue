@@ -1,7 +1,7 @@
 ﻿<script setup lang="ts">
 import TeaserTitle from "~/components/teasers/TeaserTitle.vue";
 import GameEditionBadge from "~/components/badges/GameEditionBadge.vue";
-import type {CharacterClass} from "~/classes/characterClasses/characterClass";
+import type {CharacterClass} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     data?: CharacterClass

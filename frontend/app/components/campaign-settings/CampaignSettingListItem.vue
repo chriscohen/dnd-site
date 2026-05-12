@@ -1,5 +1,5 @@
 ﻿<script setup lang="ts">
-import type {CampaignSetting} from "~/classes/campaignSetting";
+import type {CampaignSetting} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     item: CampaignSetting

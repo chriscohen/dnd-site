@@ -1,5 +1,5 @@
 ﻿<script setup lang="ts">
-import type {MagicSchool} from "~/classes/magic/magicSchool";
+import type {MagicSchool} from "@dnd5e/types";
 import MagicSchoolImage from "~/components/magic-schools/MagicSchoolImage.vue";
 import BaseCard from "~/components/cards/BaseCard.vue";
 import DndHeading from "~/components/headings/DndHeading.vue";

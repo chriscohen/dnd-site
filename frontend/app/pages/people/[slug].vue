@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import PageTitle from "~/components/labels/PageTitle.vue";
-import {createPerson, type PersonApiResponse} from "~/classes/person";
+import {createPerson, type PersonApiResponse} from "../../../../packages/@dnd5e";
 import CreditsList from "~/components/credits/CreditsList.vue";
 
 const route = useRoute()

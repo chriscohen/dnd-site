@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import {formatPages} from "#imports";
-import type {Reference} from "~/classes/reference";
+import type {Reference} from "../../../../../packages/@dnd5e";
 
 const props = defineProps<{
     reference: Reference

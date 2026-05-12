@@ -1,5 +1,5 @@
 ﻿<script setup lang="ts">
-import type {SpellCharacterClassLevel} from "~/classes/spells/SpellCharacterClassLevel";
+import type {SpellCharacterClassLevel} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     data?: SpellCharacterClassLevel[]

@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import BadgeBase from "~/components/badges/BadgeBase.vue";
-import {getGameEdition} from "~/classes/gameEdition";
+import {getGameEdition} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     edition?: string

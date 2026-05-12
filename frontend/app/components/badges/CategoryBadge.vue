@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 
-import type {Category} from "~/classes/category";
+import type {Category} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     category: Category

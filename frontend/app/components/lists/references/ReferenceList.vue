@@ -1,7 +1,7 @@
 ﻿<script setup lang="ts">
 import ReferenceListItem from "~/components/lists/references/ReferenceListItem.vue";
 import DndHeading from "~/components/headings/DndHeading.vue";
-import type {Reference} from "~/classes/reference";
+import type {Reference} from "../../../../../packages/@dnd5e";
 
 const props = defineProps<{
     references: Reference[],

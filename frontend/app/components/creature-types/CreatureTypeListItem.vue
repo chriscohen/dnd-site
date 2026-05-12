@@ -1,5 +1,5 @@
 ﻿<script setup lang="ts">
-import type {CreatureType} from "~/classes/creatures/creatureType";
+import type {CreatureType} from "../../../../packages/@dnd5e";
 import BadgeContainer from "~/components/badges/BadgeContainer.vue";
 import GameEditionBadge from "~/components/badges/GameEditionBadge.vue";
 import ChallengeRatingLabel from "~/components/labels/ChallengeRatingLabel.vue";
@@ -12,7 +12,7 @@ const props = defineProps<{
 <template>
     <li class="group">
         <NuxtLink
-            :to="'/creature-types/' + item.slug"
+            :to="'/creature-@dnd5e/' + item.slug"
             class="group-hover:bg-highlight px-4 py-2 flex flex-row"
         >
             <div class="flex flex-col">

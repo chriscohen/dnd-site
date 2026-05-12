@@ -1,5 +1,5 @@
 ﻿<script setup lang="ts">
-import type {SpellEdition} from "~/classes/spells/spellEdition";
+import type {SpellEdition} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     edition?: SpellEdition

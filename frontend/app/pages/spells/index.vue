@@ -3,7 +3,7 @@ import SpellTeaser from "~/components/teasers/SpellTeaser.vue";
 import {useSpellCache} from "~/stores/Store";
 import PageTitle from "~/components/labels/PageTitle.vue";
 import TeaserGrid from "~/components/teasers/TeaserGrid.vue";
-import {createSpell, type Spell} from "~/classes/spells/spell";
+import {createSpell} from "../../../../packages/@dnd5e";
 
 const store = useSpellCache();
 const spellMoreRef = ref<HTMLElement | null>(null);

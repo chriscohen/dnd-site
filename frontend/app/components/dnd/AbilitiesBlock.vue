@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 
-import type {AbilityScore} from "~/classes/abilities/abilityScore";
+import type {AbilityScore} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     abilities?: Record<string, AbilityScore>
@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <ul class="font-scaly text-lg flex flex-row justify-evenly w-full py-2 px-4">
+    <ul class="font-scaly text-lg flex flex-row justify-venly w-full py-2 px-4">
         <li title="Strength">
             <span class="font-bold block text-center uppercase">str</span>
             <span>

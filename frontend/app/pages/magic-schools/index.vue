@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import {useMagicSchoolCache} from "~/stores/Store";
-import {createMagicSchool} from "~/classes/magic/magicSchool";
+import {createMagicSchool} from "@dnd5e/types";
 import MagicSchoolTeaser from "~/components/magic-schools/MagicSchoolTeaser.vue";
 import PageTitle from "~/components/labels/PageTitle.vue";
 

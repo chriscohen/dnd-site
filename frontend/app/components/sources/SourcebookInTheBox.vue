@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import DndHeading from "~/components/headings/DndHeading.vue";
-import type {Source} from "@dnd-site/types";
+import type {Source} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     items: Source[]

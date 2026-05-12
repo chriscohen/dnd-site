@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 
-import type {ProductId} from "~/classes/productId";
+import type {ProductId} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     productId: ProductId

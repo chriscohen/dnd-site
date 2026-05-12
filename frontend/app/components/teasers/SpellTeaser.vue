@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import SpellTeaserTile from "~/components/teasers/SpellTeaserTile.vue";
-import type {Spell} from "~/classes/spells/spell";
+import type {Spell} from "../../../../packages/@dnd5e";
 
 interface Props {
     data?: Spell,

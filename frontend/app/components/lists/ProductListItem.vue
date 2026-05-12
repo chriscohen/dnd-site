@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import EditionStrip from "~/components/strips/EditionStrip.vue";
-import type {Source} from "@dnd-site/types";
+import type {Source} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     class?: string

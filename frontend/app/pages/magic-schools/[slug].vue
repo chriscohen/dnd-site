@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import PageTitle from "~/components/labels/PageTitle.vue";
-import {createMagicSchool, type MagicSchoolApiResponse} from "~/classes/magic/magicSchool";
+import {createMagicSchool, type MagicSchoolApiResponse} from "@dnd5e/types";
 import BaseCard from "~/components/cards/BaseCard.vue";
 import DndHeading from "~/components/headings/DndHeading.vue";
 import MagicSchoolImage from "~/components/magic-schools/MagicSchoolImage.vue";

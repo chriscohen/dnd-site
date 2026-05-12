@@ -1,7 +1,7 @@
 ﻿<script setup lang="ts">
 import {useCreatureTypeCache} from "~/stores/Store";
 import PageTitle from "~/components/labels/PageTitle.vue";
-import {createCreatureType, type CreatureType} from "~/classes/creatures/creatureType";
+import {createCreatureType, type CreatureType} from "../../../../packages/@dnd5e";
 import {useInfiniteScroll} from "@vueuse/core";
 import {useUiStore} from "~/stores/uiStore";
 import BaseCard from "~/components/cards/BaseCard.vue";
@@ -18,7 +18,7 @@ definePageMeta({ layout: false });
 const items = ref<CreatureType[]>([]);
 
 const { data, execute, status } = useLazyAsyncData(
-    'creature-types',
+    'creature-@dnd5e',
     async () => await store.page(),
     {
         immediate: false

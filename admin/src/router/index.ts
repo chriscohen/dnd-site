@@ -7,8 +7,8 @@ import CompaniesView from "@/views/CompaniesView.vue";
 import EditCompanyView from "@/views/EditCompanyView.vue";
 import SourcesView from "@/views/sources/SourcesView.vue";
 import EditSourceView from "@/views/sources/EditSourceView.vue";
-import CampaignSettingsView from "@/views/CampaignSettingsView.vue";
-import EditCampaignSettingView from "@/views/EditCampaignSettingView.vue";
+import CampaignSettingsView from "../views/campaignSettings/CampaignSettingsView.vue";
+import EditCampaignSettingView from "../views/campaignSettings/EditCampaignSettingView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

@@ -1,7 +1,7 @@
 ﻿<script lang="ts" setup>
 
 import TeaserTile from "~/components/teasers/TeaserTile.vue";
-import type {Source} from "@dnd-site/types";
+import type {Source} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     source?: Source

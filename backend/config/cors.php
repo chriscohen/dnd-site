@@ -16,7 +16,7 @@ return [
     */
 
     'paths' => [
-        'api/*',
+        'dnd5e-api/*',
         'login',
         'logout',
         'sanctum/csrf-cookie'

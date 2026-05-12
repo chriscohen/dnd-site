@@ -1,5 +1,4 @@
-﻿import type {ReferenceApiResponse} from "~/classes/reference";
-import { GameEdition } from "./enums";
+﻿import type {ReferenceApiResponse} from "../../../packages/@dnd5e";
 
 export type BottomNavItem = {
     anchor: string

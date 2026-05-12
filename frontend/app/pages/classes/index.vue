@@ -2,7 +2,7 @@
 import CharacterClassTeaser from "~/components/characterClasses/CharacterClassTeaser.vue";
 import {useCharacterClassCache} from "~/stores/Store";
 import PageTitle from "~/components/labels/PageTitle.vue";
-import {createCharacterClass} from "~/classes/characterClasses/characterClass";
+import {createCharacterClass} from "../../../../packages/@dnd5e";
 import {useUiStore} from "~/stores/uiStore";
 
 const uiStore = useUiStore();

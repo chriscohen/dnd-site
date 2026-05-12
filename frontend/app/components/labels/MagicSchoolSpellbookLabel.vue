@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import PopoverBase from "~/components/popovers/PopoverBase.vue";
-import type {MagicSchool} from "~/classes/magic/magicSchool";
+import type {MagicSchool} from "@dnd5e/types";
 
 const props = defineProps<{
     classes?: string

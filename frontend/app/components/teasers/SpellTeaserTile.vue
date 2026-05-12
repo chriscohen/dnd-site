@@ -1,7 +1,7 @@
 ﻿<script setup lang="ts">
 import TeaserTitle from "~/components/teasers/TeaserTitle.vue";
 import TeaserTile from "~/components/teasers/TeaserTile.vue";
-import type {Spell} from "~/classes/spells/spell";
+import type {Spell} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     data?: Spell

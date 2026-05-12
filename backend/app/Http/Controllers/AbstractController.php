@@ -98,7 +98,7 @@ abstract class AbstractController extends Controller implements ControllerInterf
 
     public function getQuery(): Builder
     {
-        $limit = config('api.MAX_ITEMS_PER_REQUEST', 100);
+        $limit = config('dnd5e-api.MAX_ITEMS_PER_REQUEST', 100);
         return $this->entityType::query()
             ->orderBy($this->orderKey, $this->order)
             ->limit($limit);

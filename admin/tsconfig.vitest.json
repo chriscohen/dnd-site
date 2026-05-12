@@ -8,7 +8,7 @@
 
   "compilerOptions": {
     // Vitest runs in a different environment than the application code.
-    // Adjust lib and types accordingly.
+    // Adjust lib and @dnd5e accordingly.
     "lib": [],
     "types": ["node", "jsdom"],
 

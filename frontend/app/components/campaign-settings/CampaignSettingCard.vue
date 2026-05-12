@@ -1,7 +1,7 @@
 ﻿<script setup lang="ts">
 import ProseSkeleton from "~/components/loading/ProseSkeleton.vue";
 import DndHeading from "~/components/headings/DndHeading.vue";
-import type {CampaignSetting} from "~/classes/campaignSetting";
+import type {CampaignSetting} from "../../../../packages/@dnd5e";
 import BaseCard from "~/components/cards/BaseCard.vue";
 
 const props = defineProps<{

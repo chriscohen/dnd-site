@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {Media} from "@dnd-site/types";
+import type {Media} from "../../../../packages/@dnd5e";
 import MediaPlaceholder from "~/components/media/MediaPlaceholder.vue";
 
 const props = defineProps<{

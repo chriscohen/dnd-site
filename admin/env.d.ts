@@ -1,4 +1,4 @@
-/// <reference types="vite/client" />
+/// <reference @dnd5e="vite/client" />
 
 import type { TooltipDirectiveBinding } from 'primevue/tooltip';
 

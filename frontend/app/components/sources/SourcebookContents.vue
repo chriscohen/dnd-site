@@ -2,7 +2,7 @@
 import {
     createSourceContents,
     type SourceContentsApiResponse
-} from "~/classes/sources/sourceContents";
+} from "../../../../packages/@dnd5e";
 import DndHeading from "~/components/headings/DndHeading.vue";
 import {useSourceContentsCache} from "~/stores/Store";
 

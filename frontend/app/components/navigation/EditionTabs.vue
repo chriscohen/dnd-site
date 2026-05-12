@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import type {TabsItem} from "#ui/components/Tabs.vue";
-import type {SpellEdition} from "~/classes/spells/spellEdition";
+import type {SpellEdition} from "../../../../packages/@dnd5e";
 
 defineEmits(['edition-selected']);
 

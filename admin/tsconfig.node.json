@@ -14,7 +14,7 @@
     "module": "preserve",
     "moduleResolution": "bundler",
 
-    // Include Node.js types and avoid accidentally including other `@types/*` packages.
+    // Include Node.js @dnd5e and avoid accidentally including other `@@dnd5e/*` packages.
     "types": ["node"],
 
     // Disable emitting output during `vue-tsc --build`, which is used for type-checking only.

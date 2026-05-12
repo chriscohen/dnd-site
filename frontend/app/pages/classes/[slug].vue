@@ -2,7 +2,7 @@
 import {useRoute} from "#app";
 import {useCharacterClassCache} from "~/stores/Store";
 import PageTitle from "~/components/labels/PageTitle.vue";
-import {type CharacterClassApiResponse, createCharacterClass} from "~/classes/characterClasses/characterClass";
+import {type CharacterClassApiResponse, createCharacterClass} from "../../../../packages/@dnd5e";
 
 const route = useRoute();
 const store = useCharacterClassCache();

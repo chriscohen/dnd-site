@@ -2,7 +2,7 @@
 import PageTitle from "~/components/labels/PageTitle.vue";
 import BottomNavigation from "~/components/navigation/BottomNavigation.vue";
 import StatBlock from "~/components/dnd/StatBlock.vue";
-import {createCreatureType, type CreatureTypeApiResponse} from "~/classes/creatures/creatureType";
+import {createCreatureType, type CreatureTypeApiResponse} from "../../../../packages/@dnd5e";
 import TabsCard from "~/components/cards/TabsCard.vue";
 
 const route = useRoute();
@@ -23,9 +23,7 @@ definePageMeta({ layout: false });
         </template>
 
         <div class="grid grid-cols-1 md:grid-cols-2 mt-4 md:px-4">
-            <TabsCard v-if="item" class="" :tabs="item?.toTabs()">
-                <StatBlock :creature="item" :edition="item?.editions?.[0]"/>
-            </TabsCard>
+            tabs card here
         </div>
 
         <template #bottomNav>

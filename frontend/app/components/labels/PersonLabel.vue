@@ -1,5 +1,5 @@
 ﻿<script setup lang="ts">
-import type {Person} from "~/classes/person";
+import type {Person} from "../../../../packages/@dnd5e";
 
 const props = defineProps<{
     class?: string

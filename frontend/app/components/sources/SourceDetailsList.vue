@@ -1,5 +1,5 @@
 ﻿<script setup lang="ts">
-import type {Source} from "@dnd-site/types";
+import type {Source} from "../../../../packages/@dnd5e";
 import SourceFormatLabel from "~/components/labels/SourceFormatLabel.vue";
 import {format, parseISO} from "date-fns";
 import BaseCard from "~/components/cards/BaseCard.vue";

@@ -2,10 +2,9 @@
 import {useCampaignSettingCache} from "~/stores/Store";
 import PageTitle from "~/components/labels/PageTitle.vue";
 import CampaignSettingCard from "~/components/campaign-settings/CampaignSettingCard.vue";
-import {type CampaignSettingApiResponse, createCampaignSetting} from "~/classes/campaignSetting";
+import {type CampaignSettingApiResponse, createCampaignSetting, createSource} from "../../../../packages/@dnd5e";
 import BaseCard from "~/components/cards/BaseCard.vue";
 import ProductList from "~/components/lists/ProductList.vue";
-import {createSource} from "@dnd-site/types";
 import LinkList from "~/components/lists/LinkList.vue";
 import CampaignSettingListItem from "~/components/campaign-settings/CampaignSettingListItem.vue";
 

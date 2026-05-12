@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import {useItemCache} from "~/stores/Store";
-import {createItem, type ItemApiResponse} from "~/classes/items/item";
+import {createItem, type ItemApiResponse} from "@dnd5e/types";
 
 const route = useRoute();
 const store = useItemCache();
