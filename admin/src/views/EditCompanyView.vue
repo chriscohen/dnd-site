@@ -9,13 +9,14 @@ import Button from 'primevue/button';
 import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
-import { getCompany, updateCompany, type Company } from '@/api/company';
+import { getCompany, updateCompany } from '@dnd-site/api';
+import type {CompanyApiResponse} from "@dnd-site/types";
 
 const route = useRoute();
 const router = useRouter();
 const slug = route.params.slug as string;
 
-const company = ref<Company | null>(null);
+const company = ref<CompanyApiResponse | null>(null);
 const loading = ref(false);
 const saving = ref(false);
 const errorMessage = ref<string | null>(null);

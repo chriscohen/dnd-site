@@ -13,6 +13,10 @@ const items: MenuItem[] = [
         command: () => router.push({ name: 'dashboard' }),
     },
     {
+        label: 'Campaign Settings',
+        command: () => router.push({ name: 'campaign-settings' }),
+    },
+    {
         label: 'Companies',
         command: () => router.push({ name: 'companies' }),
     },

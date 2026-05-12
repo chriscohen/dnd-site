@@ -9,7 +9,6 @@ import Button from 'primevue/button';
 import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
-import { getCompany, updateCompany } from '@/api/company';
 
 const route = useRoute();
 const router = useRouter();

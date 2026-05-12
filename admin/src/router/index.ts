@@ -7,6 +7,8 @@ import CompaniesView from "@/views/CompaniesView.vue";
 import EditCompanyView from "@/views/EditCompanyView.vue";
 import SourcesView from "@/views/sources/SourcesView.vue";
 import EditSourceView from "@/views/sources/EditSourceView.vue";
+import CampaignSettingsView from "@/views/CampaignSettingsView.vue";
+import EditCampaignSettingView from "@/views/EditCampaignSettingView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +32,16 @@ const router = createRouter({
                   path: '',
                   name: 'dashboard',
                   component: DashboardView
+              },
+              {
+                  path: '/campaign-settings',
+                  name: 'campaign-settings',
+                  component: CampaignSettingsView,
+              },
+              {
+                  path: 'campaign-setting/:slug/edit',
+                  name: 'campaign-setting.edit',
+                  component: EditCampaignSettingView,
               },
               {
                   path: '/companies',

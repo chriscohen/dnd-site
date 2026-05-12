@@ -47,3 +47,5 @@ Homestead.yaml
 
 # PHPUnit
 .phpunit.result.cache
+
+/packages/*
