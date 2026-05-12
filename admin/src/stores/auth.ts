@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue';
 import { defineStore } from "pinia";
-import {apiRequest, getCsrfCookie} from "@dnd-site/api";
+import {apiRequest, getCsrfCookie} from "dnd5e-api";
 
 type User = {
     id: number;

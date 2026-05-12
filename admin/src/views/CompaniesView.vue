@@ -5,8 +5,8 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
 import Message from 'primevue/message';
-import { getCompanies } from "@dnd-site/api";
-import type {CompanyApiResponse} from "@dnd-site/types";
+import { getCompanies } from "dnd5e-api";
+import type {CompanyApiResponse} from "@dnd5e/types";
 
 const router = useRouter();
 

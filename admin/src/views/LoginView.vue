@@ -10,7 +10,7 @@ import Card from 'primevue/card';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Message from 'primevue/message';
-import { ApiError } from '@dnd-site/api';
+import { ApiError } from 'dnd5e-api';
 import { useAuthStore } from '@/stores/auth';
 
 const route = useRoute();

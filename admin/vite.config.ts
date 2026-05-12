@@ -15,7 +15,9 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      'dnd5e-api': fileURLToPath(new URL('../packages/dnd5e-api/src/index.ts', import.meta.url)),
+      '@dnd5e/types': fileURLToPath(new URL('../packages/@dnd5e/types/src/index.ts', import.meta.url)),
     },
   },
 });

@@ -5,6 +5,8 @@
     "workspaces": [
         "admin",
         "frontend",
-        "packages/*"
+        "packages/*",
+        "packages/@dnd5e/types",
+        "packages/dnd5e-api"
     ]
 }

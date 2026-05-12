@@ -5,8 +5,8 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
 import Message from 'primevue/message';
-import type {CampaignSettingApiResponse, SourceApiResponse} from "@dnd-site/types";
-import {getCampaignSettings} from "../../../packages/api/src/campaignSetting.ts";
+import type {CampaignSettingApiResponse, SourceApiResponse} from "@dnd5e/types";
+import {getCampaignSettings} from "dnd5e-api";
 
 const router = useRouter();
 

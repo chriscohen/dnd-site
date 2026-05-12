@@ -9,7 +9,8 @@ import Button from 'primevue/button';
 import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
-import { getCompany, updateCompany } from '@/api/company';
+import { getCompany, updateCompany } from 'dnd5e-api';
+import type {Company} from "@dnd5e/types";
 
 const route = useRoute();
 const router = useRouter();

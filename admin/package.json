@@ -16,10 +16,11 @@
         "format": "prettier --write --experimental-cli src/"
     },
     "dependencies": {
-        "@dnd-site/types": "*",
+        "@dnd5e/types": "*",
         "@primeuix/themes": "^2.0.3",
         "@primevue/forms": "^4.5.5",
         "@tailwindcss/vite": "^4.2.4",
+        "dnd5e-api": "*",
         "pinia": "^3.0.4",
         "primeicons": "^7.0.0",
         "primevue": "^4.5.5",
