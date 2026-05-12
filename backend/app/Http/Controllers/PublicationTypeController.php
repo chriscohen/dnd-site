@@ -15,9 +15,18 @@ class PublicationTypeController extends Controller
     public function list(): JsonResponse
     {
         $json = [
-            PublicationType::OFFICIAL->value => PublicationType::OFFICIAL->toString(),
-            PublicationType::THIRD_PARTY->value => PublicationType::THIRD_PARTY->toString(),
-            PublicationType::HOMEBREW->value => PublicationType::HOMEBREW->toString(),
+            [
+                'id' => PublicationType::OFFICIAL->value,
+                'name' => PublicationType::OFFICIAL->toString(),
+            ],
+            [
+                'id' => PublicationType::THIRD_PARTY->value,
+                'name' => PublicationType::THIRD_PARTY->toString(),
+            ],
+            [
+                'id' => PublicationType::HOMEBREW->value,
+                'name' => PublicationType::HOMEBREW->toString(),
+            ],
         ];
         return response()->json($json);
     }
