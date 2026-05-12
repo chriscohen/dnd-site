@@ -9,12 +9,15 @@ import Button from 'primevue/button';
 import Image from 'primevue/image';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
+import type { CampaignSettingApiResponse } from '@dnd-site/types';
+import { getCampaignSetting, getCompanies, updateCampaignSetting } from '@dnd-site/api';
+import ApiSelect from '@/components/ApiSelect.vue';
 
 const route = useRoute();
 const router = useRouter();
 const slug = route.params.slug as string;
 
-const company = ref<Company | null>(null);
+const campaignSetting = ref<CampaignSettingApiResponse | null>(null);
 const loading = ref(false);
 const saving = ref(false);
 const errorMessage = ref<string | null>(null);
@@ -23,8 +26,8 @@ const schema = z.object({
     name:        z.string().min(1, 'Name is required'),
     slug:        z.string().min(1, 'Slug is required'),
     shortName:   z.string().nullable(),
-    website:     z.string().url('Enter a valid URL').or(z.literal('')).nullable(),
-    productUrl:  z.string().nullable(),
+    description: z.string().nullable(),
+    publisherId: z.string().nullable(),
 });
 
 const resolver = zodResolver(schema);
@@ -34,9 +37,9 @@ onMounted(async () => {
     errorMessage.value = null;
 
     try {
-        company.value = await getCompany(slug);
+        campaignSetting.value = await getCampaignSetting(slug);
     } catch {
-        errorMessage.value = 'Could not load company. Please try again.';
+        errorMessage.value = 'Could not load campaign setting. Please try again.';
     } finally {
         loading.value = false;
     }
@@ -50,14 +53,14 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
 
     try {
         const values = event.values as z.infer<typeof schema>;
-        await updateCompany(slug, {
+        await updateCampaignSetting(slug, {
             name: values.name,
             slug: values.slug,
             shortName: values.shortName || null,
-            website: values.website || null,
-            productUrl: values.productUrl || null,
+            description: values.description || null,
+            publisherId: values.publisherId || null,
         });
-        await router.push({ name: 'companies' });
+        await router.push({ name: 'campaign-settings' });
     } catch {
         errorMessage.value = 'Could not save changes. Please try again.';
     } finally {
@@ -68,7 +71,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
 
 <template>
     <div>
-        <h1 class="mb-6 text-2xl font-bold">Edit Company</h1>
+        <h1 class="mb-6 text-2xl font-bold">Edit Campaign Setting</h1>
 
         <Message v-if="errorMessage" severity="error" class="mb-4">
             {{ errorMessage }}
@@ -76,14 +79,14 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
 
         <div v-if="loading" class="text-muted">Loading…</div>
 
-        <div v-else-if="company" class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
+        <div v-else-if="campaignSetting" class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
 
-        <div v-if="company.logo" class="md:order-last">
+        <div v-if="campaignSetting.logo?.url" class="md:order-last">
             <label class="block text-sm font-medium">Logo</label>
             <div class="mt-1 inline-flex w-96 items-center justify-center rounded-lg border border-surface-700 bg-surface-800 p-2">
                 <Image
-                    :src="company.logo.url"
-                    :alt="company.name"
+                    :src="campaignSetting.logo.url"
+                    :alt="campaignSetting.name"
                     class="w-full object-contain"
                     preview
                 />
@@ -93,18 +96,18 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
         <Form
             :resolver
             :initial-values="{
-                name:       company.name,
-                slug:       company.slug,
-                shortName:  company.shortName ?? '',
-                website:    company.website ?? '',
-                productUrl: company.productUrl ?? '',
+                name:        campaignSetting.name,
+                slug:        campaignSetting.slug,
+                shortName:   campaignSetting.shortName ?? '',
+                description: campaignSetting.description,
+                publisherId: campaignSetting.publisher?.id ?? null,
             }"
             class="flex flex-col gap-5 md:order-first"
             @submit="submitEdit"
         >
             <div>
                 <label class="block text-sm font-medium">ID</label>
-                <InputText :model-value="company.id" disabled class="mt-1 w-full" />
+                <InputText :model-value="campaignSetting.id" disabled class="mt-1 w-full" />
             </div>
 
             <FormField v-slot="$field" name="name">
@@ -131,6 +134,14 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
                 </Message>
             </FormField>
 
+            <FormField v-slot="$field" name="publisherId">
+                <label class="block text-sm font-medium">Publisher</label>
+                <ApiSelect v-bind="$field" :fetch="getCompanies" />
+                <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                    {{ $field.error?.message }}
+                </Message>
+            </FormField>
+
             <FormField v-slot="$field" name="website">
                 <label class="block text-sm font-medium">Website</label>
                 <InputText v-bind="$field" type="url" class="mt-1 w-full" placeholder="Optional" />
@@ -149,7 +160,7 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
 
             <div class="flex gap-8 items-center">
                 <Button asChild variant="outlined">
-                    <RouterLink :to="{ name: 'companies' }">Cancel</RouterLink>
+                    <RouterLink :to="{ name: 'campaign-settings' }">Cancel</RouterLink>
                 </Button>
                 <Button type="submit" label="Save changes" :loading="saving" />
             </div>

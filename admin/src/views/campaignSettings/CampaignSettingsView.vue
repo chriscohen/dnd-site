@@ -20,7 +20,7 @@ onMounted(async () => {
 
     try {
         const response = await getCampaignSettings();
-        sources.value = response.data;
+        campaignSettings.value = response.data;
     } catch {
         errorMessage.value = 'Could not load sources. Please try again.';
     } finally {
@@ -31,29 +31,28 @@ onMounted(async () => {
 
 <template>
     <div>
-        <h1 class="mb-6 text-2xl font-bold">Sources</h1>
+        <h1 class="mb-6 text-2xl font-bold">Campaign Settings</h1>
 
         <Message v-if="errorMessage" severity="error" class="mb-4">
             {{ errorMessage }}
         </Message>
 
-        <DataTable :value="sources" :loading="loading">
+        <DataTable :value="campaignSettings" :loading="loading">
             <Column field="name" header="Name">
-                <template #body="{ data }: { data: SourceApiResponse }">
+                <template #body="{ data }: { data: CampaignSettingApiResponse }">
                     <RouterLink :to="{ name: 'source.edit', params: { slug: data.slug } }">
                         {{ data.name }}
                     </RouterLink>
                 </template>
             </Column>
             <Column field="slug" header="Slug" />
-            <Column field="shortName" header="Short name" />
             <Column header="">
-                <template #body="{ data }: { data: SourceApiResponse }">
+                <template #body="{ data }: { data: CampaignSettingApiResponse }">
                     <Button
                         v-tooltip.top="'Edit'"
                         icon="pi pi-pencil"
                         size="small"
-                        @click="router.push({ name: 'source.edit', params: { slug: data.slug } })"
+                        @click="router.push({ name: 'campaign-setting.edit', params: { slug: data.slug } })"
                     />
                 </template>
             </Column>
