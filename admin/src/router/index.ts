@@ -13,71 +13,71 @@ import PeopleView from "@/views/people/PeopleView.vue";
 import EditPersonView from "@/views/people/EditPersonView.vue";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-      {
-          path: '/login',
-          name: 'login',
-          component: LoginView,
-          meta: {
-              guestOnly: true,
-          }
-      },
-      {
-          path: '/',
-          component: AdminLayout,
-          meta: {
-              requiresAuth: true,
-          },
-          children: [
-              {
-                  path: '',
-                  name: 'dashboard',
-                  component: DashboardView
-              },
-              {
-                  path: '/campaign-settings',
-                  name: 'campaign-settings',
-                  component: CampaignSettingsView,
-              },
-              {
-                  path: 'campaign-setting/:slug/edit',
-                  name: 'campaign-setting.edit',
-                  component: EditCampaignSettingView,
-              },
-              {
-                  path: '/companies',
-                  name: 'companies',
-                  component: CompaniesView,
-              },
-              {
-                  path: '/company/:slug/edit',
-                  name: 'company.edit',
-                  component: EditCompanyView,
-              },
-              {
-                  path: '/people',
-                  name: 'people',
-                  component: PeopleView,
-              },
-              {
-                  path: '/person/:slug/edit',
-                  name: 'person.edit',
-                  component: EditPersonView,
-              },
-              {
-                  path: '/sources',
-                  name: 'sources',
-                  component: SourcesView,
-              },
-              {
-                  path: '/source/:slug/edit',
-                  name: 'source.edit',
-                  component: EditSourceView,
-              }
-          ]
-      }
-  ],
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes: [
+        {
+            path: '/login',
+            name: 'login',
+            component: LoginView,
+            meta: {
+                guestOnly: true,
+            }
+        },
+        {
+            path: '/',
+            component: AdminLayout,
+            meta: {
+                requiresAuth: true,
+            },
+            children: [
+                {
+                    path: '',
+                    name: 'dashboard',
+                    component: DashboardView
+                },
+                {
+                    path: '/campaign-settings',
+                    name: 'campaign-settings',
+                    component: CampaignSettingsView,
+                },
+                {
+                    path: 'campaign-setting/:slug/edit',
+                    name: 'campaign-setting.edit',
+                    component: EditCampaignSettingView,
+                },
+                {
+                    path: '/companies',
+                    name: 'companies',
+                    component: CompaniesView,
+                },
+                {
+                    path: '/company/:slug/edit',
+                    name: 'company.edit',
+                    component: EditCompanyView,
+                },
+                {
+                    path: '/people',
+                    name: 'people',
+                    component: PeopleView,
+                },
+                {
+                    path: '/person/:slug/edit',
+                    name: 'person.edit',
+                    component: EditPersonView,
+                },
+                {
+                    path: '/sources',
+                    name: 'sources',
+                    component: SourcesView,
+                },
+                {
+                    path: '/source/:slug/edit',
+                    name: 'source.edit',
+                    component: EditSourceView,
+                }
+            ]
+        }
+    ],
 });
 
 router.beforeEach(async (to) => {
