@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
         isLoadingUser.value = true;
 
         try {
-            user.value = await apiRequest<User>('/dnd5e-api/user');
+            user.value = await apiRequest<User>('/api/user');
         } catch {
             user.value = null;
         } finally {

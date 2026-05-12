@@ -21,6 +21,10 @@ const items: MenuItem[] = [
         command: () => router.push({ name: 'companies' }),
     },
     {
+        label: 'People',
+        command: () => router.push({ name: 'people' }),
+    },
+    {
         label: 'Sources',
         command: () => router.push({ name: 'sources' }),
     }

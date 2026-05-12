@@ -9,6 +9,8 @@ import SourcesView from "@/views/sources/SourcesView.vue";
 import EditSourceView from "@/views/sources/EditSourceView.vue";
 import CampaignSettingsView from "../views/campaignSettings/CampaignSettingsView.vue";
 import EditCampaignSettingView from "../views/campaignSettings/EditCampaignSettingView.vue";
+import PeopleView from "@/views/people/PeopleView.vue";
+import EditPersonView from "@/views/people/EditPersonView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +54,16 @@ const router = createRouter({
                   path: '/company/:slug/edit',
                   name: 'company.edit',
                   component: EditCompanyView,
+              },
+              {
+                  path: '/people',
+                  name: 'people',
+                  component: PeopleView,
+              },
+              {
+                  path: '/person/:slug/edit',
+                  name: 'person.edit',
+                  component: EditPersonView,
               },
               {
                   path: '/sources',
