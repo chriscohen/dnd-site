@@ -48,4 +48,5 @@ Homestead.yaml
 # PHPUnit
 .phpunit.result.cache
 
+# Ignore local npm packages.
 /packages/*
