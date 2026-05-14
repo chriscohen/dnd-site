@@ -10,6 +10,7 @@ use App\Http\Controllers\CharacterClassController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Creatures\CreatureTypeController;
 use App\Http\Controllers\Creatures\CreatureMainTypeController;
+use App\Http\Controllers\GameEditionController;
 use App\Http\Controllers\Items\ItemController;
 use App\Http\Controllers\Languages\LanguageController;
 use App\Http\Controllers\Magic\MagicDomainController;
@@ -49,6 +50,8 @@ Route::get('/creature-@dnd5e', [CreatureTypeController::class, 'list']);
 
 Route::get('/creature-main-type/{slug}', [CreatureMainTypeController::class, 'get']);
 Route::get('/creature-main-@dnd5e', [CreatureMainTypeController::class, 'list']);
+
+Route::get('/game-editions', [GameEditionController::class, 'list']);
 
 Route::get('/domains', [MagicDomainController::class, 'index']);
 
