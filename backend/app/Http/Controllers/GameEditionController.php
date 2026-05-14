@@ -13,7 +13,7 @@ class GameEditionController extends Controller
     public function list(): JsonResponse
     {
         return response()->json([
-            [
+            'data' => [
                 [
                     'id' => GameEdition::ZERO->value,
                     'shortName' => GameEdition::ZERO->toStringShort(),
