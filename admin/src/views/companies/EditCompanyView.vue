@@ -80,82 +80,82 @@ async function submitEdit(event: FormSubmitEvent): Promise<void> {
 
         <div v-else-if="company" class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
 
-        <div v-if="company.logo" class="md:order-last">
-            <label>Logo</label>
-            <div class="mt-1 inline-flex w-96 items-center justify-center rounded-lg border border-surface-700 bg-surface-800 p-2">
-                <Image
-                    :src="company.logo.url"
-                    :alt="company.name"
-                    class="w-full object-contain"
-                    preview
-                />
+            <div v-if="company.logo" class="md:order-last">
+                <label>Logo</label>
+                <div class="mt-1 inline-flex w-96 items-center justify-center rounded-lg border border-surface-700 bg-surface-800 p-2">
+                    <Image
+                        :src="company.logo.url"
+                        :alt="company.name"
+                        class="w-full object-contain"
+                        preview
+                    />
+                </div>
             </div>
-        </div>
 
-        <Form
-            :resolver
-            :initial-values="{
+            <Form
+                :resolver
+                :initial-values="{
                 name:       company.name,
                 slug:       company.slug,
                 shortName:  company.shortName ?? '',
                 website:    company.website ?? '',
                 productUrl: company.productUrl ?? '',
             }"
-            class="flex flex-col gap-5 md:order-first"
-            @submit="submitEdit"
-        >
-            <div>
-                <label>ID</label>
-                <InputText :model-value="company.id" disabled class="mt-1 w-full" />
-            </div>
+                class="flex flex-col gap-5 md:order-first"
+                @submit="submitEdit"
+            >
+                <div>
+                    <label>ID</label>
+                    <InputText :model-value="company.id" disabled class="mt-1 w-full" />
+                </div>
 
-            <FormField v-slot="$field" name="name">
-                <label>Name</label>
-                <InputText v-bind="$field" class="mt-1 w-full" />
-                <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
-                    {{ $field.error?.message }}
-                </Message>
-            </FormField>
+                <FormField v-slot="$field" name="name">
+                    <label>Name</label>
+                    <InputText v-bind="$field" class="mt-1 w-full" />
+                    <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                        {{ $field.error?.message }}
+                    </Message>
+                </FormField>
 
-            <FormField v-slot="$field" name="slug">
-                <label>Slug</label>
-                <InputText v-bind="$field" class="mt-1 w-full" />
-                <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
-                    {{ $field.error?.message }}
-                </Message>
-            </FormField>
+                <FormField v-slot="$field" name="slug">
+                    <label>Slug</label>
+                    <InputText v-bind="$field" class="mt-1 w-full" />
+                    <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                        {{ $field.error?.message }}
+                    </Message>
+                </FormField>
 
-            <FormField v-slot="$field" name="shortName">
-                <label>Short name</label>
-                <InputText v-bind="$field" class="mt-1 w-full" placeholder="Optional" />
-                <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
-                    {{ $field.error?.message }}
-                </Message>
-            </FormField>
+                <FormField v-slot="$field" name="shortName">
+                    <label>Short name</label>
+                    <InputText v-bind="$field" class="mt-1 w-full" placeholder="Optional" />
+                    <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                        {{ $field.error?.message }}
+                    </Message>
+                </FormField>
 
-            <FormField v-slot="$field" name="website">
-                <label>Website</label>
-                <InputText v-bind="$field" type="url" class="mt-1 w-full" placeholder="Optional" />
-                <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
-                    {{ $field.error?.message }}
-                </Message>
-            </FormField>
+                <FormField v-slot="$field" name="website">
+                    <label>Website</label>
+                    <InputText v-bind="$field" type="url" class="mt-1 w-full" placeholder="Optional" />
+                    <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                        {{ $field.error?.message }}
+                    </Message>
+                </FormField>
 
-            <FormField v-slot="$field" name="productUrl">
-                <label>Product URL template</label>
-                <InputText v-bind="$field" class="mt-1 w-full" placeholder="e.g. product/{{id}}" />
-                <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
-                    {{ $field.error?.message }}
-                </Message>
-            </FormField>
+                <FormField v-slot="$field" name="productUrl">
+                    <label>Product URL template</label>
+                    <InputText v-bind="$field" class="mt-1 w-full" placeholder="e.g. product/{{id}}" />
+                    <Message v-if="$field.invalid" severity="error" size="small" variant="simple" class="mt-1">
+                        {{ $field.error?.message }}
+                    </Message>
+                </FormField>
 
-            <div class="flex gap-8 items-center">
-                <Button asChild variant="outlined">
-                    <RouterLink :to="{ name: 'companies' }">Cancel</RouterLink>
-                </Button>
-                <Button type="submit" label="Save changes" :loading="saving" />
-            </div>
-        </Form>
+                <div class="flex gap-8 items-center">
+                    <Button asChild variant="outlined">
+                        <RouterLink :to="{ name: 'companies' }">Cancel</RouterLink>
+                    </Button>
+                    <Button type="submit" label="Save changes" :loading="saving" />
+                </div>
+            </Form>
         </div>
     </div>
 </template>

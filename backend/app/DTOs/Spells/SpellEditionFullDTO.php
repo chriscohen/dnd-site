@@ -22,7 +22,7 @@ readonly class SpellEditionFullDTO extends SpellEditionSummaryDTO
         Collection $levels,
         ?MagicSchoolFullDTO $school = null,
         // Summary.
-        public string $spellSlug
+        public SpellSummaryDTO $spell
     ) {
         parent::__construct($id, $gameEdition, $hasSpellResistance, $isDefault, $lowestLevel, $levels, $school);
     }
@@ -41,7 +41,7 @@ readonly class SpellEditionFullDTO extends SpellEditionSummaryDTO
             levels: $model->levels->map(fn (SpellEditionLevel $item) => SpellEditionLevelDTO::fromModel($item)),
             school: !empty($model->school) ? MagicSchoolFullDTO::fromModel($model->school) : null,
             // Summary.
-            spellSlug: $model->spell->slug,
+            spell: SpellSummaryDTO::fromModel($model->spell),
         );
     }
 }

@@ -2,9 +2,13 @@
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Message from 'primevue/message';
-import type { SpellEditionApiResponse } from "@dnd5e/types";
+import type { SpellEditionApiResponse} from "@dnd5e/types";
 import { getSpellEditions } from "dnd5e-api";
 import { usePaginatedList } from '@/composables/usePaginatedList';
+import Button from "primevue/button";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
 
 const { items: spellEditions, loading, loadingMore, errorMessage, sentinel } =
     usePaginatedList<SpellEditionApiResponse>(
@@ -25,8 +29,18 @@ const { items: spellEditions, loading, loadingMore, errorMessage, sentinel } =
             <template #empty>
                 <span class="text-muted">No spell editions found.</span>
             </template>
-            <Column field="spellSlug" header="Spell"/>
+            <Column field="spell.name" header="Spell"/>
             <Column field="gameEdition" header="Game Edition"/>
+            <Column header="">
+                <template #body="{ data }: { data: SpellEditionApiResponse }">
+                    <Button
+                        v-tooltip.top="'Edit'"
+                        icon="pi pi-pencil"
+                        size="small"
+                        @click="router.push({ name: 'spell-edition.edit', params: { id: data.id } })"
+                    />
+                </template>
+            </Column>
         </DataTable>
 
         <div ref="sentinel" class="h-1"/>

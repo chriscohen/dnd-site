@@ -11,7 +11,7 @@ use App\Models\Spells\Spell;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
-use InvalidArgumentException;
+use sInvalidArgumentException;
 
 class SpellController extends AbstractController
 {

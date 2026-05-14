@@ -14,6 +14,7 @@ import EditPersonView from "@/views/people/EditPersonView.vue";
 import SpellsView from "@/views/spells/SpellsView.vue";
 import EditSpellView from "@/views/spells/EditSpellView.vue";
 import SpellEditionsView from "@/views/spells/SpellEditionsView.vue";
+import EditSpellEditionView from "@/views/spells/EditSpellEditionView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -92,6 +93,11 @@ const router = createRouter({
                     path: '/spell-editions',
                     name: 'spell-editions',
                     component: SpellEditionsView
+                },
+                {
+                    path: '/spell-edition/:id/edit',
+                    name: 'spell-edition.edit',
+                    component: EditSpellEditionView
                 }
             ]
         }
