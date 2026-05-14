@@ -14,14 +14,46 @@ class GameEditionController extends Controller
     {
         return response()->json([
             [
-                GameEdition::ZERO->value => GameEdition::ZERO->toStringShort(),
-                GameEdition::FIRST->value => GameEdition::FIRST->toStringShort(),
-                GameEdition::SECOND->value => GameEdition::SECOND->toStringShort(),
-                GameEdition::THIRD->value => GameEdition::THIRD->toStringShort(),
-                GameEdition::TPF->value => GameEdition::TPF->toStringShort(),
-                GameEdition::FOURTH->value => GameEdition::FOURTH->toStringShort(),
-                GameEdition::FIFTH->value => GameEdition::FIFTH->toStringShort(),
-                GameEdition::FIFTH_REVISED->value => GameEdition::FIFTH_REVISED->toStringShort(),
+                [
+                    'id' => GameEdition::ZERO->value,
+                    'shortName' => GameEdition::ZERO->toStringShort(),
+                    'name' => GameEdition::ZERO->toString(),
+                ],
+                [
+                    'id' => GameEdition::FIRST->value,
+                    'shortName' => GameEdition::FIRST->toStringShort(),
+                    'name' => GameEdition::FIRST->toString(),
+                ],
+                [
+                    'id' => GameEdition::SECOND->value,
+                    'shortName' => GameEdition::SECOND->toStringShort(),
+                    'name' => GameEdition::SECOND->toString(),
+                ],
+                [
+                    'id' => GameEdition::THIRD->value,
+                    'shortName' => GameEdition::THIRD->toStringShort(),
+                    'name' => GameEdition::THIRD->toString(),
+                ],
+                [
+                    'id' => GameEdition::TPF->value,
+                    'shortName' => GameEdition::TPF->toStringShort(),
+                    'name' => GameEdition::TPF->toString(),
+                ],
+                [
+                    'id' => GameEdition::FOURTH->value,
+                    'shortName' => GameEdition::FOURTH->toStringShort(),
+                    'name' => GameEdition::FOURTH->toString(),
+                ],
+                [
+                    'id' => GameEdition::FIFTH->value,
+                    'shortName' => GameEdition::FIFTH->toStringShort(),
+                    'name' => GameEdition::FIFTH->toString(),
+                ],
+                [
+                    'id' => GameEdition::FIFTH_REVISED->value,
+                    'shortName' => GameEdition::FIFTH_REVISED->toStringShort(),
+                    'name' => GameEdition::FIFTH_REVISED->toString(),
+                ]
             ]
         ]);
     }
