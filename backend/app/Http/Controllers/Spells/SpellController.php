@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Spells;
 
 use App\DTOs\Spells\SpellFullDTO;
-use App\DTOs\Spells\SpellSummaryDTO;
 use App\Http\Controllers\AbstractController;
 use App\Http\Requests\GetSpellsRequest;
 use App\Models\Spells\Spell;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
+use InvalidArgumentException;
 
 class SpellController extends AbstractController
 {
@@ -31,7 +32,12 @@ class SpellController extends AbstractController
 
     public function get(Request $request, string $slug): JsonResponse
     {
-        $item = $this->query->where('slug', $slug)->first();
+        try {
+            $id = Uuid::fromString($slug);
+            $item = $this->query->where('id', $id)->first();
+        } catch (InvalidArgumentException $e) {
+            $item = $this->query->where('slug', $slug)->first();
+        }
 
         if (empty($item)) {
             return response()->json([], 404);
