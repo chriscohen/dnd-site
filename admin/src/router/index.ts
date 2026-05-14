@@ -13,6 +13,7 @@ import PeopleView from "@/views/people/PeopleView.vue";
 import EditPersonView from "@/views/people/EditPersonView.vue";
 import SpellsView from "@/views/spells/SpellsView.vue";
 import EditSpellView from "@/views/spells/EditSpellView.vue";
+import SpellEditionsView from "@/views/spells/SpellEditionsView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -86,6 +87,11 @@ const router = createRouter({
                     path: '/spell/:slug/edit',
                     name: 'spell.edit',
                     component: EditSpellView
+                },
+                {
+                    path: '/spell-editions',
+                    name: 'spell-editions',
+                    component: SpellEditionsView
                 }
             ]
         }

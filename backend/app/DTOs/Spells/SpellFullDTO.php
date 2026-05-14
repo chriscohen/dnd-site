@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\DTOs\Spells;
 
+use App\DTOs\Magic\MagicSchoolFullDTO;
+use App\DTOs\Magic\MagicSchoolSummaryDTO;
 use App\DTOs\Media\MediaSummaryDTO;
 use App\Models\Spells\Spell;
 use App\Models\Spells\SpellEdition;
@@ -18,6 +20,7 @@ readonly class SpellFullDTO extends SpellSummaryDTO
         string $slug,
         // Summary.
         public ?int $lowestLevel,
+        public ?MagicSchoolSummaryDTO $magicSchool,
         /** @var Collection<SpellEditionFullDTO> $editions */
         public Collection $editions
     ) {
@@ -34,6 +37,7 @@ readonly class SpellFullDTO extends SpellSummaryDTO
             slug: $model->slug,
             // Summary.
             lowestLevel: $model->getLowestLevel(),
+            magicSchool: empty($model->school) ? null : MagicSchoolSummaryDTO::fromModel($model->school),
             editions: $model->editions->map(fn (SpellEdition $edition) => SpellEditionFullDTO::fromModel($edition))
         );
     }

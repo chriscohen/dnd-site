@@ -20,6 +20,7 @@ use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Sources\SourceController;
 use App\Http\Controllers\Spells\SpellController;
+use App\Http\Controllers\Spells\SpellEditionController;
 use App\Http\Controllers\UserController;
 
 Route::get('/user', [UserController::class, 'self']);
@@ -82,6 +83,9 @@ Route::get('/source/{slug}/credits', [SourceController::class, 'credits']);
 
 Route::get('/spell/{slug}', [SpellController::class, 'get']);
 Route::get('/spells', [SpellController::class, 'list']);
+
+Route::get('/spell-edition/{id}', [SpellEditionController::class, 'get']);
+Route::get('/spell-editions', [SpellEditionController::class, 'list']);
 
 Route::get('/search', [SearchController::class, 'search'])->where('q', '.*');
 

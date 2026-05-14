@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
@@ -8,74 +7,20 @@ import Message from 'primevue/message';
 import InputText from 'primevue/inputtext';
 import { getSpells } from "dnd5e-api";
 import type { SpellApiResponse } from "@dnd5e/types";
+import { usePaginatedList } from '@/composables/usePaginatedList';
 
 const router = useRouter();
 
-const spells = ref<SpellApiResponse[]>([]);
-const loading = ref(false);
-const loadingMore = ref(false);
-const errorMessage = ref<string | null>(null);
-const currentPage = ref(0);
-const lastPage = ref(1);
-const sentinel = ref<HTMLElement | null>(null);
-const searchQuery = ref('');
-
-async function loadPage(page: number, q?: string): Promise<void> {
-    page === 1 ? (loading.value = true) : (loadingMore.value = true);
-    errorMessage.value = null;
-
-    try {
-        const response = await getSpells(page, q);
-        spells.value = page === 1 ? response.data : [...spells.value, ...response.data];
-        currentPage.value = response.current_page;
-        lastPage.value = response.last_page;
-    } catch {
-        errorMessage.value = 'Could not load spells. Please try again.';
-    } finally {
-        loading.value = false;
-        loadingMore.value = false;
-    }
-}
-
-let debounceTimer: ReturnType<typeof setTimeout> | null = null;
-
-watch(searchQuery, (value) => {
-    if (debounceTimer) clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-        if (value.length >= 3) {
-            loadPage(1, value);
-        } else if (value.length === 0) {
-            loadPage(1);
-        }
-    }, 300);
-});
-
-let observer: IntersectionObserver | null = null;
-
-onMounted(async () => {
-    await loadPage(1);
-
-    observer = new IntersectionObserver((entries) => {
-        if (entries[0]?.isIntersecting && !loadingMore.value && currentPage.value < lastPage.value) {
-            const q = searchQuery.value.length >= 3 ? searchQuery.value : undefined;
-            loadPage(currentPage.value + 1, q);
-        }
-    }, { rootMargin: '200px' });
-
-    if (sentinel.value) {
-        observer.observe(sentinel.value);
-    }
-});
-
-onUnmounted(() => {
-    if (debounceTimer) clearTimeout(debounceTimer);
-    observer?.disconnect();
-});
+const { items: spells, loading, loadingMore, errorMessage, sentinel, searchQuery } =
+    usePaginatedList<SpellApiResponse>(
+        getSpells,
+        'Could not load spells. Please try again.'
+    );
 </script>
 
 <template>
     <div>
-        <h1 class="mb-6 text-2xl font-bold">People</h1>
+        <h1 class="mb-6 text-2xl font-bold">Spells</h1>
 
         <Message v-if="errorMessage" severity="error" class="mb-4">
             {{ errorMessage }}
@@ -108,7 +53,7 @@ onUnmounted(() => {
                         v-tooltip.top="'Edit'"
                         icon="pi pi-pencil"
                         size="small"
-                        @click="router.push({ name: 'person.edit', params: { slug: data.slug } })"
+                        @click="router.push({ name: 'spell.edit', params: { slug: data.slug } })"
                     />
                 </template>
             </Column>

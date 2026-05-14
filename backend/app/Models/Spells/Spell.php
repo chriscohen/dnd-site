@@ -9,6 +9,7 @@ use App\Exceptions\DuplicateRecordException;
 use App\Models\AbstractModel;
 use App\Models\Media\Media;
 use App\Models\ModelInterface;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -59,6 +60,13 @@ class Spell extends AbstractModel
         }
 
         return $lowest === 999 ? null : $lowest;
+    }
+
+    public function school(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->editions->last()?->school,
+        );
     }
 
     public function toSearchableArray(): array
